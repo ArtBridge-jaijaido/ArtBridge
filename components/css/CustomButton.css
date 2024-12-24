@@ -1,0 +1,89 @@
+:root{
+    /*font size*/
+    --custom-button-font-size:14px;
+
+    /*line height*/
+    --custom-button-line-height: 0px; 
+
+    /*letter spacing*/
+    --custom-button-letter-spacing: 3px;
+
+    /*font weight*/
+    --custom-button-font-weight: 500;
+
+    /*border radius*/
+    --custom-button-border-radius: 30px;
+
+    /*button width*/
+    --custom-button-width: 90px;
+
+    /*button height*/
+    --custom-button-height: 30px;
+
+
+}
+
+.custom-button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: var(--custom-button-border-radius);
+    border: 1.5px solid #5EA5D4;
+    width:var(--custom-button-width);
+    height:var(--custom-button-height);
+    color: #48A8E0;
+    text-align: center;
+    font-size: var(--custom-button-font-size);
+    font-style: normal; 
+    font-weight: var(--custom-button-font-weight);
+    line-height: var(--custom-button-line-height);
+    letter-spacing: var(--custom-button-letter-spacing);
+}
+
+
+.custom-button:hover{
+    background-color: #48A8E0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.custom-button:active{
+    background-color: #48A8E0;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1280px){
+    .custom-button{
+       --custom-button-width:70px;
+       --custom-button-height:19px;
+       --custom-button-font-size: 12px;
+
+    }
+}
+
+@media screen and (max-width:834px){
+    .custom-button{
+        --custom-button-width:70px;
+        --custom-button-height:21px;
+        --custom-button-font-size: 10px;
+    }
+}
+
+@media screen and (max-width:440px){
+    .custom-button{
+        --custom-button-width:80px;
+        --custom-button-height:25px;
+        --custom-button-font-size:12px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .custom-button{
+        --custom-button-width:70px;
+        --custom-button-height:20px;
+        --custom-button-font-size:10px;
+    }
+}

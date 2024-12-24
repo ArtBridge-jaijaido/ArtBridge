@@ -1,0 +1,199 @@
+:root{
+
+    /* header height */ 
+    --header-height: 80px;
+
+    /* font size*/
+    --header-logo-font-size: 18px;
+    --header-nav-options-font-size:18px;
+
+    /* line height */
+    --header-nav-options-line-height: 10px;
+    --header-logo-line-height:55px;
+
+    /*letter spacing */
+    --header-nav-options-letter-spacing: 3px;
+    --header-logo-letter-spacing: 3px;
+
+    /* font weight */
+    --header-logo-font-weight: 400;
+    --header-nav-options-font-weight: 400;
+
+    /*nav options gap */
+    --header-nav-options-options-gap: 83px;
+
+    /*auth buttons gap */
+    --auth-buttons-gap: 34px;
+}
+
+
+.header{
+    width:100%;
+    position:fixed;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#fff;
+    height:var(--header-height);
+    padding: 25px 53px 25px 31px;  /* top right bottom left */
+    border-bottom: 4px solid transparent;
+    background-image: linear-gradient(180deg, #fff, #fff), 
+                      linear-gradient(90deg, #F0F9FF 0%, #A2E2FF 50%, #F0F9FF 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.header-logo{
+    display:flex;
+    align-items: center;
+    font-size:var(--header-logo-font-size);
+    font-weight:var(--header-logo-font-weight);
+    line-height:var(--header-logo-line-height);
+    letter-spacing:var(--header-logo-letter-spacing);
+    width:96px;
+    height:39px;
+    color:#A9A7A7;
+}
+
+.header-nav{
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-nav-options{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:var(--header-nav-options-font-size);
+    gap:var(--header-nav-options-options-gap);
+    font-weight:var(--header-nav-options-font-weight);
+    line-height:var(--header-nav-options-line-height);
+    letter-spacing:var(--header-nav-options-letter-spacing);
+    white-space: nowrap;
+    color:#555555;
+}
+
+.header-nav-options a:hover{
+    color:#48A8E0;
+    cursor:pointer;
+}
+
+
+.header-auth-buttons{
+    display:flex;
+    align-items: center;
+    gap: var(--auth-buttons-gap);
+}
+
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color:#80D2FF;
+}
+
+
+@media screen and (max-width: 1280px){
+
+    .header{
+        padding: 26px 45px 26px 24px;  /* top right bottom left */
+    }
+   
+    .header-nav-options{
+        --header-nav-options-font-size:16px;
+        --header-nav-options-options-gap:78px;
+    }
+
+    .header-auth-buttons{
+        --auth-buttons-gap:23px;
+    }
+}
+
+
+@media screen and (max-width: 834px){
+    .header{
+        padding: 26px 20px 26px 10px;
+    }
+
+    .header-nav-options{
+        --header-nav-options-font-size:13px;
+        --header-nav-options-options-gap:25px;
+    }
+  
+}
+
+@media screen and (max-width:768px){
+   
+
+    .hamburger-menu {
+        display: block;
+        position:absolute;
+        right: 32px;
+        z-index: 100; /* 確保在導航欄上方 */
+    }
+
+    .header-nav {
+        position: absolute;
+        top: 121px;  /* header height + nav option distance 41px */
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        flex-direction: column; 
+        padding: 20px 60px;
+        transform: translateY(-100%); 
+        opacity: 0; 
+        transition: none; 
+        z-index: 10;
+    }
+
+    .header-nav.open {
+        animation: slideDown 0.5s ease-in-out forwards; 
+    }
+
+    .header-nav-options {
+        flex-direction: column; 
+        --header-nav-options-options-gap:36px;
+        margin-bottom:63px;
+        align-items: flex-start;
+        
+    }
+
+    .header-auth-buttons{
+        width:100%;
+        --auth-buttons-gap:auto;
+        justify-content: space-between;
+    }
+
+    @keyframes slideDown {
+        0% {
+            transform: translateY(-10%); 
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1; 
+        }
+    }
+}
+
+@media screen and (max-width: 320px){
+
+    .hamburger-menu{
+        right: 25px;
+    }
+
+
+    .header-nav{
+        padding: 20px 36px;
+    }
+
+    .header-nav-options{
+        --header-nav-options-font-size:12px;
+    }
+
+}

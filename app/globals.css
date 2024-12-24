@@ -5,6 +5,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* font sizes */
+  /* --font-size-1440-1240: 18px;
+  --font-size-1280-832:16px;
+  --font-size-834-1194:13px; */
+
+
+
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +27,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  height:100vh;
+  margin: 0 auto;
+  padding: 0 0px;
 }
