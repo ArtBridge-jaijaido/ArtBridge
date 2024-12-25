@@ -20,7 +20,8 @@
     /*button height*/
     --custom-button-height: 30px;
 
-
+    /*button padding*/
+    --custom-button-padding: 4px 8px;
 }
 
 .custom-button{
@@ -39,6 +40,7 @@
     font-weight: var(--custom-button-font-weight);
     line-height: var(--custom-button-line-height);
     letter-spacing: var(--custom-button-letter-spacing);
+    padding: var(--custom-button-padding);
 }
 
 

@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { notoSansTCClass } from "../app/layout.js";
-import CustomButton from "./CustomButton.jsx";
+import { notoSansTCClass } from "../../app/layout.js";
+import CustomButton from "../CustomButton/CustomButton.jsx";
 import { useNavigation } from "@/lib/functions.js";
 import Link from "next/link";
-import "./css/Header.css";
+import styles from "./headerButton.module.css";
+import "../css/Header.css";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,6 @@ const Header = () => {
     };
 
     const handleUserRegister = () => {
-        alert("user register");
         navigate("/register");
     };
 
@@ -57,8 +57,8 @@ const Header = () => {
                     <Link href="#">委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">
-                    <CustomButton title="登入" onClick={handleUserLogin} />
-                    <CustomButton title="註冊" onClick={handleUserRegister} />
+                    <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
+                    <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
                 </div>
             </nav>
         </header>

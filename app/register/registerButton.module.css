@@ -1,0 +1,57 @@
+.registerArtistClientBtn{
+     /*font size*/
+     --registerArtistClientBtn-font-size:24px;
+
+     /*line height*/
+     --registerArtistClientBtn-line-height: 0px; 
+ 
+     /*letter spacing*/
+     --registerArtistClientBtn-letter-spacing: 5px;
+ 
+     /*font weight*/
+     --registerArtistClientBtn-font-weight: 500;
+ 
+     /*border radius*/
+     --registerArtistClientBtn-border-radius: 30px;
+ 
+     /*button width*/
+     --registerArtistClientBtn-width: 166px;
+ 
+     /*button height*/
+     --registerArtistClientBtn-height: 57px;
+ 
+     /*button padding*/
+     --registerArtistClientBtn-padding: 4px 8px;
+}
+
+.registerArtistClientBtn{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: var(--registerArtistClientBtn-border-radius);
+    border: 1.5px solid #5EA5D4;
+    width:var(--registerArtistClientBtn-width);
+    height:var(--registerArtistClientBtn-height);
+    color: #48A8E0;
+    text-align: center;
+    font-size: var(--registerArtistClientBtn-font-size);
+    font-style: normal; 
+    font-weight: var(--registerArtistClientBtn-font-weight);
+    line-height: var(--registerArtistClientBtn-line-height);
+    letter-spacing: var(--registerArtistClientBtn-letter-spacing);
+    padding: var(--registerArtistClientBtn-padding);
+}
+
+
+.registerArtistClientBtn:hover{
+    background-color: #5EA5D4;
+    color: #fff;
+    cursor: pointer;
+}
+
+.registerArtistClientBtn:active{
+    background-color: #5EA5D4;
+    color: #fff;
+    cursor: pointer;
+}
