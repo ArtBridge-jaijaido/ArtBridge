@@ -1,159 +1,188 @@
 
 
-.register-page{
+    .register-page{
 
-    /* font-size*/
-    --register-logo-font-size: 40px;
-    --register-form-group-input-placeholder-font-size: 20px;
+        /* font-size*/
+        --register-logo-font-size: 40px;
+        --register-form-group-input-placeholder-font-size: 20px;
+        --register-error-text-font-size: 14px;
+
+        /*width*/
+       
+        --register-logo-width: 179px;
+      
+        --register-checkbox-width: 30px; 
+
+        /*max-width*/
+        --register-page-max-width: 1440px;
+        --register-top-part-container-max-width: 1440px;
+        --register-file-box-max-width: 293px;
+
+        /*height*/
+        --register-logo-height: 38px;
+        --register-file-box-height: 144px;
+        --register-form-group-input-height: 56px;
+        --register-checkbox-height: 30px;
+
+        /*font-weight*/
+        --register-logo-font-weight: 700;
+        --register-form-group-input-placeholder-font-weight: 500;
+
+        /*line-height*/
+        --register-logo-line-height: 11px;
+        
+
+        /*letter-spacing*/
+        --register-logo-letter-spacing: 3px;
+        --register-form-group-input-placeholder-letter-spacing: 3px;
+
+        /*margin-top*/
+        
+
+        /*margin-bottom*/
+      
+        --register-logo-margin-bottom:80px;
+        --register-top-part-container-margin-bottom:63px;
+        --register-ArtistClientButtons-margin-bottom: 63px;
+        --register-form-group-margin-bottom: 37px;
+        --register-bottom-part-container-margin-bottom: 89px;
+
+        /*margin-left*/
+        --register-form-agree-label-margin-left:15px;
 
 
-    /*width*/
-    --register-logo-width: 179px;
-    --register-file-box-width: 293px;
+        /*gap*/
+        --register-ArtistClientButtons-container-gap: 284px;
+        --register-form-container-gap: 55px;
+        --register-file-container-gap: 26px;
 
-    /*max-width*/
-    --register-top-part-container-max-width: 1440px;
-
-    /*height*/
-    --register-logo-height: 38px;
-    --register-file-box-height: 144px;
-    --register-form-group-input-height: 56px;
-
-    /*font-weight*/
-    --register-logo-font-weight: 700;
-    --register-form-group-input-placeholder-font-weight: 500;
-
-    /*line-height*/
-    --register-logo-line-height: 11px;
-    --register-form-group-input-placeholder-line-height:11px;
-
-    /*letter-spacing*/
-    --register-logo-letter-spacing: 3px;
-    --register-form-group-input-placeholder-letter-spacing: 3px;
-
-    /*margin-top*/
- 
-
-    /*margin-bottom*/
-    --register-form-container-margin-bottom:89px;
-    --register-logo-margin-bottom:80px;
-    --register-top-part-container-margin-bottom:63px;
-    --register-ArtistClientButtons-margin-bottom: 63px;
-    --register-form-group-margin-bottom: 37px;
-
-
-    /*gap*/
-    --register-form-container-gap: 55px;
-
-    /*border-radius*/
-    --register-form-input-border-radius: 10px;
-   
-}
-
-
-.register-page{
-    width: 1440px;
-    padding: 107px 80px 81px 80px;  /* top right bottom left */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto; /* center in the viewport */
-}
-
-.register-top-part-container{
-    width:100%;
-    border-bottom: 2px solid transparent;
-    background-image: linear-gradient(180deg, #fff, #fff), 
-                      linear-gradient(90deg, #F0F9FF 0%, #A2E2FF 50%, #F0F9FF 100%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    margin-bottom:var(--register-top-part-container-margin-bottom);
-}
-
-.register-logo{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width:100%;
-    color:#7A82F0;
-    text-align: center;
-    margin-bottom:var(--register-logo-margin-bottom);
-    font-size:var(--register-logo-font-size);
-    font-weight:var(--register-logo-font-weight);  
-    line-height:var(--register-logo-line-height);
-    letter-spacing:var(--register-logo-letter-spacing);
-    flex-shrink: 0;
-}
-
-.register-ArtistClientButtons-container{
-    width:100%;
-    display:flex;
-    justify-content: space-around;
-    margin-bottom:var(--register-ArtistClientButtons-margin-bottom);
+        /*border-radius*/
+        --register-form-input-border-radius: 10px;
     
-}
+    }
 
-.register-form-container {
-    width: 100%;;
-    display: flex;
-    justify-content: space-around;
-    gap:var(--register-form-container-gap);
-    margin-bottom: var(--register-form-container-margin-bottom);
-  }
-  
-  /* 每個欄 */
-.register-form-column {
-    flex: 1; /* 平均分配寬度 */
-    position:relative;
-  }
-  
-  /* 表單的基本欄位樣式 */
-  .register-form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom:var(--register-form-group-margin-bottom);
-    flex-shrink: 0;
-  }
- 
-  .register-form-group input[type="text"],
-  .register-form-group input[type="email"],
-  .register-form-group input[type="password"] {
-    height: var(--register-form-group-input-height);
-    padding: 8px 32px;
-    border: 1px solid #7BC8EC;
-    border-radius: var(--register-form-input-border-radius);
-  }
 
-  .register-form-group input[type="text"]::placeholder,
-   .register-form-group input[type="email"]::placeholder,
-  .register-form-group input[type="password"]::placeholder{
-    font-size:var(--register-form-group-input-placeholder-font-size);
-    font-weight:var(--register-form-group-input-placeholder-font-weight);
-    line-height:var(--register-form-group-input-placeholder-line-height);
-    letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
-    color: #7BC8EC;
-  }
+    .register-page{
+       
+        width:100%;
+        max-width: var(--register-page-max-width);
+        padding: 107px 80px 81px 80px;  /* top right bottom left */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto; /* center in the viewport */
+    }
 
-  .register-form-group input[type="text"]:focus,
-  .register-form-group input[type="email"]:focus,
-  .register-form-group input[type="password"]:focus {
+    .register-top-part-container{
+        width:100%;
+        border-bottom: 2px solid transparent;
+        background-image: linear-gradient(180deg, #fff, #fff), 
+                        linear-gradient(90deg, #F0F9FF 0%, #A2E2FF 50%, #F0F9FF 100%);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        margin-bottom:var(--register-top-part-container-margin-bottom);
+    }
+
+    .register-logo{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        color:#7A82F0;
+        text-align: center;
+        margin-bottom:var(--register-logo-margin-bottom);
+        font-size:var(--register-logo-font-size);
+        font-weight:var(--register-logo-font-weight);  
+        line-height:var(--register-logo-line-height);
+        letter-spacing:var(--register-logo-letter-spacing);
+        flex-shrink: 0;
+    }
+
+    .register-ArtistClientButtons-container{
+        width:100%;
+        display:flex;
+        justify-content: space-around;
+        margin-bottom:var(--register-ArtistClientButtons-margin-bottom);
+        
+    }
+
+    .register-form-container {
+        width: 100%;;
+        display: flex;
+        justify-content: space-around;
+        gap:var(--register-form-container-gap);
+        
+    }
+    
+    /* 每個欄 */
+    .register-form-column {
+        flex: 1; /* 平均分配寬度 */
+        position:relative;
+    }
+    
+    /* 表單的基本欄位樣式 */
+    .register-form-group {
+        position:relative;
+        display: flex;
+        flex-direction: column;
+        margin-bottom:var(--register-form-group-margin-bottom);
+        flex-shrink: 0;
+    }
+
+
+    
+    .register-form-group input[type="text"],
+    .register-form-group input[type="email"],
+    .register-form-group input[type="password"] {
+        height: var(--register-form-group-input-height);
+        padding: 0px 32px;
+        border: 1px solid #7BC8EC;
+        border-radius: var(--register-form-input-border-radius);
+        
+    }
+
+    .register-form-group input[type="text"]::placeholder,
+    .register-form-group input[type="email"]::placeholder,
+    .register-form-group input[type="password"]::placeholder{
+      
+        font-size:var(--register-form-group-input-placeholder-font-size);
+        font-weight:var(--register-form-group-input-placeholder-font-weight);
+        line-height:normal; 
+        letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
+        color: #7BC8EC;
+    }
+
+    .register-form-group input[type="text"]:focus,
+    .register-form-group input[type="email"]:focus,
+    .register-form-group input[type="password"]:focus {
     border: 2px solid #7BC8EC;
     outline: none;  
-  }
+    }
 
-  /*身分證 block*/ 
-  .register-file-container {
-    display: flex;
-    gap: 26px; /* 兩塊間的距離 */
-  }
+    /*show password icon*/ 
+    .register-show-password-btn{
+        position:absolute;
+        right:20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(0, 0, 0, 0.4);
+        transition: color 0.3s ease; 
+    }
 
-  .register-file-box {
+    /*身分證 block*/ 
+    .register-file-container {
+        display: flex;
+        gap: var(--register-file-container-gap);
+    }
+
+    .register-file-box {
+        width:100%;
         display: inline-flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: var(--register-file-box-width);
+        max-width: var(--register-file-box-max-width);
         height: var(--register-file-box-height);
         border: 1px solid #7BC8EC; 
         border-radius: var(--register-form-input-border-radius);
@@ -163,69 +192,407 @@
         font-weight:var(--register-form-group-input-placeholder-font-weight);
         line-height:var(--register-form-group-input-placeholder-line-height);
         letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
-        background-color: #fff;    
-  }
+        background-color: #fff;   
+        overflow: hidden; 
+    }
 
-  
-  /* 同意條款 */
-  .register-form-agree {
-    margin-top: 38px;
-    display: flex;
-    align-items: center;
-  }
+    .register-preview-image {
+        width: 100%; 
+        height: auto; 
+        object-fit: cover; 
+        
+    }
 
-  .register-form-agree input[type="checkbox"] {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    appearance: none; /* 移除預設樣式 */
-    -webkit-appearance: none; /* 為了兼容 Safari */
-    background-color: white; /* 背景色 */
-    border: 2px solid #7BC8EC; /* 外框顏色 */
-    border-radius: 5px; /* 外框圓角 */
-    cursor: pointer; /* 滑鼠移過時顯示為指標 */
-    position: relative;
-}
+    /* register bottom part*/
+    .register-bottom-part-container{
+       
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+        margin-bottom:var(--register-bottom-part-container-margin-bottom);
+    }
 
-/* 勾選符號 */
-.register-form-agree input[type="checkbox"]:checked::after {
-    content: "✓"; 
-    color: black; 
-    font-size: 18px; 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+    
+    /* 同意條款 */
+    .register-form-agree {
+        position:relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .register-form-agree input[type="checkbox"] {
+        width: var(--register-checkbox-width);
+        height: var(--register-checkbox-height);
+        flex-shrink: 0;
+        appearance: none;
+        -webkit-appearance: none; 
+        background-color: white; 
+        border: 2px solid #7BC8EC; 
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* 勾選符號 */
+    .register-form-agree input[type="checkbox"]:checked::after {
+        content: "✓"; 
+        color: black; 
+        font-size: var(--register-form-group-input-placeholder-font-size); 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
 
-  .register-form-agree label {
-    font-size: var(--register-form-group-input-placeholder-font-size); 
-    font-weight:var(--register-form-group-input-placeholder-font-weight);
-    line-height:var(--register-form-group-input-placeholder-line-height);
-    letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
-    color: #7BC8EC;      
-    margin-left: 15px;
-  }
+    .register-form-agree label {
+        font-size: var(--register-form-group-input-placeholder-font-size); 
+        font-weight:var(--register-form-group-input-placeholder-font-weight);
+        line-height:var(--register-form-group-input-placeholder-line-height);
+        letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
+        color: #7BC8EC;      
+        margin-left:var(--register-form-agree-label-margin-left);
+    }
 
-  .register-form-agree label span{
-    color:#417791;
-  }
+    .register-form-agree label span{
+        color:#417791;
+    }
 
 
-  /*已有帳號*/
-  .register-alreadyHasAccount{
-    margin-top:38px;
-    position:absolute;
-    right:0px;
-    bottom:6px;
-    font-size: var(--register-form-group-input-placeholder-font-size); 
-    font-weight:var(--register-form-group-input-placeholder-font-weight);
-    line-height:var(--register-form-group-input-placeholder-line-height);
-    letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
-    color: #7BC8EC;      
-  }
+    /*已有帳號*/
+    .register-alreadyHasAccount{
+       
+        font-size: var(--register-form-group-input-placeholder-font-size); 
+        font-weight:var(--register-form-group-input-placeholder-font-weight);
+        line-height:var(--register-form-group-input-placeholder-line-height);
+        letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
+        color: #7BC8EC;      
+    }
 
-  .register-alreadyHasAccount a{
-    color:#417791;
-  }
+    .register-alreadyHasAccount a{
+        color:#417791;
+    }
+
+
+    /* error message */
+    .register-error-text{
+        position:absolute;
+        bottom:-25px;
+        left:8px;
+        color:#F56C6C;
+        font-size:var(--register-error-text-font-size);
+    }
+
+    
+
+
+    /*RWD*/
+    @media screen and (max-width:1280px){
+        .register-page{
+          
+            padding: 74px 65px 44px 65px;
+        }
+
+        .register-top-part-container{
+            --register-top-part-container-margin-bottom:56px;
+        }
+
+        .register-logo{
+            --register-logo-margin-bottom:54px;
+            --register-logo-font-size:32px;
+            
+        }
+
+        .register-ArtistClientButtons-container{
+            --register-ArtistClientButtons-margin-bottom: 57px;
+        }
+
+        .register-form-container {
+            --register-form-container-gap :49px;
+        }
+
+        .register-form-group{
+            --register-form-group-margin-bottom: 34px;
+        }
+
+        .register-form-group input[type="text"],
+        .register-form-group input[type="email"],
+        .register-form-group input[type="password"]{
+            --register-form-group-input-height: 50px;
+
+            padding:0px 29px;
+        
+        }
+
+        .register-form-group input[type="text"]::placeholder,
+        .register-form-group input[type="email"]::placeholder,
+        .register-form-group input[type="password"]::placeholder{
+            --register-form-group-input-placeholder-font-size:16px;
+        }
+
+        .register-file-container {
+            --register-file-container-gap: 23px;
+        }
+
+        .register-file-box{
+            --register-file-box-max-width:266px;
+            --register-file-box-height: 130px;
+            --register-form-group-input-placeholder-font-size: 16px;
+        }
+
+        .register-bottom-part-container{
+            --register-bottom-part-container-margin-bottom: 62px;
+        }
+
+        .register-form-agree input[type="checkbox"]{
+            --register-checkbox-width: 25px;
+            --register-checkbox-height: 25px;
+        }
+
+        .register-form-agree input[type="checkbox"]:checked::after{
+            --register-form-group-input-placeholder-font-size:16px;
+        }
+
+
+        .register-form-agree label{
+            --register-form-group-input-placeholder-font-size:16px;
+        }
+
+        .register-alreadyHasAccount{
+            --register-form-group-input-placeholder-font-size:16px;
+        }
+
+        .register-error-text{
+            bottom:-22px;
+            left:6px;
+            --register-error-text-font-size:14px;
+        }
+
+
+    }
+
+
+
+    @media screen and (max-width:834px){
+        .register-page{
+            width:834px;
+            padding:85px 139px 93px 139px;
+        }
+
+        .register-top-part-container{
+            --register-top-part-container-margin-bottom: 45px;
+        }
+
+        .register-logo{
+            --register-logo-margin-bottom: 73px;
+            --register-logo-font-size: 32px;
+        }
+
+       
+       
+
+        .register-form-container{
+            flex-direction: column;
+            gap: 0px;
+            margin-bottom:30px;
+        }
+
+        .register-form-group{
+            --register-form-group-margin-bottom:30px;
+        }
+
+        .register-form-group input[type="text"]::placeholder,
+        .register-form-group input[type="email"]::placeholder,
+        .register-form-group input[type="password"]::placeholder{
+            --register-form-group-input-placeholder-font-size:14px;
+            
+        }
+
+        .register-file-box{
+
+            --register-form-group-input-placeholder-font-size: 14px;
+        }
+
+        .register-bottom-part-container{
+            --register-bottom-part-container-margin-bottom: 52px;
+        }
+
+        .register-form-agree input[type="checkbox"]{
+            --register-checkbox-width: 18px;
+            --register-checkbox-height: 18px;
+        }
+        
+        .register-form-agree input[type="checkbox"]:checked::after{
+            --register-form-group-input-placeholder-font-size:14px;
+        }
+
+        .register-form-agree label{
+            --register-form-group-input-placeholder-font-size:10px;
+            --register-form-group-input-placeholder-letter-spacing:2px;
+            --register-form-agree-label-margin-left:11px;
+        }
+
+        .register-alreadyHasAccount{
+            --register-form-group-input-placeholder-font-size:10px;
+        }
+
+        .register-error-text{
+            bottom:-16px;
+            left:6px;
+            --register-error-text-font-size:8px;
+        }
+
+
+    }
+
+
+    @media screen and (max-width:440px){
+        .register-page{
+            width:440px;
+            padding:44px 72px 83px 72px;
+        }
+
+        .register-top-part-container{
+            --register-top-part-container-margin-bottom: 41px;
+        }
+
+        .register-logo{
+            --register-logo-margin-bottom: 53px;
+            --register-logo-font-size: 20px;
+        }
+
+        .register-ArtistClientButtons-container{
+            --register-ArtistClientButtons-margin-bottom:41px;
+        }
+
+        .register-form-group input[type="text"],
+        .register-form-group input[type="email"],
+        .register-form-group input[type="password"]{
+            --register-form-group-input-height: 40px;
+            padding:0px 15px;
+        
+        }
+
+        .register-form-group input[type="text"]::placeholder,
+        .register-form-group input[type="email"]::placeholder,
+        .register-form-group input[type="password"]::placeholder{
+            --register-form-group-input-placeholder-font-size:12px;
+        }
+
+        .register-file-container{
+            --register-file-container-gap: 13px;
+        }
+
+        .register-file-box{
+
+            --register-form-group-input-placeholder-font-size: 12px;
+            --register-file-box-max-width:142px;
+            --register-file-box-height:74px;
+
+        }
+
+        .register-bottom-part-container{
+            --register-bottom-part-container-margin-bottom: 60px;
+        }
+
+        .register-form-agree input[type="checkbox"]{
+            --register-checkbox-width: 15px;
+            --register-checkbox-height: 15px;
+        }
+
+        .register-form-agree input[type="checkbox"]:checked::after{
+            --register-form-group-input-placeholder-font-size:8px;
+        }
+
+        .register-form-agree label{
+            --register-form-group-input-placeholder-font-size:8px;
+            --register-form-agree-label-margin-left:7px;
+        }
+
+        .register-alreadyHasAccount{
+            --register-form-group-input-placeholder-font-size:8px;
+        }
+
+        .register-error-text{
+            bottom:-12px;
+            left:6px;
+            --register-error-text-font-size:6px;
+        }
+
+    }
+
+
+    @media screen and (max-width:320px){
+        .register-page{
+            width: 320px;
+            padding:35px 44px 16px 44px;
+        }
+
+        .register-top-part-container{
+            --register-top-part-container-margin-bottom: 28px;
+        }
+
+        .register-logo{
+            --register-logo-margin-bottom: 32px;
+        }
+
+        .register-ArtistClientButtons-container{
+            --register-ArtistClientButtons-margin-bottom:28px;
+        }
+
+        .register-form-group input[type="text"],
+        .register-form-group input[type="email"],
+        .register-form-group input[type="password"]{
+            --register-form-group-input-height: 32px;
+            
+            padding:0px 11px;
+        
+        }
+
+        .register-form-group{
+            --register-form-group-margin-bottom:20px;
+        }
+
+        .register-form-group input[type="text"]::placeholder,
+        .register-form-group input[type="email"]::placeholder,
+        .register-form-group input[type="password"]::placeholder{
+            --register-form-group-input-placeholder-font-size:8px;
+            
+        }
+
+        .register-file-container{
+            --register-file-container-gap: 8px;
+        }
+
+        .register-file-box{
+
+            --register-form-group-input-placeholder-font-size: 8px;
+            --register-file-box-max-width:112px;
+            --register-file-box-height:67px;
+
+        }
+
+        .register-bottom-part-container{
+            --register-bottom-part-container-margin-bottom: 28px;
+        }
+
+        .register-form-agree input[type="checkbox"]{
+            --register-checkbox-width: 10px;
+            --register-checkbox-height: 10px;
+        }
+
+        .register-form-agree input[type="checkbox"]:checked::after{
+            --register-form-group-input-placeholder-font-size:6px;
+        }
+
+        .register-form-agree label{
+            --register-form-group-input-placeholder-font-size:6px;
+            --register-form-agree-label-margin-left:4px;
+        }
+
+        .register-alreadyHasAccount{
+            --register-form-group-input-placeholder-font-size:6px;
+        }
+
+
+
+    }

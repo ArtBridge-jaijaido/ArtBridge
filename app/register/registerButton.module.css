@@ -1,3 +1,6 @@
+
+
+
 .registerArtistClientBtn{
      /*font size*/
      --registerArtistClientBtn-font-size:24px;
@@ -44,14 +47,57 @@
 }
 
 
-.registerArtistClientBtn:hover{
+.registerArtistClientBtn:hover {
     background-color: #5EA5D4;
     color: #fff;
     cursor: pointer;
 }
 
-.registerArtistClientBtn:active{
+.registerArtistClientBtn:active {
     background-color: #5EA5D4;
     color: #fff;
     cursor: pointer;
+}
+
+.registerArtistClientBtn.active {
+    background-color: #5EA5D4;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+
+
+@media screen and (max-width: 1280px){
+    .registerArtistClientBtn{
+        --registerArtistClientBtn-font-size:20px;
+        --registerArtistClientBtn-width: 150px;
+        --registerArtistClientBtn-height: 51px;
+    }
+}
+
+@media screen and (max-width: 834px){
+    .registerArtistClientBtn{
+        --registerArtistClientBtn-letter-spacing:3px;
+    }
+    
+}
+
+@media screen and (max-width:440px){
+    .registerArtistClientBtn{
+        --registerArtistClientBtn-font-size:12px;
+        --registerArtistClientBtn-width: 80px;
+        --registerArtistClientBtn-height: 25px;
+    }
+}
+
+
+@media screen and (max-width:320px){
+    .registerArtistClientBtn{
+        --registerArtistClientBtn-font-size:10px;
+        --registerArtistClientBtn-width: 70px;
+        --registerArtistClientBtn-height: 20px;
+    }
 }
