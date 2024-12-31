@@ -92,7 +92,7 @@ const RegisterPage = () => {
             
                 const result = await response.json();
                 if (response.ok) {
-                    addToast("success", "註冊成功!");
+                    addToast("success", "註冊成功，已發送驗證信至您信箱");
                     navigate(`/emailValidation?email=${formData.email}`);
                 } else {
                     addToast("error", `註冊失敗: ${result.message}`);

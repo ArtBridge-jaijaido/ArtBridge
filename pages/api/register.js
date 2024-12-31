@@ -69,6 +69,7 @@ export default async function handler(req, res) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const userId = userCredential.user.uid;
 
+
         // 上傳圖片到 Firebase Storage
         const storage = getStorage();
 

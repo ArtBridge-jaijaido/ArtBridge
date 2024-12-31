@@ -1,0 +1,304 @@
+.emailValidation-Page{
+
+    /* max-width */
+    --emailValidation-Page-max-width: 1440px;
+
+    /*min-width*/
+    --emailValidation-Page-min-width: 1056px;
+    
+    /* height */
+    --emailValidation-input-container-input-height: 90px;
+
+    /* font-size */
+    --emailValidation-h1-font-size: 40px;
+    --emailValidation-h2-font-size: 40px;
+    --emailValidation-input-container-input-font-size: 32px;
+    --emailValidation-Page-container-h3-font-size: 24px;
+
+    /* font-weight */
+    --emailValidation-h1-font-weight:700;
+    --emailValidation-h2-font-weight:500;
+    --emailValidation-input-container-input-font-weight:500;    
+
+    /*border radius*/
+    --emailValidation-input-container-input-border-radius:10px;
+
+
+    /* line-height */
+    --emailValidation-h1-line-height: 11px;
+
+
+    /* letter-spacing */
+    --emailValidation-h1-letter-spacing:3px;
+    --emailValidation-h2-letter-spacing:10px;
+    --emailValidation-input-container-input-letter-spacing:3px;
+
+    /* padding */
+
+
+    /*margin bottom*/
+    --emailValidation-Page-h1-margin-bottom: 156px;
+    --emailValidation-Page-container-margin-bottom: 157px;
+
+
+    /*gap */
+    --emailValidation-Page-container-gap: 137px;
+    
+
+}
+
+
+
+
+.emailValidation-Page{
+    width:100%;
+    
+    max-width: var(--emailValidation-Page-max-width);
+    padding: 107px 192px 81px 192px;  /* top right bottom left */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* center in the viewport */
+}
+
+.emailValidation-Page h1{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    color:#7A82F0;
+    text-align: center;
+    font-size:var(--emailValidation-h1-font-size);
+    font-weight:var(--emailValidation-h1-font-weight);  
+    line-height:var(--emailValidation-h1-line-height);
+    letter-spacing:var(--emailValidation-h1-letter-spacing);
+    margin-bottom:var(--emailValidation-Page-h1-margin-bottom);
+    flex-shrink: 0;
+}
+
+.emailValidation-Page-container{
+    min-width:var(--emailValidation-Page-min-width);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom:var(--emailValidation-Page-container-margin-bottom);
+    gap: var(--emailValidation-Page-container-gap);
+}
+
+
+.emailValidation-Page-container h2{
+    font-size:var(--emailValidation-h2-font-size);
+    letter-spacing:var(--emailValidation-h2-letter-spacing);
+    font-weight:var(--emailValidation-h2-font-weight);
+    color:#7BC8EC;
+    white-space: nowrap;
+}
+
+.emailValidation-highlight-blue{
+    color:#417791;
+}
+
+.emailValidation-highlight-resent{
+    cursor:pointer;
+}
+
+
+.emailValidation-input-container{
+    width:100%;
+    
+}
+
+.emailValidation-input-container input{
+    width:100%;
+    height:var(--emailValidation-input-container-input-height);
+    border-radius:var(--emailValidation-input-container-input-border-radius);
+  
+}
+
+.emailValidation-input-container input[type="text"]{
+ 
+    border: 1px solid #7BC8EC;
+    padding: 0px 42px;
+    font-size: var(--emailValidation-input-container-input-font-size);
+    font-weight: var(--emailValidation-input-container-input-font-weight);  
+    letter-spacing: var(--emailValidation-input-container-input-letter-spacing);
+    line-height: 11px;
+   
+    
+} 
+ 
+.emailValidation-input-container input[type="text"]::placeholder{
+    color: #7BC8EC;
+}   
+
+.emailValidation-input-container input[type="text"]:focus{
+    border: 2px solid #7BC8EC;
+    outline: none;  
+}
+
+.emailValidation-Page-container h3{
+    font-size: var(--emailValidation-Page-container-h3-font-size);
+    font-weight: 500;
+    line-height: 11px;
+    color: #7BC8EC;
+    letter-spacing: 3px;
+}
+
+
+/* RWD */
+
+@media screen and (max-width: 1280px) {
+    .emailValidation-Page{
+        
+        padding: 98px 112px 59px 112px;   /* top right bottom left */
+        
+    }
+
+    .emailValidation-Page h1{
+        --emailValidation-h1-font-size:36px;
+        --emailValidation-Page-h1-margin-bottom:101px;
+    }
+
+
+    .emailValidation-Page-container{
+        --emailValidation-Page-container-margin-bottom:127px;
+        --emailValidation-Page-min-width:812px;
+
+    }
+
+    .emailValidation-Page-container h2{
+        --emailValidation-h2-font-size:36px;
+    }
+
+    .emailValidation-input-container input{
+        --emailValidation-input-container-input-height:56px;
+    }
+
+    .emailValidation-input-container input[type="text"]{
+        --emailValidation-input-container-input-font-size:20px;
+    }
+    .emailValidation-Page-container h3{
+        --emailValidation-Page-container-h3-font-size:20px;
+        letter-spacing: 2px;
+    }
+}
+
+
+@media screen and (max-width:834px){
+    .emailValidation-Page{
+        width:834px;
+        padding: 212px 133px 192px 133px;   /* top right bottom left */
+        
+    }
+
+    .emailValidation-Page h1{
+        --emailValidation-h1-font-size:32px;
+        --emailValidation-Page-h1-margin-bottom:118px;
+    }
+
+    .emailValidation-Page-container{
+        --emailValidation-Page-container-margin-bottom:218px;
+        --emailValidation-Page-min-width:569px;
+
+    }
+
+    .emailValidation-Page-container h2{
+        --emailValidation-h2-font-size:32px;
+        --emailValidation-h2-letter-spacing:2px;
+    }
+
+    .emailValidation-input-container input{
+        --emailValidation-input-container-input-height:58px;
+    }
+
+    .emailValidation-input-container input[type="text"]{
+        --emailValidation-input-container-input-font-size:16px;
+    }
+
+    .emailValidation-Page-container h3{
+        --emailValidation-Page-container-h3-font-size:14px;
+        letter-spacing: 2px;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 440px){
+    .emailValidation-Page{
+        width:440px;
+        padding: 118px 64px 265px 64px;   /* top right bottom left */
+    }
+
+    .emailValidation-Page h1{
+        --emailValidation-h1-font-size:20px;
+        --emailValidation-Page-h1-margin-bottom:162px;
+    }
+
+    .emailValidation-Page-container{
+        --emailValidation-Page-min-width:312px;
+        --emailValidation-Page-container-gap:58px;
+        --emailValidation-Page-container-margin-bottom:179px;
+    }
+
+    .emailValidation-Page-container h2{
+        --emailValidation-h2-font-size:16px;
+        --emailValidation-h2-letter-spacing:2px;
+        
+    }
+
+    .emailValidation-input-container input{
+        --emailValidation-input-container-input-height:40px;
+       
+        
+    }
+
+    .emailValidation-input-container input[type="text"]{
+        --emailValidation-input-container-input-font-size:16px;
+        padding: 0px 16px;
+       
+        
+    }
+
+    .emailValidation-Page-container h3{
+        --emailValidation-Page-container-h3-font-size:10px;
+        letter-spacing: 2px;
+    }
+}
+
+
+@media screen and (max-width: 320px){
+    .emailValidation-Page{
+        width:320px;
+        padding: 82px 54px 81px 54px;   /* top right bottom left */
+    }
+
+    .emailValidation-Page h1{
+        --emailValidation-Page-h1-margin-bottom:70px;
+    }
+
+    .emailValidation-Page-container{
+        --emailValidation-Page-min-width:262px;
+        --emailValidation-Page-container-margin-bottom:124px;
+    }
+
+    .emailValidation-Page-container h2{
+        --emailValidation-h2-font-size:12px;
+       
+    }
+
+    .emailValidation-input-container input{
+        --emailValidation-input-container-input-height:30px;
+    }
+
+    .emailValidation-input-container input[type="text"]{
+        padding: 0px 10px;
+    }
+
+    .emailValidation-Page-container h3{
+        --emailValidation-Page-container-h3-font-size:8px;
+    }
+}

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { notoSansTCClass } from "@/app/layout.js";
 import { useSearchParams } from "next/navigation"; 
+import "./emailValidation.css";
+import styles from "../register/registerButton.module.css";
 import CustomButton from "@/components/CustomButton/CustomButton.jsx";
 
 const EmailValidationPage = () => {
@@ -33,21 +35,25 @@ const EmailValidationPage = () => {
   };
 
   return (
-    <div className={`emailValidationPage ${notoSansTCClass}`}>
-      <div className="emailValidationPage-container">
-        <h2>LOGO</h2>
-        <h2>已寄送驗證信件至 {email || "未提供電子郵件"}</h2>
-        <input type="text" placeholder="請輸入驗證碼" />
-        <h2>
+    <div className={`emailValidation-Page ${notoSansTCClass}`}>
+      <h1>LOGO</h1>
+      <div className="emailValidation-Page-container">
+        
+        <h2>已寄送驗證信件至 <span className="emailValidation-highlight-blue">{email || "未提供電子郵件"}</span></h2>
+        <div className="emailValidation-input-container"> 
+            <input type="text" placeholder="請輸入驗證碼" />
+        </div>
+        <h3>
           還沒收到?{" "}
           {isResendDisabled ? (
-            <span> {counter} 秒後可重新發送</span>
+            <span> {counter} 秒後可以<span className="emailValidation-highlight-blue">重新發送</span></span>
           ) : (
-            <span onClick={handleResendEmail}>重新發送</span>
+            <span onClick={handleResendEmail} className="emailValidation-highlight-blue emailValidation-highlight-resent">重新發送</span>
           )}
-        </h2>
-        <CustomButton title="驗證" onClick={handleValidation} />
+        </h3>
+       
       </div>
+      <CustomButton title="送出" className={styles.registerArtistClientBtn} onClick={handleValidation} />
     </div>
   );
 };
