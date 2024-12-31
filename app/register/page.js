@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import { ValidateFormData } from '@/lib/formValidation.js';
 import { useToast } from "@/app/contexts/ToastContext.js";
+import {useNavigation} from '@/lib/functions.js';
 import Link from "next/link";
 import CustomButton from '@/components/CustomButton/CustomButton.jsx';
 import styles from "./registerButton.module.css";
@@ -13,9 +14,12 @@ const RegisterPage = () => {
 
 
 
-    const [errors, setErrors] = useState({}); // 錯誤訊息
+    const [errors, setErrors] = useState({}); // error messages
     const { addToast } = useToast();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigation();
+
+
     const handleRoleSelect = (role) => {
 
         setFormData((prev) => ({
@@ -56,22 +60,51 @@ const RegisterPage = () => {
     };
 
     const handleSubmit = async (e) => {
-
-        console.log("表單送出：", formData);
         e.preventDefault();
+        console.log("表單送出：", formData);
+    
+        // 驗證表單資料
         const validationErrors = ValidateFormData(formData);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             addToast("error", "註冊失敗: 請檢查表單");
             return;
-        } else {
-            addToast("success", "註冊成功");
-            setErrors({});
         }
-
-
-    }
-
+    
+        try {
+            // 構建 FormData 用於處理檔案
+            const formDataObj = new FormData(); 
+            formDataObj.append("role", formData.role);
+            formDataObj.append("nickname", formData.nickname);
+            formDataObj.append("realname", formData.realname);
+            formDataObj.append("email", formData.email);
+            formDataObj.append("password", formData.password);
+            formDataObj.append("phone", formData.phone);
+            formDataObj.append("id", formData.id);
+            formDataObj.append("frontImage", formData.frontImage); 
+            formDataObj.append("backImage", formData.backImage); 
+          
+            try {
+                const response = await fetch("/api/register", {
+                    method: "POST",
+                    body: formDataObj,
+                });
+            
+                const result = await response.json();
+                if (response.ok) {
+                    addToast("success", "註冊成功!");
+                    navigate(`/emailValidation?email=${formData.email}`);
+                } else {
+                    addToast("error", `註冊失敗: ${result.message}`);
+                }
+            } catch (error) {
+                addToast("error", "註冊失敗");
+            }
+        } catch (error) {
+            addToast("error", "註冊失敗");
+        }
+    };
+        
 
 
     return (
@@ -136,7 +169,7 @@ const RegisterPage = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-
+                            maxLength={20}
 
                         />
                         <button
