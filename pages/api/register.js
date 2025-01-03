@@ -2,9 +2,10 @@ import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth';
 import {  doc, setDoc, getDoc, deleteDoc, collection, query, where, getDocs} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import nodemailer from 'nodemailer'; 
 import multer from 'multer';
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() }); // 設定 multer 的 storage engine 為 memoryStorage
 
 export const config = {
     api: {
@@ -62,14 +63,11 @@ export default async function handler(req, res) {
             return res.status(500).json({ message: 'Database query failed', error: error.message });
         }
         
-          
-
-
         // 創建新使用者
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const userId = userCredential.user.uid;
 
-
+        
         // 上傳圖片到 Firebase Storage
         const storage = getStorage();
 
@@ -81,6 +79,9 @@ export default async function handler(req, res) {
         await uploadBytes(backImageRef, backImage.buffer);
         const backImageUrl = await getDownloadURL(backImageRef);
 
+      
+        const verificationCode = Math.floor(100000 + Math.random() * 900000); // 產生 6 位數驗證碼
+
         // 將用戶資料儲存到 Firestore
         const userDoc = doc(collection(db, "users"), userId);
         await setDoc(userDoc, {
@@ -90,12 +91,33 @@ export default async function handler(req, res) {
             phone,
             id,
             role,
+            verificationCode,
             frontImageUrl,
             backImageUrl,
+            verificationCodeExpiresAt: new Date(Date.now() + 10 * 60 * 1000), // 驗證碼 10 分鐘後過期
             createdAt: new Date(),
+            isEmailCodeVerified: false,
         });
 
-        return res.status(200).json({ message: "User registered successfully", userId });
+        // 寄送驗證信件
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_ADDRESS,
+                pass: process.env.EMAIL_PASSWORD,
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_ADDRESS,
+            to: email,
+            subject: 'ArtBridge 電郵驗證碼',
+            text: `您的驗證碼是：${verificationCode}，請於10分鐘內輸入驗證碼。`,
+        };
+
+        await transporter.sendMail(mailOptions);
+
+        return res.status(200).json({ message: "註冊成功，驗證碼已寄出", userId });
     } catch (error) {
         console.error("Registration Error:", error);
 

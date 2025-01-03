@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { notoSansTCClass } from "@/app/layout.js";
 import { useSearchParams } from "next/navigation"; 
+import { useNavigation } from "@/lib/functions";
+import { useToast } from "@/app/contexts/ToastContext.js";
 import "./emailValidation.css";
 import styles from "../register/registerButton.module.css";
 import CustomButton from "@/components/CustomButton/CustomButton.jsx";
@@ -11,6 +13,9 @@ const EmailValidationPage = () => {
   const email = searchParams.get("email"); 
   const [counter, setCounter] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true); 
+  const [verificationCode, setVerificationCode] = useState("");
+  const navigate = useNavigation();
+  const { addToast } = useToast();
 
   // 倒數計時邏輯
   useEffect(() => {
@@ -22,16 +27,61 @@ const EmailValidationPage = () => {
     }
   }, [counter]);
 
-  const handleResendEmail = () => {
-    console.log("Resend Email");
-    setCounter(60); 
-    setIsResendDisabled(true); 
-  
+
+  const handleResendEmail = async () => {
+    if (isResendDisabled) return;
+
+    try{
+      setCounter(60); 
+      setIsResendDisabled(true); 
+
+      const response = await fetch("/api/resendCode", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        addToast("success", "驗證碼已重新寄送");
+      } else {
+        addToast("error", `驗證碼寄送失敗: ${result.message}`);
+      }
+    } catch (error) {
+      addToast("error", `驗證碼寄送失敗: ${result.message}`);
+    }
   };
 
-  const handleValidation = () => {
-    console.log("Validation");
-  
+  const handleValidation = async() => {
+    if (!verificationCode) {
+      addToast("error","驗證失敗: 請輸入驗證碼");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/verifyCode", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          verificationCode,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        addToast("success", "驗證成功 🎉: 即將跳轉至登入頁面");
+        navigate("/login"); 
+      } else {
+        addToast("error", `驗證失敗: ${result.message}`);
+      }
+    } catch (error) {
+      addToast("error", `驗證失敗: ${result.message}`);
+    }
   };
 
   return (
@@ -41,7 +91,11 @@ const EmailValidationPage = () => {
         
         <h2>已寄送驗證信件至 <span className="emailValidation-highlight-blue">{email || "未提供電子郵件"}</span></h2>
         <div className="emailValidation-input-container"> 
-            <input type="text" placeholder="請輸入驗證碼" />
+            <input type="text" 
+            placeholder="請輸入驗證碼" 
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)} 
+            />
         </div>
         <h3>
           還沒收到?{" "}
