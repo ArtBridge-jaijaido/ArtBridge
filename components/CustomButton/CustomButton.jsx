@@ -8,7 +8,6 @@ const CustomButton = ({title, onClick, className = '',type = "button",styles}) =
 
   const handleButtonClick = (event) => {
     setIsActive((prev) => !prev); // 切換選中狀態
-    console.log(isActive);
     if (onClick) onClick(event); // 確保外部的 onClick 被執行
   };
 

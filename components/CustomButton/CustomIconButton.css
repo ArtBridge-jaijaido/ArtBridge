@@ -1,0 +1,36 @@
+
+.CustomIconButton{
+    width:140px;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+    gap:8px;
+    padding:7px 11px;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing: 2px;
+    line-height:normal;
+    border-radius: 5px;
+    border: 1.5px solid #61BCED;
+    color:#61BCED;
+    white-space: nowrap;
+    cursor:pointer;
+}
+
+
+
+.CustomIconButton-Icon {
+    max-width: 35px; 
+    height: auto;    
+    aspect-ratio: 1;
+}
+
+
+.CustomIconButton:hover{
+    background-color:#61BCED;
+    color:#ffffff;
+    transition: all 0.3s ease;
+}
+

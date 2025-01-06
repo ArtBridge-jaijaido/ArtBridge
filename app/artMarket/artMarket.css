@@ -1,0 +1,31 @@
+.artMarket-page{
+
+}
+
+.artMarket-page{
+
+    width:1440px;
+    padding: 140px 80px 50px 80px; /* top right bottom left */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto; /* center in the viewport */
+}
+
+
+.artMarket-iconButton-container{
+    width:100%;
+    display:flex;
+    padding:0px 77px;
+    gap:68px;
+    margin-bottom:40px;
+}
+
+
+.artMarket-dropdownButton-container{
+    width:100%;
+    display:flex;
+    padding:0px 184px;
+    gap:82px;
+}

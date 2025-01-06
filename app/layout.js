@@ -1,6 +1,7 @@
 "use client";
 import { Geist, Geist_Mono,Noto_Sans_TC  } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
+import Header from "@/components/Header/Header.jsx";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,17 +23,25 @@ const notoSansTC = Noto_Sans_TC({
 
 
 export default function RootLayout({ children }) {
+
+  
+
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />  
+        <meta name="mobile-web-app-capable" content="yes" />  
       </head>
       <body
       
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-        <ToastProvider>{children}</ToastProvider>
+        <Header />
+        <main>
+          <ToastProvider>{children}</ToastProvider>
+        </main>
+
+       
       </body>
     </html>
   );
