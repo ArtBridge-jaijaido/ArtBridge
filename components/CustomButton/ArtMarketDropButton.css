@@ -21,6 +21,14 @@
     justify-content: center;
     letter-spacing: 2px;
   }
+
+  .artMarketDropdown-text{
+     display: inline-block; 
+     width:67px;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     overflow: hidden 
+  }
   
   
   /* 按鈕箭頭 */

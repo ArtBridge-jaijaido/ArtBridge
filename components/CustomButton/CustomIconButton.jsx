@@ -2,7 +2,7 @@
 import React from 'react'
 import "./CustomIconButton.css";
 import { notoSansTCClass } from '../../app/layout.js';
-import Image from 'next/image';
+
 
 
 
@@ -13,12 +13,10 @@ const CustomIconButton = ({ iconSrc,altText='', text, onClick, className = '' })
       className={`CustomIconButton ${notoSansTCClass} ${className}`}
       onClick={onClick}
     >
-     <Image
+     <img
         src={iconSrc}
         alt={altText}
-        layout="intrinsic" // "fill" | "fixed" | "intrinsic" | "responsive"
-        width={35}
-        height={35}
+        layout="intrinsic" 
         className="CustomIconButton-Icon"
       />
       <span className="CustomIconButton-text">{text}</span>

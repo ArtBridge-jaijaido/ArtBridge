@@ -1,31 +1,31 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import "./ArtMarketDropButton.css";
 
-const ArtMarketDropdownButton = ({ buttonText, options = [], onOptionSelect = () => {} }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(buttonText); // 初始按鈕文字
+const ArtMarketDropdownButton = ({
+  id,
+  buttonText,
+  options = [],
+  isOpen,
+  onToggleDropdown,
+  onOptionSelect,
+}) => {
 
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev);
-  };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option); // 更新按鈕文字
-    onOptionSelect(option); // 執行回調函數
-    setIsOpen(false); // 點擊後關閉菜單
-  };
+
 
   return (
     <div className="artMarketDropdown-menu-container">
       {/* 按鈕 */}
       <button
+        id={id}
         className="artMarketDropdown-button"
-        onClick={toggleMenu}
-        aria-expanded={isOpen} 
-        aria-haspopup="true" 
+        onClick={onToggleDropdown}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
-        {selectedOption} <span className="artMarketDropdown-arrow">▼</span>
+        <span className="artMarketDropdown-text">{buttonText}</span> 
+        <span className="artMarketDropdown-arrow">▼</span>
       </button>
 
       {/* 下拉選單 */}
@@ -35,7 +35,7 @@ const ArtMarketDropdownButton = ({ buttonText, options = [], onOptionSelect = ()
             <li
               key={index}
               className="artMarketDropdown-menu-item"
-              onClick={() => handleOptionClick(option)}
+              onClick={() => onOptionSelect(option)}
             >
               {option}
             </li>
@@ -47,4 +47,6 @@ const ArtMarketDropdownButton = ({ buttonText, options = [], onOptionSelect = ()
 };
 
 export default ArtMarketDropdownButton;
+
+
 

@@ -1,0 +1,108 @@
+.Artwork-card-container{
+    width: 228px;
+    height: 264px;
+    border: 1px solid #40A4DA;
+  
+    position: relative;
+    background: #40A4DA;
+    position:relative;
+  
+  }
+
+.Artwork-image-container{
+  width: 100%;
+  height: 214px;
+  overflow: hidden;
+}
+
+.Artwork-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Artwork-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ }
+
+
+.Artwork-title{
+  position:absolute;
+  top:-15px;
+  left:-1px;
+  background: #40A4DA;
+  width: 174px;
+  height: 29px;
+  color: #FFF;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 2px;
+  border-radius: 30px
+}
+
+.Artwork-favorite-button{
+  position:absolute;
+  width:22px;
+  height:22px;
+  background:#fff;
+  right:18px;
+  top:18px;
+  border-radius: 50%;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.Artwork-favorite-icon{
+  width:18px;
+  height:18px;
+}
+
+
+.Artwork-footer-row{
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height:50px;
+  padding:9px 8px;
+  color:#FFF;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 2px;
+}
+
+
+.Artwork-profile-container{
+  display:flex;
+  align-items: center;
+  gap:8px;
+}
+
+.Artwork-artist-nickname{
+  font-size: 14px;
+}
+
+
+
+.Artwork-artist-img{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  
+}
+
+
+.Artwork-price{
+  font-size: 18px;
+}
