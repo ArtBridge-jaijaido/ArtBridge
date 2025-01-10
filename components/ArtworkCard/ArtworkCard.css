@@ -70,7 +70,8 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: 2px;
-  border-radius: 30px
+  border-radius: 30px;
+
 }
 
 .Artwork-favorite-button{
@@ -115,6 +116,7 @@
 
 .Artwork-artist-nickname{
   font-size: var(--Artwork-artist-nickname);
+  white-space: nowrap;
 }
 
 

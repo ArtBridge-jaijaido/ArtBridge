@@ -5,9 +5,9 @@ import CustomIconButton from '@/components/CustomButton/CustomIconButton.jsx';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
-import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artMarketDropdownOptions.js';
+import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
 
-import "./artMarket.css";
+import "./artworkMarket.css";
 
 const artMarketPage = () => {
     const [openDropdown, setOpenDropdown] = useState(null); // 追蹤哪個下拉選單是開啟狀態

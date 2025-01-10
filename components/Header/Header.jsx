@@ -31,11 +31,15 @@ const Header = () => {
 
     const handleUserLogin = () => {
         navigate("/login");
+       
     };
 
     const handleUserRegister = () => {
         navigate("/register");
+       
     };
+
+  
 
     // 當窗口大小變化時，如果寬度大於 768px，關閉菜單
     useEffect(() => {
@@ -64,11 +68,11 @@ const Header = () => {
             </button>
             <nav className={`header-nav ${isMenuOpen ? "open" : ""} ${notoSansTCClass}`}>
                 <div className="header-nav-options">
-                    <Link href="/painter">繪師</Link>
-                    <Link href="/artMarket">市集</Link>
-                    <Link href="/artCommunity">交流版</Link>
-                    <Link href="/artShowcaseLobby">展示大廳</Link>
-                    <Link href="/artApply">委託大廳</Link>
+                    <Link href="/artworkPainter" >繪師</Link>
+                    <Link href="/artworkMarket" >市集</Link>
+                    <Link href="/artworkCommunity">交流版</Link>
+                    <Link href="/artworkShowcaseLobby">展示大廳</Link>
+                    <Link href="/artworkApply" >委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
