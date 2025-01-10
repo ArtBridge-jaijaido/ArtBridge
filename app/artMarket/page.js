@@ -129,7 +129,7 @@ const artMarketPage = () => {
                     />
                 ))}
             </div>
-
+                
             {/* 使用分頁元件 */}
             <Pagination
                 totalPages={totalPages}

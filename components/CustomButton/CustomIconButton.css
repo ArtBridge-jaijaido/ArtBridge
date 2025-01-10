@@ -1,14 +1,34 @@
+.CustomIconButton{
+    /*width*/
+    --CustomIconButton-width:140px;
+    --CustomIconButton-Icon:35px;
+
+
+    /*height*/
+    --CustomIconButton-height:50px;
+
+    /*gap*/
+    --CustomIconButton-gap:8px;
+
+
+    /*font-size*/
+    --CustomIconButton-font-size:15px;
+}
+
+
+
 
 .CustomIconButton{
-    width:140px;
-    height:50px;
+    width:100%;
+    max-width:var(--CustomIconButton-width);
+    height:var(--CustomIconButton-height);
     display:flex;
     justify-content:center;
     align-items:center;
     text-align: center;
-    gap:8px;
+    gap:var(--CustomIconButton-gap);
     padding:7px 11px;
-    font-size:15px;
+    font-size:var(--CustomIconButton-font-size);
     font-weight:600;
     letter-spacing: 2px;
     line-height:normal;
@@ -22,7 +42,7 @@
 
 
 .CustomIconButton-Icon {
-    width: 35px; 
+    width: var(--CustomIconButton-Icon);
     height: auto;    
     aspect-ratio: 1;
 }
@@ -34,3 +54,74 @@
     transition: all 0.3s ease;
 }
 
+
+/*RWD*/
+@media screen and (max-width: 1280px){
+    .CustomIconButton{
+        --CustomIconButton-width:120px;
+        --CustomIconButton-height:45px;
+        padding:7px 9px;
+        --CustomIconButton-gap:7px;
+        --CustomIconButton-font-size:13px;
+
+    }
+
+    .CustomIconButton-Icon{
+        --CustomIconButton-Icon:30px;
+    }
+
+
+}
+
+
+
+@media screen and (max-width:834px){
+    .CustomIconButton{
+        --CustomIconButton-width:90px;
+        --CustomIconButton-height:35px;
+        padding:6px 8px;
+        --CustomIconButton-gap:6px;
+        --CustomIconButton-font-size:10px;
+
+    }
+
+    .CustomIconButton-Icon{
+        --CustomIconButton-Icon:23px;
+    }
+}
+
+
+
+
+@media screen and (max-width:440px){
+    .CustomIconButton{
+        --CustomIconButton-width:80px;
+        --CustomIconButton-height:30px;
+        padding:5px 8px;
+        --CustomIconButton-gap:6px;
+        --CustomIconButton-font-size:8px;
+
+    }
+
+    .CustomIconButton-Icon{
+        --CustomIconButton-Icon:20px;
+    }
+
+}
+
+
+
+@media screen and (max-width:370px){
+    .CustomIconButton{
+        --CustomIconButton-width:66px;
+        --CustomIconButton-height:30px;
+        padding:5px 5px;
+        --CustomIconButton-gap:4px;
+        --CustomIconButton-font-size:8px;
+
+    }
+
+    .CustomIconButton-Icon{
+        --CustomIconButton-Icon:20px;
+    }
+}

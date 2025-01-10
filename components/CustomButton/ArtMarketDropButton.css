@@ -1,3 +1,24 @@
+.artMarketDropdown-menu-container{
+    /* width*/
+
+    --artMarketDropdown-button-width:120px; 
+    --artMarketDropdown-text-width: 67px;
+
+
+    /* height */
+    --artMarketDropdown-button-height: 40px;
+
+    /*font-size*/
+    --artMarketDropdown-button-font-size: 14px;
+    --artMarketDropdown-arrow-font-size: 12px;  
+    --artMarketDropdown-menu-item-font-size: 12px;
+
+    /*margin left*/
+    --artMarketDropdown-arrow-margin-left: 7px;
+}
+
+
+
 /* Dropdown menu container */
 .artMarketDropdown-menu-container {
     position: relative;
@@ -6,14 +27,15 @@
   
   /* 按鈕樣式 */
   .artMarketDropdown-button {
-    width:120px;
-    height: 40px;
+    width:100%;
+    max-width:var(--artMarketDropdown-button-width);
+    height: var(--artMarketDropdown-button-height);
     background-color: #8DD7FF; 
     color: #ffffff;
     border: 1px solid #8DD7FF;
     border-radius: 5px;
     padding: 10px 10px;
-    font-size: 14px;
+    font-size:var(--artMarketDropdown-button-font-size);
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -24,7 +46,7 @@
 
   .artMarketDropdown-text{
      display: inline-block; 
-     width:67px;
+     width:var(--artMarketDropdown-text-width);
      text-overflow: ellipsis;
      white-space: nowrap;
      overflow: hidden 
@@ -33,12 +55,13 @@
   
   /* 按鈕箭頭 */
   .artMarketDropdown-arrow {
-    margin-left: 7px;
-    font-size: 12px;
+    margin-left: var(--artMarketDropdown-arrow-margin-left);
+    font-size: var(--artMarketDropdown-arrow-font-size);
   }
   
   /* 下拉選單樣式 */
   .artMarketDropdown-menu {
+    width:100%;
     position: absolute;
     top:110%;
     left: 0;
@@ -49,7 +72,7 @@
     padding: 7px 10px;
     list-style: none;
     z-index: 10;
-    width: 120px;
+    max-width: var(--artMarketDropdown-button-width);
     overflow: hidden;
     border-radius: 3px;
     border: 1px solid #ECECEC;
@@ -58,7 +81,7 @@
   /* 下拉選單項目 */
   .artMarketDropdown-menu-item {
     padding: 10px 0px;
-    font-size: 12px;
+    font-size: var(--artMarketDropdown-menu-item-font-size);
     color: #828282;
     cursor: pointer;
     font-weight: 500;
@@ -70,3 +93,104 @@
      color: #8DD7FF;
   }
   
+
+
+@media screen and (max-width:1280px){
+  .artMarketDropdown-button {
+    --artMarketDropdown-button-width:100px;
+    --artMarketDropdown-button-height:35px;
+    padding: 4px 8px;
+    --artMarketDropdown-button-font-size:12px;
+
+  }
+
+  .artMarketDropdown-text{
+    --artMarketDropdown-text-width: 67px;
+  }
+
+  .artMarketDropdown-arrow{
+    --artMarketDropdown-arrow-font-size:10px;
+  }
+
+  .artMarketDropdown-menu{
+    --artMarketDropdown-button-width:100px;
+    padding:10px 4px 10px 7px;    
+  }
+
+  .artMarketDropdown-menu-item{
+    padding: 6px 0px;
+    --artMarketDropdown-menu-item-font-size:10px;
+  }
+}
+
+@media screen and (max-width:834px){
+  .artMarketDropdown-button{
+    --artMarketDropdown-button-width:85px;
+    --artMarketDropdown-button-height:25px;
+    padding: 4px 8px;
+    --artMarketDropdown-button-font-size:10px;
+  }
+
+  .artMarketDropdown-text{
+    --artMarketDropdown-text-width: 60px;
+  }
+
+  .artMarketDropdown-arrow{
+    --artMarketDropdown-arrow-font-size:10px;
+  }
+
+  .artMarketDropdown-menu {
+    --artMarketDropdown-button-width:85px;
+  }
+
+  .artMarketDropdown-menu-item {
+    --artMarketDropdown-menu-item-font-size:10px;
+  }
+}
+
+
+
+
+@media screen and (max-width:440px){
+  .artMarketDropdown-button {
+    --artMarketDropdown-button-width:75px;
+    --artMarketDropdown-button-height: 20px;
+    padding: 4px 8px;
+    --artMarketDropdown-button-font-size:8px;
+  }
+
+  .artMarketDropdown-text{
+    --artMarketDropdown-text-width: 46px;
+  }
+
+  .artMarketDropdown-arrow{
+    --artMarketDropdown-arrow-font-size:8px;
+  }
+
+
+  .artMarketDropdown-menu{
+    --artMarketDropdown-button-width:75px;
+    padding:10px 4px 10px 7px;    
+  }
+
+
+  .artMarketDropdown-menu-item{
+    padding: 6px 0px;
+    --artMarketDropdown-menu-item-font-size:8px;
+  }
+ 
+}
+
+@media screen and (max-width:370px){
+  .artMarketDropdown-button {
+    --artMarketDropdown-button-width:75px;
+    --artMarketDropdown-button-height: 20px;
+    padding: 4px 8px;
+    --artMarketDropdown-button-font-size:8px;
+  }
+
+  .artMarketDropdown-text{
+    --artMarketDropdown-text-width: 43px;
+  }
+
+}

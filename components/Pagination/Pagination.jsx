@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import "./pagination.css"; // 分頁的樣式
 

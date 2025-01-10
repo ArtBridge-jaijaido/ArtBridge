@@ -1,9 +1,26 @@
+.pagination-container{
+    /* width */
+    --pagination-arrow-button-width: 22px;
+
+    /* height */
+    --pagination-arrow-button-height: 22px;
+
+    /*gap*/
+    --pagination-container-gap:8px;
+
+
+    /*font-size*/   
+    --pagination-button-font-size: 16px;
+}
+
+
+
 .pagination-container {
     
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: var(--pagination-container-gap);
  
 }
 
@@ -14,6 +31,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size:var(--pagination-button-font-size);
 }
 
 .pagination-button.active {
@@ -37,8 +55,30 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    width: 22px;
-    height: 22px;
+    width: var(--pagination-arrow-button-width);
+    height: var(--pagination-arrow-button-height);
     border-radius: 1px;
     border: 2px solid #40A4DA;
+}
+
+
+
+
+
+
+/*RWD*/
+@media screen and (max-width: 440px){
+    .pagination-container{
+        --pagination-container-gap:4px;
+    }
+
+    .pagination-button {
+        padding: 4px 6px;
+        --pagination-button-font-size: 12px;
+    }   
+
+    .pagination-arrow-button{
+        --pagination-arrow-button-width: 13px;
+        --pagination-arrow-button-height: 13px;
+    }
 }

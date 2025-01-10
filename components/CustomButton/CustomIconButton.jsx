@@ -16,7 +16,6 @@ const CustomIconButton = ({ iconSrc,altText='', text, onClick, className = '' })
      <img
         src={iconSrc}
         alt={altText}
-        layout="intrinsic" 
         className="CustomIconButton-Icon"
       />
       <span className="CustomIconButton-text">{text}</span>

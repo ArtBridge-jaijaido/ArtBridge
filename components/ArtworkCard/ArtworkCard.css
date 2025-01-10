@@ -1,6 +1,29 @@
 .Artwork-card-container{
-    width: 228px;
-    height: 264px;
+   /*width*/
+   --Artwork-card-container-width: 228px;
+   --Artwork-title-width:174px; 
+   --Artwork-favorite-button-width:22px;
+
+   /*height*/
+    --Artwork-card-container-height: 264px;
+    --Artwork-image-container-height: 214px;
+    --Artwork-title-height: 29px;
+    --Artwork-favorite-button-height:22px;
+    --Artwork-footer-row-height:50px;
+
+
+    /*font-size*/
+    --Artwork-title-font-size: 14px;
+    --Artwork-artist-nickname:14px;
+    --Artwork-price: 18px;
+}
+
+
+
+.Artwork-card-container{
+   width:100%;
+    max-width: var(--Artwork-card-container-width);
+    height: var(--Artwork-card-container-height);
     border: 1px solid #40A4DA;
   
     position: relative;
@@ -11,7 +34,7 @@
 
 .Artwork-image-container{
   width: 100%;
-  height: 214px;
+  height: var(--Artwork-image-container-height);
   overflow: hidden;
 }
 
@@ -33,15 +56,16 @@
   top:-15px;
   left:-1px;
   background: #40A4DA;
-  width: 174px;
-  height: 29px;
+  width:100%;
+  max-width: var(--Artwork-title-width);
+  height: var(--Artwork-title-height);
   color: #FFF;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align: center;
   font-family: Inter;
-  font-size: 14px;
+  font-size: var(--Artwork-title-font-size);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -51,8 +75,8 @@
 
 .Artwork-favorite-button{
   position:absolute;
-  width:22px;
-  height:22px;
+  width:var( --Artwork-favorite-button-width);
+  height:var(--Artwork-favorite-button-height);
   background:#fff;
   right:18px;
   top:18px;
@@ -73,7 +97,7 @@
   display:flex;
   justify-content: space-between;
   align-items: center;
-  height:50px;
+  height:var( --Artwork-footer-row-height);
   padding:9px 8px;
   color:#FFF;
   font-style: normal;
@@ -90,7 +114,7 @@
 }
 
 .Artwork-artist-nickname{
-  font-size: 14px;
+  font-size: var(--Artwork-artist-nickname);
 }
 
 
@@ -104,5 +128,158 @@
 
 
 .Artwork-price{
-  font-size: 18px;
+  font-size:var(--Artwork-price);
+}
+
+@media screen and (max-width:1280px){
+  .Artwork-card-container{
+    --Artwork-card-container-width: 207px;
+    --Artwork-card-container-height: 235px;
+  }
+
+  .Artwork-image-container{
+    --Artwork-image-container-height:190px;
+  }
+
+  .Artwork-title{
+    --Artwork-title-width:157px;
+    --Artwork-title-height: 26px;
+    --Artwork-title-font-size:12px;
+  }
+
+  .Artwork-favorite-button{
+    --Artwork-favorite-button-width:22px;
+    --Artwork-favorite-button-height:22px;
+    right:13px;
+    top:13px;
+  }
+
+  .Artwork-favorite-icon{
+    width:18px;
+    height:18px;
+  }
+
+  .Artwork-footer-row{
+    --Artwork-footer-row-height:45px;
+  }
+
+  .Artwork-artist-nickname{
+   --Artwork-artist-nickname:12px;
+  }
+
+  .Artwork-artist-img{
+    width:26px;
+    height:26px; 
+  }
+
+  .Artwork-price{
+    --Artwork-price:15px;
+  }
+}
+
+
+@media screen and (max-width:834px){
+  .Artwork-card-container{
+    --Artwork-card-container-width:160px;
+    --Artwork-card-container-height:179px;
+  }
+
+  .Artwork-image-container{
+    --Artwork-image-container-height:145px;
+  }
+
+  .Artwork-title{
+    --Artwork-title-width:132px;
+    --Artwork-title-height:20px;
+    --Artwork-title-font-size:8px;
+    top:-13px;
+  }
+
+  .Artwork-favorite-button{
+    --Artwork-favorite-button-width:18px;
+    --Artwork-favorite-button-height:18px;
+
+    right:12px;
+    top:12px;
+  }
+
+  .Artwork-favorite-icon{
+    width:14px;
+    height:14px;
+  }
+
+  .Artwork-footer-row{
+    padding:8px 8px;
+    --Artwork-footer-row-height:34px;
+  } 
+
+  .Artwork-artist-nickname{
+    --Artwork-artist-nickname: 9px;
+  }
+
+  .Artwork-artist-img{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    
+  }
+
+  .Artwork-price{
+    --Artwork-price: 12px;
+  }
+}
+
+
+
+
+
+@media screen and (max-width:440px){
+  .Artwork-card-container{
+    --Artwork-card-container-width:175px;
+    --Artwork-card-container-height: 166px;
+  }
+
+  .Artwork-image-container{
+    --Artwork-image-container-height:135px;
+  }
+
+  .Artwork-title{
+    --Artwork-title-width:132px;
+    --Artwork-title-height:18px;
+    --Artwork-title-font-size:7px;
+    top:-12px;
+  }
+
+  .Artwork-favorite-button{
+    --Artwork-favorite-button-width:18px;
+    --Artwork-favorite-button-height:18px;
+
+    right:12px;
+    top:12px;
+  }
+
+  .Artwork-favorite-icon{
+    width:12px;
+    height:12px;
+  }
+
+  .Artwork-footer-row{
+    padding:8px 8px;
+    --Artwork-footer-row-height:31px;
+  } 
+
+  .Artwork-artist-nickname{
+    --Artwork-artist-nickname: 7px;
+  }
+
+  .Artwork-artist-img{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    
+  }
+
+  .Artwork-price{
+    --Artwork-price: 10px;
+  }
 }

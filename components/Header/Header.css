@@ -100,6 +100,7 @@
 
 @media screen and (max-width: 1440px){
     .header{
+        
         padding: 25px 42px 25px 42px;  /* top right bottom left */
     }
  
@@ -137,6 +138,7 @@
 
 @media screen and (max-width: 834px){
     .header{
+       
         padding: 26px 20px 26px 20px;
         
     }
@@ -148,8 +150,9 @@
   
 }
 
-@media screen and (max-width:768px){
-   
+
+
+@media screen and (max-width:440px){
 
     .hamburger-menu {
         display: block;
@@ -160,7 +163,7 @@
 
     .header-nav {
         position: absolute;
-        top: 121px;  /* header height + nav option distance 41px */
+        top: 80px;  /* header height + nav option distance 41px */
         left: 0;
         right: 0;
         background-color: #fff;
@@ -200,7 +203,7 @@
             opacity: 1; 
         }
     }
-}
+   }
 
 @media screen and (max-width: 320px){
 

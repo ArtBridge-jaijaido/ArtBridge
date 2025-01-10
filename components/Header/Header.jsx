@@ -9,13 +9,20 @@ import styles from "./headerButton.module.css";
 import "./Header.css";
 
 const Header = () => {
+    const [isMounted, setIsMounted] = useState(false); // 判斷是否已加載客戶端
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // 使用 usePathname 獲取當前路徑
     const pathname = usePathname();
 
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
-    const showHeader = !noHeaderRoutes.includes(pathname);
+
+    // 僅在客戶端加載後執行路徑判斷，避免 SSR 和 CSR 不一致
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const showHeader = isMounted && !noHeaderRoutes.includes(pathname);
+
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
@@ -23,7 +30,6 @@ const Header = () => {
     const navigate = useNavigation();
 
     const handleUserLogin = () => {
-       
         navigate("/login");
     };
 
@@ -31,11 +37,11 @@ const Header = () => {
         navigate("/register");
     };
 
-    // when the window is resized, close the menu if the window is wider than 768px
+    // 當窗口大小變化時，如果寬度大於 768px，關閉菜單
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 768) {
-                setIsMenuOpen(false); 
+                setIsMenuOpen(false);
             }
         };
 
@@ -51,8 +57,8 @@ const Header = () => {
             <button
                 className="hamburger-menu"
                 onClick={toggleMenu}
-                aria-label="Toggle navigation menu" 
-                aria-expanded={isMenuOpen} 
+                aria-label="Toggle navigation menu"
+                aria-expanded={isMenuOpen}
             >
                 ☰
             </button>
@@ -65,8 +71,8 @@ const Header = () => {
                     <Link href="/artApply">委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">
-                    <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
+                    <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
                 </div>
             </nav>
         </header>
