@@ -6,9 +6,13 @@
 
     /*gap*/
     --artworkPainter-dropdownButton-container-min-gap: 20px;
+    --artworkPainter-button-container-gap: 80px;
+    --artworkPainterProfileCard-container-gap: 60px;
+
 
      /*margin-bottom*/
      --artworkPainter-button-container-margin-bottom:50px;
+     --artworoPainterProfileCard-margin-bottom:50px;
 }
 
 
@@ -29,34 +33,48 @@
 .artworkPainter-button-container{
     width:100%;
     display:flex;
-    gap:var(--artworkPainter-dropdownButton-container-min-gap);
+    gap:var(--artworkPainter-button-container-gap);
     padding: 0px 190px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom:var(--artworkPainter-button-container-margin-bottom);
-    
+   
+}
+
+
+.artworkPainterProfileCard-container{
+    display:flex;
+    flex-direction: column;
+    gap:var(--artworkPainterProfileCard-container-gap);
+    margin-bottom:var(--artworoPainterProfileCard-margin-bottom);
 }
 
 
 @media screen and (max-width:1280px){
     .artworkPainterPage{
        
-        padding:110px 63px 50px 120px;
+        padding:110px 66px 50px 66px;  /* top right bottom left */
     }
 
     .artworkPainter-button-container{
-        padding: 0px 40px;
+        padding: 0px 128px;
+        --artworkPainter-button-container-gap:60px;
     }
 }
 
 
 @media screen and (max-width:834px){
     .artworkPainterPage{
-        padding:110px 50px 50px 60px;
+        padding:110px 50px 50px 50px;
     }
 
     .artworkPainter-button-container{
-        padding: 0px 60px;
+        padding: 0px 55px;
+        --artworkPainter-button-container-gap:36px;
+    }
+
+    .artworkPainterProfileCard-container{
+        --artworkPainterProfileCard-container-gap:30px;
     }
 }
 
@@ -73,7 +91,7 @@
     .artworkPainterPage{
         width:100%;
         max-width:440px;
-        padding : 108px 30px 25px 40px;
+        padding : 108px 30px 25px 30px;
     }
 
     .artworkPainter-button-container{
@@ -81,7 +99,7 @@
         display:grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
-        --artMarket-dropdownButton-container-margin-bottom: 30px;
+        --artworkPainter-button-container-margin-bottom: 30px;
         justify-items: center;
         align-items: center;
     }
@@ -96,6 +114,10 @@
         grid-row: 2; 
       }
 
+      .artworkPainterProfileCard-container{
+        --artworkPainterProfileCard-container-gap:20px;
+    }
+
 }
 
 
@@ -107,5 +129,9 @@
 
     .artworkPainter-button-container{
         padding: 0px 30px;
+    }
+
+    .artworkPainterProfileCard-container{
+        --artworkPainterProfileCard-container-gap:10px;
     }
 }

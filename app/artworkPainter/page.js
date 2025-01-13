@@ -3,12 +3,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
 import ToggleButton from '@/components/CustomButton/ToggleButton.jsx';
+import ArtworkPainterProfileCard from '@/components/ArtworkPainterProfileCard/ArtworkPainterProfileCard.jsx';
 import { artworkPainter, artMarketCategory, artMarketStyle} from '@/lib/artworkDropdownOptions.js';
+import Pagination from '@/components/Pagination/Pagination.jsx';
 import "./artworkPainter.css";
 
 
 const artworkPainterPage = () => {
     const [openDropdown, setOpenDropdown] = useState(null); // 追蹤哪個下拉選單是開啟狀態   
+    const [currentPage, setCurrentPage] = useState(1); // 目前頁數
+    const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
+    const totalItems = 135; // 商品總數（可以從API獲取）
+    const totalPages = Math.ceil(totalItems / ITEMSPERPAGE); // 總頁數
+
     const [selectedOptions, setSelectedOptions] = useState({
         painter: "評價最高",
         category: "類別選擇",
@@ -28,9 +35,14 @@ const artworkPainterPage = () => {
     };
 
     const dropdownRef = useRef(null); // 用於追蹤下拉選單的容器
+    
 
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
     const handleOptionSelect = (id, option) => {
@@ -54,7 +66,10 @@ const artworkPainterPage = () => {
         };
     }, []);
 
-
+    const currentItems = Array.from({ length: totalItems }).slice(
+        (currentPage - 1) * ITEMSPERPAGE,
+        currentPage * ITEMSPERPAGE
+    );
 
 
 
@@ -100,7 +115,17 @@ const artworkPainterPage = () => {
                 />
             </div>
 
+            <div className="artworkPainterProfileCard-container">
+               {currentItems.map((item, index) => (
+                    <ArtworkPainterProfileCard key={index} />
+                ))}
+            </div>
 
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
 
         </div>
     )

@@ -70,9 +70,9 @@ const Header = () => {
                 <div className="header-nav-options">
                     <Link href="/artworkPainter" >繪師</Link>
                     <Link href="/artworkMarket" >市集</Link>
-                    <Link href="/artworkCommunity">交流版</Link>
-                    <Link href="/artworkShowcaseLobby">展示大廳</Link>
-                    <Link href="/artworkApply" >委託大廳</Link>
+                    <Link href="">交流版</Link>
+                    <Link href="">展示大廳</Link>
+                    <Link href="" >委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />

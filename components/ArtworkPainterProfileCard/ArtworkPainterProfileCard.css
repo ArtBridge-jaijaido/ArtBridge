@@ -1,0 +1,398 @@
+.ArtworkPainterProfileCard{
+    
+    /* max-width*/
+    --ArtworkPainterProfileCard-header-max-width:1296px;
+
+    /*width */
+    --artworkPainterProfileCard-avator-width:70px;
+    --artworkPainterProfileCard-verify-star-width:30px;
+
+
+    /*height */
+    --artworkPainterProfileCard-avator-height:70px;
+    --artworkPainterProfileCard-verify-star-height:30px;
+}
+
+.ArtworkPainterProfileCard{
+    display:flex;
+    flex-direction: column;
+    gap:25px;
+    padding:25px 16px;
+    border-bottom: 2px solid transparent;
+    background-image: linear-gradient(180deg, #fff, #fff), 
+                      linear-gradient(90deg, #F0F9FF 0%, #A2E2FF 50%, #F0F9FF 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+}
+
+.ArtworkPainterProfileCard-header{
+  
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    max-width:var(--ArtworkPainterProfileCard-header-max-width);
+    height:auto;
+
+
+}
+
+.artworkPainterProfileCard-info{
+    display:flex;
+    align-items:center ;
+}
+
+.artworkPainterProfileCard-avator-container{
+    position:relative;
+}
+
+.artworkPainterProfileCard-avator {
+    width: var(--artworkPainterProfileCard-avator-width);
+    height: var(--artworkPainterProfileCard-avator-height); 
+    border-radius: 50%; 
+    margin-right: 10px;
+}
+
+.artworkPainterProfileCard-verify-star{
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: var(--artworkPainterProfileCard-verify-star-width);
+    height: var(--artworkPainterProfileCard-verify-star-height);
+}
+
+.artworkPainterProfileCard-info-text{
+    display:flex;
+    flex-direction: column;   
+    gap:6px;
+}
+
+.artworkPainterProfileCard-name{
+    color: #6C6B6B;
+    
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 3px;
+}
+
+.artworkPainterProfileCard-status-container{
+    display:flex;
+    align-items: center;
+    gap:6px;
+}
+
+.artworkPainterProfileCard-status-container span{
+    color: #C2C2C2;
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.artworkPainterProfileCard-status-container img{
+    width: 22px;
+    height: 22px;
+}
+
+.artworkPainterProfileCard-actions {
+    
+    display: flex;
+    gap:40px;
+    margin-left: auto; 
+    margin-right:10px;
+}
+
+.ArtworkPainterProfileCard-action-btn{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8px 16px;  
+    width: 120px;
+    height:50px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 4px;
+    color: #FFF;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.ArtworkPainterProfileCard-view-reviews{
+    background-color: #f7b267;
+}
+
+.ArtworkPainterProfileCard-view-reviews:hover {
+    background-color: #e99650; 
+ 
+}
+
+.ArtworkPainterProfileCard-assign-artist {
+    background-color: #6CB8E0;
+   
+}
+
+.ArtworkPainterProfileCard-assign-artist:hover {
+    background-color: #4d97d9; 
+   
+}
+
+.ArtworkPainterProfileCard-top-five-artworks{
+    display:flex;
+    width:100%;
+    gap:16px;
+}
+
+.ArtworkPainterProfileCard-artwork-image-container{
+    width: 100%;
+    max-width:240px;
+    height:auto;
+    aspect-ratio: 1/1;
+  
+}
+
+.ArtworkPainterProfileCard-artwork{
+    border: 1px solid #C2C2C2;
+    border-radius: 8px;
+    width:100%;
+    height:100%;
+    object-fit: cover; 
+}
+
+
+/*RWD*/
+
+@media screen and (max-width:1280px){
+
+    .ArtworkPainterProfileCard{
+        gap:20px;
+       
+    }
+
+
+    .artworkPainterProfileCard-avator{
+        --artworkPainterProfileCard-avator-width:56px;
+        --artworkPainterProfileCard-avator-height:56px;
+    }
+
+    .artworkPainterProfileCard-verify-star{
+        --artworkPainterProfileCard-verify-star-width:24px;
+        --artworkPainterProfileCard-verify-star-height:24px;
+    }
+
+    
+
+    .artworkPainterProfileCard-name{
+        font-size: 16px;
+       
+    }
+    .artworkPainterProfileCard-status-container span{
+       
+        font-size: 12px;
+        
+    }
+    .artworkPainterProfileCard-status-container img{
+        width:18px;
+        height: 18px;
+    }
+    .artworkPainterProfileCard-actions {
+        gap:32px;
+      
+    }
+    .ArtworkPainterProfileCard-action-btn{
+      
+        padding: 6px 12px;  
+        width: 100px;
+        height:40px;
+        border-radius: 5px;
+        font-size: 14px;
+     
+    }
+    .ArtworkPainterProfileCard-top-five-artworks{
+      
+        gap:12px;
+    }
+    .ArtworkPainterProfileCard-artwork-image-container{
+       
+        max-width:210px;
+    
+    }
+    
+}
+
+
+@media screen and (max-width:834px){
+    .ArtworkPainterProfileCard{
+        gap:18px;
+    
+    }
+    .ArtworkPainterProfileCard-artwork-image-container:nth-child(5) {
+        display: none;
+    }
+
+    .ArtworkPainterProfileCard-top-five-artworks{
+      
+        gap:9px;
+    }
+
+    .ArtworkPainterProfileCard-artwork-image-container{
+       
+        max-width:175px;
+    
+    }
+}
+
+@media screen and (max-width:440px){
+    .ArtworkPainterProfileCard{
+        gap:10px;
+        padding:20px 10px;
+    }
+
+
+    .artworkPainterProfileCard-avator {
+        width: 38px;
+        height:38px;
+        margin-right: 8px;
+    }
+
+    .artworkPainterProfileCard-verify-star{
+        top: -4px;
+        left: -4px;
+        width:15px;
+        height: 15px;
+    }
+
+
+    .artworkPainterProfileCard-info-text{
+        gap:2px;
+    }
+
+    .artworkPainterProfileCard-name{
+      
+        font-size: 15px;
+     
+    }
+
+    .artworkPainterProfileCard-status-container{
+      
+        gap:2px;
+    }
+
+
+    .artworkPainterProfileCard-status-container span{
+     
+        font-size: 8px;
+       
+    }
+
+    .artworkPainterProfileCard-status-container img{
+        width: 13px;
+        height: 13px;
+    }
+
+
+
+    .artworkPainterProfileCard-actions {
+    
+       
+        gap:10px;
+        margin-right:4px;
+    }
+
+    .ArtworkPainterProfileCard-action-btn{
+        padding:2px 2px;
+        width:60px;
+        height:24px;
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .ArtworkPainterProfileCard-top-five-artworks{
+      
+        gap:8px;
+    }
+
+
+    .ArtworkPainterProfileCard-artwork-image-container{
+       
+        max-width:125px;
+    
+    }
+
+    .ArtworkPainterProfileCard-artwork-image-container:nth-child(4) {
+        display: none;
+    }
+
+    
+}
+
+
+@media screen and (max-width:370px){
+    .artworkPainterProfileCard-avator {
+        width: 26px;
+        height:26px;
+        margin-right:6px;
+    }
+
+    .artworkPainterProfileCard-verify-star{
+       
+        width:10px;
+        height: 10px;
+    }
+
+    .artworkPainterProfileCard-name{
+      
+        font-size: 10px;
+     
+    }
+
+    .artworkPainterProfileCard-status-container span{
+     
+        font-size: 6px;
+       
+    }
+
+    .artworkPainterProfileCard-status-container img{
+        width: 9px;
+        height: 9px;
+    }
+
+    .artworkPainterProfileCard-actions {
+    
+       
+        gap:6px;
+        margin-right:2px;
+    }
+
+    .ArtworkPainterProfileCard-action-btn{
+        padding:2px 2px;
+        width:52px;
+        height:17px;
+        font-size: 8px;
+       
+    }
+
+    .ArtworkPainterProfileCard-top-five-artworks{
+      
+        gap:6px;
+    }
+
+
+    .ArtworkPainterProfileCard-artwork-image-container{
+       
+        max-width:100px;
+    
+    }
+
+
+}
