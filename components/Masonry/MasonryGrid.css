@@ -1,0 +1,27 @@
+.masonry-grid {
+    display: flex;
+    gap: 16px; 
+  }
+  
+  .masonry-grid-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .masonry-grid-item {
+    margin-bottom: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .masonry-grid-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* 可選：圓角效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .masonry-grid-item:hover {
+    transform: translateY(-8px);
+   
+} 

@@ -10,7 +10,7 @@ import "./artworkPainter.css";
 
 
 const artworkPainterPage = () => {
-    const [openDropdown, setOpenDropdown] = useState(null); // 追蹤哪個下拉選單是開啟狀態   
+    const [openDropdown, setOpenDropdown] = useState(null); 
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
     const totalItems = 135; // 商品總數（可以從API獲取）
