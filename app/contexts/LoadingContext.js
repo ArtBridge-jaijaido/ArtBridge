@@ -27,7 +27,7 @@ export const useLoading = () => useContext(LoadingContext);
 
 const styles = {
   loaderContainer: {
-    display:"flex",
+    
     flexDirection: "column",
     fontSize: "1rem",
     fontWeight: "600",
