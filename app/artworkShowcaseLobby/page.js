@@ -3,42 +3,52 @@ import React, { useState, useEffect, useRef } from 'react'
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
 import { artworkRecommendation, artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
+
 import MasonryGrid from '@/components/Masonry/MasonryComponent.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import "./artworkShowcaseLobby.css";
 
-const artworkShowcaseLobby = () => {
+const ArtworkShowcaseLobby = () => {
+    
     const [openDropdown, setOpenDropdown] = useState(null);
-
+    const [currentPage, setCurrentPage] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState({
         recommendation: "推薦作品",
         category: "類別選擇",
         style: "風格選擇",
     });
-
+    const ITEMSPERPAGE = 20; 
     const dropdownRef = useRef(null);
 
     const testingImages = [
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
-        "images/testing-Arkwork-image.png",
+        "images/testing-Arkwork-image-5.png",
+        "images/testing-Arkwork-image-6.png",
+        "images/testing-Arkwork-image-2.png",
+        "images/testing-Arkwork-image-4.png",
+        "images/testing-Arkwork-image-3.png",
+        "images/testing-Arkwork-image-5.png",
+        "images/testing-Arkwork-image-6.png",
+        "images/testing-Arkwork-image-2.png",
+        "images/testing-Arkwork-image-4.png",
+        "images/testing-Arkwork-image-3.png",
+        "images/testing-Arkwork-image-5.png",
+        "images/testing-Arkwork-image-6.png",
+        "images/testing-Arkwork-image-2.png",
+        "images/testing-Arkwork-image-4.png",
+        "images/testing-Arkwork-image-3.png",
+        "images/testing-Arkwork-image-5.png",
+        "images/testing-Arkwork-image-6.png",
+        "images/testing-Arkwork-image-2.png",
+        "images/testing-Arkwork-image-4.png",
+        "images/testing-Arkwork-image-3.png",
+        "images/testing-Arkwork-image-5.png",
+        "images/testing-Arkwork-image-6.png",
+        "images/testing-Arkwork-image-2.png",
+        "images/testing-Arkwork-image-4.png",
+        "images/testing-Arkwork-image-3.png",
     ];
 
-    const columnWidths = [190, 206, 317, 236, 256];
-
+  
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
     };
@@ -50,6 +60,16 @@ const artworkShowcaseLobby = () => {
         }));
         setOpenDropdown(null); // 關閉下拉選單
     };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page); // 更新頁碼
+      };
+    
+    const startIndex= (currentPage - 1) * ITEMSPERPAGE;
+    const endIndex = currentPage * ITEMSPERPAGE;
+    const currentImages =testingImages.slice(startIndex, endIndex); // 當前頁數據
+    
+   
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -64,6 +84,7 @@ const artworkShowcaseLobby = () => {
         };
     }, []);
 
+    const totalPages = Math.ceil(testingImages.length / ITEMSPERPAGE); // 總頁數
 
     return (
         <div className={`artworkShowcaseLobbyPage ${notoSansTCClass}`}>
@@ -94,10 +115,16 @@ const artworkShowcaseLobby = () => {
                 />
             </div>
             <div className="artworkShowcaseLobby-artworks-container">   
-                <MasonryGrid images={testingImages} columns={5} columnWidths={columnWidths}/>
+                <MasonryGrid images={currentImages}  />
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
         </div>
     )
 }
 
-export default artworkShowcaseLobby
+export default ArtworkShowcaseLobby

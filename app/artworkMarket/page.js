@@ -3,13 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import CustomIconButton from '@/components/CustomButton/CustomIconButton.jsx';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
+
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
 
 import "./artworkMarket.css";
 
-const artMarketPage = () => {
+const ArtMarketPage = () => {
+   
+
     const [openDropdown, setOpenDropdown] = useState(null); // 追蹤哪個下拉選單是開啟狀態
     const [selectedOptions, setSelectedOptions] = useState({
         product: "價格最低",
@@ -26,6 +29,8 @@ const artMarketPage = () => {
 
     const dropdownRef = useRef(null); // 用於追蹤下拉選單的容器
 
+   
+    
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
     };
@@ -42,6 +47,8 @@ const artMarketPage = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
+  
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -141,4 +148,4 @@ const artMarketPage = () => {
     );
 };
 
-export default artMarketPage;
+export default ArtMarketPage;

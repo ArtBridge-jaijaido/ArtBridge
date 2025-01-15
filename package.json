@@ -20,7 +20,8 @@
     "nodemailer": "^6.9.16",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.7",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-spinners": "^0.15.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

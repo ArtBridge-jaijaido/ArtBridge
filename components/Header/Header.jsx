@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { notoSansTCClass } from "../../app/layout.js";
 import CustomButton from "../CustomButton/CustomButton.jsx";
 import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./headerButton.module.css";
@@ -11,6 +12,7 @@ import "./Header.css";
 const Header = () => {
     const [isMounted, setIsMounted] = useState(false); // 判斷是否已加載客戶端
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { setIsLoading } = useLoading();
     const pathname = usePathname();
 
     // 指定不需要顯示 Header 的路徑
@@ -37,6 +39,16 @@ const Header = () => {
     const handleUserRegister = () => {
         navigate("/register");
        
+    };
+    
+    const navigateWithLoading = (path) => {
+        navigate(path); 
+        setIsLoading(true);
+        setTimeout(() => {
+           
+            setIsLoading(false); 
+          
+        }, 2000); 
     };
 
   
@@ -68,10 +80,10 @@ const Header = () => {
             </button>
             <nav className={`header-nav ${isMenuOpen ? "open" : ""} ${notoSansTCClass}`}>
                 <div className="header-nav-options">
-                    <Link href="/artworkPainter" >繪師</Link>
-                    <Link href="/artworkMarket" >市集</Link>
+                    <a onClick={() => navigateWithLoading("/artworkPainter")}>繪師</a>
+                    <a onClick={() => navigateWithLoading("/artworkMarket")} >市集</a>
                     <Link href="">交流版</Link>
-                    <Link href="/artworkShowcaseLobby">展示大廳</Link>
+                    <a onClick={()=>navigateWithLoading("/artworkShowcaseLobby")}>展示大廳</a>
                     <Link href="" >委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">

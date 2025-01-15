@@ -1,6 +1,7 @@
 "use client";
 import { Geist, Geist_Mono,Noto_Sans_TC  } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
+import {LoadingProvider} from "@/app/contexts/LoadingContext.js";
 import Header from "@/components/Header/Header.jsx";
 import "./globals.css";
 
@@ -36,11 +37,14 @@ export default function RootLayout({ children }) {
       
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
+         <LoadingProvider>
         <Header />
         <main>
-          <ToastProvider>{children}</ToastProvider>
+         
+              <ToastProvider>{children}</ToastProvider>
+          
         </main>
-
+        </LoadingProvider>
        
       </body>
     </html>

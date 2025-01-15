@@ -1,25 +1,44 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import "./MasonryGrid.css";
 
-const MasonryGrid = ({ images, columnWidths }) => {
-  const [columnItems, setColumnItems] = useState(new Array(columnWidths.length).fill([]));
+const MasonryGrid = ({ images }) => {
+  const defaultColumnWidths = [256, 206, 317, 236, 190];
+  const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
+  const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
 
   useEffect(() => {
-    const columnHeights = new Array(columnWidths.length).fill(0); // 初始化每列高度
+    const updateColumnWidths = () => {
+      if (window.innerWidth <= 370) {
+        setColumnWidths([150, 160]);
+      }
+      else if (window.innerWidth <= 440) {
+        setColumnWidths([170, 190]);
+      }
+      else if (window.innerWidth <= 834) {
+        setColumnWidths([160, 200, 180, 180]);
+      } else if (window.innerWidth <= 1280) {
+        setColumnWidths([190, 190, 260, 206, 210]);
+      } else {
+        setColumnWidths(defaultColumnWidths);
+      }
+    };
+
+    updateColumnWidths();
+    window.addEventListener("resize", updateColumnWidths);
+    return () => window.removeEventListener("resize", updateColumnWidths);
+  }, []);
+
+  useEffect(() => {
     const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
 
     images.forEach((image, index) => {
-      // 找到最短列
-      const minHeightIndex = columnHeights.indexOf(Math.min(...columnHeights));
-
-      // 將圖片分配到該列
-      newColumnItems[minHeightIndex].push(image);
-
-      // 模擬圖片高度更新（可替換為實際圖片高度）
-      columnHeights[minHeightIndex] += 200; // 假設每張圖片高度為200px
+      const columnIndex = index % columnWidths.length; // 固定分配到列
+      newColumnItems[columnIndex].push(image);
     });
 
-    setColumnItems(newColumnItems);
+    setColumnItems(newColumnItems); // 更新列數據
   }, [images, columnWidths]);
 
   return (
@@ -29,15 +48,16 @@ const MasonryGrid = ({ images, columnWidths }) => {
           key={columnIndex}
           className="masonry-grid-column"
           style={{
-            width: `${columnWidths[columnIndex]}px`, // 根據指定列寬設定寬度
+            maxWidth: `${columnWidths[columnIndex]}px`
           }}
         >
           {column.map((image, imageIndex) => (
             <div key={imageIndex} className="masonry-grid-item">
-              <img
-                src={image}
-                alt={`Artwork ${imageIndex}`}
-              />
+              <img src={image} alt={`Artwork ${imageIndex + 1}`} />
+               <div className="masonry-likesIcon-container">
+                    <img src="/images/icons8-love-96-7.png" alt="numberOfLikes" ></img>
+                    <span className="masonry-likes-number">100</span>
+                </div>
             </div>
           ))}
         </div>

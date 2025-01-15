@@ -5,11 +5,13 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import ToggleButton from '@/components/CustomButton/ToggleButton.jsx';
 import ArtworkPainterProfileCard from '@/components/ArtworkPainterProfileCard/ArtworkPainterProfileCard.jsx';
 import { artworkPainter, artMarketCategory, artMarketStyle} from '@/lib/artworkDropdownOptions.js';
+
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import "./artworkPainter.css";
 
 
-const artworkPainterPage = () => {
+const ArtworkPainterPage = () => {
+   
     const [openDropdown, setOpenDropdown] = useState(null); 
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
@@ -53,6 +55,7 @@ const artworkPainterPage = () => {
         setOpenDropdown(null); // 關閉下拉選單
     };
 
+  
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -131,4 +134,4 @@ const artworkPainterPage = () => {
     )
 }
 
-export default artworkPainterPage
+export default ArtworkPainterPage

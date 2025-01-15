@@ -1,108 +1,118 @@
-.artworkShowcaseLobbyPage{
-    
-    /*max-width*/
-    --artworkShowcaseLobbyPage-max-width:1440px;
+.artworkShowcaseLobbyPage {
+
+  /*max-width*/
+  --artworkShowcaseLobbyPage-max-width: 1440px;
 
 
-    /*gap*/
-    --artworkShowcaseLobby-button-container-gap: 240px;
+  /*gap*/
+  --artworkShowcaseLobby-button-container-gap: 240px;
 
-    /*margin-bottom*/
-    --artworkShowcaseLobby-button-container-margin-bottom:40px;
+  /*margin-bottom*/
+  --artworkShowcaseLobby-button-container-margin-bottom: 40px;
+  --artworkShowcaseLobby-artworks-container-margin-bottom: 50px;
 }
 
 
 
 
-.artworkShowcaseLobbyPage{
-    width:100%;
-    max-width:var(--artworkShowcaseLobbyPage-max-width);
-    padding:120px 50px 50px 50px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto;
+.artworkShowcaseLobbyPage {
+  width: 100%;
+  max-width: var(--artworkShowcaseLobbyPage-max-width);
+  padding: 120px 50px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 
-.artworkShowcaseLobby-button-container{
-    width:100%;
-    display:flex;
-    gap:var(--artworkShowcaseLobby-button-container-gap);
-    padding:0px 250px;
-    justify-content:center;
-    align-items: center;
-    margin-bottom:var(--artworkShowcaseLobby-button-container-margin-bottom);
-   
+.artworkShowcaseLobby-button-container {
+  width: 100%;
+  display: flex;
+  gap: var(--artworkShowcaseLobby-button-container-gap);
+  padding: 0px 250px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--artworkShowcaseLobby-button-container-margin-bottom);
+
 }
 
 .artworkShowcaseLobby-artworks-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* 圖片之間的間距 */
-    width: 100%;
-  }
-  
-  .artworkShowcaseLobby-artwork {
-    margin-bottom: 16px;
-  }
-  
-  .artworkShowcaseLobby-artwork img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px; /* 如果需要圓角 */
-  }
-  
-  /* 每列的寬度分別設定 */
-  .artworkShowcaseLobby-artwork-190px {
-    flex: 0 0 190px;
-  }
-  
-  .artworkShowcaseLobby-artwork-236px {
-    flex: 0 0 236px;
-  }
-  
-  .artworkShowcaseLobby-artwork-317px {
-    flex: 0 0 317px;
-  }
-  
-  .artworkShowcaseLobby-artwork-206px {
-    flex: 0 0 206px;
-  }
-  
-  .artworkShowcaseLobby-artwork-256px {
-    flex: 0 0 256px;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  /* wrap items to the next line */
+  width: 100%;
+  margin-bottom: var(--artworkShowcaseLobby-artworks-container-margin-bottom);
+}
+
+
+
+
+
 
 
 
 /*RWD*/
-@media screen and (max-width:1280px){
-    .artworkShowcaseLobbyPage{
-        padding:110px 36px 50px 36px;  /* top right bottom left */
-    }
+@media screen and (max-width:1280px) {
+  .artworkShowcaseLobbyPage {
+    padding: 110px 36px 50px 36px;
+    /* top right bottom left */
+  }
 
-    .artworkShowcaseLobby-button-container{
-        padding: 0px 265px;
-        --artworkShowcaseLobby-button-container-gap:200px;
-    }
+  .artworkShowcaseLobby-button-container {
+    padding: 0px 265px;
+    --artworkShowcaseLobby-button-container-gap: 200px;
+  }
 }
 
 
 
-@media screen and (max-width:834px){
+@media screen and (max-width:834px) {
 
-    .artworkShowcaseLobby-button-container{
-      
-        --artworkShowcaseLobby-button-container-gap:110px;
-    }
+  .artworkShowcaseLobby-button-container {
+    padding: 0px 138px;
+    --artworkShowcaseLobby-button-container-gap: 110px;
+  }
 }
 
-@media screen and (max-width:768px){
-    .artworkShowcaseLobbyPage{
-        width:768px;
-    }
+@media screen and (max-width:768px) {
+  .artworkShowcaseLobbyPage {
+    width: 768px;
+  }
+}
+
+
+@media screen and (max-width:440px) {
+  .artworkShowcaseLobbyPage {
+    width: 100%;
+    max-width: 440px;
+    padding: 100px 32px 50px 32px;
+  }
+
+  .artworkShowcaseLobby-button-container {
+    padding: 0px 12px;
+    --artworkShowcaseLobby-button-container-gap: 40px;
+    --artworkShowcaseLobby-button-container-margin-bottom: 20px;
+  }
+
+  .artworkShowcaseLobby-artworks-container {
+
+    --artworkShowcaseLobby-artworks-container-margin-bottom: 30px;
+  }
+
+}
+
+
+@media screen and (max-width:370px) {
+
+  .artworkShowcaseLobbyPage {
+    width: 370px;
+  }
+
+  .artworkShowcaseLobby-button-container {
+    padding: 0px 32px;
+    --artworkShowcaseLobby-button-container-gap: 30px;
+
+  }
 }
