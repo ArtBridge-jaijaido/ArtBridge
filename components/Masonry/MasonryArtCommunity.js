@@ -1,28 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
 import "./MasonryArtCommunity.css";
 
 const MasonryArtCommunity = ({ images }) => {
   const defaultColumnWidths = [256, 260, 317, 220, 230];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
 
-  const handleImageClick = (image) => {
-    
-    setCurrentData({
-      src: image.src,
-      title: "這是標題最多20個字喔喔喔喔喔喔！",
-      description: "這裡是圖片的描述內容，可以包含更多文本。",
-      likes: 999,
-      comments: 20,
-      shares: 52,
-    });
-    setIsModalOpen(true);
-  };
-
+  
   useEffect(() => {
     const updateColumnWidths = () => {
       if (window.innerWidth <= 370) {
@@ -56,7 +45,30 @@ const MasonryArtCommunity = ({ images }) => {
     setColumnItems(newColumnItems); // 更新列數據
   }, [images, columnWidths]);
 
- 
+
+  const handleImageClick = (image) => {
+
+    setCurrentData({
+      src: image,
+      author: "使用者名稱",
+      authorAvatar: "/images/testing-artist-profile-image.png",
+      imageCateorgy:["風格1", "風格2", "風格3","風格4"],
+      imageReleaseDate: "2025.02.01",
+      innerContext: "這是標題最多20個字喔喔喔喔喔喔！",
+      description: "這裡是圖片的描述內容，可以包含更多文本。",
+      likes: 999,
+      comments: 20,
+      shares: 52,
+    });
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); 
+    setCurrentData(null); 
+  };
+
+
 
   return (
     <div className="MasonryArtCommunity-grid">
@@ -70,7 +82,12 @@ const MasonryArtCommunity = ({ images }) => {
         >
           {column.map((image, imageIndex) => (
             <div key={imageIndex} className="MasonryArtCommunity-grid-item">
-              <img src={image} alt={`Artwork ${imageIndex + 1}`} className="MasonryArtCommunity-grid-item-image" />
+              <img
+                src={image}
+                alt={`Artwork ${imageIndex + 1}`}
+                className="MasonryArtCommunity-grid-item-image"
+                onClick={() => handleImageClick(image)}
+              />
               <span className="MasonryArtCommunity-artwork-title">這是標題最多放12個字...</span>
               <div className="MasonryArtCommunity-content-container">
                 <div className="MasonryArtCommunity-artistInfo-container">
@@ -86,6 +103,9 @@ const MasonryArtCommunity = ({ images }) => {
           ))}
         </div>
       ))}
+
+       {/*  ModalImage  */}
+       <ModalImgArtCommunity  isOpen={isModalOpen} onClose={closeModal} data={currentData} />
     </div>
   );
 };
