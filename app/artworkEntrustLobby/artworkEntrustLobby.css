@@ -1,0 +1,419 @@
+.artworkEntrustLobbyPage{
+  
+    /*max width*/
+    --artworkEntrustLobbyPage-width: 1440px;
+
+    /*gap*/
+    --artworkEntrustLobby-dropdownButton-container-min-gap: 20px;
+    --artworkEntrustLobby-button-container-gap: 80px;
+    --artworkEntrustCard-container-gap: 60px;
+ 
+
+    /*margin-bottom*/
+    --artworkEntrustLobby-button-container-margin-bottom:50px;
+    --artworoPainterProfileCard-margin-bottom:50px;
+
+}
+
+.artworkEntrustLobbyPage{
+    width:100%;
+    max-width:var(--artworkEntrustLobbyPage-width);
+    padding: 110px 88px 50px 88px; /* top right bottom left */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto; 
+}
+
+.artworkEntrustLobby-button-container{
+    width:100%;
+    display:flex;
+    gap:var(--artworkEntrustLobby-button-container-gap);
+    padding: 0px 190px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:var(--artworkEntrustLobby-button-container-margin-bottom);
+   
+}
+.artworkEntrustCard-container{
+    display:grid;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+}
+
+.ArtworkEntrustCard-wrapper {
+    margin-bottom: 20px; /* 列之間的間距 */
+    max-width: 100%; 
+}
+
+/*RWD*/
+
+@media screen and (max-width:1280px){
+    .artworkEntrustLobbyPage{
+        padding: 110px 66px 50px 66px;  
+    }
+
+    .artworkEntrustLobby-button-container{
+        padding: 0px 128px;
+        --artworkEntrustLobby-button-container-gap:60px;
+    }
+    .artworkEntrustCard-container {
+        max-width: 100%; 
+        padding: 0 10px; /* 增加內邊距，避免內容貼邊 */
+        box-sizing: border-box; 
+        overflow-x: hidden; 
+    }
+      
+    .ArtworkEntrustCard-wrapper {
+        width:100%; 
+        padding: 10px; 
+        box-sizing: border-box; 
+        overflow: hidden; /* 防止內容溢出 */
+        gap:10px;
+    }
+    
+    .ArtworkEntrustCard-title {
+        font-size: 14px; 
+        line-height: 1;
+        word-break: break-word; /* 確保文字不會溢出 */
+    }
+    .ArtworkEntrustCard-username{
+        font-size: 10px;
+    }
+    .ArtworkEntrustCard-applicant-text{
+        font-size: 7px;
+    }
+    .ArtworkEntrustCard-description {
+        font-size: 9px;
+        line-height: 1.4;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-price-tag{
+        padding: 9px 12px 9px 8px; 
+    }
+    .ArtworkEntrustCard-deadline,.ArtworkEntrustCard-category {
+        gap: 4px; /* 減少圖標與文字的間距 */
+    }
+    .ArtworkEntrustCard-deadline-icon{
+        width:14px;
+    }
+    .ArtworkEntrustCard-price-icon{
+        width:10px;
+        align-items: center;
+    }
+    .ArtworkEntrustCard-user-icon{
+        width:18px;
+    }
+    .ArtworkEntrustCard-category-icon,.ArtworkEntrustCard-applicant-icon{
+        width:12px;
+    }
+    .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
+        font-size: 8px; 
+        white-space: nowrap; /* 禁止換行 */
+        overflow: hidden; 
+    }   
+} 
+
+@media screen and (max-width:834px){
+    .artworkEntrustLobbyPage{
+        padding: 110px 50px 50px 50px;
+    }
+    .artworkEntrustLobby-button-container {
+        gap: 20px; 
+        justify-content: center; 
+        padding: 0 16px;
+    }
+    .artworkEntrustCard-container {
+        max-width: 100%; 
+        padding: 0 10px; /* 增加內邊距，避免內容貼邊 */
+        box-sizing: border-box; 
+        overflow-x: hidden; 
+    }
+      
+    .ArtworkEntrustCard-wrapper {
+        width:100%; 
+        padding: 10px; 
+        box-sizing: border-box; 
+        overflow: hidden; /* 防止內容溢出 */
+        gap:10px;
+    }
+    
+    .ArtworkEntrustCard-title {
+        font-size: 14px; 
+        line-height: 1;
+        word-break: break-word; /* 確保文字不會溢出 */
+    }
+    .ArtworkEntrustCard-username{
+        font-size: 10px;
+    }
+    .ArtworkEntrustCard-applicant-text{
+        font-size: 7px;
+    }
+    .ArtworkEntrustCard-description {
+        font-size: 9px;
+        line-height: 1.4;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-price-tag{
+        padding: 9px 12px 9px 8px; 
+    }
+    .ArtworkEntrustCard-price-text{
+
+    }
+    .ArtworkEntrustCard-deadline,.ArtworkEntrustCard-category {
+        gap: 4px; /* 減少圖標與文字的間距 */
+    }
+    .ArtworkEntrustCard-deadline-icon{
+        width:14px;
+    }
+    .ArtworkEntrustCard-price-icon{
+        width:10px;
+        align-items: center;
+    }
+    .ArtworkEntrustCard-user-icon{
+        width:18px;
+    }
+    .ArtworkEntrustCard-category-icon,.ArtworkEntrustCard-applicant-icon{
+        width:12px;
+    }
+    .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
+        font-size: 8px; 
+        white-space: nowrap; /* 禁止換行 */
+        overflow: hidden; 
+    }
+}
+@media screen and (max-width: 770px) {
+    .artworkEntrustLobbyPage{
+        width:100%;
+        max-width:440px;
+        padding : 108px 30px 25px 30px;
+    }
+
+    .artworkEntrustLobby-button-container{
+        padding:0px 15px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        --artworkEntrustLobby-button-container-margin-bottom: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+    .ArtworkEntrustCard-wrapper {
+        width:100%;
+        padding: 10px; 
+        box-sizing: border-box; 
+        overflow: hidden; 
+        gap:10px;
+        margin-bottom: 30px; 
+    }
+    
+    .ArtworkEntrustCard-title {
+        font-size: 15px; 
+        line-height: 1;
+        word-break: break-word; /* 確保文字不會溢出 */
+    }
+    .ArtworkEntrustCard-username{
+        font-size: 11px;
+    }
+    .ArtworkEntrustCard-applicant-text{
+        font-size: 10px;
+    }
+    .ArtworkEntrustCard-description {
+        font-size: 10px;
+        line-height: 1.4;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-price-tag{
+        padding: 9px 0px 9px 10px; 
+    }
+    .ArtworkEntrustCard-price-text{
+        font-size:12px;
+    }
+    .ArtworkEntrustCard-deadline,.ArtworkEntrustCard-category {
+        gap: 4px; 
+    }
+    .ArtworkEntrustCard-deadline-icon{
+        width:14px;
+    }
+    .ArtworkEntrustCard-price-icon{
+        width:12px;
+        align-items: center;
+    }
+    .ArtworkEntrustCard-user-icon{
+        width:18px;
+    }
+    .ArtworkEntrustCard-category-icon{
+        width:13px;
+    }
+    .ArtworkEntrustCard-applicant-icon{
+        width:14px;
+    }
+    .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
+        font-size: 9px;
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+ }
+@media screen and (max-width: 530px) {
+    .artworkEntrustLobbyPage{
+        width:100%;
+        max-width:440px;
+        padding : 108px 30px 25px 30px;
+    }
+
+    .artworkEntrustLobby-button-container{
+        padding:0px 15px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        --artworkEntrustLobby-button-container-margin-bottom: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+    .ArtworkEntrustCard-wrapper {
+        width: 370px; 
+        padding: 10px; 
+        box-sizing: border-box; 
+        overflow: hidden; 
+        gap:10px;
+        margin-bottom: 30px; 
+    }
+    
+    .ArtworkEntrustCard-title {
+        font-size: 13px; 
+        line-height: 1;
+        word-break: break-word; /* 確保文字不會溢出 */
+    }
+    .ArtworkEntrustCard-username{
+        font-size: 9px;
+    }
+    .ArtworkEntrustCard-applicant-text{
+        font-size: 8px;
+    }
+    .ArtworkEntrustCard-description {
+        font-size: 8px;
+        line-height: 1.4;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-price-tag{
+        padding: 9px 10px 9px 10px; 
+    }
+    .ArtworkEntrustCard-price-text{
+        font-size:10px;
+    }
+    .ArtworkEntrustCard-deadline,.ArtworkEntrustCard-category {
+        gap: 4px; 
+    }
+    .ArtworkEntrustCard-deadline-icon{
+        width:12px;
+    }
+    .ArtworkEntrustCard-price-icon{
+        width:10px;
+        align-items: center;
+    }
+    .ArtworkEntrustCard-user-icon{
+        width:16px;
+    }
+    .ArtworkEntrustCard-category-icon{
+        width:11px;
+    }
+    .ArtworkEntrustCard-applicant-icon{
+        width:12px;
+    }
+    .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
+        font-size: 7px;
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+  }
+  @media screen and (max-width: 370px) {
+    .artworkEntrustLobbyPage{
+        width:100%;
+        max-width:440px;
+        padding : 108px 30px 25px 30px;
+}
+
+    .artworkEntrustLobby-button-container{
+        padding:0px 15px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        --artworkEntrustLobby-button-container-margin-bottom: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+    .ArtworkEntrustCard-wrapper {
+        width: 330px; 
+        padding: 10px; 
+        box-sizing: border-box; 
+        overflow: hidden; 
+        gap:10px;
+        margin-bottom: 30px; 
+    }
+    
+    .ArtworkEntrustCard-title {
+        font-size: 11px; 
+        line-height: 1;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-username{
+        font-size: 8px;
+    }
+    .ArtworkEntrustCard-applicant-text{
+        font-size: 6px;
+    }
+    .ArtworkEntrustCard-description {
+        font-size: 8px;
+        line-height: 1.4;
+        word-break: break-word; 
+    }
+    .ArtworkEntrustCard-price-tag {
+        width:110px;
+    }
+    .ArtworkEntrustCard-price-text{
+        font-size:8px;
+    }
+    .ArtworkEntrustCard-deadline,.ArtworkEntrustCard-category {
+        gap: 4px; 
+    }
+    .ArtworkEntrustCard-deadline-icon,.ArtworkEntrustCard-category-icon{
+        width:10px;
+    }
+    .ArtworkEntrustCard-price-icon{
+        width:8px;
+    }
+    .ArtworkEntrustCard-user-icon{
+        width:14px;
+    }
+    .ArtworkEntrustCard-applicant-icon{
+        width:10px;
+    }
+    .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
+        font-size: 6px; 
+        white-space: nowrap; 
+        overflow: hidden; 
+    }
+  }
+  
