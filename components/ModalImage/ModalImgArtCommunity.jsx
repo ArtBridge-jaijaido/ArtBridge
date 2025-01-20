@@ -10,12 +10,8 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
   const tabs = [
     {
       label: "內文",
-      content: (
-        <div>
-          <h2>{data.innerContext}</h2>
-          <p>我是內容區域，顯示與內容相關的描述文字。</p>
-        </div>
-      ),
+      content: { innerContext: data.innerContext, innerContextTitle: data.innerContextTitle }
+       
     },
     {
       label: "留言板",
@@ -23,7 +19,7 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
     },
     {
       label: "圖片資訊",
-      content: <div>圖片資訊區域，顯示圖片的詳細資料。</div>,
+      content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageCateorgy: data.imageCateorgy },
     },
   ];
 

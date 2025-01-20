@@ -21,15 +21,45 @@ const Tabs = ({ tabs }) => {
 
       {/* 對應內容 */}
       <div className="tab-content">
-        {tabs.map(
-          (tab) =>
-            activeTab === tab.label && (
-              <div key={tab.label} className="tab-panel">
-                {tab.content}
-              </div>
-            )
-        )}
+        {tabs.map((tab) => {
+          if (activeTab === tab.label) {
+            switch (tab.label) {
+              case "內文":
+                return (
+                  <div key={tab.label} className="tab-panel">
+                    <h1>{tab.content.innerContextTitle}</h1>
+                    <p>{tab.content.innerContext}</p>
+                  </div>
+                );
+              case "留言板":
+                return (
+                  <div key={tab.label} className="tab-panel">
+                    {tab.content}
+                  </div>
+                );
+              case "圖片資訊":
+                return (
+                  <div key={tab.label} className="tab-panel">
+                    <span>{tab.content.imageSource}</span>
+                    <span>{tab.content.imageReleaseDate}</span>
+                    <div>
+                      {tab.content.imageCateorgy.map((category, index) => (
+                        <span key={index}>{category}</span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              default:
+                return null;
+            }
+          }
+          return null;
+        })}
+
+
+
       </div>
+
     </div>
   );
 };
