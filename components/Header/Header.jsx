@@ -33,25 +33,25 @@ const Header = () => {
 
     const handleUserLogin = () => {
         navigate("/login");
-       
+
     };
 
     const handleUserRegister = () => {
         navigate("/register");
-       
-    };
-    
-    const navigateWithLoading = (path) => {
-        navigate(path); 
-        setIsLoading(true);
-        setTimeout(() => {
-           
-            setIsLoading(false); 
-          
-        }, 2000); 
+
     };
 
-  
+    const navigateWithLoading = (path) => {
+        navigate(path);
+        setIsLoading(true);
+        setTimeout(() => {
+
+            setIsLoading(false);
+
+        }, 2000);
+    };
+
+
 
     // 當窗口大小變化時，如果寬度大於 768px，關閉菜單
     useEffect(() => {
@@ -80,10 +80,30 @@ const Header = () => {
             </button>
             <nav className={`header-nav ${isMenuOpen ? "open" : ""} ${notoSansTCClass}`}>
                 <div className="header-nav-options">
-                    <a onClick={() => navigateWithLoading("/artworkPainter")}>繪師</a>
-                    <a onClick={() => navigateWithLoading("/artworkMarket")} >市集</a>
-                    <Link href="">交流版</Link>
-                    <a onClick={()=>navigateWithLoading("/artworkShowcaseLobby")}>展示大廳</a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkPainter")}
+                        className={pathname === "/artworkPainter" ? "active" : ""}
+                    >
+                        繪師
+                    </a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkMarket")}
+                        className={pathname === "/artworkMarket" ? "active" : ""}
+                    >
+                        市集
+                    </a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkCommunity")}
+                        className={pathname === "/artworkCommunity" ? "active" : ""}
+                    >
+                        交流版
+                    </a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkShowcaseLobby")}
+                        className={pathname === "/artworkShowcaseLobby" ? "active" : ""}
+                    >
+                        展示大廳
+                    </a>
                     <Link href="" >委託大廳</Link>
                 </div>
                 <div className="header-auth-buttons">

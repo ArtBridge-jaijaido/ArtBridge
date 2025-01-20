@@ -1,23 +1,22 @@
-"use client";
+"use client"
 import React, { useState, useEffect, useRef } from 'react'
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
-import { artworkRecommendation, artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
-
-import MasonryGrid from '@/components/Masonry/MasonryGrid.js';
+import { artworkCriteria, artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
+import MasonryArtCommunity from '@/components/Masonry/MasonryArtCommunity.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
-import "./artworkShowcaseLobby.css";
+import "./artworkCommunity.css";
 
-const ArtworkShowcaseLobby = () => {
-    
+const ArtworkCommunity = () => {
+
     const [openDropdown, setOpenDropdown] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState({
-        recommendation: "推薦作品",
+        latestRelease: "最新發布",
         category: "類別選擇",
         style: "風格選擇",
     });
-    const ITEMSPERPAGE = 20; 
+    const ITEMSPERPAGE = 20;
     const dropdownRef = useRef(null);
 
     const testingImages = [
@@ -48,7 +47,6 @@ const ArtworkShowcaseLobby = () => {
         "images/testing-Arkwork-image-3.png",
     ];
 
-  
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
     };
@@ -63,13 +61,12 @@ const ArtworkShowcaseLobby = () => {
 
     const handlePageChange = (page) => {
         setCurrentPage(page); // 更新頁碼
-      };
-    
-    const startIndex= (currentPage - 1) * ITEMSPERPAGE;
+    };
+
+    const startIndex = (currentPage - 1) * ITEMSPERPAGE;
     const endIndex = currentPage * ITEMSPERPAGE;
-    const currentImages =testingImages.slice(startIndex, endIndex); // 當前頁數據
-    
-   
+    const currentImages = testingImages.slice(startIndex, endIndex); // 當前頁數據
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -84,18 +81,19 @@ const ArtworkShowcaseLobby = () => {
         };
     }, []);
 
-    const totalPages = Math.ceil(testingImages.length / ITEMSPERPAGE); // 總頁數
+    const totalPages = Math.ceil(testingImages.length / ITEMSPERPAGE);
+
 
     return (
-        <div className={`artworkShowcaseLobbyPage ${notoSansTCClass}`}>
-            <div className="artworkShowcaseLobby-button-container" ref={dropdownRef}>
+        <div className={`artworkCommunityPage ${notoSansTCClass}`}>
+            <div className="artworkCommunity-button-container" ref={dropdownRef}>
                 <ArtMarketDropButton
-                    id="recommendation"
-                    buttonText={selectedOptions.recommendation}
-                    options={artworkRecommendation}
-                    onOptionSelect={(option) => handleOptionSelect("recommendation", option)}
-                    isOpen={openDropdown === "recommendation"}
-                    onToggleDropdown={() => handleToggleDropdown("recommendation")}
+                    id="latestRelease"
+                    buttonText={selectedOptions.latestRelease}
+                    options={artworkCriteria}
+                    onOptionSelect={(option) => handleOptionSelect("latestRelease", option)}
+                    isOpen={openDropdown === "latestRelease"}
+                    onToggleDropdown={() => handleToggleDropdown("latestRelease")}
                 />
                 <ArtMarketDropButton
                     id="category"
@@ -114,8 +112,9 @@ const ArtworkShowcaseLobby = () => {
                     onToggleDropdown={() => handleToggleDropdown("style")}
                 />
             </div>
-            <div className="artworkShowcaseLobby-artworks-container">   
-                <MasonryGrid images={currentImages}  />
+
+            <div className="artworkCommunity-artworks-container">
+                <MasonryArtCommunity images={currentImages} />
             </div>
 
             <Pagination
@@ -123,8 +122,9 @@ const ArtworkShowcaseLobby = () => {
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
             />
+
         </div>
     )
 }
 
-export default ArtworkShowcaseLobby
+export default ArtworkCommunity;

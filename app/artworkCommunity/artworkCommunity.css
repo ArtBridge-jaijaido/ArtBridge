@@ -1,0 +1,109 @@
+.artworkCommunityPage{
+    /*max width*/
+    --artworkCommunityPage-max-width: 1440px;
+
+    /*gap*/ 
+    --artworkCommunity-button-container-gap: 240px;
+
+    /*margin-bottom*/
+    --artworkCommunity-button-container-margin-bottom: 40px;
+    --artworkCommunity-artworks-container-margin-bottom: 50px;
+
+}
+
+
+
+.artworkCommunityPage {
+    width:100%;
+    max-width:var(--artworkCommunityPage-max-width);
+    padding: 120px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.artworkCommunity-button-container {
+    width: 100%;
+    display: flex;
+    gap: var(--artworkCommunity-button-container-gap);
+    padding: 0px 250px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--artworkCommunity-button-container-margin-bottom);
+  
+  }
+
+
+.artworkCommunity-artworks-container{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    margin-bottom:var(--artworkCommunity-artworks-container-margin-bottom);
+
+}
+
+
+/*RWD*/
+
+@media screen and (max-width:1280px) {
+    .artworkCommunityPage {
+      padding: 110px 36px 50px 36px;
+    
+    }
+  
+    .artworkCommunity-button-container {
+      padding: 0px 265px;
+      --artworkCommunity-button-container-gap: 200px;
+    }
+  }
+
+
+@media screen and (max-width:834px) {
+    .artworkCommunity-button-container {
+        padding: 0px 138px;
+        --artworkCommunity-button-container-gap: 110px;
+      }
+
+}
+
+@media screen and (max-width:768px) {
+    .artworkCommunityPage   {
+      width: 768px;
+    }
+  }
+
+  
+@media screen and (max-width:440px) {
+    .artworkCommunityPage {
+      width: 100%;
+      max-width: 440px;
+      padding: 100px 32px 50px 32px;
+    }
+  
+    .artworkCommunity-button-container {
+      padding: 0px 12px;
+      --artworkCommunity-button-container-gap: 40px;
+      --artworkCommunity-button-container-margin-bottom: 20px;
+    }
+  
+    .artworkCommunity-artworks-container {
+  
+      --artworkCommunity-artworks-container-margin-bottom: 30px;
+    }
+  
+  }
+
+  @media screen and (max-width:370px) {
+
+    .artworkCommunityPage {
+      width: 370px;
+    }
+  
+    .artworkCommunity-button-container {
+      padding: 0px 32px;
+      --artworkCommunity-button-container-gap: 30px;
+  
+    }
+  }

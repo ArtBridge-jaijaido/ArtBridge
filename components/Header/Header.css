@@ -82,6 +82,11 @@
     cursor:pointer;
 }
 
+.header-nav-options a.active {
+    color: #48A8E0; 
+    font-weight: 500;
+}
+
 
 .header-auth-buttons{
     display:flex;

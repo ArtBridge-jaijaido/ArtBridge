@@ -55,7 +55,7 @@ const MasonryGrid = ({ images }) => {
             <div key={imageIndex} className="masonry-grid-item">
               <img src={image} alt={`Artwork ${imageIndex + 1}`} />
                <div className="masonry-likesIcon-container">
-                    <img src="/images/icons8-love-96-7.png" alt="numberOfLikes" ></img>
+                    <img src="/images/icons8-love-96-26.png" alt="numberOfLikes" ></img>
                     <span className="masonry-likes-number">100</span>
                 </div>
             </div>

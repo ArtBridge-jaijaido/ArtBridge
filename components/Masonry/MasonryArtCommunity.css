@@ -1,0 +1,217 @@
+.MasonryArtCommunity-grid {
+  display: flex;
+  gap: 25px;
+}
+
+.MasonryArtCommunity-grid-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.MasonryArtCommunity-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 30px;
+
+}
+
+
+
+.MasonryArtCommunity-grid-item-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.MasonryArtCommunity-grid-item-image:hover {
+  transform: translateY(-8px);
+
+}
+
+.MasonryArtCommunity-artwork-title {
+  color: #565656;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.MasonryArtCommunity-content-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MasonryArtCommunity-artistInfo-container {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.MasonryArtCommunity-content-container img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.MasonryArtCommunity-artistName {
+  color: #7D7D7D;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.MasonryArtCommunity-likesIcon-container {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-right: 6px;
+}
+
+.MasonryArtCommunity-likesIcon-container img {
+  cursor:pointer;
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain;
+}
+
+.MasonryArtCommunity-likes-number {
+  color: #FF5C5C;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+
+
+
+/*RWD*/
+@media screen and (max-width:1280px) {
+  .MasonryArtCommunity-grid {
+    gap: 20px;
+  }
+
+  .MasonryArtCommunity-artwork-title {
+    font-size: 16px;
+  }
+
+  .MasonryArtCommunity-content-container img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .MasonryArtCommunity-artistName{
+    font-size: 12px;
+  }
+
+  .MasonryArtCommunity-likesIcon-container img {
+    width: 16px !important;
+    height: 16px !important;
+ 
+  }
+
+  .MasonryArtCommunity-likes-number {
+    font-size: 10px;
+  }
+
+ 
+}
+
+@media screen and (max-width:834px) {
+
+  .MasonryArtCommunity-grid {
+    gap: 12px;
+  }
+
+  .MasonryArtCommunity-grid-item {
+    margin-bottom: 20px;
+  }
+  
+  .MasonryArtCommunity-artwork-title {
+    font-size: 14px;
+  }
+  
+  .MasonryArtCommunity-content-container img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .MasonryArtCommunity-artistName{
+    font-size: 10px;
+  }
+
+  .MasonryArtCommunity-likesIcon-container img {
+    width: 14px !important;
+    height: 14px !important;
+ 
+  }
+
+  .MasonryArtCommunity-likes-number {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width:440px) {
+  .MasonryArtCommunity-grid {
+    gap: 20px;
+  }
+
+  .MasonryArtCommunity-grid-item {
+    gap:8px;
+  }
+
+  .MasonryArtCommunity-artwork-title {
+    font-size: 11px;
+  }
+
+  .MasonryArtCommunity-content-container img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .MasonryArtCommunity-artistName{
+    font-size: 8px;
+  }
+
+ 
+}
+
+@media screen and (max-width:370px){
+  .MasonryArtCommunity-grid {
+    gap: 14px;
+  }
+
+  .MasonryArtCommunity-artwork-title {
+    font-size: 9px;
+  }
+
+  .MasonryArtCommunity-content-container img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .MasonryArtCommunity-artistName{
+    font-size: 6px;
+  }
+
+  .MasonryArtCommunity-likesIcon-container img {
+    width: 12px !important;
+    height: 12px !important;
+ 
+  }
+
+  .MasonryArtCommunity-likes-number {
+    font-size: 8px;
+  }
+
+
+} 
