@@ -5,8 +5,9 @@
 .tabs {
     display: flex;
     border-bottom: 1px solid #ccc;
-    gap: 85px;
-    padding: 0 10px;
+    justify-content: space-between;
+    gap:20px;
+    padding: 0 150px 0px 10px;  /* 上 右 下 左 */
 }
 
 .tab {
@@ -23,7 +24,7 @@
     line-height: normal;
     letter-spacing: 2px;
     margin-bottom: 10px;
-
+    white-space: nowrap;
 }
 
 .tab:hover {
@@ -51,7 +52,9 @@
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
-
+    height:520px;
+    overflow: hidden; 
+    
 }
 
 .tab-panel {
@@ -103,5 +106,93 @@
 
     to {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .tabs{
+        padding: 0 120px 0px 10px;  /* 上 右 下 左 */
+    }
+
+    .tab {
+        font-size: 18px;
+    }
+
+    .tab-content {
+        height: 490px;
+    }
+
+    .tab-panel-innerContext h1 {
+        font-size: 24px;
+    }
+
+    .tab-panel-imageInfo{
+        font-size: 18px;
+    }
+
+    
+
+}
+
+
+@media screen and (max-width: 834px){
+    .tabs{
+        padding: 0 90px 0px 10px;  /* 上 右 下 左 */
+    }
+
+    .tab {
+        font-size: 14px;
+    }
+
+    .tab-content {
+        height: 460px;
+    }
+
+    .tab-panel-innerContext h1 {
+        font-size: 20px;
+    }
+
+    .tab-panel-innerContext p{
+        font-size: 14px;
+    }
+
+    .tab-panel-imageInfo{
+        font-size: 14px;
+    }
+
+}
+
+
+@media screen and (max-width: 440px){
+
+
+    .tabs {
+        gap:20px;
+    }
+
+    .tab {
+        font-size: 12px;
+    }
+
+    .tab-content {
+        padding: 10px 0px;
+        height: 220px;
+    }
+
+    .tab-panel-innerContext h1{
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height:normal;
+    }
+
+
+    .tab-panel-innerContext p {
+        font-size: 12px;
+        line-height: 20px; 
+    }
+
+    .tab-panel-imageInfo{
+        font-size: 12px;
+        line-height: 20px;
     }
 }

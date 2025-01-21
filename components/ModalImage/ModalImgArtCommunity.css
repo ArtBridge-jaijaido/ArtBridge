@@ -16,10 +16,11 @@
     border-radius: 10px;
     max-width:1280px;
     width: 90%;
-    height: 780px;
+    height: auto;
     display: flex;
     position: relative;
     flex-direction: column;
+    min-width:900px;
 }
 
 
@@ -56,9 +57,8 @@
 
 .ModalImgArtCommunity-image-section {
     width: 100%;
-   
     flex: 1;
-    padding: 30px 75px;
+    padding: 30px 35px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -108,7 +108,6 @@
     justify-content: center;
     width: 54px;
     height: 34px;
-   
     border-radius: 10px;
     border: 1px solid #8DD7FF;
     background: #FFF;
@@ -166,6 +165,7 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: 2px;
+    white-space: nowrap;
     
 }
 
@@ -173,7 +173,8 @@
     width:100%;
     display:flex;
     justify-content: space-between;
-    padding:0px 75px;
+    padding:0px 35px;
+    margin-bottom: 25px;
 }
 
 .ModalImgArtCommunity-left-footer{
@@ -218,7 +219,163 @@
     padding: 50px 35px;
 }
 
-.ModalImgArtCommunity-right-footer{
-    width:100%;
-    display:flex;
+
+
+
+/*RWD */
+@media screen and (max-width: 1280px){
+    .ModalImgArtCommunity-content{
+        max-width:1160px;
+    }
+
+    .ModalImgArtCommunity-close{
+        max-width: 100px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .ModalImgArtCommunity-image-section {
+        padding: 30px 35px;
+    }
+
+    .ModalImgArtCommunity-image-container{
+        height: 490px;
+    }
+
+    .ModalImgArtCommunity-footer{
+        padding:0px 35px;
+    }
+
+    .ModalImgArtCommunity-footer-icons{
+        font-size: 20px;
+    }
+
+    .ModalImgArtCommunity-footer-icons img{
+        width: 28px;
+        height: 28px;
+      
+    }
+   
 }
+
+
+@media screen and (max-width: 834px){
+    .ModalImgArtCommunity-content{
+        max-width:800px;
+        min-width:auto;
+    }
+
+    
+    .ModalImgArtCommunity-body{
+        gap:10px;
+    }
+
+    .ModalImgArtCommunity-close{
+        max-width: 90px;
+        height: 30px;
+        font-size: 14px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .ModalImgArtCommunity-image-container{
+        height: 460px;
+    }
+
+    .ModalImgArtCommunity-footer-icons{
+        font-size: 16px;
+    }
+
+    .ModalImgArtCommunity-footer-icons img{
+        width: 24px;
+        height: 24px;
+    }
+
+
+
+
+}
+
+@media screen and (max-width: 440px){
+
+  
+
+    .ModalImgArtCommunity-content{
+        max-width:390px;
+        height:auto;
+       
+    }
+
+    .ModalImgArtCommunity-body{
+        flex-direction: column;
+    }
+
+    .ModalImgArtCommunity-close {
+        max-width:64px;
+        height: 20px;
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .ModalImgArtCommunity-image-section{
+        padding: 25px 25px 0px 25px;
+    }
+
+    .ModalImgArtCommunity-header{
+        margin-bottom: 10px;
+    }
+
+    .ModalImgArtCommunity-artistName{
+        font-size: 14px;
+    }
+
+    .ModalImgArtCommunity-imageReleaseDate{
+        font-size: 10px;
+    }
+
+    .ModalImgArtCommunity-verifyIcon-container{
+        width: 30px;
+        height: 18px;
+    }
+
+    .ModalImgArtCommunity-verifyIcon-container img {
+        width: 14px;
+        height: 14px;
+       
+    }
+
+    .ModalImgArtCommunity-artistAvatar-container{
+        width: 32px;
+        height: 32px;
+    }
+
+    .ModalImgArtCommunity-image-container{
+        height:280px;
+        margin-bottom: 10px;
+    }
+
+    .ModalImgArtCommunity-category{
+        font-size: 8px;
+        padding:2px 4px;
+    }
+
+    .ModalImgArtCommunity-footer{
+        padding:0px 25px;
+        margin-bottom: 10px;
+    }
+
+    .ModalImgArtCommunity-footer-icons{
+        font-size: 10px;
+    }
+    
+    .ModalImgArtCommunity-footer-icons img{
+        width: 14px;
+        height: 14px;
+      
+    }
+
+    .ModalImgArtCommunity-tab-section {
+     
+        padding: 10px 25px;
+    }
+}    
