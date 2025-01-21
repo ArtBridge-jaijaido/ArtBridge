@@ -6,7 +6,7 @@ const ToastMessage = ({ type, message, duration = 3000, onClose }) => {
     const timer = setTimeout(() => {
       onClose(); // 自動關閉
     }, duration);
-    return () => clearTimeout(timer); // 清理定時器
+    return () => clearTimeout(timer);
   }, [duration, onClose]);
 
   return (
