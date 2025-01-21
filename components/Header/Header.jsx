@@ -104,7 +104,18 @@ const Header = () => {
                     >
                         展示大廳
                     </a>
-                    <Link href="" >委託大廳</Link>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkEntrustLobby")}
+                        className={pathname === "/artworkEntrustLobby" ? "active" : ""}
+                    >
+                       委託大廳
+                    </a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkPainterProfile")}
+                        className={pathname === "/artworkPainterProfile" ? "active" : ""}
+                    >
+                       繪師個人介面
+                    </a>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
