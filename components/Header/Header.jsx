@@ -110,6 +110,12 @@ const Header = () => {
                     >
                        委託大廳
                     </a>
+                    <a
+                        onClick={() => navigateWithLoading("/artworkPainterProfile")}
+                        className={pathname === "/artworkPainterProfile" ? "active" : ""}
+                    >
+                       繪師個人介面
+                    </a>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
