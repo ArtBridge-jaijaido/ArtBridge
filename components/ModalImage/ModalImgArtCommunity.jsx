@@ -64,7 +64,6 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
           <div className="ModalImgArtCommunity-tab-section">
             <Tabs tabs={tabs} />
 
-            
           </div>
 
 
