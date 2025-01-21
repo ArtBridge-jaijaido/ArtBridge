@@ -1,0 +1,224 @@
+.ModalImgArtCommunity-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.ModalImgArtCommunity-content {
+    background: #fff;
+    border-radius: 10px;
+    max-width:1280px;
+    width: 90%;
+    height: 780px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+
+.ModalImgArtCommunity-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+}
+
+.ModalImgArtCommunity-close {
+    width:100%;
+    max-width: 120px;
+    height: 40px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 6px;
+    border-radius: 40px;
+    background: #4A8CB9;
+  
+}
+
+.ModalImgArtCommunity-image-section {
+    width: 100%;
+   
+    flex: 1;
+    padding: 30px 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.ModalImgArtCommunity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ModalImgArtCommunity-artistInfo-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.ModalImgArtCommunity-artistInfo-text {
+    display: flex;
+    flex-direction: column;
+    gap:6px;
+
+}
+
+.ModalImgArtCommunity-artistName {
+    color: #5F5F5F;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.ModalImgArtCommunity-imageReleaseDate {
+    color: #848484;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.ModalImgArtCommunity-verifyIcon-container{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    width: 54px;
+    height: 34px;
+   
+    border-radius: 10px;
+    border: 1px solid #8DD7FF;
+    background: #FFF;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ModalImgArtCommunity-verifyIcon-container img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+
+
+.ModalImgArtCommunity-artistAvatar-container {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.ModalImgArtCommunity-image-container{
+    width:100%;
+    height:520px;
+    margin-bottom: 25px;
+  
+}
+
+.ModalImgArtCommunity-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.ModalImgArtCommunity-category-container{
+    display:flex;
+    gap:10px;
+    
+}
+
+.ModalImgArtCommunity-category{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:5px 10px;
+    border-radius: 20px;
+    border: 0.5px solid #AFAFAF;
+    color: #AFAFAF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    
+}
+
+.ModalImgArtCommunity-footer{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    padding:0px 75px;
+}
+
+.ModalImgArtCommunity-left-footer{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.ModalImgArtCommunity-right-footer{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+}
+
+
+.ModalImgArtCommunity-footer-icons{
+    display:flex;
+    gap:2px;
+    justify-content: center;
+    align-items: center;
+    color: #919191;
+
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.ModalImgArtCommunity-footer-icons img{
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+
+.ModalImgArtCommunity-tab-section {
+    width: 100%;
+    flex: 1;
+    padding: 50px 35px;
+}
+
+.ModalImgArtCommunity-right-footer{
+    width:100%;
+    display:flex;
+}
