@@ -1,0 +1,146 @@
+.artworkEntrustLobbyPage{
+  
+    /*max width*/
+    --artworkEntrustLobbyPage-width: 1440px;
+
+    /*gap*/
+    --artworkEntrustLobby-dropdownButton-container-min-gap: 20px;
+    --artworkEntrustLobby-button-container-gap: 80px;
+    --artworkEntrustCard-container-gap: 60px;
+ 
+
+    /*margin-bottom*/
+    --artworkEntrustLobby-button-container-margin-bottom:50px;
+    --artworoPainterProfileCard-margin-bottom:50px;
+
+}
+
+.artworkEntrustLobbyPage{
+    width:100%;
+    max-width:var(--artworkEntrustLobbyPage-width);
+    padding: 110px 50px 50px 50px; /* top right bottom left */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto; 
+}
+
+.artworkEntrustLobby-button-container{
+    width:100%;
+    display:flex;
+    gap:var(--artworkEntrustLobby-button-container-gap);
+    padding: 0px 190px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:var(--artworkEntrustLobby-button-container-margin-bottom);
+   
+}
+.artworkEntrustCard-container{
+    display:grid;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+}
+
+.ArtworkEntrustCard-wrapper {
+    margin-bottom: 20px; /* 列之間的間距 */
+    max-width: 100%; 
+}
+
+/*RWD*/
+
+@media screen and (max-width:1280px){
+    .artworkEntrustLobbyPage{
+        padding: 110px 36px 50px 36px;
+    }
+
+    .artworkEntrustLobby-button-container{
+        padding: 0px 128px;
+        --artworkEntrustLobby-button-container-gap:40px;
+    }
+    .artworkEntrustCard-container {
+        max-width: 100%; 
+        width:100%;
+        padding: 0 10px; /* 增加內邊距，避免內容貼邊 */
+        box-sizing: border-box; 
+        overflow-x: hidden; 
+    } 
+} 
+
+@media screen and (max-width:834px){
+    .artworkEntrustLobbyPage{
+        padding:110px 30px 50px 30px;
+    }
+    .artworkEntrustLobby-button-container {
+        gap: 20px; 
+        justify-content: center; 
+        padding: 0 16px;
+    }
+    .artworkEntrustCard-container {
+        max-width: 100%; 
+        padding: 0 10px; /* 增加內邊距，避免內容貼邊 */
+        box-sizing: border-box; 
+        overflow-x: hidden; 
+    }      
+  
+}
+@media screen and (max-width: 768px) {
+    .artworkEntrustLobbyPage{
+        width:768px;
+    }
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+}
+@media screen and (max-width: 440px) {
+    .artworkEntrustLobbyPage{
+        width:100%;
+        max-width:440px;
+        padding : 108px 30px 25px 30px;
+    }
+
+    .artworkEntrustLobby-button-container{
+        padding:0px 15px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        --artworkEntrustLobby-button-container-margin-bottom: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+ }
+  @media screen and (max-width: 370px) {
+    .artworkEntrustLobbyPage{
+        width:100%;
+        max-width:440px;
+        padding : 108px 30px 25px 30px;
+}
+
+    .artworkEntrustLobby-button-container{
+        padding:0px 15px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
+        --artworkEntrustLobby-button-container-margin-bottom: 30px;
+        justify-items: center;
+        align-items: center;
+    }
+    .artworkEntrustCard-container {
+        display: flex;
+        flex-direction: column; /* 一列單個 */
+        gap:0px;
+    }
+
+  }
+  
