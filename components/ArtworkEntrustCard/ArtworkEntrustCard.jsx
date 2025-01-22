@@ -2,7 +2,7 @@
 import React from "react";
 import "./ArtworkEntrustCard.css";
 
-const ArtworkEntrustCard = ({title, usernametext, applicanttext, descriptiontext, categorytext, dealinetext, price, artworkImg}) => (
+const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText, categoryText, dealineText, price, artworkImg}) => (
   <div className="artworkEntrust-Card-container">
     <div className="ArtworkEntrustCard-wrapper">
       <div className="ArtworkEntrustCard-content">
@@ -11,26 +11,26 @@ const ArtworkEntrustCard = ({title, usernametext, applicanttext, descriptiontext
             <div className="ArtworkEntrustCard-title">{title}</div>
             <div className="ArtworkEntrustCard-meta-info">
               <div className="ArtworkEntrustCard-user-info">
-                <div className="ArtworkEntrustCard-username">{usernametext}</div>
+                <div className="ArtworkEntrustCard-username">{usernameText}</div>
                 <img src="images/user-icon.png" className="ArtworkEntrustCard-user-icon" />
               </div>
               <div className="ArtworkEntrustCard-applicants">
                 <img src="images/applicant-icon.png" className="ArtworkEntrustCard-applicant-icon" />
-                <div className="ArtworkEntrustCard-applicant-text">{applicanttext}</div>
+                <div className="ArtworkEntrustCard-applicant-text">{applicantText}</div>
               </div>
             </div>
             <div className="ArtworkEntrustCard-description">
-              {descriptiontext}
+              {descriptionText}
             </div>
             <div className="ArtworkEntrustCard-divider"></div>
             <div className="ArtworkEntrustCard-footer-info">
               <div className="ArtworkEntrustCard-category">
                 <img src="images/category-icon.png" className="ArtworkEntrustCard-category-icon" alt="Category icon" />
-                <div className="ArtworkEntrustCard-category-text">{categorytext}</div>
+                <div className="ArtworkEntrustCard-category-text">{categoryText}</div>
               </div>
               <div className="ArtworkEntrustCard-deadline">
                 <img src="images/dealine-icon.png" className="ArtworkEntrustCard-deadline-icon" alt="Calendar icon" />
-                <div className="ArtworkEntrustCard-deadline-text">{dealinetext}</div>
+                <div className="ArtworkEntrustCard-deadline-text">{dealineText}</div>
               </div>
             </div>
           </div>

@@ -27,9 +27,13 @@ const Tabs = ({ tabs }) => {
             switch (tab.label) {
               case "內文":
                 return (
-                  <div key={tab.label} className="tab-panel">
+                  <div key={tab.label} className="tab-panel tab-panel-innerContext">
                     <h1>{tab.content.innerContextTitle}</h1>
-                    <p>{tab.content.innerContext}</p>
+                    <p>
+                        {tab.content.innerContext.length > 150
+                          ? `${tab.content.innerContext.slice(0, 150)}...`
+                          : tab.content.innerContext}
+                      </p>
                   </div>
                 );
               case "留言板":
@@ -40,12 +44,16 @@ const Tabs = ({ tabs }) => {
                 );
               case "圖片資訊":
                 return (
-                  <div key={tab.label} className="tab-panel">
-                    <span>{tab.content.imageSource}</span>
-                    <span>{tab.content.imageReleaseDate}</span>
+                  <div key={tab.label} className="tab-panel tab-panel-imageInfo">
+                    <span>圖片出處: {tab.content.imageSource}</span>
+                    <span>文章發布日期: {tab.content.imageReleaseDate}</span>
                     <div>
+                      分類: 
                       {tab.content.imageCateorgy.map((category, index) => (
-                        <span key={index}>{category}</span>
+                        <span key={index}>
+                          {category}
+                          {index !== tab.content.imageCateorgy.length - 1 && "、"}
+                        </span>
                       ))}
                     </div>
                   </div>

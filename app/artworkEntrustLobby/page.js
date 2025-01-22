@@ -131,11 +131,11 @@ const ArtworkEntrustLobby = () => {
                     <ArtworkEntrustCard 
                     key={index}
                     title={"企劃名稱(最多15個字"}
-                    usernametext={"使用者名稱"}
-                    applicanttext={"已有5人應徵"}
-                    descriptiontext={"需要一個可以幫我畫角色的繪師，類型像圖片中那樣，偏向可矮Q版的風格，是......"}
-                    categorytext={"OC/原創角色"}
-                    dealinetext={"2025年02月03日"}
+                    usernameText={"使用者名稱"}
+                    applicantText={"已有5人應徵"}
+                    descriptionText={"需要一個可以幫我畫角色的繪師，類型像圖片中那樣，偏向可矮Q版的風格，是......"}
+                    categoryText={"OC/原創角色"}
+                    dealineText={"2025年02月03日"}
                     price={"2000-5000"}
                     artworkImg={"images/artwork-icon.png"}
                   /> 
