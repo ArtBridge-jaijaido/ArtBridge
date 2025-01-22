@@ -45,9 +45,9 @@ const ArtworkEntrustLobby = () => {
             //設定每種螢幕大小顯示的商品數目
             const updateItemsPerPage = () => {
                 if (window.innerWidth < 768) {
-                    setItemsPerPage(10); // Set to 5 items for smaller screens
+                    setItemsPerPage(10); // Set to 10 items for smaller screens
                 } else {
-                    setItemsPerPage(16); // Default to 8 items for larger screens
+                    setItemsPerPage(16); // Default to 16 items for larger screens
                 }
             };
             // Initial check
