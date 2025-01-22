@@ -2,7 +2,7 @@
 import React from "react";
 import "./ArtworkEntrustCard.css";
 
-const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptiontext, categoryText, dealineText, price, artworkImg}) => (
+const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText, categoryText, dealineText, price, artworkImg}) => (
   <div className="artworkEntrust-Card-container">
     <div className="ArtworkEntrustCard-wrapper">
       <div className="ArtworkEntrustCard-content">
@@ -20,7 +20,7 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptiontext
               </div>
             </div>
             <div className="ArtworkEntrustCard-description">
-              {descriptiontext}
+              {descriptionText}
             </div>
             <div className="ArtworkEntrustCard-divider"></div>
             <div className="ArtworkEntrustCard-footer-info">
