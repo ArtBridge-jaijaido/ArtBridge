@@ -196,3 +196,30 @@
         line-height: 20px;
     }
 }
+
+
+@media screen and (max-width: 375px){
+
+
+    .tab-content {
+        padding: 10px 0px;
+        height: 180px;
+    }
+
+    .tab-panel-innerContext h1{
+        font-size: 14px;
+      
+    }
+
+    .tab-panel-innerContext p {
+        font-size: 9px;
+        line-height: 16px; 
+    }
+
+    .tab-panel-imageInfo{
+        font-size: 9px;
+     
+    }
+
+
+}

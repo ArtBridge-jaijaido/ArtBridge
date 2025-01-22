@@ -29,7 +29,11 @@ const Tabs = ({ tabs }) => {
                 return (
                   <div key={tab.label} className="tab-panel tab-panel-innerContext">
                     <h1>{tab.content.innerContextTitle}</h1>
-                    <p>{tab.content.innerContext}</p>
+                    <p>
+                        {tab.content.innerContext.length > 150
+                          ? `${tab.content.innerContext.slice(0, 150)}...`
+                          : tab.content.innerContext}
+                      </p>
                   </div>
                 );
               case "留言板":
