@@ -26,7 +26,7 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
   return (
     <div className="ModalImgArtCommunity-overlay" onClick={onClose}>
       <div className="ModalImgArtCommunity-content" onClick={(e) => e.stopPropagation()}>
-        <button className="ModalImgArtCommunity-close" onClick={onClose}>關閉X</button>
+        <button className="ModalImgArtCommunity-close" onClick={onClose}>關閉 X</button>
         <div className="ModalImgArtCommunity-body">
           {/* 左側圖片區域 */}
           <div className="ModalImgArtCommunity-image-section">
