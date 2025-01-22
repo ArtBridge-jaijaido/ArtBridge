@@ -21,14 +21,13 @@
 
 
 .Artwork-card-container{
-   width:100%;
-    max-width: var(--Artwork-card-container-width);
-    height: var(--Artwork-card-container-height);
-    border: 1px solid #40A4DA;
-  
-    position: relative;
-    background: #40A4DA;
-    position:relative;
+  width:100%;
+  max-width: var(--Artwork-card-container-width);
+  height: var(--Artwork-card-container-height);
+  border: 1px solid #40A4DA;
+  position: relative;
+  background: #40A4DA;
+  position:relative;
   
   }
 
