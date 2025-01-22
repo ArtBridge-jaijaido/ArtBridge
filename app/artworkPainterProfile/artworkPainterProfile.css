@@ -7,7 +7,7 @@
 .artworkPainterProfilePage{
     width:100%;
     max-width:var(--artworkPainterProfilePage-width);
-    padding:110px 88px 50px 88px; 
+    padding:110px 88px 0px 88px; 
     display:flex;
     flex-direction:column;
     justify-content:center;
