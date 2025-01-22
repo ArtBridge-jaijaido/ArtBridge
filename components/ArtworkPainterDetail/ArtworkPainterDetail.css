@@ -19,8 +19,8 @@
   position: relative;
   max-height:834px;
   width: 100%;
-  height: auto; /* 自適應高度 */
-  margin: 0; /* 確保緊貼上方內容 */
+  height: auto; 
+  margin: 0; 
   padding: 0;
 }
   

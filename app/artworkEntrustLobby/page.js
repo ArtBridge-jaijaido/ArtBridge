@@ -45,9 +45,9 @@ const ArtworkEntrustLobby = () => {
             //設定每種螢幕大小顯示的商品數目
             const updateItemsPerPage = () => {
                 if (window.innerWidth < 768) {
-                    setItemsPerPage(10); // Set to 5 items for smaller screens
+                    setItemsPerPage(10); // Set to 10 items for smaller screens
                 } else {
-                    setItemsPerPage(16); // Default to 8 items for larger screens
+                    setItemsPerPage(16); // Default to 16 items for larger screens
                 }
             };
             // Initial check
@@ -131,11 +131,11 @@ const ArtworkEntrustLobby = () => {
                     <ArtworkEntrustCard 
                     key={index}
                     title={"企劃名稱(最多15個字"}
-                    usernametext={"使用者名稱"}
-                    applicanttext={"已有5人應徵"}
-                    descriptiontext={"需要一個可以幫我畫角色的繪師，類型像圖片中那樣，偏向可矮Q版的風格，是......"}
-                    categorytext={"OC/原創角色"}
-                    dealinetext={"2025年02月03日"}
+                    usernameText={"使用者名稱"}
+                    applicantText={"已有5人應徵"}
+                    descriptionText={"需要一個可以幫我畫角色的繪師，類型像圖片中那樣，偏向可矮Q版的風格，是......"}
+                    categoryText={"OC/原創角色"}
+                    dealineText={"2025年02月03日"}
                     price={"2000-5000"}
                     artworkImg={"images/artwork-icon.png"}
                   /> 

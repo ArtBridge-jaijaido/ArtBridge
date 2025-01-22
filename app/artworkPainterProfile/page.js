@@ -27,9 +27,17 @@ const ArtworkPainterProfilePage = () => {
         <div className={`artworkPainterProfilePage ${notoSansTCClass}`}>
             <div className="artworkPainterDetail-container">
                {currentItems.map((_, index) => (
-                    <ArtworkPainterDetail key={index} />
+                    <ArtworkPainterDetail 
+                    key={index} 
+                    backgroundImg={"/images/profile-background.png"}
+                    ratingText={"5"}
+                    profileImg={"/images/profile-avatar.png"}
+                    usernameText={"使用者名稱"}
+                    introductionText={"我是一名經驗豐富的插畫家，擅長日系畫風，專注於VUP虛擬主播立繪和建模（包括Live2D製作）。曾參與《食之契約》《崩壞2》《原神》《蒼藍誓約》《命運神界》......"}
+                    />
                 ))}
             </div>
+
              {/* 使用分頁元件 */}
              <Pagination
                 totalPages={totalPages}
