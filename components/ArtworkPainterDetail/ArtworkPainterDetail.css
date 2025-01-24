@@ -1,17 +1,18 @@
-.ArtworkPainterProfileCard{
+.ArtworkPainterDetail{
   display:flex;
   flex-direction: column;
   max-width:1440px;
   width:100%;
   height:auto;
   margin-top:0px;
+  overflow: hidden;
 }
 .ArtworkPainterDetail-profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width:100%;
 }
-  
 .ArtworkPainterDetail-header {
   display: flex;
   flex-direction: column;
@@ -20,10 +21,9 @@
   max-height:834px;
   width: 100%;
   height: auto; 
-  margin: 0; 
-  padding: 0;
+  background-size: cover; /* 背景圖片填滿容器 */
+  aspect-ratio: 2.5; 
 }
-  
 .ArtworkPainterDetail-background-image {
   position: absolute;
   inset: 0;
@@ -31,28 +31,30 @@
   width: 100%;
   object-fit: cover;
   object-position: center;
+  filter: brightness(60%); /* 調暗背景 */
+  z-index: 0; /* 確保背景在底層 */
 }
-  
 .ArtworkPainterDetail-profile-content {
   position: relative;
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 31px 0 95px 30px;
+  padding: 31px 30px 95px 30px;
+  z-index: 1;
 }
   
 .ArtworkPainterDetail-header-actions {
   display: flex;
-  margin-right: 42px;
+  /*margin-right: 42px;*/
   width: 100%;
   max-width: 1368px;
   align-items: start;
+  justify-content: space-between;
   gap: 20px;
   font: 600 16px/1.5 Inter, sans-serif;
   color: #fff;
   letter-spacing: 2px;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
   
 .ArtworkPainterDetail-exclamation-button {
@@ -69,71 +71,80 @@
 }
   
 .ArtworkPainterDetail-rating-wrapper {
+  width: 56px; 
+  height: 30px; 
+  background: linear-gradient(180deg, #FFD217 0%, #FBA729 100%);
   border-radius: 3px;
   display: flex;
-  gap: 5px;
+  align-items: center; 
+  justify-content: center; 
+  gap: 2px; 
+
+}
+.ArtworkPainterDetail-rating-text{
+  border-radius: 3px;
+  display: flex;
+  gap: 2px;
   font-size: 18px;
-  padding: 7px 11px;
   align-items: center;
 }
-  
 .ArtworkPainterDetail-rating-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: 16px;
+  width: 17px;
 }
-  
 .ArtworkPainterDetail-profile-info {
-  align-self: end;
+  align-self: center;
   display: flex;
   margin-top: 72px;
-  width: 828px;
   max-width: 100%;
-  gap: 20px;
   color: #fff;
   letter-spacing: 1px;
   flex-wrap: wrap;
   justify-content: space-between;
   font: 600 16px/26px Inter, sans-serif;
+  align-items: center;
+  justify-content: center;
+  position:relative;
 }
-  
 .ArtworkPainterDetail-profile-avatar {
-  aspect-ratio: 1.07;
-  object-fit: contain;
-  width: 198px;
-  border-radius: 90px;
+  object-fit: cover;
+  width: 180px;
+  height: 180px; 
+  border-radius: 50%;
+  border: 1px solid #6C6B6B;
   max-width: 100%;
+  background: lightgray 50%;
+  position: relative;
 }
-  
-.ArtworkPainterDetail-price-list {
-  border-radius: 5px 0 0 5px;
-  background-color: rgb(84, 150, 189);
-  border: 1px solid #fff;
-  border-right: 0;
-  align-self: start;
-  margin-top: 5px;
-  padding: 17px 10px;
- }
-  
+.ArtworkPainterDetail-high-quality-icon{
+  position: absolute;
+  top: -6px;
+  left: -14px;
+  width:60px;
+  height: 60px;
+}
+
 .ArtworkPainterDetail-username {
   color: #fff;
   letter-spacing: 10px;
   text-align: center;
   align-self: center;
-  margin-top: 71px;
+  margin-top: 70px;
   font: 600 40px Inter, sans-serif;
 }
-
 .ArtworkPainterDetail-action-buttons {
   align-self: center;
   display: flex;
-  margin-top: 72px;
+  margin-top: 40px;
   width: 219px;
   max-width: 100%;
   gap: 20px;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
 }
-
 .ArtworkPainterDetail-commission-button {
   border-radius: 10px;
   background-color: rgb(45, 174, 244);
@@ -141,9 +152,8 @@
   text-align: center;
   letter-spacing: 6px;
   padding: 13px 25px;
-  font: 600 20px Inter, sans-serif;
+  font: 600 20px 'Inter', sans-serif;
 }
-
 .ArtworkPainterDetail-attendance-button {
   border-radius: 40px;
   background-color: #fff;
@@ -156,45 +166,78 @@
   padding: 6px;
   border: 1px solid rgb(141, 215, 255);
 }
-
-.ArtworkPainterDetail-attendance-icon {
+.ArtworkPainterDetail-no-attendance-icon {
   aspect-ratio: 1;
   object-fit: contain;
   width: 30px;
 }
 
-.ArtworkPainterDetail-introduction-header {
+.ArtworkPainterDetail-introduction-container {
   display: flex;
-  margin-top: 66px;
+  flex-direction: column;
   width: 100%;
-  max-width: 1329px;
+  margin: 20px;
   gap: 20px;
-  font-family: Inter, sans-serif;
-  flex-wrap: wrap;
+  padding: 0px 40px;
+}
+.ArtworkPainterDetail-introduction-header{
+  display: flex;
+  margin-top: 30px;
+  width: 100%;
+  gap: 20px;
+  font-family: 'Inter';
   justify-content: space-between;
+  align-items: center;
 }
 
 .ArtworkPainterDetail-introduction-title {
   color: rgb(45, 174, 244);
-  font: 600 30px Inter, sans-serif;
+  font-size:30px;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 
-.ArtworkPainterDetail-header-actions {
+.ArtworkPainterDetail-actions {
   display: flex;
-  gap: 14px;
-  font: 500 15px Inter, sans-serif;
+  gap: 10px;
+  font: 500 15px 'Inter';
   color: #fff;
   letter-spacing: 4px;
 }
-
+/*專屬ID設定*/
 .ArtworkPainterDetail-view-id {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
   border-radius: 5px;
   background-color: rgb(155, 155, 155);
   text-align: center;
   padding: 9px 13px;
+  transition: transform 0.3s ease; /* 添加平滑的動畫效果 */
+}
+.ArtworkPainterDetail-view-id.flipped {
+  background-color: rgb(100, 200, 255); /* 翻轉後背景顏色 */
+  transform: rotateY(180deg); /* 翻轉效果 */
+  text-align: center;
+  align-items: center; 
+  justify-content: center;
+}
+.ArtworkPainterDetail-view-id span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  text-align: center;
+  align-items: center; 
+  justify-content: center;
+  width: 100%; /* 保證文字占滿按鈕 */
+}
+/* 當 isFlipped 為 true，flipped-text 類被添加到 span 元素。抵消按鈕的 180 度翻轉，讓文字保持正向顯示。*/
+.ArtworkPainterDetail-view-id span.flipped-text {
+  transform: rotateY(180deg); 
+  text-align: center;
+  width: 100%;
 }
 
+/*切換到消費者介面的部分*/
 .ArtworkPainterDetail-toggle-wrapper {
   border-radius: 5px;
   background-color: rgb(155, 155, 155);
@@ -202,6 +245,7 @@
   gap: 10px;
   padding: 7px 12px;
   align-items: center;
+  white-space: nowrap;
 }
 
 .ArtworkPainterDetail-toggle-icon {
@@ -213,6 +257,272 @@
 .ArtworkPainterDetail-introduction-text {
   color: rgb(135, 135, 135);
   letter-spacing: 1px;
-  margin-top: 25px;
-  font: 500 20px/40px Inter, sans-serif;
+  font-size:20px;
+  font-family:'Inter';
+}
+.ArtworkPainterDetail-read-more {
+  color: rgb(45, 174, 244);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-family:'Inter';
+  text-decoration: underline; 
+  text-decoration-color: rgb(45, 174, 244); 
+  text-decoration-thickness: 1px; 
+  text-underline-offset: 2px; 
+}
+
+@media (max-width: 834px) {
+  .ArtworkPainterDetail-header{
+    max-height:500px;
+  }
+  .ArtworkPainterDetail-introduction-header{
+    margin-top:20px;
+  }
+  .ArtworkPainterDetail-introduction-title{
+    font-size: 20px;
+  }
+  .ArtworkPainterDetail-introduction-text{
+    font-size: 16px;
+  }
+  .ArtworkPainterDetail-read-more{
+    font-size: 15px;
+  }
+  .ArtworkPainterDetail-view-id{
+    height:20px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+  } 
+  .ArtworkPainterDetail-view-id.flipped{
+    height:20px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+    width: 80px;
+  }
+  .ArtworkPainterDetail-toggle-wrapper{
+    font-size: 10px;
+    height:20px;
+    padding:5px 5px;
+    gap:0px;
+  }
+  .ArtworkPainterDetail-toggle-icon{
+    width: 10px;
+    height: 10px; 
+  }
+  .ArtworkPainterDetail-profile-avatar{
+    width: 110px;
+    height: 110px; 
+  }
+  .ArtworkPainterDetail-high-quality-icon{
+    width:40px;
+    height:40px;
+    left: -5px;
+  }
+  .ArtworkPainterDetail-username{
+    font-size:18px;
+    margin-top:50px;
+  }
+  .ArtworkPainterDetail-attendance-button{
+    width:34px;
+    height:34px;
+  }
+  .ArtworkPainterDetail-action-buttons{
+    margin-top:30px;
+    width:180px;
+  }
+  .ArtworkPainterDetail-commission-button{
+    font-size:14px;
+    padding: 10px 18px;
+  }
+}
+@media (max-width: 440px) {
+  .ArtworkPainterDetail-header{
+    max-height:350px;
+  }
+  .ArtworkPainterDetail-introduction-header{
+    margin-top:5px;
+  }
+  .ArtworkPainterDetail-introduction-title{
+    font-size: 16px;
+  }
+  .ArtworkPainterDetail-introduction-container{
+    gap:15px;
+    padding-right:50px;
+  }
+  .ArtworkPainterDetail-introduction-text{
+    font-size: 12px;
+  }
+  .ArtworkPainterDetail-read-more{
+    font-size: 11px;
+  }
+  .ArtworkPainterDetail-view-id{
+    height:18px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+  } 
+  .ArtworkPainterDetail-view-id.flipped{
+    height:18px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+    width: 80px;
+  }
+  .ArtworkPainterDetail-toggle-wrapper{
+    font-size: 10px;
+    height:18px;
+    padding:5px 5px;
+    gap:0px;
+  }
+  .ArtworkPainterDetail-toggle-icon{
+    width: 11px;
+    height: 11px; 
+  }
+  .ArtworkPainterDetail-profile-content{
+    padding:10px 30px 30px 30px;
+  }
+  .ArtworkPainterDetail-profile-info{
+    margin-top:40px;
+  }
+  .ArtworkPainterDetail-profile-avatar{
+    width: 100px;
+    height: 100px; 
+  }
+  .ArtworkPainterDetail-high-quality-icon{
+    width:30px;
+    height:30px;
+    left: -2px;
+    top:-3px;
+  }
+  .ArtworkPainterDetail-username{
+    font-size:18px;
+    margin-top:30px;
+  }
+  .ArtworkPainterDetail-action-buttons{
+    margin-top:20px;
+    width:160px;
+  }
+  .ArtworkPainterDetail-attendance-button{
+    width:26px;
+    height:26px;
+  }
+  .ArtworkPainterDetail-commission-button{
+    font-size:11px;
+    padding: 4px 3px 4px 8px;
+    border-radius: 3px;
+  }
+  .ArtworkPainterDetail-exclamation-button{
+    font-size: 8px;
+  }
+  .ArtworkPainterDetail-exclamation-icon{
+    width:19px;
+    height:19px;
+  }
+  .ArtworkPainterDetail-rating-wrapper{
+    width:28px;
+    height:16px;
+  }
+  .ArtworkPainterDetail-rating-icon{
+    width:8px;
+    height:8px;
+  }
+  .ArtworkPainterDetail-rating-text{
+    font-size: 10px;
+  }
+}
+@media (max-width: 370px) {
+  .ArtworkPainterDetail-header{
+    max-height:250px;
+  }
+  .ArtworkPainterDetail-introduction-header{
+    margin-top:5px;
+  }
+  .ArtworkPainterDetail-introduction-title{
+    font-size: 13px;
+  }
+  .ArtworkPainterDetail-introduction-text{
+    font-size: 12px;
+    padding: 0px 20px;
+  }
+  .ArtworkPainterDetail-introduction-container{
+    gap:15px;
+    padding: 0px 20px;
+  }
+  .ArtworkPainterDetail-read-more{
+    font-size: 12px;
+  }
+  .ArtworkPainterDetail-view-id{
+    height:16px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+  } 
+  .ArtworkPainterDetail-view-id.flipped{
+    height:16px;
+    padding:5px 5px 5px 8px;
+    font-size: 10px;
+    width: 80px;
+  }
+  .ArtworkPainterDetail-toggle-wrapper{
+    font-size: 10px;
+    height:16px;
+    padding:5px 5px;
+    gap:0px;
+  }
+  .ArtworkPainterDetail-toggle-icon{
+    width: 10px;
+    height: 10px; 
+  }
+  .ArtworkPainterDetail-profile-info{
+    margin-top:30px;
+  }
+  .ArtworkPainterDetail-profile-avatar{
+    width: 80px;
+    height: 80px; 
+  }
+  .ArtworkPainterDetail-high-quality-icon{
+    width:30px;
+    height:30px;
+    left: -5px;
+    top:-3px;
+  }
+  .ArtworkPainterDetail-username{
+    font-size:14px;
+    margin-top:20px;
+    letter-spacing:4px;
+  }
+  .ArtworkPainterDetail-attendance-button{
+    width:24px;
+    height:24px;
+  }
+  .ArtworkPainterDetail-action-buttons{
+    margin-top:20px;
+    width:160px;
+  }
+  .ArtworkPainterDetail-commission-button{
+    font-size:8px;
+    padding: 0px 3px 2px 7px;
+    height:18px;
+    width:60px;
+    letter-spacing: 3px;
+  }
+  .ArtworkPainterDetail-profile-content{
+    padding:10px 15px 30px;
+  }
+  .ArtworkPainterDetail-exclamation-button{
+    font-size: 8px;
+  }
+  .ArtworkPainterDetail-exclamation-icon{
+    width:19px;
+    height:19px;
+  }
+  .ArtworkPainterDetail-rating-wrapper{
+    width:28px;
+    height:16px;
+  }
+  .ArtworkPainterDetail-rating-icon{
+    width:8px;
+    height:8px;
+  }
+  .ArtworkPainterDetail-rating-text{
+    font-size: 10px;
+  }
 }

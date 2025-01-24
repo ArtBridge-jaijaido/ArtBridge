@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
-import Pagination from '@/components/Pagination/Pagination.jsx';
+import ArtworkPainterCalendar from '@/components/ArtworkPainterCalendar/ArtworkPainterCalendar.jsx';
 import "./artworkPainterProfile.css";
 
 
@@ -33,17 +33,37 @@ const ArtworkPainterProfilePage = () => {
                     ratingText={"5"}
                     profileImg={"/images/profile-avatar.png"}
                     usernameText={"使用者名稱"}
-                    introductionText={"我是一名經驗豐富的插畫家，擅長日系畫風，專注於VUP虛擬主播立繪和建模（包括Live2D製作）。曾參與《食之契約》《崩壞2》《原神》《蒼藍誓約》《命運神界》......"}
+                    introductionText={"我是一名經驗豐富的插畫家，擅長日系畫風，專注於VUP虛擬主播立繪和建模（包括Live2D製作）。曾參與《食之契約》《崩壞2》《原神》《蒼藍誓約》《命運神界》"}
+                    viewID={"A123456"}
+                    isHighQuality={true}
                     />
                 ))}
             </div>
 
-             {/* 使用分頁元件 */}
-             <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
+            {/* 繪師行事曆 */}
+            <div className="artworkPainterCalendar-container">
+               {currentItems.map((_, index) => (
+                    <ArtworkPainterCalendar 
+                        key={index} 
+                        completion={"100%"}
+                        reputation={"100分"}
+                        monthText1={"本月"}
+                        monthText2={"1月"}
+                        monthText3={"2月"}
+                        monthText4={"3月"}
+                        monthText5={"4月"}
+                        monthText6={"5月"}
+                        indicatorBarColors={[
+                        ["bar-gray", "bar-red"], 
+                        ["bar-green", "bar-green"], 
+                        ["bar-red", "bar-green"], 
+                        ["bar-gray", "bar-green"], 
+                        ["bar-red", "bar-red"],
+                        ["bar-gray", "bar-gray"]
+                        ]}
+                    />
+                ))}
+            </div>
         </div>
     )
 }

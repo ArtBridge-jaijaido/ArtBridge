@@ -2,7 +2,14 @@
 import React from "react";
 import "./ArtworkEntrustCard.css";
 
-const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText, categoryText, dealineText, price, artworkImg}) => (
+const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText, categoryText, dealineText, price, artworkImg}) => {
+  
+  // 檢查描述文字是否超過 35 字
+  const truncatedDescription = descriptionText.length > 35 
+  ? `${descriptionText.substring(0, 35)}...` 
+  : descriptionText;
+
+  return(
   <div className="artworkEntrust-Card-container">
     <div className="ArtworkEntrustCard-wrapper">
       <div className="ArtworkEntrustCard-content">
@@ -20,7 +27,7 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText
               </div>
             </div>
             <div className="ArtworkEntrustCard-description">
-              {descriptionText}
+              <span>{truncatedDescription}</span>
             </div>
             <div className="ArtworkEntrustCard-divider"></div>
             <div className="ArtworkEntrustCard-footer-info">
@@ -47,8 +54,8 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText
         </div>
       </div>
     </div>
-
   </div>
-);
+  );
+};
 
 export default ArtworkEntrustCard;
