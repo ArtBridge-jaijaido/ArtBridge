@@ -154,7 +154,7 @@
   padding: 13px 25px;
   font: 600 20px 'Inter', sans-serif;
 }
-.ArtworkPainterDetail-attendance-button {
+.ArtworkPainterDetail-attendance-button{
   border-radius: 40px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
@@ -165,13 +165,13 @@
   height: 42px;
   padding: 6px;
   border: 1px solid rgb(141, 215, 255);
+  object-fit: contain;
 }
 .ArtworkPainterDetail-no-attendance-icon {
   aspect-ratio: 1;
   object-fit: contain;
   width: 30px;
 }
-
 .ArtworkPainterDetail-introduction-container {
   display: flex;
   flex-direction: column;
@@ -441,7 +441,7 @@
   }
   .ArtworkPainterDetail-introduction-text{
     font-size: 12px;
-    padding: 0px 20px;
+
   }
   .ArtworkPainterDetail-introduction-container{
     gap:15px;

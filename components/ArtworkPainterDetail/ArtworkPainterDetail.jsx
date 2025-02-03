@@ -1,4 +1,4 @@
-"use client";   
+"use client";  
 import React, {useState, useEffect} from 'react'
 import "./ArtworkPainterDetail.css";
 import "@fontsource/inter"; 
@@ -11,6 +11,7 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
     
     const [isFlipped, setIsFlipped] = useState(false); // 控制翻轉狀態
     const [showFullText, setShowFullText] = useState(false);
+
     
     //檢舉
     const handleMouseEnter = () => {
@@ -49,17 +50,21 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
         return null;
     }
 
-
-    // 切換到消費者介面
-    const handleToggleClick = () => {
-        window.location.href = '/artworkEntrustLobby'; 
-    };
-
     // 查看專屬ID的翻轉狀態
     const handleViewIdClick = () => {
         setIsFlipped(!isFlipped); 
     };
 
+     // 切換到消費者介面或畫師介面
+     const handleToggleClick = () => {
+        const currentPath = window.location.pathname;
+        if (currentPath.includes("artworkPainterProfile")) {
+            navigate('/artworkConsumerProfile');
+        } else if (currentPath.includes("artworkConsumerProfile")) {
+            navigate('/artworkPainterProfile');
+        }
+    };
+   
     // 查看更多
     const handleToggleText = () => {
         setShowFullText(!showFullText); 
@@ -127,7 +132,7 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
                                 {isFlipped ? viewID : "查看專屬ID"}
                             </span>
                         </button>
-                        <button className="ArtworkPainterDetail-toggle-wrapper" onClick={handleToggleClick}>
+                        <button className="ArtworkPainterDetail-toggle-wrapper" onClick={handleToggleClick}> 
                             <span>切換</span>
                             <img src="images/toggle-icon.png " className="ArtworkPainterDetail-toggle-icon" />
                         </button>

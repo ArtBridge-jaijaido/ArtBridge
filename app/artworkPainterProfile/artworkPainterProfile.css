@@ -56,9 +56,9 @@
         width:100%;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 768px){
     .artworkPainterProfilePage{
-        width:768px;
+        width:100%
     }
     .artworkPainterDetail-container{
         display:flex;

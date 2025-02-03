@@ -1,9 +1,33 @@
-"use client";   
-import React, { useState} from 'react'
+"use client"; 
+import React, {useState, useEffect} from 'react'
 import "./ArtworkPainterCalendar.css";
 import "@fontsource/inter"; 
 
-const ArtworkPainterCalendar = ({completion, reputation, monthText1, monthText2, monthText3, monthText4, monthText5, monthText6, indicatorBarColors  }) => {
+const ArtworkPainterCalendar = ({completion, reputation,statusData}) => {
+  const [indicatorBarColors, setIndicatorBarColors] = useState([]);
+  const [months, setMonths] = useState([]);
+
+  useEffect(() => {
+    // 取得當前月份並生成接下來的5個月份
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+    
+    const generatedMonths = ["本月", ...Array.from({ length: 5 }, (_, i) => monthNames[(currentMonth + i + 1) % 12])];
+    setMonths(generatedMonths);
+
+    //行事曆狀態
+    if (statusData) {
+      const colors = statusData.map(status => {
+        return status.map(item => {
+          if (item === 2) return "bar-red";       
+          if (item === 1) return "bar-green";     
+          return "bar-gray";     
+        });
+      });
+      setIndicatorBarColors(colors);
+    } 
+  }, [statusData]);
 
     return (
         <div className="ArtworkPainterCalendar-calendar-wrapper">
@@ -28,16 +52,16 @@ const ArtworkPainterCalendar = ({completion, reputation, monthText1, monthText2,
                     </div>
                   </div>
                 </div>
-                {/*月份和狀態透過外面資料動態改變*/}
+                {/*月份和狀態動態改變*/}
                 <div className="ArtworkPainterCalendar-months-grid">
-                    {[monthText1, monthText2, monthText3, monthText4, monthText5, monthText6].map((month, index) => (
+                    {months.map((month, index) => (
                         <div className="ArtworkPainterCalendar-month-card" key={index}>
                             <div className="ArtworkPainterCalendar-month-text">{month}</div>
                             <div className="ArtworkPainterCalendar-month-indicator">
-                                {indicatorBarColors[index].map((colorClass, i) => (
+                                {indicatorBarColors[index]?.map((colorClass, i) => (
                                     <div
-                                        key={i}
-                                        className={`ArtworkPainterCalendar-indicator-bar ${colorClass}`}
+                                      key={i}
+                                      className={`ArtworkPainterCalendar-indicator-bar ${colorClass}`}
                                     ></div>
                                 ))}
                             </div>

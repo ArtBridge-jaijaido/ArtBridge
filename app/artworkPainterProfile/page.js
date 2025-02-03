@@ -10,7 +10,6 @@ const ArtworkPainterProfilePage = () => {
      const [currentPage, setCurrentPage] = useState(1); // 目前頁數
         const [itemsPerPage, setItemsPerPage] = useState(1); //設定預設顯示的商品數量
         const totalItems = 135; // 商品總數（可以從API獲取）
-        const totalPages = Math.ceil(totalItems / itemsPerPage); // 總頁數
         
 
         // 當用戶切換頁碼時
@@ -24,9 +23,10 @@ const ArtworkPainterProfilePage = () => {
     
 
     return (
+
         <div className={`artworkPainterProfilePage ${notoSansTCClass}`}>
             <div className="artworkPainterDetail-container">
-               {currentItems.map((_, index) => (
+            {currentItems.map((_, index) => (
                     <ArtworkPainterDetail 
                     key={index} 
                     backgroundImg={"/images/profile-background.png"}
@@ -37,29 +37,23 @@ const ArtworkPainterProfilePage = () => {
                     viewID={"A123456"}
                     isHighQuality={true}
                     />
-                ))}
+             ))}
             </div>
 
             {/* 繪師行事曆 */}
             <div className="artworkPainterCalendar-container">
-               {currentItems.map((_, index) => (
+                 {currentItems.map((_, index) => (
                     <ArtworkPainterCalendar 
                         key={index} 
                         completion={"100%"}
                         reputation={"100分"}
-                        monthText1={"本月"}
-                        monthText2={"1月"}
-                        monthText3={"2月"}
-                        monthText4={"3月"}
-                        monthText5={"4月"}
-                        monthText6={"5月"}
-                        indicatorBarColors={[
-                        ["bar-gray", "bar-red"], 
-                        ["bar-green", "bar-green"], 
-                        ["bar-red", "bar-green"], 
-                        ["bar-gray", "bar-green"], 
-                        ["bar-red", "bar-red"],
-                        ["bar-gray", "bar-gray"]
+                        statusData={[
+                            [0, 0], 
+                            [0, 0], 
+                            [0, 0], 
+                            [0, 0], 
+                            [0, 0],
+                            [0, 0]
                         ]}
                     />
                 ))}

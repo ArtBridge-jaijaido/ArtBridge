@@ -117,7 +117,7 @@ const Header = () => {
                         style={{position: 'absolute', left: '-9999px'}}
                         >
                         隱藏連結
-                        </a>
+                    </a>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />

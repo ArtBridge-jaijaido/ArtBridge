@@ -1,0 +1,26 @@
+.artworkConsumerProfilePage{
+    /*max width */
+    --artworkConsumerProfilePage-width: 1440px;
+}
+.artworkConsumerProfilePage{
+    width:100%;
+    max-width:var(--artworkConsumerProfilePage-width);
+    padding: 80px 0px 20px 0px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+.artworkPainterDetail-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+.artworkPainterCalendar-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-items: stretch; 
+    align-items: start;
+}
