@@ -1,0 +1,117 @@
+.artworkConsumerProfilePage{
+    /*max width */
+    --artworkConsumerProfilePage-width: 1440px;
+}
+.artworkConsumerProfilePage{
+    width:100%;
+    max-width:var(--artworkConsumerProfilePage-width);
+    padding: 80px 0px 20px 0px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+.artworkPainterDetail-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+.artworkConsumerCooperation-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-items: stretch; 
+    align-items: start;
+}
+@media (max-width: 1280px) {
+    .artworkConsumerProfilePage{
+        width:100%;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 834px) {
+    .artworkConsumerProfilePage{
+        width:100%;
+
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 768px){
+    .artworkConsumerProfilePage{
+        width:100%
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 480px) {
+    .artworkConsumerProfilePage{
+        width:480px;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 440px) {
+    .artworkConsumerProfilePage{
+        width:100%;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 370px) {
+    .artworkConsumerProfilePage{
+        width:370px;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}

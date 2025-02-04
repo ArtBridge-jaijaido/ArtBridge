@@ -110,14 +110,6 @@ const Header = () => {
                     >
                        委託大廳
                     </a>
-                    <a 
-                        href="/artworkPainterProfile" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        style={{position: 'absolute', left: '-9999px'}}
-                        >
-                        隱藏連結
-                    </a>
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />

@@ -22,7 +22,8 @@
   width: 100%;
   height: auto; 
   background-size: cover; /* 背景圖片填滿容器 */
-  aspect-ratio: 2.5; 
+  background-position: center;
+  overflow: hidden; /* 確保圖片不會超出容器範圍 */
 }
 .ArtworkPainterDetail-background-image {
   position: absolute;
@@ -172,6 +173,74 @@
   object-fit: contain;
   width: 30px;
 }
+.ArtworkPainterDetail-username-attendance-container {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    justify-content: center; /* 水平置中 */
+    gap: 15px; /* 文字與按鈕之間的間距 */
+    margin-top: 20px;
+}
+
+.ArtworkPainterDetail-username {
+    margin: 0;
+    font-size: 32px;
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+.ArtworkPainterDetail-attendance-button {
+    border-radius: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 6px;
+    border: 1px solid rgb(141, 215, 255);
+    object-fit: contain;
+}
+/* 將 username 和 attendance-button 放在同一行 */
+.ArtworkPainterDetail-username-wrapper {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 10px;  
+  margin-top: 20px;
+  white-space: nowrap; 
+  flex-wrap: nowrap; 
+}
+/* 當為 consumer-layout 時，調整樣式*/
+.ArtworkPainterDetail-username-wrapper.consumer-layout {
+  justify-content: center;  /* 讓內容置中 */
+}
+
+/* attendance-button 標準樣式 */
+.ArtworkPainterDetail-attendance-button {
+  border-radius: 40px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  border: 1px solid rgb(141, 215, 255);
+  object-fit: contain;
+}
+
+/* 隱藏 commission-button 於 consumerProfile 頁面 */
+.ArtworkPainterDetail-commission-button {
+  display: block;
+}
+
+/* 在 consumerProfile 隱藏 */
+.consumer-layout .ArtworkPainterDetail-commission-button {
+  display: none;
+}
+
 .ArtworkPainterDetail-introduction-container {
   display: flex;
   flex-direction: column;
@@ -319,9 +388,11 @@
     height:40px;
     left: -5px;
   }
+  .ArtworkPainterDetail-username-wrapper.consumer-layout {
+    gap: 8px;
+  }
   .ArtworkPainterDetail-username{
     font-size:18px;
-    margin-top:50px;
   }
   .ArtworkPainterDetail-attendance-button{
     width:34px;
@@ -336,7 +407,7 @@
     padding: 10px 18px;
   }
 }
-@media (max-width: 440px) {
+@media (max-width: 480px) {
   .ArtworkPainterDetail-header{
     max-height:350px;
   }
@@ -349,6 +420,7 @@
   .ArtworkPainterDetail-introduction-container{
     gap:15px;
     padding-right:50px;
+    margin: 5px;
   }
   .ArtworkPainterDetail-introduction-text{
     font-size: 12px;
@@ -395,7 +467,6 @@
   }
   .ArtworkPainterDetail-username{
     font-size:18px;
-    margin-top:30px;
   }
   .ArtworkPainterDetail-action-buttons{
     margin-top:20px;
@@ -486,7 +557,6 @@
   }
   .ArtworkPainterDetail-username{
     font-size:14px;
-    margin-top:20px;
     letter-spacing:4px;
   }
   .ArtworkPainterDetail-attendance-button{

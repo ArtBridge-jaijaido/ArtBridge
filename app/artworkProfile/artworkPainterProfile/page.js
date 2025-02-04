@@ -3,10 +3,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkPainterCalendar from '@/components/ArtworkPainterCalendar/ArtworkPainterCalendar.jsx';
-import "./ArtworkConsumerProfile.css";
+import "./artworkPainterProfile.css";
 
 
-const ArtworkConsumerProfilePage = () => {
+const ArtworkPainterProfilePage = () => {
      const [currentPage, setCurrentPage] = useState(1); // 目前頁數
         const [itemsPerPage, setItemsPerPage] = useState(1); //設定預設顯示的商品數量
         const totalItems = 135; // 商品總數（可以從API獲取）
@@ -29,7 +29,7 @@ const ArtworkConsumerProfilePage = () => {
             {currentItems.map((_, index) => (
                     <ArtworkPainterDetail 
                     key={index} 
-                    backgroundImg={"/images/profile-background.png"}
+                    backgroundImg={"/images/painter-background.png"}
                     ratingText={"5"}
                     profileImg={"/images/profile-avatar.png"}
                     usernameText={"使用者名稱"}
@@ -62,4 +62,4 @@ const ArtworkConsumerProfilePage = () => {
     )
 }
 
-export default ArtworkConsumerProfilePage
+export default ArtworkPainterProfilePage
