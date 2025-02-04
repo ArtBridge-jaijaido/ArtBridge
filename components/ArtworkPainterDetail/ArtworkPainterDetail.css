@@ -18,9 +18,8 @@
   flex-direction: column;
   align-self: stretch;
   position: relative;
-  max-height:834px;
+  height:640px;
   width: 100%;
-  height: auto; 
   background-size: cover; /* 背景圖片填滿容器 */
   background-position: center;
   overflow: hidden; /* 確保圖片不會超出容器範圍 */
