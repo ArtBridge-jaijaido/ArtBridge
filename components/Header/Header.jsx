@@ -49,6 +49,7 @@ const Header = () => {
             setIsLoading(false);
 
         }, 2000);
+        setIsMenuOpen((prev) => !prev); // 關閉菜單
     };
 
 
