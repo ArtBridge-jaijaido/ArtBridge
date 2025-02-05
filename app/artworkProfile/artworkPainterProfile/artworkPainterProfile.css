@@ -1,0 +1,121 @@
+.artworkPainterProfilePage{
+    /*max width */
+    --artworkPainterProfilePage-width: 1440px;
+}
+.artworkPainterProfilePage{
+    width:100%;
+    max-width:var(--artworkPainterProfilePage-width);
+    padding: 80px 0px 20px 0px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+.artworkPainterDetail-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+.artworkPainterCalendar-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-items: stretch; 
+    align-items: start;
+}
+@media (max-width: 1280px) {
+    .artworkPainterProfilePage{
+        width:100%;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+
+@media (max-width: 834px) {
+    .artworkPainterProfilePage{
+        width:100%;
+
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 768px){
+    .artworkPainterProfilePage{
+        width:100%
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 480px) {
+    .artworkPainterProfilePage{
+        width:480px;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 440px) {
+    .artworkPainterProfilePage{
+        width:100%;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+@media (max-width: 370px) {
+    .artworkPainterProfilePage{
+        width:370px;
+    }
+    .artworkPainterDetail-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+}
+
+
+

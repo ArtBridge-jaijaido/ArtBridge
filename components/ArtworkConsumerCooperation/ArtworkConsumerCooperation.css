@@ -1,0 +1,201 @@
+.ArtworkConsumerCooperation{
+    display:flex;
+    flex-direction: column;
+    max-width:1440px;
+    width:100%;
+    height:auto;
+    overflow: hidden;
+  }
+.ArtworkConsumerCooperation-stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    padding:0px 40px;
+    margin-top:10px;
+    overflow: hidden;
+}
+.ArtworkConsumerCooperation-stats-container {
+    border-radius: 8px;
+    background-color: rgba(253, 253, 253, 1);
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+    border: 1px solid rgba(230, 230, 230, 1);
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 30px 80px;
+}
+.ArtworkConsumerCooperation-stats-content{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 40px 100px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.ArtworkConsumerCooperation-stat-item {
+    display: flex;
+    flex-direction: column;
+}
+.ArtworkConsumerCooperation-stat-label {
+    color: rgba(112, 112, 112, 1);
+    font-size: 23px;
+}
+.ArtworkConsumerCooperation-stat-value {
+    color: rgba(45, 174, 244, 1);
+    font-size: 40px;
+    align-self: start;
+    margin-top: 30px;
+}
+.ArtworkConsumerCooperation-rating-container {
+    display: flex;
+    gap: 40px 52px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 10px;
+}
+.ArtworkConsumerCooperation-rating-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 90px;
+}
+.ArtworkConsumerCooperation-rating-text {
+    display: flex;
+    text-align: center;
+    justify-content: center;  
+    align-items: center;   
+    box-sizing: border-box; 
+    border-radius: 30px;
+    background-color: rgba(45, 174, 244, 1);
+    margin: auto 0;
+    padding: 12px 30px;
+    font-size: 25px;
+    white-space: nowrap; 
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1028px) {
+    .ArtworkConsumerCooperation-stats-container {
+        padding: 30px 50px;
+    }
+    .ArtworkConsumerCooperation-stat-label {
+        font-size: 20px;
+    }
+    .ArtworkConsumerCooperation-stat-value {
+        font-size: 30px;
+        margin-top: 30px;
+    }
+    .ArtworkConsumerCooperation-rating-icon {
+        width: 70px;
+    }
+    
+    .ArtworkConsumerCooperation-rating-text {
+        font-size:18px;
+    }
+}
+@media (max-width: 834px) {
+    .ArtworkConsumerCooperation-stats-container {
+        padding: 20px 40px;
+    }
+    .ArtworkConsumerCooperation-stats-content{
+        gap:40px;
+    }
+    .ArtworkConsumerCooperation-stat-label {
+        font-size: 18px;
+    }
+    .ArtworkConsumerCooperation-stat-value {
+        font-size: 25px;
+        margin-top:0px;
+    }
+    .ArtworkConsumerCooperation-rating-container{
+        gap:20px;
+    }
+    .ArtworkConsumerCooperation-rating-icon {
+        width: 60px;
+    }
+    .ArtworkConsumerCooperation-rating-text {
+        font-size:16px;
+        width:100px;
+        height:30px;
+        padding: 0px;
+    }
+}
+@media (max-width: 630px) {
+    .ArtworkConsumerCooperation-stats-container {
+        padding: 15px 30px;
+    }
+    .ArtworkConsumerCooperation-stats-content{
+        gap:20px;
+    }
+    .ArtworkConsumerCooperation-stat-label {
+        font-size: 14px;
+    }
+    .ArtworkConsumerCooperation-stat-value {
+        font-size: 18px;
+    }
+    .ArtworkConsumerCooperation-rating-container{
+        gap:20px;
+    }
+    .ArtworkConsumerCooperation-rating-icon {
+        width: 40px;
+    }
+    .ArtworkConsumerCooperation-rating-text {
+        font-size:12px;
+        width:70px;
+        height:30px;
+    }
+}
+@media (max-width: 440px) {
+    .ArtworkConsumerCooperation-stats-container {
+        padding: 5px 20px;
+        gap:10px;
+    }
+    .ArtworkConsumerCooperation-stats-content{
+        gap:20px;
+    }
+    .ArtworkConsumerCooperation-stat-label {
+        font-size: 11px;
+    }
+    .ArtworkConsumerCooperation-stat-value {
+        font-size: 13px;
+    }
+    .ArtworkConsumerCooperation-rating-container{
+        gap:10px;
+    }
+    .ArtworkConsumerCooperation-rating-icon {
+        width: 25px;
+    }
+    .ArtworkConsumerCooperation-rating-text {
+        font-size:10px;
+        width:40px;
+        height:20px;
+        padding: 0px;
+    }
+}
+@media (max-width: 370px) {
+    .ArtworkConsumerCooperation-stats-wrapper{
+        padding:0px 20px;
+    }
+    .ArtworkConsumerCooperation-stats-content{
+        gap:15px;
+    }
+    .ArtworkConsumerCooperation-stat-label {
+        font-size: 10px;
+    }
+    .ArtworkConsumerCooperation-stat-value {
+        font-size: 12px;
+    }
+    .ArtworkConsumerCooperation-rating-container{
+        gap:5px;
+    }
+    .ArtworkConsumerCooperation-rating-text {
+        font-size:8px;
+    }
+}

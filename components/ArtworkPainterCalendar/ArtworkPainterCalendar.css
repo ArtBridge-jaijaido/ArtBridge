@@ -1,0 +1,429 @@
+.ArtworkPainterCalendar{
+  display:flex;
+  flex-direction: column;
+  max-width:1440px;
+  width:100%;
+  height:auto;
+  margin-top:0px;
+  overflow: hidden;
+}
+.ArtworkPainterCalendar-calendar-wrapper { 
+  display: flex;
+  flex-direction: column;
+  margin-top:50px;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  padding:0px 40px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.ArtworkPainterCalendar-calendar-container {
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  width: 100%;
+  padding: 28px 80px;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box; 
+}
+.ArtworkPainterCalendar-calendar-content { 
+  gap: 80px;
+  display: flex;
+}
+.ArtworkPainterCalendar-calendar-main { 
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 70%;
+  margin-left: 0;
+}
+.ArtworkPainterCalendar-calendar-section { 
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.ArtworkPainterCalendar-calendar-header {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  font-family: Inter, sans-serif;
+  color: #707070;
+  white-space: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.ArtworkPainterCalendar-calendar-title {
+  font-size: 20px;
+  font-weight:bold;
+  letter-spacing: 4px;
+}
+.ArtworkPainterCalendar-status-indicators { 
+  align-self: start;
+  display: flex;
+  gap: 27px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: center;
+}
+.ArtworkPainterCalendar-status-item { 
+  display: flex;
+  gap: 4px;
+}
+/*status_color*/
+.ArtworkPainterCalendar-status-dot { 
+ border-radius: 50%;
+ display: flex;
+ width: 18px;
+ height: 18px;
+}
+.status-dot-gray { 
+  background-color: #8f8f8f;
+}
+.status-dot-red { 
+  background-color: #ff6a6a;
+}
+.status-dot-green { 
+  background-color: #2ed31c;
+}
+/*status_color- END*/
+.ArtworkPainterCalendar-status-text { 
+  margin: auto 0;
+  font-size:14px;
+}
+.ArtworkPainterCalendar-months-grid { 
+ display: flex;
+ margin-top: 26px;
+ gap: 26px;
+ flex-wrap: wrap;
+}
+.ArtworkPainterCalendar-month-card { 
+ border-radius: 2px 2px 1px 1px;
+ background-color: #fff;
+ box-shadow: 0 0 4px rgba(0,0,0,0.25);
+ display: flex;
+ padding-top: 8px;
+ flex-direction: column;
+ flex: 1;
+}
+.ArtworkPainterCalendar-month-text { 
+ color: #707070;
+ letter-spacing: 2px;
+ text-align: center;
+ align-self: center;
+ font: 500 16px Inter, sans-serif;
+}
+.ArtworkPainterCalendar-month-indicator { 
+ display: flex;
+ margin-top: 5px;
+ gap: 8px;
+}
+/*bar_color*/
+.ArtworkPainterCalendar-indicator-bar { 
+ border-radius: 1px;
+ display: flex;
+ width: 100%;
+ height: 2px;
+}
+.bar-gray { 
+  background-color: #8f8f8f;
+}
+.bar-red { 
+  background-color: #ff6a6a;
+}
+.bar-green { 
+  background-color: #2ed31c;
+}
+/*bar_color - END*/
+.ArtworkPainterCalendar-stats-column { 
+ display: flex;
+ flex-direction: column;
+ line-height: normal;
+}
+.ArtworkPainterCalendar-stats-container { 
+ display: flex;
+ gap: 40px 70px;
+ align-self: stretch;
+ white-space: nowrap;
+ letter-spacing: 1px;
+}
+.ArtworkPainterCalendar-stat-item1 { 
+ align-self: start;
+ display: flex;
+ flex-direction: column;
+}
+.ArtworkPainterCalendar-stat-label { 
+ color: #707070;
+ font-size: 22px;
+ font-weight:bold;
+}
+.ArtworkPainterCalendar-stat-value { 
+ color: #2daef4;
+ font-size: 30px;
+ margin-top: 17px;
+ font-weight:bold;
+}
+@media (max-width: 1028px) {
+  .ArtworkPainterCalendar-calendar-content {
+     gap: 40px; 
+   }
+   .ArtworkPainterCalendar-calendar-title{
+     font-size: 17px;
+   }
+   .ArtworkPainterCalendar-stat-label {
+     font-size: 15px; 
+   }
+   .ArtworkPainterCalendar-stat-value {
+     font-size: 20px; 
+     margin-top:30px;
+   }
+   .ArtworkPainterCalendar-stats-container{
+     gap:30px;
+   }
+   .ArtworkPainterCalendar-status-text{
+     font-size: 13px;
+   }
+   .status-dot-gray,.status-dot-green, .status-dot-red{
+     width: 13px;
+     height:13px;
+   }
+   .ArtworkPainterCalendar-months-grid {
+     flex-wrap: nowrap;
+     gap: 15px; 
+   }
+   .ArtworkPainterCalendar-month-text{
+     font-size: 14px;
+   }
+ }
+@media (max-width: 834px) {
+ .ArtworkPainterCalendar-calendar-content {
+    gap: 40px; 
+  }
+  .ArtworkPainterCalendar-calendar-title{
+    font-size: 16px;
+  }
+  .ArtworkPainterCalendar-stat-label {
+    font-size: 14px; 
+  }
+  .ArtworkPainterCalendar-stat-value {
+    font-size: 20px; 
+    margin-top:30px;
+  }
+  .ArtworkPainterCalendar-stats-container{
+    gap:30px;
+  }
+  .ArtworkPainterCalendar-status-text{
+    font-size: 12px;
+  }
+  .status-dot-gray,.status-dot-green, .status-dot-red{
+    width: 12px;
+    height:12px;
+  }
+  .ArtworkPainterCalendar-months-grid {
+    flex-wrap: nowrap;
+    gap: 14px; 
+  }
+  .ArtworkPainterCalendar-month-text{
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}
+@media (max-width: 768px) {
+  .ArtworkPainterCalendar-calendar-container{
+    padding:20px 15px;
+  }
+  .ArtworkPainterCalendar-calendar-content {
+     gap: 20px; 
+   }
+   .ArtworkPainterCalendar-calendar-header{
+    gap:10px;
+   }
+   .ArtworkPainterCalendar-calendar-title{
+     font-size: 15px;
+   }
+   .ArtworkPainterCalendar-stat-label {
+     font-size: 13px; 
+   }
+   .ArtworkPainterCalendar-stat-value {
+     font-size: 16px; 
+     margin-top:25px;
+   }
+   .ArtworkPainterCalendar-stats-container{
+     gap:20px;
+   }
+   .ArtworkPainterCalendar-status-text{
+     font-size: 11px;
+   }
+   .ArtworkPainterCalendar-status-indicators{
+    gap:10px;
+   }
+   .status-dot-gray,.status-dot-green, .status-dot-red{
+     width: 11px;
+     height:11px;
+   }
+   .ArtworkPainterCalendar-months-grid {
+     flex-wrap: nowrap;
+     gap: 12px; 
+   }
+   .ArtworkPainterCalendar-month-text{
+     font-size: 10px;
+   }
+ }
+@media (max-width: 567) {   
+  .ArtworkPainterCalendar-calendar-section, .ArtworkPainterCalendar-calendar-main,.ArtworkPainterCalendar-months-grid{
+    all: unset; 
+    display: contents; 
+  }
+  .ArtworkPainterCalendar-calendar-container{
+    padding:15px;
+    width:100%;
+  }
+  .ArtworkPainterCalendar-calendar-wrapper{
+    margin-top:15px;
+  }
+  .ArtworkPainterCalendar-calendar-content {
+    display: grid; 
+    grid-template-rows: auto auto; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    row-gap: 10px;
+  }
+  .ArtworkPainterCalendar-stats-column {
+    grid-row: 1; 
+    grid-column: 1;
+  }
+  /* calendar-header 改為一欄兩列 */
+  .ArtworkPainterCalendar-calendar-header {
+    display: grid;
+    grid-row: 1; 
+    grid-column: 2;
+    grid-template-rows: auto auto; /* 分為兩列 */
+    justify-items: left; 
+    align-items: center; 
+    row-gap: 10px; 
+  }
+  .ArtworkPainterCalendar-calendar-title {
+    grid-row: 1; 
+    font-size: 11px;
+    row-gap: 1px;
+  }
+  .ArtworkPainterCalendar-status-indicators {
+    grid-row: 2; 
+    display: flex; 
+    gap: 8px; 
+    justify-content: left; 
+    align-items: center; 
+  }
+  .ArtworkPainterCalendar-status-text{
+    font-size: 7px;
+  }
+  .status-dot-gray,.status-dot-green, .status-dot-red{
+    width: 8px;
+    height:8px;
+  }
+  /* calendar-header -End */
+  
+  .ArtworkPainterCalendar-months-grid {
+    grid-row: 2;
+    grid-column: span 2; 
+    display: grid; 
+    grid-template-columns: repeat(6,1fr);
+    gap: 2px; 
+    justify-content: center; 
+  }
+  .ArtworkPainterCalendar-month-card {
+    text-align: center; 
+    align-self: center;
+    text-wrap:nowrap;
+    height: 15px;
+    max-width: 38px;
+    padding:0px;
+  }
+  .ArtworkPainterCalendar-month-text{
+    font-size: 9px;
+  }
+  .ArtworkPainterCalendar-month-indicator{
+    gap:2px;
+    margin-top: 1px;
+  }
+  .ArtworkPainterCalendar-indicator-bar{
+    height:2px;
+  }
+  .ArtworkPainterCalendar-stat-label {
+    font-size: 10px; 
+  }
+  .ArtworkPainterCalendar-stat-value {
+    font-size: 16px; 
+    margin-top:5px;
+  }
+  .ArtworkPainterCalendar-stats-container{
+    gap:20px;
+  }
+}
+
+@media (max-width: 370px) {   
+  .ArtworkPainterCalendar-calendar-container{
+    padding:15px;
+  }
+  .ArtworkPainterCalendar-calendar-wrapper{
+    padding:0px 20px;
+  }
+  .ArtworkPainterCalendar-calendar-title {
+    font-size: 9px;
+  }
+  .ArtworkPainterCalendar-status-indicators {
+    grid-row: 2; 
+    display: flex; 
+    gap: 6px; 
+    justify-content: left; 
+    align-items: center; 
+    align-self: center; 
+  }
+  .ArtworkPainterCalendar-status-text{
+    font-size: 7px;
+    align-items: center; 
+  }
+  .status-dot-gray,.status-dot-green, .status-dot-red{
+    width: 8px;
+    height:9px;
+  }
+  /* calendar-header -End */
+  
+  .ArtworkPainterCalendar-months-grid {
+    grid-row: 2;
+    grid-column: span 2; 
+    display: grid; 
+    grid-template-columns: repeat(6,1fr);
+    gap: 2px; 
+    justify-content: center; 
+  }
+  .ArtworkPainterCalendar-month-card {
+    text-align: center; 
+    align-self: center;
+    text-wrap:nowrap;
+    height: 12px;
+    max-width: 34px;
+    padding:0px;
+  }
+  .ArtworkPainterCalendar-month-text{
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .ArtworkPainterCalendar-month-indicator{
+    gap:2px;
+  }
+  .ArtworkPainterCalendar-indicator-bar{
+    height:1px;
+  }
+  .ArtworkPainterCalendar-stat-label {
+    font-size: 8px; 
+  }
+  .ArtworkPainterCalendar-stat-value {
+    font-size: 14px; 
+    margin-top:5px;
+  }
+  .ArtworkPainterCalendar-stats-container{
+    gap:20px;
+  }
+}
