@@ -448,16 +448,17 @@
 }
 
 
-@media screen and (max-width:824px){
+@media screen and (max-width:834px){
     .PainterDashboardPage{
        width:100%;
-       max-width: 824px;
+       max-width: 834px;
        padding: 130px 35px 0 35px;
     }
 
     .PainterDashboard-container{
        display:flex;
        flex-direction: column;
+       gap:40px;
     }
 
     .PainterDashboard-leftPart-container {
@@ -506,6 +507,8 @@
         display:block;
         height: 200px; 
         width:100%;
+      
+
     }
 
     .PainterDashboard-rightPart-container{
@@ -565,6 +568,12 @@
         padding: 100px 25px 0 25px;
     }
 
+    .PainterDashboard-container{
+        gap:30px;
+    }
+
+   
+
     .PainterDashboard-painterInfo-container{
 
         gap:10px;
@@ -601,6 +610,10 @@
         width: 62px;
         height: 14px;
         font-size: 8px;
+    }
+
+    .PainterDashboard-rightPart-container {
+        gap: 30px;
     }
 
     .PainterDashboard-options-container {
@@ -661,4 +674,96 @@
         max-width: 140px;
     }
     
+}
+
+
+@media screen and (max-width:370px){
+    .PainterDashboardPage{
+        width:370px;
+        padding:100px 15px 0 15px;
+    }
+
+    .PainterDashboard-container{
+        gap:16px;
+    }
+
+    .PainterDashboard-painterInfo-container{
+
+        gap:8px;
+        height: 34px;
+    }
+
+    .PainterDashboard-painterInfo h1 {
+        font-size: 12px;
+    }
+
+    .PainterDashboard-painterInfo h1 span{
+        font-size: 10px;
+
+    }
+
+    .PainterDashboard-painterInfo-avatar{
+        width:40px;
+        height:34px;
+    }
+
+    .PainterDashboard-rightPart-container {
+        gap: 16px;
+    }
+
+    .PainterDashboard-options-container {
+        height:160px;
+        padding: 20px 36px;
+      
+    }
+
+    .artworkDashboardIcon {
+        width: 18px;
+        height: 18px;
+    
+    }
+
+    .PainterDashboard-option-item span{
+        font-size: 9px;
+    }
+
+    .PainterDashboard-commission-process-left{
+        gap: 10px;
+    }
+
+
+    .PainterDashboard-commission-process-container {
+        height: 160px;
+        padding: 16px 24px;
+    }
+
+
+    .PainterDashboard-commission-process-left h1{
+        font-size: 16px;
+
+    }
+
+
+    .PainterDashboard-commission-process-left p{
+        font-size: 8px;
+    
+    }
+
+    .PainterDashboard-commission-process-button{
+        max-width: 125px;
+        height: 18px;
+        font-size: 8px;
+        
+    }
+
+    
+    .commission-process-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .PainterDashboard-commission-process-right{
+        max-width: 120px;
+    }
+
 }

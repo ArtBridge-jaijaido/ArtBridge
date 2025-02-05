@@ -2,7 +2,7 @@
 import React from 'react'
 import { notoSansTCClass } from "@/app/layout.js";
 
-import "@/app/artworkDashBoard/painterDashboard/painterDashboard.css";
+import "../painterDashboard.css";
 
 const PainterDashboard = () => {
   return (
