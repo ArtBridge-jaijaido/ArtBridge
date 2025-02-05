@@ -1,0 +1,769 @@
+
+
+.PainterDashboardPage {
+    width: 100%;
+    max-width: 1440px;
+    padding: 150px 50px 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.PainterDashboard-container {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.PainterDashboard-leftPart-container {
+    width: 462px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.PainterDashboard-painterInfo-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+
+    width: 100%;
+    max-width: 462px;
+    height: 130px;
+}
+
+.PainterDashboard-painterInfo-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%; 
+    background-color: #CAEEFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+}
+
+.PainterDashboard-painterInfo-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.PainterDashboard-painterInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.PainterDashboard-painterInfo h1 {
+    color: #525252;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 4px;
+    white-space: nowrap;
+}
+
+.PainterDashboard-painterInfo h1 span {
+    color: #2DAEF4;
+    font-family: Inter;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4px;
+}
+
+.PainterDashboard-painterInfo-button-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.PainterDashboard-painterInfo-button-change {
+    width:90px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    border-radius: 20px;
+    border: 1px solid #98DBFB;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4px;
+    background: #98DBFB;
+}
+
+.PainterDashboard-painterInfo-button-change img{
+    width:18px;
+    height: 18px;
+    object-fit: cover; 
+}
+
+
+.PainterDashboard-painterInfo-button-id{
+    width:130px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: #B0B0B0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    }
+
+
+.PainterDashboard-advertisement-container {
+    box-shadow: 0px 0px 4px 0px rgba(41, 95, 118, 0.25);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 462px;
+    height: 480px;
+}
+
+.PainterDashboard-advertisement-mobile{
+    box-shadow: 0px 0px 4px 0px rgba(41, 95, 118, 0.25);
+    border-radius: 10px;
+    width: 100%;
+    display:none;
+}
+
+
+
+.PainterDashboard-rightPart-container {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+}
+
+
+
+.PainterDashboard-options-container {
+    width: 100%;
+    max-width: 800px;
+    height: 320px;
+    padding: 56px 85px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    gap: 50px 100px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.PainterDashboard-option-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 146px;
+    width: 100%;
+    height: 40px;
+    white-space: nowrap;
+}
+
+.artworkDashboardIcon {
+    width: 40px;
+    height: 40px;
+
+}
+
+.PainterDashboard-option-item span {
+    color: #6A6A6A;
+    text-align: center;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.PainterDashboard-commission-process-container {
+    width: 100%;
+    max-width: 800px;
+    height: 250px;
+    padding: 37px 50px;
+    display: flex;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.PainterDashboard-commission-process-left {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-start;
+    width: 65%;
+}
+
+.PainterDashboard-commission-process-left h1 {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4px;
+    background: linear-gradient(180deg, #54A1E1 0%, #9777E2 50%, #EA7FC5 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.PainterDashboard-commission-process-left p {
+    color: #828282;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 1px;
+}
+
+.PainterDashboard-commission-process-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    max-width: 230px;
+    height: 34px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #63B7DF 0%, #A38BE2 50%, #DE95EB 100%);
+    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 4px;
+    color: #FFF;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.PainterDashboard-commission-process-button:hover {
+    transform: translateY(-3px);
+    box-shadow: -1px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.commission-process-icon {
+    width: 26px;
+    height: 26px;
+}
+
+
+
+
+.PainterDashboard-commission-process-right{
+    width:35%;
+    max-width:200px;
+    aspect-ratio: 1/1;
+   
+}
+
+.PainterDashboard-commission-process-right img {
+    
+    width:100%;
+    height:100%;
+    object-fit: cover;
+
+}
+
+
+
+/*RWD*/
+
+@media screen and (max-width:1280px) {
+    .PainterDashboardPage{
+        max-width:1280px;
+        padding: 140px 40px 0 40px;
+    }
+
+
+    .PainterDashboard-leftPart-container{
+        width: 379px;
+    }
+
+    .PainterDashboard-painterInfo-container {
+        gap: 24px;
+        max-width: 379px;
+        height: 111px;
+    }
+
+
+    .PainterDashboard-painterInfo-avatar{
+        width: 111px;
+        height: 111px;
+    }
+
+    .PainterDashboard-painterInfo {
+        gap: 10px;
+    }
+
+    .PainterDashboard-painterInfo h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+    }
+
+    .PainterDashboard-painterInfo h1 span{
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    .PainterDashboard-painterInfo-button-change {
+        width: 80px;
+        height: 26px;
+        font-size: 14px;
+    }
+
+    .PainterDashboard-painterInfo-button-change img{
+        width:16px;
+        height: 16px;
+    }
+
+
+    .PainterDashboard-painterInfo-button-id{
+        width: 106px;
+        height: 26px;
+        font-size: 14px;
+    }
+
+
+    .PainterDashboard-advertisement-container{
+        max-width: 379px;
+        height: 444px;
+    }
+
+
+    .PainterDashboard-rightPart-container {
+        width: 760px;
+        gap: 50px;
+    }
+
+
+    .PainterDashboard-options-container{
+        max-width: 760px;
+        height: 300px;
+        padding: 48px 76px;
+        gap: 40px 60px;
+    }
+
+
+    .PainterDashboard-option-item{
+        height: 35px;
+    }
+
+    .artworkDashboardIcon {
+        width:35px;
+        height: 35px;
+    
+    }
+
+    .PainterDashboard-option-item span{
+        font-size: 16px;
+    }
+
+    .PainterDashboard-commission-process-container{
+        max-width: 760px;
+        height: 224px;
+      
+        padding: 30px 55px;
+    }
+
+    .PainterDashboard-commission-process-left {
+        gap: 20px;
+    }
+
+    .PainterDashboard-commission-process-left h1 {
+        font-size: 26px;
+    }
+
+    .PainterDashboard-commission-process-left p{
+        font-size: 14px;
+        line-height: 25px;
+        
+    }
+
+    .PainterDashboard-commission-process-button {
+        max-width: 210px;
+        height: 28px;
+        font-size: 14px;
+        letter-spacing: 3px;
+    }
+
+    .commission-process-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .PainterDashboard-commission-process-right{
+        max-width: 180px;
+    }
+
+
+}
+
+@media screen and (max-width:1024px){
+    .PainterDashboard-container {
+        gap:30px;
+    }
+
+    .PainterDashboard-commission-process-left{
+        gap:15px;
+    }
+
+    .PainterDashboard-commission-process-container{
+        padding: 30px 30px;
+    }
+}
+
+@media screen and (max-width:968px){
+    .PainterDashboardPage{
+        width: 968px;
+    }
+}
+
+
+@media screen and (max-width:834px){
+    .PainterDashboardPage{
+       width:100%;
+       max-width: 834px;
+       padding: 130px 35px 0 35px;
+    }
+
+    .PainterDashboard-container{
+       display:flex;
+       flex-direction: column;
+       gap:40px;
+    }
+
+    .PainterDashboard-leftPart-container {
+        width:100%;
+
+    }
+
+    .PainterDashboard-painterInfo-container{
+        max-width: none;
+        gap:20px;
+        height: 80px;
+    }
+
+    .PainterDashboard-painterInfo {
+        width:100%;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .PainterDashboard-painterInfo h1 {
+        font-size: 24px;
+    }
+
+    .PainterDashboard-painterInfo h1 span{
+        font-size: 20px;
+
+    }
+
+    .PainterDashboard-painterInfo-avatar{
+        width:100px;
+        height:80px;
+    }
+
+    .PainterDashboard-painterInfo-button-container{
+        width:100%;
+        justify-content: space-around;
+
+    }
+
+    .PainterDashboard-advertisement-container {
+        max-width: none; 
+        display:none;
+    }
+
+    .PainterDashboard-advertisement-mobile{
+        display:block;
+        height: 200px; 
+        width:100%;
+      
+
+    }
+
+    .PainterDashboard-rightPart-container{
+        width:100%;
+    }
+
+
+    .PainterDashboard-rightPart-container{
+        gap:40px;
+    }
+
+    .PainterDashboard-options-container{
+        max-width:none;
+        height: 250px;
+        padding: 38px 70px;
+    }
+
+    .PainterDashboard-option-item{
+        width:100px;
+        height: 28px;
+    }
+
+    .artworkDashboardIcon {
+        width:28px;
+        height: 28px;
+    
+    }
+
+    .PainterDashboard-option-item span{
+        font-size: 14px;
+    }
+
+    .PainterDashboard-commission-process-container{
+        max-width: none;
+        height: 220px;
+        padding: 30px 55px;
+    }
+
+    
+
+    
+}
+
+
+@media screen and (max-width:768px){
+    .PainterDashboardPage{
+        width:768px;
+       
+     }
+}
+
+
+@media screen and (max-width:440px){
+    .PainterDashboardPage{
+        width:100%;
+        max-width:440px;
+        padding: 100px 25px 0 25px;
+    }
+
+    .PainterDashboard-container{
+        gap:30px;
+    }
+
+   
+
+    .PainterDashboard-painterInfo-container{
+
+        gap:10px;
+        height: 40px;
+    }
+
+    .PainterDashboard-painterInfo h1 {
+        font-size: 14px;
+    }
+
+    .PainterDashboard-painterInfo h1 span{
+        font-size: 12px;
+
+    }
+
+    .PainterDashboard-painterInfo-avatar{
+        width:50px;
+        height:40px;
+    }
+
+    .PainterDashboard-painterInfo-button-change {
+        width:50px;
+        height: 14px;
+        border-radius: 10px;
+        font-size: 8px;
+    }
+
+    .PainterDashboard-painterInfo-button-change img{
+        width: 10px;
+        height: 10px;
+    }
+
+    .PainterDashboard-painterInfo-button-id{
+        width: 62px;
+        height: 14px;
+        font-size: 8px;
+    }
+
+    .PainterDashboard-rightPart-container {
+        gap: 30px;
+    }
+
+    .PainterDashboard-options-container {
+        height:180px;
+        padding: 27px 24px;
+        gap: 30px 20px;
+    }
+
+    .PainterDashboard-option-item{
+        width:75px;
+        height: 22px;
+        gap:6px;
+    }
+
+    .artworkDashboardIcon {
+        width: 22px;
+        height: 22px;
+    
+    }
+
+    .PainterDashboard-option-item span{
+        font-size: 10px;
+    }
+
+    .PainterDashboard-commission-process-container {
+        height: 180px;
+        padding: 26px 20px;
+    }
+
+    .PainterDashboard-commission-process-left{
+        gap: 12px;
+    }
+
+    .PainterDashboard-commission-process-left h1{
+        font-size: 18px;
+
+        letter-spacing: 2px;
+    }
+
+    .PainterDashboard-commission-process-left p{
+        font-size: 10px;
+        line-height: 18px;
+    }
+
+    .PainterDashboard-commission-process-button{
+        max-width: 150px;
+        height: 22px;
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .commission-process-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .PainterDashboard-commission-process-right{
+        max-width: 140px;
+    }
+    
+}
+
+
+@media screen and (max-width:370px){
+    .PainterDashboardPage{
+        width:370px;
+        padding:100px 15px 0 15px;
+    }
+
+    .PainterDashboard-container{
+        gap:16px;
+    }
+
+    .PainterDashboard-painterInfo-container{
+
+        gap:8px;
+        height: 34px;
+    }
+
+    .PainterDashboard-painterInfo h1 {
+        font-size: 12px;
+    }
+
+    .PainterDashboard-painterInfo h1 span{
+        font-size: 10px;
+
+    }
+
+    .PainterDashboard-painterInfo-avatar{
+        width:40px;
+        height:34px;
+    }
+
+    .PainterDashboard-rightPart-container {
+        gap: 16px;
+    }
+
+    .PainterDashboard-options-container {
+        height:160px;
+        padding: 20px 36px;
+      
+    }
+
+    .artworkDashboardIcon {
+        width: 18px;
+        height: 18px;
+    
+    }
+
+    .PainterDashboard-option-item span{
+        font-size: 9px;
+    }
+
+    .PainterDashboard-commission-process-left{
+        gap: 10px;
+    }
+
+
+    .PainterDashboard-commission-process-container {
+        height: 160px;
+        padding: 16px 24px;
+    }
+
+
+    .PainterDashboard-commission-process-left h1{
+        font-size: 16px;
+
+    }
+
+
+    .PainterDashboard-commission-process-left p{
+        font-size: 8px;
+    
+    }
+
+    .PainterDashboard-commission-process-button{
+        max-width: 125px;
+        height: 18px;
+        font-size: 8px;
+        
+    }
+
+    
+    .commission-process-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .PainterDashboard-commission-process-right{
+        max-width: 120px;
+    }
+
+}
