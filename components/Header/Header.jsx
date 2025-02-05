@@ -49,6 +49,7 @@ const Header = () => {
             setIsLoading(false);
 
         }, 2000);
+        setIsMenuOpen((prev) => !prev); // 關閉菜單
     };
 
 
@@ -110,6 +111,7 @@ const Header = () => {
                     >
                        委託大廳
                     </a>
+
                 </div>
                 <div className="header-auth-buttons">
                     <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
