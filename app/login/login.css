@@ -196,7 +196,7 @@
 
 @media screen and (max-width:834px){
     .login-page{
-        width:834px;
+       
         padding:212px 155px 222px 155px; /* top right bottom left */
     }
 
@@ -248,9 +248,17 @@
 }
 
 
+@media screen and (max-width:768px){
+    .login-page{
+        width:768px;
+    }
+}
+
+
 @media screen and (max-width:440px){
     .login-page{
-        width:440px;
+        width:100%;
+        max-width:440px;
         padding:118px 72px 241px 72px; /* top right bottom left */
     }
 
@@ -299,9 +307,9 @@
 
 
 
-@media screen and (max-width:320px){
+@media screen and (max-width:370px){
     .login-page{
-        width:320px;
+        width:370px;
         padding:80px 69px 80px 69px; /* top right bottom left */
     }
 

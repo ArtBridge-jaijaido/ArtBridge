@@ -1,7 +1,13 @@
 "use client";
-import { Geist, Geist_Mono,Noto_Sans_TC  } from "next/font/google";
+import { useEffect } from "react";
+import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
-import {LoadingProvider} from "@/app/contexts/LoadingContext.js";
+import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { setUser, logoutUser, setAuthLoading } from "@/app/redux/feature/userSlice.js";
+import { store} from "@/app/redux/store.js";
+import { Provider, useDispatch } from "react-redux";
+import { auth } from "@/lib/firebase.js";
 import Header from "@/components/Header/Header.jsx";
 import "./globals.css";
 
@@ -21,31 +27,65 @@ const notoSansTC = Noto_Sans_TC({
   variable: "--font-noto-sans-tc",
 });
 
+function AuthListener() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    dispatch(setAuthLoading(true)); // 設定為載入中
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // 取得 Firebase Token
+        const token = await user.getIdToken();
+        const response = await fetch("/api/session", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+          credentials: "include",
+        });
+
+        const result = await response.json(); 
+        if (response.ok) {
+          dispatch(setUser(result.user)); //  存入 Redux
+        }
+      } else {
+        dispatch(logoutUser()); // 清除 Redux `user`
+      }
+    });
+
+    return () => unsubscribe(); // 確保 component 卸載時取消監聽
+  }, [dispatch]);
+
+  return null; // 這個組件不會渲染任何 UI
+}
+
 
 
 export default function RootLayout({ children }) {
 
-  
+
 
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="mobile-web-app-capable" content="yes" />  
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body
-      
+
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-         <LoadingProvider>
-        <Header />
-        <main>
-         
+        <Provider store={store}>
+         <AuthListener />
+          <LoadingProvider>
+            <Header />
+            <main>
+
               <ToastProvider>{children}</ToastProvider>
-          
-        </main>
-        </LoadingProvider>
-       
+
+            </main>
+          </LoadingProvider>
+        </Provider>
       </body>
     </html>
   );

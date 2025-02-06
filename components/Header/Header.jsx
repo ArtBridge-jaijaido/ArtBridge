@@ -4,6 +4,8 @@ import { notoSansTCClass } from "../../app/layout.js";
 import CustomButton from "../CustomButton/CustomButton.jsx";
 import { useNavigation } from "@/lib/functions.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
+import { useSelector } from "react-redux";
+
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./headerButton.module.css";
@@ -14,7 +16,8 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { setIsLoading } = useLoading();
     const pathname = usePathname();
-
+  
+    const { user } = useSelector((state) => state.user); 
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
 
@@ -40,6 +43,8 @@ const Header = () => {
         navigate("/register");
 
     };
+
+   
 
     const navigateWithLoading = (path) => {
         navigate(path);
@@ -113,10 +118,26 @@ const Header = () => {
                     </a>
 
                 </div>
-                <div className="header-auth-buttons">
-                    <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
-                    <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
-                </div>
+                {user ? (
+                    <div className="header-loginUser-buttons">
+                        <div className="header-notification-bell">
+                            <img src="/images/icons8-bell-96-1.png" alt="通知" />
+                            <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
+                        </div>
+                        <div className="header-user-avatar">
+                            <img src={user.profilePicture || "/images/kv-min-4.png"} alt="使用者頭像" />
+                        </div>
+                        <div className="header-user-dropdownMenu-container">
+                            ⌵
+                        </div>
+                    </div>
+                ) : (
+                    /* ❌ 如果未登入，顯示「註冊 / 登入」 */
+                    <div className="header-auth-buttons">
+                        <button className={styles.headerBtn} onClick={handleUserRegister}>註冊</button>
+                        <button className={styles.headerBtn} onClick={handleUserLogin}>登入</button>
+                    </div>
+                )}
             </nav>
         </header>
     );
