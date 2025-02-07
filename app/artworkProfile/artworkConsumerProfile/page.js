@@ -27,9 +27,8 @@ const ArtworkConsumerProfilePage = () => {
 
         <div className={`artworkConsumerProfilePage ${notoSansTCClass}`}>
             <div className="artworkPainterDetail-container">
-            {currentItems.map((_, index) => (
-                    <ArtworkPainterDetail 
-                    key={index} 
+                <ArtworkPainterDetail 
+                    id="Detail" 
                     backgroundImg={"/images/consumer-background.png"}
                     ratingText={"5"}
                     profileImg={"/images/profile-avatar.png"}
@@ -37,19 +36,16 @@ const ArtworkConsumerProfilePage = () => {
                     introductionText={"很好說話，美東時差黨，延遲回覆抱歉。如果超出原本預期的工時，可以直接跟我提價錢，好商量！如果顯示在線卻沒回"}
                     viewID={"A123456"}
                     isHighQuality={true}
-                    />
-             ))}
+                />
             </div>
 
             {/* 消費者合作次數 */}
             <div className="artworkConsumerCooperation-container">
-                 {currentItems.map((_, index) => (
-                    <ArtworkConsumerCooperation
-                        key={index} 
-                        cooperationNum={"100"}
-                        finishNum={"80"}
-                    />
-                ))}
+                <ArtworkConsumerCooperation
+                    id="Cooperation"
+                    cooperationNum={"100"}
+                    finishNum={"80"}
+                />
             </div>
         </div>
     )

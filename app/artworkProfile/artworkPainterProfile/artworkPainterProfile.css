@@ -24,6 +24,25 @@
     justify-items: stretch; 
     align-items: start;
 }
+.artworkReview-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-items: stretch; 
+    align-items: start;
+}
+.artworkPainterProfile-tab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+
+}
+.artworkPainterProfilePage .tab-content {
+    height: auto !important; /* 讓內容根據內容自動調整高度 */
+    min-height: 520px; /* 設定最小高度，確保基本內容不會太小 */
+    overflow: visible !important; /* 讓內容不會被遮住 */
+}
 @media (max-width: 1280px) {
     .artworkPainterProfilePage{
         width:100%;
@@ -34,6 +53,11 @@
         width:100%;
     }
     .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkReview-container{
         display:flex;
         flex-direction: column;
         width:100%;
@@ -55,6 +79,11 @@
         flex-direction: column;
         width:100%;
     }
+    .artworkReview-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
 }
 @media (max-width: 768px){
     .artworkPainterProfilePage{
@@ -70,10 +99,15 @@
         flex-direction: column;
         width:100%;
     }
+    .artworkReview-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
 }
 @media (max-width: 480px) {
     .artworkPainterProfilePage{
-        width:480px;
+        width:100%;
     }
     .artworkPainterDetail-container{
         display:flex;
@@ -81,6 +115,11 @@
         width:100%;
     }
     .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkReview-container{
         display:flex;
         flex-direction: column;
         width:100%;
@@ -100,10 +139,15 @@
         flex-direction: column;
         width:100%;
     }
+    .artworkReview-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
 }
 @media (max-width: 370px) {
     .artworkPainterProfilePage{
-        width:370px;
+        width:100%;
     }
     .artworkPainterDetail-container{
         display:flex;
@@ -111,6 +155,11 @@
         width:100%;
     }
     .artworkPainterCalendar-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkReview-container{
         display:flex;
         flex-direction: column;
         width:100%;
