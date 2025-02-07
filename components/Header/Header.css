@@ -103,23 +103,27 @@
 .header-notification-bell {
     position: relative;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    aspect-ratio: 1/1;
 }
 
 .header-notification-bell img {
-    width: 36px;
-    height: 36px;
+    width:100%;
+    height:100%;
+    object-fit: cover;
 }
 
 
 .header-notification-badge {
     position: absolute;
-    top: -6px;
-    left:-10px;
+    top: -4px;
+    left:-5px;
     background-color: #FF3E3E;
     color: white;
     font-size: 12px;
     font-weight: 600;
-    padding: 4px 6px;
+    padding: 2px 4px;
     border-radius: 50%;
 }
 
@@ -139,9 +143,16 @@
    
 }
 
-.header-user-dropdownMenu-container{
-    color: #80D2FF;
+.header-user-dropdownMenu-container {
+    position:relative;
+    cursor:pointer;
+}
 
+.header-user-dropdownMenu-container span{
+
+    
+    
+    color: #80D2FF;
     text-align: center;
     font-family: Inter;
     font-size: 28px;
@@ -149,6 +160,11 @@
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1px;
+}
+
+
+.header-loginUser-buttons-container{
+    display:none;
 }
 
 .hamburger-menu {
@@ -187,6 +203,26 @@
     .header-auth-buttons{
         --auth-buttons-gap:23px;
     }
+
+    .header-notification-bell{
+        width:28px;
+        height:28px;
+    }
+
+    .header-notification-badge {
+        font-size: 10px;
+    }
+
+    .header-user-avatar{
+        width:48px;
+        height:48px;
+    }
+
+    
+    .header-user-dropdownMenu-container span{
+        font-size: 24px;
+    }
+    
 }
 
 @media screen and (max-width:1024px){
@@ -209,17 +245,39 @@
         --header-nav-options-font-size:13px;
         --header-nav-options-options-gap:25px;
     }
-  
+
+    .header-notification-bell{
+        width:26px;
+        height:26px;
+    }
+
+    .header-notification-badge {
+        font-size: 9px;
+    }
+
+    .header-user-avatar{
+        width:44px;
+        height:44px;
+    }
+
+    .header-user-dropdownMenu-container span{
+        font-size: 20px;
+    }
 }
+
+
 
 
 
 @media screen and (max-width:440px){
 
+    .header{
+        width:100%;
+    }
+
     .hamburger-menu {
         display: block;
-        position:absolute;
-        right: 32px;
+      
         z-index: 100; /* 確保在導航欄上方 */
     }
 
@@ -255,6 +313,47 @@
         justify-content: space-between;
     }
 
+
+    .header-loginUser-buttons{
+        display:none;
+    }
+
+
+
+    .header-loginUser-buttons-container{
+        display:flex;
+        gap:10px;
+        align-items: center;
+        
+    }
+
+    .header-loginUser-buttons-mobile{
+        display: flex;
+        align-items: center;
+        gap:10px;
+    }
+
+    .header-notification-bell{
+        width:22px;
+        height:22px;
+    }
+
+    .header-notification-badge {
+        font-size: 8px;
+    }
+
+    .header-user-avatar{
+        width:30px;
+        height:30px;
+    }
+
+
+
+    .header-user-dropdownMenu-container span{
+        font-size: 16px;
+       
+    }
+
     @keyframes slideDown {
         0% {
             transform: translateY(-10%); 
@@ -267,7 +366,7 @@
     }
    }
 
-@media screen and (max-width: 320px){
+@media screen and (max-width: 370px){
 
     .hamburger-menu{
         right: 25px;
