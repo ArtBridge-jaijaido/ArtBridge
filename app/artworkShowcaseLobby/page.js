@@ -115,7 +115,10 @@ const ArtworkShowcaseLobby = () => {
                 />
             </div>
             <div className="artworkShowcaseLobby-artworks-container">   
-                <MasonryGrid images={currentImages}  />
+                <MasonryGrid 
+                    images={currentImages}  
+                    LikeImg={"/images/icons8-love-96-26.png"}
+                />
             </div>
 
             <Pagination

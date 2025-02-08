@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import "./ArtworkReview.css";
 
-const ArtworkReview = ({profileImg, userName, reviewTime, planName, reviewText, collaborationCount, rating, tags}) => {
+const ArtworkReview = ({profileImg, userName, reviewTime, planName, reviewText, collaborationCount, rating, tags, isPrivate}) => {
     const [iconSrc, setIconSrc] = useState("/images/icons8-exclamation-mark-64-1.png");
 
     //檢舉按鈕變化
@@ -14,8 +14,9 @@ const ArtworkReview = ({profileImg, userName, reviewTime, planName, reviewText, 
         setIconSrc("/images/icons8-exclamation-mark-64-1.png");
     };
 
-    // 計算企劃名稱，超過15個字，顯示省略號
-    const displayPlanName = planName.length > 15 ? planName.substring(0, 15) + "..." : planName;
+   // 如果是保密企劃，顯示保密資訊
+   const displayPlanName = isPrivate ? "此專案為保密計畫" : (planName.length > 15 ? planName.substring(0, 15) + "..." : planName);
+   const displayUserName = isPrivate ? "保密企劃" : userName;
    
     // 根據評分生成星星圖標
     const renderRatingIcons = () => {
@@ -56,7 +57,7 @@ const ArtworkReview = ({profileImg, userName, reviewTime, planName, reviewText, 
                     <div className="ArtworkReview-user-header">
                         <img src={profileImg} className="ArtworkReview-profile-avatar" />
                         <div className="ArtworkReview-user-details">
-                        <div className="ArtworkReview-username">{userName}</div>
+                        <div className="ArtworkReview-username">{displayUserName}</div>
                         <div className="ArtworkReview-review-date">{reviewTime}</div>
                         </div>
                     </div>

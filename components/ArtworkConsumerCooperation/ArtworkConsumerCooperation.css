@@ -16,6 +16,7 @@
     padding:0px 40px;
     margin-top:10px;
     overflow: hidden;
+    margin-bottom:40px;
 }
 .ArtworkConsumerCooperation-stats-container {
     border-radius: 8px;
@@ -127,7 +128,10 @@
         padding: 0px;
     }
 }
-@media (max-width: 630px) {
+@media (max-width: 768px) {
+    .ArtworkConsumerCooperation-stats-wrapper{
+        padding:0px 20px;
+    }
     .ArtworkConsumerCooperation-stats-container {
         padding: 15px 30px;
     }

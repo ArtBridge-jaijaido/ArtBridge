@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./ArtworkCard.css";
 
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName }) => {
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline }) => {
 
   const [isFavorite, setIsFavorite] = useState(false); 
 
@@ -10,15 +10,17 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName 
     setIsFavorite((prev) => !prev);
   };
 
+  const isPainterProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkPainterProfile");
+
   return (
-    <div className="Artwork-card-container">
+    <div className="Artwork-card-container" style={isPainterProfilePage ? {background:"#808080", border:"1px solid #808080"}:{}}>
       {/* 圖片部分 */}
       <div className="Artwork-image-container">
         <img src={imageSrc} alt={title} className="Artwork-image" />
       </div>
 
       {/* 商品標題 */}
-      <span className="Artwork-title">{title}</span>
+      <span className="Artwork-title" style={isPainterProfilePage ? {background:"#808080"}:{}}>{title}</span>
 
       {/* 收藏按鈕 */}
       <button className="Artwork-favorite-button" onClick={toggleFavorite}>
@@ -30,7 +32,7 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName 
       </button>
       
       {/* 下方內容 */}
-      <div className="Artwork-card-content">
+      <div className="Artwork-card-content"> 
 
 
         
@@ -39,10 +41,18 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName 
         {/* 價格與標籤 */}
         <div className="Artwork-footer-row">
           <div className="Artwork-profile-container">
-            {/* 藝術家照片*/}
-            <img src={artistProfileImg} alt="artist" className="Artwork-artist-img" />
-            {/* 藝術家暱稱 */}
-            <span className="Artwork-artist-nickname">{artistNickName}</span>
+                {/* 藝術家暱稱 */}
+              {!isPainterProfilePage && (
+                <img src={artistProfileImg} alt="artist" className="Artwork-artist-img" />
+              )}
+                {/* 藝術家暱稱 */}
+              {!isPainterProfilePage && (
+                <span className="Artwork-artist-nickname">{artistNickName}</span>
+              )}
+              {/* 截止日期（僅在 painter 頁面顯示） */}
+              {isPainterProfilePage && deadline &&  (
+                <span className="Artwork-artist-deadline">{deadline}</span>
+              )}
           </div>
           {/* 商品價格 */}
           <span className="Artwork-price">${price}</span>

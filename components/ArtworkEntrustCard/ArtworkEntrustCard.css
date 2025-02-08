@@ -175,6 +175,7 @@
   padding: 9px 10px 9px 10px;  /* tag與文字、圖片之間的間距 */
   align-items: center; 
   max-width: 100%; 
+  justify-content: center;
 }
 .ArtworkEntrustCard-price-icon {
   aspect-ratio: 1;
@@ -392,13 +393,13 @@
       padding: 9px 10px 9px 10px; 
   }
   .ArtworkEntrustCard-price-text{
-      font-size: 8px;
+      font-size: 7px;
   }
   .ArtworkEntrustCard-deadline-icon{
       width:12px;
   }
   .ArtworkEntrustCard-price-icon{
-      width:10px;
+      width:8px;
       align-items: center;
   }
   .ArtworkEntrustCard-user-icon{
@@ -444,13 +445,13 @@
       width:110px;
   }
   .ArtworkEntrustCard-price-text{
-      font-size:8px;
+      font-size:7px;
   }
   .ArtworkEntrustCard-deadline-icon,.ArtworkEntrustCard-category-icon{
       width:10px;
   }
   .ArtworkEntrustCard-price-icon{
-      width:8px;
+      width:7px;
   }
   .ArtworkEntrustCard-user-icon{
       width:14px;

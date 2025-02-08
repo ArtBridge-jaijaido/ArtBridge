@@ -137,7 +137,7 @@ const ArtworkEntrustLobby = () => {
                     categoryText={"OC/原創角色"}
                     dealineText={"2025年02月03日"}
                     price={"2000-5000"}
-                    artworkImg={"images/artwork-icon.png"}
+                    artworkImg={"/images/artwork-icon.png"}
                   /> 
                 ))}
             </div>

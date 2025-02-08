@@ -33,9 +33,15 @@
   }
 
   .masonry-likesIcon-container img{
-    width: 10px !important;
-    height: 10px !important;
+    width: 15px !important;
+    height: 15px !important;
     object-fit: contain;
+  }
+
+  .masonry-likesIcon-container.artworkPainterProfile img {
+    max-width: 18px !important;
+    max-height:18px !important;
+    width:auto;
   }
 
   .masonry-likes-number{

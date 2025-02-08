@@ -57,47 +57,13 @@ const Tabs = ({ tabs}) => {
                     </div>
                   </div>
                 );
-
-              /* 新增的部分 */
-              case "作品集":
-                return (
-                  <div key={tab.label} className="tab-panel tab-panel-entrust">
-                    {tab.content}
-                  </div>
-                );
-
-              case "查看評價":
-                return (
-                  <div key={tab.label} className="tab-panel">
-                    <p>{tab.content}</p>
-                  </div>
-                );
-
-              case "市集":
-                return (
-                  <div key={tab.label} className="tab-panel">
-                    {tab.content}
-                  </div>
-                );
-
-              case "曾發布文章":
-                return (
-                  <div key={tab.label} className="tab-panel tab-panel-articles">
-                    {tab.content}
-                  </div>
-                );
-
-                      default:
-                        return null;
-                    }
-                  }
+                default:
                   return null;
-                })}
-
-
-
+              }
+              }
+              return null;
+            })}
       </div>
-
     </div>
   );
 };
