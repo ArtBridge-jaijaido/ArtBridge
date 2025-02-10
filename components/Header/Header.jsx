@@ -16,14 +16,15 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
-     const { setIsLoading } = useLoading();
+    const mobileDropdownRef = useRef(null);
+    const { setIsLoading } = useLoading();
     const pathname = usePathname();
-    const isLoading = useAuthLoading(); 
-    const { user} = useSelector((state) => state.user); 
+    const isLoading = useAuthLoading();
+    const { user } = useSelector((state) => state.user);
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
 
-  
+
 
     // 僅在客戶端加載後執行路徑判斷，避免 SSR 和 CSR 不一致
     useEffect(() => {
@@ -36,19 +37,24 @@ const Header = () => {
         setIsMenuOpen((prev) => !prev);
     };
 
-    const toggleDropdown = () => {
+    const toggleDropdown = (e) => {
+    
         setIsDropdownOpen((prev) => !prev);
     };
-
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (
+                dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+                mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target)
+            ) {
                 setIsDropdownOpen(false);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
 
     const navigate = useNavigation();
 
@@ -62,7 +68,7 @@ const Header = () => {
 
     };
 
-   
+
 
     const navigateWithLoading = (path) => {
         navigate(path);
@@ -93,19 +99,19 @@ const Header = () => {
 
 
             <div className="header-loginUser-buttons-container">
-                <div className="header-loginUser-buttons-mobile">
-                            <div className="header-notification-bell">
-                                <img src="/images/icons8-bell-96-1.png" alt="通知" />
-                                <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
-                            </div>
-                            <div className="header-user-avatar">
-                                <img src={"/images/kv-min-4.png"} alt="使用者頭像" />
-                            </div>
-                            <div className="header-user-dropdownMenu-container">
-                                <span>⌵</span>
-                                {isDropdownOpen && <UserDropdownMenu  />} 
-                            </div>
-                </div>
+                {user&&<div className="header-loginUser-buttons-mobile">
+                    <div className="header-notification-bell">
+                        <img src="/images/icons8-bell-96-1.png" alt="通知" />
+                        <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
+                    </div>
+                    <div className="header-user-avatar">
+                        <img src={"/images/kv-min-4.png"} alt="使用者頭像" />
+                    </div>
+                    <div className="header-user-dropdownMenu-container-mobile" ref={mobileDropdownRef }>
+                        <span onClick={toggleDropdown} >⌵</span>
+                        {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} toggleMenu={toggleMenu}/>}
+                    </div>
+                </div>}
                 <button
                     className="hamburger-menu"
                     onClick={toggleMenu}
@@ -145,12 +151,12 @@ const Header = () => {
                         onClick={() => navigateWithLoading("/artworkEntrustLobby")}
                         className={pathname === "/artworkEntrustLobby" ? "active" : ""}
                     >
-                       委託大廳
+                        委託大廳
                     </a>
 
                 </div>
                 {user ? (
-                    <div className="header-loginUser-buttons">
+                    <div className="header-loginUser-buttons" >
                         <div className="header-notification-bell">
                             <img src="/images/icons8-bell-96-1.png" alt="通知" />
                             <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
@@ -158,16 +164,16 @@ const Header = () => {
                         <div className="header-user-avatar">
                             <img src={user.profilePicture || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
-                        <div className="header-user-dropdownMenu-container"  ref={dropdownRef}>
+                        <div className="header-user-dropdownMenu-container" ref={dropdownRef} >
                             <span onClick={toggleDropdown} >⌵</span>
-                            {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown}/>} 
+                            {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} />}
                         </div>
                     </div>
                 ) : (
                     /* 如果未登入，顯示「註冊 / 登入」 */
                     <div className="header-auth-buttons">
-                       <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
-                       <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
+                        <CustomButton title="註冊" className={styles.headerBtn} onClick={handleUserRegister} />
+                        <CustomButton title="登入" className={styles.headerBtn} onClick={handleUserLogin} />
                     </div>
                 )}
             </nav>

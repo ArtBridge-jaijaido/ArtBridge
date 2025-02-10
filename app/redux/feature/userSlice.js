@@ -10,7 +10,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user = action.payload;
+            state.user = {
+                ...action.payload,
+                createdAt: action.payload.createdAt?.toDate?.() || action.payload.createdAt, 
+              };
             state.isAuthLoading = false; 
         },
         logoutUser: (state) => {

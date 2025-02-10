@@ -5,6 +5,7 @@ import { useSelector, useDispatch} from "react-redux";
 import { useNavigation } from "@/lib/functions.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { logoutUser } from "@/app/redux/feature/userSlice.js";
+import { auth } from "@/lib/firebase.js";
 
 const UserDropdownMenu = ({toggleDropdown}) => {
 
@@ -12,15 +13,21 @@ const UserDropdownMenu = ({toggleDropdown}) => {
    const dispatch = useDispatch();
    const navigate = useNavigation();
    const { setIsLoading } = useLoading();
+   
 
-   const handleHeadingToProfile = () => {
+
+   const handleHeadingToProfile = (e) => {
+          e.stopPropagation();
+         console.log("前往個人頁面");
          navigate("/artworkProfile/artworkPainterProfile");
          setIsLoading(true);
          setTimeout(() => setIsLoading(false), 1000);
          toggleDropdown();
    }
 
-   const handleLogout = async () => {
+   const handleLogout = async (e) => {
+    e.stopPropagation();
+   
     try {
         const response = await fetch('/api/logout', {
             method: 'POST',
@@ -28,9 +35,11 @@ const UserDropdownMenu = ({toggleDropdown}) => {
         });
 
         if (response.ok) {
+            await auth.signOut(); 
+            sessionStorage.clear();  
             console.log("登出成功");
             dispatch(logoutUser()); 
-            toggleDropdown(); 
+            toggleDropdown();
             setTimeout(() => {
                 navigate("/login");
             }, 500);

@@ -146,6 +146,7 @@
 .header-user-dropdownMenu-container {
     position:relative;
     cursor:pointer;
+   
 }
 
 .header-user-dropdownMenu-container span{
@@ -347,7 +348,15 @@
         height:30px;
     }
 
+    .header-user-dropdownMenu-container{
+        z-index:1001;
+    }
 
+    .header-user-dropdownMenu-container-mobile{
+        position:relative;
+        cursor:pointer;
+        z-index:1001;
+    }
 
     .header-user-dropdownMenu-container span{
         font-size: 16px;

@@ -9,6 +9,7 @@
     border-radius: 5px;
     padding: 30px;
     z-index: 1000;
+    -webkit-overflow-scrolling: touch;
 }
 
 .UserDropdownMenu-profile {
@@ -99,12 +100,22 @@
 .UserDropdownMenu-items {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 40px; 
+    gap: 40px 20px; 
     justify-content: center; 
     align-items: center; 
     width: 100%; 
     margin-bottom: 40px;
     cursor: pointer;
+}
+
+.UserDropdownMenu-items p{
+    color: #525252;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1px;
+    
 }
 
 
@@ -116,9 +127,6 @@
 
 
 .UserDropdownMenu-badge{
-   
-   
-   
     width: 90px !important;
     height: 20px !important;
     background-color: #FF3B3B !important;
@@ -129,13 +137,14 @@
     letter-spacing: 1px !important;
     padding: 2px 5px;
     margin-left: 5px;
+    border-radius: 5px;
 }
 
 .UserDropdownMenu-actions {
     width:100%;
     display: flex;
-    
     gap: 10px;
+    justify-content: space-between;
 }
 
 .UserDropdownMenu-btn {
@@ -161,4 +170,180 @@
 .UserDropdownMenu-btn:hover {
     background-color: #3A8DB5; 
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+@media screen and (max-width: 1280px){
+    .UserDropdownMenu-container{
+        width: 400px;
+    }
+
+    .UserDropdownMenu-profile{
+        margin-bottom:24px;
+    }
+
+    .UserDropdownMenu-avatar-container{
+        width: 90px;
+        height: 90px;
+    }
+
+    .UserDropdownMenu-info h3{
+        font-size: 20px;
+    }
+
+    .UserDropdownMenu-info p{
+        font-size: 14px;
+    }
+
+  
+
+    .UserDropdownMenu-items p{
+        font-size: 16px;
+    }
+
+    .UserDropdownMenu-badge{
+        width: 77px !important;
+        height: 14px !important;
+        font-size: 10px !important;
+        padding: 2px 5px;
+    }
+
+
+    .UserDropdownMenu-btn{
+        max-width:124px;
+        height: 26px;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    
+}
+
+
+@media screen and (max-width: 834px){
+    .UserDropdownMenu-container{
+        width: 280px;
+        padding: 20px 25px;
+    }
+
+    .UserDropdownMenu-avatar-container{
+        width: 80px;
+        height: 80px;
+    }
+
+    .UserDropdownMenu-info h3{
+        font-size: 16px;
+    }
+
+    .UserDropdownMenu-info p{
+        font-size: 12px;
+    }
+
+    .UserDropdownMenu-stat strong{
+        font-size: 16px;
+    }
+
+    .UserDropdownMenu-stat p{
+        font-size: 10px;
+    }
+
+    /* 變單列但先顯示奇數再顯示偶數 */
+    .UserDropdownMenu-items {
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start; 
+        gap: 30px; 
+        margin-bottom: 30px;
+    }
+
+    /* 讓奇數索引 (1,3,5...) 優先排列 */
+    .UserDropdownMenu-items p:nth-child(odd) {
+        order: -2;
+    }
+
+    /* 偶數索引的保持正常 */
+    .UserDropdownMenu-items p:nth-child(even) {
+        order: -1;
+    }
+
+    /* 讓包含 .UserDropdownMenu-badge 的 <p> 排列到最底  */
+    .UserDropdownMenu-items p:has(.UserDropdownMenu-badge) {
+        order: 1; 
+    }
+
+    .UserDropdownMenu-items p{
+        font-size: 14px;
+    }
+
+    .UserDropdownMenu-badge{
+        width: 77px !important;
+        height: 14px !important;
+        font-size: 8px!important;
+       
+    }
+   
+}
+
+
+@media screen and (max-width: 440px){
+    .UserDropdownMenu-container{
+        top: 60px;
+        width: 190px;
+        padding: 20px 20px;
+        z-index: 9999;
+        
+    }
+
+    .UserDropdownMenu-profile {
+        margin-bottom:20px;
+    }
+
+    .UserDropdownMenu-avatar-container{
+        width: 46px;
+        height: 46px;
+    }
+
+    .UserDropdownMenu-info h3{
+        font-size: 12px;
+    }
+
+    .UserDropdownMenu-info p{
+        font-size: 8px;
+    }
+
+    .UserDropdownMenu-stats{
+        gap:20px;
+        margin-bottom: 20px;
+    }
+
+    .UserDropdownMenu-stat strong{
+        font-size: 12px;
+    }
+
+    .UserDropdownMenu-stat p{
+        font-size: 8px;
+    }
+
+    .UserDropdownMenu-items{
+        gap:16px;
+        margin-bottom: 20px;
+    }
+
+    .UserDropdownMenu-items p{
+        font-size: 10px;
+    }
+
+    .UserDropdownMenu-badge{
+        width: 50px !important;
+        height: 10px !important;
+        font-size: 6px !important;
+    }
+
+    .UserDropdownMenu-btn{
+        font-size: 8px;
+        letter-spacing: 2px;
+        max-width:94px;
+        height: 20px;
+    }
+
 }
