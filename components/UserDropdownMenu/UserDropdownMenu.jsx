@@ -7,7 +7,7 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { logoutUser } from "@/app/redux/feature/userSlice.js";
 import { auth } from "@/lib/firebase.js";
 
-const UserDropdownMenu = ({toggleDropdown}) => {
+const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 
    const { user} = useSelector((state) => state.user);  
    const dispatch = useDispatch();
@@ -35,11 +35,12 @@ const UserDropdownMenu = ({toggleDropdown}) => {
         });
 
         if (response.ok) {
-            await auth.signOut(); 
+            await auth.signOut();  // firebase登出
             sessionStorage.clear();  
             console.log("登出成功");
             dispatch(logoutUser()); 
             toggleDropdown();
+            setIsMenuOpen(false); 
             setTimeout(() => {
                 navigate("/login");
             }, 500);
@@ -59,7 +60,7 @@ const UserDropdownMenu = ({toggleDropdown}) => {
       <div className="UserDropdownMenu-profile">
 
         <div className="UserDropdownMenu-avatar-container">
-        <img src="/images/kv-min-4.png" alt="使用者頭像" className="UserDropdownMenu-avatar" />
+        <img src="/images/kv-min-4.png" alt="使用者頭像" className="UserDropdownMenu-avatar"  />
         </div>
         <div className="UserDropdownMenu-info">
           <h3>{user?.nickname}</h3>

@@ -109,7 +109,7 @@ const Header = () => {
                     </div>
                     <div className="header-user-dropdownMenu-container-mobile" ref={mobileDropdownRef }>
                         <span onClick={toggleDropdown} >⌵</span>
-                        {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} toggleMenu={toggleMenu}/>}
+                        {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} toggleMenu={toggleMenu}  setIsMenuOpen={setIsMenuOpen}  />}
                     </div>
                 </div>}
                 <button
@@ -166,7 +166,7 @@ const Header = () => {
                         </div>
                         <div className="header-user-dropdownMenu-container" ref={dropdownRef} >
                             <span onClick={toggleDropdown} >⌵</span>
-                            {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} />}
+                            {isDropdownOpen && <UserDropdownMenu toggleDropdown={toggleDropdown} setIsMenuOpen={setIsMenuOpen} />}
                         </div>
                     </div>
                 ) : (

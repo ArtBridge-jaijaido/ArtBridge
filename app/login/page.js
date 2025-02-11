@@ -7,8 +7,10 @@ import Link from "next/link";
 import "./login.css";
 import styles from "../register/registerButton.module.css";
 import CustomButton from "@/components/CustomButton/CustomButton.jsx";
+import {getUserData} from "@/services/userService.js";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../app/redux/feature/userSlice.js';
+import { logoutUser } from "@/app/redux/feature/userSlice.js";
 import { auth } from "@/lib/firebase.js";
 import { setPersistence, signInWithEmailAndPassword, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
 
@@ -40,10 +42,39 @@ const LoginPage = () => {
       await setPersistence(auth, formData.rememberMe ? browserLocalPersistence : browserSessionPersistence); // 設定登入狀態
       const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
       const user = userCredential.user;
+
+      const{success, data, message} = await getUserData(user.uid);
+      const userEmail = user.email;
+
+      console.log("使用者資料",data);
+
+      if (!data?.isEmailCodeVerified) {
+        addToast("error", message || "錯誤: 請先驗證您的電子郵件再登入");
+        navigate(`/emailValidation?email=${userEmail}`);
+        const response = await fetch("/api/resendCode", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email:userEmail }),
+          });
+          const result = await response.json();
+          if (response.ok) {
+            addToast("success", "驗證碼已重新寄送");
+          } else {
+            addToast("error", `驗證碼寄送失敗: ${result.message}`);
+          }
+        await auth.signOut();
+        await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+        sessionStorage.clear();  // 清除sessionStorage
+        dispatch(logoutUser()); 
+        return;
+      }
+
+
+
       const token = await user.getIdToken(); // 取得 ID Token
-
       
-
       if (!token) {
         addToast("error", "驗證失敗，請重新登入");
         return;
