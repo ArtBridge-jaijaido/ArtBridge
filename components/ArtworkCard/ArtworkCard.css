@@ -30,6 +30,16 @@
   position:relative;
   
   }
+  /* Painter Profile 頁面的特殊樣式 */
+.Artwork-card-container.painter-profile {
+  background: #808080;
+  border: 1px solid #808080;
+}
+/* Market 頁面的標準樣式 */
+.Artwork-card-container.market-style {
+  background: #40A4DA !important;
+  border: 1px solid #40A4DA !important;
+}
 
 .Artwork-image-container{
   width: 100%;
@@ -71,6 +81,14 @@
   letter-spacing: 2px;
   border-radius: 30px;
 
+}
+/* Painter Profile 頁面的標題樣式 */
+.Artwork-card-container.painter-profile .Artwork-title {
+  background: #808080;
+}
+/* Market 頁面的標題樣式 */
+.Artwork-card-container.market-style .Artwork-title {
+  background: #40A4DA !important;
 }
 
 .Artwork-favorite-button{

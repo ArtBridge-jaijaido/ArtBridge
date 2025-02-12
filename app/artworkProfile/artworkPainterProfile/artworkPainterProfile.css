@@ -10,7 +10,7 @@
 
     /*margin-bottom*/
     --artworkPainterProfile-artworkCard-container-margin-bottom:0px;
-    --artworkPainterProfile-MasonryGrid-container-margin-bottom: 50px;
+    --artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom: 50px;
 
     /*grid-auto-rows*/
     --artworkPainterProfile-artworkCard-container-grid-auto-rows: 300px;
@@ -53,11 +53,11 @@
     gap:0px;
 }
 /*作品集、查看評價、市集、曾發布文章*/
-.artworkPainterProfile-MasonryGrid-container{
+.artworkPainterProfile-artworkPainterMasonryGrid-container{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: var(--artworkPainterProfile-MasonryGrid-container-margin-bottom);
+    margin-bottom: var(--artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom);
     justify-content: center;
 }
 .artworkPainterProfile-artworkReview-container{
@@ -163,6 +163,9 @@
         height:60px;
         font-size: 10px;
     }
+    .artworkPainter-show-more-button {
+        font-size:12px;
+    }
 }
 @media screen and (max-width: 440px){
     .artworkPainterProfile-artworkCard-container{
@@ -172,8 +175,8 @@
         --artworkPainterProfile-artworkCard-container-grid-auto-rows:166px;
     }
     
-    .artworkPainterProfile-MasonryGrid-container {
-        --artworkPainterProfile-MasonryGrid-container-margin-bottom: 30px;
+    .artworkPainterProfile-artworkPainterMasonryGrid-container {
+        --artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom: 30px;
     }
 }
 

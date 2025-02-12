@@ -12,20 +12,28 @@
   --artworkShowcaseLobby-artworks-container-margin-bottom: 50px;
 }
 
-
-
-
 .artworkShowcaseLobbyPage {
   width: 100%;
   max-width: var(--artworkShowcaseLobbyPage-max-width);
-  padding: 120px 50px 50px 50px;
+  padding: 140px 50px 50px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
+.artworkShowcaseLobbyPage-search-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; 
+  transition: all 0.5s ease-in-out;
+  z-index: 100;
+}
 
+.artworkShowcaseLobbyPage-search-container.moved {
+  justify-content: flex-start; 
+}
 
 .artworkShowcaseLobby-button-container {
   width: 100%;
@@ -41,22 +49,16 @@
 .artworkShowcaseLobby-artworks-container {
   display: flex;
   flex-wrap: wrap;/* wrap items to the next line */
-  
   width: 100%;
   margin-bottom: var(--artworkShowcaseLobby-artworks-container-margin-bottom);
 }
 
 
 
-
-
-
-
-
 /*RWD*/
 @media screen and (max-width:1280px) {
   .artworkShowcaseLobbyPage {
-    padding: 110px 36px 50px 36px;
+    padding: 120px 36px 50px 36px;
     /* top right bottom left */
   }
 
@@ -87,7 +89,7 @@
   .artworkShowcaseLobbyPage {
     width: 100%;
     max-width: 440px;
-    padding: 100px 32px 50px 32px;
+    padding: 108px 32px 50px 32px;
   }
 
   .artworkShowcaseLobby-button-container {

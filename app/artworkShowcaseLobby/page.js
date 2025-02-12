@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
 import { artworkRecommendation, artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
-
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import MasonryGrid from '@/components/Masonry/MasonryGrid.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import "./artworkShowcaseLobby.css";
 
 const ArtworkShowcaseLobby = () => {
-    
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState({
@@ -88,6 +88,10 @@ const ArtworkShowcaseLobby = () => {
 
     return (
         <div className={`artworkShowcaseLobbyPage ${notoSansTCClass}`}>
+            <div className={`artworkShowcaseLobbyPage-search-container ${isSearchOpen ? "moved" : ""}`}>
+                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+            </div>
+
             <div className="artworkShowcaseLobby-button-container" ref={dropdownRef}>
                 <ArtMarketDropButton
                     id="recommendation"

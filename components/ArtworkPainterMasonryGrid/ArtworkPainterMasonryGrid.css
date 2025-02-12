@@ -1,0 +1,128 @@
+  .ArtworkPainter-masonry-grid {
+    display: flex;
+    gap: 38px; 
+  }
+
+  .ArtworkPainter-masonry-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 讓內容靠左對齊 */
+    width: 100%;
+  }
+  
+  .ArtworkPainter-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    justify-content: flex-start; /* 讓按鈕靠左對齊 */
+  }
+  
+  .ArtworkPainter-filter-button {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #afafaf;
+    border-width: 1px;
+    width: 88px;
+    height: 28px;
+    position: relative;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #afafaf;
+    text-align: center;
+    font-family: "Inter-SemiBold", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .ArtworkPainter-filter-button.selected {
+    color: #61bced;
+    border-color:#61bced;
+  }
+  
+  .ArtworkPainter-masonry-grid-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ArtworkPainter-masonry-grid-item {
+    position:relative;
+    margin-bottom: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .ArtworkPainter-masonry-grid-item Img{
+    width: 100%; /* 讓圖片填滿父容器 */
+    object-fit: cover; 
+    border-radius: 10px;
+  }
+  .ArtworkPainter-masonry-likesIcon-container{
+    position:absolute;
+    top:10px;
+    right:10px;
+    width: 20px;
+    height: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:2px;
+    border-radius: 50px;
+    border: 0.5px solid #FF5C5C;
+    background: #FFF;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+    
+  }
+
+  .ArtworkPainter-masonry-likesIcon-container img{
+    width: 15px !important;
+    height: 15px !important;
+    object-fit: contain;
+  }
+  
+  .ArtworkPainter-favorite-icon {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; 
+    object-fit: cover;
+  }
+  
+
+  .ArtworkPainter-masonry-grid-item:hover {
+    transform: translateY(-8px);
+   
+} 
+
+
+
+
+/*RWD*/
+
+@media screen and (max-width:834px){
+    
+    .ArtworkPainter-masonry-grid{
+      gap:10px;
+    }
+
+    .ArtworkPainter-masonry-grid-item{
+      margin-bottom:20px;
+    }
+     
+}
+
+
+@media screen and (max-width:440px){
+  .ArtworkPainter-masonry-grid{
+    gap:15px;
+  }
+  .ArtworkPainter-filter-button{
+    font-size: 10px;
+  }
+}
+
+
+

@@ -5,10 +5,11 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import { artworkCriteria, artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 import MasonryArtCommunity from '@/components/Masonry/MasonryArtCommunity.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; // 引入搜尋元件
 import "./artworkCommunity.css";
 
 const ArtworkCommunity = () => {
-
+    const [isSearchOpen, setIsSearchOpen] = useState(false); 
     const [openDropdown, setOpenDropdown] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState({
@@ -86,6 +87,10 @@ const ArtworkCommunity = () => {
 
     return (
         <div className={`artworkCommunityPage ${notoSansTCClass}`}>
+            <div className={`artworkCommunityPage-search-container ${isSearchOpen ? "moved" : ""}`}>
+                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+            </div>
+
             <div className="artworkCommunity-button-container" ref={dropdownRef}>
                 <ArtMarketDropButton
                     id="latestRelease"

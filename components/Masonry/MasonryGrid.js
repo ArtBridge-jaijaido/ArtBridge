@@ -8,9 +8,7 @@ const MasonryGrid = ({ images}) => {
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
 
-   // 檢查當前頁面是否為 artworkPainterProfilec和artworkConsumerProfile
-   const isPainterProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkPainterProfile");
-   const isConsumerProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkConsumerProfile");
+  const isConsumerProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkConsumerProfile");
 
   useEffect(() => {
     const updateColumnWidths = () => {
@@ -59,11 +57,9 @@ const MasonryGrid = ({ images}) => {
             <div key={imageIndex} className="masonry-grid-item">
               <img src={image} alt={`Artwork ${imageIndex + 1}`} />
               {!isConsumerProfilePage && (
-                <div 
-                  className={`masonry-likesIcon-container ${isPainterProfilePage ? "artworkPainterProfile" : ""}`}
-                  style={isPainterProfilePage ? { background: "#FFF", border: "none", width: "20px", height: "20px", borderRadius: "50px" } : {}}>
+                <div className="masonry-likesIcon-container">
                   <img src="/images/icons8-love-96-26.png" alt="numberOfLikes"></img>
-                  {!isPainterProfilePage && <span className="masonry-likes-number">100</span>}
+                  <span className="masonry-likes-number">100</span>
                 </div>
               )}
             </div>

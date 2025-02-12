@@ -21,7 +21,7 @@
 }
 
 .artMarket-page{
-    
+    position: relative;
     width:100%;
     max-width:var(--artMarket-page-width);
     padding: 140px 80px 50px 80px; /* top right bottom left */
@@ -29,10 +29,19 @@
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    margin:0 auto; /* center in the viewport */
-    
+    margin:0 auto; 
+}
+.artMarket-search-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    transition: all 0.5s ease-in-out;
 }
 
+.artMarket-search-container.moved {
+    justify-content: flex-start; 
+}
 
 .artMarket-iconButton-container{
     width:100%;
@@ -72,7 +81,7 @@
 @media screen and (max-width: 1280px) {
     .artMarket-page{
       
-        padding: 140px 71px 40px 71px; /* top right bottom left */
+        padding: 120px 71px 40px 71px; /* top right bottom left */
     }
 
     .artMarket-iconButton-container{
@@ -99,7 +108,7 @@
     .artMarket-page{
 
         
-        padding: 110px 62px 40px 62px; /* top right bottom left */
+        padding: 120px 62px 40px 62px; /* top right bottom left */
     }
 
     .artMarket-iconButton-container{
@@ -196,5 +205,4 @@
     .artMarket-product-container{
         --artMarket-product-container-gap: 26px 15px;
     }
- 
 }

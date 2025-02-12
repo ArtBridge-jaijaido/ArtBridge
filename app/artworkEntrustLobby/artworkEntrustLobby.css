@@ -21,12 +21,25 @@
 .artworkEntrustLobbyPage{
     width:100%;
     max-width:var(--artworkEntrustLobbyPage-width);
-    padding: 110px 50px 50px 50px; /* top right bottom left */
+    padding: 140px 50px 50px 50px; /* top right bottom left */
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     margin:0 auto; 
+}
+.artworkEntrustLobbyPage-search-container {
+    position: relative;
+    right:15px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    transition: all 0.5s ease-in-out;
+    z-index: 100;
+}
+  
+.artworkEntrustLobbyPage-search-container.moved {
+    justify-content: flex-start; 
 }
 
 .artworkEntrustLobby-button-container{
@@ -56,11 +69,13 @@
     max-width: 100%; 
 }
 
+
+
 /*RWD*/
 
 @media screen and (max-width:1280px){
     .artworkEntrustLobbyPage{
-        padding: 110px 36px 50px 36px;
+        padding: 120px 36px 50px 36px;
     }
 
     .artworkEntrustLobby-button-container{
@@ -78,7 +93,7 @@
 
 @media screen and (max-width:834px){
     .artworkEntrustLobbyPage{
-        padding:110px 30px 50px 30px;
+        padding:120px 30px 50px 30px;
     }
     .artworkEntrustLobby-button-container {
         gap: 20px; 

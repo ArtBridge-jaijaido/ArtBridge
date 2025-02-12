@@ -3,16 +3,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import CustomIconButton from '@/components/CustomButton/CustomIconButton.jsx';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
-
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
-
 import "./artworkMarket.css";
 
 const ArtMarketPage = () => {
-   
-
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null); // 追蹤哪個下拉選單是開啟狀態
     const [selectedOptions, setSelectedOptions] = useState({
         product: "價格最低",
@@ -71,6 +69,10 @@ const ArtMarketPage = () => {
 
     return (
         <div className={`artMarket-page ${notoSansTCClass}`}>
+             <div className={`artMarket-search-container ${isSearchOpen ? "moved" : ""}`}>
+                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+            </div>
+
             <div className="artMarket-iconButton-container" >
                 <CustomIconButton iconSrc="/images/artMarketImage/icons8-24h-service-56-1.png" alt="artMarket-icon" text="24H速貨" />
                 <CustomIconButton iconSrc="/images/artMarketImage/icons8-top-96-11.png" alt="artMarket-icon" text="收藏TOP" />

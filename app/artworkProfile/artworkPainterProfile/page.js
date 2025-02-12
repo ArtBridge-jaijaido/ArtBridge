@@ -4,7 +4,7 @@ import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkPainterCalendar from '@/components/ArtworkPainterCalendar/ArtworkPainterCalendar.jsx';
 import ArtworkPainterProfileTab from "@/components/ArtworkPainterProfile-tab/ArtworkPainterProfile-tab.jsx";
-import MasonryGrid from "@/components/Masonry/MasonryGrid.js"; 
+import ArtworkPainterMasonryGrid from "@/components/ArtworkPainterMasonryGrid/ArtworkPainterMasonryGrid.js"; 
 import ArtworkReview from "@/components/ArtworkReview/ArtworkReview.jsx"; 
 import ArtworkCard from "@/components/ArtworkCard/ArtworkCard.jsx";
 import "./artworkPainterProfile.css";
@@ -21,26 +21,26 @@ const ArtworkPainterProfilePage = () => {
         const artworkCardTotalItems = 40;
 
         const testingImages = [
-            "/images/testing-Arkwork-image.png",
-            "/images/testing-Arkwork-image-9.png",
-            "/images/testing-Arkwork-image-8.png",
-            "/images/testing-Arkwork-image-4.png",
-            "/images/testing-Arkwork-image-7.png",
-            "/images/testing-Arkwork-image.png",
-            "/images/testing-Arkwork-image-9.png",
-            "/images/testing-Arkwork-image-8.png",
-            "/images/testing-Arkwork-image-4.png",
-            "/images/testing-Arkwork-image-7.png",
-            "/images/testing-Arkwork-image.png",
-            "/images/testing-Arkwork-image-9.png",
-            "/images/testing-Arkwork-image-8.png",
-            "/images/testing-Arkwork-image-4.png",
-            "/images/testing-Arkwork-image-7.png", 
-            "/images/testing-Arkwork-image.png",
-            "/images/testing-Arkwork-image-9.png",
-            "/images/testing-Arkwork-image-8.png",
-            "/images/testing-Arkwork-image-4.png",
-            "/images/testing-Arkwork-image-7.png", 
+            {src:"/images/testing-Arkwork-image-2.png", category: "category1"},
+            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
+            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-6.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-5.png", category: "category1"},
+            {src:"/images/testing-Arkwork-image-3.png", category: "category2"},
+            {src:"/images/testing-Arkwork-image-10.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-11.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image.png", category: "category1"},
+            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
+            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image.png", category: "category1"},
+            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
+            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
+            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
         ];
         const masonryTotalItems = testingImages.length; // 總數
         const currentImages = testingImages.slice(0, masonryVisibleItems);
@@ -50,8 +50,8 @@ const ArtworkPainterProfilePage = () => {
             {
                 label: "作品集",
                 content: <div className="artworkPainterProfile-Tab-wrapper">
-                    <div className="artworkPainterProfile-MasonryGrid-container">
-                     <MasonryGrid images={currentImages}/>
+                    <div className="artworkPainterProfile-artworkPainterMasonryGrid-container">
+                     <ArtworkPainterMasonryGrid images={currentImages}/>
                     </div>
 
                      {masonryVisibleItems < masonryTotalItems && (

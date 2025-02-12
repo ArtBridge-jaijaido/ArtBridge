@@ -38,12 +38,6 @@
     object-fit: contain;
   }
 
-  .masonry-likesIcon-container.artworkPainterProfile img {
-    max-width: 18px !important;
-    max-height:18px !important;
-    width:auto;
-  }
-
   .masonry-likes-number{
     color: #FF5C5C;
     text-align: center;
