@@ -1,0 +1,34 @@
+.artworkPainterMarketPage{
+    /*max width */
+    --artworkPainterMarketPage-width: 1440px;
+
+    /*height*/
+
+   
+}
+.artworkPainterMarketPage{
+    width:100%;
+    max-width:var(--artworkPainterMarketPage-width);
+    padding: 140px 40px 20px 40px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+/*放置元件的Wrapper*/
+.artworkPainterMarket-Tab-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    gap:0px;
+}
+/*Tab元件*/
+.ArtworkPainterMarket-SetTab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+}
