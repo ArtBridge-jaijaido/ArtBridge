@@ -4,11 +4,15 @@ import nodemailer from "nodemailer";
 
 
 export default async function handler(req, res) {
+
+    
+    
     if (req.method !== "POST") {
         return res.status(405).json({ message: "只允許 POST 請求" });
       }
 
     const { email } = req.body;
+    
 
     if (!email) {
         return res.status(400).json({  message: "Missing required fields"  });
@@ -18,17 +22,21 @@ export default async function handler(req, res) {
     try{
         const verificationCode = Math.floor(100000 + Math.random() * 900000);
         const verificationCodeExpiresAt = new Date(Date.now() + 10 * 60 * 1000); 
-       
+        const isEmailCodeVerified = false;
         const userData = await getUserByEmail(email);
-      
+        
+       
 
         if (!userData) {
             return res.status(400).json({ message: "使用者不存在" });
         }
        
+        
 
         // 更新驗證碼
-        await updateUserVerificationCode(userData.uid, verificationCode, verificationCodeExpiresAt, email);
+        await updateUserVerificationCode(userData.uid, verificationCode, verificationCodeExpiresAt, email , isEmailCodeVerified );
+
+        console.log("更新驗證碼成功");
 
         // 寄送新驗證碼
         const transporter = nodemailer.createTransport({

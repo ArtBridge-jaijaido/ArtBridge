@@ -17,6 +17,10 @@ const EmailValidationPage = () => {
   const navigate = useNavigation();
   const { addToast } = useToast();
 
+  useEffect(() => {
+    console.log("驗證頁面的 email:", email);
+  }, [email]);
+
   // 倒數計時邏輯
   useEffect(() => {
     if (counter > 0) {
@@ -28,7 +32,7 @@ const EmailValidationPage = () => {
   }, [counter]);
 
 
-  const handleResendEmail = async () => {
+   const handleResendEmail = async () => {
     if (isResendDisabled) return;
 
     try{

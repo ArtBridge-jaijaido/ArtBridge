@@ -1,10 +1,35 @@
 "use client";
-import React from 'react'
+import React,{useEffect} from 'react'
 import { notoSansTCClass } from "@/app/layout.js";
-
+import { useSelector } from 'react-redux';
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "../painterDashboard.css";
 
 const PainterDashboard = () => {
+
+
+  const {user, isAuthLoading} = useSelector((state) => state.user); 
+  const { setIsLoading } = useLoading();
+ 
+  useEffect(() => {
+    let timeout;
+
+    if (isAuthLoading) {
+        setIsLoading(true); 
+    } else {
+        timeout = setTimeout(() => setIsLoading(false), 500); 
+    }
+
+    return () => clearTimeout(timeout); 
+}, [isAuthLoading, setIsLoading]);
+
+if (isAuthLoading) {
+    return null; // 如果仍在加載，先不渲染 Dashboard 內容
+}
+
+  const nickname = user? user.nickname : "使用者名稱";
+
+
   return (
    
     
@@ -20,7 +45,7 @@ const PainterDashboard = () => {
               </div>
 
               <div className="PainterDashboard-painterInfo">
-                <h1>使用者名稱 <span>-繪師</span></h1>
+                <h1>{nickname} <span>-繪師</span></h1>
                 <div className="PainterDashboard-painterInfo-button-container">
                   <button className="PainterDashboard-painterInfo-button-change">
                     切換

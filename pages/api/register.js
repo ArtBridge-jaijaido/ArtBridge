@@ -55,7 +55,7 @@ export default async function handler(req, res) {
             const emailQuery = query(userRef, where("email", "==", email)); 
             const emailQuerySnapshot = await getDocs(emailQuery); 
         
-            if (!emailQuerySnapshot.empty) {
+            if (emailQuerySnapshot.docs.length > 0) {
                 return res.status(400).json({ message: '該電子郵件已被註冊，請使用其他電子郵件' });
             }
         } catch (error) {
