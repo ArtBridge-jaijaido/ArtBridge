@@ -1,0 +1,471 @@
+.ArtworkReview{
+    display:flex;
+    flex-direction: column;
+    max-width:1440px;
+    width:100%;
+    height:auto;
+    margin-top:0px;
+    overflow: hidden;
+}
+.ArtworkReview-review-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding:0px 40px;
+    margin-bottom: 20px;
+}
+.ArtworkReview-review-container {
+    border-radius: 10px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 13px 24px 27px;
+    border: 1px solid rgba(240, 240, 240, 1);
+}
+.ArtworkReview-review-header {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    gap: 40px 100px;
+    flex-wrap: nowrap;
+}
+.ArtworkReview-review-content {
+    margin-top: 16px;
+    flex-grow: 1;
+    flex-basis: auto;
+}
+.ArtworkReview-user-section {
+    gap: 20px;
+    display: flex;
+    align-items: flex-start;  /*靠上對齊 */
+    flex-wrap: nowrap; 
+}
+.ArtworkReview-profile-section {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 31%;
+    margin-left: 0;
+}
+.ArtworkReview-profile-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.ArtworkReview-user-header {
+    align-self: start;
+    display: flex;
+    gap: 16px;
+    font-family: Inter, sans-serif;
+    white-space: nowrap;
+}
+.ArtworkReview-profile-avatar {
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 1px;
+    object-fit: cover;
+    width:64px;
+    height:64px;
+    max-width: 100%;
+}
+.ArtworkReview-user-details {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin: auto 0;
+}
+.ArtworkReview-username {
+    color: rgba(129, 129, 129, 1);
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+.ArtworkReview-review-date {
+    color: rgba(149, 149, 149, 1);
+    font-size: 14px;
+    align-self: start;
+    margin-top: 8px;
+}
+.ArtworkReview-rating-icons {
+    display: flex;
+    margin-top: 6px;
+    align-items: center;
+    gap: 10px;
+    justify-content: start;
+}
+.ArtworkReview-star-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 35px;
+    align-self: stretch;
+    margin:auto 0px;
+}
+.ArtworkReview-project-section {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    margin-left: 20px;
+}
+.ArtworkReview-project-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    align-items: flex-start;
+}
+.ArtworkReview-project-title {
+    display: flex;
+    color: rgba(0, 0, 0, 1);
+    font-size: 24px;
+    white-space: nowrap; /* 防止換行 */
+}
+.ArtworkReview-plan-text {
+    color: rgba(87, 87, 87, 1);
+}
+.ArtworkReview-tag-container {
+    align-self: start;
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1);
+    white-space: nowrap;
+    margin: 45px 0 0 10px;
+}
+.ArtworkReview-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: rgba(255, 184, 85, 1);
+    padding: 4px 12px;
+    text-align: center;
+}
+.ArtworkReview-collaboration-section {
+    display: flex;
+    justify-content: flex-start;  /* 靠上對齊 */
+    flex-direction: column;
+    line-height: normal;
+    width: 19%;
+    margin-left: 50px;
+}
+.ArtworkReview-collaboration-badge {
+    align-items:center;  
+    border-radius: 20px;
+    background-color: rgba(141, 213, 255, 1);
+    display: flex;
+    gap: 3px;
+    color: rgba(255, 255, 255, 1);
+    white-space: nowrap;
+    text-align: center;
+    letter-spacing: 2px;
+    max-width:130px;
+    max-height:28px;
+    padding: 4px 17px;
+    font: 600 14px Inter, sans-serif;
+}
+.ArtworkReview-badge-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 20px;
+}
+.ArtworkReview-exclamation-button {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+.ArtworkReview-exclamation-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 30px;
+}
+.ArtworkReview-review-text {
+    color: rgba(108, 108, 108, 1);
+    align-self: start;
+    margin-top: 23px;
+    font: 500 16px/20px Inter, sans-serif;
+}
+
+@media (max-width: 1240px) {
+    .ArtworkReview-review-header {
+        gap: 20px 25px; /* 縮小間距 */
+    }
+    .ArtworkReview-profile-avatar {
+        width:50px;
+        height:50px;
+    }
+    .ArtworkReview-user-section {
+        gap: 10px; /* 減少元素間的間距 */
+    }
+    .ArtworkReview-username {
+        font-size: 16px;
+    }
+    .ArtworkReview-review-date{
+        font-size: 10px;
+        margin-top: 3px;
+    }
+    .ArtworkReview-profile-section,
+    .ArtworkReview-project-section,
+    .ArtworkReview-collaboration-section {
+        width: auto; /* 自動調整寬度以避免換行 */
+        min-width: 0; /* 防止最小寬度限制造成的換行 */
+    }
+    .ArtworkReview-project-title {
+        font-size: 18px; 
+    }
+    .ArtworkReview-tag-container {
+        gap: 10px; /* 縮小標籤間距 */
+        font-size: 10px;
+        margin-top: 40px;
+    }
+    .ArtworkReview-badge-icon{
+        width:18px;
+        height:18px;
+    }
+    .ArtworkReview-collaboration-section{
+        margin-left: 40px;
+    }
+    .ArtworkReview-collaboration-badge {
+        max-width:118px;
+        max-height:24px;
+        font-size:12px;
+        padding: 4px 12px;
+    }
+    .ArtworkReview-rating-icons{
+        gap:2px;
+    }
+    .ArtworkReview-star-icon {
+        width: 30px; /* 縮小評分星星 */
+        height: 30px; 
+    }
+    .ArtworkReview-exclamation-icon{
+        width:20px;
+    }
+}
+@media (max-width: 900px) {
+    .ArtworkReview-review-header {
+        gap: 20px 20px; 
+    }
+    .ArtworkReview-review-container{
+        padding-bottom: 10px;
+    }
+    .ArtworkReview-profile-avatar {
+        width:35px;
+        height:35px;
+    }
+    .ArtworkReview-user-header{
+        gap:10px;
+    }
+    .ArtworkReview-username {
+        font-size: 12px;
+    }
+    .ArtworkReview-review-date{
+        font-size: 8px;
+    }
+    .ArtworkReview-project-title {
+        font-size: 14px; 
+    }
+    .ArtworkReview-tag-container {
+        font-size: 10px;
+        max-height:18px;
+        margin-top: 35px;
+        margin-left: 5px;
+    }
+    .ArtworkReview-tag{
+        padding:4px 10px;
+    }
+    .ArtworkReview-badge-icon{
+        width:12px;
+        height:12px;
+    }
+    .ArtworkReview-collaboration-badge {
+        max-width:90px;
+        max-height:20px;
+        font-size:8px;
+        padding: 4px 8px;
+    }
+    .ArtworkReview-rating-icons{
+        gap:5px;
+    }
+    .ArtworkReview-star-icon{
+        width: 23px; 
+        height: 23px; 
+        margin-top: 10px;
+    }
+    .ArtworkReview-exclamation-icon{
+        width:18px;
+    }
+    .ArtworkReview-review-text{
+        font-size: 13px;
+    }
+}
+
+/* user-section排版 */
+@media (max-width: 768px) {
+    .ArtworkReview-project-section, .ArtworkReview-project-container {
+        all: unset; 
+        display: contents; 
+    }
+
+    /* 設定 user-section 為 grid 佈局，分成 2 欄，但第二欄內部分成 3 列 */
+    .ArtworkReview-user-section {
+        display: grid; 
+        grid-template-columns: 1fr 2fr; 
+        grid-template-rows: 1fr 1fr 2fr;
+        gap: 10px; 
+        width: 100%; 
+        align-items: start; 
+    }
+    .ArtworkReview-review-wrapper{
+        padding:0px 0px;
+    }
+    .ArtworkReview-rating-icons{
+        margin-top: 10px;
+    }
+
+    /* 第一欄：個人資訊區塊*/
+    .ArtworkReview-profile-section {
+        grid-column: 1; 
+        grid-row: 1 / span 3; /* 合併3列 */
+        width: 100%; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 第一行：企劃標題 */
+    .ArtworkReview-project-title {
+        grid-row: 1; /* 設定在第一行 */
+        grid-column: 2; 
+        display: flex; 
+        justify-content: flex-start; 
+        font-size: 15px; 
+        font-weight: bold; 
+        color: #000; 
+        white-space: nowrap; 
+    }
+
+    /* 第二行：合作標籤 */
+    .ArtworkReview-collaboration-section {
+        grid-row: 2; 
+        grid-column: 2; 
+        display: flex; 
+        justify-content: flex-start; 
+        margin:0px 0px 0px 8px; 
+    }
+    .ArtworkReview-collaboration-badge{
+        width:80px;
+        height:18px;
+        padding:3px auto;
+    }
+    .ArtworkReview-project-title{
+        font-size: 13px;
+    }
+    /* 第三行：標籤容器 */
+    .ArtworkReview-tag-container {
+        grid-row: 3; 
+        grid-column: 2; 
+        display: flex; 
+        flex-wrap: wrap;
+        gap: 5px;
+        margin:0px 0px 0px 8px; 
+    }
+    .ArtworkReview-tag{
+        font-size:9px;
+        height:18px;
+        padding:3px 5px;
+    }
+    .ArtworkReview-review-container{
+        padding:8px 10px 17px;
+    }
+    .ArtworkReview-review-text{
+        font-size: 12px;
+        margin-top:0px;
+    }
+    .ArtworkReview-exclamation-icon{
+        width:16px;
+    }
+}
+@media (max-width: 500px) {
+    .ArtworkReview-user-section {
+        display: grid; 
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: auto auto 30px; 
+    }
+    .ArtworkReview-profile-avatar{
+        width:35px;
+        height:35px;
+    }
+    .ArtworkReview-rating-icons{
+        margin-top: 5px;
+        gap:0px;
+    }
+    .ArtworkReview-star-icon{
+        width: 22px; 
+        height: 22px;
+    }
+    .ArtworkReview-project-title {
+        font-size: 12px; 
+        max-width: 25ch; /* 限制 8 個字元後換行 */
+    }
+    .ArtworkReview-collaboration-badge{
+        width:80px;
+        height:18px;
+        font-size:8px;
+    }
+    .ArtworkReview-tag{
+        font-size:8px;
+        height:18px;
+        flex: 1 1 calc(33.33% - 10px); /* 限制最多 3 個標籤在一行 */
+        max-width: calc(33.33% - 10px); /* 讓標籤在 3 個後換行 */
+        text-align: center;
+    }
+    .ArtworkReview-review-container{
+        padding:8px 10px 17px;
+    }
+    .ArtworkReview-review-text{
+        font-size: 10px;
+        margin-top:20px;
+    }
+    .ArtworkReview-plan-text{
+        white-space: wrap;
+    }
+}
+@media (max-width: 370px) {
+    .ArtworkReview-username{
+        font-size: 8px;
+    }
+    .ArtworkReview-profile-avatar{
+        width:35px;
+        height:35px;
+    }
+    .ArtworkReview-rating-icons{
+        margin-top: 5px;
+        gap:0px;
+    }
+    .ArtworkReview-star-icon{
+        width: 20px; 
+        height: 20px;
+    }
+    .ArtworkReview-project-title {
+        font-size: 10px; 
+    }
+    .ArtworkReview-collaboration-badge{
+        height:16px;
+        font-size:7px;
+    }
+    .ArtworkReview-tag{
+        font-size:7px;
+        height:16px;
+    }
+    .ArtworkReview-review-container{
+        padding:8px 10px 10px;
+    }
+    .ArtworkReview-review-text{
+        font-size: 8px;
+    }
+}

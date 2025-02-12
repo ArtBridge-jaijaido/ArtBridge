@@ -1,6 +1,19 @@
 .artworkPainterProfilePage{
     /*max width */
     --artworkPainterProfilePage-width: 1440px;
+
+    /*height*/
+    --artworkPainterProfile-artworkCard-container-height: auto;   
+
+    /*gap*/
+    --artworkPainterProfile-artworkCard-container-gap: 35px;
+
+    /*margin-bottom*/
+    --artworkPainterProfile-artworkCard-container-margin-bottom:0px;
+    --artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom: 50px;
+
+    /*grid-auto-rows*/
+    --artworkPainterProfile-artworkCard-container-grid-auto-rows: 300px;
 }
 .artworkPainterProfilePage{
     width:100%;
@@ -24,6 +37,93 @@
     justify-items: stretch; 
     align-items: start;
 }
+/*Tab元件*/
+.ArtworkPainterProfileTab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+}
+/*放置元件的Wrapper*/
+.artworkPainterProfile-Tab-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    gap:0px;
+}
+/*作品集、查看評價、市集、曾發布文章*/
+.artworkPainterProfile-artworkPainterMasonryGrid-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: var(--artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom);
+    justify-content: center;
+}
+.artworkPainterProfile-artworkReview-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-items: stretch; 
+    align-items: start;
+}
+.artworkPainterProfile-artworkCard-container{
+    width:100%;
+    padding-top:20px;
+    height:var(--artworkPainterProfile-artworkCard-container-height);
+    display:grid;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-auto-rows: var(--artworkPainterProfile-artworkCard-container-grid-auto-rows); 
+    gap: var(--artworkPainterProfile-artworkCard-container-gap);
+    justify-items: stretch; 
+    align-items: start;
+    margin-bottom:var(--artworkPainterProfile-artworkCard-container-margin-bottom);
+}
+/*顯示更多*/
+.artworkPainter-show-more-button {
+    background: none;
+    color: #2DAEF4; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-decoration: underline;
+    text-underline-offset: 3px; 
+}
+.artworkPainter-show-more-button:hover {
+    color: #1C8CD1; 
+}
+/*價目表*/
+.artworkPainterProfile-fixed-pricing-button {
+    position: fixed;
+    top: 40%; /* 讓按鈕垂直置中 */
+    right: 0px; /* 靠右側 */
+    transform: translateY(-50%); /* 讓按鈕的中心對齊畫面中央 */
+    background: #5496BD;
+    color: white;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    border-top: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    border-left: 2px solid #FFF;
+    width: 30px;
+    height: 70px;
+    letter-spacing: 4px; 
+    flex-shrink: 0;
+    cursor: pointer;
+    font-size: 14px;
+    writing-mode: vertical-rl; /* 讓文字垂直顯示 */
+    text-align: center;
+}
+
+/* 滑鼠懸停時變色 */
+.fixed-pricing-button:hover {
+    background: #3b7897;
+}
+
 @media (max-width: 1280px) {
     .artworkPainterProfilePage{
         width:100%;
@@ -38,84 +138,51 @@
         flex-direction: column;
         width:100%;
     }
-}
-
-@media (max-width: 834px) {
-    .artworkPainterProfilePage{
-        width:100%;
-
-    }
-    .artworkPainterDetail-container{
+    .artworkPainterProfileTab-container{
         display:flex;
         flex-direction: column;
         width:100%;
     }
-    .artworkPainterCalendar-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
+    .artworkPainterProfile-artworkCard-container{
+        --artworkPainterProfile-artworkCard-container-gap:26px;
+        --artworkPainterProfile-artworkCard-container-grid-auto-rows:280px;
+        --artworkPainterProfile-artworkCard-container-height:1150px;
     }
 }
-@media (max-width: 768px){
-    .artworkPainterProfilePage{
-        width:100%
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkPainterCalendar-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
+@media screen and (max-width: 834px){
+    .artworkPainterProfile-artworkCard-container{
+        grid-template-columns: repeat(4, 1fr); ;
+        --artworkPainterProfile-artworkCard-container-gap:35px 20px;
+        --artworkPainterProfile-artworkCard-container-grid-auto-rows:180px;
+        --artworkPainterProfile-artworkCard-container-height:auto;
     }
 }
-@media (max-width: 480px) {
-    .artworkPainterProfilePage{
-        width:480px;
+@media screen and (max-width:480px){
+    .artworkPainterProfile-fixed-pricing-button {
+        width:20px;
+        height:60px;
+        font-size: 10px;
     }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkPainterCalendar-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
+    .artworkPainter-show-more-button {
+        font-size:12px;
     }
 }
-@media (max-width: 440px) {
-    .artworkPainterProfilePage{
-        width:100%;
+@media screen and (max-width: 440px){
+    .artworkPainterProfile-artworkCard-container{
+        grid-template-columns:repeat(2, 1fr);   
+        --artworkPainterProfile-artworkCard-container-gap:32px 21px;
+        --artworkPainterProfile-artworkCard-container-height:auto;
+        --artworkPainterProfile-artworkCard-container-grid-auto-rows:166px;
     }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkPainterCalendar-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-}
-@media (max-width: 370px) {
-    .artworkPainterProfilePage{
-        width:370px;
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkPainterCalendar-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
+    
+    .artworkPainterProfile-artworkPainterMasonryGrid-container {
+        --artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom: 30px;
     }
 }
 
+@media screen and (max-width: 370px){
+    .artworkPainterProfile-artworkCard-container{
+        --artworkPainterProfile-artworkCard-container-gap: 26px 15px;
+    }
 
-
+}

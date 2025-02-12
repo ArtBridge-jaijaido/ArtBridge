@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "./Tab.css";
-
-const Tabs = ({ tabs }) => {
+const Tabs = ({ tabs}) => {
   const [activeTab, setActiveTab] = useState(tabs[0].label); // 預設選中的 tab 為第一個
 
   return (
@@ -58,17 +57,13 @@ const Tabs = ({ tabs }) => {
                     </div>
                   </div>
                 );
-              default:
-                return null;
-            }
-          }
-          return null;
-        })}
-
-
-
+                default:
+                  return null;
+              }
+              }
+              return null;
+            })}
       </div>
-
     </div>
   );
 };

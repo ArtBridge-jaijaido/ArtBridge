@@ -5,9 +5,11 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import {artworkCriteria,artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline,artworkBusiness} from '@/lib/artworkDropdownOptions.js';
 import ArtworkEntrustCard from '@/components/ArtworkEntrustCard/ArtworkEntrustCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import "./artworkEntrustLobby.css";
 
 const ArtworkEntrustLobby = () => {
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [selectedOptions, setSelectedOptions] = useState({
         criteria: "最新發布",
@@ -76,6 +78,9 @@ const ArtworkEntrustLobby = () => {
     //按鈕
     return (
         <div className={`artworkEntrustLobbyPage ${notoSansTCClass}`}>
+            <div className={`artworkEntrustLobbyPage-search-container ${isSearchOpen ? "moved" : ""}`}>
+                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+            </div>
             <div className="artworkEntrustLobby-button-container" ref={dropdownRef}>
                 <ArtMarketDropButton
                     id="criteria"
@@ -137,7 +142,7 @@ const ArtworkEntrustLobby = () => {
                     categoryText={"OC/原創角色"}
                     dealineText={"2025年02月03日"}
                     price={"2000-5000"}
-                    artworkImg={"images/artwork-icon.png"}
+                    artworkImg={"/images/artwork-icon.png"}
                   /> 
                 ))}
             </div>

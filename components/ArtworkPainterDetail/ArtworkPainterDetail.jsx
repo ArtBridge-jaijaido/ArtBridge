@@ -90,7 +90,7 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
                     onMouseLeave={handleMouseLeave}
                     >
                     <img src={iconSrc} className="ArtworkPainterDetail-exclamation-icon" />
-                     <span>我要檢舉</span>
+                     <span>我要檢舉/封鎖</span>
                     </button>
                     {/*評價*/}
                     <div className="ArtworkPainterDetail-rating-wrapper">

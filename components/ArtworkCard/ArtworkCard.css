@@ -30,6 +30,16 @@
   position:relative;
   
   }
+  /* Painter Profile 頁面的特殊樣式 */
+.Artwork-card-container.painter-profile {
+  background: #808080;
+  border: 1px solid #808080;
+}
+/* Market 頁面的標準樣式 */
+.Artwork-card-container.market-style {
+  background: #40A4DA !important;
+  border: 1px solid #40A4DA !important;
+}
 
 .Artwork-image-container{
   width: 100%;
@@ -72,6 +82,14 @@
   border-radius: 30px;
 
 }
+/* Painter Profile 頁面的標題樣式 */
+.Artwork-card-container.painter-profile .Artwork-title {
+  background: #808080;
+}
+/* Market 頁面的標題樣式 */
+.Artwork-card-container.market-style .Artwork-title {
+  background: #40A4DA !important;
+}
 
 .Artwork-favorite-button{
   position:absolute;
@@ -111,6 +129,7 @@
   display:flex;
   align-items: center;
   gap:8px;
+  width:100%;
 }
 
 .Artwork-artist-nickname{
@@ -118,16 +137,19 @@
   white-space: nowrap;
 }
 
-
-
 .Artwork-artist-img{
   width:30px;
   height:30px;
   border-radius:50%;
   
 }
-
-
+.Artwork-artist-deadline {
+  font-size: 10px;
+  white-space: nowrap;
+  color: #FFF;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 .Artwork-price{
   font-size:var(--Artwork-price);
 }
@@ -166,6 +188,10 @@
 
   .Artwork-artist-nickname{
    --Artwork-artist-nickname:12px;
+  }
+
+  .Artwork-artist-deadline {
+    font-size: 8px;
   }
 
   .Artwork-artist-img{

@@ -4,6 +4,7 @@ import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
 import ToggleButton from '@/components/CustomButton/ToggleButton.jsx';
 import ArtworkPainterProfileCard from '@/components/ArtworkPainterProfileCard/ArtworkPainterProfileCard.jsx';
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import { artworkPainter, artMarketCategory, artMarketStyle} from '@/lib/artworkDropdownOptions.js';
 
 import Pagination from '@/components/Pagination/Pagination.jsx';
@@ -11,7 +12,7 @@ import "./artworkPainter.css";
 
 
 const ArtworkPainterPage = () => {
-   
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null); 
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
@@ -74,11 +75,12 @@ const ArtworkPainterPage = () => {
         currentPage * ITEMSPERPAGE
     );
 
-
-
-
     return (
         <div className={`artworkPainterPage ${notoSansTCClass}`}>
+           <div className={`artworkPainterPage-search-container ${isSearchOpen ? "moved" : ""}`}>
+                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+            </div>
+
             <div className="artworkPainter-button-container" ref={dropdownRef}>
                 <ArtMarketDropButton
                     id="painter"

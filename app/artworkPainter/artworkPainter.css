@@ -15,20 +15,28 @@
      --artworoPainterProfileCard-margin-bottom:50px;
 }
 
-
-
 .artworkPainterPage{
     width:100%;
     max-width:var(--artworkPainterPage-width);
-    padding:110px 88px 50px 88px; /* top right bottom left */
+    padding:140px 88px 50px 88px; /* top right bottom left */
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     margin:0 auto;
 }
+.artworkPainterPage-search-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    transition: all 0.5s ease-in-out;
+    z-index: 100;
+}
 
-
+.artworkPainterPage-search-container.moved {
+    justify-content: flex-start; 
+}
 
 .artworkPainter-button-container{
     width:100%;
@@ -53,7 +61,7 @@
 @media screen and (max-width:1280px){
     .artworkPainterPage{
        
-        padding:110px 66px 50px 66px;  /* top right bottom left */
+        padding:120px 66px 50px 66px;  /* top right bottom left */
     }
 
     .artworkPainter-button-container{
@@ -65,7 +73,7 @@
 
 @media screen and (max-width:834px){
     .artworkPainterPage{
-        padding:110px 50px 50px 50px;
+        padding:120px 50px 50px 50px;
     }
 
     .artworkPainter-button-container{
@@ -117,7 +125,6 @@
       .artworkPainterProfileCard-container{
         --artworkPainterProfileCard-container-gap:20px;
     }
-
 }
 
 

@@ -1,0 +1,110 @@
+.ArtworkSearch-container {
+    position: absolute;
+    top:-30px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease-in-out;
+    gap:5px;
+}
+
+.ArtworkSearch-container.moved {
+    left: 10px;
+    right: 10px;
+    justify-content: flex-start;
+}
+
+.ArtworkSearch-button {
+    background: #54a3cd;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    padding:3px;
+}
+
+.ArtworkSearch-button:active {
+    transform: scale(0.85);
+}
+
+/* 搜尋框 */
+.ArtworkSearch-box {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #54a3cd;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 0;  /* 預設寬度 0，隱藏 */
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.5s ease-in-out;
+}
+
+
+.ArtworkSearch-container.moved .ArtworkSearch-box {
+    width: 100%;
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.ArtworkSearch-input {
+    flex: 1;
+    padding: 8px 20px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 50px;
+    width: 100%;
+}
+
+.ArtworkSearch-submit {
+    background-color: #54a3cd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+    margin-right:20px;
+}
+
+.ArtworkSearch-submit:active {
+    transform: scale(0.8);
+}
+
+
+@media screen and (max-width: 834px) {
+    .ArtworkSearch-container {
+        top:-30px;
+        right: -20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .ArtworkSearch-container {
+        top:-20px;
+        right: -5px;
+    }
+    .ArtworkSearch-button{
+        width:25px;
+        height:25px;
+    }
+    .ArtworkSearch-box{
+        height:30px;
+    }
+    .ArtworkSearch-input{
+        height:100%;
+    }
+    .ArtworkSearch-submit{
+        width:20px;
+        height:20px;
+        font-size: 12px;
+    }
+}

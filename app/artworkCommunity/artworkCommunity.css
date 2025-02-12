@@ -11,17 +11,27 @@
 
 }
 
-
-
 .artworkCommunityPage {
     width:100%;
     max-width:var(--artworkCommunityPage-max-width);
-    padding: 120px 50px 50px 50px;
+    padding: 140px 50px 50px 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+}
+.artworkCommunityPage-search-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    transition: all 0.5s ease-in-out;
+    z-index: 100;
+}
+
+.artworkCommunityPage-search-container.moved {
+    justify-content: flex-start; 
 }
 
 .artworkCommunity-button-container {
@@ -33,7 +43,7 @@
     align-items: center;
     margin-bottom: var(--artworkCommunity-button-container-margin-bottom);
   
-  }
+}
 
 
 .artworkCommunity-artworks-container{
@@ -49,7 +59,7 @@
 
 @media screen and (max-width:1280px) {
     .artworkCommunityPage {
-      padding: 110px 36px 50px 36px;
+      padding: 120px 36px 50px 36px;
     
     }
   
@@ -79,7 +89,7 @@
     .artworkCommunityPage {
       width: 100%;
       max-width: 440px;
-      padding: 100px 32px 50px 32px;
+      padding: 108px 32px 50px 32px;
     }
   
     .artworkCommunity-button-container {

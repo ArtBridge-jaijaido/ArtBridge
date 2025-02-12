@@ -1,6 +1,9 @@
 .artworkConsumerProfilePage{
     /*max width */
     --artworkConsumerProfilePage-width: 1440px;
+
+    /*margin-bottom*/
+    --ArtworkConsumerProfile-MasonryGrid-container-margin-bottom: 50px;
 }
 .artworkConsumerProfilePage{
     width:100%;
@@ -24,6 +27,62 @@
     justify-items: stretch; 
     align-items: start;
 }
+/*Tab元件*/
+.ArtworkConsumerProfileTab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+
+}
+/*放置元件的Wrapper*/
+.ArtworkConsumerProfile-Tab-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    gap:0px;
+}
+/*委託、查看評價、曾發布文章、合作案例*/
+.ArtworkConsumerProfile-artworkEntrustCard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 預設雙欄 */
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.ArtworkConsumerProfile-artworkReview-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+.ArtworkConsumerProfile-MasonryGrid-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: var(--ArtworkConsumerProfile-MasonryGrid-container-margin-bottom);
+    justify-content: center;
+}
+
+/*顯示更多*/
+.ArtworkConsumerProfile-show-more-button {
+    background: none;
+    color: #2DAEF4; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-decoration: underline;
+    text-underline-offset: 3px; 
+}
+.ArtworkConsumerProfile-show-more-button:hover {
+    color: #1C8CD1; /* 滑鼠懸停時的顏色變化 */
+}
+
 @media (max-width: 1280px) {
     .artworkConsumerProfilePage{
         width:100%;
@@ -39,79 +98,20 @@
         width:100%;
     }
 }
-@media (max-width: 834px) {
-    .artworkConsumerProfilePage{
-        width:100%;
+/* 小於 810px 時，改為單欄 */
+@media screen and (max-width: 810px) {
+    .ArtworkConsumerProfile-artworkEntrustCard-container {
+        padding:0px 15px;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: repeat(1, 1fr); /* 窄螢幕下顯示單列 */
+        gap:0px;
+    }
+}
 
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkConsumerCooperation-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-}
-@media (max-width: 768px){
-    .artworkConsumerProfilePage{
-        width:100%
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkConsumerCooperation-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-}
-@media (max-width: 480px) {
-    .artworkConsumerProfilePage{
-        width:480px;
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkConsumerCooperation-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-}
-@media (max-width: 440px) {
-    .artworkConsumerProfilePage{
-        width:100%;
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkConsumerCooperation-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-}
-@media (max-width: 370px) {
-    .artworkConsumerProfilePage{
-        width:370px;
-    }
-    .artworkPainterDetail-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
-    .artworkConsumerCooperation-container{
-        display:flex;
-        flex-direction: column;
-        width:100%;
-    }
+@media screen and (max-width: 440px) {
+
+.ArtworkConsumerProfile-MasonryGrid-container {
+    --ArtworkConsumerProfile-MasonryGrid-container-margin-bottom: 30px;
+  }
 }

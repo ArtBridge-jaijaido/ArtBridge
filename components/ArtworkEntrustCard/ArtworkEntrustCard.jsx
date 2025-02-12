@@ -19,10 +19,10 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText
             <div className="ArtworkEntrustCard-meta-info">
               <div className="ArtworkEntrustCard-user-info">
                 <div className="ArtworkEntrustCard-username">{usernameText}</div>
-                <img src="images/user-icon.png" className="ArtworkEntrustCard-user-icon" />
+                <img src="/images/user-icon.png" className="ArtworkEntrustCard-user-icon" />
               </div>
               <div className="ArtworkEntrustCard-applicants">
-                <img src="images/applicant-icon.png" className="ArtworkEntrustCard-applicant-icon" />
+                <img src="/images/applicant-icon.png" className="ArtworkEntrustCard-applicant-icon" />
                 <div className="ArtworkEntrustCard-applicant-text">{applicantText}</div>
               </div>
             </div>
@@ -32,11 +32,11 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText
             <div className="ArtworkEntrustCard-divider"></div>
             <div className="ArtworkEntrustCard-footer-info">
               <div className="ArtworkEntrustCard-category">
-                <img src="images/category-icon.png" className="ArtworkEntrustCard-category-icon" alt="Category icon" />
+                <img src="/images/category-icon.png" className="ArtworkEntrustCard-category-icon" alt="Category icon" />
                 <div className="ArtworkEntrustCard-category-text">{categoryText}</div>
               </div>
               <div className="ArtworkEntrustCard-deadline">
-                <img src="images/dealine-icon.png" className="ArtworkEntrustCard-deadline-icon" alt="Calendar icon" />
+                <img src="/images/dealine-icon.png" className="ArtworkEntrustCard-deadline-icon" alt="Calendar icon" />
                 <div className="ArtworkEntrustCard-deadline-text">{dealineText}</div>
               </div>
             </div>
@@ -45,7 +45,7 @@ const ArtworkEntrustCard = ({title, usernameText, applicantText, descriptionText
         <div className="ArtworkEntrustCard-sidebar">
           <div className="ArtworkEntrustCard-sidebar-content">
             <div className="ArtworkEntrustCard-price-tag">
-              <img src="images/price-icon.png"
+              <img src="/images/price-icon.png"
                 className="ArtworkEntrustCard-price-icon" alt="Currency icon" />
               <div className="ArtworkEntrustCard-price-text">{price}</div>
             </div>
