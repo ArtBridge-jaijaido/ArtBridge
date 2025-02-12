@@ -1,7 +1,11 @@
 "use client";
-import { Geist, Geist_Mono,Noto_Sans_TC  } from "next/font/google";
+import { useEffect } from "react";
+import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
-import {LoadingProvider} from "@/app/contexts/LoadingContext.js";
+import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
+import { subscribeToAuth } from "@/lib/authListener"; 
+import { store} from "@/app/redux/store.js";
+import { Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
 import "./globals.css";
 
@@ -23,29 +27,36 @@ const notoSansTC = Noto_Sans_TC({
 
 
 
+
+
 export default function RootLayout({ children }) {
 
-  
+  useEffect(() => {
+    const unsubscribe = subscribeToAuth(); 
+    return () => unsubscribe();
+  }, []);
 
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="mobile-web-app-capable" content="yes" />  
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body
-      
+
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-         <LoadingProvider>
-        <Header />
-        <main>
+        <Provider store={store}>
          
+          <LoadingProvider>
+            <Header />
+            <main>
+
               <ToastProvider>{children}</ToastProvider>
-          
-        </main>
-        </LoadingProvider>
-       
+
+            </main>
+          </LoadingProvider>
+        </Provider>
       </body>
     </html>
   );
