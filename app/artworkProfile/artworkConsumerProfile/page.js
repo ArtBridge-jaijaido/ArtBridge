@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
+import { useSelector, useDispatch} from "react-redux";
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkConsumerCooperation from '@/components/ArtworkConsumerCooperation/ArtworkConsumerCooperation.jsx';
 import ArtworkConsumerProfileTab from "@/components/ArtworkConsumerProfile-tab/ArtworkConsumerProfile-tab.jsx";
@@ -12,6 +13,8 @@ import "./artworkConsumerProfile.css";
 
 
 const ArtworkConsumerProfilePage = () => {
+
+        const {user} = useSelector((state) => state.user);  
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
 
         const [entrustVisibleItems, setEntrustVisibleItems] = useState(6); // 委託初始預設顯示數量
@@ -131,7 +134,7 @@ const ArtworkConsumerProfilePage = () => {
                     backgroundImg={"/images/consumer-background.png"}
                     ratingText={"5"}
                     profileImg={"/images/profile-avatar.png"}
-                    usernameText={"使用者名稱"}
+                    usernameText={user?.nickname}
                     introductionText={"很好說話，美東時差黨，延遲回覆抱歉。如果超出原本預期的工時，可以直接跟我提價錢，好商量！如果顯示在線卻沒回"}
                     viewID={"A123456"}
                     isHighQuality={true}

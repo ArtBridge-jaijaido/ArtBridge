@@ -23,8 +23,6 @@ export async function getUserByEmail(email) {
 // 更新使用者驗證碼
 export async function updateUserVerificationCode (uid, verificationCode , verificationCodeExpiresAt, email ,isEmailCodeVerified) {
   
- 
-  
   await updateDoc(doc(db, "users", uid), {
         verificationCode,
         email,
@@ -51,3 +49,22 @@ export const getUserData = async (uid) =>{
       return {success: false, message: "發生錯誤，請稍後再試。" };
     }
 }
+
+// 更新使用者角色
+export const updateUserRole = async (uid, role) => {
+  try {
+      const userRef = doc(db, "users", uid);
+      const userSnapshot = await getDoc(userRef);
+
+      if (!userSnapshot.exists()) {
+          return { success: false, message: "用戶不存在，無法更新角色" };
+      }
+
+      await updateDoc(userRef, { role });
+
+      return { success: true, message: "角色更新成功" };
+  } catch (error) {
+      
+      return { success: false, message: "角色更新失敗，請稍後再試" };
+  }
+};

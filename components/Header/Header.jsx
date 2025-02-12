@@ -77,6 +77,18 @@ const Header = () => {
         setIsMenuOpen((prev) => !prev); // 關閉菜單
     };
 
+    const handleNavigateToDashboard = (e) =>{
+       
+        const profilePath = user?.role === "artist" 
+        ? "/artworkDashboard/painterDashboard" 
+        : "/artworkDashboard/artworkConsumerDashboard";
+
+        navigate(profilePath);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 1000);
+        setIsMenuOpen(false); // 關閉菜單
+    }
+
 
 
     // 當窗口大小變化時，如果寬度大於 768px，關閉菜單
@@ -104,7 +116,7 @@ const Header = () => {
                         <img src="/images/icons8-bell-96-1.png" alt="通知" />
                         <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                     </div>
-                    <div className="header-user-avatar">
+                    <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
                         <img src={"/images/kv-min-4.png"} alt="使用者頭像" />
                     </div>
                     <div className="header-user-dropdownMenu-container-mobile" ref={mobileDropdownRef }>
@@ -161,7 +173,7 @@ const Header = () => {
                             <img src="/images/icons8-bell-96-1.png" alt="通知" />
                             <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                         </div>
-                        <div className="header-user-avatar">
+                        <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
                             <img src={user.profilePicture || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
                         <div className="header-user-dropdownMenu-container" ref={dropdownRef} >

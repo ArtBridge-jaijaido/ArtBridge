@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch} from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkPainterCalendar from '@/components/ArtworkPainterCalendar/ArtworkPainterCalendar.jsx';
@@ -12,6 +13,7 @@ import "./artworkPainterProfile.css";
 
 const ArtworkPainterProfilePage = () => {
 
+        const {user} = useSelector((state) => state.user);  
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
 
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
@@ -124,7 +126,7 @@ const ArtworkPainterProfilePage = () => {
                 backgroundImg={"/images/painter-background.png"}
                 ratingText={"5"}
                 profileImg={"/images/profile-avatar.png"}
-                usernameText={"使用者名稱"}
+               usernameText={user?.nickname}
                 introductionText={"我是一名經驗豐富的插畫家，擅長日系畫風，專注於VUP虛擬主播立繪和建模（包括Live2D製作）。曾參與《食之契約》《崩壞2》《原神》《蒼藍誓約》《命運神界》"}
                 viewID={"A123456"}
                 isHighQuality={1}
