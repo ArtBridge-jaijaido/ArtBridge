@@ -3,7 +3,7 @@ import React,{useEffect} from 'react'
 import { notoSansTCClass } from "@/app/layout.js";
 import { useSelector } from 'react-redux';
 import { useLoading } from "@/app/contexts/LoadingContext.js";
-import "../painterDashboard.css";
+import "../painterDashboard/painterDashboard.css";
 
 const PainterDashboard = () => {
 

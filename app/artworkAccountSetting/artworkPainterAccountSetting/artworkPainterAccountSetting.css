@@ -1,0 +1,12 @@
+
+.artworkPainterAccountSettingPage{
+    position: relative;
+    width:100%;
+    max-width:1440px;
+    padding: 140px 80px 50px 80px; /* top right bottom left */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto; 
+}

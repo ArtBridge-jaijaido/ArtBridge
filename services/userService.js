@@ -68,3 +68,18 @@ export const updateUserRole = async (uid, role) => {
       return { success: false, message: "角色更新失敗，請稍後再試" };
   }
 };
+
+
+// 更新使用者資料
+export const updateUserData = async (uid, data) => {
+  try {
+      const userRef = doc(db, "users", uid);
+      
+      await updateDoc(userRef, data); // 直接更新，減少一次讀取操作
+
+      return { success: true, message: "資料更新成功" };
+  } catch (error) {
+      console.error("❌ 更新資料失敗：", error.message);
+      return { success: false, message: `資料更新失敗：${error.message}` };
+  }
+};

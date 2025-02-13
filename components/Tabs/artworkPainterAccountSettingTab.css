@@ -1,0 +1,267 @@
+.artworkPainterAccountSetting-tabs-container {
+    width: 100%;
+}
+
+.artworkPainterAccountSetting-tabs {
+    display: flex;
+   
+    gap:90px;
+    padding: 0 150px 0px 10px;  /* 上 右 下 左 */
+}
+
+.artworkPainterAccountSetting-tab {
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #797979;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+    white-space: nowrap;
+}
+
+.artworkPainterAccountSetting-tab:hover {
+    color: #2DAEF4;
+}
+
+.artworkPainterAccountSetting-tab.active {
+    color: #2DAEF4;
+    position: relative;
+    font-weight: 600;
+}
+
+.artworkPainterAccountSetting-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: 2px;
+    background-color: #2DAEF4;
+}
+
+.artworkPainterAccountSetting-tab-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    
+   
+
+    
+}
+
+.artworkPainterAccountSetting-tab-panel {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/*帳號設定*/
+.artworkPainterAccountSetting-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 80px;
+    align-items: start;
+ 
+  }
+  
+  /* 通用表單欄位 */
+  .artworkPainterAccountSetting-form-group {
+    display: flex;
+    flex-direction: column;
+    max-width:400px;
+  }
+
+  .artworkPainterAccountSetting-form-group label {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  
+  /* 調整輸入框樣式 */
+  .artworkPainterAccountSetting-form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ABABAB;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+
+  .artworkPainterAccountSetting-form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  .artworkPainterAccountSetting-required {
+    margin-left:10px;
+    color: #FF0000;
+  }
+  
+  /* 第一行：暱稱、出生年月日、身分證 */
+  .artworkPainterAccountSetting-nickname {
+    grid-column: 1 / 2; 
+  }
+  
+  .artworkPainterAccountSetting-birthday {
+    grid-column: 2 / 3; 
+    
+  }
+
+
+
+  
+  .artworkPainterAccountSetting-id {
+    grid-column: 3 / 4; 
+    grid-row: 1 / 4; 
+  }
+  
+  /* 第二行：電子郵件、手機號碼、身分證正面 */
+  .artworkPainterAccountSetting-email {
+    grid-column: 1 / 2; 
+  }
+  
+  .artworkPainterAccountSetting-phone {
+    grid-column: 2 / 3; 
+  }
+  
+  /* 第三行：性別、身分證反面 */
+  .artworkPainterAccountSetting-gender {
+    grid-column: 1 / 2; 
+  }
+
+  .artworkPainterAccountSetting-gender select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ABABAB;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 16px;
+  }
+  
+  .artworkPainterAccountSetting-gender select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* 身分證區塊 */
+ 
+  
+  /* 身分證圖片容器 */
+  .artworkPainterAccountSetting-id-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .artworkPainterAccountSetting-id-image {
+    width: 100%;
+    height: 190px;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 當有圖片時，顯示圖片 */
+  .uploaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+  }
+  
+  /* 讓 input[type="file"] 覆蓋整個區域，但不可見 */
+  .upload-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* 鼠標懸停時增加可點擊感 */
+  .artworkPainterAccountSetting-id-image:hover {
+    background-color: rgba(0, 0, 255, 0.1);
+  }
+
+  /*儲存按鈕*/
+
+  .artworkPainterAccountSetting-save-button-container{
+    margin-top:200px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    
+  }
+  .artworkPainterAccountSetting-save-button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width: 130px;
+    height: 42px;
+    border-radius: 50px;
+    background: #2DAEF4;
+    color: #FFF;
+    text-align: center;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+  
+
+/*個人檔案設定*/
+
+
+
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1280px){
+   
+    
+
+}
+
+
+@media screen and (max-width: 834px){
+  
+
+}
+
+
+@media screen and (max-width: 440px){
+
+
+  
+}
+
+
+@media screen and (max-width: 370px){
+
+
+    
+
+
+}

@@ -18,17 +18,26 @@ const userSlice = createSlice({
             };
             state.isAuthLoading = false;
         },
-        
         logoutUser: (state) => {
             state.user = null;
             state.isAuthLoading = false;
         },
+
+        updateUser: (state, action) => {
+            if (state.user) {
+                state.user = {
+                    ...state.user,  
+                    ...action.payload 
+                };
+            }
+        },
+        
         setAuthLoading: (state, action) => { 
             state.isAuthLoading = action.payload;
         },
     },
 });
 
-export const { setUser, logoutUser, setAuthLoading } = userSlice.actions;
+export const { setUser, logoutUser,updateUser, setAuthLoading } = userSlice.actions;
 export default userSlice.reducer;
 

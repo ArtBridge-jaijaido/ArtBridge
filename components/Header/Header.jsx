@@ -79,10 +79,7 @@ const Header = () => {
 
     const handleNavigateToDashboard = (e) =>{
        
-        const profilePath = user?.role === "artist" 
-        ? "/artworkDashboard/painterDashboard" 
-        : "/artworkDashboard/artworkConsumerDashboard";
-
+        const profilePath = "/artworkDashboard";
         navigate(profilePath);
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 1000);

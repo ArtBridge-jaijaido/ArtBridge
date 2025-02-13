@@ -1,0 +1,12 @@
+.custom-datepicker {
+    width: 100%; /* 讓 Flatpickr 輸入框等寬 */
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .flatpickr-calendar {
+    max-width:400px;
+    width: 100%;
+    font-size: 16px;
+  }

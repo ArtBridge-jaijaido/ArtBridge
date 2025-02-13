@@ -14,30 +14,14 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
    const dispatch = useDispatch();
    const navigate = useNavigation();
    const { setIsLoading } = useLoading();
-   
   
-
-   const handleNavigateToProfile = (e) => {
-    e.stopPropagation();
-  
-    const profilePath = user?.role === "artist" 
-      ? "/artworkProfile/artworkPainterProfile" 
-      : "/artworkProfile/artworkConsumerProfile";
-  
-    navigate(profilePath);
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1000);
-    toggleDropdown();
-  };
 
   const handleNavigateTo = (e, page) => {
     e.stopPropagation();
   
-    // 動態選擇路徑
-    const basePath = user?.role === "artist" ? "/artworkPainter" : "/artworkConsumer";
-    const fullPath = `${basePath}${page}`;
+    const targetPath = page.startsWith("/") ? page : `/${page}`;
   
-    navigate(fullPath);
+    navigate(targetPath);
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
     toggleDropdown();
@@ -100,7 +84,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
       </div>
 
       <div className="UserDropdownMenu-items">
-        <p onClick={(e) => handleNavigateTo(e, "AccountSetting")}>帳戶設定</p>
+        <p onClick={(e) => handleNavigateTo(e, "artworkAccountSetting")}>帳戶設定</p>
         <p>我的市集</p>
         <p>案件管理</p>
         <p>我的文章</p>
@@ -115,7 +99,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p>深色模式 <span className="UserDropdownMenu-badge">NEW即將推出</span></p>
       </div>
       <div className="UserDropdownMenu-actions">
-        <button className="UserDropdownMenu-btn" onClick={handleNavigateToProfile}>前往個人頁面</button>
+        <button className="UserDropdownMenu-btn" onClick={(e) => handleNavigateTo(e, "artworkProfile")}>前往個人頁面</button>
         <button className="UserDropdownMenu-btn" onClick={handleLogout} >登出</button>
       </div>
     </div>
