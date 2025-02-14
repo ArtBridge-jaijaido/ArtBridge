@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { notoSansTCClass } from '@/app/layout.js';
-import ArtworkPainterAccountSettingTabs from '@/components/Tabs/artworkPainterAccountSettingTab.jsx';
+import ArtworkPainterAccountSettingTabs from '@/components/Tabs/ArtworkPainterAccountSettingTab.jsx';
 import '../artworkPainterAccountSetting/artworkPainterAccountSetting.css';
 
 const ArtworkPainterAccountSettingPage = () => {

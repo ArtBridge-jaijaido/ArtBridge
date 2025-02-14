@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "./artworkPainterAccountSettingTab.css";
-import { useSelector,useDispatch} from "react-redux";
-import { updateUserData } from "@/services/userService.js"; 
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserData, getUserData } from "@/services/userService.js";
 import { updateUser } from "@/app/redux/feature/userSlice.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
-
+import { useToast } from "@/app/contexts/ToastContext.js";
 import DatePicker from "@/components/DatePicker/DatePicker.jsx";
-
+import { uploadImage } from "@/services/storageService.js";
+import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 
 const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(tabs[0].label);
@@ -16,41 +17,68 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedBirthday, setSelectedBirthday] = useState("");
 
+  const { addToast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
     nickname: user?.nickname || "",
     email: user?.email || "",
     phone: user?.phone || ""
   });
 
+  // **本地預覽 & Firebase URL**
+  const [selectedFrontImage, setSelectedFrontImage] = useState(null);
+  const [selectedBackImage, setSelectedBackImage] = useState(null);
+  const [frontImageUrl, setFrontImageUrl] = useState(user?.frontImageUrl || "");
+  const [backImageUrl, setBackImageUrl] = useState(user?.backImageUrl || "");
+
+  // **更新表單資料**
   useEffect(() => {
+
     setFormData((prevData) => ({
       ...prevData,
       nickname: user?.nickname || "",
       email: user?.email || "",
       phone: user?.phone || ""
     }));
-  }, [user]); 
+
+    if (user?.birthday) {
+      const birthdayDate = new Date(user.birthday); // 轉換成 Date 物件
+      const localDate = new Date(birthdayDate.getTime() - birthdayDate.getTimezoneOffset() * 60000);
+      setSelectedBirthday(localDate.toISOString().split("T")[0]); // 轉為 YYYY-MM-DD 格式
+    } else {
+      setSelectedBirthday("");
+    }
+
+    if (user?.gender) {
+      setSelectedGender(user.gender);
+    } else {
+      setSelectedGender("");
+    }
+
+    if (user?.frontImageUrl) setFrontImageUrl(user.frontImageUrl);
+    if (user?.backImageUrl) setBackImageUrl(user.backImageUrl);
+
+  }, [user]);
 
 
-  
-  // **前端暫存圖片**
-  const [selectedFrontImage, setSelectedFrontImage] = useState(null);
-  const [selectedBackImage, setSelectedBackImage] = useState(null);
+  // **處理圖片選擇，但不馬上上傳**
+  const handleImageSelect = (event, isFront) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    // **處理圖片選擇，但不馬上上傳**
-    const handleImageSelect = (event, isFront) => {
-      const file = event.target.files[0];
-      if (!file) return;
-  
-      // 更新前端圖片預覽
-      if (isFront) {
-        setSelectedFrontImage(URL.createObjectURL(file));
-      } else {
-        setSelectedBackImage(URL.createObjectURL(file));
-      }
-    };
+    const previewUrl = URL.createObjectURL(file);
+
+    if (isFront) {
+      setSelectedFrontImage({ file, preview: previewUrl });
+    } else {
+      setSelectedBackImage({ file, preview: previewUrl });
+    }
+  };
+
+
 
   const { setIsLoading } = useLoading();
+
   useEffect(() => {
     let timeout;
 
@@ -63,25 +91,6 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
     return () => clearTimeout(timeout);
   }, [isAuthLoading, setIsLoading]);
 
-  const handleImageUpload = async () => {
-    if (!user?.uid) return;
-
-    try {
-      if (selectedFrontImage) {
-        const frontRef = ref(storage, `users/${user.uid}/frontImage`);
-        await uploadBytes(frontRef, selectedFrontImage);
-      }
-
-      if (selectedBackImage) {
-        const backRef = ref(storage, `users/${user.uid}/backImage`);
-        await uploadBytes(backRef, selectedBackImage);
-      }
-
-      alert("圖片已成功上傳到 Firebase Storage！");
-    } catch (error) {
-      console.error("上傳失敗:", error);
-    }
-  };
 
   const handleFormDataChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -93,29 +102,59 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
   };
 
   const handleSave = async () => {
-    if (!user?.uid) return; // 確保 user 存在
-  
-    const updatedData = {
-      nickname: formData.nickname.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-    };
-  
+    if (!user?.uid) return;
+    setIsSaving(true);
     try {
      
+      let updatedFrontImageUrl = frontImageUrl;
+      let updatedBackImageUrl = backImageUrl;
+
+      if (selectedFrontImage?.file) {
+        updatedFrontImageUrl = await uploadImage(
+          selectedFrontImage.file,
+          `usersIdImage/${user.uid}/IdFrontImage.jpg`
+        );
+      }
+
+      if (selectedBackImage?.file) {
+        updatedBackImageUrl = await uploadImage(
+          selectedBackImage.file,
+          `usersIdImage/${user.uid}/IdBackImage.jpg`
+        );
+      }
+
+      const updatedData = {
+        nickname: formData.nickname.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        frontImageUrl: updatedFrontImageUrl,
+        backImageUrl: updatedBackImageUrl,
+      };
+
       const response = await updateUserData(user.uid, updatedData);
-  
+
       if (response.success) {
-        alert("✅ 使用者資料更新成功！");
-        dispatch(updateUser(updatedData)); 
+        addToast("success", "使用者資料已更新！");
+        dispatch(updateUser(updatedData));
+
+        // 更新 Firebase 圖片 URL，確保前端顯示 Firebase 下載的圖片
+        setFrontImageUrl(updatedFrontImageUrl);
+        setBackImageUrl(updatedBackImageUrl);
+
+        // 清除選擇的圖片，但保留 Firebase 圖片 URL
+        setSelectedFrontImage(null);
+        setSelectedBackImage(null);
       } else {
         alert(`❌ 更新失敗: ${response.message}`);
       }
     } catch (error) {
-      console.error("❌ 更新使用者資料失敗:", error);
-      alert("❌ 發生錯誤，請稍後再試！");
-    } 
+      console.error("更新使用者資料失敗", error);
+      addToast("error", "更新使用者資料失敗");
+    } finally {
+      setIsSaving(false);
+    }
   };
+
 
   if (isAuthLoading) {
     return null;
@@ -148,27 +187,30 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                       {/* 第一行 */}
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-nickname">
                         <label>暱稱<span className="artworkPainterAccountSetting-required">*</span></label>
-                        <input type="text" 
-                              name="nickname"
-                              value={formData.nickname}  
-                              onChange={handleFormDataChange}  
-                              placeholder={"請輸入暱稱"} 
-                            />
+                        <input type="text"
+                          name="nickname"
+                          value={formData.nickname}
+                          onChange={handleFormDataChange}
+                          placeholder={"請輸入暱稱"}
+                        />
                       </div>
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-birthday">
                         <label>出生年月日<span className="artworkPainterAccountSetting-required">*</span></label>
-                        <DatePicker value={selectedBirthday} onChange={setSelectedBirthday} />
+                        <DatePicker
+                          value={selectedBirthday}
+                          onChange={(date) => setSelectedBirthday(date)}
+                        />
                       </div>
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-id">
                         <label>身分證<span className="artworkPainterAccountSetting-required">*</span>  <span className="artworkPainterAccountSetting-pending">⚠️官方驗證中</span></label>
 
                         <div className="artworkPainterAccountSetting-id-image-container">
-                            {/* 正面 */}
+                          {/* 正面 */}
                           <div className="artworkPainterAccountSetting-id-image">
-                            {selectedFrontImage ? (
-                              <img src={selectedFrontImage} alt="身分證正面" className="uploaded-image" />
-                            ) : user?.frontImageUrl ? (
-                              <img src={user.frontImageUrl} alt="身分證正面" className="uploaded-image" />
+                            {selectedFrontImage?.preview ? (
+                              <img src={selectedFrontImage.preview} alt="身分證正面" />
+                            ) : frontImageUrl ? (
+                              <img src={frontImageUrl} alt="身分證正面" />
                             ) : (
                               <span>正面</span>
                             )}
@@ -181,12 +223,12 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                           </div>
 
 
-                           {/* 反面 */}
+                          {/* 反面 */}
                           <div className="artworkPainterAccountSetting-id-image">
-                            {selectedBackImage ? (
-                              <img src={selectedBackImage} alt="身分證反面" className="uploaded-image" />
-                            ) : user?.backImageUrl ? (
-                              <img src={user.backImageUrl} alt="身分證反面" className="uploaded-image" />
+                            {selectedBackImage?.preview ? (
+                              <img src={selectedBackImage.preview} alt="身分證反面" />
+                            ) : backImageUrl ? (
+                              <img src={backImageUrl} alt="身分證反面" />
                             ) : (
                               <span>反面</span>
                             )}
@@ -203,23 +245,23 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                       {/* 第二行 */}
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-email">
                         <label>電子郵件<span className="artworkPainterAccountSetting-required">*</span></label>
-                         <input 
-                            type="email"
-                            name="email" 
-                            value={formData.email} 
-                            placeholder={"請輸入電子郵件"} 
-                            onChange={handleFormDataChange}  
-                         />
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          placeholder={"請輸入電子郵件"}
+                          onChange={handleFormDataChange}
+                        />
                       </div>
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-phone">
                         <label>手機號碼<span className="artworkPainterAccountSetting-required">*</span></label>
-                          <input
-                                type="text" 
-                                name="phone"
-                                value={formData.phone} 
-                                placeholder={"請輸入手機號碼"} 
-                                onChange={handleFormDataChange}  
-                          />
+                        <input
+                          type="text"
+                          name="phone"
+                          value={formData.phone}
+                          placeholder={"請輸入手機號碼"}
+                          onChange={handleFormDataChange}
+                        />
                       </div>
 
                       {/* 第三行 */}
@@ -229,14 +271,16 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                           <option value="">請選擇</option>
                           <option value="male">男</option>
                           <option value="female">女</option>
-                          <option value="prefer_not_to_say">不透露</option>
+                          <option value="preferNotToSay">不透露</option>
                         </select>
                       </div>
                     </div>
 
                     {/* 儲存按鈕 */}
                     <div className="artworkPainterAccountSetting-save-button-container">
-                      <button className="artworkPainterAccountSetting-save-button" onClick={handleSave}>儲存</button>
+                      <LoadingButton isLoading={isSaving} onClick={handleSave}>
+                        儲存
+                      </LoadingButton>
                     </div>
 
                   </div>
