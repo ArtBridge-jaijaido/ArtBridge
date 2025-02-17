@@ -11,7 +11,7 @@ import "./artworkUploadMarket.css";
 
 const ArtworkUploadMarketPage = () => {
   const [step, setStep] = useState(1);
-  const router = useRouter(); // ← 初始化 useRouter
+  const router = useRouter();
 
   const handleNext = () => {
     if (step < 4) setStep(step + 1);

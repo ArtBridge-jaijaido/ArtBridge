@@ -36,7 +36,7 @@
     color: #555;
     text-align: left;
     width: 100%;
-    max-width: 620px; /* 限制標籤寬度與框框一致 */
+    max-width: 620px; 
     padding-left: 10px; /* 調整左邊距，確保標籤與框框左側對齊 */
     display: block;
 }
@@ -90,7 +90,7 @@
     padding-left: 10px; 
     white-space: normal; /* 讓文字自動換行 */
     word-break: break-all; 
-    overflow-wrap: break-word; /* 確保文字不會超出 box */
+    overflow-wrap: break-word;
 }
 
 .file-name {
@@ -188,7 +188,7 @@
         height: 260px;
     }
 }
-/* 響應式調整：當螢幕小於 834px 時，改為垂直排列 */
+/* 當螢幕小於 834px 時，改為垂直排列 */
 @media screen and (max-width: 834px) {
     .MarketUploadForm2-upload-box {
         width: 100%;
@@ -209,7 +209,6 @@
     }
 }
 
-/* 更小螢幕的調整 */
 @media screen and (max-width: 480px) {
     .MarketUploadForm2-container{
         padding-top:0px;
