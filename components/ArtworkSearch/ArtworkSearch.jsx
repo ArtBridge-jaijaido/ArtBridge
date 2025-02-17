@@ -32,8 +32,8 @@ const ArtworkSearch = ({ onSearchToggle }) => {
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
-
-
+  
+  
      useEffect(() => {
         if (onSearchToggle) {
             onSearchToggle(isOpen);
