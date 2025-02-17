@@ -1,0 +1,242 @@
+.MarketUploadForm3-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.MarketUploadForm3-container {
+    width: 100%;
+    padding: 20px;
+    background: white;
+}
+
+.MarketUploadForm3-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    min-width: 120px;
+}
+
+/*欄位各占 50% */
+.MarketUploadForm3-group.file-type , .MarketUploadForm3-group.file-size{
+    flex: 1;
+    width: 50%;
+}
+
+.MarketUploadForm3-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.MarketUploadForm3-group textarea {
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.MarketUploadForm3-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.MarketUploadForm3-size-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    min-width: 0;
+}
+
+.MarketUploadForm3-size-input input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    min-width: 0;
+}
+
+.MarketUploadForm3-size-input span {
+    font-size: 16px;
+    color: #555;
+    margin-left: 5px;
+    white-space: nowrap; /* 防止 px 跑出框框 */
+}
+
+.dropdown-selected.gray-text {
+    color: #999;
+}
+
+.dropdown-selected.black-text {
+    color: black;
+}
+
+.MarketUploadForm3-group .dropdown {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    width:100%;
+}
+
+.dropdown::after {
+    content: "▼";
+    font-size: 14px;
+    color: #555;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.dropdown.open::after {
+    content: "▲";
+}
+
+.dropdown-options {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    left: 0;
+    top: 100%;
+}
+
+.dropdown-option {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dropdown-option:hover {
+    background-color: #40a4da;
+    color: white;
+}
+/* 權限 */
+.MarketUploadForm3-group.permission {
+    flex: 1;
+    width: 50%;
+    position: relative; 
+}
+.MarketUploadForm3-group.permission .dropdown-options {
+    left: calc(100% + 30px); 
+    top: -5; 
+    width: max-content; 
+    min-width: 200px; 
+    white-space: nowrap; 
+}
+
+
+/*按鈕*/
+.MarketUploadForm3-button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    gap: 100px;
+}
+
+.MarketUploadForm3-button-group button {
+    padding: 0px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.MarketUploadForm3-prev {
+    background-color: #40a4da;
+    color: white;
+}
+
+.MarketUploadForm3-next {
+    background-color: #40a4da;
+    color: white;
+}
+
+.MarketUploadForm3-next:hover {
+    background-color: #358bc5;
+}
+
+/* 作品尺寸輸入非數字時的錯誤訊息樣式 */
+.error-message {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 760px) {
+
+    .MarketUploadForm3-row {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+
+    .MarketUploadForm3-group.file-type, 
+    .MarketUploadForm3-group.file-size {
+        width: 100%;
+    }
+    .MarketUploadForm3-group.permission {
+        width: 100%;
+    }
+    .MarketUploadForm3-group.permission .dropdown-options {
+        left: 0; /* 回到原本的對齊方式 */
+        width: 100%;
+        top:100%;
+    }
+
+    .MarketUploadForm3-button-group {
+        gap: 70px;
+        margin-top: 70px;
+    }
+
+    .MarketUploadForm3-button-group button {
+        font-size: 14px;
+        width: 100px;
+        height: 35px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .MarketUploadForm3-container{
+        padding-top:0px;
+    }
+  
+    .MarketUploadForm3-button-group {
+        gap: 60px;
+        margin-top: 40px;
+    }
+
+    .MarketUploadForm3-button-group button {
+        font-size: 12px;
+        width: 80px;
+        height: 35px;
+    }
+}

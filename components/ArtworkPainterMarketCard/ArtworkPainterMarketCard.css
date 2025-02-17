@@ -1,0 +1,200 @@
+.ArtworkPainterMarketCard-card-container{
+    /*width*/
+    --ArtworkPainterMarketCard-card-container-width: 228px;
+    --ArtworkPainterMarketCard-title-width:174px; 
+ 
+    /*height*/
+     --ArtworkPainterMarketCard-card-container-height: 264px;
+     --ArtworkPainterMarketCard-image-container-height: 214px;
+     --ArtworkPainterMarketCard-title-height: 29px;
+     --ArtworkPainterMarketCard-footer-row-height:50px;
+ 
+ 
+     /*font-size*/
+     --ArtworkPainterMarketCard-title-font-size: 14px;
+     --ArtworkPainterMarketCard-price: 18px;
+ }
+ 
+  .ArtworkPainterMarketCard-card-container{
+    width:100%;
+    max-width: var(--ArtworkPainterMarketCard-card-container-width);
+    height: var(--ArtworkPainterMarketCard-card-container-height);
+    border: 1px solid #40A4DA;
+    position: relative;
+    background: #40A4DA;
+    position:relative;
+    }
+
+  .ArtworkPainterMarketCard-title{
+    position:absolute;
+    top:-15px;
+    left:-1px;
+    background: #40A4DA;
+    width:100%;
+    max-width: var(--ArtworkPainterMarketCard-title-width);
+    height: var(--ArtworkPainterMarketCard-title-height);
+    color: #FFF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+    font-family: Inter;
+    font-size: var(--ArtworkPainterMarketCard-title-font-size);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+    border-radius: 30px;
+  }
+
+ /* 歷史市集時的樣式變更 */
+  .history-market.ArtworkPainterMarketCard-card-container {
+    background: #808080 !important;
+    border-color: #808080 !important;
+  }
+
+  .history-market.ArtworkPainterMarketCard-title {
+    background: #808080 !important;
+  }
+
+  .ArtworkPainterMarketCard-image-container{
+    width: 100%;
+    height: var(--ArtworkPainterMarketCard-image-container-height);
+    overflow: hidden;
+  }
+  .ArtworkPainterMarketCard-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .ArtworkPainterMarketCard-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+ 
+  .ArtworkPainterMarketCard-footer-row{
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:var( --ArtworkPainterMarketCard-footer-row-height);
+    padding:9px 8px;
+    color:#FFF;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+ }
+ 
+ .ArtworkPainterMarketCard-profile-container{
+   display:flex;
+   align-items: center;
+   gap:8px;
+   width:100%;
+ }
+ 
+ .ArtworkPainterMarketCard-edit {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+ .ArtworkPainterMarketCard-price{
+   font-size:var(--ArtworkPainterMarketCard-price);
+ }
+ 
+ @media screen and (max-width:1280px){
+   .ArtworkPainterMarketCard-card-container{
+     --ArtworkPainterMarketCard-card-container-width: 207px;
+     --ArtworkPainterMarketCard-card-container-height: 235px;
+   }
+   .ArtworkPainterMarketCard-image-container{
+    --ArtworkPainterMarketCard-image-container-height:190px;
+   }
+
+   .ArtworkPainterMarketCard-title{
+     --ArtworkPainterMarketCard-title-width:157px;
+     --ArtworkPainterMarketCard-title-height: 26px;
+     --ArtworkPainterMarketCard-title-font-size:12px;
+   }
+
+   .ArtworkPainterMarketCard-footer-row{
+     --ArtworkPainterMarketCard-footer-row-height:45px;
+   }
+ 
+   .ArtworkPainterMarketCard-edit {
+     font-size: 12px;
+   }
+ 
+   .ArtworkPainterMarketCard-price{
+    --ArtworkPainterMarketCard-price:15px;
+ }
+}
+ 
+ @media screen and (max-width:834px){
+   .ArtworkPainterMarketCard-card-container{
+     --ArtworkPainterMarketCard-card-container-width:160px;
+     --ArtworkPainterMarketCard-card-container-height:179px;
+   }
+   .ArtworkPainterMarketCard-image-container{
+    --ArtworkPainterMarketCard-image-container-height:145px;
+   }
+
+   .ArtworkPainterMarketCard-title{
+     --ArtworkPainterMarketCard-title-width:132px;
+     --ArtworkPainterMarketCard-title-height:20px;
+     --ArtworkPainterMarketCard-title-font-size:8px;
+     top:-13px;
+   }
+ 
+   .ArtworkPainterMarketCard-footer-row{
+     padding:8px 8px;
+     --ArtworkPainterMarketCard-footer-row-height:34px;
+   } 
+ 
+   .ArtworkPainterMarketCard-edit{
+     font-size: 9px;
+   }
+
+ 
+   .ArtworkPainterMarketCard-price{
+     --ArtworkPainterMarketCard-price: 12px;
+   }
+ }
+ 
+ 
+ @media screen and (max-width:440px){
+   .ArtworkPainterMarketCard-card-container{
+     --ArtworkPainterMarketCard-card-container-width:175px;
+     --ArtworkPainterMarketCard-card-container-height: 166px;
+   }
+
+   .ArtworkPainterMarketCard-image-container{
+    --ArtworkPainterMarketCard-image-container-height:135px;
+  }
+   .ArtworkPainterMarketCard-title{
+     --ArtworkPainterMarketCard-title-width:100px;
+     --ArtworkPainterMarketCard-title-height:18px;
+     --ArtworkPainterMarketCard-title-font-size:7px;
+     top:-12px;
+   }
+ 
+   .ArtworkPainterMarketCard-footer-row{
+     padding:8px 8px;
+     --ArtworkPainterMarketCard-footer-row-height:31px;
+   } 
+ 
+   .ArtworkPainterMarketCard-price{
+     --ArtworkPainterMarketCard-price: 12px;
+   }
+ }
