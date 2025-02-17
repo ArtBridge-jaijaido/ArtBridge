@@ -171,7 +171,7 @@ const Header = () => {
                             <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                         </div>
                         <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
-                            <img src={user.profilePicture || "/images/kv-min-4.png"} alt="使用者頭像" />
+                            <img src={user.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
                         <div className="header-user-dropdownMenu-container" ref={dropdownRef} >
                             <span onClick={toggleDropdown} >⌵</span>

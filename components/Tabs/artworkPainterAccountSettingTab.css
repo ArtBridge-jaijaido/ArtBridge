@@ -3,8 +3,7 @@
 }
 
 .artworkPainterAccountSetting-tabs {
-    display: flex;
-   
+    display: flex;  
     gap:90px;
     padding: 0 150px 0px 10px;  /* 上 右 下 左 */
 }

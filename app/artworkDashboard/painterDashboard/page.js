@@ -41,7 +41,7 @@ if (isAuthLoading) {
             <div className="PainterDashboard-painterInfo-container">
 
               <div className="PainterDashboard-painterInfo-avatar">
-                <img src="/images/kv-min-4.png" alt="avatar" className="PainterDashboard-painterInfo-avatar-img" />
+                <img src={user.profileAvatar || "/images/kv-min-4.png"} alt="avatar" className="PainterDashboard-painterInfo-avatar-img" />
               </div>
 
               <div className="PainterDashboard-painterInfo">

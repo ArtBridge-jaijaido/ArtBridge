@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { notoSansTCClass } from '@/app/layout.js';
 import "./artworkPainterAccountSettingTab.css";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserData, getUserData } from "@/services/userService.js";
@@ -7,6 +8,7 @@ import { updateUser } from "@/app/redux/feature/userSlice.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import DatePicker from "@/components/DatePicker/DatePicker.jsx";
+import ArtworkPainterAccountProfileSetting from "@/components/ArtworkPainterAccountSettingContent/ArtworkPainterAccountProfileSetting.jsx";
 import { uploadImage } from "@/services/storageService.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 
@@ -16,7 +18,6 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
   const dispatch = useDispatch();
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedBirthday, setSelectedBirthday] = useState("");
-
   const { addToast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
@@ -176,7 +177,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
       </div>
 
       {/* 對應內容 */}
-      <div className="artworkPainterAccountSetting-tab-content">
+      <div className={`artworkPainterAccountSetting-tab-content ${notoSansTCClass}`}>
         {tabs.map((tab) => {
           if (activeTab === tab.label) {
             switch (tab.label) {
@@ -288,7 +289,13 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
               case "個人檔案設定":
                 return (
                   <div key={tab.label} className="artworkPainterAccountSetting-tab-panel artworkPainterAccountSetting-tab-panel-profileSetting">
-
+                   <ArtworkPainterAccountProfileSetting
+                      userPainterProfileBackgroundImg={user?.painterProfileBackgroundImg}
+                      userProfileAvatar={user?.profileAvatar}
+                      userPainterProfileIntorduction={user?.painterIntorduction}
+                      userExclusiveId={"A123456"}
+                      userNickname={user?.nickname}
+                    />
                   </div>
                 );
               case "封鎖名單":

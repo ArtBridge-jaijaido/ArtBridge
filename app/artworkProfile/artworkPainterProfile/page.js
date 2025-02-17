@@ -123,11 +123,11 @@ const ArtworkPainterProfilePage = () => {
             <div className="artworkPainterDetail-container">
                 <ArtworkPainterDetail 
                 id="Detail"
-                backgroundImg={"/images/painter-background.png"}
+                backgroundImg={user?.painterProfileBackgroundImg}
                 ratingText={"5"}
-                profileImg={"/images/profile-avatar.png"}
-               usernameText={user?.nickname}
-                introductionText={"我是一名經驗豐富的插畫家，擅長日系畫風，專注於VUP虛擬主播立繪和建模（包括Live2D製作）。曾參與《食之契約》《崩壞2》《原神》《蒼藍誓約》《命運神界》"}
+                profileImg={user?.profileAvatar ? user.profileAvatar : "/images/profile-avatar.png"}
+                usernameText={user?.nickname}
+                introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
                 viewID={"A123456"}
                 isHighQuality={1}
                 />
