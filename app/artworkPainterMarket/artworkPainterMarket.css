@@ -1,15 +1,23 @@
-.artworkPainterMarketPage{
+.artworkPainterMarket-page{
     /*max width */
-    --artworkPainterMarketPage-width: 1440px;
+    --artworkPainterMarket-page-width: 1440px;
 
     /*height*/
+    --artworkPainterMarket-marketCard-container-height: auto;   
+
+    /*gap*/
+    --artworkPainterMarket-marketCard-container-gap: 35px;
+
+    /*grid-auto-rows*/
+    --artworkPainterMarket-marketCard-container-grid-auto-rows: 300px;
 
    
 }
-.artworkPainterMarketPage{
+.artworkPainterMarket-page{
+    position: relative;
     width:100%;
-    max-width:var(--artworkPainterMarketPage-width);
-    padding: 140px 40px 20px 40px; 
+    max-width:var(--artworkPainterMarket-page-width);
+    padding: 100px 30px 20px 30px; 
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -18,7 +26,7 @@
 }
 
 /*放置元件的Wrapper*/
-.artworkPainterMarket-Tab-wrapper {
+.artworkPainterMarket-tab-wrapper {
     display: flex;
     flex-direction: column; 
     align-items: center; 
@@ -26,9 +34,93 @@
     gap:0px;
 }
 /*Tab元件*/
-.ArtworkPainterMarket-SetTab-container{
+.artworkPainterMarket-setTab-container{
     display:flex;
     flex-direction: column;
     width:100%;
     padding:0px 20px;
+}
+
+.artworkPainterMarket-marketCard-container{
+    width:100%;
+    height:var(--artworkPainterMarket-marketCard-container-height);
+    display:grid;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-auto-rows: var(--artworkPainterMarket-marketCard-container-grid-auto-rows); 
+    gap: var(--artworkPainterMarket-marketCard-container-gap);
+    justify-items: stretch; 
+    align-items: start;
+    margin-top: 20px;
+}
+
+/*顯示更多*/
+.artworkPainterMarket-show-more-button {
+    background: none;
+    color: #2DAEF4; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-decoration: underline;
+    text-underline-offset: 3px; 
+}
+.artworkPainterMarket-show-more-button:hover {
+    color: #1C8CD1; 
+}
+
+@media (max-width: 1280px) {
+    .artworkPainterMarketPage{
+        width:100%;
+    }
+
+    .artworkPainterMarket-setTab-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkPainterMarket-marketCard-container{
+        --artworkPainterMarket-marketCard-container-gap:26px;
+        --artworkPainterMarket-marketCard-container-grid-auto-rows:280px;
+        --artworkPainterMarket-marketCard-container-height:auto;
+    }
+}
+@media screen and (max-width: 834px){
+    .artworkPainterMarket-marketCard-container{
+        grid-template-columns: repeat(4, 1fr); ;
+        --artworkPainterMarket-marketCard-container-gap:35px 20px;
+        --artworkPainterMarket-marketCard-container-grid-auto-rows:180px;
+        --artworkPainterMarket-marketCard-container-height:auto;
+    }
+}
+@media screen and (max-width:700px){
+    .artworkPainterMarket-marketCard-container{
+        grid-template-columns:repeat(3, 1fr);   
+        --artworkPainterMarket-marketCard-container-gap:50px 21px;
+        --artworkPainterMarket-marketCard-container-grid-auto-rows:166px;
+        --artworkPainterMarket-marketCard-container-height:auto;
+    }
+}
+@media screen and (max-width:480px){
+    .artworkPainterMarket-show-more-button {
+        font-size:12px;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .artworkPainterMarket-marketCard-container{
+        grid-template-columns:repeat(2, 1fr);   
+        --artworkPainterMarket-marketCard-container-gap:32px 21px;
+        --artworkPainterMarket-marketCard-container-grid-auto-rows:166px;
+        --artworkPainterMarket-marketCard-container-height:auto;
+    }
+}
+
+@media screen and (max-width: 370px){
+    .artworkPainterMarket-marketCard-container{
+        --artworkPainterMarket-marketCard-container-gap: 26px 15px;
+    }
+
 }

@@ -1,8 +1,16 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; 
 import "./ArtworkPainterSetTab.css";
+
 const ArtworkPainterSetTab = ({ tabs}) => {
-const [activeTab, setActiveTab] = useState(tabs[0].label); // 預設選中的 tab 為第一個
+  const [activeTab, setActiveTab] = useState(tabs[0].label); // 預設選中的 tab 為第一個
+  const router = useRouter(); 
+
+  // 按鈕點擊處理函式
+  const handleUploadMarketClick = () => {
+    router.push("/artworkUploadMarket"); 
+  };
 
   return (
     <div className="ArtworkPainterSetTab-tabs-container">
@@ -17,6 +25,10 @@ const [activeTab, setActiveTab] = useState(tabs[0].label); // 預設選中的 ta
             {tab.label}
           </button>
         ))}
+        {/* 上傳新市集按鈕 */}
+        <button className="ArtworkPainterSetTab-upload-button" onClick={handleUploadMarketClick}>
+          上傳新市集
+        </button>
       </div>
 
       {/* 對應內容 */}

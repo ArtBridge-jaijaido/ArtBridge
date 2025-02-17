@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import "./ArtworkSearch.css";
 
 const ArtworkSearch = ({ onSearchToggle }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchText, setSearchText] = useState("");
+    const searchRef = useRef(null);
 
     const toggleSearch = (e) => {
         e.stopPropagation(); // 避免點擊按鈕時馬上觸發關閉事件
@@ -13,13 +14,25 @@ const ArtworkSearch = ({ onSearchToggle }) => {
 
     //確保點擊相同頁面時搜尋框收起
     useEffect(() => {
-        const handleClick = () => setIsOpen(false);
+        
+        const handleClickOutside = (e) => {
+              // 檢查是否點擊的是 <a> 標籤（超連結）
+              if (e.target.tagName === "A") {
+                setIsOpen(false);
+                return;
+            }
+            
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                setIsOpen(false);
+            }
+        };
 
-        window.addEventListener("click", handleClick);
+        document.addEventListener("click", handleClickOutside);
         return () => {
-            window.removeEventListener("click", handleClick);
+            document.removeEventListener("click", handleClickOutside);
         };
     }, []);
+
 
      useEffect(() => {
         if (onSearchToggle) {

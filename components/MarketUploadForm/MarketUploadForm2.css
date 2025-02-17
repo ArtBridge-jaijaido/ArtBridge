@@ -1,0 +1,250 @@
+.MarketUploadForm2-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.MarketUploadForm2-container {
+    width: 100%;
+    padding: 20px;
+    background: white;
+}
+
+/* 設定兩個上傳框的排列方式 */
+.MarketUploadForm2-upload-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+/* 兩個圖片上傳區塊 */
+.MarketUploadForm2-image-upload {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.MarketUploadForm2-image-upload label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+    text-align: left;
+    width: 100%;
+    max-width: 620px; /* 限制標籤寬度與框框一致 */
+    padding-left: 10px; /* 調整左邊距，確保標籤與框框左側對齊 */
+    display: block;
+}
+
+/* 上傳框 */
+.MarketUploadForm2-upload-box {
+    width: 100%;
+    max-width: 620px;
+    height: 520px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 縮短補充圖片的框框高度 */
+.MarketUploadForm2-upload-box.small-box {
+    height: 350px;
+}
+
+.MarketUploadForm2-upload-box input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    color: 979797;
+}
+.MarketUploadForm2-gray-text {
+    color: gray;
+}
+
+
+/* 圖片預覽 */
+.MarketUploadForm2-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* 補充圖片的檔名 */
+.MarketUploadForm2-file-names {
+    margin-top: 10px;
+    width: 100%;
+    text-align: left;  
+    padding-left: 10px; 
+    white-space: normal; /* 讓文字自動換行 */
+    word-break: break-all; 
+    overflow-wrap: break-word; /* 確保文字不會超出 box */
+}
+
+.file-name {
+    font-size: 14px;
+    color: #555;
+    margin: 3px 0;
+}
+
+/* 按鈕區域 */
+.MarketUploadForm2-button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 100px;
+}
+
+.MarketUploadForm2-button-group button {
+    padding: 0px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.MarketUploadForm2-prev {
+    background-color: #40a4da;
+    color: white;
+}
+.MarketUploadForm2-next {
+    background-color: #40a4da;
+    color: white;
+}
+
+.MarketUploadForm2-next:hover {
+    background-color: #358bc5;
+}
+
+/* 檔名與刪除按鈕的容器 */
+.file-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+
+/* 檔名樣式 */
+.file-name {
+    font-size: 14px;
+    color: #555;
+    word-break: break-word;
+    flex: 1;
+}
+
+/* 刪除按鈕樣式 */
+.delete-file {
+    background: #40a4da;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0px 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.delete-file:hover {
+    background: darkred;
+}
+
+
+/* 確保螢幕很大的時候檔名區域也不會超出上傳框 */
+@media screen and (min-width: 1440px) {
+    .MarketUploadForm2-file-names {
+        max-width: 620px; 
+        overflow-x: hidden; 
+    }
+}
+
+
+@media screen and (max-width: 1280px) {
+    .MarketUploadForm2-upload-box {
+        width: 100%;
+        max-width: 500px;
+        height: 370px;
+    }
+
+    .MarketUploadForm2-upload-box.small-box {
+        height: 260px;
+    }
+}
+/* 響應式調整：當螢幕小於 834px 時，改為垂直排列 */
+@media screen and (max-width: 834px) {
+    .MarketUploadForm2-upload-box {
+        width: 100%;
+        max-width: 755px;
+        height: 370px;
+    }
+
+    .MarketUploadForm2-upload-box.small-box {
+        height: 320px;
+    }
+    .MarketUploadForm2-upload-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .MarketUploadForm2-image-upload {
+        width: 100%;
+    }
+}
+
+/* 更小螢幕的調整 */
+@media screen and (max-width: 480px) {
+    .MarketUploadForm2-container{
+        padding-top:0px;
+    }
+    .MarketUploadForm2-upload-box {
+        width: 100%;
+        max-width: 371px;
+        height: 220px;
+    }
+
+    .MarketUploadForm2-upload-box.small-box {
+        height: 220px;
+    }
+    .MarketUploadForm2-button-group {
+        gap: 50px;
+    }
+
+    .MarketUploadForm2-button-group button {
+        font-size: 12px;
+        width: 80px;
+        height: 35px;
+    }
+
+    .file-name {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 370px) {
+    .MarketUploadForm2-upload-box {
+        width: 100%;
+        max-width: 341px;
+        height: 174px;
+    }
+
+    .MarketUploadForm2-upload-box.small-box {
+        height: 174px;
+    }
+}
