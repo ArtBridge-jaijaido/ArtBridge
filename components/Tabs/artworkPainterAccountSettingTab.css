@@ -100,6 +100,16 @@
     margin-left:10px;
     color: #FF0000;
   }
+
+  .artworkPainterAccountSetting-pending{
+    color: #AAA;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
   
   /* 第一行：暱稱、出生年月日、身分證 */
   .artworkPainterAccountSetting-nickname {
@@ -203,27 +213,13 @@
     justify-content: center;
     
   }
-  .artworkPainterAccountSetting-save-button{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width: 130px;
-    height: 42px;
-    border-radius: 50px;
-    background: #2DAEF4;
-    color: #FFF;
-    text-align: center;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 2px;
-  }
+
   
 
 /*個人檔案設定*/
 
 
+/*blocklist*/
 
 
 /* 動畫效果 */

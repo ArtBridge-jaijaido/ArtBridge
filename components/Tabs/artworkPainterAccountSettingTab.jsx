@@ -9,6 +9,8 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import DatePicker from "@/components/DatePicker/DatePicker.jsx";
 import ArtworkPainterAccountProfileSetting from "@/components/ArtworkPainterAccountSettingContent/ArtworkPainterAccountProfileSetting.jsx";
+import ArtworkPainterAccountSettingBlockList from "@/components/ArtworkPainterAccountSettingContent/ArtworkPainterAccountSettingBlockList.jsx";
+import ArtworkPainterAccountSettingVerify from "@/components/ArtworkPainterAccountSettingContent/ArtworkPainterAccountSettingVerify.jsx";
 import { uploadImage } from "@/services/storageService.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 
@@ -156,6 +158,41 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
     }
   };
 
+  /* 封鎖名單  for testing*/
+  const blockedUsers = [
+    {
+      id: 1,
+      avatar: "/images/kv-min-4.png",
+      username: "使用者名稱",
+      userID: "A123456",
+    },
+    {
+      id: 2,
+      avatar: "/images/kv-min-4.png",
+      username: "使用者名稱",
+      userID: "A123456",
+    },{
+      id: 3,
+      avatar: "/images/kv-min-4.png",
+      username: "使用者名稱",
+      userID: "A123456",
+    },
+    {
+      id: 4,
+      avatar: "/images/kv-min-4.png",
+      username: "使用者名稱",
+      userID: "A123456",
+    },
+  ];
+
+  const handleUnblock = (id) => {
+    console.log("解除封鎖使用者ID:", id);
+  };
+  
+  const handleReport = (id) => {
+    console.log("檢舉使用者ID:", id);
+  };
+
 
   if (isAuthLoading) {
     return null;
@@ -292,7 +329,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                    <ArtworkPainterAccountProfileSetting
                       userPainterProfileBackgroundImg={user?.painterProfileBackgroundImg}
                       userProfileAvatar={user?.profileAvatar}
-                      userPainterProfileIntorduction={user?.painterIntorduction}
+                      userPainterProfileIntroduction={user?.painterIntroduction||"請寫下你的自我介紹"}
                       userExclusiveId={"A123456"}
                       userNickname={user?.nickname}
                     />
@@ -301,14 +338,18 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
               case "封鎖名單":
                 return (
                   <div key={tab.label} className="artworkPainterAccountSetting-tab-panel artworkPainterAccountSetting-tab-panel-blockList">
-
+                       <ArtworkPainterAccountSettingBlockList
+                          blockedUsers={blockedUsers}
+                          onUnblock={handleUnblock}
+                          onReport={handleReport}
+                        />
                   </div>
 
                 );
-              case "官方驗證":
+              case "官方驗證 🚨":
                 return (
                   <div key={tab.label} className="artworkPainterAccountSetting-tab-panel artworkPainterAccountSetting-tab-panel-officialVerification">
-
+                     <ArtworkPainterAccountSettingVerify/>
                   </div>
                 );
               default:

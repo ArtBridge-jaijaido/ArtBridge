@@ -20,7 +20,7 @@ const ArtworkPainterAccountSettingPage = () => {
      
     },
     {
-      label: "官方驗證",
+      label: "官方驗證 🚨",
       
     }
   ]

@@ -1,0 +1,128 @@
+.artworkPainterAccountSettingBlockList-container {
+   display:grid;
+   grid-template-columns: 1fr  1fr;
+   gap:80px;
+   position: relative;
+}
+
+
+/* 單個封鎖使用者項目 */
+.ArtworkPainterAccountSettingBlockList-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background-color: #fff;
+    position: relative;
+    width:100%;
+    max-width:500px;
+    
+  }
+
+
+  .ArtworkPainterAccountSettingBlockList-item::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+}
+
+  /* 使用者大頭貼 */
+  .ArtworkPainterAccountSettingBlockList-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+
+
+  .ArtworkPainterAccountSettingBlockList-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+   
+  }
+  
+  /* 使用者資訊 */
+  .ArtworkPainterAccountSettingBlockList-info {
+    flex-grow: 1; /* 讓文字部分填滿剩餘空間 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-username {
+    color: #525252;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-userID {
+    color: #747474;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+  
+  /* 按鈕區域 */
+  .ArtworkPainterAccountSettingBlockList-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-unblock,
+  .ArtworkPainterAccountSettingBlockList-report {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:66px;
+    height:30px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-unblock {
+    background-color: #2DAEF4;
+    color: white;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-unblock:hover {
+    background-color: #3498db;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-report {
+    background-color: #F94141;
+    color: white;
+  }
+  
+  .ArtworkPainterAccountSettingBlockList-report:hover {
+    background-color: #c0392b;
+  }
+  
+  /* 當封鎖名單為空時 */
+  .ArtworkPainterAccountSettingBlockList-empty {
+    grid-column: span 2;
+    text-align: center;
+    font-size: 16px;
+    color: #747474;
+  }

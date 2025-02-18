@@ -37,6 +37,11 @@ const ArtworkPainterAccountProfileSetting = ({
   const [introduction, setIntroduction] = useState(userPainterProfileIntroduction || "請輸入您的個人簡介...");
   const [charCount, setCharCount] = useState(userPainterProfileIntroduction?.length || 0);
 
+  useEffect(() => {
+    setIntroduction(userPainterProfileIntroduction || "");
+    setCharCount(userPainterProfileIntroduction?.length || 0);
+  }, [userPainterProfileIntroduction]);
+
   const handleEditIntroduction = () => {
     setIsEditing(true);
   };
@@ -105,7 +110,7 @@ const ArtworkPainterAccountProfileSetting = ({
     // **前端即時預覽**
     const newBgPreview = URL.createObjectURL(file);
     setPreviewBg(newBgPreview);
-
+    dispatch(updateUser({ painterProfileBackgroundImg: newBgPreview }));// 即時更新背景圖片
 
     // **上傳至 Firebase Storage**
     try {

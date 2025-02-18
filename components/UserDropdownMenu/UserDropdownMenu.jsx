@@ -18,9 +18,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 
   const handleNavigateTo = (e, page) => {
     e.stopPropagation();
-  
     const targetPath = page.startsWith("/") ? page : `/${page}`;
-  
     navigate(targetPath);
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
