@@ -38,7 +38,7 @@ const Header = () => {
     };
 
     const toggleDropdown = (e) => {
-    
+       
         setIsDropdownOpen((prev) => !prev);
     };
     
@@ -114,7 +114,7 @@ const Header = () => {
                         <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                     </div>
                     <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
-                        <img src={"/images/kv-min-4.png"} alt="使用者頭像" />
+                        <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                     </div>
                     <div className="header-user-dropdownMenu-container-mobile" ref={mobileDropdownRef }>
                         <span onClick={toggleDropdown} >⌵</span>
@@ -171,7 +171,7 @@ const Header = () => {
                             <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                         </div>
                         <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
-                            <img src={user.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
+                            <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
                         <div className="header-user-dropdownMenu-container" ref={dropdownRef} >
                             <span onClick={toggleDropdown} >⌵</span>

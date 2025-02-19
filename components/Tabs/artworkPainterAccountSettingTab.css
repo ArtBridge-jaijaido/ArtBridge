@@ -1,220 +1,222 @@
 .artworkPainterAccountSetting-tabs-container {
-    width: 100%;
+  width: 100%;
 }
 
 .artworkPainterAccountSetting-tabs {
-    display: flex;  
-    gap:90px;
-    padding: 0 150px 0px 10px;  /* 上 右 下 左 */
+  display: flex;
+  gap: 90px;
+  padding: 0 150px 0px 10px;
+  /* 上 右 下 左 */
 }
 
 .artworkPainterAccountSetting-tab {
 
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #797979;
-    text-align: center;
-    font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 1px;
-    margin-bottom: 50px;
-    white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #797979;
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+  white-space: nowrap;
 }
 
 .artworkPainterAccountSetting-tab:hover {
-    color: #2DAEF4;
+  color: #2DAEF4;
 }
 
 .artworkPainterAccountSetting-tab.active {
-    color: #2DAEF4;
-    position: relative;
-    font-weight: 600;
+  color: #2DAEF4;
+  position: relative;
+  font-weight: 600;
 }
 
 .artworkPainterAccountSetting-tab.active::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: -10px;
-    width: calc(100% + 20px);
-    height: 2px;
-    background-color: #2DAEF4;
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 2px;
+  background-color: #2DAEF4;
 }
 
 .artworkPainterAccountSetting-tab-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0px;
-    
-   
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
 
-    
 }
 
 .artworkPainterAccountSetting-tab-panel {
-    animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 /*帳號設定*/
 .artworkPainterAccountSetting-form-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
-    gap: 80px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+
+}
+
+/* 通用表單欄位 */
+.artworkPainterAccountSetting-form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+.artworkPainterAccountSetting-form-group label {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+/* 調整輸入框樣式 */
+.artworkPainterAccountSetting-form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ABABAB;
+  border-radius: 5px;
+  font-size: 18px;
  
-  }
-  
-  /* 通用表單欄位 */
-  .artworkPainterAccountSetting-form-group {
-    display: flex;
-    flex-direction: column;
-    max-width:400px;
-  }
+}
 
-  .artworkPainterAccountSetting-form-group label {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-  
-  /* 調整輸入框樣式 */
-  .artworkPainterAccountSetting-form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ABABAB;
-    border-radius: 5px;
-    font-size: 18px;
-  }
+.artworkPainterAccountSetting-form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
 
-  .artworkPainterAccountSetting-form-group input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
+.artworkPainterAccountSetting-required {
+  margin-left: 10px;
+  color: #FF0000;
+}
 
-  .artworkPainterAccountSetting-required {
-    margin-left:10px;
-    color: #FF0000;
-  }
+.artworkPainterAccountSetting-pending {
+  color: #AAA;
 
-  .artworkPainterAccountSetting-pending{
-    color: #AAA;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1px;
+}
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 1px;
-  }
-  
-  /* 第一行：暱稱、出生年月日、身分證 */
-  .artworkPainterAccountSetting-nickname {
-    grid-column: 1 / 2; 
-  }
-  
-  .artworkPainterAccountSetting-birthday {
-    grid-column: 2 / 3; 
-    
-  }
+/* 第一行：暱稱、出生年月日、身分證 */
+.artworkPainterAccountSetting-nickname {
+  grid-column: 1 / 2;
+}
+
+.artworkPainterAccountSetting-birthday {
+  grid-column: 2 / 3;
+
+}
+
+.artworkPainterAccountSetting-id {
+  grid-column: 3 / 4;
+  grid-row: 1 / 4;
+}
+
+/* 第二行：電子郵件、手機號碼、身分證正面 */
+.artworkPainterAccountSetting-email {
+  grid-column: 1 / 2;
+}
+
+.artworkPainterAccountSetting-phone {
+  grid-column: 2 / 3;
+}
+
+/* 第三行：性別、身分證反面 */
+.artworkPainterAccountSetting-gender {
+  grid-column: 1 / 2;
+}
+
+.artworkPainterAccountSetting-gender select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ABABAB;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  max-width: 400px;
+}
+
+.artworkPainterAccountSetting-gender select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* 身分證區塊 */
 
 
+/* 身分證圖片容器 */
+.artworkPainterAccountSetting-id-image-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  
-  .artworkPainterAccountSetting-id {
-    grid-column: 3 / 4; 
-    grid-row: 1 / 4; 
-  }
-  
-  /* 第二行：電子郵件、手機號碼、身分證正面 */
-  .artworkPainterAccountSetting-email {
-    grid-column: 1 / 2; 
-  }
-  
-  .artworkPainterAccountSetting-phone {
-    grid-column: 2 / 3; 
-  }
-  
-  /* 第三行：性別、身分證反面 */
-  .artworkPainterAccountSetting-gender {
-    grid-column: 1 / 2; 
-  }
+.artworkPainterAccountSetting-id-image {
+  width: 100%;
+  height: 190px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  font-size: 20px;
+  color: #666;
+  position: relative;
+  overflow: hidden;
+}
 
-  .artworkPainterAccountSetting-gender select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ABABAB;
-    border-radius: 4px;
-    background-color: white;
-    font-size: 16px;
-  }
-  
-  .artworkPainterAccountSetting-gender select:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  /* 身分證區塊 */
- 
-  
-  /* 身分證圖片容器 */
-  .artworkPainterAccountSetting-id-image-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .artworkPainterAccountSetting-id-image {
-    width: 100%;
-    height: 190px;
-    border: 2px dashed #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* 當有圖片時，顯示圖片 */
-  .uploaded-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-  }
-  
-  /* 讓 input[type="file"] 覆蓋整個區域，但不可見 */
-  .upload-input {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  /* 鼠標懸停時增加可點擊感 */
-  .artworkPainterAccountSetting-id-image:hover {
-    background-color: rgba(0, 0, 255, 0.1);
-  }
+/* 當有圖片時，顯示圖片 */
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
 
-  /*儲存按鈕*/
+/* 讓 input[type="file"] 覆蓋整個區域，但不可見 */
+.upload-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
 
-  .artworkPainterAccountSetting-save-button-container{
-    margin-top:200px;
-    width:100%;
-    display: flex;
-    justify-content: center;
-    
-  }
+/* 鼠標懸停時增加可點擊感 */
+.artworkPainterAccountSetting-id-image:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+}
 
-  
+/*儲存按鈕*/
+
+.artworkPainterAccountSetting-save-button-container {
+  margin-top: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+
 
 /*個人檔案設定*/
 
@@ -224,39 +226,272 @@
 
 /* 動畫效果 */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1280px) {
+  .artworkPainterAccountSetting-tabs {
+    gap: 60px;
+  }
+
+  .artworkPainterAccountSetting-tab {
+    font-size: 20px;
+  }
+
+
+  /*帳號設定*/
+  .artworkPainterAccountSetting-form-container {
+    gap: 70px;
+  }
+
+  .artworkPainterAccountSetting-form-group {
+    max-width: 330px;
+  }
+
+  .artworkPainterAccountSetting-form-group label {
+    font-size: 18px;
+  }
+
+  .artworkPainterAccountSetting-form-group input {
+    font-size: 16px;
+  }
+
+  .artworkPainterAccountSetting-pending {
+    font-size: 14px;
+  }
+
+  .artworkPainterAccountSetting-gender select {
+    font-size: 16px;
+    max-width: 330px;
+  }
+
+  /* 身分證圖片容器 */
+  .artworkPainterAccountSetting-id-image {
+    height: 190px;
+    font-size: 16px;
+  }
+
+
+  /*儲存按鈕*/
+  .artworkPainterAccountSetting-save-button-container {
+    margin-top: 120px;
+  }
+
+
+}
+
+
+@media screen and (max-width: 834px) {
+  .artworkPainterAccountSetting-tabs {
+    gap: 40px;
+  }
+
+
+
+
+  /*帳號設定*/
+  .artworkPainterAccountSetting-form-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+
+  /* 第一行：暱稱、出生年月日 */
+  .artworkPainterAccountSetting-nickname {
+    grid-column: 1 / 2;
+
+  }
+
+  .artworkPainterAccountSetting-birthday {
+    grid-column: 2 / 3;
+  }
+
+  /* 第二行：電子郵件、手機號碼 */
+  .artworkPainterAccountSetting-email {
+    grid-column: 1 / 2;
+  }
+
+  .artworkPainterAccountSetting-phone {
+    grid-column: 2 / 3;
+  }
+
+  /* 第三行：性別獨占一行 */
+  .artworkPainterAccountSetting-gender {
+    grid-column: 1 / 2;
+    order: 1;
+  }
+
+  /* 身分證資訊區塊 */
+  .artworkPainterAccountSetting-id {
+    max-width: 100% !important;
+    grid-column: 1 / -1;
+    grid-row: auto;
+    order: 2;
+  }
+
+  /* 身分證圖片（正面 & 反面） */
+  .artworkPainterAccountSetting-id-image-container {
+
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+
+  }
+
+  .artworkPainterAccountSetting-form-group label {
+    font-size: 16px;
+  }
+
+  .artworkPainterAccountSetting-form-group input {
+    font-size: 14px;
+  }
+
+  .artworkPainterAccountSetting-pending {
+    font-size: 12px;
+  }
+
+  .artworkPainterAccountSetting-gender select {
+    font-size: 14px;
+  }
+
+   /*儲存按鈕*/
+   .artworkPainterAccountSetting-save-button-container {
+    margin-top: 100px;
+  }
+
+
+
+}
+
+
+@media screen and (max-width: 440px) {
+  .artworkPainterAccountSetting-tabs{
+    gap: 20px;
+    padding: 0 10px 0px 0px;
+  }
+
+  .artworkPainterAccountSetting-tab {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .artworkPainterAccountSetting-tab.active::after{
+    bottom: -6px;
+    width: calc(100% + 18px);
+  }
+
+  .artworkPainterAccountSetting-tab-content{
+    padding: 10px 0px;
+  }
+
+  .artworkPainterAccountSetting-form-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .artworkPainterAccountSetting-form-group {
+     max-width: 400px;
+  }
+
+  .artworkPainterAccountSetting-form-group label {
+    font-size: 14px;
+  }
+
+  .artworkPainterAccountSetting-form-group input {
+    font-size: 13px;
    
+  }
+
+  .artworkPainterAccountSetting-pending {
+    font-size: 10px;
+  }
+
+  .artworkPainterAccountSetting-gender select {
+    font-size: 14px;
+    max-width: 400px;
     
+  }
+
+
+   /* 第一行：暱稱 */
+   .artworkPainterAccountSetting-nickname {
+    grid-column: 1 / 2;
+  }
+
+  /* 第二行：出生年月日 */
+  .artworkPainterAccountSetting-birthday {
+    grid-column: 1 / 2;
+  }
+
+  /* 第三行：電子郵件 */
+  .artworkPainterAccountSetting-email {
+    grid-column: 1 / 2;
+  }
+
+  /* 第四行：手機號碼 */
+  .artworkPainterAccountSetting-phone {
+    grid-column: 1 / 2;
+  }
+
+  /* 第五行：性別 */
+  .artworkPainterAccountSetting-gender {
+    grid-column: 1 / 2;
+    order: 1;
+  }
+
+  /* 第六行：身分證，填滿整行 */
+  .artworkPainterAccountSetting-id {
+    grid-column: 1 / -1;
+    order: 2;
+  }
+
+  /* 身分證圖片容器 */
+  .artworkPainterAccountSetting-id-image {
+    height: 100px;
+    font-size: 12px;
+  }
+
+  .artworkPainterAccountSetting-id-image-container{
+    gap: 20px;
+  }
+
+  /*儲存按鈕*/
+  .artworkPainterAccountSetting-save-button-container {
+    margin-top: 60px;
+  }
 
 }
 
 
-@media screen and (max-width: 834px){
-  
+@media screen and (max-width: 370px) {
 
-}
+  .artworkPainterAccountSetting-tab{
+    font-size: 12px;
+  }
 
+  .artworkPainterAccountSetting-form-group label {
+    font-size: 12px;
+  }
 
-@media screen and (max-width: 440px){
+  .artworkPainterAccountSetting-form-group input {
+    font-size: 11px;
+   
+  }
 
+  .artworkPainterAccountSetting-pending {
+    font-size: 10px;
+  }
 
-  
-}
+  .artworkPainterAccountSetting-gender select{
+    font-size: 12px;
+  }
 
-
-@media screen and (max-width: 370px){
-
-
-    
-
-
+  .artworkPainterAccountSetting-save-button-container {
+    margin-top: 50px;
+  }
 }

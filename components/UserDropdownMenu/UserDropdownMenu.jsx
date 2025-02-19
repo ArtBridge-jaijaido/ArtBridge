@@ -14,7 +14,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
    const dispatch = useDispatch();
    const navigate = useNavigation();
    const { setIsLoading } = useLoading();
-  
+ 
 
   const handleNavigateTo = (e, page) => {
     e.stopPropagation();
@@ -61,7 +61,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
       <div className="UserDropdownMenu-profile">
 
         <div className="UserDropdownMenu-avatar-container">
-        <img src={user.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" className="UserDropdownMenu-avatar"  />
+        <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" className="UserDropdownMenu-avatar"  />
         </div>
         <div className="UserDropdownMenu-info">
           <h3>{user?.nickname}</h3>

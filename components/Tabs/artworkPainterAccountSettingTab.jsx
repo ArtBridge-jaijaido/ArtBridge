@@ -346,7 +346,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                   </div>
 
                 );
-              case "官方驗證 🚨":
+              case "官方驗證🚨":
                 return (
                   <div key={tab.label} className="artworkPainterAccountSetting-tab-panel artworkPainterAccountSetting-tab-panel-officialVerification">
                      <ArtworkPainterAccountSettingVerify/>

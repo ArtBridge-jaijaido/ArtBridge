@@ -1,287 +1,402 @@
-.ArtworkPainterAccountProfileSetting-container{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-  
-    overflow: hidden;
-    
+.ArtworkPainterAccountProfileSetting-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  overflow: hidden;
+
 }
 
 
-.ArtworkPainterAccountProfileSetting-container-top-part{
-    width:100%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0 auto;
-    margin-bottom: 80px;
+.ArtworkPainterAccountProfileSetting-container-top-part {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 80px;
 }
 
 
 .ArtworkPainterAccountProfileSetting-background-img {
-    width: 100%;
-    height: 736px;  
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(60%); 
-    z-index: 0; 
-    
-  }
+  width: 100%;
+  height: 736px;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(60%);
+  z-index: 0;
 
-  .ArtworkPainterAccountProfileSetting-hidden-input {
-    display: none;
-  }
+}
+
+.ArtworkPainterAccountProfileSetting-hidden-input {
+  display: none;
+}
 
 
-.ArtworkPainterAccountProfileSetting-edit-btn{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    background: #fff;
-    border: none;
-    width:64px;
-    height: 64px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
+.ArtworkPainterAccountProfileSetting-edit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: #fff;
+  border: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .ArtworkPainterAccountProfileSetting-background-edit-btn {
-    top: 28px;
-    left: 28px;
+  top: 28px;
+  left: 28px;
 }
 
 
-.ArtworkPainterAccountProfileSetting-profile-container{
-    position:absolute;
-    top: 50%;  
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.ArtworkPainterAccountProfileSetting-profile-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
 
-.ArtworkPainterAccountProfileSetting-profile-avatar { 
-    position:relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 180px;
-    height: 180px;
-    background: #CAEEFF;
-    border-radius: 50%;
-    margin-bottom:100px;
-   
+.ArtworkPainterAccountProfileSetting-profile-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  aspect-ratio: 1/1;
+  background: #CAEEFF;
+  border-radius: 50%;
+  margin-bottom: 100px;
+
 }
 
 .ArtworkPainterAccountProfileSetting-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .ArtworkPainterAccountProfileSetting-avatar-edit-btn {
-    width:50px;
-    height: 50px;
-    position: absolute;
-    bottom:20px;
-    right:30px;
-    transform: translate(50%, 50%);
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-    aspect-ratio: 1/1;
-  }
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  transform: translate(50%, 50%);
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  aspect-ratio: 1/1;
+}
 
-  .ArtworkPainterAccountProfileSetting-avatar-edit-btn img{
-    width:30px;
-    height:30px;
-    object-fit: cover;
-  }
+.ArtworkPainterAccountProfileSetting-avatar-edit-btn img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
 
-.ArtworkPainterAccountProfileSetting-profile-username{
-    color: #FFF;
-    text-align: center;
-    font-family: "Noto Sans TC";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 4px;
+.ArtworkPainterAccountProfileSetting-profile-username {
+  color: #FFF;
+  text-align: center;
+  font-family: "Noto Sans TC";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 4px;
 }
 
 .ArtworkPainterAccountProfileSetting-exclusiveId {
-    position: absolute;
-    top: 28px;
-    right: 28px;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 5px;
-    color: #FFF;
-    text-align: center;
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 1px;
-    background-color: #9B9B9B;
-    padding: 9px 13px;
-    border: none;
-    cursor: pointer;
-    perspective: 1000px; 
-    transition: transform 0.5s ease;
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  background-color: #9B9B9B;
+  padding: 9px 13px;
+  border: none;
+  cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.5s ease;
 }
 
 /* 當 isFlipped 為 true，按鈕本身翻轉 180 度 */
 .ArtworkPainterAccountProfileSetting-exclusiveId.flipped {
-    background-color: rgb(100, 200, 255); 
-    transform: rotateY(180deg);
+  background-color: rgb(100, 200, 255);
+  transform: rotateY(180deg);
 }
 
 /* 內部文字翻轉回來，確保不會鏡像 */
 .ArtworkPainterAccountProfileSetting-exclusiveId span {
-    display: inline-block;
-    transition: transform 0.5s ease;
+  display: inline-block;
+  transition: transform 0.5s ease;
 }
 
 /* 內部文字翻轉回來，讓 A123456 顯示正常 */
 .ArtworkPainterAccountProfileSetting-exclusiveId.flipped span {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 
 
 /* 簡介 */
 .ArtworkPainterAccountProfileSetting-introduction {
-    width:100%;
-    background: #FFF;
-    padding: 50px;
-    border-radius: 5px;
-    border: 1px solid #C0C0C0;
-    max-width:1440px;
-    height:340px;
-  
+  width: 100%;
+  background: #FFF;
+  padding: 50px;
+  border-radius: 5px;
+  border: 1px solid #C0C0C0;
+  max-width: 1440px;
+  height: 340px;
+
+}
+
+.ArtworkPainterAccountProfileSetting-intro-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-title {
+  color: #2DAEF4;
+  font-family: "Noto Sans TC";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-limit {
+  color: #6C6C6C;
+  font-family: "Noto Sans TC";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-display {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 0;
+  height: 200px;
+
+}
+
+.ArtworkPainterAccountProfileSetting-intro-display p {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: 1px;
+  color: #878787;
+  overflow: auto;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-edit-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-textarea {
+  width: 100%;
+  height: 160px;
+  border: 1px solid #878787;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  resize: none;
+}
+
+.ArtworkPainterAccountProfileSetting-intro-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ArtworkPainterAccountProfileSetting-char-count {
+  font-size: 18px;
+  color: #878787;
+}
+
+.intro-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.cancel-btn,
+.save-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #E0E0E0;
+  color: #878787;
+}
+
+.save-btn {
+  background: #2DAEF4;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:440px) {
+  .ArtworkPainterAccountProfileSetting-container-top-part {
+    margin-bottom: 20px;
   }
 
-  .ArtworkPainterAccountProfileSetting-intro-header{
-    display:flex;
-    gap:20px;
-    align-items: center;
-    margin-bottom:30px;
+  .ArtworkPainterAccountProfileSetting-background-img {
+    height: 259px;
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-title {
-    color: #2DAEF4;
-    font-family: "Noto Sans TC";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 22px; 
-    letter-spacing: 1px;
+
+  .ArtworkPainterAccountProfileSetting-edit-btn {
+    width: 26px;
+    height: 26px;
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-limit {
-    color: #6C6C6C;
-    font-family: "Noto Sans TC";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 22px; 
-    letter-spacing: 1px;
+
+  .ArtworkPainterAccountProfileSetting-background-edit-btn img{
+    width: 14px;
+    height: 14px;
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-display {
-    position: relative;
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 0;
-    height: 200px;
+
+  .ArtworkPainterAccountProfileSetting-background-edit-btn {
+    top: 8px;
+    left: 11px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-profile-avatar{
+      width:70px;
+      height:70px;
+      margin-bottom: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn{
+    width: 24px;
+    height: 24px;
+    bottom: 8px;
+    right: 12px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn img {
+    width: 12px;
+    height: 12px;
    
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-display p {
+
+  .ArtworkPainterAccountProfileSetting-profile-username{
     font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 40px; 
-    letter-spacing: 1px;
-    color: #878787;
-    overflow:auto;
+    letter-spacing: 2px;
   }
-  
+
+  .ArtworkPainterAccountProfileSetting-exclusiveId {
+    top: 12px;
+    right: 14px;
+    font-size: 8px;
+    padding: 3px 5px;
+  }
+
+  /* 簡介 */
+  .ArtworkPainterAccountProfileSetting-introduction {
+    padding: 12px;
+    max-width: 440px;
+    height: 280px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-header {
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-title{
+    font-size: 14px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-limit {
+    font-size: 10px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-display{
+    padding: 0px 0px;
+    height: 200px;
+  }
+  .ArtworkPainterAccountProfileSetting-intro-display p{
+    font-size: 12px;
+    line-height: 22px;
+  }
+
   .ArtworkPainterAccountProfileSetting-intro-edit-btn {
-    position: absolute;
-    right: 0;
-    bottom:0px;
-    background: none;
-    border: none;
-    cursor: pointer;
+    width: 20px;
+    height: 20px;
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-edit-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+  .ArtworkPainterAccountProfileSetting-intro-textarea{
+    font-size: 12px;
+    padding: 6px;
+    height: 180px;
   }
-  
-  .ArtworkPainterAccountProfileSetting-intro-textarea {
-    width: 100%;
-    height: 160px;
-    border: 1px solid #878787;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 18px;
-    resize: none;
-  }
-  
-  .ArtworkPainterAccountProfileSetting-intro-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+
   .ArtworkPainterAccountProfileSetting-char-count {
-    font-size: 18px;
-    color: #878787;
+    font-size: 14px;
   }
-  
-  .intro-buttons {
-    display: flex;
-    gap: 10px;
+
+  .cancel-btn,
+  .save-btn{
+    font-size: 12px;
   }
-  
-  .cancel-btn, .save-btn {
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cancel-btn {
-    background: #E0E0E0;
-    color: #878787;
-  }
-  
-  .save-btn {
-    background: #2DAEF4;
-    color: white;
-  }
-  
+}
