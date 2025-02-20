@@ -219,7 +219,7 @@
 }
 
 .ArtworkPainterAccountProfileSetting-intro-display p {
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 40px;
@@ -288,7 +288,184 @@
 }
 
 
+@media screen and (max-width:1280px) {
+  .ArtworkPainterAccountProfileSetting-container-top-part {
+    margin-bottom: 50px;
+  }
 
+  .ArtworkPainterAccountProfileSetting-background-img {
+    height:575px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-edit-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-edit-btn img{
+    width: 24px;
+    height: 24px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-background-edit-btn {
+    top: 22px;
+    left: 22px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-profile-avatar {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 60px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn {
+    width: 40px;
+    height: 40px;
+    right: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-exclusiveId {
+    font-size: 14px;
+    top: 22px;
+    right: 22px;
+  }
+
+  /* 簡介 */
+  .ArtworkPainterAccountProfileSetting-introduction {
+    padding: 32px;
+    height: 300px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-header {
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-title{
+    font-size: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-limit{
+    font-size: 14px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-display{
+    height: 180px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-display p {
+    font-size:16px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-textarea {
+    font-size: 16px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-char-count {
+    font-size: 16px;
+  }
+
+  .cancel-btn,
+  .save-btn{
+    font-size: 16px;
+}
+
+ 
+}
+
+@media screen and (max-width:834px){
+  .ArtworkPainterAccountProfileSetting-background-img {
+    height:432px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-edit-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-edit-btn img{
+    width: 20px;
+    height: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-background-edit-btn {
+    top: 16px;
+    left: 16px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-profile-avatar{
+    width: 100px;
+    height: 100px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn {
+    width: 30px;
+    height: 30px;
+    right: 16px;
+    bottom:10px
+  }
+
+  .ArtworkPainterAccountProfileSetting-avatar-edit-btn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-profile-username{
+    font-size: 24px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-exclusiveId {
+    font-size: 12px;
+    top: 16px;
+    right: 16px;
+  }
+
+    /* 簡介 */
+    .ArtworkPainterAccountProfileSetting-introduction {
+      padding: 25px;
+      height: 280px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-intro-header {
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-intro-title{
+      font-size: 16px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-intro-limit{
+      font-size: 12px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-intro-display p {
+      font-size: 14px;
+      line-height: 30px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-intro-textarea{
+      font-size: 14px;
+      line-height: 30px;
+    }
+
+    .ArtworkPainterAccountProfileSetting-char-count {
+      font-size: 14px;
+    }
+
+    .cancel-btn,
+    .save-btn{
+      font-size: 14px;
+  }
+  
+
+
+} 
 
 
 
@@ -316,8 +493,8 @@
   }
 
   .ArtworkPainterAccountProfileSetting-background-edit-btn {
-    top: 8px;
-    left: 11px;
+    top: 10px;
+    left: 10px;
   }
 
   .ArtworkPainterAccountProfileSetting-profile-avatar{
@@ -345,8 +522,8 @@
   }
 
   .ArtworkPainterAccountProfileSetting-exclusiveId {
-    top: 12px;
-    right: 14px;
+    top: 10px;
+    right: 10px;
     font-size: 8px;
     padding: 3px 5px;
   }
@@ -383,6 +560,7 @@
   .ArtworkPainterAccountProfileSetting-intro-edit-btn {
     width: 20px;
     height: 20px;
+    bottom:-10px;
   }
 
   .ArtworkPainterAccountProfileSetting-intro-textarea{
@@ -398,5 +576,88 @@
   .cancel-btn,
   .save-btn{
     font-size: 12px;
+  }
+}
+
+
+
+@media screen and (max-width:370px){
+  .ArtworkPainterAccountProfileSetting-container-top-part {
+    margin-bottom: 16px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-background-img {
+    height: 224px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-edit-btn {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-background-edit-btn img{
+    width: 12px;
+    height: 12px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-profile-avatar{
+   
+    margin-bottom: 16px;
+}
+
+  .ArtworkPainterAccountProfileSetting-profile-username{
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  /* 簡介 */
+  .ArtworkPainterAccountProfileSetting-introduction {
+   
+  
+    height: 240px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-header {
+    margin-bottom: 8px;
+    gap: 7px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-title{
+    font-size: 12px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-limit {
+    font-size: 8px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-display{
+    padding: 0px 0px;
+    height: 180px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-display p{
+    font-size: 10px;
+    line-height: 20px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-intro-edit-btn {
+    width: 16px;
+    height: 16px;
+    bottom: 0px;
+  }
+
+
+  .ArtworkPainterAccountProfileSetting-intro-textarea{
+    font-size: 10px;
+    padding: 4px;
+    height: 150px;
+  }
+
+  .ArtworkPainterAccountProfileSetting-char-count {
+    font-size: 12px;
+  }
+
+  .cancel-btn,
+  .save-btn{
+    font-size: 10px;
   }
 }

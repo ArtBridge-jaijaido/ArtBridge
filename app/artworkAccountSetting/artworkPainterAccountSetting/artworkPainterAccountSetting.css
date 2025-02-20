@@ -41,14 +41,14 @@
 @media screen and (max-width: 440px) {
     .artworkPainterAccountSettingPage{
         width:100%;
-        padding: 100px 25px 30px 25px; 
+        padding: 100px 20px 30px 20px; 
     }
 }
 
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 370px) {
     .artworkPainterAccountSettingPage{
         width:370px;
-        padding: 100px 20px 30px 20px; 
+        padding: 100px 16px 30px 16px; 
     }
 }
