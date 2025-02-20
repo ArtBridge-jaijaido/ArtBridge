@@ -71,10 +71,10 @@ const MarketUploadFormPage3 = ({ prev, next,formData  }) => {
     const handleNextClick = () => {
         if (validateForm()) {
             next({
+                rejectedTypes,
                 fileFormat,
                 size,
-                permission,
-                rejectedTypes
+                permission
             });
         }
     };

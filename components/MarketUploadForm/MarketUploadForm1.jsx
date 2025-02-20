@@ -9,7 +9,7 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
     const router = useRouter(); 
     const { addToast } = useToast();
     const [marketName, setMarketName] = useState(formData.marketName || "");
-    const [selectedOption, setSelectedOption] = useState(formData.selectedOption || "");
+    const [completionTime, setCompletionTime] = useState(formData.completionTime || "");
     const [price, setPrice] = useState(formData.price || "");
     const [description, setDescription] = useState(formData.description || "");
 
@@ -20,7 +20,7 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
     const dropdownRef = useRef(null); 
 
     const handleSelect = (option) => {
-        setSelectedOption(option);
+        setCompletionTime(option);
         setIsOpen(false);
     };
 
@@ -54,7 +54,13 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
         setIsEndDateActive(true);
     };
 
-
+    const validateDates = (start, end) => {
+        if (new Date(start) > new Date(end)) {
+            addToast("error", "開始時間不能晚於結束時間！");
+            return false;
+        }
+        return true;
+    };
 
     const handlePriceChange = (e) => {
         const value = e.target.value;
@@ -71,12 +77,9 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
 
 
     const handleDescriptionChange = (e) => {
-        const value = e.target.value;
-        if (value.trim() === "") {
-            addToast("error", "請輸入詳細解說！");
-        }
-        setDescription(value);
+        setDescription(e.target.value); 
     };
+    
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -93,7 +96,7 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
             addToast("error", "請輸入市集名稱！");
             return false;
         }
-        if (!selectedOption) {
+        if (!completionTime) {
             addToast("error", "請選擇完稿時間！");
             return false;
         }
@@ -101,9 +104,12 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
             addToast("error", "請輸入價格！");
             return false;
         }
-        if (!description.trim()) {
+        if (!description.trim()) { 
             addToast("error", "請輸入詳細解說！");
             return false;
+        }
+        if (!validateDates(startDate, endDate)) {
+            return false; // 檢查開始時間與結束時間
         }
         return true;
     };
@@ -114,7 +120,7 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
                 marketName,
                 startDate,
                 endDate,
-                selectedOption,
+                completionTime,
                 price,
                 description
             });
@@ -149,7 +155,7 @@ const MarketUploadFormPage1 = ({ next, formData }) => {
                     <div className="MarketUploadForm1-group dealine-dropdown" ref={dropdownRef}>
                         <label>完搞時間</label>
                         <div className={`MarketUploadForm1-dropdown ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-                            <div className={`MarketUploadForm1-dropdown-selected ${selectedOption ? 'black-text' : 'gray-text'}`}>{selectedOption || "24小時/天數"}</div>
+                            <div className={`MarketUploadForm1-dropdown-selected ${completionTime ? 'black-text' : 'gray-text'}`}>{completionTime || "24小時/天數"}</div>
                             {isOpen && (
                                 <div className="MarketUploadForm1-dropdown-options">
                                     {marketDealineOptions.map((option, index) => (

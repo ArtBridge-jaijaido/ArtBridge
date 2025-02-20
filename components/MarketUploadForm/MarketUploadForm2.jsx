@@ -6,14 +6,16 @@ import "./MarketUploadForm2.css";
 const MarketUploadFormPage2 = ({ prev, next, formData }) => {
     const { addToast } = useToast();
     const [exampleImage, setExampleImage] = useState(formData.exampleImage || null);
+    const [exampleImageName, setExampleImageName] = useState(formData.exampleImageName || ""); 
     const [supplementaryImages, setSupplementaryImages] = useState(formData.supplementaryImages || []);
-    const [fileNames, setFileNames] = useState(formData.fileNames || []);
+    const [supplementaryImageName, setFileNames] = useState(formData.supplementaryImageName || []);
     
 
     const handleExampleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
             setExampleImage(URL.createObjectURL(file));
+            setExampleImageName(file.name); 
         }
     };
 
@@ -35,7 +37,7 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
 
     const handleDeleteSupplementaryImage = (index) => {
         const newImages = supplementaryImages.filter((_, i) => i !== index);
-        const newFileNames = fileNames.filter((_, i) => i !== index);
+        const newFileNames = supplementaryImageName.filter((_, i) => i !== index);
         setSupplementaryImages(newImages);
         setFileNames(newFileNames);
     };
@@ -50,7 +52,7 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
         const newFileNames = files.map(file => file.name);
 
         setSupplementaryImages([...supplementaryImages, ...newImages]);
-        setFileNames([...fileNames, ...newFileNames]);
+        setFileNames([...supplementaryImageName, ...newFileNames]);
     };
 
     const handleNextClick = () => {
@@ -60,8 +62,9 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
         }
         next({
             exampleImage,
+            exampleImageName,
             supplementaryImages,
-            fileNames
+            supplementaryImageName
         });
     };
 
@@ -96,9 +99,9 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
                             <input type="file" accept="image/*" multiple onChange={handleSupplementaryImagesUpload} />
                         </div>
 
-                        {fileNames.length > 0 && (
+                        {supplementaryImageName.length > 0 && (
                             <div className="MarketUploadForm2-file-names">
-                                {fileNames.map((name, index) => (
+                                {supplementaryImageName.map((name, index) => (
                                     <div key={index} className="MarketUploadForm2-file-name-container">
                                         <span className="MarketUploadForm2-file-name">{name}</span>
                                         <button className="MarketUploadForm2-delete-file" onClick={() => handleDeleteSupplementaryImage(index)}>✖</button>

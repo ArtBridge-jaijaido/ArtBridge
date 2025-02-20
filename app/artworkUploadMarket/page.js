@@ -17,15 +17,17 @@ const ArtworkUploadMarketPage = () => {
         marketName: "",
         startDate: "",
         endDate: "",
-        selectedOption: "",
+        completionTime: "",
         price: "",
         description: "",
         exampleImage: null,
+        exampleImageName: "",
         supplementaryImages: [],
+        supplementaryImageName: [],
+        rejectedTypes: "",
         fileFormat: "",
         size: "",
         permission: "",
-        rejectedTypes: "",
         selectedCategory: "",
         selectedStyles: [],
         reference: ""
@@ -42,9 +44,10 @@ const ArtworkUploadMarketPage = () => {
     };
 
     const handlePublish = (newData) => {
-        setFormData({ ...formData, ...newData });
+        const updatedData = { ...formData, ...newData };
+        setFormData(updatedData);
         setStep(5);
-        console.log("提交的資料：", formData); 
+        console.log("提交的資料：", updatedData); 
     };
     return (
         <div className={`artworkUploadMarket-page ${notoSansTCClass}`}>

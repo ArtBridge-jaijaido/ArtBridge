@@ -43,6 +43,21 @@ const MasonryGrid = ({ images}) => {
     setColumnItems(newColumnItems); // 更新列數據
   }, [images, columnWidths]);
 
+  const downloadImage = (imageSrc, e) => {
+    e.stopPropagation()
+    fetch(imageSrc)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = imageSrc.split("/").pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => console.error("Download failed:", error));
+  };
+
   return (
     <div className="masonry-grid">
       {columnItems.map((column, columnIndex) => (
@@ -57,10 +72,19 @@ const MasonryGrid = ({ images}) => {
             <div key={imageIndex} className="masonry-grid-item">
               <img src={image} alt={`Artwork ${imageIndex + 1}`} />
               {!isConsumerProfilePage && (
-                <div className="masonry-likesIcon-container">
-                  <img src="/images/icons8-love-96-26.png" alt="numberOfLikes"></img>
-                  <span className="masonry-likes-number">100</span>
-                </div>
+                <>
+                  <div
+                    className="masonry-downloadIcon-container"
+                    
+                    onClick={(e) => downloadImage(image,e)}
+                  >
+                    <img src="/images/download-icon.png" alt="Download" />
+                  </div>
+                  <div className="masonry-likesIcon-container">
+                    <img src="/images/icons8-love-96-26.png" alt="numberOfLikes" />
+                    <span className="masonry-likes-number">100</span>
+                  </div>
+                </>
               )}
             </div>
           ))}
