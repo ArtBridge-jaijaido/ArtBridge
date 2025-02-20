@@ -9,6 +9,7 @@
 .MarketUploadForm4-container {
     width: 100%;
     padding: 20px;
+    max-width:1000px;
     background: white;
 }
 
@@ -42,18 +43,32 @@
 }
 
 /* 下拉按鈕 */
-.dropdown-container {
+.MarketUploadForm4-dropdown-container {
     position: relative; 
     display: flex;
     align-items: center;
     gap: 10px;
 }
 /*最多幾項的說明*/
-.MarketUploadForm4-group .max-selection {
-    font-size: 14px;
-    color: #555;
+.MarketUploadForm4-group .MarketUploadForm4-max-selection {
+    font-size: 15px;
     width:100%;
     min-width:max-content;
+    color:  #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+.MarketUploadForm4-reference-label {
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
 /* 類別選擇 & 風格選擇的下拉按鈕樣式 */
@@ -61,18 +76,20 @@
     background-color: #8DD7FF;
     color: white;
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 12px 10px;
-    min-width: 100px;
+    padding: 8px 10px;
+    min-width: 120px;
     text-align: center;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     position: relative;
-    height:40px;
+    height:auto;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
 }
 
 /* 設定箭頭置中 */
@@ -90,31 +107,40 @@
 #category-dropdown.open::after, #style-dropdown.open::after {
     content: "▲";
 }
-
+/* 滑鼠懸停在 checkbox 上時變成手指 */
+.MarketUploadForm4-dropdown-option input[type="checkbox"] {
+    cursor: pointer;
+    width:20px;
+    height:20px;
+}
 
 /* 輸入框樣式 */
-.input-box {
+.MarketUploadForm4-input-box {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
     background-color: white;
     width: 100%;
-    color: black;
     margin-top: 5px;
     box-sizing:border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    color:8C8C8C;
 }
-
 .gray-text {
     color: #999;
-}
 
+}
 .black-text {
     color: black;
 }
 
 /* 參考圖下拉選單 */
-.dropdown {
+.MarketUploadForm4-dropdown {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -124,9 +150,12 @@
     position: relative;
     width: 100%;
     box-sizing:border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
 }
 
-.dropdown::after {
+.MarketUploadForm4-dropdown::after {
     content: "▼";
     font-size: 14px;
     color: #555;
@@ -137,11 +166,11 @@
     pointer-events: none;
 }
 
-.dropdown.open::after {
+.MarketUploadForm4-dropdown.open::after {
     content: "▲";
 }
 
-.dropdown-options {
+.MarketUploadForm4-dropdown-options {
     position: absolute;
     background: white;
     border: 1px solid #ccc;
@@ -154,9 +183,10 @@
     left: 0;
     top: 100%; 
     min-width:max-content;
+    width:100%;
 }
 
-.dropdown-option {
+.MarketUploadForm4-dropdown-option {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -167,36 +197,37 @@
     gap:10px;
 }
 
-.dropdown-option:hover {
+.MarketUploadForm4-dropdown-option:hover {
     background-color: #40a4da;
     color: white;
 }
-/* 滑鼠懸停在 checkbox 上時變成手指 */
-.dropdown-option input[type="checkbox"] {
-    cursor: pointer;
-    width:20px;
-    height:20px;
-}
+
 
 
 /* 提示區域 */
 .MarketUploadForm4-hint {
     margin-top: 40px;
-    font-size: 16px;
+    font-size: 18px;
     text-align: left;
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
 }
 
 /* 點擊這裡 */
-.text-link {
+.MarketUploadForm4-text-link {
     color: #40a4da;
     text-decoration: underline;
     background: none;
     border: none;
-    font-size: 16px;
+    font-size: 19px;
     cursor: pointer;
 }
 
-.text-link:hover {
+.MarketUploadForm4-text-link:hover {
     text-decoration: none;
 }
 
@@ -224,6 +255,11 @@
     color: white;
 }
 
+.MarketUploadForm4-prev:hover {
+    background-color: #358bc5;
+}
+
+
 .MarketUploadForm4-next {
     background-color: #40a4da;
     color: white;
@@ -233,7 +269,7 @@
     background-color: #358bc5;
 }
 
-.warning-text {
+.MarketUploadForm4-warning-text {
     color: red;
     font-weight: 500;
 }
@@ -268,11 +304,27 @@
     .MarketUploadForm4-row{
         margin-bottom:10px;
     }
-
+    #category-dropdown, #style-dropdown, .MarketUploadForm4-input-box, 
+    .MarketUploadForm4-reference-label, .MarketUploadForm4-dropdown-option,
+    .MarketUploadForm4-dropdown{
+        font-size:14px;
+    }
+    .MarketUploadForm4-group .MarketUploadForm4-max-selection {
+        font-size:13px;
+    }
+    .MarketUploadForm4-dropdown::after, .MarketUploadForm4-dropdown.open::after  {
+        font-size:12px;
+    }
+    #category-dropdown, #style-dropdown {
+        min-width:100px;
+    }
     .MarketUploadForm4-hint {
         margin-top: 10px;
-        font-size: 13px;
+        font-size: 12px;
         text-align: left;
+    }
+    .MarketUploadForm4-text-link {
+        font-size: 12px;
     }
 
     .MarketUploadForm4-button-group {

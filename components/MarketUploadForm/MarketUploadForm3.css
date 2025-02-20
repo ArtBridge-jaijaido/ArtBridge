@@ -9,6 +9,7 @@
 .MarketUploadForm3-container {
     width: 100%;
     padding: 20px;
+    max-width:1000px;
     background: white;
 }
 
@@ -26,10 +27,14 @@
 }
 
 .MarketUploadForm3-group label {
-    font-size: 14px;
-    font-weight: bold;
     margin-bottom: 5px;
-    color: #555;
+    color:  #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
 .MarketUploadForm3-group textarea {
@@ -38,8 +43,13 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
     box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
 .MarketUploadForm3-row {
@@ -57,6 +67,7 @@
     padding: 5px;
     width: 100%;
     min-width: 0;
+    color:  #4F4F4F;
 }
 
 .MarketUploadForm3-size-input input {
@@ -64,8 +75,13 @@
     outline: none;
     flex: 1;
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
     min-width: 0;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
 .MarketUploadForm3-size-input span {
@@ -75,15 +91,27 @@
     white-space: nowrap; /* 防止 px 跑出框框 */
 }
 
-.dropdown-selected.gray-text {
+.MarketUploadForm3-dropdown-selected.gray-text {
     color: #999;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
-.dropdown-selected.black-text {
+.MarketUploadForm3-dropdown-selected.black-text {
     color: black;
+    font-size: 18px;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
 }
 
-.MarketUploadForm3-group .dropdown {
+.MarketUploadForm3-group .MarketUploadForm3-dropdown {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -94,7 +122,7 @@
     width:100%;
 }
 
-.dropdown::after {
+.MarketUploadForm3-dropdown::after {
     content: "▼";
     font-size: 14px;
     color: #555;
@@ -105,11 +133,11 @@
     pointer-events: none;
 }
 
-.dropdown.open::after {
+.MarketUploadForm3-dropdown.open::after {
     content: "▲";
 }
 
-.dropdown-options {
+.MarketUploadForm3-dropdown-options {
     position: absolute;
     width: 100%;
     background: white;
@@ -124,24 +152,24 @@
     top: 100%;
 }
 
-.dropdown-option {
+.MarketUploadForm3-dropdown-option {
     padding: 10px;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.dropdown-option:hover {
+.MarketUploadForm3-dropdown-option:hover {
     background-color: #40a4da;
     color: white;
 }
 /* 權限 */
 .MarketUploadForm3-group.permission {
     flex: 1;
-    width: 50%;
+    width: 48.5%;
     position: relative; 
 }
-.MarketUploadForm3-group.permission .dropdown-options {
+.MarketUploadForm3-group.permission .MarketUploadForm3-dropdown-options {
     left: calc(100% + 30px); 
     top: -5; 
     width: max-content; 
@@ -184,9 +212,9 @@
 }
 
 /* 作品尺寸輸入非數字時的錯誤訊息樣式 */
-.error-message {
+.MarketUploadForm3-error-message {
     color: red;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 5px;
 }
 
@@ -205,7 +233,7 @@
     .MarketUploadForm3-group.permission {
         width: 100%;
     }
-    .MarketUploadForm3-group.permission .dropdown-options {
+    .MarketUploadForm3-group.permission .MarketUploadForm3-dropdown-options {
         left: 0; /* 回到原本的對齊方式 */
         width: 100%;
         top:100%;
@@ -238,5 +266,14 @@
         font-size: 12px;
         width: 80px;
         height: 35px;
+    }
+    .MarketUploadForm3-group label,.MarketUploadForm3-size-input input, 
+    .MarketUploadForm3-dropdown-selected.gray-text,.MarketUploadForm3-group textarea,
+    .MarketUploadForm3-dropdown-selected.black-text,
+    .MarketUploadForm3-dropdown-option,.MarketUploadForm3-size-input span {
+        font-size:14px;
+    }
+    .MarketUploadForm3-dropdown::after, .MarketUploadForm3-dropdown.open::after{
+        font-size:12px;
     }
 }

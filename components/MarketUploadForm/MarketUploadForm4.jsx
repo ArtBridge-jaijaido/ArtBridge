@@ -1,49 +1,50 @@
 "use client";
 import React, { useState, useEffect ,useRef } from "react";
+import { useToast } from "@/app/contexts/ToastContext.js";
+import { artMarketCategory, artMarketStyle, referOptions } from '@/lib/artworkDropdownOptions.js';
 import "./MarketUploadForm4.css";
-import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 
-const MarketUploadFormPage4 = ({ prev, next }) => {
-    const [selectedCategory, setSelectedCategory] = useState("");
+const MarketUploadFormPage4 = ({ prev, next,formData }) => {
+    const { addToast } = useToast();
+    const [selectedCategory, setSelectedCategory] = useState(formData.selectedCategory || "");
+    const [selectedStyles, setSelectedStyles] = useState(formData.selectedStyles || []);
+    const [reference, setReference] = useState(formData.reference || "");
+
+
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-    
-    const [selectedStyles, setSelectedStyles] = useState([]);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
-    const [styleLimitWarning, setStyleLimitWarning] = useState(false);
-    
-    const [reference, setReference] = useState("");
     const [isReferenceOpen, setIsReferenceOpen] = useState(false);
 
     const categoryRef = useRef(null);
     const styleRef = useRef(null);
     const referenceRef = useRef(null);
 
-    const referenceOptions = ["是", "否"];
+    const referenceOptions = referOptions;
+    const filteredCategories = artMarketCategory.filter(option => option !== "全部");
+    const filteredStyles = artMarketStyle.filter(option => option !== "全部");
 
     // 類別選擇（單選）
     const handleCategorySelect = (option) => {
         setSelectedCategory(option === selectedCategory ? "" : option);
+        setIsCategoryOpen(false);
     };
 
     // 風格選擇（最多 3 項）
-    const handleStyleSelect = (option) => {
-        setSelectedStyles((prevStyles) => {
-            let newStyles;
-            if (prevStyles.includes(option)) {
-                newStyles = prevStyles.filter(item => item !== option); // 取消選擇
-            } else if (prevStyles.length < 3) { // 阻止選擇第4項
-                newStyles = [...prevStyles, option]; // 新增選擇
-            } else {
-                setStyleLimitWarning(true);
-                return prevStyles;
-            }
-            setStyleLimitWarning(newStyles.length > 4);  // 只有當超過 3 項時才顯示警告
-            return newStyles;
-        });
+    const handleStyleSelect = (event, option) => {
+        event.stopPropagation();
+    
+        if (selectedStyles.includes(option)) {
+            setSelectedStyles(prevStyles => prevStyles.filter(item => item !== option));
+        } else if (selectedStyles.length < 3) {
+            setSelectedStyles(prevStyles => [...prevStyles, option]);
+        } else {
+                addToast("error", "最多只能選擇3項風格！");
+        }
     };
 
-       // 監聽點擊外部事件來關閉選單
-       useEffect(() => {
+    
+    // 關閉選單
+    useEffect(() => {
         const handleClickOutside = (event) => {
             if (categoryRef.current && !categoryRef.current.contains(event.target)) {
                 setIsCategoryOpen(false);
@@ -62,6 +63,39 @@ const MarketUploadFormPage4 = ({ prev, next }) => {
         };
     }, []);
 
+    useEffect(() => {
+        if (selectedStyles.length === 3) {
+            setIsStyleOpen(false); 
+        }
+    }, [selectedStyles]);
+    
+    
+    const validateForm = () => {
+        if (!selectedCategory) {
+            addToast("error", "請選擇類別！");
+            return false;
+        }
+        if (selectedStyles.length === 0) {
+            addToast("error", "請選擇至少一個風格！");
+            return false;
+        }
+        if (!reference) {
+            addToast("error", "請選擇是否需要提供參考圖！");
+            return false;
+        }
+        return true;
+    };
+
+    const handleNextClick = () => {
+        if (validateForm()) {
+            next({
+                selectedCategory,
+                selectedStyles,
+                reference
+            });
+        }
+    };
+
     return (
         <div className="MarketUploadForm4-wrapper">
             <div className="MarketUploadForm4-container">
@@ -69,17 +103,17 @@ const MarketUploadFormPage4 = ({ prev, next }) => {
                 <div className="MarketUploadForm4-row">
                     {/* 類別選擇 */}
                     <div className="MarketUploadForm4-group category-width" ref={categoryRef}>
-                        <div className="dropdown-container">
+                        <div className="MarketUploadForm4-dropdown-container">
                             <div 
                                 id="category-dropdown" 
-                                className={`dropdown ${isCategoryOpen ? "open" : ""}`} 
+                                className={`MarketUploadForm4-dropdown ${isCategoryOpen ? "open" : ""}`} 
                                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                             >
                                 類別選擇
                                 {isCategoryOpen && (
-                                    <ul className="dropdown-options">
-                                        {artMarketCategory.map((option, index) => (
-                                            <li key={index} className="dropdown-option">
+                                    <ul className="MarketUploadForm4-dropdown-options">
+                                        {filteredCategories.map((option, index) => (
+                                            <li key={index} className="MarketUploadForm4-dropdown-option">
                                                 <input
                                                     type="checkbox"
                                                     checked={selectedCategory === option}
@@ -91,33 +125,34 @@ const MarketUploadFormPage4 = ({ prev, next }) => {
                                     </ul>
                                 )}
                             </div>
-                            <span className="max-selection">(最多1項)</span>
+                            <span className="MarketUploadForm4-max-selection">(最多1項)</span>
                         </div>
                         <input 
                             type="text" 
                             value={selectedCategory || "類別"}  
                             readOnly 
-                            className={`input-box ${selectedCategory ? "black-text" : "gray-text"}`}
+                            className={`MarketUploadForm4-input-box ${selectedCategory ? "black-text" : "gray-text"}`}
                         />
                     </div>
 
                     {/* 風格選擇 */}
                     <div className="MarketUploadForm4-group category-width" ref={styleRef}>
-                        <div className="dropdown-container">
+                        <div className="MarketUploadForm4-dropdown-container">
                             <div 
                                 id="style-dropdown" 
-                                className={`dropdown ${isStyleOpen ? "open" : ""}`} 
+                                className={`MarketUploadForm4-dropdown ${isStyleOpen ? "open" : ""}`} 
                                 onClick={() => setIsStyleOpen(!isStyleOpen)}
                             >
                                 風格選擇
                                 {isStyleOpen && (
-                                    <ul className="dropdown-options">
-                                        {artMarketStyle.map((option, index) => (
-                                            <li key={index} className="dropdown-option">
+                                    <ul className="MarketUploadForm4-dropdown-options">
+                                        {filteredStyles.map((option, index) => (
+                                            <li key={index} className="MarketUploadForm4-dropdown-option">
                                                 <input
                                                     type="checkbox"
                                                     checked={selectedStyles.includes(option)}
-                                                    onChange={() => handleStyleSelect(option)}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    onChange={(e) => handleStyleSelect(e, option)}
                                                 />
                                                 {option}
                                             </li>
@@ -125,29 +160,28 @@ const MarketUploadFormPage4 = ({ prev, next }) => {
                                     </ul>
                                 )}
                             </div>
-                            <span className="max-selection">(最多3項)</span>
+                            <span className="MarketUploadForm4-max-selection">(最多3項)</span>
                         </div>
                         <input 
                             type="text" 
                             value={selectedStyles.length > 0 ? selectedStyles.join("、") : "風格1、風格2、風格3"}  
                             readOnly 
-                            className={`input-box ${selectedStyles.length > 0 ? "black-text" : "gray-text"}`}  
+                            className={`MarketUploadForm4-input-box ${selectedStyles.length > 0 ? "black-text" : "gray-text"}`}  
                         />
-                        {styleLimitWarning && <p className="warning-text">最多只能選擇3項風格！</p>}
                     </div>
                 </div>
 
                 {/* 第二行：委託方是否提供參考圖 */}
                 <div className="MarketUploadForm4-group full-width" ref={referenceRef}>
-                    <label>委託方是否需要提供參考圖</label>
-                    <div className={`dropdown ${isReferenceOpen ? "open" : ""}`} onClick={() => setIsReferenceOpen(!isReferenceOpen)}>
-                        <div className={`dropdown-selected ${reference ? "black-text" : "gray-text"}`}>
+                    <label className="MarketUploadForm4-reference-label">委託方是否需要提供參考圖</label>
+                    <div className={`MarketUploadForm4-dropdown ${isReferenceOpen ? "open" : ""}`} onClick={() => setIsReferenceOpen(!isReferenceOpen)}>
+                        <div className={`MarketUploadForm4-dropdown-selected ${reference ? "black-text" : "gray-text"}`}>
                             {reference || "是/否"}
                         </div>
                         {isReferenceOpen && (
-                            <div className="dropdown-options">
+                            <div className="MarketUploadForm4-dropdown-options">
                                 {referenceOptions.map((option, index) => (
-                                    <div key={index} className="dropdown-option" onClick={() => {
+                                    <div key={index} className="MarketUploadForm4-dropdown-option" onClick={() => {
                                         setReference(option);
                                         setIsReferenceOpen(false);
                                     }}>
@@ -161,13 +195,13 @@ const MarketUploadFormPage4 = ({ prev, next }) => {
 
                 {/* 提示區域 */}
                 <div className="MarketUploadForm4-hint">
-                    如果需要更改/自訂接委託流程，請 <a href="#" className="text-link">點擊這裡</a>
+                    如果需要更改/自訂接委託流程，請 <a href="#" className="MarketUploadForm4-text-link">點擊這裡</a>
                 </div>
 
                 {/* 按鈕區域 */}
                 <div className="MarketUploadForm4-button-group">
                     <button className="MarketUploadForm4-prev" onClick={prev}>上一步</button>
-                    <button className="MarketUploadForm4-next" onClick={next}>發佈</button>
+                    <button className="MarketUploadForm4-next" onClick={handleNextClick}>發佈</button>
                 </div>
             </div>
         </div>
