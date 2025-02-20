@@ -132,6 +132,8 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
         phone: formData.phone.trim(),
         frontImageUrl: updatedFrontImageUrl,
         backImageUrl: updatedBackImageUrl,
+        gender: selectedGender,
+        birthday: selectedBirthday,
       };
 
       const response = await updateUserData(user.uid, updatedData);
@@ -330,7 +332,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                       userPainterProfileBackgroundImg={user?.painterProfileBackgroundImg}
                       userProfileAvatar={user?.profileAvatar}
                       userPainterProfileIntroduction={user?.painterIntroduction||"請寫下你的自我介紹"}
-                      userExclusiveId={"A123456"}
+                      userExclusiveId={user?.userSerialId?user.userSerialId:"A123456"}
                       userNickname={user?.nickname}
                     />
                   </div>

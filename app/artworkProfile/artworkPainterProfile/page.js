@@ -128,7 +128,7 @@ const ArtworkPainterProfilePage = () => {
                 profileImg={user?.profileAvatar ? user.profileAvatar : "/images/profile-avatar.png"}
                 usernameText={user?.nickname}
                 introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
-                viewID={"A123456"}
+                viewID={user?.userSerialId?user.userSerialId:"A123456"}
                 isHighQuality={1}
                 />
             </div>

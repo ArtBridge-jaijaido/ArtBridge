@@ -65,7 +65,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         </div>
         <div className="UserDropdownMenu-info">
           <h3>{user?.nickname}</h3>
-          <p>專屬ID</p>
+          <p> {user?.userSerialId?user.userSerialId:"A123456"}</p>
         </div>
       </div>
 
