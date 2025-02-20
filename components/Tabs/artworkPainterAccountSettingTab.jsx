@@ -128,7 +128,6 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
 
       const updatedData = {
         nickname: formData.nickname.trim(),
-        email: formData.email.trim(),
         phone: formData.phone.trim(),
         frontImageUrl: updatedFrontImageUrl,
         backImageUrl: updatedBackImageUrl,
@@ -291,6 +290,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                           value={formData.email}
                           placeholder={"請輸入電子郵件"}
                           onChange={handleFormDataChange}
+                          disabled={true}
                         />
                       </div>
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-phone">
