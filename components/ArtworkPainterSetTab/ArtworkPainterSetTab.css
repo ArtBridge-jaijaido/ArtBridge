@@ -1,0 +1,153 @@
+.ArtworkPainterSetTab-tabs-container {
+    width: 100%;
+}
+
+.ArtworkPainterSetTab-tabs {
+    display: flex;
+    justify-content: flex-start;
+    gap:50px;
+    padding: 0 50px 0px 10px;  /* 上 右 下 左 */
+}
+
+.ArtworkPainterSetTab-tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #919191;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.ArtworkPainterSetTab-tab:hover {
+    color: #2DAEF4;
+}
+
+.ArtworkPainterSetTab-tab.active {
+    color: #2DAEF4;
+    position: relative;
+    font-weight: 600;
+}
+
+.ArtworkPainterSetTab-tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: 2px;
+    background-color: #2DAEF4;
+}
+
+.ArtworkPainterSetTab-tab-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    height: auto;
+    min-height:520px; 
+}
+
+.ArtworkPainterSetTab-tab-panel {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 上傳新市集按鈕 */
+.ArtworkPainterSetTab-upload-button {
+    background: #40a4da;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    position: relative;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    white-space: nowrap;
+    padding:0px 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+  }
+  
+  .ArtworkPainterSetTab-upload-button:hover {
+    background: #368dc6; 
+  }
+  
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .ArtworkPainterSetTab-tabs{
+        padding: 0 120px 0px 10px;  /* 上 右 下 左 */
+    }
+
+    .ArtworkPainterSetTab-tab {
+        font-size: 18px;
+    }
+    
+}
+
+
+@media screen and (max-width: 834px){
+    .ArtworkPainterSetTab-tabs{
+        padding: 0 90px 0px 10px;  /* 上 右 下 左 */
+    }
+
+    .ArtworkPainterSetTab-tab {
+        font-size: 14px;
+    }
+    .ArtworkPainterSetTab-upload-button {
+        width:100px;
+        height:25px;
+        font-size:14px;
+    }
+}
+
+
+@media screen and (max-width: 440px){
+
+    .ArtworkPainterSetTab-tabs {
+        gap:20px;
+    }
+
+    .ArtworkPainterSetTab-tab {
+        font-size: 12px;
+    }
+
+    .ArtworkPainterSetTab-tab-content {
+        padding: 10px 0px;
+    }
+    .ArtworkPainterSetTab-upload-button {
+        width:220px;
+        height:25px;
+        padding:2px 10px;
+        font-size:12px;
+        top:-2px;
+    }
+}
+
+
+@media screen and (max-width: 375px){
+    .ArtworkPainterSetTab-tab-content {
+        padding: 10px 0px;
+    }
+}
