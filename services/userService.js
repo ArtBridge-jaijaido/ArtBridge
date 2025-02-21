@@ -13,7 +13,7 @@ export async function getUserByEmail(email) {
   
     if (!querySnapshot.empty) {
       const doc = querySnapshot.docs[0];
-      return { uid: doc.id, ...doc.data() }; // 返回文档的 `uid` 和数据
+      return { uid: doc.id, ...doc.data() }; 
     }
     return null;
   };

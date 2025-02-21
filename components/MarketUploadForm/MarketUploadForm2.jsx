@@ -14,7 +14,10 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
     const handleExampleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setExampleImage(URL.createObjectURL(file));
+            setExampleImage({
+                file,                              // file object
+                preview: URL.createObjectURL(file) // local preview
+            });
             setExampleImageName(file.name); 
         }
     };
@@ -48,7 +51,10 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
             return;
         }
 
-        const newImages = files.map(file => URL.createObjectURL(file));
+        const newImages = files.map(file => ({
+            file,                              //  file object
+            preview: URL.createObjectURL(file) //  local preview
+        }));
         const newFileNames = files.map(file => file.name);
 
         setSupplementaryImages([...supplementaryImages, ...newImages]);
@@ -76,7 +82,7 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
                         <label>範例圖片 (1張)</label>
                         <div className="MarketUploadForm2-uploadImg-box">
                             {exampleImage ? (
-                                <img src={exampleImage} alt="範例圖片" className="MarketUploadForm2-preview" />
+                                <img src={exampleImage.preview} alt="範例圖片" className="MarketUploadForm2-preview" />
                             ) : (
                                 <span className="MarketUploadForm2-gray-text">請上傳範例圖片 (JPG, PNG, GIF) <br/>最多 15MB</span>
                             )}
@@ -92,7 +98,7 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
                             onDrop={handleDrop}
                         >
                             {supplementaryImages.length > 0 ? (
-                                <img src={supplementaryImages[supplementaryImages.length - 1]} alt="補充圖片" className="MarketUploadForm2-preview" />
+                                <img src={supplementaryImages[supplementaryImages.length - 1].preview} alt="補充圖片" className="MarketUploadForm2-preview" />
                             ) : (
                                 <span className="MarketUploadForm2-gray-text">請拖曳或點擊上傳補充圖片 (JPG, PNG, GIF) <br/>單張 15MB 以下</span>
                             )}
