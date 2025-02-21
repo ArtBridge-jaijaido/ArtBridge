@@ -3,7 +3,7 @@ import React,{useEffect} from 'react'
 import { notoSansTCClass } from "@/app/layout.js";
 import { useSelector } from 'react-redux';
 import { useLoading } from "@/app/contexts/LoadingContext.js";
-import "../painterDashboard.css";
+import "../painterDashboard/painterDashboard.css";
 
 const PainterDashboard = () => {
 
@@ -41,7 +41,7 @@ if (isAuthLoading) {
             <div className="PainterDashboard-painterInfo-container">
 
               <div className="PainterDashboard-painterInfo-avatar">
-                <img src="/images/kv-min-4.png" alt="avatar" className="PainterDashboard-painterInfo-avatar-img" />
+                <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="avatar" className="PainterDashboard-painterInfo-avatar-img" />
               </div>
 
               <div className="PainterDashboard-painterInfo">

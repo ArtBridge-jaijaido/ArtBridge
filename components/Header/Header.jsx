@@ -38,7 +38,7 @@ const Header = () => {
     };
 
     const toggleDropdown = (e) => {
-    
+       
         setIsDropdownOpen((prev) => !prev);
     };
     
@@ -77,6 +77,15 @@ const Header = () => {
         setIsMenuOpen((prev) => !prev); // 關閉菜單
     };
 
+    const handleNavigateToDashboard = (e) =>{
+       
+        const profilePath = "/artworkDashboard";
+        navigate(profilePath);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 1000);
+        setIsMenuOpen(false); // 關閉菜單
+    }
+
 
 
     // 當窗口大小變化時，如果寬度大於 768px，關閉菜單
@@ -104,8 +113,8 @@ const Header = () => {
                         <img src="/images/icons8-bell-96-1.png" alt="通知" />
                         <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                     </div>
-                    <div className="header-user-avatar">
-                        <img src={"/images/kv-min-4.png"} alt="使用者頭像" />
+                    <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
+                        <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                     </div>
                     <div className="header-user-dropdownMenu-container-mobile" ref={mobileDropdownRef }>
                         <span onClick={toggleDropdown} >⌵</span>
@@ -161,8 +170,8 @@ const Header = () => {
                             <img src="/images/icons8-bell-96-1.png" alt="通知" />
                             <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
                         </div>
-                        <div className="header-user-avatar">
-                            <img src={user.profilePicture || "/images/kv-min-4.png"} alt="使用者頭像" />
+                        <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
+                            <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
                         <div className="header-user-dropdownMenu-container" ref={dropdownRef} >
                             <span onClick={toggleDropdown} >⌵</span>

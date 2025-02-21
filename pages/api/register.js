@@ -2,6 +2,7 @@ import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from 'firebase/auth';
 import {  doc, setDoc, getDoc, deleteDoc, collection, query, where, getDocs} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {generateUniqueSerial} from "@/services/userService.js";
 import nodemailer from 'nodemailer'; 
 import multer from 'multer';
 
@@ -62,11 +63,17 @@ export default async function handler(req, res) {
             console.error('Firestore query error:', error);
             return res.status(500).json({ message: 'Database query failed', error: error.message });
         }
+        console.log("確認是否有生成專屬ID");
+        //  生成唯一專屬ID
+        const uniqueSerialId = await generateUniqueSerial();
+        console.log(uniqueSerialId);
+        console.log("確認是否有生成專屬ID");
         
         // 創建新使用者
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const userId = userCredential.user.uid;
 
+      
         
         // 上傳圖片到 Firebase Storage
         const storage = getStorage();
@@ -94,6 +101,7 @@ export default async function handler(req, res) {
             verificationCode,
             frontImageUrl,
             backImageUrl,
+            userSerialId: uniqueSerialId,
             verificationCodeExpiresAt: new Date(Date.now() + 10 * 60 * 1000), // 驗證碼 10 分鐘後過期
             createdAt: new Date(),
             isEmailCodeVerified: false,

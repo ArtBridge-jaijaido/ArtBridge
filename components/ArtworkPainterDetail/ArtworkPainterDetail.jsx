@@ -3,9 +3,13 @@ import React, {useState, useEffect} from 'react'
 import "./ArtworkPainterDetail.css";
 import "@fontsource/inter"; 
 import { useRouter, usePathname } from 'next/navigation';
+import {updateUserRole} from '@/services/userService.js';
+import { useSelector, useDispatch} from "react-redux";
 
 const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameText, introductionText, viewID, isHighQuality}) => {
     const router = useRouter(); 
+    const { user} = useSelector((state) => state.user);  
+    const dispatch = useDispatch();
     const pathname = usePathname(); // 取得當前路徑
     // 判斷是否為消費者頁面
     const isConsumerProfile = pathname.includes("artworkConsumerProfile"); 
@@ -58,12 +62,22 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
     };
 
      // 切換到消費者介面或畫師介面
-     const handleToggleClick = () => {
-        const currentPath = window.location.pathname;
-        if (currentPath.includes("artworkPainterProfile")) {
-            router.push("/artworkProfile/artworkConsumerProfile"); 
-        } else if (currentPath.includes("artworkConsumerProfile")) {
-            router.push("/artworkProfile/artworkPainterProfile"); 
+     const handleToggleClick = async () => {
+        if (!user) return;
+    
+        const newRole = user.role === "artist" ? "consumer" : "artist";
+        
+        const response = await updateUserRole(user.uid, newRole);
+    
+        if (response.success) {
+          
+            const newPath = newRole === "artist" 
+                ? "/artworkProfile/artworkPainterProfile" 
+                : "/artworkProfile/artworkConsumerProfile";
+            router.push(newPath);
+          
+        } else {
+            console.error(response.message);
         }
     };
    

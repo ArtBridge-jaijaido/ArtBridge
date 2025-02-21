@@ -7,23 +7,24 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { logoutUser } from "@/app/redux/feature/userSlice.js";
 import { auth } from "@/lib/firebase.js";
 
+
 const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 
    const { user} = useSelector((state) => state.user);  
    const dispatch = useDispatch();
    const navigate = useNavigation();
    const { setIsLoading } = useLoading();
-   
+ 
 
+  const handleNavigateTo = (e, page) => {
+    e.stopPropagation();
+    const targetPath = page.startsWith("/") ? page : `/${page}`;
+    navigate(targetPath);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+    toggleDropdown();
+  };
 
-   const handleHeadingToProfile = (e) => {
-          e.stopPropagation();
-         console.log("前往個人頁面");
-         navigate("/artworkProfile/artworkPainterProfile");
-         setIsLoading(true);
-         setTimeout(() => setIsLoading(false), 1000);
-         toggleDropdown();
-   }
 
    const handleHeadingToMarket = (e) => {
     e.stopPropagation();
@@ -62,7 +63,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
     } catch (error) {
         console.error("登出錯誤:", error);
     }
-};
+ };
 
 
   return (
@@ -70,11 +71,11 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
       <div className="UserDropdownMenu-profile">
 
         <div className="UserDropdownMenu-avatar-container">
-        <img src="/images/kv-min-4.png" alt="使用者頭像" className="UserDropdownMenu-avatar"  />
+        <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" className="UserDropdownMenu-avatar"  />
         </div>
         <div className="UserDropdownMenu-info">
           <h3>{user?.nickname}</h3>
-          <p>專屬ID</p>
+          <p> {user?.userSerialId?user.userSerialId:"A123456"}</p>
         </div>
       </div>
 
@@ -91,8 +92,10 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
       </div>
 
       <div className="UserDropdownMenu-items">
+
+        <p onClick={(e) => handleNavigateTo(e, "artworkAccountSetting")}>帳戶設定</p>
+        <p>我的市集</p>
         <p>帳戶設定</p>
-        <p onClick={handleHeadingToMarket}>我的市集</p>
         <p>案件管理</p>
         <p>我的文章</p> 
         <p>粉絲名單</p>
@@ -106,7 +109,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p>深色模式 <span className="UserDropdownMenu-badge">NEW即將推出</span></p>
       </div>
       <div className="UserDropdownMenu-actions">
-        <button className="UserDropdownMenu-btn" onClick={handleHeadingToProfile}>前往個人頁面</button>
+        <button className="UserDropdownMenu-btn" onClick={(e) => handleNavigateTo(e, "artworkProfile")}>前往個人頁面</button>
         <button className="UserDropdownMenu-btn" onClick={handleLogout} >登出</button>
       </div>
     </div>
