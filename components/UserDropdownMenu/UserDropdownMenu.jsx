@@ -25,6 +25,16 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
          toggleDropdown();
    }
 
+   const handleHeadingToMarket = (e) => {
+    e.stopPropagation();
+    console.log("前往我的市集");
+    navigate("/artworkPainterMarket");
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+    toggleDropdown();
+};
+
+
    const handleLogout = async (e) => {
     e.stopPropagation();
    
@@ -82,9 +92,9 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 
       <div className="UserDropdownMenu-items">
         <p>帳戶設定</p>
-        <p>我的市集</p>
+        <p onClick={handleHeadingToMarket}>我的市集</p>
         <p>案件管理</p>
-        <p>我的文章</p>
+        <p>我的文章</p> 
         <p>粉絲名單</p>
         <p>我的作品</p>
         <p>追蹤名單</p>

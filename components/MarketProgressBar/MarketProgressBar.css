@@ -1,0 +1,109 @@
+.MarketProgressBar{
+  display:flex;
+  flex-direction: column;
+  max-width:1440px;
+  width:100%;
+  height:auto;
+  margin-top:0px;
+}
+.Market-progressbar-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin-top:20px;
+  width:100%;
+  padding:0px 30px;
+  margin-bottom:20px;
+}
+.Market-progressbar-container {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  max-width: 100%;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+/* 每個圓圈或線條獨立放一欄 */
+.Market-progress-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 圓圈樣式 */
+.Market-progress-circle {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #a2e2ff;
+  border-width: 1px;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+/* 當前步驟及之前的圈圈變藍色 */
+.Market-progress-circle.active {
+  background: #a2e2ff 
+}
+
+/* 連接線 */
+.Market-progress-line {
+  width: 180px;
+  height: 1px;
+  margin: auto 0;
+  border: 1px solid #a2e2ff;
+}
+
+
+@media (max-width: 1028px) {
+  .Market-progress-line {
+    width: 120px;
+  }
+  .Market-progress-circle {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 834px) {
+  .Market-progress-line {
+    width: 100px;
+  }
+  .Market-progress-circle {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (max-width: 760px) {
+  .Market-progress-bar{
+    gap:10px;
+  }
+  .Market-progress-line {
+    width: 60px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .Market-progress-line {
+    width: 40px;
+  }
+  .Market-progress-circle {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (max-width: 370px) {
+  .Market-progress-bar{
+    gap:8px;
+  }
+  .Market-progress-line {
+    width: 20px;
+  }
+  .Market-progress-circle {
+    width: 12px;
+    height: 12px;
+  }
+}

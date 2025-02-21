@@ -1,0 +1,353 @@
+.MarketUploadForm1-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.MarketUploadForm1-container {
+    width: 100%;
+    padding: 20px;
+    max-width:1000;
+    background: white;
+}
+
+/* 欄 */
+.MarketUploadForm1-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    min-width: 120px;
+}
+
+.MarketUploadForm1-group label {
+    margin-bottom: 5px;
+    color:  #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.MarketUploadForm1-group input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    
+}
+.MarketUploadForm1-group textarea{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.MarketUploadForm1-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* 第一列：市集名稱、開始時間、結束時間並排 */
+.MarketUploadForm1-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* 市集名稱欄位 */
+.MarketUploadForm1-group.market-name {
+    flex: 1;
+    width: 50%;
+    flex-basis: 50%;
+}
+
+/* 時間欄位 */
+.MarketUploadForm1-time-container {
+    display: flex;
+    flex-direction: row;
+    width:50%;
+    gap: 10px;
+}
+/* 開始時間 & 結束時間 */
+.MarketUploadForm1-time-container .MarketUploadForm1-group {
+    flex: 1;
+}
+.MarketUploadForm1-gray-text {
+    color: #8C8C8C;
+}
+.MarketUploadForm1-group input.black-text {
+    color: black;
+}
+
+/* 第二列：完稿時間和價格 */
+.MarketUploadForm1-group.dealine-dropdown,
+.MarketUploadForm1-group.price-group {
+    flex: 1;
+    width:50%;
+    position: relative;
+}
+
+.MarketUploadForm1-group.full-width {
+    flex: 2;
+}
+
+/* 下拉式選單 */
+.MarketUploadForm1-dropdown-selected.gray-text {
+    color: #999;
+    font-size:18px;
+}
+
+.MarketUploadForm1-dropdown-selected.black-text {
+    color: black;
+    font-size:18px;
+}
+
+.MarketUploadForm1-group .MarketUploadForm1-dropdown {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 箭頭樣式 */
+.MarketUploadForm1-dropdown::after {
+    content: "▼";
+    font-size: 14px;
+    color: #555;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.MarketUploadForm1-dropdown.open::after {
+    content: "▲";
+}
+
+/* 下拉式選單選項 */
+.MarketUploadForm1-group .MarketUploadForm1-dropdown-options {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    left: 0;
+    top: 100%;
+}
+
+.MarketUploadForm1-group .MarketUploadForm1-dropdown-option {
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.MarketUploadForm1-group .MarketUploadForm1-dropdown-option:hover {
+    background-color: #40a4da;
+    color: white;
+}
+
+/* 價格輸入框 */
+.MarketUploadForm1-group.price-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.MarketUploadForm1-price-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%; 
+    min-width: 0;
+}
+
+.MarketUploadForm1-price-input input{
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+    font-size: 18px;
+    min-width: 0; 
+}
+
+.MarketUploadForm1-price-input span {
+    font-size: 16px;
+    color: #555;
+    margin-left: 5px;
+    white-space: nowrap; 
+}
+
+/* 按鈕區域 */
+.MarketUploadForm1-button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    gap: 100px;
+}
+
+.MarketUploadForm1-button-group button {
+    padding: 0px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.MarketUploadForm1-cancel {
+    background-color: #ccc;
+    color: white;
+}
+
+.MarketUploadForm1-cancel:hover {
+    background-color: #999;
+}
+
+.MarketUploadForm1-next {
+    background-color: #40a4da;
+    color: white;
+}
+
+.MarketUploadForm1-next:hover {
+    background-color: #2291cc;
+}
+
+/* 錯誤訊息樣式 */
+.MarketUploadForm1-error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    width:max-content;
+}
+
+@media screen and (max-width: 834px) {
+
+    .MarketUploadForm1-row {
+        flex-direction: column;
+        width: 100%;
+        gap:0px; /*市集名稱和開始時間的間距*/
+        margin-bottom: 0px; /*完稿時間和開始時間的間距*/
+    }
+
+    /* 第一列：市集名稱獨占一行 */
+    .MarketUploadForm1-group.market-name {
+        width: 100%;
+    }
+
+    /* 開始時間 & 結束時間保持並排 */
+    .MarketUploadForm1-time-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .MarketUploadForm1-time-container .MarketUploadForm1-group {
+        width: 50%;
+    }
+
+    /* 保持完稿時間 & 價格並排 */
+    .MarketUploadForm1-row:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+        flex-wrap: nowrap; 
+    }
+
+    /* 各佔 50% */
+    .MarketUploadForm1-group.dealine-dropdown,
+    .MarketUploadForm1-group.price-group {
+        width: 50%;
+        flex: 1;
+    }
+    /* 詳細解說一行 */
+    .MarketUploadForm1-group.full-width {
+        width: 100%;
+    }
+    .MarketUploadForm1-button-group{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .MarketUploadForm1-group label {
+        font-size: 14px
+    }
+    .MarketUploadForm1-group input,
+    .MarketUploadForm1-group textarea, .MarketUploadForm1-group .dropdown,
+    .MarketUploadForm1-group .MarketUploadForm1-dropdown-option,
+    .MarketUploadForm1-price-input input,.MarketUploadForm1-price-input span,
+    .MarketUploadForm1-dropdown-selected.gray-text,
+    .MarketUploadForm1-dropdown-selected.black-text {
+        font-size: 14px;
+    }
+    .MarketUploadForm1-container{
+        padding-top:0px; /*表單跟進度條的距離*/
+    }
+    .MarketUploadForm1-button-group{
+        gap:50px;
+    }
+
+    .MarketUploadForm1-button-group button{
+        font-size:12px;
+        width:80px;
+        height:35px;
+        margin-top: 10px;
+    }
+    .MarketUploadForm1-group.full-width textarea {
+        height: 150px;
+    }
+    .MarketUploadForm1-dropdown::after, .MarketUploadForm1-dropdown.open::after{
+        font-size:12px;
+    }
+   
+    /* 讓完稿時間與價格的 row 變成垂直排列 */
+    .MarketUploadForm1-row:nth-child(2) {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    /* 讓完稿時間獨佔一行 */
+    .MarketUploadForm1-group.dealine-dropdown {
+        width: 100%;
+    }
+
+    /* 讓價格獨佔一行 */
+    .MarketUploadForm1-group.price-group {
+        width: 100%;
+    }
+
+}
