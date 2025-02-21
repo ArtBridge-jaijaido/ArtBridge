@@ -1,0 +1,86 @@
+.artworkUploadMarket-page{
+    /*max width */
+    --artworkPainterMarket-page-width: 1440px;
+
+}
+
+.artworkUploadMarket-page{
+    position: relative;
+    width:100%;
+    max-width:var(--artworkUploadMarket-page-width);
+    padding: 100px 80px 20px 80px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+.artworkUploadMarket-progressbar {
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+.artworkUploadMarket-form-content{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+/* 成功畫面樣式 */
+.artworkUploadMarket-success-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;  /* 讓內容在整個視窗置中 */
+    text-align: center;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.success-button {
+    background-color: #40a4da;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top:80px;
+}
+
+.success-button:hover {
+    background-color: #358bc5;
+}
+
+
+@media screen and (min-width:1280){
+    .artworkUploadMarket-form-content{
+        padding:0px 30px;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .artworkUploadMarket-page{
+        padding: 100px 40px 20px 40px; 
+    }
+}
+@media screen and (max-width: 760px) {
+    .artworkUploadMarket-page{
+        padding: 100px 20px 20px 20px; 
+    }
+}
+  
+  

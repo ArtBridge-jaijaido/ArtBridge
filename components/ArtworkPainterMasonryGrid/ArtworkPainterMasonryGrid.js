@@ -38,6 +38,22 @@ const ArtworkPainterMasonryGrid = ({ images}) => {
     }));
   };
 
+  const downloadImage = (imageSrc,e) => {
+    e.stopPropagation(); 
+    fetch(imageSrc)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = imageSrc.substring(imageSrc.lastIndexOf('/') + 1) || "download.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => console.error("Download failed:", error));
+  };
+  
+
   useEffect(() => {
     const updateColumnWidths = () => {
       if (window.innerWidth <= 370) {
@@ -97,7 +113,11 @@ const ArtworkPainterMasonryGrid = ({ images}) => {
           {column.map((image, imageIndex) => (
             <div key={imageIndex} className="ArtworkPainter-masonry-grid-item">
               <img src={image.src} alt={`ArtworkPainter ${imageIndex + 1}`} />
-              {/* 收藏按鈕 */}
+               {/* 下載按鈕 */}
+                <div className="ArtworkPainter-masonry-downloadIcon-container" onClick={(e) => downloadImage(image.src,e)}>
+                      <img src="/images/download-icon.png" alt="Download" />
+                </div>
+                {/* 收藏按鈕 */}
                 <button className="ArtworkPainter-masonry-likesIcon-container" onClick={() => toggleFavorite(columnIndex * columnItems[0].length + imageIndex)}>
                         <img
                           src={isfavorite[columnIndex * columnItems[0].length + imageIndex]  ? "/images/icons8-love-48-1.png" : "/images/icons8-love-96-26.png"}
