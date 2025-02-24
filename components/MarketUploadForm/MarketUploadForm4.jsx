@@ -2,6 +2,7 @@
 import React, { useState, useEffect ,useRef } from "react";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle, referOptions } from '@/lib/artworkDropdownOptions.js';
+import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx"; 
 import "./MarketUploadForm4.css";
 
 const MarketUploadFormPage4 = ({ prev, next,formData }) => {
@@ -14,7 +15,7 @@ const MarketUploadFormPage4 = ({ prev, next,formData }) => {
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
     const [isReferenceOpen, setIsReferenceOpen] = useState(false);
-
+    const [isLoading, setIsLoading] = useState(false);
     const categoryRef = useRef(null);
     const styleRef = useRef(null);
     const referenceRef = useRef(null);
@@ -86,13 +87,22 @@ const MarketUploadFormPage4 = ({ prev, next,formData }) => {
         return true;
     };
 
-    const handleNextClick = () => {
-        if (validateForm()) {
-            next({
+    const handlePublishClick = async () => {
+        if (!validateForm()) return;
+
+        setIsLoading(true); 
+        try {
+            await next({
                 selectedCategory,
                 selectedStyles,
                 reference
             });
+         
+        } catch (error) {
+            console.error("上傳失敗:", error);
+            addToast("error", "上傳失敗，請稍後再試");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -201,7 +211,14 @@ const MarketUploadFormPage4 = ({ prev, next,formData }) => {
                 {/* 按鈕區域 */}
                 <div className="MarketUploadForm4-button-group">
                     <button className="MarketUploadForm4-prev" onClick={prev}>上一步</button>
-                    <button className="MarketUploadForm4-next" onClick={handleNextClick}>發佈</button>
+                    <LoadingButton
+                        isLoading={isLoading}
+                        onClick={handlePublishClick}
+                        loadingText="發佈中..."
+                        className="MarketUploadForm4-next"
+                    >
+                        發佈
+                    </LoadingButton>
                 </div>
             </div>
         </div>

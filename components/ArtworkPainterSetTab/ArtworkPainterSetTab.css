@@ -125,9 +125,14 @@
 
 @media screen and (max-width: 440px){
 
+
+    
+
     .ArtworkPainterSetTab-tabs {
         gap:20px;
     }
+
+  
 
     .ArtworkPainterSetTab-tab {
         font-size: 12px;
@@ -137,7 +142,7 @@
         padding: 10px 0px;
     }
     .ArtworkPainterSetTab-upload-button {
-        width:220px;
+        width:100px;
         height:25px;
         padding:2px 10px;
         font-size:12px;

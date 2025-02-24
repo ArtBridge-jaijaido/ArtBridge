@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { notoSansTCClass } from '@/app/layout.js';
+import { useToast } from "@/app/contexts/ToastContext.js";
 import MarketProgressBar from "@/components/MarketProgressBar/MarketProgressBar.jsx";
 import MarketUploadForm1 from "@/components/MarketUploadForm/MarketUploadForm1.jsx";
 import MarketUploadForm2 from "@/components/MarketUploadForm/MarketUploadForm2.jsx";
@@ -12,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { uploadArtwork } from "@/services/artworkMarketService";
 
 const ArtworkUploadMarketPage = () => {
+    const { addToast } = useToast();
     const [step, setStep] = useState(1);
     const router = useRouter();
     const { user } = useSelector((state) => state.user);
@@ -56,14 +58,15 @@ const ArtworkUploadMarketPage = () => {
     const handlePublish = async (newData) => {
         const updatedData = { ...formData, ...newData };
         setFormData(updatedData);
-        const userId = user?.userSerialId;
-        const response = await uploadArtwork(userId, updatedData);
+        const userSerialId = user?.userSerialId;
+        const userUid = user?.uid;
+        const response = await uploadArtwork(userUid, userSerialId, updatedData);
         if (response.success) {
-            console.log("✅ 上傳成功, 作品ID:", response.artworkId);
+            addToast("success", "作品已成功上傳！");
             setStep(5); // 成功頁面
         } else {
             console.error("❌ 上傳失敗:", response.message);
-            alert("上傳失敗，請稍後再試");
+            addToast("error", "上傳失敗，請稍後再試");
         }
     };
 

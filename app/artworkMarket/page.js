@@ -6,6 +6,7 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
+import { fetchAllUserArtworks } from "@/services/artworkMarketService";
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
 import "./artworkMarket.css";
 
@@ -19,15 +20,28 @@ const ArtMarketPage = () => {
         priceRange: "價格區間",
         deadline: "完稿時間",
     });
-
+    const [artworks, setArtworks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
-    const totalItems = 135; // 商品總數（可以從API獲取）
-    const totalPages = Math.ceil(totalItems / ITEMSPERPAGE); // 總頁數
-
     const dropdownRef = useRef(null); // 用於追蹤下拉選單的容器
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const loadAllArtworks = async () => {
+            setIsLoading(true);
+            const allArtworks = await fetchAllUserArtworks();
+            setArtworks(allArtworks);
+            setIsLoading(false);
+        };
 
-   
+        loadAllArtworks();
+    }, []);
+
+    const currentItems = artworks.slice(
+        (currentPage - 1) * ITEMSPERPAGE,
+        currentPage * ITEMSPERPAGE
+    );
+
+    const totalPages = Math.ceil(artworks.length / ITEMSPERPAGE);
     
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
@@ -61,10 +75,7 @@ const ArtMarketPage = () => {
         };
     }, []);
 
-    const currentItems = Array.from({ length: totalItems }).slice(
-        (currentPage - 1) * ITEMSPERPAGE,
-        currentPage * ITEMSPERPAGE
-    );
+    
 
 
     return (
@@ -126,17 +137,20 @@ const ArtMarketPage = () => {
             </div>
 
             <div className="artMarket-product-container">
-                {/* 渲染商品列表 */}
-                {currentItems.map((_, index) => ( 
-                    <ArtworkCard
-                        key={index}
-                        imageSrc={"/images/testing-Arkwork-image.png"}
-                        title={"網站測試用商品圖"}
-                        price={"1000"}
-                        artistProfileImg={"/images/testing-artist-profile-image.png"}
-                        artistNickName={"王小美"}
-                    />
-                ))}
+                {isLoading ? (
+                    <p>載入中...</p>
+                ) : (
+                    currentItems.map((artwork) => (
+                        <ArtworkCard
+                            key={artwork.id}
+                            imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
+                            title={artwork.marketName}
+                            price={artwork.price}
+                            artistProfileImg={artwork.artistProfileImg || "/images/default-artist-profile.png"}
+                            artistNickName={artwork.artistNickName || "使用者名稱"}
+                        />
+                    ))
+                )}
             </div>
                 
             {/* 使用分頁元件 */}

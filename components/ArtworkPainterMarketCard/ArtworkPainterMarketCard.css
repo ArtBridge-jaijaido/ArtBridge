@@ -47,6 +47,15 @@
     border-radius: 30px;
   }
 
+  .ArtworkPainterMarketCard-loader {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
  /* 歷史市集時的樣式變更 */
   .history-market.ArtworkPainterMarketCard-card-container {
     background: #808080 !important;
@@ -61,11 +70,13 @@
     width: 100%;
     height: var(--ArtworkPainterMarketCard-image-container-height);
     overflow: hidden;
+  
   }
   .ArtworkPainterMarketCard-image{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
   
   .ArtworkPainterMarketCard-card-content{
