@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
 import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
 import { subscribeToAuth } from "@/lib/authListener"; 
+import { subscribeToArtworks} from "@/lib/artworkListener";
 import { store} from "@/app/redux/store.js";
 import { Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -32,8 +33,12 @@ const notoSansTC = Noto_Sans_TC({
 export default function RootLayout({ children }) {
 
   useEffect(() => {
-    const unsubscribe = subscribeToAuth(); 
-    return () => unsubscribe();
+    const unsubscribeAuth = subscribeToAuth(); 
+    const unsubscribeArtworks = subscribeToArtworks(); 
+    return () => {
+      unsubscribeAuth();        // 清除 Auth 訂閱
+      unsubscribeArtworks();    // 清除 Artworks 訂閱
+    };
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { FadeLoader } from "react-spinners"; // 確保已安裝 react-spinners
+import { FadeLoader } from "react-spinners"; 
 import "./ArtworkPainterMarketCard.css";
 
 const ArtworkPainterMarketCard = ({ imageSrc, title, price, isHistoryTab }) => {

@@ -9,13 +9,15 @@ import MarketUploadForm2 from "@/components/MarketUploadForm/MarketUploadForm2.j
 import MarketUploadForm3 from "@/components/MarketUploadForm/MarketUploadForm3.jsx";
 import MarketUploadForm4 from "@/components/MarketUploadForm/MarketUploadForm4.jsx";
 import "./artworkUploadMarket.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { uploadArtwork } from "@/services/artworkMarketService";
+
 
 const ArtworkUploadMarketPage = () => {
     const { addToast } = useToast();
     const [step, setStep] = useState(1);
     const router = useRouter();
+
     const { user } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         marketName: "",
@@ -62,6 +64,8 @@ const ArtworkUploadMarketPage = () => {
         const userUid = user?.uid;
         const response = await uploadArtwork(userUid, userSerialId, updatedData);
         if (response.success) {
+          
+          
             addToast("success", "作品已成功上傳！");
             setStep(5); // 成功頁面
         } else {

@@ -40,15 +40,16 @@ const MarketUploadFormPage3 = ({ prev, next,formData  }) => {
 
     const handleSizeChange = (e) => {
         const value = e.target.value;
-        if (/^\d*$/.test(value)) {
-            if (value.length > 4) {
-                addToast("error", "尺寸最多 4 位數！");
+        // 允許數字、*、x，並限制最多9個字
+        if (/^[\d*xX]*$/.test(value)) {
+            if (value.length > 9) {
+                addToast("error", "尺寸最多 9 個字！");
             } else {
                 setSize(value);
                 setSizeError("");
             }
         } else {
-            addToast("error", "只能輸入數字！");
+            addToast("error", "只能輸入數字、* 或 x！");
         }
     };
 
@@ -57,10 +58,11 @@ const MarketUploadFormPage3 = ({ prev, next,formData  }) => {
             addToast("error", "請選擇檔案格式！");
             return false;
         }
-        if (!size || size.length > 4 || isNaN(size)) {
-            addToast("error", "請輸入最多 4 位數的尺寸！");
+        if (!size ) {
+            addToast("error", "請輸入尺寸！");
             return false;
         }
+
         if (!permission) {
             addToast("error", "請選擇權限設定！");
             return false;

@@ -16,14 +16,15 @@ const ArtworkPainterMarketPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (user?.userSerialId) {
-            loadUserArtworks(user.userSerialId);
+        if (user?.uid) {
+            console.log(user.uid);
+            loadUserArtworks(user.uid);
         }
-    }, [user?.userSerialId]);
+    }, [user?.uid]);
 
-    const loadUserArtworks = async (userId) => {
+    const loadUserArtworks = async (userUid) => {
         setIsLoading(true);
-        const fetchedArtworks = await fetchUserArtworks(userId);
+        const fetchedArtworks = await fetchUserArtworks(userUid);
 
         // 當前日期（設為 00:00:00 確保正確比較）
         const currentDate = new Date();

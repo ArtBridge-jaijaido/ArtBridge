@@ -6,7 +6,8 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
-import { fetchAllUserArtworks } from "@/services/artworkMarketService";
+import { subscribeToArtworks } from "@/lib/artworkListener";
+import { useSelector } from 'react-redux';
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
 import "./artworkMarket.css";
 
@@ -20,21 +21,26 @@ const ArtMarketPage = () => {
         priceRange: "價格區間",
         deadline: "完稿時間",
     });
-    const [artworks, setArtworks] = useState([]);
+    const artworks = useSelector((state) => state.artwork.artworks);
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const ITEMSPERPAGE = 20; // 每頁顯示的商品數量
     const dropdownRef = useRef(null); // 用於追蹤下拉選單的容器
     const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        const loadAllArtworks = async () => {
-            setIsLoading(true);
-            const allArtworks = await fetchAllUserArtworks();
-            setArtworks(allArtworks);
-            setIsLoading(false);
-        };
+   
+     // ✅ 觸發 artwork 監聽
+     useEffect(() => {
+        const unsubscribe = subscribeToArtworks(); // 監聽開始
 
-        loadAllArtworks();
+        return () => {
+            unsubscribe(); // 頁面卸載時取消監聽
+        };
     }, []);
+    
+    useEffect(() => {
+        if (artworks.length) {
+            setIsLoading(false);
+        }
+    }, [artworks]);
 
     const currentItems = artworks.slice(
         (currentPage - 1) * ITEMSPERPAGE,
@@ -138,15 +144,15 @@ const ArtMarketPage = () => {
 
             <div className="artMarket-product-container">
                 {isLoading ? (
-                    <p>載入中...</p>
+                    <p></p>
                 ) : (
                     currentItems.map((artwork) => (
                         <ArtworkCard
-                            key={artwork.id}
+                            key={artwork.artworkId}
                             imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
                             title={artwork.marketName}
                             price={artwork.price}
-                            artistProfileImg={artwork.artistProfileImg || "/images/default-artist-profile.png"}
+                            artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
                             artistNickName={artwork.artistNickName || "使用者名稱"}
                         />
                     ))
