@@ -1,0 +1,455 @@
+.PortfolioUploadForm-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.PortfolioUploadForm-container {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    max-width:1200px;
+    background: white;
+}
+.PortfolioUploadForm-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap:20px;
+    width: 100%;
+}
+/* 左側圖片上傳 */
+.PortfolioUploadForm-image-upload {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.PortfolioUploadForm-image-upload label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+    color: #4F4F4F;
+    font-size: 18px;
+}
+
+.PortfolioUploadForm-uploadImg-box {
+    max-width: 620px;
+    width: 100%;
+    max-height:520px;
+    height: 520px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.PortfolioUploadForm-uploadImg-box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%; 
+    height: 100%;
+}
+
+.PortfolioUploadForm-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.PortfolioUploadForm-gray-text {
+    color: gray;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+/* 右側表單區域 */
+.PortfolioUploadForm-form-area {
+    grid-column: 2;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+}
+.PortfolioUploadForm-category-width{
+    align-items: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.PortfolioUploadForm-style-width {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.PortfolioUploadForm-download-width {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* 下拉按鈕 */
+.PortfolioUploadForm-dropdown-container {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/*最多幾項的說明*/
+.PortfolioUploadForm-max-selection {
+    font-size: 15px;
+    min-width:max-content;
+    color:  #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+.PortfolioUploadForm-download-label {
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+/* 類別選擇 & 風格選擇的下拉按鈕樣式 */
+#category-dropdown, #style-dropdown {
+    background-color: #8DD7FF;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 10px;
+    min-width: 120px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height:auto;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
+}
+
+/* 設定箭頭置中 */
+#category-dropdown::after, #style-dropdown::after {
+    content: "▼";
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#category-dropdown.open::after, #style-dropdown.open::after {
+    content: "▲";
+}
+/* 滑鼠懸停在 checkbox 上時變成手指 */
+.PortfolioUploadForm-dropdown-option input[type="checkbox"] {
+    cursor: pointer;
+    width:20px;
+    height:20px;
+}
+
+/* 輸入框樣式 */
+.PortfolioUploadForm-input-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: white;
+    width: 100%;
+    margin-top: 5px;
+    box-sizing:border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    color:8C8C8C;
+}
+.gray-text {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: 500;
+    color: #999;
+
+}
+.black-text {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: 500;
+    color: black;
+}
+
+/* 參考圖下拉選單 */
+.PortfolioUploadForm-dropdown {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    box-sizing:border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+}
+
+.PortfolioUploadForm-dropdown::after {
+    content: "▼";
+    font-size: 14px;
+    color: #555;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.PortfolioUploadForm-dropdown.open::after {
+    content: "▲";
+}
+
+.PortfolioUploadForm-dropdown-options {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    left: 0;
+    top: 100%; 
+    min-width:max-content;
+    width:100%;
+}
+
+.PortfolioUploadForm-dropdown-option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color:#555;
+    gap:10px;
+}
+
+.PortfolioUploadForm-dropdown-option:hover {
+    background-color: #40a4da;
+    color: white;
+}
+
+
+/* 按鈕 */
+.PortfolioUploadForm-button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+    gap: 100px;
+}
+
+.PortfolioUploadForm-button-group button {
+    padding: 0px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 120px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.PortfolioUploadForm-prev {
+    background-color: #40a4da;
+    color: white;
+}
+
+.PortfolioUploadForm-prev:hover {
+    background-color: #358bc5;
+}
+
+
+.PortfolioUploadForm-next {
+    background-color: #40a4da;
+    color: white;
+}
+
+.PortfolioUploadForm-next:hover {
+    background-color: #358bc5;
+}
+
+
+
+/* 響應式設計 */
+@media screen and (max-width: 1280px) {
+    
+    .PortfolioUploadForm-uploadImg-box {
+        max-width:500px;
+        max-height: 370px;
+    }
+}
+@media screen and (max-width: 834px) {
+    .PortfolioUploadForm-grid {
+        display: grid;
+        grid-template-columns: 1fr;     
+        grid-template-rows: auto auto auto; 
+        gap: 20px;
+    }
+
+    /* 第一行: 上傳圖片 */
+    .PortfolioUploadForm-image-upload {
+        grid-column: 1;
+        grid-row: 1;
+        justify-content: center;
+        align-items: center;
+    }
+    .PortfolioUploadForm-uploadImg-box{
+        max-width:700px;
+    }
+
+    /* 第二行: 類別與風格選擇 */
+    .PortfolioUploadForm-form-area {
+        grid-column: 1;
+        grid-row: 2;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        justify-content: space-between;  /* 左右排列並自動對齊 */
+        flex-wrap: wrap;
+    }
+
+    .PortfolioUploadForm-category-width {
+        flex: 1;
+        min-width: 45%;
+    }
+
+    .PortfolioUploadForm-style-width {
+        flex: 1;
+        min-width: 45%;
+    }
+
+    /* 第三行: 是否可供下載 */
+    .PortfolioUploadForm-download-width {
+        grid-column: 1;
+        grid-row: 3;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .PortfolioUploadForm-button-group {
+        gap: 70px;
+        margin-top: 70px;
+    }
+
+    .PortfolioUploadForm-button-group button {
+        font-size: 14px;
+        width: 100px;
+        height: 35px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .PortfolioUploadForm-grid{
+        grid-template-rows: auto;
+        gap:0px;
+    }
+
+    .PortfolioUploadForm-uploadImg-box{
+        max-width:371px;
+        max-height:220px;
+    }
+
+    /* 第二行: 類別與風格選擇 */
+    .PortfolioUploadForm-form-area {
+        grid-column: 1;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .PortfolioUploadForm-category-width {
+        width: 100%;
+    }
+
+    .PortfolioUploadForm-style-width {
+        width: 100%;
+    }
+
+    /* 第三行: 是否可供下載 */
+    .PortfolioUploadForm-download-width {
+        width: 100%;
+    }
+
+    #category-dropdown, #style-dropdown, .PortfolioUploadForm-dropdown-selected.gray-text
+    .PortfolioUploadForm-download-label, .PortfolioUploadForm-dropdown-option,
+    .PortfolioUploadForm-dropdown{
+        font-size:14px;
+    }
+    .PortfolioUploadForm-group .PortfolioUploadForm-max-selection {
+        font-size:13px;
+    }
+    .PortfolioUploadForm-dropdown::after, .PortfolioUploadForm-dropdown.open::after  {
+        font-size:12px;
+    }
+    #category-dropdown, #style-dropdown {
+        min-width:100px;
+    }
+
+    .PortfolioUploadForm-button-group {
+        gap: 60px;
+        margin-top: 40px;
+    }
+
+    .PortfolioUploadForm-button-group button {
+        font-size: 12px;
+        width: 80px;
+        height: 35px;
+    }
+    .PortfolioUploadForm-input-box {
+        padding:5px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+
+    .PortfolioUploadForm-container{
+        padding:10px;
+    }
+    .PortfolioUploadForm-uploadImg-box{
+        max-width:341px;
+        max-height:174px;
+    }
+}

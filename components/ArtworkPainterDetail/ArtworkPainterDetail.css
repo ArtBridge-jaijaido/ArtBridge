@@ -137,7 +137,6 @@
   align-self: center;
   display: flex;
   margin-top: 40px;
-  width: 219px;
   max-width: 100%;
   gap: 20px;
   align-items: center;
@@ -154,23 +153,11 @@
   padding: 13px 25px;
   font: 600 20px 'Inter', sans-serif;
 }
-.ArtworkPainterDetail-attendance-button{
-  border-radius: 40px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  padding: 6px;
-  border: 1px solid rgb(141, 215, 255);
-  object-fit: contain;
-}
+
 .ArtworkPainterDetail-no-attendance-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: 30px;
+  width: 40px;
 }
 .ArtworkPainterDetail-username-attendance-container {
     display: flex;
@@ -187,19 +174,6 @@
     letter-spacing: 5px;
 }
 
-.ArtworkPainterDetail-attendance-button {
-    border-radius: 40px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 6px;
-    border: 1px solid rgb(141, 215, 255);
-    object-fit: contain;
-}
 /* 將 username 和 attendance-button 放在同一行 */
 .ArtworkPainterDetail-username-wrapper {
   display: flex;
@@ -223,8 +197,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 60px;
+  height: 60px;
   padding: 6px;
   border: 1px solid rgb(141, 215, 255);
   object-fit: contain;
@@ -394,12 +368,11 @@
     font-size:18px;
   }
   .ArtworkPainterDetail-attendance-button{
-    width:34px;
-    height:34px;
+    width:45px;
+    height:45px;
   }
   .ArtworkPainterDetail-action-buttons{
     margin-top:30px;
-    width:180px;
   }
   .ArtworkPainterDetail-commission-button{
     font-size:14px;
@@ -476,9 +449,9 @@
     width:160px;
   }
   .ArtworkPainterDetail-attendance-button{
-    width:26px;
-    height:26px;
-  }
+    width:35px;
+    height:35px;
+  } 
   .ArtworkPainterDetail-commission-button{
     font-size:11px;
     padding: 4px 3px 4px 8px;
@@ -563,8 +536,8 @@
     letter-spacing:4px;
   }
   .ArtworkPainterDetail-attendance-button{
-    width:24px;
-    height:24px;
+    width:30px;
+    height:30px;
   }
   .ArtworkPainterDetail-action-buttons{
     margin-top:20px;
