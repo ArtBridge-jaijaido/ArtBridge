@@ -72,7 +72,7 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
         if (response.success) {
           
             const newPath = newRole === "artist" 
-                ? "/artworkProfile/artworkPainterProfile" 
+                ? `/artworkProfile/artworkPainterProfile`
                 : "/artworkProfile/artworkConsumerProfile";
             router.push(newPath);
           

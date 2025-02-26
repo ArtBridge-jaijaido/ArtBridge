@@ -5,8 +5,9 @@ import { ToastProvider } from "@/app/contexts/ToastContext.js";
 import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
 import { subscribeToAuth } from "@/lib/authListener"; 
 import { subscribeToArtworks} from "@/lib/artworkListener";
-import { store} from "@/app/redux/store.js";
-import { Provider } from "react-redux";
+import { subscribeToAllUsers } from "@/lib/userListener";
+import {store} from "@/app/redux/store.js";
+import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
 import "./globals.css";
 
@@ -35,9 +36,12 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const unsubscribeAuth = subscribeToAuth(); 
     const unsubscribeArtworks = subscribeToArtworks(); 
+    const unsubscribeAllUsers = subscribeToAllUsers();
+  
     return () => {
       unsubscribeAuth();        // 清除 Auth 訂閱
       unsubscribeArtworks();    // 清除 Artworks 訂閱
+      unsubscribeAllUsers();    // 清除 Users 訂閱
     };
   }, []);
 

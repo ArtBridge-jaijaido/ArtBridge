@@ -15,13 +15,15 @@ const artworkSlice = createSlice({
       state.artworks.push(action.payload);
     },
     updateArtwork: (state, action) => {
-      const index = state.artworks.findIndex(art => art.id === action.payload.id);
-      if (index !== -1) {
-        state.artworks[index] = action.payload;
-      }
+        const index = state.artworks.findIndex(art => art.artworkId === action.payload.artworkId);
+        if (index !== -1) {
+            
+            state.artworks[index] = { ...action.payload };
+        }
     },
+    
     deleteArtwork: (state, action) => {
-      state.artworks = state.artworks.filter(art => art.id !== action.payload);
+      state.artworks = state.artworks.filter(art => art.artworkId !== action.payload);
     },
   },
 });

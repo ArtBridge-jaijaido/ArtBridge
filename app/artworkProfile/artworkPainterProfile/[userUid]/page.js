@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
 import { useSelector, useDispatch} from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
@@ -12,8 +13,9 @@ import "./artworkPainterProfile.css";
 
 
 const ArtworkPainterProfilePage = () => {
-
-        const {user} = useSelector((state) => state.user);  
+        const {userUid} = useParams();
+        const dispatch = useDispatch();
+        const user = useSelector((state) => state.user.allUsers[userUid]) || {};
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
 
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
@@ -46,7 +48,8 @@ const ArtworkPainterProfilePage = () => {
         ];
         const masonryTotalItems = testingImages.length; // 總數
         const currentImages = testingImages.slice(0, masonryVisibleItems);
-
+        
+     
 
         const tabs = [
             {
@@ -117,13 +120,15 @@ const ArtworkPainterProfilePage = () => {
         ];
 
 
+
+
     return (
 
         <div className={`artworkPainterProfilePage ${notoSansTCClass}`}>
             <div className="artworkPainterDetail-container">
                 <ArtworkPainterDetail 
                 id="Detail"
-                backgroundImg={user?.painterProfileBackgroundImg}
+                backgroundImg={user?.painterProfileBackgroundImg || "/images/painter-background.png" }
                 ratingText={"5"}
                 profileImg={user?.profileAvatar ? user.profileAvatar : "/images/profile-avatar.png"}
                 usernameText={user?.nickname}

@@ -2,12 +2,15 @@
 import React, { useState, useEffect } from "react";
 import "./ArtworkCard.css";
 import { FadeLoader } from "react-spinners";
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline }) => {
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid }) => {
 
   const [isFavorite, setIsFavorite] = useState(false); 
   const [pageType, setPageType] = useState("market"); // 預設是 market 頁面
   const [isImageLoaded, setIsImageLoaded] = useState(false); 
-
+  const navigate = useNavigation();
+  const { setIsLoading } = useLoading();
   const toggleFavorite = () => {
     setIsFavorite((prev) => !prev);
   };
@@ -19,6 +22,15 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
     }
   }, [typeof window !== "undefined" ? window.location.pathname : null]); // 監聽 pathname 變化
 
+
+
+  const handleHeadingToProfile = (e) => {
+    e.stopPropagation();
+    navigate(`/artworkProfile/artworkPainterProfile/${artistUid}`);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+   
+};
 
   return (
     <div className={`Artwork-card-container ${pageType === "painterProfile" ? "painter-profile" : "market-style"}`}>
@@ -73,7 +85,7 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
                 {/* 藝術家暱稱 */}
                 {pageType === "market" && (
                   <>
-                    <img src={artistProfileImg} alt="artist" className="Artwork-artist-img" />
+                    <img src={artistProfileImg} alt="artist avatar" className="Artwork-artist-img" onClick={handleHeadingToProfile}/>
                     {/* 藝術家暱稱 */}
                     <span className="Artwork-artist-nickname">{artistNickName}</span>
                   </>

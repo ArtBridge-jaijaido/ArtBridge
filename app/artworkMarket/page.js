@@ -7,6 +7,7 @@ import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx';
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import { subscribeToArtworks } from "@/lib/artworkListener";
+import {subscribeToUsers} from "@/lib/userListener";
 import { useSelector } from 'react-redux';
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
 import "./artworkMarket.css";
@@ -27,12 +28,12 @@ const ArtMarketPage = () => {
     const dropdownRef = useRef(null); // 用於追蹤下拉選單的容器
     const [isLoading, setIsLoading] = useState(true);
    
-     // ✅ 觸發 artwork 監聽
+    // 觸發 artwork 監聽
      useEffect(() => {
-        const unsubscribe = subscribeToArtworks(); // 監聽開始
+        const unsubscribeToUsers = subscribeToUsers();
 
         return () => {
-            unsubscribe(); // 頁面卸載時取消監聽
+            unsubscribeToUsers(); // 頁面卸載時取消監聽
         };
     }, []);
     
@@ -154,6 +155,7 @@ const ArtMarketPage = () => {
                             price={artwork.price}
                             artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
                             artistNickName={artwork.artistNickName || "使用者名稱"}
+                            artistUid={artwork.userUid}
                         />
                     ))
                 )}
