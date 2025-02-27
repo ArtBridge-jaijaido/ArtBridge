@@ -43,7 +43,33 @@ const ArtMarketPage = () => {
         }
     }, [artworks]);
 
-    const currentItems = artworks.slice(
+   // 取得當前日期 (去掉時分秒)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+
+    // 根據風格 + 上架時間篩選作品
+    const filteredArtworks = artworks.filter((artwork) => {
+        const startDate = new Date(artwork.startDate);
+        const endDate = new Date(artwork.endDate);
+
+        // 確保 startDate 和 endDate 是有效的日期
+        if (isNaN(startDate) || isNaN(endDate)) return false;
+
+        // 檢查是否在上架時間內
+        const isOnSale =  today <= endDate;
+
+        // 風格過濾條件
+        const isMatchingStyle = selectedOptions.style === "風格選擇" || 
+                                selectedOptions.style === "全部" ||  
+                                artwork.selectedCategory === selectedOptions.style;
+
+        return isOnSale && isMatchingStyle;
+    });
+
+    
+
+    const currentItems = filteredArtworks.slice(
         (currentPage - 1) * ITEMSPERPAGE,
         currentPage * ITEMSPERPAGE
     );

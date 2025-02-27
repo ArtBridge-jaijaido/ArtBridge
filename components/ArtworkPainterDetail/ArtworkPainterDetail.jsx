@@ -5,17 +5,19 @@ import "@fontsource/inter";
 import { useRouter, usePathname } from 'next/navigation';
 import {updateUserRole} from '@/services/userService.js';
 import { useSelector, useDispatch} from "react-redux";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
-const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameText, introductionText, viewID, isHighQuality}) => {
+const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameText, introductionText, viewID, isHighQuality, browsingPainterId}) => {
     const router = useRouter(); 
-    const { user} = useSelector((state) => state.user);  
+    const {user} = useSelector((state) => state.user);  // 登入者資訊
     const dispatch = useDispatch();
     const pathname = usePathname(); // 取得當前路徑
     // 判斷是否為消費者頁面
     const isConsumerProfile = pathname.includes("artworkConsumerProfile"); 
     //localStorage Key，個別記住attendance icon的狀態
     const attendanceKey = isConsumerProfile ? "consumerAttendanceIcon" : "painterAttendanceIcon";
-
+    const { addToast } = useToast();
     const [iconSrc, setIconSrc] = useState("/images/icons8-exclamation-mark-64-1.png");
     const [attendanceIcon, setAttendanceIcon] = useState("/images/no-attendance-icon.png");
     const [loading, setLoading] = useState(true); // 加載狀態
@@ -62,23 +64,32 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
     };
 
      // 切換到消費者介面或畫師介面
-     const handleToggleClick = async () => {
-        if (!user) return;
-    
-        const newRole = user.role === "artist" ? "consumer" : "artist";
-        
-        const response = await updateUserRole(user.uid, newRole);
-    
-        if (response.success) {
-          
-            const newPath = newRole === "artist" 
-                ? `/artworkProfile/artworkPainterProfile`
-                : "/artworkProfile/artworkConsumerProfile";
+    const handleToggleClick = async () => {
+     
+        if(user){
+            const newRole = user.role === "artist" ? "consumer" : "artist";
+            console.log("切換角色到", newRole );
+            const response = await updateUserRole(user.uid, newRole);
+            if (response.success) {
+              
+                const newPath = newRole === "artist" 
+                    ? `/artworkProfile/artworkPainterProfile/${browsingPainterId}`
+                    : `/artworkProfile/artworkConsumerProfile/${browsingPainterId}`;
+                router.push(newPath);
+              
+            } else {
+                console.error(response.message);
+            }
+        }else{
+            const currentPath = window.location.pathname; 
+            const isPainterProfile = currentPath.includes(`/artworkProfile/artworkPainterProfile/${browsingPainterId}`);
+            const newPath = isPainterProfile
+                ? `/artworkProfile/artworkConsumerProfile/${browsingPainterId}`
+                : `/artworkProfile/artworkPainterProfile/${browsingPainterId}`;
+            
             router.push(newPath);
-          
-        } else {
-            console.error(response.message);
         }
+        
     };
    
     // 查看更多
@@ -94,7 +105,10 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
         <div className="ArtworkPainterDetail-profile-container">
             {/*背景*/}
             <div className="ArtworkPainterDetail-header">
-            <img src={backgroundImg} className="ArtworkPainterDetail-background-image" />
+            <img src={backgroundImg} 
+                 className="ArtworkPainterDetail-background-image" 
+                    
+            />
             {/*個人簡介內容*/}
             <div className="ArtworkPainterDetail-profile-content">
                 {/*頂部按鈕*/}

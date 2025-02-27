@@ -30,7 +30,7 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
    
-};
+ };
 
   return (
     <div className={`Artwork-card-container ${pageType === "painterProfile" ? "painter-profile" : "market-style"}`}>
