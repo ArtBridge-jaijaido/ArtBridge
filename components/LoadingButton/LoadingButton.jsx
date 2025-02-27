@@ -3,7 +3,7 @@ import React from "react";
 import { FadeLoader } from "react-spinners";
 import "./loadingButton.css";
 
-const LoadingButton = ({ isLoading, onClick, children, disabled, className }) => {
+const LoadingButton = ({ isLoading, onClick, children, disabled, className,loadingText }) => {
     return (
         <button
             className={`loading-button ${isLoading ? "loading" : ""} ${className || ""}`}
@@ -12,7 +12,7 @@ const LoadingButton = ({ isLoading, onClick, children, disabled, className }) =>
         >
             {isLoading ? (
                 <div className="loading-content">
-                    <span>儲存中...</span>
+                    <span>{loadingText||"儲存中..."}</span>
                     <div className="loading-spinner-container">
 
                         <FadeLoader

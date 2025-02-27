@@ -125,9 +125,14 @@
 
 @media screen and (max-width: 440px){
 
+
+    
+
     .ArtworkPainterSetTab-tabs {
         gap:20px;
     }
+
+  
 
     .ArtworkPainterSetTab-tab {
         font-size: 12px;

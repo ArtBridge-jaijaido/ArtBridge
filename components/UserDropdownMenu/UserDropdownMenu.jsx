@@ -26,14 +26,14 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
   };
 
 
-   const handleHeadingToMarket = (e) => {
-    e.stopPropagation();
-    console.log("前往我的市集");
-    navigate("/artworkPainterMarket");
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1000);
-    toggleDropdown();
-};
+//    const handleHeadingToMarket = (e) => {
+//     e.stopPropagation();
+//     console.log("前往我的市集");
+//     navigate("/artworkPainterMarket");
+//     setIsLoading(true);
+//     setTimeout(() => setIsLoading(false), 1000);
+//     toggleDropdown();
+// };
 
 
    const handleLogout = async (e) => {
@@ -95,7 +95,6 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 
         <p onClick={(e) => handleNavigateTo(e, "artworkAccountSetting")}>帳戶設定</p>
         <p onClick={(e) => handleNavigateTo(e, "artworkPainterMarket")}>我的市集</p>
-        <p>帳戶設定</p>
         <p>案件管理</p>
         <p>我的文章</p> 
         <p>粉絲名單</p>
@@ -109,7 +108,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p>深色模式 <span className="UserDropdownMenu-badge">NEW即將推出</span></p>
       </div>
       <div className="UserDropdownMenu-actions">
-        <button className="UserDropdownMenu-btn" onClick={(e) => handleNavigateTo(e, "artworkProfile")}>前往個人頁面</button>
+        <button className="UserDropdownMenu-btn" onClick={(e) => handleNavigateTo(e, `artworkProfile`)}>前往個人頁面</button>
         <button className="UserDropdownMenu-btn" onClick={handleLogout} >登出</button>
       </div>
     </div>

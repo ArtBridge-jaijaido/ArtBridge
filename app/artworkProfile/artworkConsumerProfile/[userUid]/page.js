@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { notoSansTCClass } from '@/app/layout.js';
+import { useParams } from "next/navigation";
 import { useSelector, useDispatch} from "react-redux";
+import { notoSansTCClass } from '@/app/layout.js';
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkConsumerCooperation from '@/components/ArtworkConsumerCooperation/ArtworkConsumerCooperation.jsx';
 import ArtworkConsumerProfileTab from "@/components/ArtworkConsumerProfile-tab/ArtworkConsumerProfile-tab.jsx";
@@ -13,13 +15,14 @@ import "./artworkConsumerProfile.css";
 
 
 const ArtworkConsumerProfilePage = () => {
-
-        const {user} = useSelector((state) => state.user);  
+        const {userUid} = useParams();
+        const { setIsLoading } = useLoading();
+        const user = useSelector((state) => state.user.allUsers[userUid]) || {};
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
 
         const [entrustVisibleItems, setEntrustVisibleItems] = useState(6); // 委託初始預設顯示數量
         const entrustTotalItems = 20; // 總數
-
+        const [isUserLoaded, setIsUserLoaded] = useState(false);
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價預設顯示數量
         const reviewTotalItems = 30; // 總數
 
@@ -125,6 +128,18 @@ const ArtworkConsumerProfilePage = () => {
             },
         ];
 
+            useEffect(() => {
+                    if (user?.userSerialId) {  
+                        setIsUserLoaded(true);
+                        setTimeout(() => setIsLoading(false), 500);
+                    } else {
+                        setIsUserLoaded(false);
+                        setIsLoading(true);
+                    }
+                }, [user, setIsLoading]);
+        
+                if (!isUserLoaded) return null;
+
     return (
 
         <div className={`artworkConsumerProfilePage ${notoSansTCClass}`}>
@@ -133,11 +148,12 @@ const ArtworkConsumerProfilePage = () => {
                     id="Detail" 
                     backgroundImg={"/images/consumer-background.png"}
                     ratingText={"5"}
-                    profileImg={"/images/profile-avatar.png"}
+                    profileImg={user.profileAvatar ?? "/images/profile-avatar.png"}
                     usernameText={user?.nickname}
                     introductionText={"很好說話，美東時差黨，延遲回覆抱歉。如果超出原本預期的工時，可以直接跟我提價錢，好商量！如果顯示在線卻沒回"}
-                    viewID={"A123456"}
+                    viewID={user?.userSerialId?user.userSerialId:"A123456"}
                     isHighQuality={true}
+                    browsingPainterId={userUid}
                 />
             </div>
 

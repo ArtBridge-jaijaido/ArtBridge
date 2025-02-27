@@ -1,12 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "./ArtworkCard.css";
-
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline }) => {
+import { FadeLoader } from "react-spinners";
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid }) => {
 
   const [isFavorite, setIsFavorite] = useState(false); 
   const [pageType, setPageType] = useState("market"); // 預設是 market 頁面
-
+  const [isImageLoaded, setIsImageLoaded] = useState(false); 
+  const navigate = useNavigation();
+  const { setIsLoading } = useLoading();
   const toggleFavorite = () => {
     setIsFavorite((prev) => !prev);
   };
@@ -19,11 +23,41 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
   }, [typeof window !== "undefined" ? window.location.pathname : null]); // 監聽 pathname 變化
 
 
+
+  const handleHeadingToProfile = (e) => {
+    e.stopPropagation();
+    navigate(`/artworkProfile/artworkPainterProfile/${artistUid}`);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+   
+ };
+
   return (
     <div className={`Artwork-card-container ${pageType === "painterProfile" ? "painter-profile" : "market-style"}`}>
       {/* 圖片部分 */}
       <div className="Artwork-image-container">
-        <img src={imageSrc} alt={title} className="Artwork-image" />
+        
+        {/*  Loading Spinner */}
+        {!isImageLoaded && (
+          <div className="ArtworkCard-loader">
+            <FadeLoader
+              color="white"
+              height={12}
+              width={3}
+              radius={5}
+              margin={-4}
+            />
+          </div>
+        )}
+
+        {/* 圖片加載完成才顯示 */}
+        <img
+          src={imageSrc}
+          alt={title}
+          className={`Artwork-image ${isImageLoaded ? "loaded" : "hidden"}`}
+          onLoad={() => setIsImageLoaded(true)}
+          onError={() => setIsImageLoaded(true)} 
+        />
       </div>
 
       {/* 商品標題 */}
@@ -51,7 +85,7 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
                 {/* 藝術家暱稱 */}
                 {pageType === "market" && (
                   <>
-                    <img src={artistProfileImg} alt="artist" className="Artwork-artist-img" />
+                    <img src={artistProfileImg} alt="artist avatar" className="Artwork-artist-img" onClick={handleHeadingToProfile}/>
                     {/* 藝術家暱稱 */}
                     <span className="Artwork-artist-nickname">{artistNickName}</span>
                   </>

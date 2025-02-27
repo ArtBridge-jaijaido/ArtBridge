@@ -192,7 +192,7 @@ const ArtworkPainterAccountSettingVerify = () => {
             />
 
             {/* 顯示圖片預覽 */}
-            {selectedImages[index] ? (
+            {selectedImages[index]?.preview? (
               <img
                 src={selectedImages[index].preview}
                 alt="上傳的圖片"

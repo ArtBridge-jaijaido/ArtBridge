@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
 import { useSelector, useDispatch} from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkPainterCalendar from '@/components/ArtworkPainterCalendar/ArtworkPainterCalendar.jsx';
 import ArtworkPainterProfileTab from "@/components/ArtworkPainterProfile-tab/ArtworkPainterProfile-tab.jsx";
@@ -12,15 +14,34 @@ import "./artworkPainterProfile.css";
 
 
 const ArtworkPainterProfilePage = () => {
-
-        const {user} = useSelector((state) => state.user);  
+        const {userUid} = useParams();
+        const { setIsLoading } = useLoading();
+        const dispatch = useDispatch();
+        const user = useSelector((state) => state.user.allUsers[userUid]) || {};
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
-
+        const artworks = useSelector((state) => state.artwork.artworks);
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
         const reviewTotalItems = 30; //總數
-
+        const [isUserLoaded, setIsUserLoaded] = useState(false);
         const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
         const artworkCardTotalItems = 40;
+
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const filteredArtworks = artworks.filter((artwork) => {
+            if (artwork.userUid !== userUid) return false; 
+        
+            const startDate = new Date(artwork.startDate);
+            const endDate = new Date(artwork.endDate);
+        
+            // 確保 startDate 和 endDate 是有效的日期
+            if (isNaN(startDate) || isNaN(endDate)) return false;
+        
+            // 確保作品目前在上架期間內
+            return  today <= endDate;
+        });
+       
 
         const testingImages = [
             {src:"/images/testing-Arkwork-image-2.png", category: "category1"},
@@ -46,6 +67,7 @@ const ArtworkPainterProfilePage = () => {
         ];
         const masonryTotalItems = testingImages.length; // 總數
         const currentImages = testingImages.slice(0, masonryVisibleItems);
+        
 
 
         const tabs = [
@@ -91,15 +113,15 @@ const ArtworkPainterProfilePage = () => {
                 label: "市集",
                 content: (<div className="artworkPainterProfile-Tab-wrapper">
                     <div className="artworkPainterProfile-artworkCard-container">
-                        {Array.from({ length: artworkCardTotalItems }).slice(0, artworkCardVisibleItems).map((_, index) => (
+                    {filteredArtworks.slice(0, artworkCardVisibleItems).map((artwork, index) => (
                             <ArtworkCard 
-                                key={index}
-                                imageSrc={"/images/testing-Arkwork-image-10.png"}
-                                title={"商品標題(至多8字"}
-                                price={"1500"}
-                                artistProfileImg="profile.jpg"
-                                artistNickName="Artist Name"
-                                deadline={"截止日期:2025.01.02"}
+                                key={artwork.artworkId}
+                                imageSrc={artwork.exampleImageUrl}
+                                title={artwork.marketName}
+                                price={artwork.price}
+                                artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
+                                artistNickName={artwork.artistNickName || "使用者名稱"}
+                                deadline={`截止日期: ${artwork.endDate}`}
                             /> 
                         ))}
                     </div>
@@ -116,20 +138,33 @@ const ArtworkPainterProfilePage = () => {
             },
         ];
 
+        useEffect(() => {
+            if (user?.userSerialId) {  
+                setIsUserLoaded(true);
+                setTimeout(() => setIsLoading(false), 500);
+            } else {
+                setIsUserLoaded(false);
+                setIsLoading(true);
+            }
+        }, [user, setIsLoading]);
+
+        if (!isUserLoaded) return null;
+
 
     return (
-
-        <div className={`artworkPainterProfilePage ${notoSansTCClass}`}>
+     
+          <div className={`artworkPainterProfilePage ${notoSansTCClass}`}>
             <div className="artworkPainterDetail-container">
                 <ArtworkPainterDetail 
-                id="Detail"
-                backgroundImg={user?.painterProfileBackgroundImg}
-                ratingText={"5"}
-                profileImg={user?.profileAvatar ? user.profileAvatar : "/images/profile-avatar.png"}
-                usernameText={user?.nickname}
-                introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
-                viewID={user?.userSerialId?user.userSerialId:"A123456"}
-                isHighQuality={1}
+                    id="Detail"
+                    backgroundImg={user.painterProfileBackgroundImg ?? "/images/painter-background.png" }
+                    ratingText={"5"}
+                    profileImg={user.profileAvatar ?? "/images/profile-avatar.png"}
+                    usernameText={user?.nickname}
+                    introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
+                    viewID={user?.userSerialId?user.userSerialId:"A123456"}
+                    isHighQuality={1}
+                    browsingPainterId={userUid}
                 />
             </div>
 

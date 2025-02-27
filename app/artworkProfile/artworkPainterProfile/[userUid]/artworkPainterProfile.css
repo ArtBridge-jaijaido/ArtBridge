@@ -157,17 +157,19 @@
         --artworkPainterProfile-artworkCard-container-height:auto;
     }
 }
-@media screen and (max-width:480px){
-    .artworkPainterProfile-fixed-pricing-button {
-        width:20px;
-        height:60px;
-        font-size: 10px;
-    }
-    .artworkPainter-show-more-button {
-        font-size:12px;
+
+@media screen and (max-width:768px){
+    .artworkPainterProfilePage{
+        width:768px;
     }
 }
+
+
 @media screen and (max-width: 440px){
+
+    .artworkPainterProfilePage{
+        width:100%;
+    }
     .artworkPainterProfile-artworkCard-container{
         grid-template-columns:repeat(2, 1fr);   
         --artworkPainterProfile-artworkCard-container-gap:32px 21px;
@@ -177,6 +179,15 @@
     
     .artworkPainterProfile-artworkPainterMasonryGrid-container {
         --artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom: 30px;
+    }
+
+    .artworkPainterProfile-fixed-pricing-button {
+        width:20px;
+        height:60px;
+        font-size: 10px;
+    }
+    .artworkPainter-show-more-button {
+        font-size:12px;
     }
 }
 
