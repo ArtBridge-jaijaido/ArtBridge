@@ -26,7 +26,21 @@ const ArtworkPainterProfilePage = () => {
         const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
         const artworkCardTotalItems = 40;
 
-        const filteredArtworks = artworks.filter((artwork) => artwork.userUid === userUid);
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const filteredArtworks = artworks.filter((artwork) => {
+            if (artwork.userUid !== userUid) return false; 
+        
+            const startDate = new Date(artwork.startDate);
+            const endDate = new Date(artwork.endDate);
+        
+            // 確保 startDate 和 endDate 是有效的日期
+            if (isNaN(startDate) || isNaN(endDate)) return false;
+        
+            // 確保作品目前在上架期間內
+            return  today <= endDate;
+        });
        
 
         const testingImages = [

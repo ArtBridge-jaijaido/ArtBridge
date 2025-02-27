@@ -59,12 +59,39 @@ const ArtMarketPage = () => {
         // 檢查是否在上架時間內
         const isOnSale =  today <= endDate;
 
-        // 風格過濾條件
-        const isMatchingStyle = selectedOptions.style === "風格選擇" || 
-                                selectedOptions.style === "全部" ||  
-                                artwork.selectedCategory === selectedOptions.style;
+        // 類別過濾條件
+        const isMatchingCategory = selectedOptions.category === "類別選擇" || 
+                                selectedOptions.category === "全部" ||  
+                                artwork.selectedCategory === selectedOptions.category;
 
-        return isOnSale && isMatchingStyle;
+       // 風格過濾條件
+        const isMatchingStyle = selectedOptions.style === "風格選擇" ||
+        selectedOptions.style === "全部" ||
+        (Array.isArray(artwork.selectedStyles) && artwork.selectedStyles.includes(selectedOptions.style));
+
+      
+        // 價格區間過濾條件
+        const isMatchingPriceRange = selectedOptions.priceRange === "價格區間" ||
+        selectedOptions.priceRange === "全部" ||
+        (selectedOptions.priceRange === "100-500元" && artwork.price <= 500) ||
+        (selectedOptions.priceRange === "501-1000元" && artwork.price > 500 && artwork.price <= 1000) ||
+        (selectedOptions.priceRange === "1001-2000元" && artwork.price > 1000 && artwork.price <= 2000) ||
+        (selectedOptions.priceRange === "2001-3000元" && artwork.price > 2000 && artwork.price <= 3000) ||
+        (selectedOptions.priceRange === "3001-4000元" && artwork.price > 3000 && artwork.price <= 4000) ||
+        (selectedOptions.priceRange === "4001-5000元" && artwork.price > 4000 && artwork.price <= 5000) ||
+        (selectedOptions.priceRange === "5000以上" && artwork.price > 5000);
+
+        //完稿時間過濾條件
+        const isMatchingDeadline = selectedOptions.deadline === "完稿時間" ||
+        selectedOptions.deadline === "全部" ||
+        (selectedOptions.deadline === "24小時以內" && artwork.completionTime=="24小時")||
+        (selectedOptions.deadline === "3天內" && artwork.completionTime=="2～7天")||
+        (selectedOptions.deadline === "5天內" && artwork.completionTime=="2～7天")||
+        (selectedOptions.deadline === "7天內" && artwork.completionTime=="2～7天")||
+        (selectedOptions.deadline === "14天內" && artwork.completionTime=="8～14天")
+
+
+        return isOnSale &&  isMatchingCategory && isMatchingStyle && isMatchingPriceRange && isMatchingDeadline;
     });
 
     
