@@ -296,7 +296,7 @@
   .Artwork-title{
     --Artwork-title-width:132px;
     --Artwork-title-height:18px;
-    --Artwork-title-font-size:7px;
+    --Artwork-title-font-size:9px;
     top:-12px;
   }
 
@@ -319,7 +319,7 @@
   } 
 
   .Artwork-artist-nickname{
-    --Artwork-artist-nickname: 7px;
+    --Artwork-artist-nickname: 9px;
   }
 
   .Artwork-artist-img{

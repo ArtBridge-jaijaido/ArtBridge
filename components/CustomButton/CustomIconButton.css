@@ -12,7 +12,7 @@
 
 
     /*font-size*/
-    --CustomIconButton-font-size:15px;
+    --CustomIconButton-font-size:17px;
 }
 
 
@@ -95,11 +95,11 @@
 
 @media screen and (max-width:440px){
     .CustomIconButton{
-        --CustomIconButton-width:80px;
+        --CustomIconButton-width:130px;
         --CustomIconButton-height:30px;
         padding:5px 8px;
         --CustomIconButton-gap:6px;
-        --CustomIconButton-font-size:8px;
+        --CustomIconButton-font-size:11px;
 
     }
 
@@ -113,11 +113,11 @@
 
 @media screen and (max-width:370px){
     .CustomIconButton{
-        --CustomIconButton-width:66px;
+        --CustomIconButton-width:80px;
         --CustomIconButton-height:30px;
         padding:5px 5px;
         --CustomIconButton-gap:4px;
-        --CustomIconButton-font-size:8px;
+        --CustomIconButton-font-size:10px;
 
     }
 

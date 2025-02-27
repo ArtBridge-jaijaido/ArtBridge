@@ -1,17 +1,17 @@
 .artMarketDropdown-menu-container{
     /* width*/
 
-    --artMarketDropdown-button-width:120px; 
-    --artMarketDropdown-text-width: 67px;
+    --artMarketDropdown-button-width:150px; 
+    --artMarketDropdown-text-width: 80px;
 
 
     /* height */
     --artMarketDropdown-button-height: 40px;
 
     /*font-size*/
-    --artMarketDropdown-button-font-size: 14px;
+    --artMarketDropdown-button-font-size: 18px;
     --artMarketDropdown-arrow-font-size: 12px;  
-    --artMarketDropdown-menu-item-font-size: 12px;
+    --artMarketDropdown-menu-item-font-size: 16px;
 
     /*margin left*/
     --artMarketDropdown-arrow-margin-left: 7px;
@@ -28,7 +28,7 @@
   /* 按鈕樣式 */
   .artMarketDropdown-button {
     width:100%;
-    max-width:var(--artMarketDropdown-button-width);
+    min-width:var(--artMarketDropdown-button-width);
     height: var(--artMarketDropdown-button-height);
     background-color: #8DD7FF; 
     color: #ffffff;
@@ -97,10 +97,10 @@
 
 @media screen and (max-width:1280px){
   .artMarketDropdown-button {
-    --artMarketDropdown-button-width:100px;
+    --artMarketDropdown-button-width:120px;
     --artMarketDropdown-button-height:35px;
     padding: 4px 8px;
-    --artMarketDropdown-button-font-size:12px;
+    --artMarketDropdown-button-font-size:14px;
 
   }
 
@@ -113,22 +113,22 @@
   }
 
   .artMarketDropdown-menu{
-    --artMarketDropdown-button-width:100px;
+    --artMarketDropdown-button-width:120px;
     padding:10px 4px 10px 7px;    
   }
 
   .artMarketDropdown-menu-item{
     padding: 6px 0px;
-    --artMarketDropdown-menu-item-font-size:10px;
+    --artMarketDropdown-menu-item-font-size:14px;
   }
 }
 
 @media screen and (max-width:834px){
   .artMarketDropdown-button{
-    --artMarketDropdown-button-width:85px;
+    --artMarketDropdown-button-width:100px;
     --artMarketDropdown-button-height:25px;
     padding: 4px 8px;
-    --artMarketDropdown-button-font-size:10px;
+    --artMarketDropdown-button-font-size:12px;
   }
 
   .artMarketDropdown-text{
@@ -140,25 +140,26 @@
   }
 
   .artMarketDropdown-menu {
-    --artMarketDropdown-button-width:85px;
+    padding:10px 0px 10px 7px;   
+    --artMarketDropdown-button-width:100px;
   }
 
   .artMarketDropdown-menu-item {
-    --artMarketDropdown-menu-item-font-size:10px;
+    --artMarketDropdown-menu-item-font-size:12px;
   }
 }
 
 
 @media screen and (max-width:440px){
   .artMarketDropdown-button {
-    --artMarketDropdown-button-width:75px;
-    --artMarketDropdown-button-height: 20px;
-    padding: 4px 8px;
-    --artMarketDropdown-button-font-size:8px;
+    --artMarketDropdown-button-width:95px;
+    --artMarketDropdown-button-height:25px;
+    padding: 0px 0px;
+    --artMarketDropdown-button-font-size:11.5px;
   }
 
   .artMarketDropdown-text{
-    --artMarketDropdown-text-width: 46px;
+    --artMarketDropdown-text-width: 60px;
   }
 
   .artMarketDropdown-arrow{
@@ -167,28 +168,30 @@
 
 
   .artMarketDropdown-menu{
-    --artMarketDropdown-button-width:75px;
-    padding:10px 4px 10px 7px;    
+    --artMarketDropdown-button-width:100px; 
   }
 
 
   .artMarketDropdown-menu-item{
     padding: 6px 0px;
-    --artMarketDropdown-menu-item-font-size:8px;
+    --artMarketDropdown-menu-item-font-size:11.5px;
   }
  
 }
 
 @media screen and (max-width:370px){
   .artMarketDropdown-button {
-    --artMarketDropdown-button-width:75px;
-    --artMarketDropdown-button-height: 20px;
+    --artMarketDropdown-button-width:70px;
+    --artMarketDropdown-button-height: 23px;
     padding: 4px 8px;
-    --artMarketDropdown-button-font-size:8px;
+    --artMarketDropdown-button-font-size:10px;
   }
 
   .artMarketDropdown-text{
-    --artMarketDropdown-text-width: 43px;
+    --artMarketDropdown-text-width: 55px;
   }
-
+  .artMarketDropdown-menu-item{
+    padding: 6px 0px;
+    --artMarketDropdown-menu-item-font-size:10px;
+  }
 }
