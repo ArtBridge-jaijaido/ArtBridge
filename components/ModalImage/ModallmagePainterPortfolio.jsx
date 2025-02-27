@@ -9,8 +9,6 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
     const { addToast } = useToast(); // 使用 addToast
     const [isLoading, setIsLoading] = useState(false);
 
-
-    // 暫存的選擇
     const [tempSelectedCategory, setTempSelectedCategory] = useState("");
     const [tempSelectedStyles, setTempSelectedStyles] = useState([]);
 
@@ -25,10 +23,9 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
 
     
     useEffect(() => {
-        if (isOpen && data?.src) {
-            const storedData = JSON.parse(localStorage.getItem(data.src)) || {};
-            setTempSelectedCategory(storedData.category || "");
-            setTempSelectedStyles(storedData.styles || []);
+        if (isOpen) {
+            setTempSelectedCategory("");
+            setTempSelectedStyles([]);
         }
     }, [isOpen, data?.src]);
 
@@ -96,31 +93,21 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
             return;
         }
     
-        if (data?.src) {
-            localStorage.setItem(
-                data.src,
-                JSON.stringify({
-                    category: tempSelectedCategory,
-                    styles: tempSelectedStyles
-                })
-            );
-            addToast("success", "儲存成功！");
-    
-            setTimeout(() => {
-                onClose();
-                setIsLoading(false);
-            }, 900);
-        } else {
-            setIsLoading(false); 
-        }
+        console.log("選擇的類別:", tempSelectedCategory);
+        console.log("選擇的風格:", tempSelectedStyles);
+
+        addToast("success", "儲存成功！");
+
+        setTimeout(() => {
+            onClose();
+            setIsLoading(false);
+        }, 900);
+
     };
     
     const handleClose = () => {
-        if (data?.src) {
-            const storedData = JSON.parse(localStorage.getItem(data.src)) || {};
-            setTempSelectedCategory(storedData.category || "");
-            setTempSelectedStyles(storedData.styles || []);
-        }
+        setTempSelectedCategory("");
+        setTempSelectedStyles([]);
         onClose();
     };
 

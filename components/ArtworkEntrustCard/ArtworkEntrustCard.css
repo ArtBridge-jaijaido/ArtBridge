@@ -379,13 +379,13 @@
       word-break: break-word; 
   }
   .ArtworkEntrustCard-username{
-      font-size: 9px;
+      font-size: 10px;
   }
   .ArtworkEntrustCard-applicant-text{
-      font-size: 8px;
+      font-size: 9px;
   }
   .ArtworkEntrustCard-description {
-      font-size: 8px;
+      font-size: 9px;
       line-height: 1.4;
       word-break: break-word; 
   }
@@ -393,7 +393,7 @@
       padding: 9px 10px 9px 10px; 
   }
   .ArtworkEntrustCard-price-text{
-      font-size: 7px;
+      font-size: 9px;
   }
   .ArtworkEntrustCard-deadline-icon{
       width:12px;
@@ -412,7 +412,7 @@
       width:12px;
   }
   .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
-      font-size: 7px;
+      font-size: 9px;
   }
 }
 @media screen and (max-width: 370px) {
@@ -445,7 +445,7 @@
       width:110px;
   }
   .ArtworkEntrustCard-price-text{
-      font-size:7px;
+      font-size:9px;
   }
   .ArtworkEntrustCard-deadline-icon,.ArtworkEntrustCard-category-icon{
       width:10px;
@@ -460,7 +460,7 @@
       width:10px;
   }
   .ArtworkEntrustCard-deadline-text,.ArtworkEntrustCard-category-text {
-     font-size: 6px; 
+     font-size: 8px; 
   }
 }
 

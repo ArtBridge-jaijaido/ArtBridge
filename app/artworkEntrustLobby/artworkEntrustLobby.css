@@ -6,8 +6,7 @@
 
 
     /*gap*/
-    --artworkEntrustLobby-dropdownButton-container-min-gap: 20px;
-    --artworkEntrustLobby-button-container-gap: 80px;
+    --artworkEntrustLobby-button-container-gap: 60px;
     --artworkEntrustCard-container-gap: 30px;
 
     /*margin-bottom*/
@@ -30,7 +29,6 @@
 }
 .artworkEntrustLobbyPage-search-container {
     position: relative;
-    right:15px;
     width: 100%;
     display: flex;
     justify-content: flex-end; 
@@ -46,7 +44,7 @@
     width:100%;
     display:flex;
     gap:var(--artworkEntrustLobby-button-container-gap);
-    padding: 0px 190px;
+    padding: 0px 150px;
     justify-content: center;
     align-items: center;
     margin-bottom:var(--artworkEntrustLobby-button-container-margin-bottom);
@@ -79,7 +77,7 @@
     }
 
     .artworkEntrustLobby-button-container{
-        padding: 0px 128px;
+        padding: 0px 30px;
         --artworkEntrustLobby-button-container-gap:40px;
     }
     .artworkEntrustCard-container {
@@ -137,7 +135,7 @@
     }
 
     .artworkEntrustLobby-button-container{
-        padding:0px 15px;
+        padding:0px 25px;
         display:grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
@@ -151,11 +149,10 @@
         width:100%;
         padding : 108px 10px 15px 10px;
     }
-
     .artworkEntrustLobby-button-container{
-        padding:0px 15px;
-        justify-items: center;
-        align-items: center;
+        padding:0px 30px;
+        --artworkEntrustLobby-button-container-gap: 10px;
+        gap: var(--artworkEntrustLobby-button-container-gap)
     }
   }
   
