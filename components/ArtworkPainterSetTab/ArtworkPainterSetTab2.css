@@ -1,15 +1,15 @@
-.ArtworkPainterSetTab-tabs-container {
+.ArtworkPainterSetTab2-tabs-container {
     width: 100%;
 }
 
-.ArtworkPainterSetTab-tabs {
+.ArtworkPainterSetTab2-tabs {
     display: flex;
     justify-content: flex-start;
     gap:50px;
     padding: 0 50px 0px 10px;  /* 上 右 下 左 */
 }
 
-.ArtworkPainterSetTab-tab {
+.ArtworkPainterSetTab2-tab {
     background: none;
     border: none;
     cursor: pointer;
@@ -25,27 +25,27 @@
     white-space: nowrap;
 }
 
-.ArtworkPainterSetTab-tab:hover {
+.ArtworkPainterSetTab2-tab:hover {
     color: #2DAEF4;
 }
 
-.ArtworkPainterSetTab-tab.active {
+.ArtworkPainterSetTab2-tab.active {
     color: #2DAEF4;
     position: relative;
     font-weight: 600;
 }
 
-.ArtworkPainterSetTab-tab.active::after {
+.ArtworkPainterSetTab2-tab.active::after {
     content: "";
     position: absolute;
-    bottom: -11px;
-    left: -10px;
-    width: calc(100% + 20px);
+    bottom: -5px;
+    left: -7px;
+    width: calc(100% + 15px);
     height: 2px;
     background-color: #2DAEF4;
 }
 
-.ArtworkPainterSetTab-tab-content {
+.ArtworkPainterSetTab2-tab-content {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -54,12 +54,12 @@
     min-height:520px; 
 }
 
-.ArtworkPainterSetTab-tab-panel {
+.ArtworkPainterSetTab2-tab-panel {
     animation: fadeIn 0.3s ease-in-out;
 }
 
 /* 上傳按鈕 */
-.ArtworkPainterSetTab-upload-button {
+.ArtworkPainterSetTab2-upload-button {
     background: #40a4da;
     border-radius: 5px;
     width: 130px;
@@ -79,7 +79,7 @@
     align-items: center;    
   }
   
-  .ArtworkPainterSetTab-upload-button:hover {
+  .ArtworkPainterSetTab2-upload-button:hover {
     background: #368dc6; 
   }
   
@@ -96,11 +96,11 @@
 }
 
 @media screen and (max-width: 1280px){
-    .ArtworkPainterSetTab-tabs{
+    .ArtworkPainterSetTab2-tabs{
         padding: 0 120px 0px 10px;  /* 上 右 下 左 */
     }
 
-    .ArtworkPainterSetTab-tab {
+    .ArtworkPainterSetTab2-tab {
         font-size: 18px;
     }
     
@@ -108,14 +108,14 @@
 
 
 @media screen and (max-width: 834px){
-    .ArtworkPainterSetTab-tabs{
+    .ArtworkPainterSetTab2-tabs{
         padding: 0 90px 0px 10px;  /* 上 右 下 左 */
     }
 
-    .ArtworkPainterSetTab-tab {
+    .ArtworkPainterSetTab2-tab {
         font-size: 14px;
     }
-    .ArtworkPainterSetTab-upload-button {
+    .ArtworkPainterSetTab2-upload-button {
         width:100px;
         height:25px;
         font-size:14px;
@@ -125,18 +125,18 @@
 
 @media screen and (max-width: 440px){
 
-    .ArtworkPainterSetTab-tabs {
+    .ArtworkPainterSetTab2-tabs {
         gap:20px;
     }
 
-    .ArtworkPainterSetTab-tab {
+    .ArtworkPainterSetTab2-tab {
         font-size: 12px;
     }
 
-    .ArtworkPainterSetTab-tab-content {
+    .ArtworkPainterSetTab2-tab-content {
         padding: 10px 0px;
     }
-    .ArtworkPainterSetTab-upload-button {
+    .ArtworkPainterSetTab2-upload-button {
         height:25px;
         padding:2px 8px;
         font-size:12px;
@@ -146,7 +146,11 @@
 
 
 @media screen and (max-width: 375px){
-    .ArtworkPainterSetTab-upload-button {
+    .ArtworkPainterSetTab2-upload-button {
         width:90px;
+        height:25px;
+        padding:2px 8px;
+        font-size:12px;
+        top:-2px;
     }
 }

@@ -99,7 +99,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p>案件管理</p>
         <p>我的文章</p> 
         <p>粉絲名單</p>
-        <p>我的作品</p>
+        <p onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>我的作品</p>
         <p>追蹤名單</p>
         <p>訂閱專區</p>
         <p>收藏名單</p>

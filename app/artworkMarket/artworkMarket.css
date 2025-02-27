@@ -57,7 +57,7 @@
     width:100%;
     display:flex;
     justify-content: space-between;
-    padding:0px 184px;
+    padding:0px 144px;
     gap:var(--artMarket-dropdownButton-container-min-gap);
     margin-bottom:var(--artMarket-dropdownButton-container-margin-bottom);
 }
@@ -81,7 +81,7 @@
 @media screen and (max-width: 1280px) {
     .artMarket-page{
       
-        padding: 120px 71px 40px 71px; /* top right bottom left */
+        padding: 120px 20px 40px 21px; /* top right bottom left */
     }
 
     .artMarket-iconButton-container{
@@ -117,7 +117,7 @@
     }
 
     .artMarket-dropdownButton-container{
-        padding:0px 42px;
+        padding:0px 30px;
         --artMarket-dropdownButton-container-gap: 55px;
     
     }
@@ -150,7 +150,7 @@
     }
 
     .artMarket-iconButton-container{
-        padding:0px 17px;
+        padding:0px 5px;
         display:grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
@@ -158,11 +158,12 @@
     }
 
     .artMarket-dropdownButton-container{
-        padding:0px 17px;
+        padding:0px 0px;
         display:grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
         --artMarket-dropdownButton-container-margin-bottom: 35px;
+        --artMarket-dropdownButton-container-min-gap: 20px 10px;
         justify-items: center;
         align-items: center;
         

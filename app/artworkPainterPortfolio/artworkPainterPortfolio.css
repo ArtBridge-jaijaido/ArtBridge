@@ -1,0 +1,94 @@
+.artworkPainterPortfolio-page{
+    /*max width */
+    --artworkPainterPortfolio-page-width: 1440px;
+  
+   
+}
+.artworkPainterPortfolio-page{
+    position: relative;
+    width:100%;
+    max-width:var(--artworkPainterPortfolio-page-width);
+    padding: 100px 15px 20px 15px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+/*放置元件的Wrapper*/
+.artworkPainterPortfolio-tab-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    gap:0px;
+}
+/*Tab元件*/
+.artworkPainterPortfolio-setTab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+    margin-top:20px;
+}
+
+.artworkPainterPortfolio-masonryGrid-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top:20px;
+  }
+  
+  
+
+/*顯示更多*/
+.artworkPainterPortfolio-show-more-button {
+    background: none;
+    color: #2DAEF4; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-decoration: underline;
+    text-underline-offset: 3px; 
+}
+.artworkPainterPortfolio-show-more-button:hover {
+    color: #1C8CD1; 
+}
+
+@media (max-width: 1280px) {
+    .artworkPainterPortfolioPage{
+        width:100%;
+    }
+   
+}
+
+@media screen and (max-width:480px){
+    .artworkPainterPortfolio-show-more-button {
+        font-size:12px;
+    }
+    .artworkPainterPortfolio-setTab-container{
+        margin-top:10px;
+    }
+    .artworkPainterPortfolio-masonryGrid-container {
+         margin-top:10px;
+    }
+}
+
+@media screen and (max-width:440px) {
+    .artworkPainterPortfolio-masonryGrid-container {
+      --artworkPainterPortfolio-masonryGrid-container-margin-bottom: 30px;
+    }
+}
+
+
+@media screen and (max-width: 370px){
+    .artworkPainterPortfolio-masonryGrid-container {
+
+        --artworkPainterPortfolio-masonryGrid-container-margin-bottom: 30px;
+    }
+}
