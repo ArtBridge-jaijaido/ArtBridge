@@ -64,8 +64,6 @@ const ArtworkUploadMarketPage = () => {
         const userUid = user?.uid;
         const response = await uploadArtwork(userUid, userSerialId, updatedData);
         if (response.success) {
-          
-          
             addToast("success", "作品已成功上傳！");
             setStep(5); // 成功頁面
         } else {

@@ -17,7 +17,7 @@ const ArtworkPainterMarketPage = () => {
 
     useEffect(() => {
         if (user?.uid) {
-            console.log(user.uid);
+           
             loadUserArtworks(user.uid);
         }
     }, [user?.uid]);

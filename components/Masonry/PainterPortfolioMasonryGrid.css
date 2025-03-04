@@ -1,5 +1,6 @@
 .painterPortfolio-masonry-grid {
     display: flex;
+    
     gap: 38px; 
   }
   
@@ -42,6 +43,7 @@
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    min-width:140px;
   }
 
   .painterPortfolio-grid-item-image:hover {
@@ -51,6 +53,15 @@
 
 
 /*RWD*/
+@media screen and (max-width:1280px){
+  .painterPortfolio-masonry-grid{
+    gap:20px;
+  }
+}
+
+
+
+
 @media screen and (max-width:834px){
     
     .painterPortfolio-masonry-grid{
@@ -78,6 +89,12 @@
   .painterPortfolio-masonry-grid{
     gap:15px;
   }
+
+
+  .painterPortfolio-grid-item-image{
+    min-width:auto;
+  }
+
   .painterPortfolio-masonry-delete-container {
     width: 25px;
     height: 25px;

@@ -4,13 +4,15 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle, downloadOption } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
+import {uploadPortfolio} from "@/services/artworkPortfolioService";
+import { useSelector} from "react-redux";
 import "./PortfolioUploadForm.css";
 
 const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     const router = useRouter(); 
     const { addToast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
-
+    const { user } = useSelector((state) => state.user);
     const [exampleImage, setExampleImage] = useState(formData.exampleImage || null);
     const [exampleImageName, setExampleImageName] = useState(formData.exampleImageName || "");
     const [selectedCategory, setSelectedCategory] = useState(formData.selectedCategory || "");
@@ -130,6 +132,8 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     
         setIsSubmitting(true); // 啟用 Loading 狀態
         try {
+            const userSerialId = user?.userSerialId;
+            const userUid = user?.uid;
             const data = {
                 exampleImage: {
                     name: exampleImage.file.name,
@@ -145,17 +149,26 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     
             if (onSubmit) {
                 await onSubmit(data); 
-                addToast("success", "發布成功！");  
+               
             }
+
+            //  上傳 Portfolio 到 Firebase
+            const response = await uploadPortfolio(userUid, userSerialId, data);
     
-            setTimeout(() => {
-                router.push("/artworkPainterPortfolio");
-            }, 1000);
-    
+            if (response.success) {
+                addToast("success", "作品發布成功！");  
+                setTimeout(() => {
+                    router.push("/artworkPainterPortfolio");
+                }, 1000);
+            } else {
+                console.error("作品上傳失敗:", response.message);
+                addToast("error", "發布失敗，請稍後再試！");  
+            }
         } catch (error) {
-            console.error("提交失敗", error);
+           
             addToast("error", "發布失敗，請稍後再試！");  
         } finally {
+            setIsSubmitting(false);
         }
     };
     
@@ -274,7 +287,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                 {/* 按鈕區域 */}
                 <div className="PortfolioUploadForm-button-group">
                     <button className="PortfolioUploadForm-prev"  onClick={() => router.push("/artworkPainterPortfolio")}>取消</button>
-                    <LoadingButton isLoading={isSubmitting} onClick={handleSubmit}>發佈</LoadingButton>
+                    <LoadingButton isLoading={isSubmitting} onClick={handleSubmit} loadingText={"發布中"} >發佈</LoadingButton>
                 </div>
             </div>
         </div>

@@ -120,7 +120,7 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
                     {/* 左側圖片區域 */}
                     <div className="ModallmagePainterPortfolio-image-section">
                         <div className="ModallmagePainterPortfolio-image-container">
-                            <img src={data.src} alt="Artwork" />
+                            <img src={data.exampleImageUrl} alt="Artwork" />
                             <button className="ModallmagePainterPortfolio-close" onClick={handleClose}>X</button>
                                 <div className="ModallmagePainterPortfolio-likesIcon-container">
                                     <img src="/images/icons8-love.png" alt="numberOfLikes" />

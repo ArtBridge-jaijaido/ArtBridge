@@ -1,45 +1,40 @@
 "use client";   
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
+import { useSelector } from "react-redux";
 import ArtworkPainterSetTab2 from "@/components/ArtworkPainterSetTab/ArtworkPainterSetTab2.jsx";
 import PainterPortfolioMasonryGrid from "@/components/Masonry/PainterPortfolioMasonryGrid.js";
+
 import "./artworkPainterPortfolio.css";
 
 
 const ArtworkPainterPortfolioPage = () => {
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(20); // 作品集預設顯示數量
-    const testingImages = [
-        "images/testing-Arkwork-image-5.png",
-        "images/testing-Arkwork-image-6.png",
-        "images/testing-Arkwork-image-2.png",
-        "images/testing-Arkwork-image-4.png",
-        "images/testing-Arkwork-image-3.png",
-        "images/testing-Arkwork-image-7.png",
-        "images/testing-Arkwork-image-1.png",
-        "images/testing-Arkwork-image-8.png",
-        "images/testing-Arkwork-image-7.png",
-        "images/testing-Arkwork-image-1.png",
-        "images/testing-Arkwork-image-5.png",
-        "images/testing-Arkwork-image-6.png",
-        "images/testing-Arkwork-image-2.png",
-        "images/testing-Arkwork-image-4.png",
-        "images/testing-Arkwork-image-3.png",
-        "images/testing-Arkwork-image-7.png",
-        "images/testing-Arkwork-image-1.png",
-        "images/testing-Arkwork-image-8.png",
-        "images/testing-Arkwork-image-7.png",
-        "images/testing-Arkwork-image-1.png"
-    ];
-    const masonryTotalItems = testingImages.length; // 總數
-    const currentImages = testingImages.slice(0, masonryVisibleItems);
+    const { user } = useSelector((state) => state.user);
     
+    const painterPortfolios = useSelector((state) => state.painterPortfolio.painterPortfolios);
+
+   
+    // ** 過濾出當前使用者的 portfolio**
+    const userPortfolios = user?.uid
+    ? painterPortfolios.filter((portfolio) => portfolio.userUid === user.uid)
+    : [];
+
+    const masonryTotalItems = userPortfolios.length; // 總數
+    const currentImages = userPortfolios.slice(0, masonryVisibleItems);
+    
+  
 
     const tabs = [
         {
             label: "全部作品",
             content: <div className="artworkPainterPortfolio-tab-wrapper">
                 <div className="artworkPainterPortfolio-masonryGrid-container">
-                     <PainterPortfolioMasonryGrid images={currentImages}/>
+                        {userPortfolios.length === 0 ? (
+                            <p className="no-portfolio-message"> 目前還沒有任何作品喔 ! </p>
+                        ) : (
+                            <PainterPortfolioMasonryGrid images={currentImages}/>
+                        )}
                     </div>
 
                      {masonryVisibleItems < masonryTotalItems && (
