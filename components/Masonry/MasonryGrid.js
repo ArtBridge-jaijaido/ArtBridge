@@ -1,62 +1,83 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback,useRef } from "react";
 import "./MasonryGrid.css";
 
 const MasonryGrid = ({ images}) => {
   const defaultColumnWidths = [256, 206, 317, 236, 190];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
-
+  const prevColumnWidths = useRef(defaultColumnWidths); 
   const isConsumerProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkConsumerProfile");
+  const [imageLoaded, setImageLoaded] = useState({});
 
-  useEffect(() => {
-    const updateColumnWidths = () => {
+  
+    //  只有當 window.innerWidth 改變時，才更新 columnWidths
+    const updateColumnWidths = useCallback(() => {
+     
+      
+      let newWidths = defaultColumnWidths;
+  
       if (window.innerWidth <= 370) {
-        setColumnWidths([150, 160]);
-      }
-      else if (window.innerWidth <= 440) {
-        setColumnWidths([170, 190]);
-      }
-      else if (window.innerWidth <= 834) {
-        setColumnWidths([160, 200, 180, 180]);
+        newWidths = [150, 160];
+      } else if (window.innerWidth <= 440) {
+        newWidths = [170, 190];
+      } else if (window.innerWidth <= 834) {
+        newWidths = [160, 200, 180, 180];
       } else if (window.innerWidth <= 1280) {
-        setColumnWidths([190, 190, 260, 206, 210]);
-      } else {
-        setColumnWidths(defaultColumnWidths);
+        newWidths = [190, 190, 260, 206, 210];
       }
-    };
+  
+      // ** 只有當 columnWidths 真的改變時，才更新狀態**
+      if (JSON.stringify(prevColumnWidths.current) !== JSON.stringify(newWidths)) {
+        prevColumnWidths.current = newWidths; // 更新 useRef
+        setColumnWidths(newWidths);
+      }
+     
+    }, []);
+  
+    
+  
+    //  監聽 resize 事件，並確保 columnWidths 只在變更時更新
+    useEffect(() => {
+      updateColumnWidths(); // 初始化時執行一次
+      window.addEventListener("resize", updateColumnWidths);
+     
+      return () => {
+        window.removeEventListener("resize", updateColumnWidths);
+        
+      };
+     
+    }, [updateColumnWidths]);
+  
+    //  按照 masonry 分配作品到不同欄位
+    useEffect(() => {
+      const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
+      images.forEach((portfolio, index) => {
+        const columnIndex = index % columnWidths.length;
+        newColumnItems[columnIndex].push(portfolio); // 傳遞完整的 portfolio
+      });
+      setColumnItems(newColumnItems);
+    }, [images, columnWidths]);
 
-    updateColumnWidths();
-    window.addEventListener("resize", updateColumnWidths);
-    return () => window.removeEventListener("resize", updateColumnWidths);
-  }, []);
-
-  useEffect(() => {
-    const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
-
-    images.forEach((image, index) => {
-      const columnIndex = index % columnWidths.length; // 固定分配到列
-      newColumnItems[columnIndex].push(image);
-    });
-
-    setColumnItems(newColumnItems); // 更新列數據
-  }, [images, columnWidths]);
-
-  const downloadImage = (imageSrc, e) => {
-    e.stopPropagation()
-    fetch(imageSrc)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = imageSrc.split("/").pop();
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      })
-      .catch((error) => console.error("Download failed:", error));
+  const handleImageLoad = (id) => {
+    setImageLoaded((prev) => ({ ...prev, [id]: true }));
   };
+
+  // const downloadImage = (imageSrc, e) => {
+  //   e.stopPropagation()
+  //   fetch(imageSrc)
+  //     .then((response) => response.blob())
+  //     .then((blob) => {
+  //       const link = document.createElement("a");
+  //       link.href = URL.createObjectURL(blob);
+  //       link.download = imageSrc.split("/").pop();
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       document.body.removeChild(link);
+  //     })
+  //     .catch((error) => console.error("Download failed:", error));
+  // };
 
   return (
     <div className="masonry-grid">
@@ -70,16 +91,28 @@ const MasonryGrid = ({ images}) => {
         >
           {column.map((image, imageIndex) => (
             <div key={imageIndex} className="masonry-grid-item">
-              <img src={image} alt={`Artwork ${imageIndex + 1}`} />
-              {!isConsumerProfilePage && (
+              {/* 圖片 */}
+              <img
+                src={image.exampleImageUrl}
+                alt={`Artwork ${imageIndex + 1}`}
+                onLoad={() => handleImageLoad(image.portfolioId)} // 確保圖片載入完成
+              />
+
+              {/* 只有當圖片載入後才顯示按鈕 */}
+              {imageLoaded[image.portfolioId] && (
                 <>
-                  <div
-                    className="masonry-downloadIcon-container"
-                    
-                    onClick={(e) => downloadImage(image,e)}
-                  >
-                    <img src="/images/download-icon.png" alt="Download" />
-                  </div>
+                  {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
+
+                  {image.download === "是" && (
+                    <div
+                      className="masonry-downloadIcon-container"
+                      onClick={(e) => downloadImage(image.exampleImageUrl, e)}
+                    >
+                      <img src="/images/download-icon.png" alt="Download" />
+                    </div>
+                  )}
+
+                  {/* Like 按鈕 */}
                   <div className="masonry-likesIcon-container">
                     <img src="/images/icons8-love-96-26.png" alt="numberOfLikes" />
                     <span className="masonry-likes-number">100</span>

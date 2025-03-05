@@ -6,19 +6,25 @@ import { deletePortfolio } from "@/services/artworkPortfolioService";
 import { useDispatch } from "react-redux";
 import { deletePainterPortfolio } from "@/app/redux/feature/painterPortfolioSlice";
 import "./PainterPortfolioMasonryGrid.css";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
 const PainterPortfolioMasonryGrid = ({ images }) => {
   const defaultColumnWidths = [256, 206, 317, 236, 190];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
-  const prevColumnWidths = useRef(defaultColumnWidths); // 🎯 追蹤上次的 `columnWidths`
+  const prevColumnWidths = useRef(defaultColumnWidths); // 🎯 追蹤上次的 columnWidths
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
   const [imageLoaded, setImageLoaded] = useState({});
+  const { setIsLoading } = useLoading();
   const dispatch = useDispatch();
+  const { addToast } = useToast();
 
-  //  只有當 `window.innerWidth` 改變時，才更新 `columnWidths`
+  
+  //  只有當 window.innerWidth 改變時，才更新 columnWidths
   const updateColumnWidths = useCallback(() => {
+   
+    
     let newWidths = defaultColumnWidths;
 
     if (window.innerWidth <= 370) {
@@ -31,37 +37,39 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
       newWidths = [190, 190, 260, 206, 210];
     }
 
-    // ** 只有當 `columnWidths` 真的改變時，才更新狀態**
+    // ** 只有當 columnWidths 真的改變時，才更新狀態**
     if (JSON.stringify(prevColumnWidths.current) !== JSON.stringify(newWidths)) {
       prevColumnWidths.current = newWidths; // 更新 useRef
       setColumnWidths(newWidths);
     }
+   
   }, []);
 
-  //  監聽 `resize` 事件，並確保 `columnWidths` 只在變更時更新
+  
+
+  //  監聽 resize 事件，並確保 columnWidths 只在變更時更新
   useEffect(() => {
     updateColumnWidths(); // 初始化時執行一次
     window.addEventListener("resize", updateColumnWidths);
-
+   
     return () => {
       window.removeEventListener("resize", updateColumnWidths);
+      
     };
+   
   }, [updateColumnWidths]);
 
-  //  按照 `masonry` 分配作品到不同欄位
+  //  按照 masonry 分配作品到不同欄位
   useEffect(() => {
     const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
-
     images.forEach((portfolio, index) => {
       const columnIndex = index % columnWidths.length;
       newColumnItems[columnIndex].push(portfolio); // 傳遞完整的 portfolio
     });
-
     setColumnItems(newColumnItems);
   }, [images, columnWidths]);
 
-  const handleImageLoad = (portfolioId) => {
-   
+  const handleImageLoad = (portfolioId) => { 
     setImageLoaded((prev) => ({ ...prev, [portfolioId]: true }));
   };
 
@@ -82,7 +90,7 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
         )
       );
     } else {
-      alert("刪除失敗，請稍後再試！");
+      addToast("error", "刪除失敗，請稍後再試");
     }
   };
 
@@ -96,6 +104,8 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
     setCurrentData(null);
   };
 
+  
+
   return (
     <div className="painterPortfolio-masonry-grid">
       {columnItems.map((column, colIndex) => (
@@ -108,7 +118,7 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
             <div key={imageIndex} className="painterPortfolio-masonry-grid-item">
               <img
                 src={portfolio.exampleImageUrl}
-                alt={portfolio.exampleImageName || `ArtworkPainterPortfolio ${imageIndex + 1}`}
+               alt={portfolio.exampleImageName || `ArtworkPainterPortfolio ${imageIndex + 1}`}
                 className="painterPortfolio-grid-item-image"
                 onClick={() => handleImageClick(portfolio)}
                 onLoad={() => handleImageLoad(portfolio.portfolioId)}

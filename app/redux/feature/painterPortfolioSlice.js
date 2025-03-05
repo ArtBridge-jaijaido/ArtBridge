@@ -12,6 +12,7 @@ const painterPortfolioSlice = createSlice({
   reducers: {
     setPainterPortfolios: (state, action) => {
       state.painterPortfolios = action.payload;
+      state.loading = false; 
     },
     addPainterPortfolio: (state, action) => {
       state.painterPortfolios.push(action.payload);

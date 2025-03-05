@@ -6,6 +6,7 @@ import { artMarketCategory, artMarketStyle, downloadOption } from '@/lib/artwork
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 import {uploadPortfolio} from "@/services/artworkPortfolioService";
 import { useSelector} from "react-redux";
+
 import "./PortfolioUploadForm.css";
 
 const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
@@ -18,7 +19,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     const [selectedCategory, setSelectedCategory] = useState(formData.selectedCategory || "");
     const [selectedStyles, setSelectedStyles] = useState(formData.selectedStyles || []);
     const [download, setDownload] = useState(formData.download || "");
-
+  
 
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
@@ -131,6 +132,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
         if (!validateForm()) return; 
     
         setIsSubmitting(true); // 啟用 Loading 狀態
+      
         try {
             const userSerialId = user?.userSerialId;
             const userUid = user?.uid;
@@ -160,6 +162,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                 setTimeout(() => {
                     router.push("/artworkPainterPortfolio");
                 }, 1000);
+               
             } else {
                 console.error("作品上傳失敗:", response.message);
                 addToast("error", "發布失敗，請稍後再試！");  
@@ -169,6 +172,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
             addToast("error", "發布失敗，請稍後再試！");  
         } finally {
             setIsSubmitting(false);
+           
         }
     };
     

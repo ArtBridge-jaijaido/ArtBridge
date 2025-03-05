@@ -4,16 +4,16 @@ import { notoSansTCClass } from '@/app/layout.js';
 import { useSelector } from "react-redux";
 import ArtworkPainterSetTab2 from "@/components/ArtworkPainterSetTab/ArtworkPainterSetTab2.jsx";
 import PainterPortfolioMasonryGrid from "@/components/Masonry/PainterPortfolioMasonryGrid.js";
-
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "./artworkPainterPortfolio.css";
 
 
 const ArtworkPainterPortfolioPage = () => {
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(20); // 作品集預設顯示數量
     const { user } = useSelector((state) => state.user);
-    
-    const painterPortfolios = useSelector((state) => state.painterPortfolio.painterPortfolios);
+    const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio);
 
+   
    
     // ** 過濾出當前使用者的 portfolio**
     const userPortfolios = user?.uid
@@ -30,12 +30,13 @@ const ArtworkPainterPortfolioPage = () => {
             label: "全部作品",
             content: <div className="artworkPainterPortfolio-tab-wrapper">
                 <div className="artworkPainterPortfolio-masonryGrid-container">
-                        {userPortfolios.length === 0 ? (
-                            <p className="no-portfolio-message"> 目前還沒有任何作品喔 ! </p>
-                        ) : (
-                            <PainterPortfolioMasonryGrid images={currentImages}/>
-                        )}
-                    </div>
+                    {!loading && userPortfolios.length === 0 ? (
+                        <p className="no-portfolio-message">目前還沒有任何作品喔 !</p>
+                    ) : !loading && (
+                        <PainterPortfolioMasonryGrid images={currentImages} />
+                    )}
+                </div>
+
 
                      {masonryVisibleItems < masonryTotalItems && (
                         <button onClick={() => setMasonryVisibleItems(prev => prev + 10)} className="artworkPainterPortfolio-show-more-button" style={{gridColumn: "span 5", marginTop: "20px"}}>

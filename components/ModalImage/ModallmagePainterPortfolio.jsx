@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
+import { updatePortfolio } from "@/services/artworkPortfolioService"; 
 import "./ModallmagePainterPortfolio.css";
 
 const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
@@ -24,10 +25,10 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
     
     useEffect(() => {
         if (isOpen) {
-            setTempSelectedCategory("");
-            setTempSelectedStyles([]);
+            setTempSelectedCategory(data.selectedCategory || ""); 
+            setTempSelectedStyles(data.selectedStyles || []);
         }
-    }, [isOpen, data?.src]);
+    }, [isOpen, data]);
 
     // 類別選擇（單選）
     const handleCategorySelect = (option) => {
@@ -71,7 +72,7 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
     }, [tempSelectedStyles]);
     
     // 儲存按鈕 
-    const handleSave = () => {
+    const handleSave =  async () => {
         setIsLoading(true); 
     
         // 驗證失敗
@@ -93,15 +94,29 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
             return;
         }
     
-        console.log("選擇的類別:", tempSelectedCategory);
-        console.log("選擇的風格:", tempSelectedStyles);
+        // 更新 firebase 內資料
+        const updatedData = {
+            selectedCategory: tempSelectedCategory,
+            selectedStyles: tempSelectedStyles,
+        }
 
-        addToast("success", "儲存成功！");
 
-        setTimeout(() => {
-            onClose();
+        if (!data.userUid || !data.portfolioId) {
+            addToast("error", "無法更新作品資料，缺少必要資訊");
             setIsLoading(false);
-        }, 900);
+            return;
+        }
+
+        const response = await updatePortfolio(data.userUid, data.portfolioId, updatedData);
+
+        if (response.success) {
+            addToast("success", "作品更新成功！");
+            onClose(); 
+        } else {
+            addToast("error", "更新失敗，請稍後再試");
+        }
+    
+        setIsLoading(false);
 
     };
     
