@@ -1,27 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useCallback,useRef } from "react";
-import "./MasonryGrid.css";
 
-const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
+
+const ConsumerProfileMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
   const defaultColumnWidths = [256, 206, 317, 236, 190];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
-  const prevColumnWidths = useRef(defaultColumnWidths); 
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
+  const prevColumnWidths = useRef(defaultColumnWidths); 
   const isConsumerProfilePage = typeof window !== "undefined" && window.location.pathname.includes("artworkConsumerProfile");
   const [imageLoaded, setImageLoaded] = useState({});
-  const totalImages = images.length;
-  const [imageLoadedCount, setImageLoadedCount] = useState(0);
+
   
-
-    useEffect(() => {
-      if (imageLoadedCount >= totalImages && totalImages > 0) {
-          setTimeout(() => {
-              onMasonryReady(); // 🔥 觸發 Masonry 完成
-          }, 300);
-      }
-  }, [imageLoadedCount, totalImages, onMasonryReady]);
-
     //  只有當 window.innerWidth 改變時，才更新 columnWidths
     const updateColumnWidths = useCallback(() => {
      
@@ -70,13 +60,8 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
       setColumnItems(newColumnItems);
     }, [images, columnWidths]);
 
-  const handleImageLoad = (portfolioId, imageUrl) => {
-    setImageLoaded((prev) => ({
-      ...prev,
-      [portfolioId]: imageUrl ? true : false, 
-    }));
-    setImageLoadedCount((prev) => prev + 1);
-    console.log("imageLoadedCount", imageLoadedCount);
+  const handleImageLoad = (id) => {
+    setImageLoaded((prev) => ({ ...prev, [id]: true }));
   };
 
   // const downloadImage = (imageSrc, e) => {
@@ -95,33 +80,32 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
   // };
 
   return (
-    <div className="masonry-grid">
+    <div className="ConsumerProfile-masonry-grid">
       {columnItems.map((column, columnIndex) => (
         <div
           key={columnIndex}
-          className="masonry-grid-column"
+          className="ConsumerProfile-masonry-grid-column"
           style={{
             maxWidth: `${columnWidths[columnIndex]}px`
           }}
         >
           {column.map((image, imageIndex) => (
-            <div key={imageIndex} className="masonry-grid-item">
+            <div key={imageIndex} className="ConsumerProfile-masonry-grid-item">
               {/* 圖片 */}
               <img
                 src={image.exampleImageUrl}
                 alt={`Artwork ${imageIndex + 1}`}
-                onLoad={() => handleImageLoad(image.portfolioId, image.exampleImageUrl)} // 確保圖片載入完成
-                style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
+                onLoad={() => handleImageLoad(image.portfolioId)} // 確保圖片載入完成
               />
 
               {/* 只有當圖片載入後才顯示按鈕 */}
-              {isMasonryReady&&imageLoaded[image.portfolioId] && image.exampleImageUrl &&(
+              {imageLoaded[image.portfolioId] && (
                 <>
                   {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
 
                   {image.download === "是" && (
                     <div
-                      className="masonry-downloadIcon-container"
+                      className="ConsumerProfile-masonry-downloadIcon-container"
                       onClick={(e) => downloadImage(image.exampleImageUrl, e)}
                     >
                       <img src="/images/download-icon.png" alt="Download" />
@@ -129,9 +113,9 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
                   )}
 
                   {/* Like 按鈕 */}
-                  <div className="masonry-likesIcon-container">
+                  <div className="ConsumerProfile-masonry-likesIcon-container">
                     <img src="/images/icons8-love-96-26.png" alt="numberOfLikes" />
-                    <span className="masonry-likes-number">100</span>
+                    <span className="ConsumerProfile-masonry-likes-number">100</span>
                   </div>
                 </>
               )}
@@ -143,4 +127,4 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
   );
 };
 
-export default MasonryGrid;
+export default ConsumerProfileMasonryGrid;

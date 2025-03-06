@@ -5,10 +5,11 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { deletePortfolio } from "@/services/artworkPortfolioService";
 import { useDispatch } from "react-redux";
 import { deletePainterPortfolio } from "@/app/redux/feature/painterPortfolioSlice";
+
 import "./PainterPortfolioMasonryGrid.css";
 import { useToast } from "@/app/contexts/ToastContext.js";
 
-const PainterPortfolioMasonryGrid = ({ images }) => {
+const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   }) => {
   const defaultColumnWidths = [256, 206, 317, 236, 190];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const prevColumnWidths = useRef(defaultColumnWidths); // 🎯 追蹤上次的 columnWidths
@@ -16,11 +17,22 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
   const [imageLoaded, setImageLoaded] = useState({});
-  const { setIsLoading } = useLoading();
+ 
+  const totalImages = images.length;
+  const [imageLoadedCount, setImageLoadedCount] = useState(0);
   const dispatch = useDispatch();
   const { addToast } = useToast();
 
-  
+  useEffect(() => {
+    if (imageLoadedCount >= totalImages && totalImages > 0) {
+        setTimeout(() => {
+            onMasonryReady(); // 🔥 觸發 Masonry 完成
+        }, 300);
+    }
+
+    
+}, [imageLoadedCount, totalImages, onMasonryReady]);
+
   //  只有當 window.innerWidth 改變時，才更新 columnWidths
   const updateColumnWidths = useCallback(() => {
    
@@ -61,16 +73,23 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
 
   //  按照 masonry 分配作品到不同欄位
   useEffect(() => {
+   
     const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
     images.forEach((portfolio, index) => {
       const columnIndex = index % columnWidths.length;
       newColumnItems[columnIndex].push(portfolio); // 傳遞完整的 portfolio
     });
     setColumnItems(newColumnItems);
+   
   }, [images, columnWidths]);
 
-  const handleImageLoad = (portfolioId) => { 
-    setImageLoaded((prev) => ({ ...prev, [portfolioId]: true }));
+  const handleImageLoad = (portfolioId, imageUrl) => { 
+    setImageLoaded((prev) => ({
+      ...prev,
+      [portfolioId]: imageUrl ? true : false, //  確保圖片網址存在才標記為載入完成
+    }));
+    setImageLoadedCount((prev) => prev + 1);
+    
   };
 
   const handleDelete = async (portfolio, colIndex, imageIndex, e) => {
@@ -89,6 +108,13 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
           idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column
         )
       );
+
+      // 當所有圖片都刪除時 不應該顯示 imageloading
+      if (Object.keys(imageLoaded).length === 1) {
+        onMasonryReady();
+      }
+
+
     } else {
       addToast("error", "刪除失敗，請稍後再試");
     }
@@ -118,12 +144,13 @@ const PainterPortfolioMasonryGrid = ({ images }) => {
             <div key={imageIndex} className="painterPortfolio-masonry-grid-item">
               <img
                 src={portfolio.exampleImageUrl}
-               alt={portfolio.exampleImageName || `ArtworkPainterPortfolio ${imageIndex + 1}`}
+                alt={portfolio.exampleImageName || `ArtworkPainterPortfolio ${imageIndex + 1}`}
                 className="painterPortfolio-grid-item-image"
                 onClick={() => handleImageClick(portfolio)}
-                onLoad={() => handleImageLoad(portfolio.portfolioId)}
+                onLoad={() => handleImageLoad(portfolio.portfolioId, portfolio.exampleImageUrl)}
+                style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
               />
-              {imageLoaded[portfolio.portfolioId] && (
+              {isMasonryReady&&imageLoaded[portfolio.portfolioId] && portfolio.exampleImageUrl &&(
                 <div
                   className="painterPortfolio-masonry-delete-container"
                   onClick={(e) => handleDelete(portfolio, colIndex, imageIndex, e)}

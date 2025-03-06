@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
 import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
+import {ImageLoadingProvider} from "@/app/contexts/ImageLoadingContext.js";
 import { subscribeToAuth } from "@/lib/authListener"; 
 import { subscribeToArtworks} from "@/lib/artworkListener";
 import { subscribeToAllUsers } from "@/lib/userListener";
@@ -63,9 +64,9 @@ export default function RootLayout({ children }) {
           <LoadingProvider>
             <Header />
             <main>
-
+              <ImageLoadingProvider>
               <ToastProvider>{children}</ToastProvider>
-
+              </ImageLoadingProvider>
             </main>
           </LoadingProvider>
         </Provider>

@@ -6,6 +6,7 @@ import { artworkRecommendation, artMarketCategory, artMarketStyle } from '@/lib/
 import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx';
 import MasonryGrid from '@/components/Masonry/MasonryGrid.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
+import {useImageLoading} from "@/app/contexts/ImageLoadingContext.js";
 import { useSelector } from "react-redux";
 import "./artworkShowcaseLobby.css";
 
@@ -22,6 +23,9 @@ const ArtworkShowcaseLobby = () => {
     const ITEMSPERPAGE = 20;
     const dropdownRef = useRef(null);
 
+    const {  setIsImageLoading } = useImageLoading();
+    const [isMasonryReady, setIsMasonryReady] = useState(false);
+
     // 🟢 **篩選符合類別的作品**
     const filteredPortfolios = painterPortfolios.filter(portfolio => {
         // 類別篩選
@@ -36,8 +40,32 @@ const ArtworkShowcaseLobby = () => {
 
         return categoryMatch && styleMatch;
     });
+    
+    useEffect(() => {
+       
+       
+        setIsMasonryReady(false);
+        setIsImageLoading(true);
+       
+    
+    }, []);
 
+    useEffect(() => {
 
+        if (filteredPortfolios.length!==0) {
+
+            setIsMasonryReady(false); // 先關閉 Masonry Ready 狀態
+            setIsImageLoading(true); // 顯示 ImageLoading 動畫
+        }
+    }, [selectedOptions,currentPage]);
+
+    // ✅ 當 Masonry 排列完成後，關閉 Loading
+    const handleMasonryReady = () => {
+        setTimeout(() => {
+            setIsImageLoading(false);
+            setIsMasonryReady(true);
+        }, 300);
+    };
 
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
@@ -118,18 +146,19 @@ const ArtworkShowcaseLobby = () => {
                 ) : (
                     <MasonryGrid
                         images={currentImages}
-                        LikeImg={"/images/icons8-love-96-26.png"}
+                        onMasonryReady={handleMasonryReady} 
+                        isMasonryReady={isMasonryReady}
                     />
                 )}
             </div>
 
 
 
-            <Pagination
+            {isMasonryReady&&<Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
-            />
+            />}
 
         </div>
     )
