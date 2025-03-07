@@ -10,6 +10,7 @@ import ArtworkPainterProfileTab from "@/components/ArtworkPainterProfile-tab/Art
 import ArtworkPainterMasonryGrid from "@/components/ArtworkPainterMasonryGrid/ArtworkPainterMasonryGrid.js"; 
 import ArtworkReview from "@/components/ArtworkReview/ArtworkReview.jsx"; 
 import ArtworkCard from "@/components/ArtworkCard/ArtworkCard.jsx";
+import {useImageLoading} from "@/app/contexts/ImageLoadingContext.js";
 import "./artworkPainterProfile.css";
 
 
@@ -25,7 +26,17 @@ const ArtworkPainterProfilePage = () => {
         const [isUserLoaded, setIsUserLoaded] = useState(false);
         const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
         const artworkCardTotalItems = 40;
+        const { setIsImageLoading, setIsEmpty } = useImageLoading();   
+        const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio);
+        
+       
+        
+         // ** 過濾出當前使用者的 portfolio**
+       const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
 
+
+
+        console.log("userPortfolios", userPortfolios); 
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -42,40 +53,31 @@ const ArtworkPainterProfilePage = () => {
             return  today <= endDate;
         });
        
-
-        const testingImages = [
-            {src:"/images/testing-Arkwork-image-2.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-6.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-5.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-3.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-10.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-11.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-        ];
-        const masonryTotalItems = testingImages.length; // 總數
-        const currentImages = testingImages.slice(0, masonryVisibleItems);
+        const [isMasonryReady, setIsMasonryReady] = useState(false);
+        const masonryTotalItems = userPortfolios.length; // 總數
+        const currentImages = userPortfolios.slice(0, masonryVisibleItems);
         
-
+        const handleMasonryReady = () => {
+            setTimeout(() => {
+                setIsMasonryReady(true);
+            }, 300);
+    
+           
+        };
+        
+      
 
         const tabs = [
             {
                 label: "作品集",
                 content: <div className="artworkPainterProfile-Tab-wrapper">
                     <div className="artworkPainterProfile-artworkPainterMasonryGrid-container">
-                     <ArtworkPainterMasonryGrid images={currentImages}/>
+                        <ArtworkPainterMasonryGrid 
+                        images={currentImages}
+                        onMasonryReady={handleMasonryReady} 
+                        isMasonryReady={isMasonryReady}
+                        
+                        />
                     </div>
 
                      {masonryVisibleItems < masonryTotalItems && (

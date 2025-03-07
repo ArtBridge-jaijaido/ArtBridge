@@ -1,7 +1,8 @@
 .painterPortfolio-masonry-grid {
   display: flex;
 
-  gap: 38px;
+  gap: 30px;
+  margin : 0 auto; 
 }
 
 .painterPortfolio-masonry-grid-column {
@@ -10,6 +11,7 @@
 }
 
 .painterPortfolio-masonry-grid-item {
+  
   position: relative;
   margin-bottom: 18px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -101,8 +103,8 @@
 
 
   .painterPortfolio-grid-item-image {
-    min-width: auto;
-    min-height: 120px;
+    min-width: 140px;
+    min-height: 140px;
   }
 
   .painterPortfolio-masonry-delete-container {

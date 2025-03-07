@@ -23,8 +23,11 @@ const ArtworkShowcaseLobby = () => {
     const ITEMSPERPAGE = 20;
     const dropdownRef = useRef(null);
 
-    const {  setIsImageLoading } = useImageLoading();
+    const {  setIsImageLoading, setIsEmpty  } = useImageLoading();
     const [isMasonryReady, setIsMasonryReady] = useState(false);
+   
+    const isDataFetched = useRef(false);
+    const isCurrentImageUpdated = useRef(false); 
 
     // 🟢 **篩選符合類別的作品**
     const filteredPortfolios = painterPortfolios.filter(portfolio => {
@@ -42,28 +45,54 @@ const ArtworkShowcaseLobby = () => {
     });
     
     useEffect(() => {
-       
-       
-        setIsMasonryReady(false);
-        setIsImageLoading(true);
-       
+        
+        if (!isDataFetched.current) {
+            setIsImageLoading(true);
+            setIsMasonryReady(false);
     
-    }, []);
+            const delayCheck = setTimeout(() => {
+                if (!loading) {
+                    if (filteredPortfolios.length === 0) {
+                        console.log("empty");
+                        setIsEmpty(true);
+                       
+                    } else {
+                        console.log("not empty");
+                        setIsEmpty(false);
+                    }
+                    isDataFetched.current = true; //  數據已加載，防止重複執行
+                }
+            }, 500);
+    
+            return () => clearTimeout(delayCheck);
+        }
+    }, [loading, filteredPortfolios]);  
 
     useEffect(() => {
 
-        if (filteredPortfolios.length!==0) {
+        setIsImageLoading(true);
+        setIsMasonryReady(false);
+        isCurrentImageUpdated.current = false; // 重置狀態
+        console.log("isImageUpdated", isCurrentImageUpdated.current);
 
-            setIsMasonryReady(false); // 先關閉 Masonry Ready 狀態
-            setIsImageLoading(true); // 顯示 ImageLoading 動畫
+        if (isDataFetched.current) { //  數據已加載，進行篩選
+            if (filteredPortfolios.length === 0) {
+                setIsEmpty(true);
+            } else {
+                setIsEmpty(false);
+            }
         }
+            
+      
     }, [selectedOptions,currentPage]);
+
 
     // ✅ 當 Masonry 排列完成後，關閉 Loading
     const handleMasonryReady = () => {
         setTimeout(() => {
             setIsImageLoading(false);
             setIsMasonryReady(true);
+           
         }, 300);
     };
 
@@ -86,8 +115,20 @@ const ArtworkShowcaseLobby = () => {
     const startIndex = (currentPage - 1) * ITEMSPERPAGE;
     const endIndex = currentPage * ITEMSPERPAGE;
     const currentImages = filteredPortfolios.slice(startIndex, endIndex); // 當前頁數據
+    
 
+    useEffect(() => {
+        const totalFilteredPages = Math.ceil(filteredPortfolios.length / ITEMSPERPAGE);
+        
+        isCurrentImageUpdated.current = true;
 
+        console.log("isImageUpdated", isCurrentImageUpdated.current);
+
+        // 🔥 如果當前頁數 > 總頁數，則回到第一頁
+        if (currentPage > totalFilteredPages) {
+            setCurrentPage(1);
+        }
+    }, [filteredPortfolios, currentPage]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -102,8 +143,7 @@ const ArtworkShowcaseLobby = () => {
         };
     }, []);
 
-
-
+   
     const totalPages = Math.ceil(filteredPortfolios.length / ITEMSPERPAGE); // 總頁數
 
     return (
@@ -144,7 +184,7 @@ const ArtworkShowcaseLobby = () => {
                         Sorry! 目前沒有相對應的作品
                     </div>
                 ) : (
-                    <MasonryGrid
+                    isCurrentImageUpdated&&<MasonryGrid
                         images={currentImages}
                         onMasonryReady={handleMasonryReady} 
                         isMasonryReady={isMasonryReady}

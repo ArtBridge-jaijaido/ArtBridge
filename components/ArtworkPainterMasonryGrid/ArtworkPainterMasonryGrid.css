@@ -16,6 +16,7 @@
     margin-bottom: 30px;
     width: 100%;
     justify-content: flex-start; /* 讓按鈕靠左對齊 */
+    flex-wrap: wrap;
   }
   
   .ArtworkPainter-filter-button {
@@ -23,8 +24,7 @@
     border-style: solid;
     border-color: #afafaf;
     border-width: 1px;
-    width: 88px;
-    height: 28px;
+    padding: 5px 10px;
     position: relative;
     background: none;
     cursor: pointer;
@@ -38,6 +38,7 @@
     letter-spacing: 2px;
     font-weight: 600;
     transition: all 0.3s ease;
+    max-width:120px;
   }
   
   .ArtworkPainter-filter-button.selected {
@@ -137,7 +138,8 @@
     gap:15px;
   }
   .ArtworkPainter-filter-button{
-    font-size: 10px;
+    font-size: 8px;
+    max-width:100px;
   }
 }
 

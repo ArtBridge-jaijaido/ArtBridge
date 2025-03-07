@@ -17,7 +17,6 @@ const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
   const [imageLoaded, setImageLoaded] = useState({});
- 
   const totalImages = images.length;
   const [imageLoadedCount, setImageLoadedCount] = useState(0);
   const dispatch = useDispatch();
@@ -139,6 +138,7 @@ const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   
           key={colIndex}
           className="painterPortfolio-masonry-grid-column"
           style={{ maxWidth: `${columnWidths[colIndex]}px` }}
+          
         >
           {column.map((portfolio, imageIndex) => (
             <div key={imageIndex} className="painterPortfolio-masonry-grid-item">
