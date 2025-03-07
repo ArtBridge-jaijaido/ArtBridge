@@ -29,7 +29,6 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady}) =>
       return acc;
     }, {});
   
-    console.log("🔥 categoryCounts:", counts); // 確保 categories 正確
     setCategoryCounts(counts);
     setFilteredImages(images); 
   }, [images]);

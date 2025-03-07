@@ -103,7 +103,7 @@
 
 
   .painterPortfolio-grid-item-image {
-    min-width: 140px;
+    min-width: auto;
     min-height: 140px;
   }
 
