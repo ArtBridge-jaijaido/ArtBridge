@@ -24,19 +24,17 @@ const ArtworkPainterProfilePage = () => {
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
         const reviewTotalItems = 30; //總數
         const [isUserLoaded, setIsUserLoaded] = useState(false);
+        const [imagesLoaded, setImagesLoaded] =useState({
+            backgroundImg: false,
+            profileImg: false,
+        })
         const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
         const artworkCardTotalItems = 40;
-        const { setIsImageLoading, setIsEmpty } = useImageLoading();   
         const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio);
         
-       
-        
+      
          // ** 過濾出當前使用者的 portfolio**
        const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
-
-
-
-        console.log("userPortfolios", userPortfolios); 
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -57,6 +55,9 @@ const ArtworkPainterProfilePage = () => {
         const masonryTotalItems = userPortfolios.length; // 總數
         const currentImages = userPortfolios.slice(0, masonryVisibleItems);
         
+        const backgroundImage = user.painterProfileBackgroundImg ?? "/images/painter-background.png";
+        const profileImage = user.profileAvatar ?? "/images/profile-avatar.png";
+
         const handleMasonryReady = () => {
             setTimeout(() => {
                 setIsMasonryReady(true);
@@ -64,6 +65,24 @@ const ArtworkPainterProfilePage = () => {
     
            
         };
+
+          // **預載入背景圖片**
+          useEffect(() => {
+            const imagesToLoad = [
+                { key: "backgroundImg", src: backgroundImage, label: "背景圖片" },
+                { key: "profileImg", src: profileImage, label: "個人圖片" },
+            ];
+        
+            imagesToLoad.forEach(({ key, src, label }) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => setImagesLoaded(prev => ({ ...prev, [key]: true }));
+                img.onerror = () => {
+                    console.error(`${label} 載入失敗:`, src);
+                    setImagesLoaded(prev => ({ ...prev, [key]: true })); // 如果圖片載入失敗，也設定為 true
+                };
+            });
+        }, [backgroundImage, profileImage]);
         
       
 
@@ -150,7 +169,7 @@ const ArtworkPainterProfilePage = () => {
             }
         }, [user, setIsLoading]);
 
-        if (!isUserLoaded) return null;
+        if (!isUserLoaded || !imagesLoaded.backgroundImg || !imagesLoaded.profileImg ) return null;
 
 
     return (
@@ -159,9 +178,9 @@ const ArtworkPainterProfilePage = () => {
             <div className="artworkPainterDetail-container">
                 <ArtworkPainterDetail 
                     id="Detail"
-                    backgroundImg={user.painterProfileBackgroundImg ?? "/images/painter-background.png" }
+                    backgroundImg={backgroundImage} 
                     ratingText={"5"}
-                    profileImg={user.profileAvatar ?? "/images/profile-avatar.png"}
+                    profileImg={profileImage}
                     usernameText={user?.nickname}
                     introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
                     viewID={user?.userSerialId?user.userSerialId:"A123456"}

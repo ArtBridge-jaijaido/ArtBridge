@@ -13,12 +13,15 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
   const totalImages = images.length;
   const [imageLoadedCount, setImageLoadedCount] = useState(0);
 
+ 
 
   useEffect(() => {
     if (imageLoadedCount >= totalImages && totalImages > 0) {
+
+      
       setTimeout(() => {
         onMasonryReady(); // 🔥 觸發 Masonry 完成
-      }, 300);
+      }, 500);
     }
   }, [imageLoadedCount, totalImages, onMasonryReady]);
 

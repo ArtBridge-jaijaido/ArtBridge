@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./UserDropdownMenu.css";
 import { useSelector, useDispatch} from "react-redux";
 import { useNavigation } from "@/lib/functions.js";
@@ -14,7 +14,19 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
    const dispatch = useDispatch();
    const navigate = useNavigation();
    const { setIsLoading } = useLoading();
- 
+   const [profileAvatarIsLoaded, setProfileAvatarIsLoaded] = useState(false);
+   const profileImage = user.profileAvatar ?? "/images/profile-avatar.png";
+
+
+  useEffect (() => {
+    const img = new Image();
+    img.src = profileImage;
+    img.onload = () => {
+      setProfileAvatarIsLoaded(true);
+    };
+  }, [profileImage]);
+
+
 
   const handleNavigateTo = (e, page) => {
     e.stopPropagation();
@@ -34,6 +46,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
 //     setTimeout(() => setIsLoading(false), 1000);
 //     toggleDropdown();
 // };
+
 
 
    const handleLogout = async (e) => {
@@ -65,13 +78,17 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
     }
  };
 
+ if (!user|| !profileAvatarIsLoaded) {
+    return null;
+  }
+
 
   return (
     <div className="UserDropdownMenu-container">
       <div className="UserDropdownMenu-profile">
 
         <div className="UserDropdownMenu-avatar-container">
-        <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" className="UserDropdownMenu-avatar"  />
+        <img src={profileImage} alt="使用者頭像" className="UserDropdownMenu-avatar"  />
         </div>
         <div className="UserDropdownMenu-info">
           <h3>{user?.nickname}</h3>
@@ -96,7 +113,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p onClick={(e) => handleNavigateTo(e, "artworkAccountSetting")}>帳戶設定</p>
         <p onClick={(e) => handleNavigateTo(e, "artworkPainterMarket")}>我的市集</p>
         <p>案件管理</p>
-        <p>我的文章</p> 
+        <p onClick={(e) => handleNavigateTo(e, "artworkPainterArticle")}>我的文章</p> 
         <p>粉絲名單</p>
         <p onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>我的作品</p>
         <p>追蹤名單</p>

@@ -23,7 +23,7 @@ const ArtworkShowcaseLobby = () => {
     const ITEMSPERPAGE = 20;
     const dropdownRef = useRef(null);
 
-    const {  setIsImageLoading, setIsEmpty  } = useImageLoading();
+    const { setIsImageLoading, setIsEmpty  } = useImageLoading();
     const [isMasonryReady, setIsMasonryReady] = useState(false);
    
     const isDataFetched = useRef(false);
@@ -53,14 +53,14 @@ const ArtworkShowcaseLobby = () => {
             const delayCheck = setTimeout(() => {
                 if (!loading) {
                     if (filteredPortfolios.length === 0) {
-                        console.log("empty");
+                        
                         setIsEmpty(true);
                        
                     } else {
-                        console.log("not empty");
+                       
                         setIsEmpty(false);
                     }
-                    isDataFetched.current = true; //  數據已加載，防止重複執行
+                    isDataFetched.current = true; 
                 }
             }, 500);
     
@@ -73,7 +73,7 @@ const ArtworkShowcaseLobby = () => {
         setIsImageLoading(true);
         setIsMasonryReady(false);
         isCurrentImageUpdated.current = false; // 重置狀態
-        console.log("isImageUpdated", isCurrentImageUpdated.current);
+  
 
         if (isDataFetched.current) { //  數據已加載，進行篩選
             if (filteredPortfolios.length === 0) {
@@ -93,7 +93,7 @@ const ArtworkShowcaseLobby = () => {
             setIsImageLoading(false);
             setIsMasonryReady(true);
            
-        }, 300);
+        }, 1000);
     };
 
     const handleToggleDropdown = (id) => {
@@ -109,20 +109,21 @@ const ArtworkShowcaseLobby = () => {
     };
 
     const handlePageChange = (page) => {
+    
         setCurrentPage(page); // 更新頁碼
+        
     };
 
     const startIndex = (currentPage - 1) * ITEMSPERPAGE;
     const endIndex = currentPage * ITEMSPERPAGE;
     const currentImages = filteredPortfolios.slice(startIndex, endIndex); // 當前頁數據
     
+   
 
     useEffect(() => {
         const totalFilteredPages = Math.ceil(filteredPortfolios.length / ITEMSPERPAGE);
         
         isCurrentImageUpdated.current = true;
-
-        console.log("isImageUpdated", isCurrentImageUpdated.current);
 
         // 🔥 如果當前頁數 > 總頁數，則回到第一頁
         if (currentPage > totalFilteredPages) {
