@@ -29,6 +29,8 @@ const ArtworkShowcaseLobby = () => {
     const isDataFetched = useRef(false);
     const isCurrentImageUpdated = useRef(false); 
 
+    
+
     // 🟢 **篩選符合類別的作品**
     const filteredPortfolios = painterPortfolios.filter(portfolio => {
         // 類別篩選
@@ -66,10 +68,12 @@ const ArtworkShowcaseLobby = () => {
     
             return () => clearTimeout(delayCheck);
         }
+
+        
     }, [loading, filteredPortfolios]);  
 
     useEffect(() => {
-
+     
         setIsImageLoading(true);
         setIsMasonryReady(false);
         isCurrentImageUpdated.current = false; // 重置狀態
@@ -82,7 +86,10 @@ const ArtworkShowcaseLobby = () => {
                 setIsEmpty(false);
             }
         }
-            
+
+        return () => {
+            setIsImageLoading(false); 
+        };
       
     }, [selectedOptions,currentPage]);
 
@@ -195,7 +202,7 @@ const ArtworkShowcaseLobby = () => {
 
 
 
-            {isMasonryReady&&<Pagination
+            {filteredPortfolios.length != 0 && isMasonryReady&&<Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

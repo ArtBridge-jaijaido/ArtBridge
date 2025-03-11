@@ -13,7 +13,6 @@ const ArtworkUploadPortfolioPage = () => {
         <div className={`artworkUploadPortfolio-page ${notoSansTCClass}`}>
             <div className="artworkUploadPortfolio-form-content">
                 <PortfolioUploadForm onSubmit={handleFormSubmit} />
-
             </div>
         </div>
     );

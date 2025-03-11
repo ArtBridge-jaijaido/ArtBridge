@@ -1,16 +1,16 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle, downloadOption } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
-import {uploadPortfolio} from "@/services/artworkPortfolioService";
-import { useSelector} from "react-redux";
+import { uploadPortfolio } from "@/services/artworkPortfolioService";
+import { useSelector } from "react-redux";
 
 import "./PortfolioUploadForm.css";
 
-const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
-    const router = useRouter(); 
+const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
+    const router = useRouter();
     const { addToast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useSelector((state) => state.user);
@@ -19,7 +19,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     const [selectedCategory, setSelectedCategory] = useState(formData.selectedCategory || "");
     const [selectedStyles, setSelectedStyles] = useState(formData.selectedStyles || []);
     const [download, setDownload] = useState(formData.download || "");
-  
+
 
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
@@ -37,15 +37,15 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
         const file = event.target.files[0];
         if (file) {
             if (exampleImage?.preview) {
-                URL.revokeObjectURL(exampleImage.preview);
+                URL.revokeObjectURL(exampleImage.preview); 
             }
-    
+
             const previewURL = URL.createObjectURL(file);
-            console.log("Preview URL:", previewURL); 
-    
+            console.log("Preview URL:", previewURL);
+
             setExampleImage({
-                file,           
-                preview: previewURL 
+                file,
+                preview: previewURL
             });
             setExampleImageName(file.name);
         }
@@ -57,8 +57,8 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
             }
         };
     }, []);
-    
-    
+
+
 
     // 類別選擇（單選）
     const handleCategorySelect = (option) => {
@@ -69,17 +69,17 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     // 風格選擇（最多 3 項）
     const handleStyleSelect = (event, option) => {
         event.stopPropagation();
-    
+
         if (selectedStyles.includes(option)) {
             setSelectedStyles(prevStyles => prevStyles.filter(item => item !== option));
         } else if (selectedStyles.length < 3) {
             setSelectedStyles(prevStyles => [...prevStyles, option]);
         } else {
-                addToast("error", "最多只能選擇3項風格！");
+            addToast("error", "最多只能選擇3項風格！");
         }
     };
 
-    
+
     // 關閉選單
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -102,11 +102,11 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
 
     useEffect(() => {
         if (selectedStyles.length === 3) {
-            setIsStyleOpen(false); 
+            setIsStyleOpen(false);
         }
     }, [selectedStyles]);
-    
-    
+
+
     const validateForm = () => {
         if (!exampleImage) {
             addToast("error", "請上傳範例圖片！");
@@ -128,11 +128,11 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
-        if (!validateForm()) return; 
-    
+        e.preventDefault();
+        if (!validateForm()) return;
+
         setIsSubmitting(true); // 啟用 Loading 狀態
-      
+
         try {
             const userSerialId = user?.userSerialId;
             const userUid = user?.uid;
@@ -148,35 +148,35 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                 download
             };
             console.log("Form Data:", data);
-    
+
             if (onSubmit) {
-                await onSubmit(data); 
-               
+                await onSubmit(data);
+
             }
 
             //  上傳 Portfolio 到 Firebase
             const response = await uploadPortfolio(userUid, userSerialId, data);
-    
+
             if (response.success) {
-                addToast("success", "作品發布成功！");  
+                addToast("success", "作品發布成功！");
                 setTimeout(() => {
                     router.push("/artworkPainterPortfolio");
                 }, 1000);
-               
+
             } else {
                 console.error("作品上傳失敗:", response.message);
-                addToast("error", "發布失敗，請稍後再試！");  
+                addToast("error", "發布失敗，請稍後再試！");
             }
         } catch (error) {
-           
-            addToast("error", "發布失敗，請稍後再試！");  
+
+            addToast("error", "發布失敗，請稍後再試！");
         } finally {
             setIsSubmitting(false);
-           
+
         }
     };
-    
-    
+
+
     return (
         <div className="PortfolioUploadForm-wrapper">
             <div className="PortfolioUploadForm-container">
@@ -185,7 +185,7 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                     <div className="PortfolioUploadForm-image-upload">
                         <label>作品</label>
                         <div className="PortfolioUploadForm-uploadImg-box">
-                            {exampleImage?.preview ?  (
+                            {exampleImage?.preview ? (
                                 <img src={exampleImage.preview} alt="範例圖片" className="PortfolioUploadForm-preview" />
                             ) : (
                                 <span className="PortfolioUploadForm-gray-text">請上傳範例圖片 (JPG, PNG, GIF)<br />最多 15MB</span>
@@ -196,12 +196,12 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
 
                     {/* 右邊表單區*/}
                     <div className="PortfolioUploadForm-form-area">
-                            {/* 類別選擇 */}
+                        {/* 類別選擇 */}
                         <div className="PortfolioUploadForm-category-width" ref={categoryRef}>
                             <div className="PortfolioUploadForm-dropdown-container">
-                                <div 
-                                    id="category-dropdown" 
-                                    className={`PortfolioUploadForm-dropdown ${isCategoryOpen ? "open" : ""}`} 
+                                <div
+                                    id="category-dropdown"
+                                    className={`PortfolioUploadForm-dropdown ${isCategoryOpen ? "open" : ""}`}
                                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                                 >
                                     類別選擇
@@ -222,10 +222,10 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                                 </div>
                                 <span className="PortfolioUploadForm-max-selection">(最多1項)</span>
                             </div>
-                            <input 
-                                type="text" 
-                                value={selectedCategory || "類別"}  
-                                readOnly 
+                            <input
+                                type="text"
+                                value={selectedCategory || "類別"}
+                                readOnly
                                 className={`PortfolioUploadForm-input-box ${selectedCategory ? "black-text" : "gray-text"}`}
                             />
                         </div>
@@ -233,9 +233,9 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                         {/* 風格選擇 */}
                         <div className="PortfolioUploadForm-style-width" ref={styleRef}>
                             <div className="PortfolioUploadForm-dropdown-container">
-                                <div 
-                                    id="style-dropdown" 
-                                    className={`PortfolioUploadForm-dropdown ${isStyleOpen ? "open" : ""}`} 
+                                <div
+                                    id="style-dropdown"
+                                    className={`PortfolioUploadForm-dropdown ${isStyleOpen ? "open" : ""}`}
                                     onClick={() => setIsStyleOpen(!isStyleOpen)}
                                 >
                                     風格選擇
@@ -257,11 +257,11 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                                 </div>
                                 <span className="PortfolioUploadForm-max-selection">(最多3項)</span>
                             </div>
-                            <input 
-                                type="text" 
-                                value={selectedStyles.length > 0 ? selectedStyles.join("、") : "風格1、風格2、風格3"}  
-                                readOnly 
-                                className={`PortfolioUploadForm-input-box ${selectedStyles.length > 0 ? "black-text" : "gray-text"}`}  
+                            <input
+                                type="text"
+                                value={selectedStyles.length > 0 ? selectedStyles.join("、") : "風格1、風格2、風格3"}
+                                readOnly
+                                className={`PortfolioUploadForm-input-box ${selectedStyles.length > 0 ? "black-text" : "gray-text"}`}
                             />
                         </div>
 
@@ -290,12 +290,12 @@ const PortfolioUploadForm = ({formData = {}, onSubmit }) => {
                 </div>
                 {/* 按鈕區域 */}
                 <div className="PortfolioUploadForm-button-group">
-                    <button className="PortfolioUploadForm-prev"  onClick={() => router.push("/artworkPainterPortfolio")}>取消</button>
+                    <button className="PortfolioUploadForm-prev" onClick={() => router.push("/artworkPainterPortfolio")}>取消</button>
                     <LoadingButton isLoading={isSubmitting} onClick={handleSubmit} loadingText={"發布中"} >發佈</LoadingButton>
                 </div>
             </div>
         </div>
     );
-};    
-   
+};
+
 export default PortfolioUploadForm;

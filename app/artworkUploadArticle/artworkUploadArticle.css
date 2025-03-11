@@ -1,0 +1,60 @@
+.artworkUploadArticle-page{
+    /*max width */
+    --artworkUploadPortfolio-page-width: 1440px;
+
+}
+
+.artworkUploadArticle-page{
+    position: relative;
+    width:100%;
+    max-width:var(--artworkUploadPortfolio-page-width);
+    padding: 100px 80px 20px 80px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+.artworkUploadArticle-form-content{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+}
+
+
+@media screen and (min-width:1280){
+    .artworkUploadArticle-form-content{
+        padding:0px 30px;
+    }
+}
+
+@media screen and (max-width: 834px) {
+    .artworkUploadArticle-page{
+        padding: 100px 40px 20px 40px; 
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .artworkUploadArticle-page{
+        width:768px;
+    }
+}
+
+
+@media screen and (max-width:440px){
+    .artworkUploadArticle-page{
+        width:100%;
+        padding:100px 20px 20px 20px;
+    }
+}
+
+
+
+/* @media screen and (max-width:370px){
+    .artworkUploadArticle-page{
+        width:370px;
+    }
+}
+   */

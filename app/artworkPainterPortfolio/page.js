@@ -44,8 +44,14 @@ const ArtworkPainterPortfolioPage = () => {
                 }
             }, 500);
     
-            return () => clearTimeout(delayCheck);
+            return () => {
+                clearTimeout(delayCheck);
+                setIsImageLoading(false);  //  關閉 Loading
+            };
         }
+
+       
+       
     }, [loading, userPortfolios]);  
     
    
