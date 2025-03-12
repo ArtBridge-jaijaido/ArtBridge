@@ -16,6 +16,7 @@
     margin-bottom: 30px;
     width: 100%;
     justify-content: flex-start; /* 讓按鈕靠左對齊 */
+    flex-wrap: wrap;
   }
   
   .ArtworkPainter-filter-button {
@@ -23,8 +24,7 @@
     border-style: solid;
     border-color: #afafaf;
     border-width: 1px;
-    width: 88px;
-    height: 28px;
+    padding: 5px 10px;
     position: relative;
     background: none;
     cursor: pointer;
@@ -38,6 +38,7 @@
     letter-spacing: 2px;
     font-weight: 600;
     transition: all 0.3s ease;
+    max-width:120px;
   }
   
   .ArtworkPainter-filter-button.selected {
@@ -55,6 +56,8 @@
     margin-bottom: 18px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    min-width: 140px;
+    min-height: 150px;
   }
   .ArtworkPainter-masonry-grid-item Img{
     width: 100%; /* 讓圖片填滿父容器 */
@@ -133,11 +136,18 @@
 
 
 @media screen and (max-width:440px){
+
+  .ArtworkPainter-masonry-grid-item {
+    min-width: auto;
+    min-height: 140px;
+  }
+
   .ArtworkPainter-masonry-grid{
     gap:15px;
   }
   .ArtworkPainter-filter-button{
-    font-size: 10px;
+    font-size: 8px;
+    max-width:100px;
   }
 }
 

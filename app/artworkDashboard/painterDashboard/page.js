@@ -116,7 +116,7 @@ const PainterDashboard = () => {
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-artwork-100-1.png" alt="icon" className="artworkDashboardIcon" />
-              <span>我的作品</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>我的作品</span>
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-bookmark-96-2.png" alt="icon" className="artworkDashboardIcon" />

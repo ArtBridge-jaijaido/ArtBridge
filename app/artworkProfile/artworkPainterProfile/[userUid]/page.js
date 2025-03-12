@@ -10,6 +10,7 @@ import ArtworkPainterProfileTab from "@/components/ArtworkPainterProfile-tab/Art
 import ArtworkPainterMasonryGrid from "@/components/ArtworkPainterMasonryGrid/ArtworkPainterMasonryGrid.js"; 
 import ArtworkReview from "@/components/ArtworkReview/ArtworkReview.jsx"; 
 import ArtworkCard from "@/components/ArtworkCard/ArtworkCard.jsx";
+import {useImageLoading} from "@/app/contexts/ImageLoadingContext.js";
 import "./artworkPainterProfile.css";
 
 
@@ -23,9 +24,17 @@ const ArtworkPainterProfilePage = () => {
         const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
         const reviewTotalItems = 30; //總數
         const [isUserLoaded, setIsUserLoaded] = useState(false);
+        const [imagesLoaded, setImagesLoaded] =useState({
+            backgroundImg: false,
+            profileImg: false,
+        })
         const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
         const artworkCardTotalItems = 40;
-
+        const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio);
+        
+      
+         // ** 過濾出當前使用者的 portfolio**
+       const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -42,40 +51,52 @@ const ArtworkPainterProfilePage = () => {
             return  today <= endDate;
         });
        
-
-        const testingImages = [
-            {src:"/images/testing-Arkwork-image-2.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-6.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-5.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-3.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-10.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-11.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image.png", category: "category1"},
-            {src:"/images/testing-Arkwork-image-9.png", category: "category2"},
-            {src:"/images/testing-Arkwork-image-8.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-4.png", category: "category3"},
-            {src:"/images/testing-Arkwork-image-7.png", category: "category3"},
-        ];
-        const masonryTotalItems = testingImages.length; // 總數
-        const currentImages = testingImages.slice(0, masonryVisibleItems);
+        const [isMasonryReady, setIsMasonryReady] = useState(false);
+        const masonryTotalItems = userPortfolios.length; // 總數
+        const currentImages = userPortfolios.slice(0, masonryVisibleItems);
         
+        const backgroundImage = user.painterProfileBackgroundImg ?? "/images/painter-background.png";
+        const profileImage = user.profileAvatar ?? "/images/profile-avatar.png";
 
+        const handleMasonryReady = () => {
+            setTimeout(() => {
+                setIsMasonryReady(true);
+            }, 300);
+    
+           
+        };
+
+          // **預載入背景圖片**
+          useEffect(() => {
+            const imagesToLoad = [
+                { key: "backgroundImg", src: backgroundImage, label: "背景圖片" },
+                { key: "profileImg", src: profileImage, label: "個人圖片" },
+            ];
+        
+            imagesToLoad.forEach(({ key, src, label }) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => setImagesLoaded(prev => ({ ...prev, [key]: true }));
+                img.onerror = () => {
+                    console.error(`${label} 載入失敗:`, src);
+                    setImagesLoaded(prev => ({ ...prev, [key]: true })); // 如果圖片載入失敗，也設定為 true
+                };
+            });
+        }, [backgroundImage, profileImage]);
+        
+      
 
         const tabs = [
             {
                 label: "作品集",
                 content: <div className="artworkPainterProfile-Tab-wrapper">
                     <div className="artworkPainterProfile-artworkPainterMasonryGrid-container">
-                     <ArtworkPainterMasonryGrid images={currentImages}/>
+                        <ArtworkPainterMasonryGrid 
+                        images={currentImages}
+                        onMasonryReady={handleMasonryReady} 
+                        isMasonryReady={isMasonryReady}
+                        
+                        />
                     </div>
 
                      {masonryVisibleItems < masonryTotalItems && (
@@ -148,7 +169,7 @@ const ArtworkPainterProfilePage = () => {
             }
         }, [user, setIsLoading]);
 
-        if (!isUserLoaded) return null;
+        if (!isUserLoaded || !imagesLoaded.backgroundImg || !imagesLoaded.profileImg ) return null;
 
 
     return (
@@ -157,9 +178,9 @@ const ArtworkPainterProfilePage = () => {
             <div className="artworkPainterDetail-container">
                 <ArtworkPainterDetail 
                     id="Detail"
-                    backgroundImg={user.painterProfileBackgroundImg ?? "/images/painter-background.png" }
+                    backgroundImg={backgroundImage} 
                     ratingText={"5"}
-                    profileImg={user.profileAvatar ?? "/images/profile-avatar.png"}
+                    profileImg={profileImage}
                     usernameText={user?.nickname}
                     introductionText={user?.painterIntroduction? user.painterIntroduction : "請寫下你的自我介紹......."}
                     viewID={user?.userSerialId?user.userSerialId:"A123456"}

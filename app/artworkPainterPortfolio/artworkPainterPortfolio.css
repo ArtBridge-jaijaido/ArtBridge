@@ -38,6 +38,7 @@
     flex-wrap: wrap;
     width: 100%;
     margin-top:20px;
+    position: relative;
   }
   
   
@@ -60,26 +61,33 @@
     color: #1C8CD1; 
 }
 
-@media (max-width: 1280px) {
-    .artworkPainterPortfolioPage{
-        width:100%;
+
+
+@media screen and (max-width:768px){
+    .artworkPainterPortfolio-page{
+        width:768px;
     }
-   
 }
 
-@media screen and (max-width:480px){
+
+
+@media screen and (max-width:440px) {
+
+    .artworkPainterPortfolio-page{
+        width:100%;
+    }
     .artworkPainterPortfolio-show-more-button {
         font-size:12px;
     }
     .artworkPainterPortfolio-setTab-container{
         margin-top:10px;
+        padding:0px 0px;
     }
     .artworkPainterPortfolio-masonryGrid-container {
          margin-top:10px;
     }
-}
 
-@media screen and (max-width:440px) {
+
     .artworkPainterPortfolio-masonryGrid-container {
       --artworkPainterPortfolio-masonryGrid-container-margin-bottom: 30px;
     }
@@ -87,6 +95,10 @@
 
 
 @media screen and (max-width: 370px){
+
+  
+
+
     .artworkPainterPortfolio-masonryGrid-container {
 
         --artworkPainterPortfolio-masonryGrid-container-margin-bottom: 30px;

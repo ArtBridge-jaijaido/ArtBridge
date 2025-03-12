@@ -1,0 +1,27 @@
+.artworkPainterArticle-page{
+    position: relative;
+    width:100%;
+    max-width:1440px;
+    padding: 100px 15px 20px 15px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+.artworkPainterArticle-tab-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    gap:0px;
+}
+
+.artworkPainterArticle-setTab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+    margin-top:20px;
+}
