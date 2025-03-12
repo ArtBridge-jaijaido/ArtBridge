@@ -7,6 +7,8 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         const pages = [];
         const maxVisiblePages = 5;
 
+   
+
         if (totalPages <= maxVisiblePages) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(

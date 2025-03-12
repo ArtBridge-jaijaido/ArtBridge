@@ -124,18 +124,19 @@ const ArtworkShowcaseLobby = () => {
     const handlePageChange = (page) => {
     
         setCurrentPage(page); // 更新頁碼
-        
+    
     };
 
     const startIndex = (currentPage - 1) * ITEMSPERPAGE;
     const endIndex = currentPage * ITEMSPERPAGE;
-    const currentImages = filteredPortfolios.slice(startIndex, endIndex); // 當前頁數據
+    // const currentImages = filteredPortfolios.slice(startIndex, endIndex); // 當前頁數據
 
-    useEffect(()=>{
-        setLatestImages(currentImages);
-    },[filteredPortfolios])
+    useEffect(() => {
+        setLatestImages(filteredPortfolios.slice(startIndex, endIndex));
+    }, [filteredPortfolios, currentPage]);
     
-   
+    
+    
 
     useEffect(() => {
         const totalFilteredPages = Math.ceil(filteredPortfolios.length / ITEMSPERPAGE);
@@ -213,7 +214,7 @@ const ArtworkShowcaseLobby = () => {
 
 
             {filteredPortfolios.length != 0 && isMasonryReady&&<Pagination
-                currentPage={latestImages}
+                currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
             />}
