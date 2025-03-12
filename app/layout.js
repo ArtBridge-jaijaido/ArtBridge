@@ -8,6 +8,7 @@ import { subscribeToAuth } from "@/lib/authListener";
 import { subscribeToArtworks} from "@/lib/artworkListener";
 import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
+import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -40,12 +41,14 @@ export default function RootLayout({ children }) {
     const unsubscribeArtworks = subscribeToArtworks(); 
     const unsubscribeAllUsers = subscribeToAllUsers();
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
+    const unsubscribePainterArticles = subscribeToPainterArticles();
   
     return () => {
       unsubscribeAuth();        // 清除 Auth 訂閱
       unsubscribeArtworks();    // 清除 Artworks 訂閱
       unsubscribeAllUsers();    // 清除 Users 訂閱
       unsubscribePainterPortfolios(); // 清除 PainterPortfolios 訂閱
+      unsubscribePainterArticles();   // 清除 PainterArticles 訂閱
     };
   }, []);
 

@@ -103,8 +103,11 @@ const Header = () => {
     if (!showHeader || isLoading) return null; //如果還在 loading，完全不渲染 Header
 
     return (
-        <header className="header">
-            <div className={`header-logo ${notoSansTCClass}`}>LOGO</div>
+        <header className={`header ${notoSansTCClass}`}>
+            <div className="header-logo">
+
+                <img src="/images/header-logo.png" alt="ArtBridge" />
+            </div>
 
 
             <div className="header-loginUser-buttons-container">

@@ -1,14 +1,32 @@
 .masonry-grid {
     display: flex;
-    gap: 30px;
-    margin : 0 auto; 
+    gap:30px;
+    align-items: flex-start;
   }
   
-  .masonry-grid-column {
-    display: flex;
-    flex-direction: column;
-    width:100%;
-  }
+  .masonry-column {
+  background-clip: padding-box;
+ 
+  width: 100%;
+}
+
+/* 預設 5 欄，每個 column 設定不同寬度 */
+.masonry-column:nth-child(1) {
+  width: 256px !important;
+}
+.masonry-column:nth-child(2) {
+  width: 206px !important;
+}
+.masonry-column:nth-child(3) {
+  width: 317px !important;
+}
+.masonry-column:nth-child(4) {
+  width: 236px !important;
+}
+.masonry-column:nth-child(5) {
+  width: 190px !important;
+}
+
   
   .masonry-grid-item {
     width:100%;
@@ -17,8 +35,10 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     min-width: 140px;
-    min-height: 150px;
+   
   }
+
+  
 
   .masonry-grid-item img {
     width: 100%;
@@ -90,11 +110,57 @@
 
 
 /*RWD*/
+@media screen and (max-width:1280px){
+
+  .masonry-grid{
+    gap:10px;
+  }
+
+  .masonry-column:nth-child(1) {
+    width:100% !important;
+    max-width: 210px !important;
+  }
+  .masonry-column:nth-child(2) {
+    width:100% !important;
+    max-width: 206px !important;
+  }
+  .masonry-column:nth-child(3) {
+    width:100%  !important;
+    max-width: 261px !important;
+  }
+  .masonry-column:nth-child(4) {
+    width:100% !important;
+    max-width: 190px !important;
+  }
+  .masonry-column:nth-child(5) {
+    width:100% !important;
+    max-width: 190px !important;
+  }
+}
+
+
+
+
+
 @media screen and (max-width:834px){
     
     .masonry-grid{
       gap:10px;
     }
+
+    .masonry-column:nth-child(1) {
+      max-width: 180px !important;
+    }
+    .masonry-column:nth-child(2) {
+      max-width: 180px !important;
+    }
+    .masonry-column:nth-child(3) {
+      max-width: 200px !important;
+    }
+    .masonry-column:nth-child(4) {
+      max-width: 160px !important;
+    }
+  
 
     .masonry-grid-item{
       margin-bottom:20px;
@@ -105,14 +171,20 @@
 
 @media screen and (max-width:440px){
 
-  .masonry-grid-item {
-    min-width: auto;
-    min-height: 140px;
+  .masonry-column:nth-child(1) {
+    max-width: 170px !important;
+  }
+  .masonry-column:nth-child(2) {
+    max-width: 190px !important;
   }
 
+  .masonry-grid-item {
+    min-width: auto;
+    
+  }
 
   .masonry-grid{
-    gap:15px;
+    gap:10px;
   }
 }
 

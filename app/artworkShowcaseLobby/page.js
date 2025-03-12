@@ -29,22 +29,27 @@ const ArtworkShowcaseLobby = () => {
     const isDataFetched = useRef(false);
     const isCurrentImageUpdated = useRef(false); 
 
-    
+    const [filteredPortfolios, setFilteredPortfolios] = useState([]);
+    const [latestImages, setLatestImages] = useState([]);
 
     // 🟢 **篩選符合類別的作品**
-    const filteredPortfolios = painterPortfolios.filter(portfolio => {
-        // 類別篩選
-        const categoryMatch = selectedOptions.category === "類別選擇" || selectedOptions.category === "全部"
-            ? true
-            : portfolio.selectedCategory === selectedOptions.category;
+    useEffect(() => {
+        const updatedFilteredPortfolios = painterPortfolios.filter(portfolio => {
+            // 類別篩選
+            const categoryMatch = selectedOptions.category === "類別選擇" || selectedOptions.category === "全部"
+                ? true
+                : portfolio.selectedCategory === selectedOptions.category;
 
-        // 風格篩選
-        const styleMatch = selectedOptions.style === "風格選擇" || selectedOptions.style === "全部"
-            ? true
-            : portfolio.selectedStyles.some(style => style === selectedOptions.style);
+            // 風格篩選
+            const styleMatch = selectedOptions.style === "風格選擇" || selectedOptions.style === "全部"
+                ? true
+                : portfolio.selectedStyles.some(style => style === selectedOptions.style);
 
-        return categoryMatch && styleMatch;
-    });
+            return categoryMatch && styleMatch;
+        });
+
+        setFilteredPortfolios(updatedFilteredPortfolios); // ✅ 立即更新 state
+    }, [painterPortfolios, selectedOptions, currentPage]);
     
     useEffect(() => {
         
@@ -54,8 +59,9 @@ const ArtworkShowcaseLobby = () => {
     
             const delayCheck = setTimeout(() => {
                 if (!loading) {
+                   
                     if (filteredPortfolios.length === 0) {
-                        
+                      
                         setIsEmpty(true);
                        
                     } else {
@@ -91,7 +97,7 @@ const ArtworkShowcaseLobby = () => {
             setIsImageLoading(false); 
         };
       
-    }, [selectedOptions,currentPage]);
+    }, [selectedOptions,currentPage,filteredPortfolios]);
 
 
     // ✅ 當 Masonry 排列完成後，關閉 Loading
@@ -124,6 +130,10 @@ const ArtworkShowcaseLobby = () => {
     const startIndex = (currentPage - 1) * ITEMSPERPAGE;
     const endIndex = currentPage * ITEMSPERPAGE;
     const currentImages = filteredPortfolios.slice(startIndex, endIndex); // 當前頁數據
+
+    useEffect(()=>{
+        setLatestImages(currentImages);
+    },[filteredPortfolios])
     
    
 
@@ -188,12 +198,12 @@ const ArtworkShowcaseLobby = () => {
             </div>
             <div className="artworkShowcaseLobby-artworks-container">
                 {filteredPortfolios.length === 0 ? (
-                    <div className="artworkShowcaseLobby-no-artworks">
+                    <div className="artworkShowcaseLobby-no-artworks" >
                         Sorry! 目前沒有相對應的作品
                     </div>
                 ) : (
                     isCurrentImageUpdated&&<MasonryGrid
-                        images={currentImages}
+                        images={latestImages}
                         onMasonryReady={handleMasonryReady} 
                         isMasonryReady={isMasonryReady}
                     />
@@ -203,7 +213,7 @@ const ArtworkShowcaseLobby = () => {
 
 
             {filteredPortfolios.length != 0 && isMasonryReady&&<Pagination
-                currentPage={currentPage}
+                currentPage={latestImages}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
             />}

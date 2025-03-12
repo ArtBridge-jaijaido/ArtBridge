@@ -4,8 +4,13 @@ import "./ArticleUploadForm.css";
 import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
+import { useNavigation } from "@/lib/functions.js";
+import { useSelector } from "react-redux";
+import { uploadArticle} from "@/services/artworkArticleService";
+
 
 const ArticleUploadForm = () => {
+    const { user } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         exampleImage: "",
         title: "",
@@ -14,6 +19,8 @@ const ArticleUploadForm = () => {
         selectedStyles: [],
     });
     const { addToast } = useToast();
+    const navigate = useNavigation();
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const categoryRef = useRef(null);
     const styleRef = useRef(null);
     const filteredStyles = artMarketStyle.filter(option => option !== "全部");
@@ -118,7 +125,7 @@ const ArticleUploadForm = () => {
             addToast("error", "請上傳範例圖片！");
             return false;
         }
-        if (formData.selectedCategory) {
+        if (!formData.selectedCategory) {
             addToast("error", "請選擇類別！");
             return false;
         }
@@ -128,6 +135,35 @@ const ArticleUploadForm = () => {
         }
      
         return true;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+        setIsSubmitting(true);
+
+        console.log("提交的資料：", formData);
+
+        
+
+        try {
+            const userSerialId = user?.userSerialId;
+            const userUid = user?.uid;
+            const response = await uploadArticle(userUid,userSerialId,formData);
+
+            if (response.success) {
+                addToast("success", response.message);
+                navigate("/artworkPainterArticle");
+            } else {
+                addToast("error", response.message);
+            }
+        }catch (error) {
+           
+            addToast("error", "發布失敗，請稍後再試");
+        }finally{
+            setIsSubmitting(false);
+        }
+
     };
 
     return (
@@ -158,10 +194,11 @@ const ArticleUploadForm = () => {
                         <input
                             type="text"
                             name="title"
-                            placeholder="請輸入標題"
+                            placeholder="請輸入標題 (最多12字)"
                             value={formData.title}
                             onChange={handleInputChange}
                             className="ArticleUploadForm-input"
+                            maxLength={12}
                         />
 
                         <label className="ArticleUploadForm-label">內文</label>
@@ -257,8 +294,8 @@ const ArticleUploadForm = () => {
                 </div>
 
                 <div className="ArticleUploadForm-button-group">
-                    <button className="ArticleUploadForm-prev">取消</button>
-                    <LoadingButton  loadingText={"發布中"} >發佈</LoadingButton>
+                    <button className="ArticleUploadForm-prev" onClick={()=>{navigate("/artworkPainterArticle")}}>取消</button>
+                    <LoadingButton  isLoading={isSubmitting} onClick={handleSubmit} loadingText={"發布中"} >發佈</LoadingButton>
                 </div>
             </div>
         </div>

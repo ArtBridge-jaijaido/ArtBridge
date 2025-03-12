@@ -47,13 +47,15 @@
 .header-logo{
     display:flex;
     align-items: center;
-    font-size:var(--header-logo-font-size);
-    font-weight:var(--header-logo-font-weight);
-    line-height:var(--header-logo-line-height);
-    letter-spacing:var(--header-logo-letter-spacing);
-    width:96px;
-    height:39px;
-    color:#A9A7A7;
+    width:200px;
+    height:80px;
+    aspect-ratio: 13/5;
+}
+
+.header-logo img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
 }
 
 .header-nav{
@@ -282,6 +284,12 @@
         display: block;
       
         z-index: 100; /* 確保在導航欄上方 */
+    }
+
+
+    .header-logo{
+        width:160px;
+        height:60px;
     }
 
     .header-nav {

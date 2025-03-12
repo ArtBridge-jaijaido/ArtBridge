@@ -1,0 +1,189 @@
+.painterArticle-masonry-grid {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.painterArticle-masonry-column {
+    background-clip: padding-box;
+
+    width: 100%;
+}
+
+/* 預設 5 欄，每個 column 設定不同寬度 */
+.painterArticle-masonry-column:nth-child(1) {
+    width: 256px !important;
+}
+
+.painterArticle-masonry-column:nth-child(2) {
+    width: 206px !important;
+}
+
+.painterArticle-masonry-column:nth-child(3) {
+    width: 317px !important;
+}
+
+.painterArticle-masonry-column:nth-child(4) {
+    width: 236px !important;
+}
+
+.painterArticle-masonry-column:nth-child(5) {
+    width: 190px !important;
+}
+
+
+.painterArticle-masonry-grid-item {
+    width: 100%;
+    position: relative;
+    margin-bottom: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    min-width: 140px;
+
+}
+
+
+
+.painterArticle-masonry-grid-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+
+}
+
+
+
+
+
+.painterArticle-masonry-deleteIcon-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 3px;
+    
+    background: #FFF;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.painterArticle-masonry-deleteIcon-container img {
+    width:28px !important;
+    height:28px !important;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+.painterArticle-masonry-grid-item:hover {
+    transform: translateY(-8px);
+
+}
+
+
+/*RWD*/
+@media screen and (max-width:1280px) {
+
+    .painterArticle-masonry-grid {
+        gap: 10px;
+    }
+
+    .painterArticle-masonry-column:nth-child(1) {
+        width: 100% !important;
+        max-width: 210px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(2) {
+        width: 100% !important;
+        max-width: 206px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(3) {
+        width: 100% !important;
+        max-width: 261px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(4) {
+        width: 100% !important;
+        max-width: 190px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(5) {
+        width: 100% !important;
+        max-width: 190px !important;
+    }
+}
+
+
+
+
+
+@media screen and (max-width:834px) {
+
+    .painterArticle-masonry-grid {
+        gap: 10px;
+    }
+
+    .painterArticle-masonry-column:nth-child(1) {
+        max-width: 180px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(2) {
+        max-width: 180px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(3) {
+        max-width: 200px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(4) {
+        max-width: 160px !important;
+    }
+
+
+    .painterArticle-masonry-grid-item {
+        margin-bottom: 20px;
+    }
+
+}
+
+
+@media screen and (max-width:440px) {
+
+    .painterArticle-masonry-column:nth-child(1) {
+        max-width: 170px !important;
+    }
+
+    .painterArticle-masonry-column:nth-child(2) {
+        max-width: 190px !important;
+    }
+
+    .painterArticle-masonry-grid-item {
+        min-width: auto;
+
+    }
+
+    .painterArticle-masonry-grid {
+        gap: 10px;
+    }
+
+
+    .painterArticle-masonry-deleteIcon-container{
+        width:28px;
+        height:28px;
+    }
+
+    .painterArticle-masonry-deleteIcon-container img{
+        width:20px !important;
+        height:20px !important;
+    }
+}

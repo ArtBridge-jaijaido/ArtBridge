@@ -18,6 +18,14 @@
     gap:0px;
 }
 
+.artworkPainterArticle-masonryGrid-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top:20px;
+    position: relative;
+}
+
 .artworkPainterArticle-setTab-container{
     display:flex;
     flex-direction: column;
@@ -25,3 +33,5 @@
     padding:0px 20px;
     margin-top:20px;
 }
+
+
