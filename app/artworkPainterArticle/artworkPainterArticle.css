@@ -34,4 +34,16 @@
     margin-top:20px;
 }
 
+@media screen and (max-width: 768px) {
+    .artworkPainterArticle-page{
+       width:768px;
+    }
+}
 
+
+@media screen and (max-width:440px){
+    .artworkPainterArticle-page{
+        width:100%;
+        
+    }
+}

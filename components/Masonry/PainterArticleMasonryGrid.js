@@ -1,16 +1,48 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import "./PainterArticleMasonryGrid.css";
+import {deleteArticle} from '@/services/artworkArticleService.js';
+import {useDispatch} from 'react-redux';
+import {deletePainterArticle} from '@/app/redux/feature/painterArticleSlice.js';
+import { useToast } from "@/app/contexts/ToastContext.js";
+import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
 
-const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
+
+const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
     const [imageLoaded, setImageLoaded] = useState({});
     const [isPreloaded, setIsPreloaded] = useState(false);
+    const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
+      const { setIsImageLoading } = useImageLoading();
+    const dispatch = useDispatch();
+    const { addToast } = useToast();
+   
+
+    const breakpointColumns = {
+        default: 5, // 桌機最多 5 欄
+        1280: 5,
+        834: 4,
+        440: 2,
+    };
+
+    const getCurrentBreakpoint = () => {
+        const width = window.innerWidth;
+        let matchedBreakpoint = "default"; // 預設最大值
+
+        Object.keys(breakpointColumns).forEach((bp) => {
+            if (width <= parseInt(bp)) {
+                matchedBreakpoint = bp;
+            }
+        });
+
+        return matchedBreakpoint;
+    };
+
 
     useEffect(() => {
         setIsPreloaded(false);
         setImageLoaded({}); // 重置圖片載入狀態
+       
 
         let loadedCount = 0;
         images.forEach((image) => {
@@ -20,23 +52,58 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
                 loadedCount++;
                 setImageLoaded((prev) => ({
                     ...prev,
-                    [image.portfolioId]: true,
+                    [image.articleId]: true,
                 }));
 
                 if (loadedCount === images.length) {
                     setIsPreloaded(true);
                     onMasonryReady();
+                    
                 }
             };
         });
-    }, [images]);
 
-    const breakpointColumns = {
-        default: 5, // 桌機最多 5 欄
-        1280: 5,
-        834: 4,
-        440: 2,
+      
+    }, [images, currentBreakpoint]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const newBreakpoint = getCurrentBreakpoint();
+            if (newBreakpoint !== currentBreakpoint) {
+                setCurrentBreakpoint(newBreakpoint);
+            }
+        };
+
+        handleResize(); // 先執行一次
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+      
+
+            window.removeEventListener("resize", handleResize);
+        };
+
+    }, [currentBreakpoint]);
+
+    const handleDelete = async (article, e) => {
+        e.stopPropagation(); // 防止點擊事件冒泡到其他元素
+    
+        const confirmDelete = window.confirm(`確定要刪除文章「${article.title}」嗎？`);
+        if (!confirmDelete) return;
+    
+        try {
+            const response = await deleteArticle(article.userUid, article.userId, article.articleId);
+    
+            if (response.success) {
+                dispatch(deletePainterArticle(article.articleId)); // ✅ 透過 Redux 更新 UI
+            } else {
+                addToast("error", "刪除失敗，請稍後再試");
+            }
+        } catch (error) {
+            addToast("error", "刪除失敗，請稍後再試");
+        }
     };
+
 
     return isPreloaded ? (
         <Masonry
@@ -53,11 +120,29 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
                     />
 
                     {/* 只有當圖片載入後才顯示按鈕 */}
-                    {isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+                    {isMasonryReady && imageLoaded[image.articleId] && image.exampleImageUrl && (
                         <>
+                            <p className="painterArticle-masonry-article-title">{image.title}</p>
                             {/* delete 按鈕 */}
                             <div className="painterArticle-masonry-deleteIcon-container">
-                                <img src="/images/delete-icon.png" alt="numberOfLikes" />
+                                <img src="/images/delete-icon.png"
+                                 alt="delete-icon" 
+                                 onClick={(e) => handleDelete(image, e)}
+                                 />
+                            </div>
+                            <div className="painterArticle-masonry-functionIcon-container">
+                                <div className="painterArticle-masonry-functionIcon-group-container">
+                                    <img src="/images/icons8-love-96-14.png" alt="like-icon"></img>
+                                    <span>999+</span>
+                                </div>
+                                <div className="painterArticle-masonry-functionIcon-group-container">
+                                    <img src="/images/icons8-message-96-3.png" alt="message-icon"></img>
+                                    <span>20</span>
+                                </div>
+                                <div className="painterArticle-masonry-functionIcon-group-container">
+                                    <img src="/images/icons8-bookmark-96-4.png" alt="mark-icon"></img>
+                                    <span>15</span>
+                                </div>
                             </div>
                         </>
                     )}
@@ -67,4 +152,4 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
     ) : null;
 };
 
-export default MasonryGrid;
+export default PainterArticleMasonryGrid;

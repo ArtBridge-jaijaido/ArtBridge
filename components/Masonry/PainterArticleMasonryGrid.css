@@ -1,6 +1,6 @@
 .painterArticle-masonry-grid {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     align-items: flex-start;
 }
 
@@ -12,7 +12,7 @@
 
 /* 預設 5 欄，每個 column 設定不同寬度 */
 .painterArticle-masonry-column:nth-child(1) {
-    width: 256px !important;
+    width: 236px !important;
 }
 
 .painterArticle-masonry-column:nth-child(2) {
@@ -20,7 +20,7 @@
 }
 
 .painterArticle-masonry-column:nth-child(3) {
-    width: 317px !important;
+    width: 280px !important;
 }
 
 .painterArticle-masonry-column:nth-child(4) {
@@ -28,7 +28,7 @@
 }
 
 .painterArticle-masonry-column:nth-child(5) {
-    width: 190px !important;
+    width: 230px !important;
 }
 
 
@@ -42,7 +42,10 @@
 
 }
 
+.painterArticle-masonry-grid-item:hover {
+    transform: translateY(-8px);
 
+}
 
 .painterArticle-masonry-grid-item img {
     width: 100%;
@@ -52,7 +55,16 @@
 
 }
 
+.painterArticle-masonry-article-title{
+    color: #565656;
 
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom:6px;
+}
 
 
 
@@ -62,40 +74,67 @@
     right: 10px;
     width: 44px;
     height: 44px;
+    aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2px;
     border-radius: 3px;
-    
+
     background: #FFF;
     box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
 }
 
+
 .painterArticle-masonry-deleteIcon-container img {
-    width:28px !important;
-    height:28px !important;
+    width: 28px !important;
+    height: 28px !important;
     object-fit: contain;
 }
 
-
-
-
-
-
-
-.painterArticle-masonry-grid-item:hover {
-    transform: translateY(-8px);
-
+.painterArticle-masonry-functionIcon-container{
+    width:100%;
+    display:flex;
+    align-items: center;
+    flex-wrap: wrap; 
 }
+
+.painterArticle-masonry-functionIcon-group-container{
+    display:flex;
+    align-items: center;
+    gap:2px;
+    margin-right: 4px;
+   
+}
+
+.painterArticle-masonry-functionIcon-container img{
+    width:25px;
+    height:25px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.painterArticle-masonry-functionIcon-container span{
+    color: #919191;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+   
+}
+
+
+
 
 
 /*RWD*/
 @media screen and (max-width:1280px) {
 
-    .painterArticle-masonry-grid {
+    /* .painterArticle-masonry-grid {
         gap: 10px;
-    }
+    } */
 
     .painterArticle-masonry-column:nth-child(1) {
         width: 100% !important;
@@ -120,6 +159,30 @@
     .painterArticle-masonry-column:nth-child(5) {
         width: 100% !important;
         max-width: 190px !important;
+    }
+
+    .painterArticle-masonry-grid-item p {
+        font-size: 16px;
+    }
+
+    .painterArticle-masonry-deleteIcon-container{
+        width:36px;
+        height:36px;
+    }
+
+    .painterArticle-masonry-deleteIcon-container img {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .painterArticle-masonry-functionIcon-container img{
+        width:20px;
+        height:20px;
+    }
+
+    .painterArticle-masonry-functionIcon-container span{
+        font-size: 14px;
+       
     }
 }
 
@@ -154,6 +217,9 @@
         margin-bottom: 20px;
     }
 
+    
+   
+
 }
 
 
@@ -172,18 +238,33 @@
 
     }
 
+    .painterArticle-masonry-grid-item p {
+        font-size: 12px;
+    }
+
     .painterArticle-masonry-grid {
         gap: 10px;
     }
 
 
-    .painterArticle-masonry-deleteIcon-container{
-        width:28px;
-        height:28px;
+    .painterArticle-masonry-deleteIcon-container {
+        width: 28px;
+        height: 28px;
     }
 
-    .painterArticle-masonry-deleteIcon-container img{
-        width:20px !important;
-        height:20px !important;
+    .painterArticle-masonry-deleteIcon-container img {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+
+    .painterArticle-masonry-functionIcon-container img{
+        width:16px;
+        height:16px;
+    }
+
+    .painterArticle-masonry-functionIcon-container span{
+        font-size: 12px;
+       
     }
 }

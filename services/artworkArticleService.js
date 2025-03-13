@@ -55,3 +55,30 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
     }
 
 };
+
+
+/**
+ * 刪除文章
+ */
+
+
+export const deleteArticle = async (userUid, userId, articleId)=>{
+    try{
+        // 刪除 Firestore 中的文章
+        const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
+        await deleteDoc(articleRef);
+
+        // 刪除 Storage 中的圖片
+        const exampleImageRef = ref(storage, `artworkArticle/${userId}/${articleId}/exampleImage.jpg`);
+        await deleteObject(exampleImageRef);
+
+        // 刪除 Storage 中的低解析度圖片
+        const blurredImageRef = ref(storage, `artworkArticle/${userId}/${articleId}/exampleImage_blurred.jpg`);
+        await deleteObject(blurredImageRef);
+
+        return { success: true, message: "文章刪除成功" };
+    }catch (error){
+        console.error("文章刪除失敗:", error);
+        return { success: false, message: error.message };
+    }
+};

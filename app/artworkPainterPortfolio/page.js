@@ -52,7 +52,7 @@ const ArtworkPainterPortfolioPage = () => {
 
        
        
-    }, [loading, userPortfolios]);  
+    }, [loading]);  
     
    
     
@@ -78,10 +78,13 @@ const ArtworkPainterPortfolioPage = () => {
             label: "全部作品",
             content: <div className="artworkPainterPortfolio-tab-wrapper">
                 <div className="artworkPainterPortfolio-masonryGrid-container">
-                    {!loading && userPortfolios.length === 0 ? (
+                    {isDataFetched.current && userPortfolios.length === 0 ? (
                         <p className="no-portfolio-message">目前還沒有任何作品喔 !</p>
                     ) : !loading && (
-                        <PainterPortfolioMasonryGrid images={currentImages} onMasonryReady={handleMasonryReady} isMasonryReady={isMasonryReady} />
+                        <PainterPortfolioMasonryGrid 
+                        images={currentImages} 
+                        onMasonryReady={handleMasonryReady} 
+                        isMasonryReady={isMasonryReady} />
                     )}
                 </div>
 
