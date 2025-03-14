@@ -1,0 +1,208 @@
+.ModalImageArticle-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.ModalImageArticle-content{
+    background: #fff;
+    border-radius: 10px;
+    max-width:1280px;
+    max-height:1100px;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.ModalImageArticle-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.ModalImageArticle-close{
+    width:100%;
+    max-width: 120px;
+    height: 40px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 6px;
+    border-radius: 40px;
+    background: #4A8CB9;
+}
+/*左半圖片部分*/
+.ModalImageArticle-image-section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    padding:50px 75px;
+}
+
+.ModalImageArticle-image-container{
+    margin-bottom:30px;
+    width:100%;
+    height:60%;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ModalImageArticle-image-editBtn{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:100;
+    background-color: #fff;
+    border-radius: 50%;
+    width:64px;
+    height:64px;
+    aspect-ratio: 1/1;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ModalImageArticle-image-editBtn img{
+    width: 34px !important;
+    height: 34px !important;
+    object-fit: contain;
+   
+}
+
+.ModalImageArticle-image-container img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* 低解析圖片（初始顯示） */
+.ModalImageArticle-blurImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(10px);
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+/* 低解析圖片淡出 */
+.fadeOut {
+    opacity: 0.5;
+}
+
+/* 高解析圖片初始隱藏 */
+.ModalImageArticle-highRes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+/* 高解析圖片淡入 */
+.fadeIn {
+    opacity: 1;
+}
+
+.ModalImageArticle-category-container{
+    display:flex;
+    gap:10px;
+    
+}
+
+.ModalImageArticle-category{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    padding:5px 10px;
+    border-radius: 20px;
+    border: 0.5px solid #AFAFAF;
+    color: #AFAFAF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    height: 20px;
+}
+
+
+/*右半內文、 留言板、 圖片資訊 部分*/
+.ModalImageArticle-tab-section{
+    width:100%;
+    flex:1;
+    padding: 50px 35px 30px 35px;
+}
+
+
+
+
+/*footer部分*/
+.ModalImageArticle-footer{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    padding:0px 75px;
+    margin-bottom: 25px;
+}
+
+.ModalImageArticle-left-footer{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.ModalImageArticle-right-footer{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+}
+
+
+.ModalImageArticle-footer-icons{
+    display:flex;
+    gap:2px;
+    justify-content: center;
+    align-items: center;
+    color: #919191;
+
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

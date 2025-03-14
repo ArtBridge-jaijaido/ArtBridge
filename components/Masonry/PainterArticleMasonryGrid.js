@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
+import ModalImageArticle from "@/components/ModalImage/ModalImageArticle.jsx";
 import "./PainterArticleMasonryGrid.css";
 import {deleteArticle} from '@/services/artworkArticleService.js';
 import {useDispatch} from 'react-redux';
@@ -9,14 +10,16 @@ import { useToast } from "@/app/contexts/ToastContext.js";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
 
 
+
 const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
     const [imageLoaded, setImageLoaded] = useState({});
     const [isPreloaded, setIsPreloaded] = useState(false);
     const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
-      const { setIsImageLoading } = useImageLoading();
+    const { setIsImageLoading } = useImageLoading();
     const dispatch = useDispatch();
     const { addToast } = useToast();
-   
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentData, setCurrentData] = useState(null);
 
     const breakpointColumns = {
         default: 5, // 桌機最多 5 欄
@@ -104,8 +107,28 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
         }
     };
 
+    const handleArticleClick = (article) => {
+        if (!article || !article.blurredImageUrl) return;
+
+        // 先確保 blur image 先載入
+        const img = new Image();
+        img.src = article.blurredImageUrl;
+        img.onload = () => {
+           
+            setCurrentData(article);
+            setIsModalOpen(true);
+        };
+    };
+
+    const closeModal = () =>{
+        setIsModalOpen(false);
+        setCurrentData(null);
+    }
+
+
 
     return isPreloaded ? (
+        <>
         <Masonry
             breakpointCols={breakpointColumns}
             className="painterArticle-masonry-grid"
@@ -117,6 +140,7 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                         src={image.exampleImageUrl}
                         alt={`Artwork ${index + 1}`}
                         style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
+                        onClick={() => handleArticleClick(image)}
                     />
 
                     {/* 只有當圖片載入後才顯示按鈕 */}
@@ -149,7 +173,11 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                 </div>
             ))}
         </Masonry>
+        <ModalImageArticle isOpen={isModalOpen} onClose={closeModal} data={currentData} />
+        </>
     ) : null;
+
+   
 };
 
 export default PainterArticleMasonryGrid;
