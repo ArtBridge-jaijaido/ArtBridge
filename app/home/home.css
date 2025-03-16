@@ -1,0 +1,169 @@
+
+.home-page {
+    --home-page-wave-container-margin-top: -15vh;
+    --home-page-news-and-event-container-font-size: 30px;
+    --home-page-news-and-event-container-margin-top: 10px;
+    --home-page-advertisement-container-font-size: 32px;
+    --home-page-image-slider-entrust-font-size: 40px;
+    --home-page-image-slider-entrust-letter-spacing: 6px;
+    --home-page-image-slider-register-font-size: 28px;
+}
+
+
+.home-page {
+    width: 100%;
+    padding-top: 80px;
+    position: relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+/* 宣傳圖上蓋一層黑底 */
+.home-page-promotion-image-container {
+    position: relative;
+    display: block;
+    width: 100vw;
+}
+
+.home-page-promotion-image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.home-page-promotion-image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.home-page-wave-container {
+    position: relative;
+    width: 100vw;
+    margin-top: var(--home-page-wave-container-margin-top);
+    z-index: 2;
+}
+
+.home-page-wave-container img {
+    width: 100%;
+}
+
+.home-page-news-and-event-container {
+    width: 100vw;
+    height: 300px; /* 以後應該會直接有消息或活動項目 就不用給定高度了 */
+}
+
+.home-page-news-and-event-container p {
+    text-align: center;
+    font-size: var(--home-page-news-and-event-container-font-size);
+    margin-top: var(--home-page-news-and-event-container-margin-top);
+}
+
+.home-page-advertisement-container {
+    width: 100vw;
+    height: 60vh; /* 以後應該會直接有廣告 就不用給定高度了 */
+    background-color: #EDFAFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #21426D;
+    font-size: var(--home-page-advertisement-container-font-size);
+}
+
+.home-page-image-slider-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8% 0;
+}
+
+.home-page-image-slider-entrust {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(0deg, #6EC7F7 0%, #2E80AC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 100%;
+    font-weight: 700;
+    font-size: var(--home-page-image-slider-entrust-font-size);
+    letter-spacing: var(--home-page-image-slider-entrust-letter-spacing);
+}
+
+.home-page-image-slider-register {
+    color: #8DD7FF;
+    line-height: 100%;
+    font-weight: 500;
+    font-size: var(--home-page-image-slider-register-font-size);
+    letter-spacing: 4px;
+}
+
+.home-page-image-slider-register a {
+    color: #2DAEF4;
+    text-decoration: underline solid;
+}
+
+@media screen and (max-width: 1280px){
+    .home-page {
+        --home-page-news-and-event-container-font-size: 26px;
+        --home-page-news-and-event-container-margin-top: 50px;
+        --home-page-image-slider-entrust-font-size: 36px;
+        --home-page-image-slider-register-font-size: 24px;
+    }
+
+    .home-page-image-slider-entrust img {
+        width: 44px;
+    }
+}
+
+@media screen and (max-width: 834px){
+    .home-page {
+        --home-page-image-slider-entrust-font-size: 30px;
+        --home-page-image-slider-entrust-letter-spacing: 4px;
+        --home-page-image-slider-register-font-size: 20px;
+    }
+
+    .home-page-image-slider-entrust img {
+        width: 34px;
+    }
+}
+
+@media screen and (max-width: 440px){
+    .home-page {
+        --home-page-wave-container-margin-top: -8vh;
+        --home-page-news-and-event-container-font-size: 20px;
+        --home-page-news-and-event-container-margin-top: 100px;
+        --home-page-advertisement-container-font-size: 20px;
+        --home-page-image-slider-entrust-font-size: 20px;
+        --home-page-image-slider-entrust-letter-spacing: 2px;
+        --home-page-image-slider-register-font-size: 14px;
+    }
+
+    .home-page-image-slider-entrust img {
+        width: 26px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .home-page {
+        --home-page-advertisement-container-font-size: 16px;
+        --home-page-image-slider-entrust-font-size: 18px;
+        --home-page-image-slider-register-font-size: 12px;
+    }
+
+    .home-page-image-slider-entrust img {
+        width: 24px;
+    }
+}
