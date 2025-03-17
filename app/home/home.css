@@ -1,6 +1,6 @@
 
 .home-page {
-    --home-page-wave-container-margin-top: -15vh;
+    --home-page-wave-container-margin-top: -15vw;
     --home-page-news-and-event-container-font-size: 30px;
     --home-page-news-and-event-container-margin-top: 10px;
     --home-page-advertisement-container-font-size: 32px;
@@ -142,7 +142,7 @@
 
 @media screen and (max-width: 440px){
     .home-page {
-        --home-page-wave-container-margin-top: -8vh;
+        --home-page-wave-container-margin-top: -8vw;
         --home-page-news-and-event-container-font-size: 20px;
         --home-page-news-and-event-container-margin-top: 100px;
         --home-page-advertisement-container-font-size: 20px;
