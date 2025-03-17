@@ -8,10 +8,6 @@ import Footer from '@/components/Footer/Footer';
 export default function Home() {
   const imgUrl = 'images/pngtree-anime-anime-girl-by-kyuuya-yoshito-and-her-three-friends-image_2951481-1.png';
 
-  const handleValidation = async() => {
-
-  }
-
   return (
     <div className={`home-page ${notoSansTCClass}`}>
       <div className="home-page-promotion-image-container">
