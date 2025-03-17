@@ -72,6 +72,20 @@
     overflow: hidden;
 }
 
+.ModalImageArticle-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
 .ModalImageArticle-image-editBtn{
     position:absolute;
     top:10px;
@@ -85,6 +99,7 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 
@@ -92,7 +107,7 @@
     width: 34px !important;
     height: 34px !important;
     object-fit: contain;
-   
+    cursor: pointer;
 }
 
 .ModalImageArticle-image-container img{

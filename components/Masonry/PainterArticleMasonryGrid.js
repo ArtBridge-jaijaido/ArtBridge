@@ -43,6 +43,12 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
 
 
     useEffect(() => {
+
+        if (!images || images.length === 0) return; // 確保 images 存在
+
+        // 只有當 images 數量變動時才重置 isPreloaded
+        if (isPreloaded && images.length === Object.keys(imageLoaded).length) return;
+
         setIsPreloaded(false);
         setImageLoaded({}); // 重置圖片載入狀態
        

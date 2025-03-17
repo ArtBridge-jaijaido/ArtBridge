@@ -48,21 +48,23 @@ const ArtworkShowcaseLobby = () => {
             return categoryMatch && styleMatch;
         });
 
-        setFilteredPortfolios(updatedFilteredPortfolios); // ✅ 立即更新 state
+        setFilteredPortfolios(updatedFilteredPortfolios); 
     }, [painterPortfolios, selectedOptions, currentPage]);
 
     
     useEffect(() => {
+
         
         if (!isDataFetched.current) {
+            
             setIsImageLoading(true);
             setIsMasonryReady(false);
-    
+
             const delayCheck = setTimeout(() => {
                 if (!loading) {
                    
                     if (filteredPortfolios.length === 0) {
-                      
+                        
                         setIsEmpty(true);
                        
                     } else {
@@ -70,24 +72,26 @@ const ArtworkShowcaseLobby = () => {
                         setIsEmpty(false);
                     }
                     isDataFetched.current = true; 
+                   
                 }
             }, 500);
     
             return () => clearTimeout(delayCheck);
         }
+       
 
         
-    }, [loading, filteredPortfolios]);  
+    }, [loading]);  
 
 
 
     useEffect(() => {
-     
+        
+        
         setIsImageLoading(true);
         setIsMasonryReady(false);
         isCurrentImageUpdated.current = false; // 重置狀態
-  
-
+        
         if (isDataFetched.current) { //  數據已加載，進行篩選
             if (filteredPortfolios.length === 0) {
                 setIsEmpty(true);
@@ -96,15 +100,22 @@ const ArtworkShowcaseLobby = () => {
             }
         }
 
+
+        if(isPreloaded){
+            setIsImageLoading(false);
+        }
+
         return () => {
             setIsImageLoading(false); 
         };
       
-    }, [selectedOptions,currentPage,filteredPortfolios]);
+    }, [selectedOptions,currentPage,isPreloaded]);
 
 
     // ✅ 當 Masonry 排列完成後，關閉 Loading
     const handleMasonryReady = () => {
+
+    
         setTimeout(() => {
             setIsImageLoading(false);
             setIsMasonryReady(true);

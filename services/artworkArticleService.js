@@ -1,21 +1,21 @@
-import { db, storage} from "@/lib/firebase";
-import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
+import { db, storage } from "@/lib/firebase";
+import { collectionGroup, collection, addDoc, getDoc, setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
 import { uploadImage } from "./storageService";
 import { ref, deleteObject } from "firebase/storage";
-import {createLowResImage} from "@/lib/functions";
+import { createLowResImage } from "@/lib/functions";
 
 
 /*上傳文章*/
 export const uploadArticle = async (userUid, userSerialId, formData) => {
-    try{
-        const articleId = userSerialId + "_" + Date.now().toString()+"_"+"article";
+    try {
+        const articleId = userSerialId + "_" + Date.now().toString() + "_" + "article";
 
         // 上傳文章圖片
-        let exampleImageUrl  = "";
-        let blurredImageUrl = ""; 
+        let exampleImageUrl = "";
+        let blurredImageUrl = "";
 
         if (formData.exampleImage?.file) {
-            exampleImageUrl  = await uploadImage(
+            exampleImageUrl = await uploadImage(
                 formData.exampleImage.file,
                 `artworkArticle/${userSerialId}/${articleId}/exampleImage.jpg`
             );
@@ -31,7 +31,7 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
         }
 
         // 過濾掉不支援的欄位（例如 File 物件）
-        const {exampleImage, ...filteredFormData} = formData;
+        const { exampleImage, ...filteredFormData } = formData;
 
         // 準備要存入 Firestore 的資料
         const articleData = {
@@ -49,7 +49,7 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
         await setDoc(articleRef, articleData);
         return { success: true, message: "文章上傳成功", articleId };
     }
-    catch (error){
+    catch (error) {
         console.error("文章上傳失敗:", error);
         return { success: false, message: error.message };
     }
@@ -62,8 +62,8 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
  */
 
 
-export const deleteArticle = async (userUid, userId, articleId)=>{
-    try{
+export const deleteArticle = async (userUid, userId, articleId) => {
+    try {
         // 刪除 Firestore 中的文章
         const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
         await deleteDoc(articleRef);
@@ -77,8 +77,42 @@ export const deleteArticle = async (userUid, userId, articleId)=>{
         await deleteObject(blurredImageRef);
 
         return { success: true, message: "文章刪除成功" };
-    }catch (error){
+    } catch (error) {
         console.error("文章刪除失敗:", error);
         return { success: false, message: error.message };
     }
 };
+
+
+/*
+* 更新文章圖片
+*/
+
+export const updateArticleImage = async ({ userId,articleId,userUid,file }) => {
+    try {
+        const blurredImageFile = await createLowResImage(file);
+
+        // 上傳文章圖片
+        const newExampleImageUrl = await uploadImage(file, `artworkArticle/${userId}/${articleId}/exampleImage.jpg`);
+        const newBlurredImageUrl = await uploadImage(blurredImageFile, `artworkArticle/${userId}/${articleId}/exampleImage_blurred.jpg`);
+
+        console.log("newExampleImageUrl", newExampleImageUrl);
+        console.log("newBlurredImageUrl", newBlurredImageUrl);
+
+        // 更新 Firebase 中的文章資料
+        const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
+        await updateDoc(articleRef, {
+
+            exampleImageUrl: newExampleImageUrl,
+            blurredImageUrl: newBlurredImageUrl,
+        });
+       
+        return { success: true, exampleImageUrl: newExampleImageUrl, blurredImageUrl: newBlurredImageUrl };
+    }
+    catch (error) {
+        console.error("更新文章圖片失敗:", error);
+        return { success: false, message: error.message };
+    }
+};
+
+

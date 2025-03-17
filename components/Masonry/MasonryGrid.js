@@ -33,9 +33,9 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
 
   useEffect(() => {
+
     setIsPreloaded(false);
     setImageLoaded({}); // 重置圖片載入狀態
-    
 
     let loadedCount = 0;
     images.forEach((image) => {
