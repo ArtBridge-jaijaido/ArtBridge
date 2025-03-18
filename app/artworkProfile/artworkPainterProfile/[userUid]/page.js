@@ -11,6 +11,7 @@ import ArtworkPainterMasonryGrid from "@/components/ArtworkPainterMasonryGrid/Ar
 import ArtworkReview from "@/components/ArtworkReview/ArtworkReview.jsx"; 
 import ArtworkCard from "@/components/ArtworkCard/ArtworkCard.jsx";
 import {useImageLoading} from "@/app/contexts/ImageLoadingContext.js";
+import { fetchPainterPortfolios } from '@/lib/painterPortfolioListener.js';
 import "./artworkPainterProfile.css";
 
 
@@ -84,7 +85,9 @@ const ArtworkPainterProfilePage = () => {
             });
         }, [backgroundImage, profileImage]);
         
-      
+        useEffect(() =>{
+            fetchPainterPortfolios();
+        },[])
 
         const tabs = [
             {
