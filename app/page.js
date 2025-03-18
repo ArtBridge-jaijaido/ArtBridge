@@ -27,7 +27,7 @@ export default function Home() {
           委託最高人氣繪師<img src="images/fire-icon.png" alt="fire"/>
         </p>
         <p className="home-page-image-slider-register">
-          多種風格任你挑選，<Link href="/register" className="login-highlight-blue">立即註冊</Link>
+          多種風格任你挑選，<Link href="/register">立即註冊</Link>
         </p>
         <HomeImageSlider></HomeImageSlider>
       </div>
