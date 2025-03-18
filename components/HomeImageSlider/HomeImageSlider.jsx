@@ -36,15 +36,15 @@ const HomeImageSlider = () => {
 
   const setCurrentState = (direction) => {
     setTimeout(() => {
-      if (direction === 'next') setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      if (direction === 'previous') setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       else  setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
     }, 300);
 };
 
   return (
     <div className="home-image-slider">
-      <button className="home-image-slider-controls left" onClick={() => setCurrentState('next')}>
-        <img src="images/previous-icon.png"></img>
+      <button className="home-image-slider-controls home-image-slider-controls-left" onClick={() => setCurrentState('previous')}>
+        <img src="images/previous-icon.png" alt="previous-icon"></img>
       </button>
       <div className="home-image-slider-container">
         {images.map((src, index) => {
@@ -59,7 +59,7 @@ const HomeImageSlider = () => {
           return (
             <div
               key={index}
-              className="gallery-item-container"
+              className="home-image-slider-gallery-item-container"
               style={{
                 position: 'absolute',
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) scale(${scale})`,
@@ -71,18 +71,18 @@ const HomeImageSlider = () => {
               <img 
                 src={src} 
                 alt={`Image_${index}`} 
-                className="gallery-item"
+                className="home-image-slider-gallery-item"
                 style={{width: `${responsiveImageWidth}px`}}
               />
-              <span className="gallery-item-painter">
+              <span className="home-image-slider-gallery-item-painter">
                 繪師名稱
               </span>
             </div>
           );
         })}
       </div>
-      <button className="home-image-slider-controls right" onClick={() => setCurrentState('previous')}>
-        <img src="images/next-icon.png"></img>
+      <button className="home-image-slider-controls home-image-slider-controls-right" onClick={() => setCurrentState('next')}>
+        <img src="images/next-icon.png" alt="next-icon"></img>
       </button>
     </div>
   );
