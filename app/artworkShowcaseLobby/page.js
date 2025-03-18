@@ -7,6 +7,7 @@ import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx';
 import MasonryGrid from '@/components/Masonry/MasonryGrid.js';
 import Pagination from '@/components/Pagination/Pagination.jsx';
 import {useImageLoading} from "@/app/contexts/ImageLoadingContext.js";
+import { fetchPainterPortfolios } from '@/lib/painterPortfolioListener.js';
 import { useSelector } from "react-redux";
 import "./artworkShowcaseLobby.css";
 
@@ -32,8 +33,15 @@ const ArtworkShowcaseLobby = () => {
     const [filteredPortfolios, setFilteredPortfolios] = useState([]);
     const [latestImages, setLatestImages] = useState([]);
 
-    // 🟢 **篩選符合類別的作品**
+   useEffect(()=>{
+    fetchPainterPortfolios(); // 取得作品集 
+   },[selectedOptions, currentPage])
+
+   
+
+    //  **篩選符合類別的作品**
     useEffect(() => {
+       
         const updatedFilteredPortfolios = painterPortfolios.filter(portfolio => {
             // 類別篩選
             const categoryMatch = selectedOptions.category === "類別選擇" || selectedOptions.category === "全部"
@@ -49,62 +57,24 @@ const ArtworkShowcaseLobby = () => {
         });
 
         setFilteredPortfolios(updatedFilteredPortfolios); 
+   
     }, [painterPortfolios, selectedOptions, currentPage]);
 
     
-    useEffect(() => {
-
-        
-        if (!isDataFetched.current) {
-            
-            setIsImageLoading(true);
-            setIsMasonryReady(false);
-
-            const delayCheck = setTimeout(() => {
-                if (!loading) {
-                   
-                    if (filteredPortfolios.length === 0) {
-                        
-                        setIsEmpty(true);
-                       
-                    } else {
-                       
-                        setIsEmpty(false);
-                    }
-                    isDataFetched.current = true; 
-                   
-                }
-            }, 500);
-    
-            return () => clearTimeout(delayCheck);
-        }
-       
-
-        
-    }, [loading]);  
-
-
 
     useEffect(() => {
-        
-        
+
         setIsImageLoading(true);
         setIsMasonryReady(false);
         isCurrentImageUpdated.current = false; // 重置狀態
-        
-        if (isDataFetched.current) { //  數據已加載，進行篩選
-            if (filteredPortfolios.length === 0) {
-                setIsEmpty(true);
-            } else {
-                setIsEmpty(false);
-            }
-        }
+        isDataFetched.current = true;
 
 
         if(isPreloaded){
             setIsImageLoading(false);
         }
 
+       
         return () => {
             setIsImageLoading(false); 
         };

@@ -1,5 +1,5 @@
 import { db, storage} from "@/lib/firebase";
-import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
+import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy , Timestamp } from "firebase/firestore";
 import { uploadImage } from "./storageService";
 import { ref, deleteObject } from "firebase/storage";
 import {createLowResImage} from "@/lib/functions";
@@ -36,13 +36,13 @@ export const uploadPortfolio = async (userUid, userSerialId, formData) => {
             portfolioId: portfolioId,
             exampleImageUrl: exampleImageUrl,
             blurredImageUrl: blurredImageUrl, // 低解析度圖片
-            createdAt: serverTimestamp(),
+            createdAt: new Date().toISOString(),
         };
 
         // ✅ 寫入 Firestore
         const portfolioRef = doc(db, "artworkPortfolio", userUid, "portfolios", portfolioId);
         await setDoc(portfolioRef, portfolioData);
-        return { success: true, message: "作品上傳成功", portfolioId };
+        return { success: true, message: "作品上傳成功", portfolioData };
     }
     catch (error) {
         console.error("作品上傳失敗:", error);

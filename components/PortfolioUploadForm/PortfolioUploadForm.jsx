@@ -5,11 +5,13 @@ import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle, downloadOption } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 import { uploadPortfolio } from "@/services/artworkPortfolioService";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch  } from "react-redux";
+import { addPainterPortfolio } from "@/app/redux/feature/painterPortfolioSlice";
 
 import "./PortfolioUploadForm.css";
 
 const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
+    const dispatch = useDispatch();
     const router = useRouter();
     const { addToast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -156,8 +158,10 @@ const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
 
             //  上傳 Portfolio 到 Firebase
             const response = await uploadPortfolio(userUid, userSerialId, data);
-
+           
             if (response.success) {
+                //  Redux 更新狀態 (新增到 Redux store)
+                dispatch(addPainterPortfolio(response.portfolioData));
                 addToast("success", "作品發布成功！");
                 setTimeout(() => {
                     router.push("/artworkPainterPortfolio");
@@ -168,7 +172,7 @@ const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
                 addToast("error", "發布失敗，請稍後再試！");
             }
         } catch (error) {
-
+            console.error("作品上傳失敗:", error);
             addToast("error", "發布失敗，請稍後再試！");
         } finally {
             setIsSubmitting(false);

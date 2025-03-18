@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import "./MasonryGrid.css";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
@@ -10,7 +10,10 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
   // const [isPreloaded, setIsPreloaded] = useState(false);
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const { setIsImageLoading } = useImageLoading();
+ 
+
   const breakpointColumns = {
+
     default: 5, // 桌機最多 5 欄
     1280: 5,
     834: 4,
@@ -33,7 +36,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
 
   useEffect(() => {
-
+   
     setIsPreloaded(false);
     setImageLoaded({}); // 重置圖片載入狀態
 
@@ -50,12 +53,13 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
         if (loadedCount === images.length) {
           setIsPreloaded(true);
+       
           onMasonryReady();
          
         }
       };
     });
-  }, [images, currentBreakpoint]);
+  }, [images]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,7 +77,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     };
   }, [currentBreakpoint]);
 
-  return isPreloaded ? (
+  return (
     <Masonry
       breakpointCols={breakpointColumns}
       className="masonry-grid"
@@ -88,7 +92,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
           />
 
           {/* 只有當圖片載入後才顯示按鈕 */}
-          {isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+          {isPreloaded&&isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
             <>
               {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
               {image.download === "是" && (
@@ -107,7 +111,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
         </div>
       ))}
     </Masonry>
-  ) : null;
+  );
 };
 
 export default MasonryGrid;
