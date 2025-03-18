@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const HomeImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(0);
 
   const images = ["/images/testing-Arkwork-image.png",
     "/images/testing-Arkwork-image-1.png",
@@ -22,12 +22,11 @@ const HomeImageSlider = () => {
   ];
 
   useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
+    const handleResize = () => setScreenWidth(window.innerWidth);
 
-    handleResize();
+    handleResize(); // 初始化的時候先執行一次
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
