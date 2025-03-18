@@ -1,8 +1,10 @@
 
 .home-page {
     --home-page-wave-container-margin-top: -15vw;
+    --home-page-news-and-event-container-height: 35vw;
     --home-page-news-and-event-container-font-size: 30px;
-    --home-page-news-and-event-container-margin-top: 10px;
+    --home-page-news-and-event-container-margin-top: 8vw;
+    --home-page-advertisement-container-height: 45vw;
     --home-page-advertisement-container-font-size: 32px;
     --home-page-image-slider-entrust-font-size: 40px;
     --home-page-image-slider-entrust-letter-spacing: 6px;
@@ -61,7 +63,7 @@
 
 .home-page-news-and-event-container {
     width: 100vw;
-    height: 300px; /* 以後應該會直接有消息或活動項目 就不用給定高度了 */
+    height: var(--home-page-news-and-event-container-height); /* 以後應該會直接有消息或活動項目 就不用給定高度了 */
 }
 
 .home-page-news-and-event-container p {
@@ -72,12 +74,12 @@
 
 .home-page-advertisement-container {
     width: 100vw;
-    height: 60vh; /* 以後應該會直接有廣告 就不用給定高度了 */
     background-color: #EDFAFF;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #21426D;
+    height: var(--home-page-advertisement-container-height); /* 以後應該會直接有廣告 就不用給定高度了 */
     font-size: var(--home-page-advertisement-container-font-size);
 }
 
@@ -118,7 +120,6 @@
 @media screen and (max-width: 1280px){
     .home-page {
         --home-page-news-and-event-container-font-size: 26px;
-        --home-page-news-and-event-container-margin-top: 50px;
         --home-page-image-slider-entrust-font-size: 36px;
         --home-page-image-slider-register-font-size: 24px;
     }
@@ -130,6 +131,9 @@
 
 @media screen and (max-width: 834px){
     .home-page {
+        --home-page-news-and-event-container-height: 45vw;
+        --home-page-news-and-event-container-margin-top: 15vw;
+        --home-page-advertisement-container-height: 55vw;
         --home-page-image-slider-entrust-font-size: 30px;
         --home-page-image-slider-entrust-letter-spacing: 4px;
         --home-page-image-slider-register-font-size: 20px;
@@ -144,7 +148,8 @@
     .home-page {
         --home-page-wave-container-margin-top: -8vw;
         --home-page-news-and-event-container-font-size: 20px;
-        --home-page-news-and-event-container-margin-top: 100px;
+        --home-page-news-and-event-container-height: 50vw;
+        --home-page-advertisement-container-height: 60vw;
         --home-page-advertisement-container-font-size: 20px;
         --home-page-image-slider-entrust-font-size: 20px;
         --home-page-image-slider-entrust-letter-spacing: 2px;
@@ -158,6 +163,9 @@
 
 @media screen and (max-width: 320px){
     .home-page {
+        --home-page-news-and-event-container-height: 60vw;
+        --home-page-news-and-event-container-margin-top: 20vw;
+        --home-page-advertisement-container-height: 70vw;
         --home-page-advertisement-container-font-size: 16px;
         --home-page-image-slider-entrust-font-size: 18px;
         --home-page-image-slider-register-font-size: 12px;
