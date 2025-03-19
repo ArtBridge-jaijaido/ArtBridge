@@ -88,7 +88,7 @@ export const deleteArticle = async (userUid, userId, articleId) => {
 * 更新文章圖片
 */
 
-export const updateArticleImage = async ({ userId,articleId,userUid,file }) => {
+export const updateArticleImage = async ({ userId, articleId, userUid, file }) => {
     try {
         const blurredImageFile = await createLowResImage(file);
 
@@ -106,7 +106,7 @@ export const updateArticleImage = async ({ userId,articleId,userUid,file }) => {
             exampleImageUrl: newExampleImageUrl,
             blurredImageUrl: newBlurredImageUrl,
         });
-       
+
         return { success: true, exampleImageUrl: newExampleImageUrl, blurredImageUrl: newBlurredImageUrl };
     }
     catch (error) {
@@ -116,3 +116,22 @@ export const updateArticleImage = async ({ userId,articleId,userUid,file }) => {
 };
 
 
+/**
+ * 更新文章資料
+ */
+
+export const updateArticleData = async ({ userUid, articleId, updateData }) => {
+    try {
+        // 取得 Firestore 文章參考
+        const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
+
+        // 更新 Firestore 文件，動態更新傳入的 `updateData`
+        await updateDoc(articleRef, {
+            ...updateData,  
+        });
+        return { success: true, message: "文章資料更新成功" };
+    } catch (error) {
+        console.error("更新文章資料失敗:", error);
+        return { success: false, message: error.message };
+    }
+};

@@ -5,7 +5,7 @@ import ModelImageArticleTabs from "@/components/Tabs/ModelImageArticleTab.jsx";
 import { updatePainterArticle } from "@/app/redux/feature/painterArticleSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { updateArticleImage } from "@/services/artworkArticleService";
-import { FadeLoader } from "react-spinners"; 
+import { FadeLoader } from "react-spinners";
 
 const ModalImageArticle = ({ isOpen, onClose, data }) => {
     const dispatch = useDispatch();
@@ -23,21 +23,6 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
     const [isLowResLoaded, setIsLowResLoaded] = useState(false);
     const [showHighRes, setShowHighRes] = useState(false); // 控制高解析圖淡入
     const [newImageFile, setNewImageFile] = useState(null);
-
-    const tabs = [
-        {
-            label: "內文",
-            content: { innerContext: data?.innerContext, innerContextTitle: data?.title }
-        },
-        {
-            label: "留言板",
-            content: <div>留言板區域，顯示留言的內容。</div>,
-        },
-        {
-            label: "圖片資訊",
-            content: { imageSource: data?.imageSource || "無", imageReleaseDate: data?.createdAt, imageCateorgy: data?.selectedStyles },
-        },
-    ];
 
     useEffect(() => {
         if (!highResUrl || !lowResUrl) return;
@@ -67,7 +52,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
 
         setNewImageFile(file);
         setIsLoading(true);
-        // ✅ 呼叫 updateArticleImage 更新圖片
+        // 呼叫 updateArticleImage 更新圖片
         try {
             const updatedArticle = await updateArticleImage({
                 userId: data.userId,
@@ -77,9 +62,9 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
             });
 
             if (updatedArticle.success) {
-                // ✅ 更新 Redux 狀態 (更新 exampleImageUrl 和 blurredImageUrl)
+                // 更新 Redux 狀態 (更新 exampleImageUrl 和 blurredImageUrl)
                 dispatch(updatePainterArticle({
-                    articleId: data.articleId,  
+                    articleId: data.articleId,
                     exampleImageUrl: updatedArticle.exampleImageUrl,
                     blurredImageUrl: updatedArticle.blurredImageUrl,
                 }));
@@ -91,7 +76,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
         }
     };
 
-    
+
 
     if (!isOpen || !data) return null;
 
@@ -103,7 +88,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
                     {/* 左側圖片區域 */}
                     <div className="ModalImageArticle-image-section">
                         <div className="ModalImageArticle-image-container">
-                           {isLoading ? ( 
+                            {isLoading ? (
                                 <div className="ModalImageArticle-loader">
                                     <FadeLoader color="white" height={12} width={3} radius={5} margin={-4} />
                                     <p>圖片更新中...請稍後</p>
@@ -136,7 +121,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
                                     type="file"
                                     accept="image/*"
                                     onChange={handleImageChange}
-                                    style={{ display: "none" }} 
+                                    style={{ display: "none" }}
                                 />
                             </div>
                         </div>
@@ -148,10 +133,9 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
                         </div>
                     </div>
 
-                                  {/* 右側內容區域 */}
-                                  <div className="ModalImageArticle-tab-section">
-                        <ModelImageArticleTabs tabs={tabs} />
-
+                    {/* 右側內容區域 */}
+                    <div className="ModalImageArticle-tab-section">
+                        <ModelImageArticleTabs data={data} />
                     </div>
                 </div>
 

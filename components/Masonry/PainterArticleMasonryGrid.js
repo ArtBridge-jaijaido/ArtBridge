@@ -73,7 +73,7 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
         });
 
       
-    }, [images, currentBreakpoint]);
+    }, [images]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -140,17 +140,17 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
             className="painterArticle-masonry-grid"
             columnClassName="painterArticle-masonry-column"
         >
-            {images.map((image, index) => (
+            {images.map((image, index) => ( /*這邊的image 是 article*/
                 <div key={index} className="painterArticle-masonry-grid-item">
                     <img
-                        src={image.exampleImageUrl}
+                        src={image.exampleImageUrl} 
                         alt={`Artwork ${index + 1}`}
                         style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
                         onClick={() => handleArticleClick(image)}
                     />
 
                     {/* 只有當圖片載入後才顯示按鈕 */}
-                    {isMasonryReady && imageLoaded[image.articleId] && image.exampleImageUrl && (
+                    {isPreloaded&&isMasonryReady && imageLoaded[image.articleId] && image.exampleImageUrl && (
                         <>
                             <p className="painterArticle-masonry-article-title">{image.title}</p>
                             {/* delete 按鈕 */}

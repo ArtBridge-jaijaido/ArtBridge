@@ -1,12 +1,15 @@
 .ModelImage-article-tabs-container {
+
     width: 100%;
+    height: 100%;
 }
 
 .ModelImage-article-tabs {
     display: flex;
     border-bottom: 1px solid #ccc;
     justify-content: space-between;
-    padding: 0 150px 0px 10px;  /* 上 右 下 左 */
+    padding: 0 150px 0px 10px;
+    /* 上 右 下 左 */
 }
 
 .ModelImage-article-tab {
@@ -51,17 +54,23 @@
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
-    height:100%;
-    overflow: hidden; 
+    height: 100%;
+    overflow: hidden;
 
-    
+
 }
 
 .ModelImage-article-tab-panel {
+    width: 100%;
     animation: fadeIn 0.3s ease-in-out;
 }
 
 /*內文*/
+.ModelImage-article-tab-panel-innerContext {
+    width: 100%;
+    height: 100%;
+}
+
 .ModelImage-article-tab-panel-innerContext h1 {
     color: #565656;
     font-family: Inter;
@@ -84,11 +93,81 @@
 }
 
 
+
+.ModelImage-article-tab-innerContext-editBtn {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    cursor: pointer;
+}
+
+.ModelImage-article-tab-innerContext-container {
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+}
+
+.ModelImage-article-tab-edit-mode-container {
+    width: 100%;
+    height: 100%;
+}
+
+.ModelImage-article-tab-footer {
+    display: flex;
+    justify-content: space-between;
+    /* 讓字數計數器和按鈕區域左右對齊 */
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ModelImage-article-tab-edit-textarea {
+    width: 100%;
+    height: 80%;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ModelImage-article-tab-char-count {
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+
+}
+
+.ModelImage-article-tab-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+}
+
+.ModelImage-article-tab-cancel-btn {
+    background: #E0E0E0;
+    color: #878787;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ModelImage-article-tab-save-btn {
+    background: #2DAEF4;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 /*圖片資訊*/
 .ModelImage-article-tab-panel-imageInfo {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     color: #9F9F9F;
     font-family: "Noto Sans TC";
     font-size: 20px;
@@ -96,7 +175,173 @@
     font-weight: 500;
     line-height: 40px;
     letter-spacing: 2px;
+    overflow: auto;
 }
+
+.ModelImage-article-tab-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.ModelImage-article-tab-field input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: white;
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    color: 8C8C8C;
+}
+
+.ModelImage-article-tab-dropdowns {
+
+    max-width: 620px;
+    width: 100%;
+}
+
+.ModelImage-article-tab-dropdown-container {
+    width:100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#ModelImage-article-tab-dropdown-btn {
+    max-width: 188px;
+    background-color: #8DD7FF;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px 10px;
+    min-width: 140px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: auto;
+    text-align: center;
+    font-family: Inter;
+    font-style: normal;
+}
+
+#ModelImage-article-tab-dropdown-btn::after {
+    content: "▼";
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* 滑鼠懸停在 checkbox 上時變成手指 */
+.ModelImage-article-tab-dropdown-option input[type="checkbox"] {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+/* 輸入框樣式 */
+.ModelImage-article-tab-input-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: white;
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    color: 8C8C8C;
+}
+
+.gray-text {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: 500;
+    color: #999;
+
+}
+
+.black-text {
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: 500;
+    color: black;
+}
+
+.ModelImage-article-tab-dropdown-btn {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: "Noto Sans TC";
+    font-style: normal;
+    font-weight: 500;
+}
+
+.ModelImage-article-tab-dropdown-options {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    left: 0;
+    top: 100%;
+    min-width: max-content;
+    width: 100%;
+}
+
+.ModelImage-article-tab-dropdown-option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: #555;
+    gap: 10px;
+}
+
+.ModelImage-article-tab-dropdown-option:hover {
+    background-color: #40a4da;
+    color: white;
+}
+
+.ModelImage-article-tab-save-container{
+    margin-top:30px;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* 動畫效果 */
 @keyframes fadeIn {
@@ -109,35 +354,35 @@
     }
 }
 
-@media screen and (max-width: 1280px){
-    .ModelImage-article-tabs{
-        padding: 0 120px 0px 10px;  /* 上 右 下 左 */
+@media screen and (max-width: 1280px) {
+    .ModelImage-article-tabs {
+        padding: 0 120px 0px 10px;
+        /* 上 右 下 左 */
     }
 
     .ModelImage-article-tab {
         font-size: 18px;
     }
 
-    .ModelImage-article-tab-content {
-        height: 490px;
-    }
+
 
     .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 24px;
     }
 
-    .ModelImage-article-tab-panel-imageInfo{
+    .ModelImage-article-tab-panel-imageInfo {
         font-size: 18px;
     }
 
-    
+
 
 }
 
 
-@media screen and (max-width: 834px){
-    .ModelImage-article-tabs{
-        padding: 0 90px 0px 10px;  /* 上 右 下 左 */
+@media screen and (max-width: 834px) {
+    .ModelImage-article-tabs {
+        padding: 0 90px 0px 10px;
+        /* 上 右 下 左 */
     }
 
     .ModelImage-article-tab {
@@ -152,22 +397,22 @@
         font-size: 20px;
     }
 
-    .ModelImage-article-tab-panel-innerContext p{
+    .ModelImage-article-tab-panel-innerContext p {
         font-size: 14px;
     }
 
-    .ModelImage-article-tab-panel-imageInfo{
+    .ModelImage-article-tab-panel-imageInfo {
         font-size: 14px;
     }
 
 }
 
 
-@media screen and (max-width: 440px){
+@media screen and (max-width: 440px) {
 
 
     .ModelImage-article-tabs {
-        gap:20px;
+        gap: 20px;
     }
 
     .ModelImage-article-tab {
@@ -179,26 +424,26 @@
         height: 220px;
     }
 
-    .ModelImage-article-tab-panel-innerContext h1{
+    .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 16px;
         margin-bottom: 10px;
-        line-height:normal;
+        line-height: normal;
     }
 
 
     .ModelImage-article-tab-panel-innerContext p {
         font-size: 12px;
-        line-height: 20px; 
+        line-height: 20px;
     }
 
-    .ModelImage-article-tab-panel-imageInfo{
+    .ModelImage-article-tab-panel-imageInfo {
         font-size: 12px;
         line-height: 20px;
     }
 }
 
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 375px) {
 
 
     .ModelImage-article-tab-content {
@@ -206,19 +451,19 @@
         height: 180px;
     }
 
-    .ModelImage-article-tab-panel-innerContext h1{
+    .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 14px;
-      
+
     }
 
     .ModelImage-article-tab-panel-innerContext p {
         font-size: 9px;
-        line-height: 16px; 
+        line-height: 16px;
     }
 
-    .ModelImage-article-tab-panel-imageInfo{
+    .ModelImage-article-tab-panel-imageInfo {
         font-size: 9px;
-     
+
     }
 
 
