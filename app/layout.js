@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
 import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
@@ -12,6 +12,8 @@ import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,22 +37,62 @@ const notoSansTC = Noto_Sans_TC({
 
 
 export default function RootLayout({ children }) {
+  const [token, setToken] = useState(null);
+  const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
 
+  //  透過 API 獲取 HttpOnly Cookie 內的 token
+  const fetchToken = async () => {
+    try {
+      const response = await fetch("/api/getToken", { credentials: "include" }); // ✅ 從後端獲取 token
+      const { token } = await response.json();
+      setToken(token);
+    } catch (error) {
+      
+      setToken(null);
+    }
+  };
+
+  // 監聽 Firebase Auth 狀態變更，並確保 token 最新
   useEffect(() => {
-    const unsubscribeAuth = subscribeToAuth(); 
-    const unsubscribeArtworks = subscribeToArtworks(); 
-    const unsubscribeAllUsers = subscribeToAllUsers();
+    fetchToken(); 
+
+    const unsubscribeAuthState = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const newToken = await user.getIdToken();
+        if (!token || token !== newToken) {      
+          fetchToken(); 
+        }
+      } else {
+        setToken(null);
+      }
+    });
+
+    return () => unsubscribeAuthState();
+  }, []);
+
+  //  當 Token 變更時，重新訂閱 Firestore 監聽
+  useEffect(() => {
+    const unsubscribeAuth = subscribeToAuth();
+    const unsubscribeArtworks = subscribeToArtworks();
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
     const unsubscribePainterArticles = subscribeToPainterArticles();
-  
+
+    //  先取消舊的 Users 訂閱，然後重新訂閱
+    if (unsubscribeAllUsers) {
+      unsubscribeAllUsers();
+    }
+    const newUnsubscribeAllUsers = subscribeToAllUsers();
+    setUnsubscribeAllUsers(() => newUnsubscribeAllUsers);
+
     return () => {
-      unsubscribeAuth();        // 清除 Auth 訂閱
-      unsubscribeArtworks();    // 清除 Artworks 訂閱
-      unsubscribeAllUsers();    // 清除 Users 訂閱
-      unsubscribePainterPortfolios(); // 清除 PainterPortfolios 訂閱
-      unsubscribePainterArticles();   // 清除 PainterArticles 訂閱
+      unsubscribeAuth();
+      unsubscribeArtworks();
+      newUnsubscribeAllUsers();
+      unsubscribePainterPortfolios();
+      unsubscribePainterArticles();
     };
-  }, []);
+  }, [token]); //  當 Token 變更時，重新執行
+
 
   return (
     <html lang="en">

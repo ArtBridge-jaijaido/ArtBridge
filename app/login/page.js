@@ -46,7 +46,6 @@ const LoginPage = () => {
       const{success, data, message} = await getUserData(user.uid);
       const userEmail = user.email;
 
-      console.log("使用者資料",data);
 
       if (!data?.isEmailCodeVerified) {
         addToast("error", message || "錯誤: 請先驗證您的電子郵件再登入");

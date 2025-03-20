@@ -19,6 +19,7 @@ const ArtworkPainterProfilePage = () => {
         const {userUid} = useParams();
         const { setIsLoading } = useLoading();
         const dispatch = useDispatch();
+        const users= useSelector((state) => state.user.allUsers);
         const user = useSelector((state) => state.user.allUsers[userUid]) || {};
         const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
         const artworks = useSelector((state) => state.artwork.artworks);
@@ -36,7 +37,7 @@ const ArtworkPainterProfilePage = () => {
       
          // ** 過濾出當前使用者的 portfolio**
        const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
-
+      
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const filteredArtworks = artworks.filter((artwork) => {
@@ -58,7 +59,7 @@ const ArtworkPainterProfilePage = () => {
         
         const backgroundImage = user.painterProfileBackgroundImg ?? "/images/painter-background.png";
         const profileImage = user.profileAvatar ?? "/images/profile-avatar.png";
-
+       
         const handleMasonryReady = () => {
             setTimeout(() => {
                 setIsMasonryReady(true);
@@ -88,7 +89,7 @@ const ArtworkPainterProfilePage = () => {
         useEffect(() =>{
             fetchPainterPortfolios();
         },[])
-
+     
         const tabs = [
             {
                 label: "作品集",
@@ -163,6 +164,8 @@ const ArtworkPainterProfilePage = () => {
         ];
 
         useEffect(() => {
+
+            console.log(user.userSerialId);
             if (user?.userSerialId) {  
                 setIsUserLoaded(true);
                 setTimeout(() => setIsLoading(false), 500);
