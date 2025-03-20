@@ -88,7 +88,7 @@ const LoginPage = () => {
         },
         body: JSON.stringify({ rememberMe: formData.rememberMe }),
       });
-
+      
       const result = await response.json();
       console.log(result);
       if (response.ok) {

@@ -222,10 +222,71 @@
     justify-content: center;
     align-items: center;
     color: #919191;
-
+    
     font-family: Inter;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+.ModalImageArticle-footer-icons img{
+    width:32px;
+    height:32px;
+    aspect-ratio: 1/1;
+}
+
+
+/*RWD */
+@media screen and (max-width: 1280px){
+
+
+    .ModalImageArticle-close{
+        max-width:100px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    /*左半圖片部分*/
+    .ModalImageArticle-image-section{
+        padding:30px 20px;
+       
+    }
+
+    
+
+    .ModalImageArticle-image-editBtn{
+        width: 44px;
+        height: 44px;
+    }
+
+    .ModalImageArticle-image-editBtn img{
+        width: 24px;
+        height: 24px;
+    }
+
+
+
+
+
+    /*右半內文、 留言板、 圖片資訊 部分*/
+    .ModalImageArticle-tab-section{
+        padding: 30px 20px 30px 20px;
+    }
+
+    /*footer部分*/
+    .ModalImageArticle-footer{
+        padding:0px 20px;
+
+    }
+
+    .ModalImageArticle-footer-icons span{
+        font-size: 20px;
+    }
+
+    .ModalImageArticle-footer-icons img{
+        width:28px;
+        height:28px;
+        
+    }
 }
