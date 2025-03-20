@@ -2,7 +2,13 @@
 import { useState, useEffect } from "react";
 import "./HomeImageSlider.css"
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow } from 'swiper/modules';
+import HomeImageSliderButton from './HomeImageSliderButton/HomeImageSliderButton';
 
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
 
 const HomeImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,56 +39,48 @@ const HomeImageSlider = () => {
   const baseImageWidth = 1440; // 基準寬度，適用於大螢幕
   const responsiveImageWidth = Math.min(baseImageWidth, screenWidth * 0.3); // 根據螢幕寬度調整大小
 
-  const setCurrentState = (direction) => {
-    setTimeout(() => {
-      if (direction === 'previous') setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      else  setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    }, 300);
-};
-
   return (
     <div className="home-image-slider">
-      <button className="home-image-slider-controls home-image-slider-controls-left" onClick={() => setCurrentState('previous')}>
-        <img src="images/previous-icon.png" alt="previous-icon"></img>
-      </button>
-      <div className="home-image-slider-container">
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 400,
+          modifier: 1,
+          slideShadows: false,
+        }}
+        loop={true}
+        loopAdditionalSlides={1}
+        modules={[EffectCoverflow]}
+        onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)}
+      >
+        <HomeImageSliderButton direction="previous" />
         {images.map((src, index) => {
           const distanceFromCenter = (index - currentIndex + images.length) % images.length;
           const adjustedDistance = distanceFromCenter > images.length / 2 ? distanceFromCenter - images.length : distanceFromCenter;
-          const scale = 1 - Math.abs(adjustedDistance) * 0.2;
-          const angle = adjustedDistance * 30;
-          const translateX = Math.sin(angle * (Math.PI / 180)) * responsiveImageWidth * 1.2;
-          const translateZ = Math.max(0, 200 - Math.abs(adjustedDistance) * 100);
-          const zIndex = 10 - Math.abs(adjustedDistance); 
+          const opacity = 1 - Math.abs(adjustedDistance) * 0.2;
 
-          return (
-            <div
-              key={index}
-              className="home-image-slider-gallery-item-container"
-              style={{
-                position: 'absolute',
-                transform: `translateX(${translateX}px) translateZ(${translateZ}px) scale(${scale})`,
-                zIndex: zIndex,
-                opacity: scale,
-                transition: 'transform 0.7s',
-              }}
-            >
+          return(
+            <SwiperSlide key={index} className="home-image-slider-gallery-item-container"
+              style={{ opacity: opacity, width: `${responsiveImageWidth}px` }}>
               <img 
                 src={src} 
                 alt={`Image_${index}`} 
                 className="home-image-slider-gallery-item"
-                style={{width: `${responsiveImageWidth}px`}}
+                style={{ width: `${responsiveImageWidth}px` }}
               />
               <span className="home-image-slider-gallery-item-painter">
                 繪師名稱
               </span>
-            </div>
-          );
+            </SwiperSlide>
+          )
         })}
-      </div>
-      <button className="home-image-slider-controls home-image-slider-controls-right" onClick={() => setCurrentState('next')}>
-        <img src="images/next-icon.png" alt="next-icon"></img>
-      </button>
+        <HomeImageSliderButton direction="next" />
+      </Swiper>
     </div>
   );
 }
