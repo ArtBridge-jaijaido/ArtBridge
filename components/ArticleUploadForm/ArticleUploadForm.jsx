@@ -294,7 +294,9 @@ const ArticleUploadForm = () => {
                 </div>
 
                 <div className="ArticleUploadForm-button-group">
-                    <button className="ArticleUploadForm-prev" onClick={()=>{navigate("/artworkPainterArticle")}}>取消</button>
+                <button className="ArticleUploadForm-prev" onClick={() => navigate("/artworkPainterArticle")}>
+                    取消
+                    </button>
                     <LoadingButton  isLoading={isSubmitting} onClick={handleSubmit} loadingText={"發布中"} >發佈</LoadingButton>
                 </div>
             </div>

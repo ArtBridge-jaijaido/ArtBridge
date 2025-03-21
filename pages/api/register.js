@@ -63,11 +63,10 @@ export default async function handler(req, res) {
             console.error('Firestore query error:', error);
             return res.status(500).json({ message: 'Database query failed', error: error.message });
         }
-        console.log("確認是否有生成專屬ID");
+        
         //  生成唯一專屬ID
         const uniqueSerialId = await generateUniqueSerial();
-        console.log(uniqueSerialId);
-        console.log("確認是否有生成專屬ID");
+       
         
         // 創建新使用者
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);

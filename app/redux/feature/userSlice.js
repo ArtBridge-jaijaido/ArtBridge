@@ -19,9 +19,11 @@ const userSlice = createSlice({
             };
             state.isAuthLoading = false;
         },
+
         logoutUser: (state) => {
             state.user = null;
             state.isAuthLoading = false;
+            state.allUsers = {}; 
         },
 
         updateUser: (state, action) => {

@@ -9,12 +9,15 @@ const useAuthLoading = () => {
 
     useEffect(() => {
         let timeout;
-        
+     
         if (isAuthLoading) {
             setIsLoading(true);
+            
         } else {
             timeout = setTimeout(() => setIsLoading(false), 500);
         }
+
+        
 
         return () => clearTimeout(timeout);
     }, [isAuthLoading, setIsLoading]);

@@ -1,11 +1,12 @@
-"use client";   
-import React, { useState, useEffect, useRef} from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkPainterArticleTab from "@/components/ArtworkPainterSetTab/ArtworkPainterArticleTab.jsx";
 import { useSelector } from "react-redux";
 import PainterArticleMasonryGrid from "@/components/Masonry/PainterArticleMasonryGrid.js";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
 import "./artworkPainterArticle.css";
+
 
 const ArtworkPainterArticlePage = () => {
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(20); // 文章預設顯示數量
@@ -21,14 +22,15 @@ const ArtworkPainterArticlePage = () => {
     const [isMasonryReady, setIsMasonryReady] = useState(false);
     const masonryTotalItems = userArticles.length; // 總數
     const currentArticles = userArticles.slice(0, masonryVisibleItems);
-
     const isDataFetched = useRef(false);
-    
+
+  
     useEffect(() => {
+
         if (!isDataFetched.current) {
             setIsImageLoading(true);
             setIsMasonryReady(false);
-    
+
             const delayCheck = setTimeout(() => {
                 if (!loading) {
                     if (userArticles.length === 0) {
@@ -41,13 +43,20 @@ const ArtworkPainterArticlePage = () => {
                     isDataFetched.current = true; // ✅ 數據已加載，防止重複執行
                 }
             }, 500);
-    
+
             return () => {
+
                 clearTimeout(delayCheck);
                 setIsImageLoading(false);  // 關閉 Loading
             };
         }
-    }, [loading, userArticles]);  
+
+
+    }, [loading]);
+
+   
+
+
 
     // ✅ 當 Masonry 排列完成後，關閉 Loading
     const handleMasonryReady = () => {
@@ -63,28 +72,28 @@ const ArtworkPainterArticlePage = () => {
             content: (
                 <div className="artworkPainterArticle-tab-wrapper">
                     <div className="artworkPainterArticle-masonryGrid-container">
-                        {!loading && userArticles.length === 0 ? (
+                        {isDataFetched.current && userArticles.length === 0 ? (
                             <p className="no-article-message">目前還沒有任何文章喔 !</p>
                         ) : !loading && (
-                            <PainterArticleMasonryGrid 
-                                images={currentArticles} 
-                                onMasonryReady={handleMasonryReady} 
-                                isMasonryReady={isMasonryReady} 
+                            <PainterArticleMasonryGrid
+                                images={currentArticles}
+                                onMasonryReady={handleMasonryReady}
+                                isMasonryReady={isMasonryReady}
                             />
                         )}
                     </div>
 
                     {masonryVisibleItems < masonryTotalItems && (
-                        <button 
-                            onClick={() => setMasonryVisibleItems(prev => prev + 10)} 
+                        <button
+                            onClick={() => setMasonryVisibleItems(prev => prev + 10)}
                             className="artworkPainterArticle-show-more-button"
-                            style={{gridColumn: "span 5", marginTop: "20px"}}
+                            style={{ gridColumn: "span 5", marginTop: "20px" }}
                         >
                             顯示更多
                         </button>
                     )}
                 </div>
-            ),  
+            ),
         }
     ];
 

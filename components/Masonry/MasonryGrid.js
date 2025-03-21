@@ -1,18 +1,46 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import "./MasonryGrid.css";
+import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
 
-const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
+const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
   const [imageLoaded, setImageLoaded] = useState({});
-  const [isPreloaded, setIsPreloaded] = useState(false);
-  
+  // const [isPreloaded, setIsPreloaded] = useState(false);
+  const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
+  const { setIsImageLoading } = useImageLoading();
+ 
+
+  const breakpointColumns = {
+
+    default: 5, // 桌機最多 5 欄
+    1280: 5,
+    834: 4,
+    440: 2,
+  };
+
+  const getCurrentBreakpoint = () => {
+    const width = window.innerWidth;
+    let matchedBreakpoint = "default"; // 預設最大值
+
+    Object.keys(breakpointColumns).forEach((bp) => {
+      if (width <= parseInt(bp)) {
+        matchedBreakpoint = bp;
+      }
+    });
+
+    return matchedBreakpoint;
+  };
+
+
+
   useEffect(() => {
+   
     setIsPreloaded(false);
     setImageLoaded({}); // 重置圖片載入狀態
 
-    let loadedCount = 0; 
+    let loadedCount = 0;
     images.forEach((image) => {
       const img = new Image();
       img.src = image.exampleImageUrl;
@@ -25,21 +53,31 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
 
         if (loadedCount === images.length) {
           setIsPreloaded(true);
+       
           onMasonryReady();
+         
         }
       };
     });
   }, [images]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const newBreakpoint = getCurrentBreakpoint();
+      if (newBreakpoint !== currentBreakpoint) {
+        setCurrentBreakpoint(newBreakpoint);
+      }
+    };
 
-  const breakpointColumns = {
-    default: 5, // 桌機最多 5 欄
-    1280: 5,
-    834: 4,
-    440: 2,
-  };
+    handleResize(); // 先執行一次
+    window.addEventListener("resize", handleResize);
 
-  return isPreloaded ?  (
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [currentBreakpoint]);
+
+  return (
     <Masonry
       breakpointCols={breakpointColumns}
       className="masonry-grid"
@@ -54,7 +92,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
           />
 
           {/* 只有當圖片載入後才顯示按鈕 */}
-          {isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+          {isPreloaded&&isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
             <>
               {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
               {image.download === "是" && (
@@ -73,7 +111,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
         </div>
       ))}
     </Masonry>
-  ) : null; 
+  );
 };
 
 export default MasonryGrid;

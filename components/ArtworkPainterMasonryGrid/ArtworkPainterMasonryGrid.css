@@ -38,7 +38,8 @@
     letter-spacing: 2px;
     font-weight: 600;
     transition: all 0.3s ease;
-    max-width:120px;
+    max-width:140px;
+    height:30px;
   }
   
   .ArtworkPainter-filter-button.selected {
@@ -148,6 +149,7 @@
   .ArtworkPainter-filter-button{
     font-size: 8px;
     max-width:100px;
+    height:26px;
   }
 }
 

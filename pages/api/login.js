@@ -3,6 +3,7 @@ import { adminAuth, adminDb  } from '@/lib/firebaseAdmin';
 const cookie = require('cookie');
 
 export default async function handler(req, res) {
+    
     if (req.method === 'POST') {
         const token = req.headers.authorization?.split(' ')[1]; // 從 `Authorization` 頭部取得 token
         const { rememberMe } = req.body || {};
@@ -18,9 +19,12 @@ export default async function handler(req, res) {
             const decodedToken = await adminAuth.verifyIdToken(token); // 驗證 token
             const uid = decodedToken.uid; // 取得使用者 ID
 
+
             // 從 Firestore 中取得使用者資料
             const userRef = adminDb.collection("users").doc(uid); // 取得使用者文件參考
             const userDoc = await userRef.get(); // 取得使用者文件
+
+            
 
             // 確認文件是否存在
             if (!userDoc.exists) {
@@ -28,6 +32,7 @@ export default async function handler(req, res) {
             }
 
             const userData = userDoc.data();
+
 
             // 設置 HttpOnly Cookie，將 token 存儲在 cookie 中
             res.setHeader('Set-Cookie', cookie.serialize('token', token, {

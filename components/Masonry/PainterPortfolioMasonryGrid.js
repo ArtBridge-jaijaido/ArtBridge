@@ -94,29 +94,37 @@ const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   
   const handleDelete = async (portfolio, colIndex, imageIndex, e) => {
     e.stopPropagation(); // 防止觸發其他事件
 
-    // 🔹 刪除 Firestore & Storage 資料
-    const response = await deletePortfolio(portfolio.userUid,portfolio.userId, portfolio.portfolioId);
+    const confirmDelete = window.confirm(`確定要刪除文章「${portfolio.exampleImageName}」嗎？`);
+    if (!confirmDelete) return;
 
-    if (response.success) {
-      // ✅ Redux 更新狀態 (刪除 Redux store 內的 portfolio)
-      dispatch(deletePainterPortfolio(portfolio.portfolioId));
+    try{
+      const response = await deletePortfolio(portfolio.userUid,portfolio.userId, portfolio.portfolioId);
 
-      // ✅ 更新 UI，從狀態中移除該 portfolio
-      setColumnItems((prevColumnItems) =>
-        prevColumnItems.map((column, idx) =>
-          idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column
-        )
-      );
-
-      // 當所有圖片都刪除時 不應該顯示 imageloading
-      if (Object.keys(imageLoaded).length === 1) {
-        onMasonryReady();
+      if (response.success) {
+        // ✅ Redux 更新狀態 (刪除 Redux store 內的 portfolio)
+        dispatch(deletePainterPortfolio(portfolio.portfolioId));
+  
+        // ✅ 更新 UI，從狀態中移除該 portfolio
+        setColumnItems((prevColumnItems) =>
+          prevColumnItems.map((column, idx) =>
+            idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column
+          )
+        );
+  
+        // 當所有圖片都刪除時 不應該顯示 imageloading
+        if (Object.keys(imageLoaded).length === 1) {
+          onMasonryReady();
+        }
+  
+  
+      } else {
+        addToast("error", "刪除失敗，請稍後再試");
       }
-
-
-    } else {
+    }catch(error){
+    
       addToast("error", "刪除失敗，請稍後再試");
     }
+
   };
 
   const handleImageClick = (portfolio) => {
