@@ -32,8 +32,6 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    flex: 1;  
-   
 }
 
 
@@ -118,6 +116,7 @@
     width:100%;
     height:100%;
     object-fit: cover;
+    position:center;
     border-radius: 10px;
 }
 
@@ -253,8 +252,6 @@
        
     }
 
-    
-
     .ModalImageArticle-image-editBtn{
         width: 44px;
         height: 44px;
@@ -264,9 +261,6 @@
         width: 24px;
         height: 24px;
     }
-
-
-
 
 
     /*右半內文、 留言板、 圖片資訊 部分*/
@@ -288,5 +282,144 @@
         width:28px;
         height:28px;
         
+    }
+}
+
+
+@media screen and (max-width: 834px){
+    .ModalImageArticle-close{
+        max-width:90px;
+        height:30px;
+        font-size: 14px;
+        top: -10px;
+   
+    }
+
+     /*左半圖片部分*/
+     .ModalImageArticle-image-section{
+        padding:30px 10px;
+       
+    }
+
+    .ModalImageArticle-image-editBtn{
+        width: 36px;
+        height: 36px;
+    }
+
+    .ModalImageArticle-image-editBtn img{
+        width: 20px;
+        height: 20px;
+    }
+
+    
+    /*右半內文、 留言板、 圖片資訊 部分*/
+    .ModalImageArticle-tab-section{
+        padding: 30px 10px 30px 10px;
+    }
+
+     /*footer部分*/
+     .ModalImageArticle-footer{
+        padding:0px 10px;
+
+    }
+
+    .ModalImageArticle-footer-icons span{
+        font-size: 16px;
+    }
+
+    .ModalImageArticle-footer-icons img{
+        width:24px;
+        height:24px;
+        
+    }
+
+}
+
+
+
+@media screen and (max-width: 440px){
+
+    .ModalImageArticle-content{
+        height:80dvh;
+    }
+
+
+    .ModalImageArticle-body{
+        flex-direction: column;
+        justify-content: initial; 
+    }
+
+    .ModalImageArticle-close{
+        max-width:64px;
+        height: 20px;
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .ModalImageArticle-image-section{
+        flex:3;
+    }
+
+    .ModalImageArticle-image-section{
+        padding:20px 0px 0px 0px;
+    }
+
+    .ModalImageArticle-image-container{
+        height:200px;
+        margin-bottom:10px;
+    }
+
+    .ModalImageArticle-image-editBtn{
+        width:26px;
+        height:26px;
+      
+
+    }
+
+    .ModalImageArticle-image-editBtn img{
+        width:14px !important;
+        height:14px !important;
+    }
+
+    .ModalImageArticle-category{
+        font-size:8px;
+        height:16px;
+    }
+    
+    /*右半內文、 留言板、 圖片資訊 部分*/
+    .ModalImageArticle-tab-section{
+        flex:7;
+        padding:20px 0px 20px 0px;
+    }
+
+    /*footer部分*/
+    .ModalImageArticle-footer{
+        display:flex;
+        padding:0px 10px;
+        margin-bottom:20px;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .ModalImageArticle-left-footer{
+        flex:none;
+        justify-content:flex-start;
+        gap:8px;
+
+    }
+
+    .ModalImageArticle-right-footer{
+        flex:none;
+    }
+
+    .ModalImageArticle-footer-icons span{
+        font-size: 10px;
+    }
+
+    .ModalImageArticle-footer-icons img{
+        width:14px;
+        height:14px;
+       
     }
 }

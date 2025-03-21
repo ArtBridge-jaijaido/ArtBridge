@@ -9,7 +9,7 @@
     border-bottom: 1px solid #ccc;
     justify-content: space-between;
     padding: 0 150px 0px 10px;
-    gap:10px;
+    gap: 10px;
     /* 上 右 下 左 */
 }
 
@@ -97,9 +97,14 @@
 
 .ModelImage-article-tab-innerContext-editBtn {
     position: absolute;
-    right: 50px;
-    bottom: 50px;
+    right: 40px;
+    bottom: 40px;
     cursor: pointer;
+    width: 36px;
+    height: 36px;
+    aspect-ratio: 1/1;
+    z-index:10;
+
 }
 
 .ModelImage-article-tab-innerContext-container {
@@ -116,7 +121,6 @@
 .ModelImage-article-tab-footer {
     display: flex;
     justify-content: space-between;
-    /* 讓字數計數器和按鈕區域左右對齊 */
     align-items: center;
     width: 100%;
     margin-top: 10px;
@@ -152,6 +156,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .ModelImage-article-tab-save-btn {
@@ -161,6 +166,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 
@@ -168,27 +174,32 @@
 .ModelImage-article-tab-panel-imageInfo {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    color: #9F9F9F;
-    font-family: "Noto Sans TC";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 40px;
-    letter-spacing: 2px;
-    overflow: auto;
+    justify-content: space-between;
+    height: 70%;
+  
 }
 
 .ModelImage-article-tab-field {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
-.ModelImage-article-tab-field input{
+
+.ModelImage-article-tab-field label {
+    color: #4F4F4F;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+}
+
+.ModelImage-article-tab-field input {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 16px;
     background-color: white;
     width: 100%;
     margin-top: 5px;
@@ -198,7 +209,7 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: 1px;
-    color: 8C8C8C;
+    color: #8C8C8C;
 }
 
 .ModelImage-article-tab-dropdowns {
@@ -208,7 +219,7 @@
 }
 
 .ModelImage-article-tab-dropdown-container {
-    width:100%;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
@@ -221,10 +232,10 @@
     background-color: #8DD7FF;
     color: white;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 8px 10px;
-    min-width: 140px;
+    padding: 10px 10px;
+    min-width: 110px;
     text-align: center;
     cursor: pointer;
     border-radius: 5px;
@@ -288,20 +299,6 @@
     color: black;
 }
 
-.ModelImage-article-tab-dropdown-btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 18px;
-    background-color: white;
-    cursor: pointer;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: "Noto Sans TC";
-    font-style: normal;
-    font-weight: 500;
-}
 
 .ModelImage-article-tab-dropdown-options {
     position: absolute;
@@ -335,14 +332,16 @@
     color: white;
 }
 
-.ModelImage-article-tab-save-container{
-    margin-top:30px;
-    width:100%;
-    display:flex;
+.ModelImage-article-tab-save-container {
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.ModelImage-article-tab-save-container button{
+    font-size: 18px !important; 
+}
 
 /* 動畫效果 */
 @keyframes fadeIn {
@@ -366,16 +365,51 @@
     }
 
 
-
+    /*內文*/
     .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 24px;
     }
 
-    .ModelImage-article-tab-panel-imageInfo {
-        font-size: 18px;
+
+
+    .ModelImage-article-tab-innerContext-editBtn {
+        width: 30px;
+        height: 30px;
     }
 
+    /*圖片資訊*/
 
+    .ModelImage-article-tab-field label{
+        font-size: 16px;
+    }
+
+    .ModelImage-article-tab-field input{
+        font-size: 14px;
+    }
+
+    #ModelImage-article-tab-dropdown-btn {
+        font-size: 16px;
+        padding: 8px 8px;
+    }
+
+    #ModelImage-article-tab-dropdown-btn::after {
+        font-size: 10px;
+       
+    }
+
+    .ModelImage-article-tab-input-box{
+        font-size: 14px;
+    }
+
+    .ModelImage-article-tab-dropdown-option{
+        font-size: 14px;
+    }
+
+    .ModelImage-article-tab-save-container button{
+        font-size: 16px !important;
+       
+    }
+    
 
 }
 
@@ -390,10 +424,8 @@
         font-size: 14px;
     }
 
-    .ModelImage-article-tab-content {
-        height: 460px;
-    }
-
+  
+    /*內文*/
     .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 20px;
     }
@@ -402,9 +434,75 @@
         font-size: 14px;
     }
 
+
+    .ModelImage-article-tab-innerContext-editBtn {
+        width: 20px;
+        height: 20px;
+    }
+
+    /*內文 edit area*/
+    .ModelImage-article-tab-edit-textarea {
+        font-size: 14px;
+    }
+
+
     .ModelImage-article-tab-panel-imageInfo {
         font-size: 14px;
     }
+
+    
+    .ModelImage-article-tab-char-count {
+        font-size: 12px;
+    }
+
+    .ModelImage-article-tab-cancel-btn{
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .ModelImage-article-tab-save-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+     /*圖片資訊*/
+    .ModelImage-article-tab-field label{
+        font-size: 14px;
+    }
+
+    .ModelImage-article-tab-field input{
+        font-size: 12px;
+    }
+
+    #ModelImage-article-tab-dropdown-btn{
+        font-size: 14px;
+       
+    }
+
+    #ModelImage-article-tab-dropdown-btn::after {
+        font-size: 8px;
+       
+    }
+
+    .ModelImage-article-tab-dropdown-option input[type="checkbox"] {
+      
+        width: 18px;
+        height: 18px;
+    }
+
+    .ModelImage-article-tab-input-box {
+        font-size: 12px;
+    }
+
+    .ModelImage-article-tab-dropdown-option{
+        font-size: 12px;
+    }
+
+    .ModelImage-article-tab-save-container button{
+        font-size: 14px !important;
+       
+    }
+
 
 }
 
@@ -422,8 +520,23 @@
 
     .ModelImage-article-tab-content {
         padding: 10px 0px;
-        height: 220px;
+        height:100%;
+        
     }
+
+    .ModelImage-article-tab-panel-innerContext{
+        height:200px;
+        
+    }
+
+    .ModelImage-article-tab-innerContext-container{
+        height:80%;
+        flex-grow: 1;
+        overflow: auto;
+    }
+
+  
+   
 
     .ModelImage-article-tab-panel-innerContext h1 {
         font-size: 16px;
@@ -433,39 +546,107 @@
 
 
     .ModelImage-article-tab-panel-innerContext p {
-        font-size: 12px;
+        font-size: 11px;
         line-height: 20px;
     }
 
+    .ModelImage-article-tab-footer {
+        margin-top:2px;
+    }
+
+    .ModelImage-article-tab-edit-textarea {
+        height: 70%;
+        font-size: 11px;
+    }
+
+    .ModelImage-article-tab-char-count {
+        font-size: 10px;
+     
+    
+    }
+
+    .ModelImage-article-tab-cancel-btn{
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+
+    .ModelImage-article-tab-save-btn {
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+
+    .ModelImage-article-tab-innerContext-editBtn{
+        width:18px;
+        height:18px;
+        right:10;
+        bottom:10px;
+       
+    }
+
+    .ModelImage-article-tab-innerContext-container{
+        height:100%;
+    }
+
+    
+    /*圖片資訊*/    
     .ModelImage-article-tab-panel-imageInfo {
+        height: 100%;
+        gap:10px;
+        overflow: auto;
+    }
+
+    .ModelImage-article-tab-field {
+        margin-top: 10px;
+    }
+
+    .ModelImage-article-tab-field label{
         font-size: 12px;
-        line-height: 20px;
+    }
+
+    .ModelImage-article-tab-field input {
+        font-size: 12px;
+        height:24px;
+    }
+
+    #ModelImage-article-tab-dropdown-btn {
+        width:80px;
+        font-size: 12px;
+        padding: 6px 6px;
+        height:24px;
+    }
+
+    #ModelImage-article-tab-dropdown-btn::after {
+        font-size: 8px;
+    }
+
+    .ModelImage-article-tab-dropdown-option input[type="checkbox"] {
+     
+        width: 12px;
+        height: 12px;
+    }
+
+    .ModelImage-article-tab-input-box {
+        font-size: 12px;
+        padding: 6px;
+        height:24px;
+    }
+
+    .ModelImage-article-tab-save-container{
+        margin-bottom:20px;
+    }
+
+    .ModelImage-article-tab-save-container button{
+        font-size: 12px !important; 
+        width: 50px !important;
+        height: 22px !important;
+        
     }
 }
 
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 370px) {
 
 
-    .ModelImage-article-tab-content {
-        padding: 10px 0px;
-        height: 180px;
-    }
-
-    .ModelImage-article-tab-panel-innerContext h1 {
-        font-size: 14px;
-
-    }
-
-    .ModelImage-article-tab-panel-innerContext p {
-        font-size: 9px;
-        line-height: 16px;
-    }
-
-    .ModelImage-article-tab-panel-imageInfo {
-        font-size: 9px;
-
-    }
 
 
 }

@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
   //  透過 API 獲取 HttpOnly Cookie 內的 token
   const fetchToken = async () => {
     try {
-      const response = await fetch("/api/getToken", { credentials: "include" }); // ✅ 從後端獲取 token
+      const response = await fetch("/api/getToken", { credentials: "include" }); //  從後端獲取 token
       const { token } = await response.json();
       setToken(token);
     } catch (error) {

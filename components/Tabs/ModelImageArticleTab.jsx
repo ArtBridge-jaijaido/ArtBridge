@@ -211,7 +211,7 @@ const ModelImageArticleTabs = ({ data }) => {
                           <textarea
                             value={editedText}
                             onChange={(e) => setEditedText(e.target.value)}
-                            maxLength={250}
+                            maxLength={1000}
                             className="ModelImage-article-tab-edit-textarea"
                           />
 
