@@ -1,0 +1,193 @@
+
+.footer {
+    --footer-height: 220px;
+
+    --footer-logo-position: 80px;
+
+    --footer-about-us-padding-x: 60px;
+
+    --footer-about-us-button-container-width: 75%;
+    --footer-about-us-button-container-padding-x: 80px;
+    --footer-about-us-button-margin-top: 50px;
+    
+    --footer-about-us-link-width: 130px;
+    --footer-about-us-link-font-size: 24px;
+
+    --footer-about-us-social-media-container-width: 25%;
+    --footer-about-us-social-media-container-padding-x: 70px;
+    --footer-about-us-social-media-icon-margin-top: 55px;
+    --footer-about-us-social-media-mail-margin-top: 15px;
+    --footer-about-us-social-media-mail-font-size: 20px;
+    --footer-about-us-social-media-link-width: 48px;
+
+    --footer-copyright-font-size: 18px;
+    --footer-copyright-margin-top: 30px;
+    --footer-copyright-margin-left: 155px;   
+}
+
+.footer {
+    background-color: #F8F9F9;
+    box-shadow: 0px -4px 4px 0px #A5A5A540;
+    width: 100vw;
+    height: var(--footer-height);
+    color: #767676;
+    font-weight: 400;
+    line-height: 100%;
+}
+
+.footer-logo {
+    position: absolute;
+    bottom: calc(var(--footer-height) - var(--footer-logo-position));
+}
+
+.footer-about-us {
+    display: flex;
+    padding: 0 var(--footer-about-us-padding-x);
+}
+
+.footer-about-us-button-container {
+    width: var(--footer-about-us-button-container-width);
+    padding: 0 var(--footer-about-us-button-container-padding-x);
+}
+
+.footer-about-us-button-top, .footer-about-us-button-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--footer-about-us-button-margin-top);
+}
+
+.footer-about-us-social-media-container {
+    width: var(--footer-about-us-social-media-container-width);
+    padding: 0 var(--footer-about-us-social-media-container-padding-x);
+}
+
+.footer-about-us-social-media-icon {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--footer-about-us-social-media-icon-margin-top);
+}
+
+.footer-about-us-social-media-mail {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--footer-about-us-social-media-mail-margin-top);
+    font-size: var(--footer-about-us-social-media-mail-font-size);
+}
+
+.footer-copyright {
+    margin-top: var(--footer-copyright-margin-top);
+    margin-left: var(--footer-copyright-margin-left);
+    font-size: var(--footer-copyright-font-size);
+}
+
+.footer-about-us-link {
+    display: flex;
+    justify-content: center;
+    line-height: 100%;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: var(--footer-about-us-link-width);
+    font-size: var(--footer-about-us-link-font-size);
+}
+
+.footer-about-us-social-media-link {
+    cursor: pointer;
+    width: var(--footer-about-us-social-media-link-width);
+}
+
+
+@media screen and (max-width: 1280px){
+    .footer {
+        --footer-height: 200px;
+        --footer-logo-position: 45px;
+        --footer-about-us-button-container-width: 70%;
+        --footer-about-us-button-margin-top: 40px;
+        --footer-about-us-link-width: 110px;
+        --footer-about-us-link-font-size: 20px;
+        --footer-about-us-social-media-container-padding-x: 80px;
+        --footer-about-us-social-media-container-width: 30%;
+        --footer-about-us-social-media-icon-margin-top: 45px;
+        --footer-about-us-social-media-mail-font-size: 16px;
+        --footer-about-us-social-media-link-width: 40px;
+        --footer-copyright-font-size: 16px;
+        --footer-copyright-margin-left: 150px;
+    }
+
+    .footer-logo {
+        width: 112px;
+    }
+}
+
+@media screen and (max-width: 834px){
+    .footer {
+        --footer-height: 180px;
+        --footer-logo-position: 35px;
+        --footer-about-us-padding-x: 15px;
+        --footer-about-us-button-container-width: 70%;
+        --footer-about-us-button-container-padding-x: 20px;
+        --footer-about-us-link-width: 100px;
+        --footer-about-us-link-font-size: 18px;
+        --footer-about-us-social-media-container-width: 30%;
+        --footer-about-us-social-media-container-padding-x: 60px;
+        --footer-about-us-social-media-mail-font-size: 16px;
+        --footer-about-us-social-media-link-width: 32px;
+        --footer-copyright-font-size: 14px;
+        --footer-copyright-margin-left: 45px;
+    }
+
+    .footer-logo {
+        width: 90px;
+    }
+}
+
+@media screen and (max-width: 440px){
+    .footer {
+        --footer-height: 130px;
+        --footer-logo-position: 25px;
+        --footer-about-us-padding-x: 0px;
+        --footer-about-us-button-margin-top: 30px;
+        --footer-about-us-button-container-width: 70%;
+        --footer-about-us-button-container-padding-x: 20px;
+        --footer-about-us-link-width: 70px;
+        --footer-about-us-link-font-size: 12px;
+        --footer-about-us-social-media-container-width: 30%;
+        --footer-about-us-social-media-container-padding-x: 15px;
+        --footer-about-us-social-media-icon-margin-top: 35px;
+        --footer-about-us-social-media-mail-font-size: 10px;
+        --footer-about-us-social-media-mail-margin-top: 5px;
+        --footer-about-us-social-media-link-width: 24px;
+        --footer-copyright-font-size: 10px;
+        --footer-copyright-margin-left: 27px;
+        --footer-copyright-margin-top: 20px;
+    }
+
+    .footer-logo {
+        width: 62px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .footer {
+        --footer-height: 110px;
+        --footer-logo-position: 20px;
+        --footer-about-us-padding-x: 0px;
+        --footer-about-us-button-container-width: 70%;
+        --footer-about-us-button-container-padding-x: 20px;
+        --footer-about-us-button-margin-top: 30px;
+        --footer-about-us-link-width: 60px;
+        --footer-about-us-link-font-size: 10px;
+        --footer-about-us-social-media-container-width: 30%;
+        --footer-about-us-social-media-container-padding-x: 15px;
+        --footer-about-us-social-media-icon-margin-top: 35px;
+        --footer-about-us-social-media-mail-font-size: 8px;
+        --footer-about-us-social-media-link-width: 20px;
+        --footer-about-us-social-media-mail-margin-top: 5px;
+        --footer-copyright-font-size: 8px;
+        --footer-copyright-margin-left: 27px;
+        --footer-copyright-margin-top: 20px;
+    }
+
+    .footer-logo {
+        width: 42px;
+    }
+}
