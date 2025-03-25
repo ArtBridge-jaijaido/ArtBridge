@@ -37,7 +37,7 @@ const Tabs = ({ tabs}) => {
                 );
               case "留言板":
                 return (
-                  <div key={tab.label} className="tab-panel">
+                  <div key={tab.label} className="tab-panel tab-pannel-commentBoard">
                     {tab.content}
                   </div>
                 );
@@ -47,14 +47,15 @@ const Tabs = ({ tabs}) => {
                     <span>圖片出處: {tab.content.imageSource}</span>
                     <span>文章發布日期: {tab.content.imageReleaseDate}</span>
                     <div>
-                      分類: 
-                      {tab.content.imageCateorgy.map((category, index) => (
+                      風格: 
+                      {tab.content.imageStyles.map((style, index) => (
                         <span key={index}>
-                          {category}
-                          {index !== tab.content.imageCateorgy.length - 1 && "、"}
+                          {style}
+                          {index !== tab.content.imageStyles.length - 1 && "、"}
                         </span>
                       ))}
                     </div>
+                    <span>類別: {tab.content.imageCategory}</span>
                   </div>
                 );
                 default:

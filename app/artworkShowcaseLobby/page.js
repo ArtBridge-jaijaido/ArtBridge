@@ -201,7 +201,7 @@ const ArtworkShowcaseLobby = () => {
 
 
 
-            { isPreloaded&& filteredPortfolios.length != 0 && isMasonryReady&&<Pagination
+            { isPreloaded&&filteredPortfolios.length != 0 && isMasonryReady&&<Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

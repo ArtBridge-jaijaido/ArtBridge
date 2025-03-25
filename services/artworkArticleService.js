@@ -41,13 +41,13 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
             articleId: articleId,
             exampleImageUrl: exampleImageUrl,
             blurredImageUrl: blurredImageUrl, // 低解析度圖片
-            createdAt: serverTimestamp(),
+            createdAt: new Date().toISOString(),
         };
 
         // ✅ 寫入 Firestore
         const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
         await setDoc(articleRef, articleData);
-        return { success: true, message: "文章上傳成功", articleId };
+        return { success: true, message: "文章上傳成功", articleData};
     }
     catch (error) {
         console.error("文章上傳失敗:", error);
@@ -96,8 +96,6 @@ export const updateArticleImage = async ({ userId, articleId, userUid, file }) =
         const newExampleImageUrl = await uploadImage(file, `artworkArticle/${userId}/${articleId}/exampleImage.jpg`);
         const newBlurredImageUrl = await uploadImage(blurredImageFile, `artworkArticle/${userId}/${articleId}/exampleImage_blurred.jpg`);
 
-        console.log("newExampleImageUrl", newExampleImageUrl);
-        console.log("newBlurredImageUrl", newBlurredImageUrl);
 
         // 更新 Firebase 中的文章資料
         const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);

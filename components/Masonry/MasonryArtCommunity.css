@@ -1,19 +1,38 @@
 .MasonryArtCommunity-grid {
   display: flex;
-  gap: 25px;
+  gap:30px;
+  align-items: flex-start;
 }
 
 .MasonryArtCommunity-grid-column {
-  display: flex;
-  flex-direction: column;
+  background-clip: padding-box;
+  width: 100%;
+}
+
+/* 預設 5 欄，每個 column 設定不同寬度 */
+.MasonryArtCommunity-grid-column:nth-child(1) {
+  width: 256px !important;
+}
+.MasonryArtCommunity-grid-column:nth-child(2) {
+  width: 206px !important;
+}
+.MasonryArtCommunity-grid-column:nth-child(3) {
+  width: 317px !important;
+}
+.MasonryArtCommunity-grid-column:nth-child(4) {
+  width: 236px !important;
+}
+.MasonryArtCommunity-grid-column:nth-child(5) {
+  width: 190px !important;
 }
 
 .MasonryArtCommunity-grid-item {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  margin-bottom: 30px;
+  width:100%;
+  position:relative;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  min-width: 140px;
 
 }
 
@@ -22,6 +41,10 @@
 .MasonryArtCommunity-grid-item-image {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  width: 100%;
+    height: 100%;
+    border-radius: 10px; 
+    object-fit: cover;
 }
 
 .MasonryArtCommunity-grid-item-image:hover {
@@ -51,12 +74,14 @@
   align-items: center;
 }
 
-.MasonryArtCommunity-content-container img {
+.MasonryArtCommunity-artistInfo-container img  {
   width: 24px;
   height: 24px;
-  object-fit: contain;
+  overflow: hidden;
   border-radius: 50%;
 }
+
+
 
 .MasonryArtCommunity-artistName {
   color: #7D7D7D;
@@ -97,7 +122,28 @@
 /*RWD*/
 @media screen and (max-width:1280px) {
   .MasonryArtCommunity-grid {
-    gap: 20px;
+    gap: 10px;
+  }
+
+  .MasonryArtCommunity-grid-column:nth-child(1) {
+    width:100% !important;
+    max-width: 210px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(2) {
+    width:100% !important;
+    max-width: 206px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(3) {
+    width:100%  !important;
+    max-width: 261px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(4) {
+    width:100% !important;
+    max-width: 190px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(5) {
+    width:100% !important;
+    max-width: 190px !important;
   }
 
   .MasonryArtCommunity-artwork-title {
@@ -129,7 +175,20 @@
 @media screen and (max-width:834px) {
 
   .MasonryArtCommunity-grid {
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .MasonryArtCommunity-grid-column:nth-child(1) {
+    max-width: 180px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(2) {
+    max-width: 180px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(3) {
+    max-width: 200px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(4) {
+    max-width: 160px !important;
   }
 
   .MasonryArtCommunity-grid-item {
@@ -162,12 +221,21 @@
 
 @media screen and (max-width:440px) {
   .MasonryArtCommunity-grid {
-    gap: 20px;
+    gap: 10px;
   }
 
-  .MasonryArtCommunity-grid-item {
+  .MasonryArtCommunity-grid-column:nth-child(1) {
+    max-width: 170px !important;
+  }
+  .MasonryArtCommunity-grid-column:nth-child(2) {
+    max-width: 190px !important;
+  }
+
+  .MasonryArtCommunity-grid-item{
+    min-width:auto;
     gap:8px;
   }
+
 
   .MasonryArtCommunity-artwork-title {
     font-size: 11px;

@@ -2,10 +2,16 @@
 import React from 'react'
 import "./ModalImgArtCommunity.css";
 import Tabs from '@/components/Tabs/Tab.jsx';
+import ArticleComment from '@/components/ArticleComments/ArticleComments.jsx';
+import { useSelector } from 'react-redux';
 
 const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
 
-  if (!isOpen || !data) return null;
+  const currentUser = useSelector((state) => state.user.user);
+
+  if (!isOpen || !data || !currentUser ) return null;
+
+
 
   const tabs = [
     {
@@ -15,11 +21,17 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
     },
     {
       label: "留言板",
-      content: <div>留言板區域，顯示留言的內容。</div>,
+      content: data?.articleId && data?.userUid && currentUser ? (
+        <ArticleComment
+          articleId={data.articleId}
+          userUid={data.userUid}
+          currentUser={currentUser}
+        />
+      ) : <p>留言板載入中...</p>,
     },
     {
       label: "圖片資訊",
-      content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageCateorgy: data.imageCateorgy },
+      content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageStyles: data.imageStyles, imageCategory: data.imageCategory },
     },
   ];
 
@@ -50,14 +62,11 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
               <img src={data.src} alt="Artwork" />
             </div>
 
-            <div className="ModalImgArtCommunity-category-container">
-              {data.imageCateorgy.map((category, index) => (
-                <span key={index} className="ModalImgArtCommunity-category">{category}</span>
+            <div className="ModalImgArtCommunity-styles-container">
+              {data.imageStyles.map((style, index) => (
+                <span key={index} className="ModalImgArtCommunity-styles">{style}</span>
               ))}
             </div>
-
-          
-
           </div>
 
           {/* 右側選擇欄 */}
