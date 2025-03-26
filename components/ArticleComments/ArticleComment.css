@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 16px;
-    overflow-y: auto;
+    padding: 0px 10px 0px 10px;
     font-family: "Noto Sans TC", sans-serif;
    
   }
@@ -12,13 +11,13 @@
     flex: 1;
     overflow: auto;
     scrollbar-width: none;
-    padding-bottom: 12px;
-    max-height:90%;
+    min-height:160px;
+    max-height:92%;
   }
   
   .ArticleComment-item {
     border-bottom: 1px solid #eee;
-    padding: 16px 0;
+    padding: 12px 0;
   }
   
   .ArticleComment-header {
@@ -68,27 +67,27 @@
   
   .ArticleComment-actions span {
     font-size: 14px;
-    color: #f44336; /* 紅色愛心 */
+    color: #919191;
     font-weight: bold;
   }
   
   .ArticleComment-content {
     margin-top: 8px;
     font-size: 14px;
-    color: #444;
+    color: #919191;
     word-wrap: break-word;
   }
   
   .ArticleComment-inputArea {
     width:90%;
     position:absolute;
-    bottom: 10px;
+    bottom: -30px;
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 28px;
     padding: 8px 16px;
-    margin-top: 12px;
+
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
   
@@ -108,7 +107,60 @@
   }
   
   .ArticleComment-inputArea img {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
   
+
+
+  @media screen and (max-width: 440px) {
+
+    .ArticleComment-item {
+      padding:6px 0px 2px 0px;
+    }
+    .ArticleComment-avatar{
+      width:24px;
+      height:24px;
+      margin-right:10px;
+    }
+
+    .ArticleComment-meta {
+      font-size: 10px;
+    }
+
+    .ArticleComment-time{
+      font-size: 6px;
+    }
+    .ArticleComment-actions {
+      gap:4px;
+    }
+
+    .ArticleComment-actions img {
+      width: 14px;
+      height: 14px;
+    }
+
+    .ArticleComment-actions span{
+      font-size: 8px;
+    }
+
+    .ArticleComment-content{
+      margin-top: 4px;
+      font-size: 9px;
+    }
+
+    .ArticleComment-inputArea{
+      padding:4px 8px;
+      bottom: -5px;
+      height:24px;
+    }
+
+    .ArticleComment-inputArea input {
+      font-size:8px;
+    }
+
+    .ArticleComment-inputArea img {
+      width: 14px;
+      height: 14px;
+    }
+  }

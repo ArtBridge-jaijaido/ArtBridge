@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
+import {getCommentCount} from "@/services/articleCommentService.js";
 import "./MasonryArtCommunity.css";
 
 const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
@@ -92,9 +93,11 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     
       let loadedCount = 0;
     
-      const checkAllLoaded = () => {
+      const checkAllLoaded = async() => {
         loadedCount++;
         if (loadedCount === 2) {
+
+          const commentCount = await getCommentCount(image.userUid, image.articleId);
           setCurrentData({
             src: exampleImageUrl,
             author: image.artistNickName || "使用者名稱",
@@ -109,7 +112,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
             innerContext: image.innerContext || "請輸入文章內文...",
             description: "這裡是圖片的描述內容，可以包含更多文本。",
             likes: 999,
-            comments: 20,
+            comments:commentCount,
             shares: 52,
           });
           setIsModalOpen(true); // ✅ 全部圖片都載入後才開

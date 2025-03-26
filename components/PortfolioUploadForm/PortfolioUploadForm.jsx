@@ -43,7 +43,6 @@ const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
             }
 
             const previewURL = URL.createObjectURL(file);
-            console.log("Preview URL:", previewURL);
 
             setExampleImage({
                 file,

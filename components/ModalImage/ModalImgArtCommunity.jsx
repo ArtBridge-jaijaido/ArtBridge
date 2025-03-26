@@ -1,16 +1,15 @@
 "use client";
-import React from 'react'
 import "./ModalImgArtCommunity.css";
 import Tabs from '@/components/Tabs/Tab.jsx';
 import ArticleComment from '@/components/ArticleComments/ArticleComments.jsx';
-import { useSelector } from 'react-redux';
 
 const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
 
-  const currentUser = useSelector((state) => state.user.user);
+  
 
-  if (!isOpen || !data || !currentUser ) return null;
+  if (!isOpen || !data  ) return null;
 
+  
 
 
   const tabs = [
@@ -21,11 +20,11 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
     },
     {
       label: "留言板",
-      content: data?.articleId && data?.userUid && currentUser ? (
+      content: data?.articleId && data?.userUid? (
         <ArticleComment
           articleId={data.articleId}
           userUid={data.userUid}
-          currentUser={currentUser}
+         
         />
       ) : <p>留言板載入中...</p>,
     },
