@@ -133,3 +133,23 @@ export const updateArticleData = async ({ userUid, articleId, updateData }) => {
         return { success: false, message: error.message };
     }
 };
+
+
+/**
+ *  確認文章是否存在
+ */
+
+/**
+ * 確認文章是否存在（簡化版）
+ */
+export const checkArticleExists = async (userUid, articleId) => {
+    try {
+      const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
+      const docSnap = await getDoc(articleRef);
+      return docSnap.exists(); // 直接回傳 true 或 false
+    } catch (error) {
+      console.error("檢查文章是否存在失敗:", error);
+      return false; // 失敗也回傳 false
+    }
+  };
+  

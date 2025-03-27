@@ -5,6 +5,7 @@ import {
   orderBy,
   addDoc,
   serverTimestamp,
+  deleteDoc,
   onSnapshot,
   arrayUnion,
   arrayRemove,
@@ -96,7 +97,7 @@ export const toggleCommentReport = async (userUid, articleId, commentId, current
 
 
 /**
- * total comments number
+ * total comments number single article
  */
 export const getCommentCount = async (userUid, articleId) => {
   if (!userUid || !articleId) return 0;
@@ -106,6 +107,26 @@ export const getCommentCount = async (userUid, articleId) => {
 
   return snapshot.data().count;
 };
+
+
+/**
+ * 取得每一篇article的留言數
+ */
+export const getAllCommentCounts = async (articles) => {
+  const results = {};
+
+  await Promise.all(
+    articles.map(async (article) => {
+      const ref = collection(db, "artworkArticle", article.userUid, "articles", article.articleId, "comments");
+      const snapshot = await getCountFromServer(ref);
+      results[article.articleId] = snapshot.data().count;
+    })
+  );
+
+  return results;
+};
+
+
 
 /**
  * 即時監聽留言、愛心狀態
@@ -144,3 +165,19 @@ export const subscribeToComments = (userUid, articleId, callback, currentUserUid
   return unsubscribe;
 };
 
+/**
+ * 刪除留言
+ */
+
+export const deleteComment = async (userUid, articleId, commentId) => {
+  if (!userUid || !articleId || !commentId) return;
+
+  try {
+    const commentRef = doc(db, "artworkArticle", userUid, "articles", articleId, "comments", commentId);
+    await deleteDoc(commentRef);
+    return { success: true };
+  } catch (error) {
+    console.error("刪除留言失敗", error);
+    return { success: false, error };
+  }
+};

@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
 import {getCommentCount} from "@/services/articleCommentService.js";
+import { checkArticleExists } from "@/services/artworkArticleService";
+import { fetchPainterArticles } from '@/lib/painterArticleListener';
+import { useToast } from "@/app/contexts/ToastContext.js";
 import "./MasonryArtCommunity.css";
 
 const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
@@ -11,6 +14,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
+  const { addToast } = useToast();
 
   const breakpointColumns = {
   
@@ -36,29 +40,41 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   
   
     useEffect(() => {
-     
       setIsPreloaded(false);
       setImageLoaded({}); // 重置圖片載入狀態
-  
+    
       let loadedCount = 0;
+      const totalImages = images.length * 2; // 每個 image 有兩張圖要載入
+    
       images.forEach((image) => {
-        const img = new Image();
-        img.src = image.exampleImageUrl;
-        
-        img.onload = () => {
+        const exampleImg = new Image();
+        const avatarImg = new Image();
+    
+        const exampleUrl = image.exampleImageUrl;
+        const avatarUrl = image.artistProfileImg || "/images/testing-artist-profile-image.png";
+    
+        // 同步更新載入狀態
+        const handleSingleLoad = () => {
           loadedCount++;
-          setImageLoaded((prev) => ({
-            ...prev,
-            [image.portfolioId]: true,
-          }));
-  
-          if (loadedCount === images.length) {
+          if (loadedCount === totalImages) {
             setIsPreloaded(true);
-         
             onMasonryReady();
-           
           }
         };
+    
+        exampleImg.onload = handleSingleLoad;
+        exampleImg.onerror = handleSingleLoad;
+        avatarImg.onload = handleSingleLoad;
+        avatarImg.onerror = handleSingleLoad;
+    
+        exampleImg.src = exampleUrl;
+        avatarImg.src = avatarUrl;
+    
+        // 一次性標記為這組圖片已進入 preload 階段（不影響 loading 判斷）
+        setImageLoaded((prev) => ({
+          ...prev,
+          [image.portfolioId]: true,
+        }));
       });
     }, [images]);
   
@@ -80,7 +96,16 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
  
   
 
-    const handleImageClick = (image) => {
+    const handleImageClick = async (image) => {
+
+      const articleExist= await checkArticleExists(image.userUid, image.articleId);
+      if (!articleExist) {
+        addToast("error", "sorry 該文章已被原作者刪除");
+        fetchPainterArticles();
+        return;
+      }
+
+
       // ✅ 先重置
       setIsModalOpen(false);
       setCurrentData(null);
