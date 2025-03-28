@@ -8,6 +8,8 @@ import { checkArticleExists } from "@/services/artworkArticleService";
 import { fetchPainterArticles } from '@/lib/painterArticleListener';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import "./MasonryArtCommunity.css";
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 
 const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
   const [imageLoaded, setImageLoaded] = useState({});
@@ -15,6 +17,8 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
   const { addToast } = useToast();
+  const navigate = useNavigation();
+  const { setIsLoading } = useLoading();
 
   const breakpointColumns = {
   
@@ -99,6 +103,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     const handleImageClick = async (image) => {
 
       const articleExist= await checkArticleExists(image.userUid, image.articleId);
+      
       if (!articleExist) {
         addToast("error", "sorry 該文章已被原作者刪除");
         fetchPainterArticles();
@@ -157,7 +162,12 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     setCurrentData(null); 
   };
 
-
+  const handleHeadingToProfile = (e,userUid) => {
+    e.stopPropagation();
+    navigate(`/artworkProfile/artworkPainterProfile/${userUid}`);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+  }
 
   return (
     <>
@@ -185,7 +195,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
             <div className="MasonryArtCommunity-content-container">
               <div className="MasonryArtCommunity-artistInfo-container">
                 
-                <img src={image.artistProfileImg || "/images/testing-artist-profile-image.png"} alt="artistAvatar" />
+                <img src={image.artistProfileImg || "/images/testing-artist-profile-image.png"} alt="artistAvatar"   onClick={(e) => handleHeadingToProfile(e, image.userUid)} />
                 <span className="MasonryArtCommunity-artistName">{image.artistNickName || "使用者名稱"}</span>
               </div>
               <div className="MasonryArtCommunity-likesIcon-container">

@@ -14,7 +14,7 @@ const ArticleComment = ({ userUid, articleId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const { addToast } = useToast();
-
+  const allUsers = useSelector((state) => state.user.allUsers);
   const [isCommentsFetched, setIsCommentsFetched] = useState(false);
   const [isAllAvatarsLoaded, setIsAllAvatarsLoaded] = useState(false);
 
@@ -106,14 +106,9 @@ const ArticleComment = ({ userUid, articleId }) => {
 
     if (!newComment.trim()) return;
 
-    const avatarUrl = currentUser.profileAvatar || "/images/kv-min-4.png";
-    const avatarImage = new Image();
-    avatarImage.src = avatarUrl;
 
     await addComment(userUid, articleId, {
       content: newComment,
-      nickname: currentUser.nickname || "匿名使用者",
-      avatar: avatarUrl,
       userUid: currentUser.uid,
     });
 
@@ -130,53 +125,41 @@ const ArticleComment = ({ userUid, articleId }) => {
   return (
     <div className="ArticleComment-section">
       <div className="ArticleComment-list">
-        {comments.map((comment) => (
-          <div key={comment.id} className="ArticleComment-item">
-            <div className="ArticleComment-header">
-              <img
-                src={comment.avatar}
-                alt="user-avatar"
-                className="ArticleComment-avatar"
-              />
-              <div className="ArticleComment-meta">
-                <span className="ArticleComment-nickname">{comment.nickname}</span>
-                <span className="ArticleComment-time">
-                  {formatTime(comment.createdAt)}
-                </span>
-              </div>
-              <div className="ArticleComment-actions">
+        {comments.map((comment) => {
+          const user = allUsers[comment.userUid];
+          return (
+            <div key={comment.id} className="ArticleComment-item">
+              <div className="ArticleComment-header">
                 <img
-                  src={
-                    comment.isLikedByCurrentUser
-                      ? "/images/icons8-love-48-1.png"
-                      : "/images/icons8-love-96-13-1.png"
-                  }
-                  alt="like"
-                  onClick={() => handleLikeClick(comment.id)}
+                  src={user?.profileAvatar || "/images/kv-min-4.png"}
+                  alt="user-avatar"
+                  className="ArticleComment-avatar"
                 />
-                <span>{comment.likes || 0}</span>
-                {isArticleOwner && (
-                  <button
-                    className="ArticleComment-deleteBtn"
-                    onClick={() => handleDeleteClick(comment.id)}
-                  >
-                    刪除
-                  </button>
-                )}
-                <img
-                  src={
-                    comment.isReportedByCurrentUser
-                      ? "/images/exclamation-icon.png"
-                      : "/images/icons8-exclamation-mark-64-3.png"
-                  }
-                  alt="report"
-                  onClick={() => handleReportClick(comment.id)}
-                />
+                <div className="ArticleComment-meta">
+                  <span className="ArticleComment-nickname">{user?.nickname || "使用者名稱"}</span>
+                  <span className="ArticleComment-time">{formatTime(comment.createdAt)}</span>
+                </div>
+                <div className="ArticleComment-actions">
+                  <img
+                    src={comment.isLikedByCurrentUser ? "/images/icons8-love-48-1.png" : "/images/icons8-love-96-13-1.png"}
+                    alt="like"
+                    onClick={() => handleLikeClick(comment.id)}
+                  />
+                  <span>{comment.likes || 0}</span>
+                  {isArticleOwner && (
+                    <button className="ArticleComment-deleteBtn" onClick={() => handleDeleteClick(comment.id)}>刪除</button>
+                  )}
+                  <img
+                    src={comment.isReportedByCurrentUser ? "/images/exclamation-icon.png" : "/images/icons8-exclamation-mark-64-3.png"}
+                    alt="report"
+                    onClick={() => handleReportClick(comment.id)}
+                  />
+                </div>
               </div>
+              <p className="ArticleComment-content">{comment.content}</p>
             </div>
-            <p className="ArticleComment-content">{comment.content}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {!isArticleOwner && (
@@ -193,7 +176,6 @@ const ArticleComment = ({ userUid, articleId }) => {
           </button>
         </div>
       )}
-
     </div>
   );
 };
