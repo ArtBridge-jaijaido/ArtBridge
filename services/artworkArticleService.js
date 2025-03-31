@@ -1,5 +1,5 @@
 import { db, storage } from "@/lib/firebase";
-import { collectionGroup, collection, addDoc, getDoc, setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
+import { collectionGroup, collection, addDoc, getDoc, setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy, arrayUnion, arrayRemove } from "firebase/firestore";
 import { uploadImage } from "./storageService";
 import { ref, deleteObject } from "firebase/storage";
 import { createLowResImage } from "@/lib/functions";
@@ -41,13 +41,18 @@ export const uploadArticle = async (userUid, userSerialId, formData) => {
             articleId: articleId,
             exampleImageUrl: exampleImageUrl,
             blurredImageUrl: blurredImageUrl, // 低解析度圖片
+            likes: 0,
+            likedBy: [],
+            collections: 0,
+            collectedBy: [],
+            reportedBy: [],
             createdAt: new Date().toISOString(),
         };
 
         // ✅ 寫入 Firestore
         const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
         await setDoc(articleRef, articleData);
-        return { success: true, message: "文章上傳成功", articleData};
+        return { success: true, message: "文章上傳成功", articleData };
     }
     catch (error) {
         console.error("文章上傳失敗:", error);
@@ -125,7 +130,7 @@ export const updateArticleData = async ({ userUid, articleId, updateData }) => {
 
         // 更新 Firestore 文件，動態更新傳入的 `updateData`
         await updateDoc(articleRef, {
-            ...updateData,  
+            ...updateData,
         });
         return { success: true, message: "文章資料更新成功" };
     } catch (error) {
@@ -136,20 +141,88 @@ export const updateArticleData = async ({ userUid, articleId, updateData }) => {
 
 
 /**
- *  確認文章是否存在
- */
-
-/**
- * 確認文章是否存在（簡化版）
+ * 確認文章是否存在
  */
 export const checkArticleExists = async (userUid, articleId) => {
     try {
-      const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
-      const docSnap = await getDoc(articleRef);
-      return docSnap.exists(); // 直接回傳 true 或 false
+        const articleRef = doc(db, "artworkArticle", userUid, "articles", articleId);
+        const docSnap = await getDoc(articleRef);
+        return docSnap.exists(); // 直接回傳 true 或 false
     } catch (error) {
-      console.error("檢查文章是否存在失敗:", error);
-      return false; // 失敗也回傳 false
+        console.error("檢查文章是否存在失敗:", error);
+        return false; // 失敗也回傳 false
     }
-  };
-  
+};
+
+
+/**
+ * toggle 愛心狀態
+ */
+
+export const toggleArticleLike = async (articleOwnerUid, articleId, currentUserUid) => {
+    try {
+        const articleRef = doc(db, "artworkArticle", articleOwnerUid, "articles", articleId);
+        const docSnap = await getDoc(articleRef);
+
+        if (!docSnap.exists()) {
+            console.warn("找不到文章，無法切換愛心狀態");
+            return { success: false, message: "文章不存在" };
+        }
+
+        const data = docSnap.data();
+        const hasLiked = data.likedBy?.includes(currentUserUid);
+
+        if (hasLiked) {
+            await updateDoc(articleRef, {
+                likes: data.likes - 1,
+                likedBy: arrayRemove(currentUserUid),
+            });
+            return { success: true, liked: false };
+        } else {
+            await updateDoc(articleRef, {
+                likes: data.likes + 1,
+                likedBy: arrayUnion(currentUserUid),
+            });
+            return { success: true, liked: true };
+        }
+    } catch (error) {
+        console.error("切換愛心狀態失敗:", error);
+        return { success: false, message: error.message };
+    }
+};
+
+
+/**
+ * toggle 收藏狀態
+ */
+export const toggleArticleCollect = async (articleOwnerUid, articleId, currentUserUid) => {
+    try {
+        const articleRef = doc(db, "artworkArticle", articleOwnerUid, "articles", articleId);
+        const docSnap = await getDoc(articleRef);
+
+        if (!docSnap.exists()) {
+            console.warn("找不到文章，無法切換收藏狀態");
+            return { success: false, message: "文章不存在" };
+        }
+
+        const data = docSnap.data();
+        const hasCollected = data.collectedBy?.includes(currentUserUid);
+
+        if (hasCollected) {
+            await updateDoc(articleRef, {
+                collections: data.collections - 1,
+                collectedBy: arrayRemove(currentUserUid),
+            });
+            return { success: true, collected: false };
+        } else {
+            await updateDoc(articleRef, {
+                collections: data.collections + 1,
+                collectedBy: arrayUnion(currentUserUid),
+            });
+            return { success: true, collected: true };
+        }
+    } catch (error) {
+        console.error("切換收藏狀態失敗:", error);
+        return { success: false, message: error.message };
+    }
+};

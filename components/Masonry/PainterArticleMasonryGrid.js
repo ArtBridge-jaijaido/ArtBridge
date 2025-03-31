@@ -173,7 +173,7 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                             <div className="painterArticle-masonry-functionIcon-container">
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-love-96-14.png" alt="like-icon"></img>
-                                    <span>999+</span>
+                                    <span>{image.likes}</span>
                                 </div>
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-message-96-3.png" alt="message-icon"></img>

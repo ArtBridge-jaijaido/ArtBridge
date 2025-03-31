@@ -1,15 +1,16 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import "./ModalImgArtCommunity.css";
 import Tabs from '@/components/Tabs/Tab.jsx';
 import ArticleComment from '@/components/ArticleComments/ArticleComments.jsx';
+import { toggleArticleCollect } from "@/services/artworkArticleService";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
 const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
 
   
 
   if (!isOpen || !data  ) return null;
-
-  
 
 
   const tabs = [
@@ -33,6 +34,10 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
       content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageStyles: data.imageStyles, imageCategory: data.imageCategory },
     },
   ];
+
+  
+
+  
 
   return (
     <div className="ModalImgArtCommunity-overlay" onClick={onClose}>
