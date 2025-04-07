@@ -11,17 +11,9 @@
   --font-size-1280-832:16px;
   --font-size-834-1194:13px; */
 
-
-
-
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   color: var(--foreground);

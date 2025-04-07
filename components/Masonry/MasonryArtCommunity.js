@@ -33,6 +33,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   };
 
   const getCurrentBreakpoint = () => {
+
     const width = window.innerWidth;
     let matchedBreakpoint = "default"; // 預設最大值
 
@@ -149,7 +150,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
           comments: commentCount,
           shares: 0,
         });
-        setIsModalOpen(true); // ✅ 全部圖片都載入後才開
+        setIsModalOpen(true); // 全部圖片都載入後才開
       }
     };
 

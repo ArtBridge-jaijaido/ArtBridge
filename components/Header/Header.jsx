@@ -104,7 +104,9 @@ const Header = () => {
 
     return (
         <header className={`header ${notoSansTCClass}`}>
-            <div className="header-logo">
+            <div className="header-logo"
+                onClick={() => navigateWithLoading("/")}
+            >
 
                 <img src="/images/header-logo.png" alt="ArtBridge" />
             </div>

@@ -492,6 +492,12 @@
         height: 80px;
     }
 
+    .PainterDashboard-painterInfo-avatar{
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+
     .PainterDashboard-painterInfo {
         width: 100%;
         flex-direction: row;
@@ -596,8 +602,13 @@
 
     .PainterDashboard-painterInfo-container {
 
-        gap: 10px;
+        gap: 5px;
         height: 40px;
+    }
+
+    .PainterDashboard-painterInfo-avatar{
+        width: 40px !important;
+        height: 40px !important;
     }
 
     .PainterDashboard-painterInfo h1 {

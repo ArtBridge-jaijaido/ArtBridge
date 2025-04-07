@@ -105,7 +105,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
                     <div className="ModalImageArticle-left-footer">
                         <div className="ModalImageArticle-footer-icons">
                             <img src="/images/icons8-love-96-13-1.png" alt="likesIcon"></img>
-                            <span>999+</span>
+                            <span>{data?.likes}</span>
                         </div>
                         <div className="ModalImageArticle-footer-icons">
                             <img src="/images/icons8-message-96-1.png" alt="commentsIcon"></img>

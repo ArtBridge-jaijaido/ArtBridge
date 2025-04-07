@@ -50,6 +50,7 @@
     width:200px;
     height:80px;
     aspect-ratio: 13/5;
+    cursor: pointer;
 }
 
 .header-logo img{
