@@ -181,7 +181,7 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                                 </div>
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-bookmark-96-4.png" alt="mark-icon"></img>
-                                    <span>15</span>
+                                    <span>{image.collections}</span>
                                 </div>
                             </div>
                         </>

@@ -12,6 +12,8 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
 
   if (!isOpen || !data  ) return null;
 
+  console.log(data.isCollected);
+
 
   const tabs = [
     {
@@ -36,7 +38,7 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
   ];
 
   
-
+  
   
 
   return (
@@ -97,7 +99,13 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
                 <span>{data.shares}</span>
               </div>
               <div className="ModalImgArtCommunity-footer-icons ModalImgArtCommunity-collection">
-                <img src="/images/icons8-bookmark-96-1.png" alt="collectionIcon"></img>
+                <img src={
+                      data.isCollected
+                        ? "/images/icons8-bookmark-96-6.png"
+                        : "/images/icons8-bookmark-96-4.png"
+                    }
+                
+                alt="collectionIcon"></img>
                 <span>珍藏</span>
               </div>
             </div>

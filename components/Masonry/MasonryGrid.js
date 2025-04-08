@@ -4,14 +4,18 @@ import React, { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import "./MasonryGrid.css";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
-
+import { togglePortfolioLike,checkPortfolioIdExists } from "@/services/artworkPortfolioService";
+import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
+import { useSelector } from "react-redux";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
 const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
   const [imageLoaded, setImageLoaded] = useState({});
-  // const [isPreloaded, setIsPreloaded] = useState(false);
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const { setIsImageLoading } = useImageLoading();
- 
+  const currentUser = useSelector((state) => state.user.user);
+  const [likeStates, setLikeStates] = useState({});
+  const { addToast } = useToast();
 
   const breakpointColumns = {
 
@@ -37,7 +41,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
 
   useEffect(() => {
-   
+
     setIsPreloaded(false);
     setImageLoaded({}); // 重置圖片載入狀態
 
@@ -54,9 +58,9 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
         if (loadedCount === images.length) {
           setIsPreloaded(true);
-       
+
           onMasonryReady();
-         
+
         }
       };
     });
@@ -78,6 +82,41 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     };
   }, [currentBreakpoint]);
 
+
+  /* 按讚功能 */
+  const handleToggleLike = async (e, image) => {
+    e.stopPropagation();
+
+    const portfoliExist =await checkPortfolioIdExists(image.userUid, image.portfolioId);
+    if (!portfoliExist) {
+      addToast("error", "sorry 該作品已被原作者刪除");
+      fetchPainterPortfolios();
+      return;
+    }
+
+    if (!currentUser) {
+      addToast("error", "請先登入才能按讚喔！");
+      return;
+    }
+
+    try {
+      const response = await togglePortfolioLike(image.userUid, image.portfolioId, currentUser.uid);
+
+      if (response.success) {
+        const hasLiked = image.likedBy?.includes(currentUser.uid);
+
+        setLikeStates((prev) => ({
+          ...prev,
+          [image.portfolioId]: !hasLiked,
+        }));
+      }
+    } catch (err) {
+      console.error("按讚失敗", err);
+      addToast("error", "按讚失敗，請稍後再試！");
+    }
+  };
+
+
   return (
     <Masonry
       breakpointCols={breakpointColumns}
@@ -93,7 +132,7 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
           />
 
           {/* 只有當圖片載入後才顯示按鈕 */}
-          {isPreloaded&&isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+          {isPreloaded && isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
             <>
               {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
               {image.download === "是" && (
@@ -103,9 +142,20 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
               )}
 
               {/* Like 按鈕 */}
-              <div className="masonry-likesIcon-container">
-                <img src="/images/icons8-love-96-26.png" alt="numberOfLikes" />
-                <span className="masonry-likes-number">100</span>
+              <div className="masonry-likesIcon-container"
+                onClick={(e) => handleToggleLike(e, image)}
+              >
+                <img
+                      src={
+                        image.likedBy?.includes(currentUser?.uid)
+                          ? "/images/icons8-love-48-1.png"
+                          : "/images/icons8-love-96-26.png"
+                      }
+                      alt="numberOfLikes"
+                    />
+                <span className="masonry-likes-number"
+
+                >{image.likes}</span>
               </div>
             </>
           )}

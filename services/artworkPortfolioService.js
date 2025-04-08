@@ -1,8 +1,9 @@
 import { db, storage} from "@/lib/firebase";
-import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy , Timestamp } from "firebase/firestore";
+import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy , Timestamp, arrayUnion, arrayRemove } from "firebase/firestore";
 import { uploadImage } from "./storageService";
 import { ref, deleteObject } from "firebase/storage";
 import {createLowResImage} from "@/lib/functions";
+import { current } from "@reduxjs/toolkit";
 
 export const uploadPortfolio = async (userUid, userSerialId, formData) => {
     try {
@@ -36,6 +37,8 @@ export const uploadPortfolio = async (userUid, userSerialId, formData) => {
             portfolioId: portfolioId,
             exampleImageUrl: exampleImageUrl,
             blurredImageUrl: blurredImageUrl, // 低解析度圖片
+            likes: 0,
+            likedBy: [],
             createdAt: new Date().toISOString(),
         };
 
@@ -112,3 +115,54 @@ export const updatePortfolio = async (userUid, portfolioId, updatedData) => {
         return { success: false, error };
     }
 };
+
+/**
+ * 確認portfolioId是否存在
+ */
+export const checkPortfolioIdExists = async (userUid, portfolioId) => {
+    try {
+        const portfolioRef = doc(db, "artworkPortfolio", userUid, "portfolios", portfolioId);
+        const docSnap = await getDoc(portfolioRef);
+        return docSnap.exists();
+    } catch (error) {
+        console.error("檢查作品集 ID 是否存在時發生錯誤:", error);
+        return false;
+    }
+}
+
+/**
+ * toggleLike
+ */
+
+export const togglePortfolioLike = async (portfolioOwnerUid, portfolioId, currentUserUid) => {
+    try {
+      const portfolioRef = doc(db, "artworkPortfolio", portfolioOwnerUid, "portfolios", portfolioId);
+      const docSnap = await getDoc(portfolioRef);
+  
+      if (!docSnap.exists()) {
+        console.warn("找不到作品集，無法切換愛心狀態");
+        return { success: false, message: "作品集不存在" };
+      }
+  
+      const data = docSnap.data();
+      const hasLiked = data.likedBy?.includes(currentUserUid);
+  
+      if (hasLiked) {
+        await updateDoc(portfolioRef, {
+          likes: data.likes - 1,
+          likedBy: arrayRemove(currentUserUid),
+        });
+        return { success: true, liked: false };
+      } else {
+        await updateDoc(portfolioRef, {
+          likes: data.likes + 1,
+          likedBy: arrayUnion(currentUserUid),
+        });
+        return { success: true, liked: true };
+      }
+    } catch (error) {
+      console.error("切換作品集愛心狀態失敗:", error);
+      return { success: false, message: error.message };
+    }
+  };
+

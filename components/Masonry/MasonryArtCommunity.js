@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
 import { getCommentCount } from "@/services/articleCommentService.js";
-import { checkArticleExists, toggleArticleLike } from "@/services/artworkArticleService";
+import { checkArticleExists, toggleArticleLike, toggleArticleCollect} from "@/services/artworkArticleService";
 import { fetchPainterArticles } from '@/lib/painterArticleListener';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import "./MasonryArtCommunity.css";
@@ -22,7 +22,9 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   const navigate = useNavigation();
   const { setIsLoading } = useLoading();
   const [likeStates, setLikeStates] = useState({});
+  const [collectedStates, setCollectedStates] = useState({});
   const currentUser = useSelector((state) => state.user.user);
+
 
   const breakpointColumns = {
 
@@ -149,6 +151,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
           likes: image.likes || 0,
           comments: commentCount,
           shares: 0,
+          isCollected:image.collectedBy?.includes(currentUser?.uid),
         });
         setIsModalOpen(true); // 全部圖片都載入後才開
       }
@@ -167,9 +170,17 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     setCurrentData(null);
   };
 
-  const handleHeadingToProfile = (e, userUid) => {
+  const handleHeadingToProfile = async(e, image) => {
+    const articleExist = await checkArticleExists(image.userUid, image.articleId);
+
+    if (!articleExist) {
+      addToast("error", "sorry 該文章已被原作者刪除");
+      fetchPainterArticles();
+      return;
+    }
+
     e.stopPropagation();
-    navigate(`/artworkProfile/artworkPainterProfile/${userUid}`);
+    navigate(`/artworkProfile/artworkPainterProfile/${image.userUid}`);
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
   }
@@ -178,6 +189,14 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   /*按讚功能*/
   const handleToggleLike = async (e, image) => {
     e.stopPropagation();
+
+    const articleExist = await checkArticleExists(image.userUid, image.articleId);
+
+    if (!articleExist) {
+      addToast("error", "sorry 該文章已被原作者刪除");
+      fetchPainterArticles();
+      return;
+    }
   
     if (!currentUser) {
       addToast("error", "請先登入才能按讚喔！");
@@ -201,6 +220,45 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
       addToast("error", "按讚失敗，請稍後再試！");
     }
   };
+
+
+  /*收藏功能*/
+  const handleToggleCollect = async (e, image) => {
+    e.stopPropagation();
+
+    const articleExist = await checkArticleExists(image.userUid, image.articleId);
+
+    if (!articleExist) {
+      addToast("error", "sorry 該文章已被原作者刪除");
+      fetchPainterArticles();
+      return;
+    }
+
+    if (!currentUser) {
+      addToast("error", "請先登入才能收藏喔！");
+      return;
+    }
+
+    
+    try {
+      const response = await  toggleArticleCollect(image.userUid, image.articleId, currentUser.uid);
+  
+      if (response.success) {
+        const hasCollected = image.collectedBy?.includes(currentUser.uid);
+  
+        setCollectedStates((prev) => ({
+          ...prev,
+          [image.articleId]: !hasCollected,
+        }));
+  
+      }
+    } catch (err) {
+      console.error("珍藏失敗", err);
+      addToast("error", "珍藏失敗，請稍後再試！");
+    }
+
+  
+  }
   
 
   return (
@@ -223,13 +281,24 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
             {/*只有當圖片載入後才顯示下面內容*/}
             {isPreloaded && isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
               <>
+                <div className="MasonryArtCommunity-collectionIcon-container"
+                  onClick={(e) => handleToggleCollect(e, image)} 
+                >
+                    
+                    <img src={
+                      image.collectedBy?.includes(currentUser?.uid)
+                        ? "/images/icons8-bookmark-96-6.png"
+                        : "/images/icons8-bookmark-96-4.png"
+                    }
+                    alt="collectionIcon" />
+                </div>
                 <span className="MasonryArtCommunity-artwork-title">
                   {image.title?.slice(0, 12) || "這是標題最多放12個字..."}
                 </span>
                 <div className="MasonryArtCommunity-content-container">
                   <div className="MasonryArtCommunity-artistInfo-container">
 
-                    <img src={image.artistProfileImg || "/images/testing-artist-profile-image.png"} alt="artistAvatar" onClick={(e) => handleHeadingToProfile(e, image.userUid)} />
+                    <img src={image.artistProfileImg || "/images/testing-artist-profile-image.png"} alt="artistAvatar" onClick={(e) => handleHeadingToProfile(e, image)} />
                     <span className="MasonryArtCommunity-artistName">{image.artistNickName || "使用者名稱"}</span>
                   </div>
                   <div
