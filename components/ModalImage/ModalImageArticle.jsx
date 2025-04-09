@@ -116,7 +116,7 @@ const ModalImageArticle = ({ isOpen, onClose, data }) => {
                         </div>
                         <div className="ModalImageArticle-footer-icons ModalImageArticle-collection">
                             <img src="/images/icons8-bookmark-96-1.png" alt="collectionIcon"></img>
-                            <span>珍藏</span>
+                            <span>{data?.collections}</span>
                         </div>
                     </div>
                     <div className="ModalImageArticle-right-footer"></div>

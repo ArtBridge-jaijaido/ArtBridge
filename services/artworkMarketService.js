@@ -1,7 +1,7 @@
 // services/artworkMarketService.js
 
 import { db } from "@/lib/firebase";
-import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy } from "firebase/firestore";
+import { collectionGroup,collection, addDoc, getDoc,setDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc, orderBy,arrayUnion, arrayRemove } from "firebase/firestore";
 import { uploadImage } from "./storageService";
 
 /**
@@ -44,6 +44,8 @@ export const uploadArtwork = async (userUid, userSerialId, formData) => {
         artworkId: artworkId,
         exampleImageUrl: exampleImageUrl, 
         supplementaryImageUrls: supplementaryImageUrls,
+        likes: 0,
+        likedBy: [],
         createdAt: serverTimestamp(),
     };
 
@@ -130,6 +132,75 @@ export const fetchAllUserArtworks = async () => {
     return [];
   }
 };
+
+/**
+ * toggleArtworkLike
+ */
+export const toggleArtworkLike = async (artworkOwnerUid, artworkId, currentUserUid) => {
+  try {
+    const artworkRef = doc(db, "artworkMarket", artworkOwnerUid, "artworks", artworkId);
+    const docSnap = await getDoc(artworkRef);
+
+    if (!docSnap.exists()) {
+      console.warn("找不到市集，無法切換愛心狀態");
+      return { success: false, message: "作品不存在" };
+    }
+
+    const data = docSnap.data();
+    const hasLiked = data.likedBy?.includes(currentUserUid);
+
+    if (hasLiked) {
+      await updateDoc(artworkRef, {
+        likes: data.likes - 1,
+        likedBy: arrayRemove(currentUserUid),
+      });
+      return { success: true, liked: false };
+    } else {
+      await updateDoc(artworkRef, {
+        likes: data.likes + 1,
+        likedBy: arrayUnion(currentUserUid),
+      });
+      return { success: true, liked: true };
+    }
+  } catch (error) {
+    console.error("切換市集愛心狀態失敗:", error);
+    return { success: false, message: error.message };
+  }
+};
+
+
+/**
+ * 獲取使用者按讚的所有artworkMarket 市集
+ */
+export const fetchLikedArtworksByUser = async (currentUserUid) => {
+
+  try {
+    const q = query(
+      collectionGroup(db, "artworks"), // artworkMarket/{userUid}/artworks
+      where("likedBy", "array-contains", currentUserUid),
+      orderBy("createdAt", "asc"),
+    );
+
+    const querySnapshot = await getDocs(q);
+    const likedArtworks = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+   
+
+    return { success: true, data: likedArtworks };
+  } catch (error) {
+    console.error("查詢使用者按過讚的 artworks 失敗：", error);
+    return { success: false, message: error.message };
+  }
+};
+
+
+
+
+
+
 
 /**fetch artwork user avatar and user nickname */
 

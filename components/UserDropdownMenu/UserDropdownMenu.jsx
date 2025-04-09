@@ -118,7 +118,7 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
         <p onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>我的作品</p>
         <p>追蹤名單</p>
         <p>訂閱專區</p>
-        <p>收藏名單</p>
+        <p onClick={(e)=> handleNavigateTo(e, "artworkCollectionList")}>收藏名單</p>
         <p>意見回饋</p>
         <p>流量分析 <span className="UserDropdownMenu-badge">NEW即將推出</span></p>
         <p>聯絡我們</p>

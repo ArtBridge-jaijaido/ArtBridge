@@ -184,6 +184,9 @@ const ArtworkPainterProfilePage = () => {
                             price={artwork.price}
                             artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
                             artistNickName={artwork.artistNickName || "使用者名稱"}
+                            artistUid={artwork.userUid}
+                            artworkId={artwork.artworkId}
+                            likedby={artwork.likedBy || []}
                             deadline={`截止日期: ${artwork.endDate}`}
                         />
                     ))}

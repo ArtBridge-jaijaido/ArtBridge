@@ -1,0 +1,34 @@
+
+.artworkCollectionListPage{
+    position: relative;
+    width:100%;
+    max-width:1440px;
+    padding: 100px 30px 20px 30px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+
+}
+
+
+.artworkCollectionList-tab-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:0px 20px;
+}
+
+
+.artworkCollectionList-artworkCard-container{
+    width:100%;
+    padding-top:20px;
+    display:grid;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-auto-rows:300px;
+    gap: 35px;
+    justify-items: stretch; 
+    align-items: start;
+    margin-bottom: 50px;
+}
