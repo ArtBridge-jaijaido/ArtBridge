@@ -6,8 +6,12 @@ import { togglePortfolioLike,checkPortfolioIdExists } from "@/services/artworkPo
 import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
 import { useSelector } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
+import { usePathname } from "next/navigation";
+
 
 const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
+  const pathname = usePathname();
+  const isCollectionPage = pathname.includes("artworkCollectionList");
   const defaultColumnWidths = [270, 270, 270, 270, 270];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
@@ -19,6 +23,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
   const currentUser = useSelector((state) => state.user.user);
   const [likeStates, setLikeStates] = useState({});
   const { addToast } = useToast();
+
 
   // **初始化分類計數**
   useEffect(() => {
@@ -67,7 +72,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
     });
 
     setFilteredImages(newFilteredImages);
-  }, [selectedFilter]);
+  }, [selectedFilter,images.length]);
 
   // **更新 Masonry 欄位配置**
   useEffect(() => {
@@ -105,7 +110,10 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
 
   // **切換愛心狀態**
    const handleToggleLike = async (e, image) => {
+
      e.stopPropagation();
+
+     if (isCollectionPage) return;
  
      const portfoliExist =await checkPortfolioIdExists(image.userUid, image.portfolioId);
      if (!portfoliExist) {
@@ -153,7 +161,8 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
   return (
     <div className="ArtworkPainter-masonry-container">
       {/* 篩選按鈕 */}
-      <div className="ArtworkPainter-filter">
+      {!isCollectionPage && (
+        <div className="ArtworkPainter-filter">
         <button
           className={`ArtworkPainter-filter-button ${selectedFilter === "all" ? "selected" : ""}`}
           onClick={() => setSelectedFilter("all")}
@@ -170,6 +179,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
           </button>
         ))}
       </div>
+      )}
 
       {/* **只有當圖片完全載入後才顯示 Masonry** */}
       {isPreloaded ? (
@@ -183,7 +193,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                   alt={`Artwork ${imageIndex + 1}`} />
 
                   {/* **按鈕只在圖片完全載入後顯示** */}
-                  {imageLoaded[image.portfolioId] && image.exampleImageUrl && image.download === "是" && (
+                  {imageLoaded[image.portfolioId] && image.exampleImageUrl && image.download === "是" && !isCollectionPage&& (
                     <div className="ArtworkPainter-masonry-downloadIcon-container" onClick={(e) => downloadImage(image.exampleImageUrl, e)}>
                       <img src="/images/download-icon.png" alt="Download" />
                     </div>

@@ -166,3 +166,28 @@ export const togglePortfolioLike = async (portfolioOwnerUid, portfolioId, curren
     }
   };
 
+
+/**
+ * 獲取使用者按讚的所有作品集
+ */
+export const fetchLikedPortfoliosByUser = async (userUid) => {
+    try {
+      const q = query(
+        collectionGroup(db, "portfolios"),
+        where("likedBy", "array-contains", userUid),
+        orderBy("createdAt", "asc")
+      );
+  
+      const querySnapshot = await getDocs(q);
+      const likedPortfolios = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+  
+      return { success: true, data: likedPortfolios };
+    } catch (error) {
+      console.error("查詢使用者按讚的 portfolios 失敗：", error);
+      return { success: false, message: error.message };
+    }
+  };
+  

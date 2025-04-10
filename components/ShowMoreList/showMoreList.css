@@ -1,0 +1,23 @@
+.ShowMoreList-wrapper {
+    width: 100%;
+  }
+  
+  .ShowMoreList-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .ShowMoreList-button {
+    background: none;
+    color: #2daef4;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }

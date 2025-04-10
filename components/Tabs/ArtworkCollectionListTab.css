@@ -113,10 +113,14 @@
     .ArtworkCollectionList-tab-content {
         padding: 10px 0px;
     }
+
+    
+.ArtworkCollectionList-tab.active::after {
+    bottom: -6px;
    
 }
 
-
+}
 @media screen and (max-width: 375px){
 
 

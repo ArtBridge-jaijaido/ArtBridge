@@ -226,3 +226,29 @@ export const toggleArticleCollect = async (articleOwnerUid, articleId, currentUs
         return { success: false, message: error.message };
     }
 };
+
+
+
+/**
+ * 獲取使用者收藏的所有文章
+ */
+export const fetchCollectedArticlesByUser = async (userUid) => {
+    try {
+      const q = query(
+        collectionGroup(db, "articles"),
+        where("collectedBy", "array-contains", userUid),
+        orderBy("createdAt", "asc") 
+      );
+  
+      const querySnapshot = await getDocs(q);
+      const collectedArticles = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+  
+      return { success: true, data: collectedArticles };
+    } catch (error) {
+      console.error("取得收藏的文章失敗:", error);
+      return { success: false, message: error.message };
+    }
+  };
