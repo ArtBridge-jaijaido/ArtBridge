@@ -38,6 +38,11 @@
     width:100%;
 }
 
+.artworkCollectionList-article-container{
+    position:relative;
+    width:100%;
+}
+
 
 
 /*RWD*/

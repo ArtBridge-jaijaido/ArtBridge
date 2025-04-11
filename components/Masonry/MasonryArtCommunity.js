@@ -4,16 +4,19 @@ import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
 import { getCommentCount } from "@/services/articleCommentService.js";
-import { checkArticleExists, toggleArticleLike, toggleArticleCollect} from "@/services/artworkArticleService";
+import { checkArticleExists, toggleArticleLike, toggleArticleCollect } from "@/services/artworkArticleService";
 import { fetchPainterArticles } from '@/lib/painterArticleListener';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import "./MasonryArtCommunity.css";
 import { useNavigation } from "@/lib/functions.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
 
-const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
+const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded, onUnlike }) => {
+  const pathname = usePathname();
+  const isCollectionPage = pathname.includes("artworkCollectionList");
   const [imageLoaded, setImageLoaded] = useState({});
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +27,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   const [likeStates, setLikeStates] = useState({});
   const [collectedStates, setCollectedStates] = useState({});
   const currentUser = useSelector((state) => state.user.user);
+  const allUsers = useSelector((state) => state.user.allUsers);
 
 
   const breakpointColumns = {
@@ -135,12 +139,14 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
       if (loadedCount === 2) {
 
         const commentCount = await getCommentCount(image.userUid, image.articleId);
+        const user = allUsers[image.userUid] || {};
+
         setCurrentData({
           src: exampleImageUrl,
-          author: image.artistNickName || "使用者名稱",
+          author: user.nickname || "使用者名稱",
           articleId: image.articleId || "文章ID",
           userUid: image.userUid || "使用者ID",
-          authorAvatar: artistAvatarUrl,
+          authorAvatar: user.profileAvatar || "/images/testing-artist-profile-image.png",
           imageStyles: image.selectedStyles || "[風格1,風格2,風格3]",
           imageCategory: image.selectedCategory || "類別",
           imageSource: image.imageSource || "(使用者自行填寫)",
@@ -151,7 +157,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
           likes: image.likes || 0,
           comments: commentCount,
           shares: 0,
-          isCollected:image.collectedBy?.includes(currentUser?.uid),
+          isCollected: image.collectedBy?.includes(currentUser?.uid),
         });
         setIsModalOpen(true); // 全部圖片都載入後才開
       }
@@ -170,7 +176,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     setCurrentData(null);
   };
 
-  const handleHeadingToProfile = async(e, image) => {
+  const handleHeadingToProfile = async (e, image) => {
     const articleExist = await checkArticleExists(image.userUid, image.articleId);
 
     if (!articleExist) {
@@ -197,23 +203,23 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
       fetchPainterArticles();
       return;
     }
-  
+
     if (!currentUser) {
       addToast("error", "請先登入才能按讚喔！");
       return;
     }
-  
+
     try {
       const response = await toggleArticleLike(image.userUid, image.articleId, currentUser.uid);
-  
+
       if (response.success) {
         const hasLiked = image.likedBy?.includes(currentUser.uid);
-  
+
         setLikeStates((prev) => ({
           ...prev,
           [image.articleId]: !hasLiked,
         }));
-  
+
       }
     } catch (err) {
       console.error("按讚失敗", err);
@@ -239,27 +245,32 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
       return;
     }
 
-    
+
     try {
-      const response = await  toggleArticleCollect(image.userUid, image.articleId, currentUser.uid);
-  
+      const response = await toggleArticleCollect(image.userUid, image.articleId, currentUser.uid);
+
       if (response.success) {
         const hasCollected = image.collectedBy?.includes(currentUser.uid);
-  
+
+        if (isCollectionPage) {
+         
+          onUnlike(image.articleId);
+        }
+
         setCollectedStates((prev) => ({
           ...prev,
           [image.articleId]: !hasCollected,
         }));
-  
+
       }
     } catch (err) {
       console.error("珍藏失敗", err);
       addToast("error", "珍藏失敗，請稍後再試！");
     }
 
-  
+
   }
-  
+
 
   return (
     <>
@@ -268,58 +279,72 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
         className="MasonryArtCommunity-grid"
         columnClassName="MasonryArtCommunity-grid-column"
       >
-        {images.map((image, index) => (
-          <div key={index} className="MasonryArtCommunity-grid-item">
-            <img
-              src={image.exampleImageUrl}
-              alt={`Artwork ${index + 1}`}
-              className="MasonryArtCommunity-grid-item-image"
-              onClick={() => handleImageClick(image)}
-              style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
-            />
+        {images.map((image, index) => {
+          const user = allUsers[image.userUid] || {};
+          const isLiked = likeStates[image.articleId]?? image.likedBy?.includes(currentUser?.uid);
+          const isCollected = collectedStates[image.articleId]?? image.collectedBy?.includes(currentUser?.uid);
 
-            {/*只有當圖片載入後才顯示下面內容*/}
-            {isPreloaded && isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
-              <>
-                <div className="MasonryArtCommunity-collectionIcon-container"
-                  onClick={(e) => handleToggleCollect(e, image)} 
-                >
-                    
-                    <img src={
-                      image.collectedBy?.includes(currentUser?.uid)
-                        ? "/images/icons8-bookmark-96-6.png"
-                        : "/images/icons8-bookmark-96-4.png"
-                    }
-                    alt="collectionIcon" />
-                </div>
-                <span className="MasonryArtCommunity-artwork-title">
-                  {image.title?.slice(0, 12) || "這是標題最多放12個字..."}
-                </span>
-                <div className="MasonryArtCommunity-content-container">
-                  <div className="MasonryArtCommunity-artistInfo-container">
+          return (
+            <div key={index} className="MasonryArtCommunity-grid-item">
+              <img
+                src={image.exampleImageUrl}
+                alt={`Artwork ${index + 1}`}
+                className="MasonryArtCommunity-grid-item-image"
+                onClick={() => handleImageClick(image)}
+                style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
+              />
 
-                    <img src={image.artistProfileImg || "/images/testing-artist-profile-image.png"} alt="artistAvatar" onClick={(e) => handleHeadingToProfile(e, image)} />
-                    <span className="MasonryArtCommunity-artistName">{image.artistNickName || "使用者名稱"}</span>
-                  </div>
+              {isPreloaded && isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+                <>
                   <div
-                    className="MasonryArtCommunity-likesIcon-container"
-                    onClick={(e) => handleToggleLike(e, image)}
+                    className="MasonryArtCommunity-collectionIcon-container"
+                    onClick={(e) => handleToggleCollect(e, image)}
                   >
                     <img
                       src={
-                        image.likedBy?.includes(currentUser?.uid)
-                          ? "/images/icons8-love-48-1.png"
-                          : "/images/icons8-love-96-26.png"
+                        isCollected
+                          ? "/images/icons8-bookmark-96-6.png"
+                          : "/images/icons8-bookmark-96-4.png"
                       }
-                      alt="numberOfLikes"
+                      alt="collectionIcon"
                     />
-                    <span className="MasonryArtCommunity-likes-number">{image.likes || 0}</span>
                   </div>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+
+                  <span className="MasonryArtCommunity-artwork-title">
+                    {image.title?.slice(0, 12) || "這是標題最多放12個字..."}
+                  </span>
+
+                  <div className="MasonryArtCommunity-content-container">
+                    <div className="MasonryArtCommunity-artistInfo-container">
+                      <img
+                        src={user.profileAvatar || "/images/testing-artist-profile-image.png"}
+                        alt="artistAvatar"
+                        onClick={(e) => handleHeadingToProfile(e, image)}
+                      />
+                      <span className="MasonryArtCommunity-artistName">{user.nickname || "使用者名稱"}</span>
+                    </div>
+
+                    <div
+                      className="MasonryArtCommunity-likesIcon-container"
+                      onClick={(e) => handleToggleLike(e, image)}
+                    >
+                      <img
+                        src={
+                          isLiked
+                              ? "/images/icons8-love-48-1.png"
+                              : "/images/icons8-love-96-26.png"
+                        }
+                        alt="numberOfLikes"
+                      />
+                      <span className="MasonryArtCommunity-likes-number">{image.likes || 0}</span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })}
+
       </Masonry>
 
       <ModalImgArtCommunity isOpen={isModalOpen} onClose={closeModal} data={currentData} />

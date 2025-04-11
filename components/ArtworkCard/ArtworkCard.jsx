@@ -9,8 +9,13 @@ import {useSelector} from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { usePathname } from "next/navigation";
 
+/**
+ * 
+ * @param {onUnlike} 取消在artworkCollectionList 內的市集按讚並移除 
+ * @returns 
+ */
 
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid,artworkId,likedby}) => {
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid,artworkId,likedby , onUnlike }) => {
   const pathname = usePathname();
   const isCollectionPage = pathname.includes("artworkCollectionList");
   const [likeStates, setLikeStates] = useState({});
@@ -19,7 +24,9 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
   const navigate = useNavigation();
   const { setIsLoading } = useLoading();
   const currentUser = useSelector((state) => state.user.user);
-   const { addToast } = useToast();
+  const { addToast } = useToast();
+  const isLiked = likeStates[artworkId] ?? likedby?.includes(currentUser?.uid);
+
 
   /*按讚功能*/
   const handleToggleLike = async (e) =>{
@@ -34,10 +41,17 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
       const response = await toggleArtworkLike(artistUid, artworkId, currentUser.uid);
       if(response.success){
         const hasLiked = likedby?.includes(currentUser.uid);
+
+        if (isCollectionPage) {
+          onUnlike(artworkId);
+        }
+
         setLikeStates((prev) => ({
           ...prev,
           [artworkId]: !hasLiked,
         }));
+
+       
       }
     }catch(err){
       console.error("Error toggling like:", err);
@@ -96,19 +110,19 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
       <span className="Artwork-title">{title}</span>
 
       {/* 按讚按鈕 */}
-      {!isCollectionPage && (
+      
         <button className="Artwork-favorite-button" onClick={handleToggleLike}>
           <img
             src={
-              likedby?.includes(currentUser?.uid)
-                ? "/images/icons8-love-48-1.png"
-                : "/images/icons8-love-96-26.png"
+              isLiked
+              ? "/images/icons8-love-48-1.png"
+              : "/images/icons8-love-96-26.png"
             }
             alt="favorite"
             className="Artwork-favorite-icon"
           />
         </button>
-)}
+
       
       {/* 下方內容 */}
       <div className="Artwork-card-content"> 
