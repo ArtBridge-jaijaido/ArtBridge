@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 
 
-const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded, onUnlike }) => {
+const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded, onCollected }) => {
   const pathname = usePathname();
   const isCollectionPage = pathname.includes("artworkCollectionList");
   const [imageLoaded, setImageLoaded] = useState({});
@@ -215,6 +215,10 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
       if (response.success) {
         const hasLiked = image.likedBy?.includes(currentUser.uid);
 
+        if (isCollectionPage) {
+          onCollected(image.articleId);
+        }
+
         setLikeStates((prev) => ({
           ...prev,
           [image.articleId]: !hasLiked,
@@ -231,6 +235,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
   /*收藏功能*/
   const handleToggleCollect = async (e, image) => {
     e.stopPropagation();
+
 
     const articleExist = await checkArticleExists(image.userUid, image.articleId);
 
@@ -251,10 +256,11 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
 
       if (response.success) {
         const hasCollected = image.collectedBy?.includes(currentUser.uid);
+      
 
         if (isCollectionPage) {
-         
-          onUnlike(image.articleId);
+          console.log("isCollectionPage")
+          onCollected(image.articleId);
         }
 
         setCollectedStates((prev) => ({
@@ -284,6 +290,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
           const isLiked = likeStates[image.articleId]?? image.likedBy?.includes(currentUser?.uid);
           const isCollected = collectedStates[image.articleId]?? image.collectedBy?.includes(currentUser?.uid);
 
+   
           return (
             <div key={index} className="MasonryArtCommunity-grid-item">
               <img

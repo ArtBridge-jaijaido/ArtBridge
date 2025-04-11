@@ -49,13 +49,15 @@ const ArtworkCollectionListPage = () => {
   const [isPreloaded, setIsPreloaded] = useState(false);
   const [isArticleMasonryReady, setIsArticleMasonryReady] = useState(false);
 
-  const refreshLikedArticles = useCallback(async () => {
+  const refreshCollectedArticles = useCallback(async () => {
     if (!currentUser?.uid) return;
     const res = await fetchCollectedArticlesByUser(currentUser.uid);
     if (res.success) {
       setCollectedArticles(res.data);
     }
   }, [currentUser]);
+
+  
 
   const handleArticleMasonryReady = () => {
     setTimeout(() => {
@@ -144,7 +146,7 @@ const ArtworkCollectionListPage = () => {
                   setIsPreloaded={setIsPreloaded}
                   isMasonryReady={isArticleMasonryReady}
                   onMasonryReady={handleArticleMasonryReady}
-                  onUnlike={refreshLikedArticles}
+                  onCollected={refreshCollectedArticles }
                 />
               </div>
               {!isArticleMasonryReady&&collectedArticles.length !==0? (
