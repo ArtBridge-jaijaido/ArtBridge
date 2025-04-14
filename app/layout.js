@@ -28,7 +28,7 @@ const geistMono = Geist_Mono({
 
 const notoSansTC = Noto_Sans_TC({
   weight: ['400', '500', '700'],
-  subsets: ['latin', 'chinese-traditional'],
+  subsets: ['latin'],
   variable: "--font-noto-sans-tc",
 });
 

@@ -5,11 +5,12 @@ import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.
 import { useToast } from "@/app/contexts/ToastContext.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 import { useNavigation } from "@/lib/functions.js";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { uploadArticle} from "@/services/artworkArticleService";
-
+import {addPainterArticle} from "@/app/redux/feature/painterArticleSlice";
 
 const ArticleUploadForm = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         exampleImage: "",
@@ -152,6 +153,7 @@ const ArticleUploadForm = () => {
             const response = await uploadArticle(userUid,userSerialId,formData);
 
             if (response.success) {
+                dispatch(addPainterArticle(response.articleData));
                 addToast("success", response.message);
                 navigate("/artworkPainterArticle");
             } else {

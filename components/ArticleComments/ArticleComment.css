@@ -1,0 +1,199 @@
+.ArticleComment-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0px 10px 0px 10px;
+  font-family: "Noto Sans TC", sans-serif;
+
+}
+
+.ArticleComment-list {
+  flex: 1;
+  overflow: auto;
+  scrollbar-width: none;
+  min-height: 400px;
+  max-height: 92%;
+}
+
+.ArticleComment-item {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.ArticleComment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ArticleComment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  background-color: beige;
+}
+
+.ArticleComment-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #333;
+}
+
+.ArticleComment-nickname {
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.ArticleComment-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.ArticleComment-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ArticleComment-actions img {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.ArticleComment-actions span {
+  font-size: 14px;
+  color: #919191;
+  font-weight: bold;
+}
+
+.ArticleComment-deleteBtn {
+  color: #6F6F6F;
+  text-align: center;
+  font-family: "Noto Sans TC";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.ArticleComment-deleteBtn:hover {
+  color: #FF0000;
+}
+
+.ArticleComment-content {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #919191;
+  word-wrap: break-word;
+}
+
+.ArticleComment-inputArea {
+  width: 90%;
+  position: absolute;
+  bottom: -30px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 28px;
+  padding: 8px 16px;
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ArticleComment-inputArea input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px;
+  background: transparent;
+}
+
+.ArticleComment-inputArea button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ArticleComment-inputArea img {
+  width: 22px;
+  height: 22px;
+}
+
+
+
+@media screen and (max-width: 440px) {
+
+  .ArticleComment-item {
+    padding: 6px 0px 2px 0px;
+  }
+
+  .ArticleComment-list{
+    min-height:180px;
+  }
+
+  .ArticleComment-avatar {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+
+  .ArticleComment-meta {
+    font-size: 10px;
+  }
+
+  .ArticleComment-time {
+    font-size: 6px;
+  }
+
+  .ArticleComment-actions {
+    gap: 4px;
+  }
+
+  .ArticleComment-actions img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ArticleComment-deleteBtn {
+    font-size: 10px;
+  }
+
+  .ArticleComment-actions span {
+    font-size: 8px;
+  }
+
+  .ArticleComment-content {
+    margin-top: 4px;
+    font-size: 9px;
+  }
+
+  .ArticleComment-inputArea {
+    padding: 4px 8px;
+    bottom: -5px;
+    height: 24px;
+  }
+
+  .ArticleComment-inputArea input {
+    font-size: 8px;
+  }
+
+  .ArticleComment-inputArea img {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+
+@media screen and (max-width: 370px){
+  .ArticleComment-list{
+    min-height:150px;
+  }
+}

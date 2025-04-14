@@ -139,7 +139,7 @@ const ModallmagePainterPortfolio = ({ isOpen, onClose, data }) => {
                             <button className="ModallmagePainterPortfolio-close" onClick={handleClose}>X</button>
                                 <div className="ModallmagePainterPortfolio-likesIcon-container">
                                     <img src="/images/icons8-love.png" alt="numberOfLikes" />
-                                    <span className="ModallmagePainterPortfolio-likes-number">156</span>
+                                    <span className="ModallmagePainterPortfolio-likes-number">{data?.likes}</span>
                                 </div>
                         </div>
                     </div> 

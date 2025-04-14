@@ -1,5 +1,6 @@
 .tabs-container {
     width: 100%;
+    height: 100%;
 }
 
 .tabs {
@@ -51,10 +52,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px 0px;
+    padding: 20px 0px 0px 0px;
     height:520px;
-    overflow: hidden; 
-
+    position: relative;
     
 }
 
@@ -62,7 +62,10 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
+
+
 /*內文*/
+
 .tab-panel-innerContext h1 {
     color: #565656;
     font-family: Inter;
@@ -74,6 +77,12 @@
     margin-bottom: 20px;
 }
 
+.tab-panel-innerContext-content{
+    display:flex;
+    max-height:480px;
+    overflow:auto;
+}
+
 .tab-panel-innerContext p {
     color: #848484;
     font-family: "Noto Sans TC";
@@ -82,6 +91,13 @@
     font-weight: 500;
     line-height: 35px;
     letter-spacing: 2px;
+}
+
+
+/*留言板*/
+.tab-pannel-commentBoard{
+    
+    overflow: auto;
 }
 
 
@@ -180,6 +196,12 @@
         height: 220px;
     }
 
+    .tab-panel-innerContext-content{
+       
+        max-height:180px;
+      
+    }
+
     .tab-panel-innerContext h1{
         font-size: 16px;
         margin-bottom: 10px;
@@ -205,6 +227,13 @@
     .tab-content {
         padding: 10px 0px;
         height: 180px;
+    }
+
+    
+    .tab-panel-innerContext-content{
+      
+        max-height:150px;
+       
     }
 
     .tab-panel-innerContext h1{

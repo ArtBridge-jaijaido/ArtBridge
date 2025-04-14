@@ -58,8 +58,18 @@
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: var(--artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom);
-    justify-content: center;
+    justify-content:flex-start;
 }
+
+.artworkPainterProfile-MasonryArtCommunity-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: var(--artworkPainterProfile-artworkPainterMasonryGrid-container-margin-bottom);
+    justify-content: flex-start;
+    position: relative;
+}
+
 .artworkPainterProfile-artworkReview-container{
     display:flex;
     flex-direction: column;
@@ -67,6 +77,7 @@
     justify-items: stretch; 
     align-items: start;
 }
+
 .artworkPainterProfile-artworkCard-container{
     width:100%;
     padding-top:20px;
@@ -79,6 +90,7 @@
     align-items: start;
     margin-bottom:var(--artworkPainterProfile-artworkCard-container-margin-bottom);
 }
+
 /*顯示更多*/
 .artworkPainter-show-more-button {
     background: none;

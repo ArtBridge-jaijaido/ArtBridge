@@ -1,11 +1,19 @@
 "use client";
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import "./ModalImgArtCommunity.css";
 import Tabs from '@/components/Tabs/Tab.jsx';
+import ArticleComment from '@/components/ArticleComments/ArticleComments.jsx';
+import { toggleArticleCollect } from "@/services/artworkArticleService";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
 const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
 
-  if (!isOpen || !data) return null;
+  
+
+  if (!isOpen || !data  ) return null;
+
+  console.log(data.isCollected);
+
 
   const tabs = [
     {
@@ -15,13 +23,23 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
     },
     {
       label: "留言板",
-      content: <div>留言板區域，顯示留言的內容。</div>,
+      content: data?.articleId && data?.userUid? (
+        <ArticleComment
+          articleId={data.articleId}
+          userUid={data.userUid}
+         
+        />
+      ) : <p>留言板載入中...</p>,
     },
     {
       label: "圖片資訊",
-      content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageCateorgy: data.imageCateorgy },
+      content: { imageSource: data.imageSource, imageReleaseDate: data.imageReleaseDate, imageStyles: data.imageStyles, imageCategory: data.imageCategory },
     },
   ];
+
+  
+  
+  
 
   return (
     <div className="ModalImgArtCommunity-overlay" onClick={onClose}>
@@ -50,14 +68,11 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
               <img src={data.src} alt="Artwork" />
             </div>
 
-            <div className="ModalImgArtCommunity-category-container">
-              {data.imageCateorgy.map((category, index) => (
-                <span key={index} className="ModalImgArtCommunity-category">{category}</span>
+            <div className="ModalImgArtCommunity-styles-container">
+              {data.imageStyles.map((style, index) => (
+                <span key={index} className="ModalImgArtCommunity-styles">{style}</span>
               ))}
             </div>
-
-          
-
           </div>
 
           {/* 右側選擇欄 */}
@@ -84,7 +99,13 @@ const ModalImgArtCommunity = ({ isOpen, onClose, data }) => {
                 <span>{data.shares}</span>
               </div>
               <div className="ModalImgArtCommunity-footer-icons ModalImgArtCommunity-collection">
-                <img src="/images/icons8-bookmark-96-1.png" alt="collectionIcon"></img>
+                <img src={
+                      data.isCollected
+                        ? "/images/icons8-bookmark-96-6.png"
+                        : "/images/icons8-bookmark-96-4.png"
+                    }
+                
+                alt="collectionIcon"></img>
                 <span>珍藏</span>
               </div>
             </div>

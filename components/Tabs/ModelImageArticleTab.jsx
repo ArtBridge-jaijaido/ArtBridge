@@ -6,15 +6,27 @@ import { updateArticleData } from "@/services/artworkArticleService";
 import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
+import ArticleComment from '@/components/ArticleComments/ArticleComments.jsx';
 import "./ModelImageArticleTab.css";
 
 
 
 const ModelImageArticleTabs = ({ data }) => {
 
+  if (!data) return null;
+
   const tabs = [
     { label: "內文", content: { articleId: data?.articleId, innerContext: data?.innerContext, innerContextTitle: data?.title } },
-    { label: "留言板", content: <div>留言板區域，顯示留言的內容。</div> },
+    {
+      label: "留言板",
+      content: data?.articleId && data?.userUid? (
+        <ArticleComment
+          articleId={data.articleId}
+          userUid={data.userUid}
+         
+        />
+      ) : <p>留言板載入中...</p>,
+    },
     { label: "圖片資訊", content: { imageSource: data?.imageSource || "無", imageReleaseDate: data?.createdAt, imageCateorgy: data?.selectedStyles } }
   ];
 
@@ -60,6 +72,7 @@ const ModelImageArticleTabs = ({ data }) => {
         articleId: data.articleId,
         updateData: { innerContext: editedText },
       });
+
 
       //  更新 Redux store（確保前端同步更新）
       dispatch(updatePainterArticle({

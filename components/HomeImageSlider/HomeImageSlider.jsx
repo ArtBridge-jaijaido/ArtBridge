@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 const HomeImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [screenWidth, setScreenWidth] = useState(0);
+  
 
   const images = ["/images/testing-Arkwork-image.png",
     "/images/testing-Arkwork-image-1.png",

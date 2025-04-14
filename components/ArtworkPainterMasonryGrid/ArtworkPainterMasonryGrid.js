@@ -2,8 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import "./ArtworkPainterMasonryGrid.css";
+import { togglePortfolioLike, checkPortfolioIdExists } from "@/services/artworkPortfolioService";
+import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
+import { useSelector } from "react-redux";
+import { useToast } from "@/app/contexts/ToastContext.js";
+import { usePathname } from "next/navigation";
 
-const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
+
+const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onUnlike }) => {
+  const pathname = usePathname();
+  const isCollectionPage = pathname.includes("artworkCollectionList");
   const defaultColumnWidths = [270, 270, 270, 270, 270];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
@@ -12,7 +20,10 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
   const [imageLoaded, setImageLoaded] = useState({});
   const [categoryCounts, setCategoryCounts] = useState({});
   const [isPreloaded, setIsPreloaded] = useState(false);
-  const [isFavorite, setFavorites] = useState({});
+  const currentUser = useSelector((state) => state.user.user);
+  const [likeStates, setLikeStates] = useState({});
+  const { addToast } = useToast();
+
 
   // **初始化分類計數**
   useEffect(() => {
@@ -61,7 +72,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
     });
 
     setFilteredImages(newFilteredImages);
-  }, [selectedFilter, images]);
+  }, [selectedFilter, images.length]);
 
   // **更新 Masonry 欄位配置**
   useEffect(() => {
@@ -97,73 +108,123 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
     setColumnItems(newColumnItems);
   }, [filteredImages, columnWidths, isPreloaded]);
 
-  // **切換收藏狀態**
-  const toggleFavorite = (imageIndex) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [imageIndex]: !prev[imageIndex],
-    }));
+
+  // **切換愛心狀態**
+  const handleToggleLike = async (e, image) => {
+
+    e.stopPropagation();
+
+
+
+    const portfoliExist = await checkPortfolioIdExists(image.userUid, image.portfolioId);
+    if (!portfoliExist) {
+      addToast("error", "sorry 該作品已被原作者刪除");
+      fetchPainterPortfolios();
+      return;
+    }
+
+    if (!currentUser) {
+      addToast("error", "請先登入才能按讚喔！");
+      return;
+    }
+
+    try {
+      const response = await togglePortfolioLike(image.userUid, image.portfolioId, currentUser.uid);
+
+      if (response.success) {
+        const hasLiked = image.likedBy?.includes(currentUser.uid);
+
+        if (isCollectionPage) {
+          console.log("isCollectionPage")
+          onUnlike(image.portfolioId);
+        }
+
+        setLikeStates((prev) => ({
+          ...prev,
+          [image.portfolioId]: !hasLiked,
+        }));
+      }
+    } catch (err) {
+      console.error("按讚失敗", err);
+      addToast("error", "按讚失敗，請稍後再試！");
+    }
   };
 
   // **下載圖片**
-  const downloadImage = (imageSrc, e) => {
+  const downloadImage = (imageUrl, e) => {
     e.stopPropagation();
-    fetch(imageSrc)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = imageSrc.substring(imageSrc.lastIndexOf("/") + 1) || "download.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      })
-      .catch((error) => console.error("Download failed:", error));
+    const a = document.createElement("a");
+    a.href = imageUrl;
+    a.download = "artwork.jpg";
+    a.click();
   };
+
+  if (!images || images.length === 0) {
+    return <div className="ArtworkPainter-noData">目前還沒有任何作品喔！</div>;
+
+  }
 
   return (
     <div className="ArtworkPainter-masonry-container">
       {/* 篩選按鈕 */}
-      <div className="ArtworkPainter-filter">
-        <button
-          className={`ArtworkPainter-filter-button ${selectedFilter === "all" ? "selected" : ""}`}
-          onClick={() => setSelectedFilter("all")}
-        >
-          全部 {images.length}
-        </button>
-        {Object.entries(categoryCounts).map(([category, count]) => (
+      {!isCollectionPage && (
+        <div className="ArtworkPainter-filter">
           <button
-            key={category}
-            className={`ArtworkPainter-filter-button ${selectedFilter === category ? "selected" : ""}`}
-            onClick={() => setSelectedFilter(category)}
+            className={`ArtworkPainter-filter-button ${selectedFilter === "all" ? "selected" : ""}`}
+            onClick={() => setSelectedFilter("all")}
           >
-            {category} {count}
+            全部 {images.length}
           </button>
-        ))}
-      </div>
+          {Object.entries(categoryCounts).map(([category, count]) => (
+            <button
+              key={category}
+              className={`ArtworkPainter-filter-button ${selectedFilter === category ? "selected" : ""}`}
+              onClick={() => setSelectedFilter(category)}
+            >
+              {category} {count}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* **只有當圖片完全載入後才顯示 Masonry** */}
       {isPreloaded ? (
         <div className="ArtworkPainter-masonry-grid">
           {columnItems.map((column, columnIndex) => (
             <div key={columnIndex} className="ArtworkPainter-masonry-grid-column" style={{ maxWidth: `${columnWidths[columnIndex]}px` }}>
-              {column.map((image, imageIndex) => (
-                <div key={imageIndex} className="ArtworkPainter-masonry-grid-item">
-                  <img src={image.exampleImageUrl} alt={`Artwork ${imageIndex + 1}`} />
+              {column.map((image, imageIndex) => {
+                const isLiked = likeStates[image.portfolioId] ?? image.likedBy?.includes(currentUser?.uid);
 
-                  {/* **按鈕只在圖片完全載入後顯示** */}
-                  {imageLoaded[image.portfolioId] && image.exampleImageUrl && image.download === "是" && (
-                    <div className="ArtworkPainter-masonry-downloadIcon-container" onClick={(e) => downloadImage(image.src, e)}>
-                      <img src="/images/download-icon.png" alt="Download" />
-                    </div>
-                  )}
-                  {imageLoaded[image.portfolioId] && image.exampleImageUrl && (
-                    <button className="ArtworkPainter-masonry-likesIcon-container" onClick={() => toggleFavorite(columnIndex * columnItems[0].length + imageIndex)}>
-                      <img src={isFavorite[columnIndex * columnItems[0].length + imageIndex] ? "/images/icons8-love-48-1.png" : "/images/icons8-love-96-26.png"} alt="favorite" className="ArtworkPainter-favorite-icon" />
-                    </button>
-                  )}
-                </div>
-              ))}
+                return (
+                  <div key={imageIndex} className="ArtworkPainter-masonry-grid-item">
+                    <img
+                      src={image.exampleImageUrl}
+                      alt={`Artwork ${imageIndex + 1}`}
+                    />
+
+                    {imageLoaded[image.portfolioId] && image.exampleImageUrl && image.download === "是" && !isCollectionPage && (
+                      <div className="ArtworkPainter-masonry-downloadIcon-container" onClick={(e) => downloadImage(image.exampleImageUrl, e)}>
+                        <img src="/images/download-icon.png" alt="Download" />
+                      </div>
+                    )}
+
+                    {imageLoaded[image.portfolioId] && image.exampleImageUrl && (
+                      <button className="ArtworkPainter-masonry-likesIcon-container" onClick={(e) => handleToggleLike(e, image)}>
+                        <img
+                          src={
+                            isLiked
+                              ? "/images/icons8-love-48-1.png"
+                              : "/images/icons8-love-96-26.png"
+                          }
+                          alt="favorite"
+                          className="ArtworkPainter-favorite-icon"
+                        />
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+
             </div>
           ))}
         </div>

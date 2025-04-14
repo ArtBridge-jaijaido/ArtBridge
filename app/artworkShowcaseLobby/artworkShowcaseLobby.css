@@ -51,6 +51,7 @@
   flex-wrap: wrap;/* wrap items to the next line */
   width: 100%;
   margin-bottom: var(--artworkShowcaseLobby-artworks-container-margin-bottom);
+ 
 }
 
 

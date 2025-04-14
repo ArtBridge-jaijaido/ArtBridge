@@ -6,7 +6,7 @@ import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.j
 import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
 import ArtworkCard from '@/components/ArtworkCard/ArtworkCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
-import { subscribeToArtworks } from "@/lib/artworkListener";
+import { fetchPainterArtwork  } from "@/lib/artworkListener";
 import {subscribeToUsers} from "@/lib/userListener";
 import { useSelector } from 'react-redux';
 import { artMarketProduct, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline } from '@/lib/artworkDropdownOptions.js';
@@ -42,6 +42,10 @@ const ArtMarketPage = () => {
             setIsLoading(false);
         }
     }, [artworks]);
+
+    useEffect(()=>{
+        fetchPainterArtwork();
+    },[selectedOptions, currentPage]);
 
    // 取得當前日期 (去掉時分秒)
     const today = new Date();
@@ -101,7 +105,7 @@ const ArtMarketPage = () => {
         currentPage * ITEMSPERPAGE
     );
 
-    const totalPages = Math.ceil(artworks.length / ITEMSPERPAGE);
+    const totalPages = Math.ceil(filteredArtworks.length / ITEMSPERPAGE);
     
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
@@ -134,8 +138,6 @@ const ArtMarketPage = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-
-    
 
 
     return (
@@ -196,30 +198,39 @@ const ArtMarketPage = () => {
                 />
             </div>
 
-            <div className="artMarket-product-container">
-                {isLoading ? (
-                    <p></p>
+            {filteredArtworks.length === 0 ? (
+                <p>Sorry! 目前沒有相對應的市集</p>
                 ) : (
+                <div className="artMarket-product-container">
+                    {isLoading ? (
+                    <p>載入中...</p> // 可改成 Spinner 或 Loading 組件
+                    ) : (
                     currentItems.map((artwork) => (
                         <ArtworkCard
-                            key={artwork.artworkId}
-                            imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
-                            title={artwork.marketName}
-                            price={artwork.price}
-                            artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
-                            artistNickName={artwork.artistNickName || "使用者名稱"}
-                            artistUid={artwork.userUid}
+                        key={artwork.artworkId}
+                        imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
+                        title={artwork.marketName}
+                        price={artwork.price}
+                        artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
+                        artistNickName={artwork.artistNickName || "使用者名稱"}
+                        artistUid={artwork.userUid}
+                        artworkId={artwork.artworkId}
+                        likedby={artwork.likedBy || []}
                         />
                     ))
+                    )}
+                </div>
                 )}
-            </div>
+
                 
             {/* 使用分頁元件 */}
-            <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
+            {filteredArtworks.length > 0 && (
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                />
+            )}
 
         </div>
     );

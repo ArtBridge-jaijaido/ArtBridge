@@ -8,8 +8,7 @@ import {useDispatch} from 'react-redux';
 import {deletePainterArticle} from '@/app/redux/feature/painterArticleSlice.js';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
-
-
+import { getAllCommentCounts } from "@/services/articleCommentService";
 
 const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
     const [imageLoaded, setImageLoaded] = useState({});
@@ -20,7 +19,8 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
     const { addToast } = useToast();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentData, setCurrentData] = useState(null);
-
+    const [commentCounts, setCommentCounts] = useState({});
+    
     const breakpointColumns = {
         default: 5, // 桌機最多 5 欄
         1280: 5,
@@ -40,6 +40,12 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
 
         return matchedBreakpoint;
     };
+
+    useEffect(() => {
+        if (images && images.length > 0) {
+          getAllCommentCounts(images).then(setCommentCounts);
+        }
+      }, [images]);
 
 
     useEffect(() => {
@@ -116,12 +122,16 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
     const handleArticleClick = (article) => {
         if (!article || !article.blurredImageUrl) return;
 
+        
+
         // 先確保 blur image 先載入
         const img = new Image();
         img.src = article.blurredImageUrl;
         img.onload = () => {
-           
-            setCurrentData(article);
+            
+            // 把留言數量傳入 ModalImageArticle
+            const commentCount = commentCounts[article.articleId] || 0;
+            setCurrentData({ ...article, commentCount }); // 加入留言數
             setIsModalOpen(true);
         };
     };
@@ -163,15 +173,15 @@ const PainterArticleMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
                             <div className="painterArticle-masonry-functionIcon-container">
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-love-96-14.png" alt="like-icon"></img>
-                                    <span>999+</span>
+                                    <span>{image.likes}</span>
                                 </div>
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-message-96-3.png" alt="message-icon"></img>
-                                    <span>20</span>
+                                    <span>{commentCounts[image.articleId] || 0}</span>
                                 </div>
                                 <div className="painterArticle-masonry-functionIcon-group-container">
                                     <img src="/images/icons8-bookmark-96-4.png" alt="mark-icon"></img>
-                                    <span>15</span>
+                                    <span>{image.collections}</span>
                                 </div>
                             </div>
                         </>

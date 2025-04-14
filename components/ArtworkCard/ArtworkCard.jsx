@@ -4,17 +4,63 @@ import "./ArtworkCard.css";
 import { FadeLoader } from "react-spinners";
 import { useNavigation } from "@/lib/functions.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid }) => {
+import {toggleArtworkLike} from "@/services/artworkMarketService.js";
+import {useSelector} from "react-redux";
+import { useToast } from "@/app/contexts/ToastContext.js";
+import { usePathname } from "next/navigation";
 
-  const [isFavorite, setIsFavorite] = useState(false); 
+/**
+ * 
+ * @param {onUnlike} 取消在artworkCollectionList 內的市集按讚並移除 
+ * @returns 
+ */
+
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid,artworkId,likedby , onUnlike }) => {
+  const pathname = usePathname();
+  const isCollectionPage = pathname.includes("artworkCollectionList");
+  const [likeStates, setLikeStates] = useState({});
   const [pageType, setPageType] = useState("market"); // 預設是 market 頁面
   const [isImageLoaded, setIsImageLoaded] = useState(false); 
   const navigate = useNavigation();
   const { setIsLoading } = useLoading();
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
-  };
+  const currentUser = useSelector((state) => state.user.user);
+  const { addToast } = useToast();
+  const isLiked = likeStates[artworkId] ?? likedby?.includes(currentUser?.uid);
 
+
+  /*按讚功能*/
+  const handleToggleLike = async (e) =>{
+    e.stopPropagation();
+
+    if (!currentUser) {
+      addToast("error", "請先登入才能按讚喔！");
+      return;
+    }
+
+    try {
+      const response = await toggleArtworkLike(artistUid, artworkId, currentUser.uid);
+      if(response.success){
+        const hasLiked = likedby?.includes(currentUser.uid);
+
+        if (isCollectionPage) {
+          onUnlike(artworkId);
+        }
+
+        setLikeStates((prev) => ({
+          ...prev,
+          [artworkId]: !hasLiked,
+        }));
+
+       
+      }
+    }catch(err){
+      console.error("Error toggling like:", err);
+      addToast("error", "按讚失敗，請稍後再試！");
+    }
+  }
+
+
+  
   useEffect(() => {
     // 監聽路徑變更，確保 className 正確
     if (typeof window !== "undefined") {
@@ -63,20 +109,24 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
       {/* 商品標題 */}
       <span className="Artwork-title">{title}</span>
 
-      {/* 收藏按鈕 */}
-      <button className="Artwork-favorite-button" onClick={toggleFavorite}>
-        <img
-          src={isFavorite ? "/images/icons8-love-48-1.png" : "/images/icons8-love-96-26.png"}
-          alt="favorite"
-          className="Artwork-favorite-icon"
-        />
-      </button>
+      {/* 按讚按鈕 */}
+      
+        <button className="Artwork-favorite-button" onClick={handleToggleLike}>
+          <img
+            src={
+              isLiked
+              ? "/images/icons8-love-48-1.png"
+              : "/images/icons8-love-96-26.png"
+            }
+            alt="favorite"
+            className="Artwork-favorite-icon"
+          />
+        </button>
+
       
       {/* 下方內容 */}
       <div className="Artwork-card-content"> 
 
-
-        
 
 
         {/* 價格與標籤 */}
