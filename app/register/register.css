@@ -170,42 +170,63 @@
         transition: color 0.3s ease; 
     }
 
-    /*身分證 block*/ 
-    .register-file-container {
-        display: flex;
-        gap: var(--register-file-container-gap);
-    }
-
-    .register-file-box {
-        width:100%;
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: var(--register-file-box-max-width);
-        height: var(--register-file-box-height);
-        border: 1px solid #7BC8EC; 
+    /*gender part*/
+    .register-form-group select{
+        height: var(--register-form-group-input-height);
+        padding: 0px 32px;
+        border: 1px solid #7BC8EC;
         border-radius: var(--register-form-input-border-radius);
-        cursor: pointer;           
-        color: #7BC8EC;          
-        font-size: var(--register-form-group-input-placeholder-font-size); 
+        font-size:var(--register-form-group-input-placeholder-font-size);
         font-weight:var(--register-form-group-input-placeholder-font-weight);
-        line-height:var(--register-form-group-input-placeholder-line-height);
+        line-height:normal; 
         letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
-        background-color: #fff;   
-        overflow: hidden; 
+        color: #7BC8EC;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
     }
 
-    .register-preview-image {
-        width: 100%; 
-        height: auto; 
-        object-fit: cover; 
-        
+    /* 🔻 自訂箭頭 */
+    .register-form-group-gender::after {
+        content: "▼";
+        position: absolute;
+        top: 30%;
+        right: 30px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        width: 0;
+        height: 0;
+        color:#7BC8EC;
     }
 
+    .register-form-group select option{
+        font-size:var(--register-form-group-input-placeholder-font-size);
+        font-weight:var(--register-form-group-input-placeholder-font-weight);
+        line-height:normal; 
+        letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
+        color: #7BC8EC;
+    }
+
+    .register-form-group select:focus{
+        border: 2px solid #7BC8EC;
+        outline: none;  
+    }
+
+
+    /* birthday part*/
+    .register-form-group-birthday{
+        font-size:var(--register-form-group-input-placeholder-font-size);
+        font-weight:var(--register-form-group-input-placeholder-font-weight);
+        line-height:normal; 
+        letter-spacing:var(--register-form-group-input-placeholder-letter-spacing);
+        color: #7BC8EC;
+    }
+    
+   
     /* register bottom part*/
     .register-bottom-part-container{
-       
+   
         width:100%;
         display:flex;
         justify-content: space-between;
@@ -272,14 +293,28 @@
         color:#417791;
     }
 
+    .register-submit-buttom{
+        background-color: #fff !important;
+        color:#5ea5d4  !important;
+    }
+
+    .register-submit-buttom:hover,
+    .register-submit-buttom.register-is-loading {
+      background-color: #5ea5d4 !important;
+      color: #fff !important;
+    }
+
+   
+
 
     /* error message */
     .register-error-text{
         position:absolute;
         bottom:-25px;
         left:8px;
-        color:#F56C6C;
+        color:#F56C6C !important;
         font-size:var(--register-error-text-font-size);
+        letter-spacing:1px !important;
     }
 
     
@@ -329,14 +364,16 @@
             --register-form-group-input-placeholder-font-size:16px;
         }
 
-        .register-file-container {
-            --register-file-container-gap: 23px;
+        /*gender part*/
+
+        .register-form-group select{
+            --register-form-group-input-placeholder-font-size:16px;
+            --register-form-group-input-height: 50px;
+            padding:0px 29px;
         }
 
-        .register-file-box{
-            --register-file-box-max-width:266px;
-            --register-file-box-height: 130px;
-            --register-form-group-input-placeholder-font-size: 16px;
+        .register-form-group select option{
+            --register-form-group-input-placeholder-font-size:16px;
         }
 
         .register-bottom-part-container{
@@ -374,7 +411,7 @@
 
     @media screen and (max-width:834px){
         .register-page{
-            width:834px;
+           
             padding:85px 139px 93px 139px;
         }
 
@@ -407,10 +444,17 @@
             
         }
 
-        .register-file-box{
-
-            --register-form-group-input-placeholder-font-size: 14px;
+        .register-form-group select{
+            --register-form-group-input-placeholder-font-size:14px;
+            
         }
+
+        .register-form-group select option{
+            --register-form-group-input-placeholder-font-size:14px;
+        }
+
+
+       
 
         .register-bottom-part-container{
             --register-bottom-part-container-margin-bottom: 52px;
@@ -445,10 +489,17 @@
     }
 
 
+    @media screen and (max-width:768px){
+        .register-page{
+            width:768px;
+        }
+    }
+
+
     @media screen and (max-width:440px){
         .register-page{
-            width:440px;
-            padding:44px 72px 83px 72px;
+            width:100%;
+            padding:44px 50px 83px 50px;
         }
 
         .register-top-part-container{
@@ -472,22 +523,26 @@
         
         }
 
+
         .register-form-group input[type="text"]::placeholder,
         .register-form-group input[type="email"]::placeholder,
         .register-form-group input[type="password"]::placeholder{
             --register-form-group-input-placeholder-font-size:12px;
         }
 
-        .register-file-container{
-            --register-file-container-gap: 13px;
+        .register-form-group select{
+            --register-form-group-input-placeholder-font-size:12px;
+            --register-form-group-input-height: 40px;
+            padding:0px 15px;
         }
 
-        .register-file-box{
+        .register-form-group select option{
+            --register-form-group-input-placeholder-font-size:12px;
+        }
 
-            --register-form-group-input-placeholder-font-size: 12px;
-            --register-file-box-max-width:142px;
-            --register-file-box-height:74px;
-
+        .register-form-group-gender::after {
+            top:25%;
+            font-size:12px;
         }
 
         .register-bottom-part-container{
@@ -521,9 +576,9 @@
     }
 
 
-    @media screen and (max-width:320px){
+    @media screen and (max-width:375px){
         .register-page{
-            width: 320px;
+          
             padding:35px 44px 16px 44px;
         }
 

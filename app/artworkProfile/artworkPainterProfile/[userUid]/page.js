@@ -21,7 +21,6 @@ const ArtworkPainterProfilePage = () => {
     const { userUid } = useParams();
     const { setIsLoading } = useLoading();
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.user.allUsers);
     const user = useSelector((state) => state.user.allUsers[userUid]) || {};
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
     const artworks = useSelector((state) => state.artwork.artworks);
