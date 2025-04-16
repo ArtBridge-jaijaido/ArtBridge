@@ -46,11 +46,12 @@ const RegisterPage = () => {
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
+     
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("表單送出：", formData);
+       
 
         // 驗證表單資料
         const validationErrors = ValidateFormData(formData);
@@ -225,7 +226,7 @@ const RegisterPage = () => {
                     <Link href="/login">登入</Link>
                 </div>
             </div>
-            <LoadingButton loadingText={"註冊中..."}   className={`${styles.registerArtistClientBtn} register-submit-buttom ${isSubmitting ? "register-is-loading" : ""}`} isLoading={isSubmitting} onClick={handleSubmit}>
+            <LoadingButton loadingText={"註冊中..."}   className={`register-submit-buttom ${isSubmitting ? "register-is-loading" : ""}`} isLoading={isSubmitting} onClick={handleSubmit}>
                 註冊
             </LoadingButton>
         </div>

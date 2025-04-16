@@ -5,8 +5,9 @@ import { useNavigation } from "@/lib/functions";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import Link from "next/link";
 import "./login.css";
-import styles from "../register/registerButton.module.css";
-import CustomButton from "@/components/CustomButton/CustomButton.jsx";
+// import styles from "../register/registerButton.module.css";
+// import CustomButton from "@/components/CustomButton/CustomButton.jsx";
+import LoadingButton from "@/components/LoadingButton/LoadingButton";
 import {getUserData} from "@/services/userService.js";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../app/redux/feature/userSlice.js';
@@ -34,9 +35,12 @@ const LoginPage = () => {
   const { addToast } = useToast();
   const navigate = useNavigation();
   const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsSubmitting(true);
 
     try {
       await setPersistence(auth, formData.rememberMe ? browserLocalPersistence : browserSessionPersistence); // 設定登入狀態
@@ -112,6 +116,8 @@ const LoginPage = () => {
        
           addToast("error", "錯誤: 登入失敗");
       }
+    }finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -160,11 +166,14 @@ const LoginPage = () => {
           <Link href="/register" className="login-highlight-blue"> 註冊</Link>
         </div>
       </div>
-      <CustomButton 
-        title="登入" 
-        className={styles.registerArtistClientBtn} 
+      <LoadingButton
+        loadingText={"登入中..."}
+        className={`login-submit-buttom ${isSubmitting ? "login-is-loading" : ""}`}
+        isLoading={isSubmitting}
         onClick={handleSubmit} 
-      />
+      >
+        登入
+      </LoadingButton>
     </div>
   )
 }

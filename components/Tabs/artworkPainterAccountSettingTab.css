@@ -96,39 +96,9 @@
   border-color: #007bff;
 }
 
-.artworkPainterAccountSetting-required {
-  margin-left: 10px;
-  color: #FF0000;
-}
 
-.artworkPainterAccountSetting-pending {
-  color: #AAA;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 1px;
-}
 
-/* 第一行：暱稱、出生年月日、身分證 */
-.artworkPainterAccountSetting-nickname {
-  grid-column: 1 / 2;
-}
 
-.artworkPainterAccountSetting-birthday {
-  grid-column: 2 / 3;
-
-}
-
-.artworkPainterAccountSetting-id {
-  grid-column: 3 / 4;
-  grid-row: 1 / 4;
-}
-
-/* 第二行：電子郵件、手機號碼、身分證正面 */
-.artworkPainterAccountSetting-email {
-  grid-column: 1 / 2;
-}
 
 .artworkPainterAccountSetting-email input:disabled {
   color: #aaa6a6; /* 深灰色文字 */
@@ -136,14 +106,7 @@
 
 }
 
-.artworkPainterAccountSetting-phone {
-  grid-column: 2 / 3;
-}
 
-/* 第三行：性別、身分證反面 */
-.artworkPainterAccountSetting-gender {
-  grid-column: 1 / 2;
-}
 
 .artworkPainterAccountSetting-gender select {
   width: 100%;
@@ -164,52 +127,7 @@
   border-color: #007bff;
 }
 
-/* 身分證區塊 */
 
-
-/* 身分證圖片容器 */
-.artworkPainterAccountSetting-id-image-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.artworkPainterAccountSetting-id-image {
-  width: 100%;
-  height: 190px;
-  border: 2px dashed #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  text-align: center;
-  font-size: 20px;
-  color: #666;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 當有圖片時，顯示圖片 */
-.uploaded-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-}
-
-/* 讓 input[type="file"] 覆蓋整個區域，但不可見 */
-.upload-input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* 鼠標懸停時增加可點擊感 */
-.artworkPainterAccountSetting-id-image:hover {
-  background-color: rgba(0, 0, 255, 0.1);
-}
 
 /*儲存按鈕*/
 

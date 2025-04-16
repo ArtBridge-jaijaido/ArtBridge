@@ -17,6 +17,38 @@ const ArtworkPainterAccountSettingVerify = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+
+  // **上傳身分證**
+  // **本地預覽 & Firebase URL**
+  const [selectedFrontImage, setSelectedFrontImage] = useState(null);
+  const [selectedBackImage, setSelectedBackImage] = useState(null);
+  const [frontImageUrl, setFrontImageUrl] = useState(user?.frontImageUrl || "");
+  const [backImageUrl, setBackImageUrl] = useState(user?.backImageUrl || "");
+
+
+  // **處理圖片選擇，但不馬上上傳**
+  const handleImageSelect = (event, isFront) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const previewUrl = URL.createObjectURL(file);
+
+    if (isFront) {
+      setSelectedFrontImage({ file, preview: previewUrl });
+    } else {
+      setSelectedBackImage({ file, preview: previewUrl });
+    }
+  };
+
+  // **銀行帳戶 
+  const [bankAccountData, setBankAccountData] = useState({
+    accountName: user?.bankAccountName || "",
+    bankCode: user?.bankCode || "",
+    bankNumber: user?.bankNumber || "",
+  });
+
+
+
   // **使用 useRef 來隱藏 input**
   const imageInputRefs = useRef([]);
   const processFileInputRef = useRef(null);
@@ -38,6 +70,13 @@ const ArtworkPainterAccountSettingVerify = () => {
         name: user.verifyProcessFile.name,  // 原始檔案名稱
       });
     }
+
+
+    if (user?.frontImageUrl) setFrontImageUrl(user.frontImageUrl);
+    if (user?.backImageUrl) setBackImageUrl(user.backImageUrl);
+
+
+
   }, [user]);
 
   const triggerImageUpload = (index) => {
@@ -137,7 +176,7 @@ const ArtworkPainterAccountSettingVerify = () => {
       if (selectedProcessFile?.file) {
         const processFilePath = `usersProfile/${user.uid}/accountSettingVerifyArtworks/verifyProcessFile`;
         const fileUrl = await uploadImage(selectedProcessFile.file, processFilePath);
-        
+
         uploadedProcessFile = {
           url: fileUrl,
           name: selectedProcessFile.file.name, // **存儲原始檔案名稱**
@@ -192,7 +231,7 @@ const ArtworkPainterAccountSettingVerify = () => {
             />
 
             {/* 顯示圖片預覽 */}
-            {selectedImages[index]?.preview? (
+            {selectedImages[index]?.preview ? (
               <img
                 src={selectedImages[index].preview}
                 alt="上傳的圖片"
@@ -206,24 +245,102 @@ const ArtworkPainterAccountSettingVerify = () => {
 
         {/* 作畫過程上傳框 (MP4 或 PDF) */}
         <div
-            className="artworkPainterAccountSettingVerify-upload-box"
-            onClick={triggerProcessFileUpload} // 觸發 input
-          >
-            <input
-              type="file"
-              accept="video/mp4, application/pdf"
-              ref={processFileInputRef}
-              onChange={handleProcessFileUpload}
-              style={{ display: "none" }} // 隱藏 input
-            />
-            {selectedProcessFile?.name ? (
-              <p>{selectedProcessFile.file ? selectedProcessFile.file.name : selectedProcessFile.name}</p>
-            ) : (
-              <span>MP4, PDF (最大15MB)</span>
-            )}
-          </div>
+          className="artworkPainterAccountSettingVerify-upload-box"
+          onClick={triggerProcessFileUpload} // 觸發 input
+        >
+          <input
+            type="file"
+            accept="video/mp4, application/pdf"
+            ref={processFileInputRef}
+            onChange={handleProcessFileUpload}
+            style={{ display: "none" }} // 隱藏 input
+          />
+          {selectedProcessFile?.name ? (
+            <p>{selectedProcessFile.file ? selectedProcessFile.file.name : selectedProcessFile.name}</p>
+          ) : (
+            <span>MP4, PDF (最大15MB)</span>
+          )}
+        </div>
 
       </div>
+
+      <div className="artworkPainterAccountSettingVerify-id-bankAccount-container">
+        {/*上傳身分證*/}
+        <div className="artworkPainterAccountSettingVerify-id-section">
+          <h2>身分證<span className="artworkPainterAccountSettingVerify-required">*</span>  <span className="artworkPainterAccountSettingVerify-pending">⚠️官方驗證中</span></h2>
+
+          <div className="artworkPainterAccountSettingVerify-id-image-container">
+            {/* 正面 */}
+            <div className="artworkPainterAccountSettingVerify-id-image">
+              {selectedFrontImage?.preview ? (
+                <img src={selectedFrontImage.preview} alt="身分證正面" />
+              ) : frontImageUrl ? (
+                <img src={frontImageUrl} alt="身分證正面" />
+              ) : (
+                <span>正面</span>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageSelect(e, true)}
+                className="artworkPainterAccountSettingVerify-upload-input"
+              />
+            </div>
+
+
+            {/* 反面 */}
+            <div className="artworkPainterAccountSettingVerify-id-image">
+              {selectedBackImage?.preview ? (
+                <img src={selectedBackImage.preview} alt="身分證反面" />
+              ) : backImageUrl ? (
+                <img src={backImageUrl} alt="身分證反面" />
+              ) : (
+                <span>反面</span>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageSelect(e, false)}
+                className="artworkPainterAccountSettingVerify-upload-input"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* 銀行帳戶資料 */}
+        <div className="artworkPainterAccountSettingVerify-bankAccount-section">
+          <h2>銀行帳戶 <span className="artworkPainterAccountSettingVerify-required">*</span></h2>
+          <div className="artworkPainterAccountSettingVerify-bankAccount-form">
+            <input
+              type="text"
+              placeholder="請輸入戶名"
+              value={bankAccountData.accountName}
+              onChange={(e) =>
+                setBankAccountData((prev) => ({ ...prev, accountName: e.target.value }))
+              }
+            />
+            <input
+              type="text"
+              placeholder="請輸入銀行代碼"
+              value={bankAccountData.bankCode}
+              onChange={(e) =>
+                setBankAccountData((prev) => ({ ...prev, bankCode: e.target.value }))
+              }
+            />
+            <input
+              type="text"
+              placeholder="請輸入銀行帳戶"
+              value={bankAccountData.bankNumber}
+              onChange={(e) =>
+                setBankAccountData((prev) => ({ ...prev, bankNumber: e.target.value }))
+              }
+            />
+          </div>
+
+        </div>
+      </div>
+
+
 
       {/* 說明區塊 */}
       <div className="artworkPainterAccountSettingVerify-info">
