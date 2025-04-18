@@ -100,7 +100,7 @@ const LoginPage = () => {
         addToast("success", "成功:登入成功");
 
         setTimeout(() => {
-          navigate("/artworkDashboard/painterDashboard");
+          navigate("/artworkDashboard");
         }, 2000);
 
       } else {
