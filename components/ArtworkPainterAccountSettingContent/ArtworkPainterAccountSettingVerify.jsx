@@ -4,7 +4,9 @@ import "./ArtworkPainterAccountSettingVerify.css";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { uploadImage } from "@/services/storageService.js";
-import { updateUserData } from "@/services/userService.js";
+import { updateUserVerifyData, getUserVerificationData } from "@/services/userService.js";
+import { maskBankNumber } from "@/lib/functions.js";
+import { validateBankAccount } from "@/lib/bankAccountValidation";
 import { updateUser } from "@/app/redux/feature/userSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,6 +18,8 @@ const ArtworkPainterAccountSettingVerify = () => {
   const { addToast } = useToast();
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [isEditingBankNumber, setIsEditingBankNumber] = useState(false);
+
 
 
   // **上傳身分證**
@@ -27,7 +31,7 @@ const ArtworkPainterAccountSettingVerify = () => {
 
 
   // **處理圖片選擇，但不馬上上傳**
-  const handleImageSelect = (event, isFront) => {
+  const handleIdImageSelect = (event, isFront) => {
     const file = event.target.files[0];
     if (!file) return;
 
@@ -54,30 +58,34 @@ const ArtworkPainterAccountSettingVerify = () => {
   const processFileInputRef = useRef(null);
 
   useEffect(() => {
-    if (user?.verifyThreeArtwork && user.verifyThreeArtwork.length > 0) {
+    const fetchVerificationData = async () => {
+      if (!user?.uid) return;
+
+      const data = await getUserVerificationData(user.uid);
+      if (!data) return;
+
+      setFrontImageUrl(data.frontImageUrl);
+      setBackImageUrl(data.backImageUrl);
+      setBankAccountData(data.bankAccountData);
       setSelectedImages(
-        user.verifyThreeArtwork.map((imageUrl) => ({
+        data.verifyThreeArtwork.map((url) => ({
           file: null,
-          preview: imageUrl,
+          preview: url,
         }))
       );
-    }
+      if (data.verifyProcessFile) {
+        setSelectedProcessFile({
+          file: null,
+          preview: data.verifyProcessFile.url,
+          name: data.verifyProcessFile.name,
+        });
+      }
+    };
 
-    if (user?.verifyProcessFile?.url) {
-      setSelectedProcessFile({
-        file: null,
-        preview: user.verifyProcessFile.url, // URL
-        name: user.verifyProcessFile.name,  // 原始檔案名稱
-      });
-    }
-
-
-    if (user?.frontImageUrl) setFrontImageUrl(user.frontImageUrl);
-    if (user?.backImageUrl) setBackImageUrl(user.backImageUrl);
+    fetchVerificationData();
 
 
-
-  }, [user]);
+  }, [user?.uid]);
 
   const triggerImageUpload = (index) => {
     if (imageInputRefs.current[index]) {
@@ -146,12 +154,20 @@ const ArtworkPainterAccountSettingVerify = () => {
       return;
     }
 
+    const validationErrors = validateBankAccount(bankAccountData);
+    if (Object.keys(validationErrors).length > 0) {
+      addToast("error", Object.values(validationErrors)[0]); // 顯示第一個錯誤
+      return;
+    }
+
     setIsSaving(true);
 
     try {
       // 取得已存在的圖片 URL，確保未變更的圖片不會被刪除
       const existingImages = user.verifyThreeArtwork || [];
       const existingProcessFile = user.verifyProcessFile || null;
+      let updatedFrontImageUrl = frontImageUrl;
+      let updatedBackImageUrl = backImageUrl;
 
       // 確保 `selectedImages` 陣列中的圖片是完整的
       const finalImages = selectedImages.map((image, index) => {
@@ -186,20 +202,58 @@ const ArtworkPainterAccountSettingVerify = () => {
       // 等待所有圖片上傳完成
       const uploadedImageUrls = await Promise.all(uploadPromises);
 
+      // **上傳身分證圖片**
+      if (selectedFrontImage?.file) {
+        updatedFrontImageUrl = await uploadImage(
+          selectedFrontImage.file,
+          `usersIdImage/${user.uid}/IdFrontImage.jpg`
+        );
+      }
+
+      if (selectedBackImage?.file) {
+        updatedBackImageUrl = await uploadImage(
+          selectedBackImage.file,
+          `usersIdImage/${user.uid}/IdBackImage.jpg`
+        );
+      }
+
+      //取得原有舊資料
+      const existingVerificationData = await getUserVerificationData(user.uid);
+
       // **更新 Firebase Firestore**
-      const updatedData = {
-        verifyThreeArtwork: uploadedImageUrls,
-        verifyProcessFile: uploadedProcessFile
+      const userVerifyData = {
+        frontImageUrl: updatedFrontImageUrl || existingVerificationData?.frontImageUrl,
+        backImageUrl: updatedBackImageUrl || existingVerificationData?.backImageUrl,
+        bankAccountData,
+        verifyThreeArtwork: uploadedImageUrls.filter(Boolean).length ? uploadedImageUrls : existingVerificationData?.verifyThreeArtwork,
+        verifyProcessFile: uploadedProcessFile || existingVerificationData?.verifyProcessFile,
       };
-      await updateUserData(user.uid, updatedData);
+      const response = await updateUserVerifyData(user.uid, userVerifyData);
 
-      // **更新 Redux store**
-      dispatch(updateUser(updatedData));
+      if (response.success) {
+        // **更新 Redux store**
+        dispatch(updateUser(userVerifyData));
 
-      addToast("success", "驗證作品與作畫過程上傳成功！");
+        addToast("success", "驗證資料上傳成功！");
+        setIsEditingBankNumber(false); 
+
+        // 更新 Firebase 圖片 URL，確保前端顯示 Firebase 下載的圖片
+        setFrontImageUrl(updatedFrontImageUrl);
+        setBackImageUrl(updatedBackImageUrl);
+
+        // 清除選擇的圖片，但保留 Firebase 圖片 URL
+        setSelectedFrontImage(null);
+        setSelectedBackImage(null);
+
+
+      } else {
+        addToast("error", "驗證資料上傳失敗，請稍後再試！");
+      }
+
+
     } catch (error) {
-      console.error("驗證作品上傳失敗:", error);
-      addToast("error", "驗證作品上傳失敗，請稍後再試！");
+      console.error("驗證資料上傳失敗:", error);
+      addToast("error", "驗證資料上傳失敗，請稍後再試！");
     } finally {
       setIsSaving(false);
     }
@@ -282,7 +336,7 @@ const ArtworkPainterAccountSettingVerify = () => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => handleImageSelect(e, true)}
+                onChange={(e) => handleIdImageSelect(e, true)}
                 className="artworkPainterAccountSettingVerify-upload-input"
               />
             </div>
@@ -300,7 +354,7 @@ const ArtworkPainterAccountSettingVerify = () => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => handleImageSelect(e, false)}
+                onChange={(e) => handleIdImageSelect(e, false)}
                 className="artworkPainterAccountSettingVerify-upload-input"
               />
             </div>
@@ -330,7 +384,12 @@ const ArtworkPainterAccountSettingVerify = () => {
             <input
               type="text"
               placeholder="請輸入銀行帳戶"
-              value={bankAccountData.bankNumber}
+              value={
+                isEditingBankNumber
+                  ? bankAccountData.bankNumber
+                  : maskBankNumber(bankAccountData.bankNumber)
+              }
+              onFocus={() => setIsEditingBankNumber(true)} // 一點擊就切換成真實資料
               onChange={(e) =>
                 setBankAccountData((prev) => ({ ...prev, bankNumber: e.target.value }))
               }

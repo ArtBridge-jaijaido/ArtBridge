@@ -125,8 +125,6 @@ const ArtworkPainterProfilePage = () => {
     }, [])
 
 
- 
-  
 
     const tabs = [
         {
@@ -210,9 +208,14 @@ const ArtworkPainterProfilePage = () => {
                         onMasonryReady={handleArticleMasonryReady}
                     />
                     </div>
-                    {!isArticleMasonryReady && (
+                    {!isArticleMasonryReady&&currentArticles.length!==0? (
                     <p className="MasonryArtCommunity-loading"style={{ position: 'absolute', top: 10 }} >文章載入中...</p>
-                    )}
+                    ): currentArticles.length === 0 ? (
+                        <div className="artworkCollectionList-noData" style={{ position: 'absolute', top: 10 }}>
+                            目前還沒有發布的文章喔!
+                        </div>
+                    ) : null
+                }
                 </div>
                 {articleVisibleItems < articleMasonryTotalItems && articleMasonryTotalItems>9&& (
                     <button onClick={handleArticleShowMore} className="artworkPainter-show-more-button" style={{ gridColumn: "span 5", marginTop: "20px" }}>
