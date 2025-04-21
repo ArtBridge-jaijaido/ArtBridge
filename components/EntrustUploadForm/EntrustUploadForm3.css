@@ -1,0 +1,231 @@
+/* === EntrustUploadForm3.css（RWD + placeholder 統一）=== */
+
+.EntrustUploadForm3-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.EntrustUploadForm3-container {
+  width: 100%;
+  padding: 20px;
+  max-width: 1000px;
+  background: white;
+}
+
+/* ✅ 統一 placeholder 樣式 */
+.EntrustUploadForm3-container input::placeholder,
+.EntrustUploadForm3-container textarea::placeholder {
+  color: #8C8C8C;
+  font-size: 18px;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm3-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  min-width: 120px;
+}
+
+.EntrustUploadForm3-group.file-type, .EntrustUploadForm3-group.file-size {
+  flex: 1;
+  width: 50%;
+}
+
+.EntrustUploadForm3-group label {
+  margin-bottom: 5px;
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm3-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.EntrustUploadForm3-size-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+  min-width: 0;
+  color: #4F4F4F;
+}
+
+.EntrustUploadForm3-size-input input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  font-size: 18px;
+  min-width: 0;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm3-size-input input::placeholder {
+  color: #8C8C8C;
+  font-size: 18px;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm3-size-input span {
+  font-size: 16px;
+  color: #555;
+  margin-left: 5px;
+  white-space: nowrap;
+}
+
+.EntrustUploadForm3-artist-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Noto Sans TC";
+}
+
+.EntrustUploadForm3-artist-input::placeholder {
+  color: #8C8C8C;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-family: "Noto Sans TC";
+}
+
+.EntrustUploadForm3-suggestion-list {
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  list-style: none;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: "Noto Sans TC";
+}
+
+.EntrustUploadForm3-suggestion-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.EntrustUploadForm3-suggestion-list li:hover {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm3-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+  gap: 100px;
+}
+
+.EntrustUploadForm3-button-group button {
+  padding: 0px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 120px;
+  height: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.EntrustUploadForm3-prev {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm3-next {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm3-next:hover {
+  background-color: #358bc5;
+}
+
+.EntrustUploadForm3-error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 760px) {
+  .EntrustUploadForm3-row {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .EntrustUploadForm3-group.file-type, 
+  .EntrustUploadForm3-group.file-size {
+    width: 100%;
+  }
+
+  .EntrustUploadForm3-button-group {
+    gap: 70px;
+    margin-top: 70px;
+  }
+
+  .EntrustUploadForm3-button-group button {
+    font-size: 14px;
+    width: 100px;
+    height: 35px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .EntrustUploadForm3-container {
+    padding-top: 0px;
+  }
+
+  .EntrustUploadForm3-button-group {
+    gap: 60px;
+    margin-top: 40px;
+  }
+
+  .EntrustUploadForm3-button-group button {
+    font-size: 12px;
+    width: 80px;
+    height: 35px;
+  }
+
+  .EntrustUploadForm3-group label,
+  .EntrustUploadForm3-size-input input,
+  .EntrustUploadForm3-size-input span {
+    font-size: 14px;
+  }
+
+  .EntrustUploadForm3-artist-input::placeholder,
+  .EntrustUploadForm3-artist-input,
+  .EntrustUploadForm3-container input::placeholder {
+    font-size: 14px;
+  }
+}

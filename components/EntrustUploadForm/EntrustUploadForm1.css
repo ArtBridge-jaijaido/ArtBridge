@@ -1,0 +1,219 @@
+/* === EntrustUploadForm1.css（調整完稿時間與價格一排兩欄）=== */
+
+.EntrustUploadForm1-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.EntrustUploadForm1-container {
+  width: 100%;
+  padding: 20px;
+  max-width: 1000px;
+  background: white;
+}
+
+.EntrustUploadForm1-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  min-width: 120px;
+}
+
+.EntrustUploadForm1-group label {
+  margin-bottom: 5px;
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm1-group input,
+.EntrustUploadForm1-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.EntrustUploadForm1-group textarea {
+  height: 100px;
+  resize: none;
+}
+
+.EntrustUploadForm1-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.EntrustUploadForm1-group.market-name {
+  flex: 1;
+  width: 50%;
+}
+
+.EntrustUploadForm1-time-container {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  gap: 10px;
+}
+
+.EntrustUploadForm1-time-container .EntrustUploadForm1-group {
+  flex: 1;
+}
+
+.EntrustUploadForm1-group.dealine-dropdown,
+.EntrustUploadForm1-group.price-group {
+  flex: 1;
+  width: 50%;
+}
+
+.EntrustUploadForm1-group.full-width {
+  flex: 2;
+  width: 100%;
+}
+
+.dropdown-selected {
+  font-size: 18px;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: #8C8C8C;
+}
+
+.dropdown-selected.black-text {
+  color: black;
+}
+
+.EntrustUploadForm1-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  gap: 100px;
+}
+
+.EntrustUploadForm1-button-group button {
+  padding: 0px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  width: 120px;
+  height: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.EntrustUploadForm1-cancel {
+  background-color: #ccc;
+  color: white;
+}
+
+.EntrustUploadForm1-cancel:hover {
+  background-color: #999;
+}
+
+.EntrustUploadForm1-next {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm1-next:hover {
+  background-color: #2291cc;
+}
+
+.EntrustUploadForm1-error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  width: max-content;
+}
+
+@media screen and (max-width: 834px) {
+  .EntrustUploadForm1-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 0px;
+    margin-bottom: 0px;
+  }
+
+  .EntrustUploadForm1-group.market-name {
+    width: 100%;
+  }
+
+  .EntrustUploadForm1-time-container {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .EntrustUploadForm1-row:nth-child(2) {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .EntrustUploadForm1-group.dealine-dropdown,
+  .EntrustUploadForm1-group.price-group {
+    width: 50%;
+  }
+
+  .EntrustUploadForm1-group.full-width {
+    width: 100%;
+  }
+
+  .EntrustUploadForm1-button-group {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .EntrustUploadForm1-group label,
+  .EntrustUploadForm1-group input,
+  .EntrustUploadForm1-group textarea,
+  .dropdown-selected {
+    font-size: 14px;
+  }
+
+  .EntrustUploadForm1-container {
+    padding-top: 0px;
+  }
+
+  .EntrustUploadForm1-button-group {
+    gap: 50px;
+  }
+
+  .EntrustUploadForm1-button-group button {
+    font-size: 12px;
+    width: 80px;
+    height: 35px;
+    margin-top: 10px;
+  }
+
+  .EntrustUploadForm1-group.full-width textarea {
+    height: 150px;
+  }
+
+  .EntrustUploadForm1-row:nth-child(2) {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .EntrustUploadForm1-group.dealine-dropdown,
+  .EntrustUploadForm1-group.price-group {
+    width: 100%;
+  }
+}

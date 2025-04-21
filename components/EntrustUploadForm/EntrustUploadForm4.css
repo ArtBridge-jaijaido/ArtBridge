@@ -1,0 +1,327 @@
+.EntrustUploadForm4-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.EntrustUploadForm4-container {
+  width: 100%;
+  padding: 20px;
+  max-width:1000px;
+  background: white;
+}
+
+.EntrustUploadForm4-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  min-width: 120px;
+  position: relative; 
+}
+
+.EntrustUploadForm4-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.EntrustUploadForm4-group.category-width {
+  flex: 1;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.EntrustUploadForm4-group.full-width {
+  width: 100%;  
+  display: flex;
+  flex-direction: column;
+}
+
+.EntrustUploadForm4-dropdown-container {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.EntrustUploadForm4-group .EntrustUploadForm4-max-selection {
+  font-size: 15px;
+  width:100%;
+  min-width:max-content;
+  color:  #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+.EntrustUploadForm4-reference-label {
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+#category-dropdown, #style-dropdown {
+  background-color: #8DD7FF;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 10px;
+  min-width: 120px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height:auto;
+  text-align: center;
+  font-family: Inter;
+  font-style: normal;
+}
+
+#category-dropdown::after, #style-dropdown::after {
+  content: "▼";
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#category-dropdown.open::after, #style-dropdown.open::after {
+  content: "▲";
+}
+
+.EntrustUploadForm4-dropdown-option input[type="checkbox"] {
+  cursor: pointer;
+  width:20px;
+  height:20px;
+}
+
+.EntrustUploadForm4-input-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing:border-box;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  color:8C8C8C;
+}
+.gray-text {
+  color: #999;
+
+}
+.black-text {
+  color: black;
+}
+
+.EntrustUploadForm4-dropdown {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  box-sizing:border-box;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.EntrustUploadForm4-dropdown::after {
+  content: "▼";
+  font-size: 14px;
+  color: #555;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.EntrustUploadForm4-dropdown.open::after {
+  content: "▲";
+}
+
+.EntrustUploadForm4-dropdown-options {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  left: 0;
+  top: 100%; 
+  min-width:max-content;
+  width:100%;
+}
+
+.EntrustUploadForm4-dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color:#555;
+  gap:10px;
+}
+
+.EntrustUploadForm4-dropdown-option:hover {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm4-hint {
+  margin-top: 40px;
+  font-size: 18px;
+  text-align: left;
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+}
+
+.EntrustUploadForm4-text-link {
+  color: #40a4da;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.EntrustUploadForm4-text-link:hover {
+  text-decoration: none;
+}
+
+.EntrustUploadForm4-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+  gap: 100px;
+}
+
+.EntrustUploadForm4-button-group button {
+  padding: 0px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 120px;
+  height: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.EntrustUploadForm4-prev {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm4-prev:hover {
+  background-color: #358bc5;
+}
+
+.EntrustUploadForm4-next {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm4-next:hover {
+  background-color: #358bc5;
+}
+
+.EntrustUploadForm4-warning-text {
+  color: red;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .EntrustUploadForm4-row {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .EntrustUploadForm4-group.category-width {
+      width: 100%;
+  }
+
+  .EntrustUploadForm4-button-group {
+      gap: 70px;
+      margin-top: 70px;
+  }
+
+  .EntrustUploadForm4-button-group button {
+      font-size: 14px;
+      width: 100px;
+      height: 35px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .EntrustUploadForm4-container {
+      padding-top: 0px;
+  }
+  .EntrustUploadForm4-row{
+      margin-bottom:10px;
+  }
+  #category-dropdown, #style-dropdown, .EntrustUploadForm4-input-box, 
+  .EntrustUploadForm4-reference-label, .EntrustUploadForm4-dropdown-option,
+  .EntrustUploadForm4-dropdown{
+      font-size:14px;
+  }
+  .EntrustUploadForm4-group .EntrustUploadForm4-max-selection {
+      font-size:13px;
+  }
+  .EntrustUploadForm4-dropdown::after, .EntrustUploadForm4-dropdown.open::after  {
+      font-size:12px;
+  }
+  #category-dropdown, #style-dropdown {
+      min-width:100px;
+  }
+  .EntrustUploadForm4-hint {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: left;
+  }
+  .EntrustUploadForm4-text-link {
+      font-size: 12px;
+  }
+
+  .EntrustUploadForm4-button-group {
+      gap: 60px;
+      margin-top: 40px;
+  }
+
+  .EntrustUploadForm4-button-group button {
+      font-size: 12px;
+      width: 100px;
+      height: 35px;
+  }
+}
