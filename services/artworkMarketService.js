@@ -197,9 +197,35 @@ export const fetchLikedArtworksByUser = async (currentUserUid) => {
 };
 
 
+/**
+ * fetch artwork by artworkId (details page)
+ */
+export const fetchArtworkById = async (artworkId) => {
+  try {
+    const q = query(
+      collectionGroup(db, "artworks"),
+      where("artworkId", "==", artworkId),
+      orderBy("createdAt", "asc")
+    );
 
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      console.warn(`找不到 artworkId 為 ${artworkId} 的作品`);
+      return null;
+    }
 
+    const docSnap = querySnapshot.docs[0];
+    const artworkData = docSnap.data();
 
+    return {
+      id: docSnap.id,
+      ...artworkData,
+    };
+  } catch (error) {
+    console.error("獲取作品失敗:", error);
+    return null;
+  }
+};
 
 
 /**fetch artwork user avatar and user nickname */

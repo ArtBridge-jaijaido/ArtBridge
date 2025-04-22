@@ -45,6 +45,7 @@
   width: 100%;
   height: var(--Artwork-image-container-height);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .Artwork-image{
@@ -100,7 +101,7 @@
   line-height: normal;
   letter-spacing: 2px;
   border-radius: 30px;
-
+  cursor: pointer;
 }
 
 

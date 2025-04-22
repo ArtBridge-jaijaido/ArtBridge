@@ -67,7 +67,7 @@ const ArtworkPainterDetail = ({backgroundImg, ratingText, profileImg, usernameTe
     const handleToggleClick = async () => {
      
         if(user){
-            const newRole = user.role === "artist" ? "consumer" : "artist";
+            const newRole = user.role === "artist" ? "client" : "artist";
             console.log("切換角色到", newRole );
             const response = await updateUserRole(user.uid, newRole);
             if (response.success) {

@@ -1,0 +1,316 @@
+ .artworkDetails-page {
+     position: relative;
+     width: 100%;
+     max-width: 1440px;
+     padding: 140px 80px 50px 80px;
+     /* top right bottom left */
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     margin: 0 auto;
+ }
+
+ .artworkDetails-header {
+     width: 100%;
+     display: flex;
+     justify-content: space-around;
+     gap: 100px;
+
+
+ }
+
+ .artworkDetails-left {
+     flex: 1 1 50%;
+     display: flex;
+     flex-direction: column;
+     gap: 25px;
+ }
+
+ .artworkDetails-right {
+     flex: 1 1 50%;
+     display: flex;
+     flex-direction: column;
+     gap: 25px;
+ }
+
+ /* 標題與價格 */
+ .artworkDetails-titleRow {
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-end;
+     width: 100%;
+ }
+
+ .artworkDetails-title {
+     color: #4F4F4F;
+     text-align: center;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
+ }
+
+ .artworkDetails-price {
+     color: #2DAEF4;
+     font-family: Inter;
+     font-size: 22px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ .price-number {
+     color: #2DAEF4;
+     font-family: Inter;
+     font-size: 34px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ /* 圖片與檢舉 */
+ .artworkDetails-image-wrapper {
+     position: relative;
+     width: 600px;
+     height: 560px;
+ }
+
+ .artworkDetails-image {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     border-radius: 10px;
+ }
+
+ .artworkDetails-report {
+     position: absolute;
+     top: 12px;
+     left: 12px;
+     background-color: black;
+     color: white;
+     padding: 4px 10px;
+     font-size: 12px;
+     border-radius: 20px;
+     opacity: 0.9;
+ }
+
+ /* 畫師資訊 */
+ .artworkDetails-artistTopRow {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .artworkDetails-artistTopRow-left {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+ }
+
+ .artworkDetails-artistAvatar {
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+     object-fit: cover;
+
+     background: #FFF;
+ }
+
+ .artworkDetails-artist-name {
+     color: #4F4F4F;
+     font-family: "Noto Sans TC";
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ .artworkDetails-artist-rating {
+     width: 56px;
+     height: 28px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #ffcc00;
+     padding: 2px 8px;
+     border-radius: 8px;
+     font-size: 14px;
+     font-weight: bold;
+ }
+
+ /* stats */
+ .artworkDetails-stats {
+     display: flex;
+     justify-content: space-around;
+     height: 130px;
+     min-width:480px;
+     align-items: center;
+     text-align: center;
+     border-radius: 8px;
+     border: 1px solid #E6E6E6;
+     background: #FDFDFD;
+     padding: 16px 20px;
+     gap: 20px;
+     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
+ }
+
+ .artworkDetails-stats div {
+     display: flex;
+     flex-direction: column;
+
+
+     gap: 4px;
+     color: #707070;
+
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ .artworkDetails-stats .blue {
+     color: #2DAEF4;
+     font-family: Inter;
+     font-size: 28px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+
+ }
+
+ /* 購買與收藏 */
+ .artworkDetails-buttonRow {
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+
+     gap: 12px;
+ }
+
+ .buy-button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+     max-width: 200px;
+     height: 44px;
+     gap:10px;
+     background-color: #4094e5;
+     color: white;
+     border: none;
+     padding: 8px 18px;
+     border-radius: 6px;
+     font-weight: 600;
+     cursor: pointer;
+ }
+
+ .like-button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+     width: 200px;
+     height: 44px;
+     gap:10px;
+     background-color: #fff0f0;
+     color: #e85c5c;
+     border: none;
+     padding: 8px 18px;
+     border-radius: 6px;
+     font-weight: 600;
+     cursor: pointer;
+ }
+
+ /* Info Table */
+ .artworkDetails-infoTable {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     place-items: center;
+     padding: 20px 30px;
+     gap: 20px;
+     font-size: 14px;
+     border-radius: 8px;
+     border: 1px solid #E6E6E6;
+     background: #FDFDFD;
+     height: 220px;
+     min-width:480px;
+     
+ }
+
+ .artworkDetails-infoTable-group {
+     display: flex;
+     flex-direction: column;
+     gap: 4px;
+     text-align: center;
+ }
+
+ .label {
+     color: #707070;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ .value {
+     color: #AAA;
+     text-align: center;
+     font-family: Inter;
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ /* 拒絕 & 參考圖片 */
+ .artworkDetails-rejectInfo {
+     color: #FF5C5C;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
+ }
+
+ .artworkDetails-rejectInfo span {
+     color: #707070;
+     font-family: Inter;
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     letter-spacing: 2px;
+ }
+
+ .artworkDetails-referenceImage {
+     color: #2DAEF4;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 1px;
+ }
+
+ .artworkDetails-referenceImage span {
+     color: #707070;
+     font-family: Inter;
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     letter-spacing: 2px;
+ }
