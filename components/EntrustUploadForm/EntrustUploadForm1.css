@@ -1,5 +1,3 @@
-/* === EntrustUploadForm1.css（調整完稿時間與價格一排兩欄）=== */
-
 .EntrustUploadForm1-wrapper {
   display: flex;
   flex-direction: column;
@@ -27,9 +25,7 @@
   color: #4F4F4F;
   font-family: "Noto Sans TC";
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
   letter-spacing: 1px;
 }
 
@@ -38,12 +34,9 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
   font-family: "Noto Sans TC";
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
   letter-spacing: 1px;
 }
 
@@ -59,47 +52,70 @@
   width: 100%;
 }
 
+/* 市集名稱 50% */
 .EntrustUploadForm1-group.market-name {
   flex: 1;
   width: 50%;
+  flex-basis: 50%;
 }
 
+/* 開始與結束時間 25% + 25% */
 .EntrustUploadForm1-time-container {
   display: flex;
-  flex-direction: row;
   width: 50%;
   gap: 10px;
 }
 
 .EntrustUploadForm1-time-container .EntrustUploadForm1-group {
   flex: 1;
-}
-
-.EntrustUploadForm1-group.dealine-dropdown,
-.EntrustUploadForm1-group.price-group {
-  flex: 1;
   width: 50%;
 }
 
+/* 完稿時間與價格 各占50% */
+.EntrustUploadForm1-group.deadline-dropdown,
+.EntrustUploadForm1-group.price-group {
+  flex: 1;
+  width: 50%;
+  position: relative;
+}
+
+/* 詳細解說 */
 .EntrustUploadForm1-group.full-width {
+  width: 100%;
   flex: 2;
+}
+
+/* dropdown 樣式一致化（視覺對齊 input） */
+.entrustUpload-dropdown {
   width: 100%;
 }
 
-.dropdown-selected {
+.entrustUpload-dropdown .dropdown-selected {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   font-size: 18px;
   font-family: "Noto Sans TC";
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
-  letter-spacing: 1px;
   color: #8C8C8C;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.dropdown-selected.black-text {
+.entrustUpload-dropdown .dropdown-selected.black-text {
   color: black;
 }
 
+.entrustUpload-dropdown .dropdown-arrow {
+  margin-left: auto;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 按鈕 */
 .EntrustUploadForm1-button-group {
   display: flex;
   justify-content: center;
@@ -113,7 +129,6 @@
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-  text-align: center;
   width: 120px;
   height: 40px;
   transition: background-color 0.3s ease;
@@ -144,47 +159,45 @@
   width: max-content;
 }
 
+/* === RWD === */
 @media screen and (max-width: 834px) {
   .EntrustUploadForm1-row {
     flex-direction: column;
     width: 100%;
     gap: 0px;
-    margin-bottom: 0px;
   }
 
-  .EntrustUploadForm1-group.market-name {
-    width: 100%;
-  }
-
-  .EntrustUploadForm1-time-container {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .EntrustUploadForm1-row:nth-child(2) {
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .EntrustUploadForm1-group.dealine-dropdown,
-  .EntrustUploadForm1-group.price-group {
-    width: 50%;
-  }
-
+  .EntrustUploadForm1-group.market-name,
+  .EntrustUploadForm1-time-container,
+  .EntrustUploadForm1-group.deadline-dropdown,
+  .EntrustUploadForm1-group.price-group,
   .EntrustUploadForm1-group.full-width {
     width: 100%;
   }
 
+  .EntrustUploadForm1-time-container {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .EntrustUploadForm1-time-container .EntrustUploadForm1-group {
+    width: 50%;
+  }
+
   .EntrustUploadForm1-button-group {
     margin-top: 20px;
+    gap: 50px;
+  }
+
+  .entrustUpload-dropdown .dropdown-selected {
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .EntrustUploadForm1-group label,
   .EntrustUploadForm1-group input,
-  .EntrustUploadForm1-group textarea,
-  .dropdown-selected {
+  .EntrustUploadForm1-group textarea {
     font-size: 14px;
   }
 
@@ -207,12 +220,11 @@
     height: 150px;
   }
 
-  .EntrustUploadForm1-row:nth-child(2) {
-    flex-direction: column;
+  .EntrustUploadForm1-time-container .EntrustUploadForm1-group {
     width: 100%;
   }
 
-  .EntrustUploadForm1-group.dealine-dropdown,
+  .EntrustUploadForm1-group.deadline-dropdown,
   .EntrustUploadForm1-group.price-group {
     width: 100%;
   }

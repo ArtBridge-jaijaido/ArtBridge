@@ -1,4 +1,4 @@
-/* === EntrustUploadForm5.css（RWD 修正重疊與對齊問題）=== */
+/* === EntrustUploadForm5.css（所有裝置按鈕左右並排）=== */
 
 .EntrustUploadForm5-wrapper {
   display: flex;
@@ -42,7 +42,7 @@
   flex: 0 1 28%;
   position: relative;
   min-width: 80px;
-  min-height: 140px; /* 💡 保證每個項目高度一致避免文字換行時高度不齊 */
+  min-height: 140px;
   box-sizing: border-box;
 }
 
@@ -75,7 +75,7 @@
   text-align: center;
   margin-top: 10px;
   margin-bottom: 5px;
-  white-space: nowrap; /* 💡 防止百分比被換行 */
+  white-space: nowrap;
 }
 
 .EntrustUploadForm5-label {
@@ -86,7 +86,7 @@
   line-height: 10px;
   margin-top: 5px;
   text-align: center;
-  white-space: nowrap; /* 💡 防止階段名稱換行 */
+  white-space: nowrap;
 }
 
 .EntrustUploadForm5-delete {
@@ -106,6 +106,7 @@
   justify-content: center;
   gap: 100px;
   margin-top: 40px;
+  flex-direction: row; /* 強制左右並排 */
 }
 
 .EntrustUploadForm5-button-group button {
@@ -113,18 +114,28 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 18px;
-  font-weight: 500;
-  font-family: "Noto Sans TC";
+  font-size: 16px;
   width: 120px;
   height: 40px;
-  background-color: #40A4DA;
-  color: white;
-  letter-spacing: 1px;
   transition: background-color 0.3s ease;
+  font-family: "Noto Sans TC";
 }
 
-.EntrustUploadForm5-button-group button:hover {
+.EntrustUploadForm5-prev {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm5-prev:hover {
+  background-color: #358bc5;
+}
+
+.EntrustUploadForm5-next {
+  background-color: #40a4da;
+  color: white;
+}
+
+.EntrustUploadForm5-next:hover {
   background-color: #358bc5;
 }
 
@@ -156,11 +167,28 @@
   }
 
   .EntrustUploadForm5-button-group {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row; /* 手機版也左右並排 */
+    flex-wrap: wrap;
+    gap: 60px;
   }
 
   .EntrustUploadForm5-button-group button {
-    width: 100%;
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .EntrustUploadForm5-button-group button {
+    width: 80px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .EntrustUploadForm5-button-group {
+    gap: 40px;
+    flex-direction: row;
+    justify-content: center;
   }
 }

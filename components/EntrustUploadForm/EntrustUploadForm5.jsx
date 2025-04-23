@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import "./EntrustUploadForm5.css";
+import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx"; 
 
 const EntrustUploadForm5 = ({ prev, next, formData }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [milestones, setMilestones] = useState([
     { label: "0% 支付款項", id: 0 },
     { label: "30% 草稿", id: 1 },
@@ -15,9 +18,16 @@ const EntrustUploadForm5 = ({ prev, next, formData }) => {
     setMilestones((prev) => prev.filter((m) => m.id !== id));
   };
 
-  const handlePublish = () => {
-    console.log("📦 formData on publish:", formData);
-    next({ milestones });
+  const handlePublishClick = async () => {
+    setIsLoading(true);
+    try {
+      console.log("📦 formData on publish:", formData);
+      await next({ milestones }); // 若 next 是同步可移除 await
+    } catch (error) {
+      console.error("發佈失敗：", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -43,7 +53,14 @@ const EntrustUploadForm5 = ({ prev, next, formData }) => {
 
         <div className="EntrustUploadForm5-button-group">
           <button className="EntrustUploadForm5-prev" onClick={prev}>上一步</button>
-          <button className="EntrustUploadForm5-next" onClick={handlePublish}>發佈</button>
+          <LoadingButton
+            isLoading={isLoading}
+            onClick={handlePublishClick}
+            loadingText="發佈中..."
+            className="EntrustUploadForm5-next"
+          >
+            發佈
+          </LoadingButton>
         </div>
       </div>
     </div>

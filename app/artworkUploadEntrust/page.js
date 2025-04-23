@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { notoSansTCClass } from '@/app/layout.js';
 import { useToast } from "@/app/contexts/ToastContext.js";
-import EntrustProgressBar from "@/components/MarketProgressBar/MarketProgressBar.jsx"; 
+import EntrustProgressBar from "@/components/MarketProgressBar/MarketProgressBar.jsx";
 import EntrustUploadForm1 from "@/components/EntrustUploadForm/EntrustUploadForm1.jsx";
 import EntrustUploadForm2 from "@/components/EntrustUploadForm/EntrustUploadForm2.jsx";
 import EntrustUploadForm3 from "@/components/EntrustUploadForm/EntrustUploadForm3.jsx";
 import EntrustUploadForm4 from "@/components/EntrustUploadForm/EntrustUploadForm4.jsx";
 import EntrustUploadForm5 from "@/components/EntrustUploadForm/EntrustUploadForm5.jsx";
-import "./artworkUploadEntrust.css"; 
+import "./artworkUploadEntrust.css";
 import { useSelector } from "react-redux";
 
 const ArtworkUploadEntrustPage = () => {
@@ -68,10 +68,12 @@ const ArtworkUploadEntrustPage = () => {
         {step === 4 && <EntrustUploadForm4 prev={handlePrev} next={handleNext} formData={formData} />}
         {step === 5 && <EntrustUploadForm5 prev={handlePrev} next={handlePublish} formData={formData} />}
         {step === 6 && (
-          <div className="artworkUploadEntrust-success-page">
-            <img src="/images/success-icon.gif" alt="成功" className="success-icon" />
-            <h2 className="success-message">您的委託已成功發佈！</h2>
-            <button className="success-button" onClick={() => router.push("/artworkEntrustMarket")}>前往我的委託</button>
+          <div className="artworkUploadEntrust-success">
+            <img src="/images/success-icon.gif" alt="成功" className="artworkUploadEntrust-success-icon" />
+            <h2 className="artworkUploadEntrust-success-message">您的委託已成功發佈！</h2>
+            <button className="artworkUploadEntrust-success-button" onClick={() => router.push("/artworkEntrustMarket")}>
+              前往我的委託
+            </button>
           </div>
         )}
       </div>

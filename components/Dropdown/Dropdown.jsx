@@ -1,7 +1,6 @@
-// components/common/Dropdown.jsx
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import "./Dropdown.css";
+import styles from "./Dropdown.module.css"; // ← 改成 CSS module
 
 const Dropdown = ({ options = [], value, onSelect, placeholder = "請選擇", className = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,20 +17,26 @@ const Dropdown = ({ options = [], value, onSelect, placeholder = "請選擇", cl
   }, []);
 
   return (
-    <div className={`dropdown-wrapper ${className}`} ref={dropdownRef}>
-    <div
-      className={`dropdown-selected ${value ? "black-text" : "gray-text"}`}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      {value || placeholder}
-      <span className="dropdown-arrow">{isOpen ? "▲" : "▼"}</span>
-    </div>
-
+    <div className={`${styles.wrapper} ${className}`} ref={dropdownRef}>
+      <div
+        className={`${styles.selected} ${value ? styles.blackText : styles.grayText}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {value || placeholder}
+        <span className={styles.arrow}>{isOpen ? "▲" : "▼"}</span>
+      </div>
 
       {isOpen && (
-        <ul className="dropdown-options">
+        <ul className={styles.options}>
           {options.map((option, index) => (
-            <li key={index} className="dropdown-option" onClick={() => { onSelect(option); setIsOpen(false); }}>
+            <li
+              key={index}
+              className={styles.option}
+              onClick={() => {
+                onSelect(option);
+                setIsOpen(false);
+              }}
+            >
               {option}
             </li>
           ))}

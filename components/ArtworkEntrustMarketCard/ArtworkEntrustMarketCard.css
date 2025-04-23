@@ -1,0 +1,205 @@
+.ArtworkEntrustMarketCard-card-container {
+  --ArtworkEntrustMarketCard-card-container-width: 228px;
+  --ArtworkEntrustMarketCard-title-width: 174px;
+  --ArtworkEntrustMarketCard-card-container-height: 264px;
+  --ArtworkEntrustMarketCard-image-container-height: 214px;
+  --ArtworkEntrustMarketCard-title-height: 29px;
+  --ArtworkEntrustMarketCard-footer-row-height: 50px;
+  --ArtworkEntrustMarketCard-title-font-size: 14px;
+  --ArtworkEntrustMarketCard-price: 18px;
+
+  width: 100%;
+  max-width: var(--ArtworkEntrustMarketCard-card-container-width);
+  height: var(--ArtworkEntrustMarketCard-card-container-height);
+  border: 1px solid #40A4DA;
+  background: #40A4DA;
+  position: relative;
+}
+
+.ArtworkEntrustMarketCard-title {
+  position: absolute;
+  top: -15px;
+  left: -1px;
+  background: #40A4DA;
+  width: 100%;
+  max-width: var(--ArtworkEntrustMarketCard-title-width);
+  height: var(--ArtworkEntrustMarketCard-title-height);
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Inter;
+  font-size: var(--ArtworkEntrustMarketCard-title-font-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  border-radius: 30px;
+}
+
+.history-market.ArtworkEntrustMarketCard-card-container {
+  background: #808080 !important;
+  border-color: #808080 !important;
+}
+
+.history-market.ArtworkEntrustMarketCard-title {
+  background: #808080 !important;
+}
+
+.ArtworkEntrustMarketCard-image-container {
+  width: 100%;
+  height: var(--ArtworkEntrustMarketCard-image-container-height);
+  overflow: hidden;
+}
+
+.ArtworkEntrustMarketCard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: none;
+}
+
+.ArtworkEntrustMarketCard-loader {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ArtworkEntrustMarketCard-image.loaded {
+  display: block;
+}
+
+.ArtworkEntrustMarketCard-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ArtworkEntrustMarketCard-footer-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--ArtworkEntrustMarketCard-footer-row-height);
+  padding: 9px 8px;
+  color: #FFF;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.ArtworkEntrustMarketCard-profile-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ArtworkEntrustMarketCard-edit {
+  color: #ffffff;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ArtworkEntrustMarketCard-price {
+  font-size: var(--ArtworkEntrustMarketCard-price);
+}
+
+/* RWD 尺寸調整 */
+
+@media screen and (max-width: 1280px) {
+  .ArtworkEntrustMarketCard-card-container {
+      --ArtworkEntrustMarketCard-card-container-width: 207px;
+      --ArtworkEntrustMarketCard-card-container-height: 235px;
+  }
+
+  .ArtworkEntrustMarketCard-image-container {
+      --ArtworkEntrustMarketCard-image-container-height: 190px;
+  }
+
+  .ArtworkEntrustMarketCard-title {
+      --ArtworkEntrustMarketCard-title-width: 157px;
+      --ArtworkEntrustMarketCard-title-height: 26px;
+      --ArtworkEntrustMarketCard-title-font-size: 12px;
+  }
+
+  .ArtworkEntrustMarketCard-footer-row {
+      --ArtworkEntrustMarketCard-footer-row-height: 45px;
+  }
+
+  .ArtworkEntrustMarketCard-edit {
+      font-size: 12px;
+  }
+
+  .ArtworkEntrustMarketCard-price {
+      --ArtworkEntrustMarketCard-price: 15px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .ArtworkEntrustMarketCard-card-container {
+      --ArtworkEntrustMarketCard-card-container-width: 160px;
+      --ArtworkEntrustMarketCard-card-container-height: 179px;
+  }
+
+  .ArtworkEntrustMarketCard-image-container {
+      --ArtworkEntrustMarketCard-image-container-height: 145px;
+  }
+
+  .ArtworkEntrustMarketCard-title {
+      --ArtworkEntrustMarketCard-title-width: 132px;
+      --ArtworkEntrustMarketCard-title-height: 20px;
+      --ArtworkEntrustMarketCard-title-font-size: 8px;
+      top: -13px;
+  }
+
+  .ArtworkEntrustMarketCard-footer-row {
+      padding: 8px 8px;
+      --ArtworkEntrustMarketCard-footer-row-height: 34px;
+  }
+
+  .ArtworkEntrustMarketCard-edit {
+      font-size: 9px;
+  }
+
+  .ArtworkEntrustMarketCard-price {
+      --ArtworkEntrustMarketCard-price: 12px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .ArtworkEntrustMarketCard-card-container {
+      --ArtworkEntrustMarketCard-card-container-width: 175px;
+      --ArtworkEntrustMarketCard-card-container-height: 166px;
+  }
+
+  .ArtworkEntrustMarketCard-image-container {
+      --ArtworkEntrustMarketCard-image-container-height: 135px;
+  }
+
+  .ArtworkEntrustMarketCard-title {
+      --ArtworkEntrustMarketCard-title-width: 100px;
+      --ArtworkEntrustMarketCard-title-height: 18px;
+      --ArtworkEntrustMarketCard-title-font-size: 7px;
+      top: -12px;
+  }
+
+  .ArtworkEntrustMarketCard-footer-row {
+      padding: 8px 8px;
+      --ArtworkEntrustMarketCard-footer-row-height: 31px;
+  }
+
+  .ArtworkEntrustMarketCard-price {
+      --ArtworkEntrustMarketCard-price: 12px;
+  }
+}
