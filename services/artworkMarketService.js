@@ -210,7 +210,7 @@ export const fetchArtworkById = async (artworkId) => {
 
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
-      console.warn(`找不到 artworkId 為 ${artworkId} 的作品`);
+      console.warn(`找不到 artworkId 為 ${artworkId} 的市集`);
       return null;
     }
 
@@ -222,7 +222,7 @@ export const fetchArtworkById = async (artworkId) => {
       ...artworkData,
     };
   } catch (error) {
-    console.error("獲取作品失敗:", error);
+    console.error("獲取市集失敗:", error);
     return null;
   }
 };

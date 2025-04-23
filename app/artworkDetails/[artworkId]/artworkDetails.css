@@ -9,14 +9,15 @@
      justify-content: center;
      align-items: center;
      margin: 0 auto;
+
  }
 
  .artworkDetails-header {
      width: 100%;
      display: flex;
      justify-content: space-around;
-     gap: 100px;
-
+     gap: 60px;
+     margin-bottom: 50px;
 
  }
 
@@ -63,7 +64,7 @@
      letter-spacing: 1px;
  }
 
- .price-number {
+ .artworkDetails-price-number {
      color: #2DAEF4;
      font-family: Inter;
      font-size: 34px;
@@ -76,8 +77,9 @@
  /* 圖片與檢舉 */
  .artworkDetails-image-wrapper {
      position: relative;
-     width: 600px;
+     max-width: 600px;
      height: 560px;
+
  }
 
  .artworkDetails-image {
@@ -88,13 +90,17 @@
  }
 
  .artworkDetails-report {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 2px;
      position: absolute;
      top: 12px;
-     left: 12px;
+     left: 16px;
      background-color: black;
      color: white;
-     padding: 4px 10px;
-     font-size: 12px;
+     padding: 6px 10px;
+     font-size: 18px;
      border-radius: 20px;
      opacity: 0.9;
  }
@@ -120,6 +126,7 @@
      object-fit: cover;
 
      background: #FFF;
+     cursor: pointer;
  }
 
  .artworkDetails-artist-name {
@@ -147,10 +154,11 @@
 
  /* stats */
  .artworkDetails-stats {
+
      display: flex;
      justify-content: space-around;
      height: 130px;
-     min-width:480px;
+     min-width: 480px;
      align-items: center;
      text-align: center;
      border-radius: 8px;
@@ -166,7 +174,7 @@
      flex-direction: column;
 
 
-     gap: 4px;
+     gap: 6px;
      color: #707070;
 
      font-family: Inter;
@@ -198,36 +206,58 @@
  }
 
  .buy-button {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
      max-width: 200px;
      height: 44px;
-     gap:10px;
+     gap: 10px;
      background-color: #4094e5;
-     color: white;
+     color: #FFF;
+     text-align: center;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
      border: none;
      padding: 8px 18px;
-     border-radius: 6px;
-     font-weight: 600;
+     border-radius: 5px;
      cursor: pointer;
  }
 
+ .buy-button:hover {
+     background-color: #2DAEF4;
+ }
+
  .like-button {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-     width: 200px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     max-width: 200px;
      height: 44px;
-     gap:10px;
-     background-color: #fff0f0;
-     color: #e85c5c;
-     border: none;
+     gap: 10px;
+     color: #FF5C5C;
+     border-radius: 5px;
+     border: 1px solid #FF5C5C;
      padding: 8px 18px;
      border-radius: 6px;
+     background-color: #fff;
+     text-align: center;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
      font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
      cursor: pointer;
+ }
+
+ .like-button:hover {
+     background-color: #FFF5F5;
  }
 
  /* Info Table */
@@ -237,13 +267,12 @@
      place-items: center;
      padding: 20px 30px;
      gap: 20px;
-     font-size: 14px;
      border-radius: 8px;
      border: 1px solid #E6E6E6;
      background: #FDFDFD;
      height: 220px;
-     min-width:480px;
-     
+     min-width: 480px;
+
  }
 
  .artworkDetails-infoTable-group {
@@ -253,7 +282,7 @@
      text-align: center;
  }
 
- .label {
+ .artworkDetails-infoTable-label {
      color: #707070;
      font-family: Inter;
      font-size: 24px;
@@ -263,7 +292,7 @@
      letter-spacing: 1px;
  }
 
- .value {
+ .artworkDetails-infoTable-value {
      color: #AAA;
      text-align: center;
      font-family: Inter;
@@ -296,6 +325,9 @@
  }
 
  .artworkDetails-referenceImage {
+     display: flex;
+     align-items: center;
+     gap: 12px;
      color: #2DAEF4;
      font-family: Inter;
      font-size: 24px;
@@ -303,6 +335,11 @@
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
+ }
+
+ .artworkDetails-referenceImage img {
+     width: 26px;
+     height: 26px;
  }
 
  .artworkDetails-referenceImage span {
@@ -313,4 +350,267 @@
      font-weight: 500;
      line-height: normal;
      letter-spacing: 2px;
+ }
+
+
+ /* supplementaryImage */
+ .artworkDetails-section {
+     width: 100%;
+     margin-bottom: 50px;
+
+ }
+
+ .artworkDetails-section h2 {
+     width: 100%;
+     display: flex;
+     justify-content: flex-start;
+     color: #4F4F4F;
+     text-align: center;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
+     margin-bottom: 25px;
+ }
+
+ .artworkDetails-masonry {
+     display: flex;
+     margin-left: -12px;
+     width: auto;
+ }
+
+ .artworkDetails-masonry-column {
+     padding-left: 12px;
+     background-clip: padding-box;
+ }
+
+ .artworkDetails-masonry-image {
+     width: 100%;
+     margin-bottom: 12px;
+     border-radius: 6px;
+     display: block;
+     object-fit: cover;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     cursor: pointer;
+ }
+
+ .artworkDetails-masonry-image:hover {
+     transform: translateY(-8px);
+
+ }
+
+
+ /* supplementary innerConext */
+
+
+
+ .artworkDetails-innerText {
+     width: 100%;
+     color: #8C8C8C;
+     font-family: "Noto Sans TC";
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: 50px;
+     letter-spacing: 1px;
+ }
+
+ /* flow chart */
+
+
+
+
+
+
+ /* supplementary info */
+ .artworkDetails-supplementaryInfo-section {
+     width: 100%;
+     margin-bottom: 50px;
+     display: flex;
+     flex-direction: column;
+
+ }
+
+ .artworkDetails-supplementaryInfo-section h2 {
+     width: 100%;
+     display: flex;
+     justify-content: flex-start;
+     color: #4F4F4F;
+     text-align: center;
+     font-family: Inter;
+     font-size: 24px;
+     font-style: normal;
+     font-weight: 600;
+     line-height: normal;
+     letter-spacing: 2px;
+     margin-bottom: 25px;
+ }
+
+
+ .artworkDetails-supplementaryInfo-container {
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     gap: 20px;
+     padding-right: 100px;
+
+ }
+
+ .artworkDetails-supplementaryInfo-container p {
+     color: #707070;
+     font-family: Inter;
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 500;
+     line-height: normal;
+     letter-spacing: 2px;
+ }
+
+
+ /* evaluation */
+
+
+
+
+
+ /*RWD*/
+
+ @media screen and (max-width: 1280px) {
+
+     .artworkDetails-page {
+         padding: 140px 70px 40px 50px;
+     }
+
+     .artworkDetails-header {
+         gap: 40px;
+     }
+
+     .artworkDetails-titleRow {
+         height: 40px;
+     }
+
+     .artworkDetails-left {
+         gap: 20px;
+     }
+
+     .artworkDetails-right {
+         gap: 20px;
+     }
+
+
+     /* 標題與價格 */
+     .artworkDetails-title {
+         font-size: 20px;
+     }
+
+     .artworkDetails-price {
+         font-size: 18px;
+     }
+
+     .artworkDetails-price-number {
+         font-size: 26px;
+     }
+
+
+     /* 圖片與檢舉 */
+     .artworkDetails-image-wrapper {
+         max-width: 500px;
+         height: 500px;
+     }
+
+
+     .artworkDetails-report {
+         font-size: 14px;
+     }
+
+
+
+     /* artist info*/
+     .artworkDetails-artist-name {
+         font-size: 20px;
+     }
+
+
+
+     /* stats */
+     .artworkDetails-stats {
+         min-width: 400px;
+         height: 120px;
+     }
+
+     .artworkDetails-stats div {
+         font-size: 20px;
+     }
+
+     .artworkDetails-stats .blue {
+         font-size: 20px;
+     }
+
+
+     /* 購買與收藏 */
+
+     .buy-button {
+         max-width: 180px;
+         height: 40px;
+         font-size: 20px;
+     }
+
+     .like-button {
+         max-width: 180px;
+         height: 40px;
+         font-size: 20px;
+     }
+
+
+     .artworkDetails-infoTable {
+         min-width: 400px;
+         height: 200px;
+     }
+
+     .artworkDetails-infoTable-label {
+         font-size: 20px;
+     }
+
+     .artworkDetails-infoTable-value {
+         font-size: 16px;
+     }
+
+     .artworkDetails-rejectInfo {
+         font-size: 20px;
+     }
+
+     .artworkDetails-rejectInfo span {
+         font-size: 16px;
+     }
+
+     .artworkDetails-referenceImage {
+         font-size: 20px;
+     }
+
+     .artworkDetails-referenceImage span {
+         font-size: 16px;
+     }
+
+
+     /* supplementaryImage */
+     .artworkDetails-section h2 {
+         font-size: 20px;
+     }
+
+
+     /* supplementary innerConext */
+     .artworkDetails-innerText {
+         font-size: 18px;
+     }
+
+     .artworkDetails-supplementaryInfo-section h2 {
+         font-size: 20px;
+     }
+
+     .artworkDetails-supplementaryInfo-container p {
+         font-size: 18px;
+     }
+
  }

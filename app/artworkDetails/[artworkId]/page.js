@@ -3,27 +3,37 @@ import React, { use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { notoSansTCClass } from '@/app/layout.js';
 import { fetchArtworkById } from "@/services/artworkMarketService";
+import { toggleArtworkLike } from "@/services/artworkMarketService.js";
+import { useNavigation } from "@/lib/functions.js";
+import { useSelector } from "react-redux";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
+import Masonry from "react-masonry-css";
 import "./artworkDetails.css";
 
 export default function ArtworkDetailPage({ params }) {
 
 
-
+    const currentUser = useSelector((state) => state.user.user);
+    const [likeStates, setLikeStates] = useState({});
     const searchParams = useSearchParams();
     const { artworkId } = use(params);
-
-
-
     const artworkImageUrl = searchParams.get("image");
     const artistNickname = searchParams.get("nickname");
     const artistProfileImg = searchParams.get("avatar");
+    const navigate = useNavigation();
+    const { setIsLoading } = useLoading();
 
-
-    // 🔸 狀態儲存 Firestore 抓到的 artwork 資料
+    //  狀態儲存 Firestore 抓到的 artwork 資料
     const [artwork, setArtwork] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // 🔸 抓取資料
+    const isLiked = likeStates[artworkId] ?? artwork?.likedBy?.includes(currentUser?.uid);
+
+    const breakpointColumnsObj = {
+        default: 2,
+        440: 1,
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             const data = await fetchArtworkById(artworkId);
@@ -34,9 +44,57 @@ export default function ArtworkDetailPage({ params }) {
         fetchData();
     }, [artworkId]);
 
-    // 🔸 loading 狀態
+    /*toggle like*/
+    const handleToggleLike = async (e) => {
+        e.stopPropagation();
+
+        if (!currentUser) {
+            addToast("error", "請先登入才能按讚喔！");
+            return;
+        }
+
+        try {
+            const response = await toggleArtworkLike(artwork.userUid, artwork.artworkId, currentUser.uid);
+            if (response.success) {
+                const hasLiked = artwork?.likedBy?.includes(currentUser.uid);
+
+                // 更新 artwork.likedBy 陣列
+                const updatedLikedBy = hasLiked
+                    ? artwork.likedBy.filter((uid) => uid !== currentUser.uid)
+                    : [...artwork.likedBy, currentUser.uid];
+
+                setArtwork((prev) => ({
+                    ...prev,
+                    likedBy: updatedLikedBy,
+                }));
+
+                setLikeStates((prev) => ({
+                    ...prev,
+                    [artworkId]: !hasLiked,
+                }));
+
+
+            }
+        } catch (err) {
+            console.error("Error toggling like:", err);
+            addToast("error", "按讚失敗，請稍後再試！");
+        }
+    }
+
+    /*heading artist profile page*/
+    const handleArtistProfileClick = (e) => {
+        e.stopPropagation();
+        const targetPath = `/artworkProfile/artworkPainterProfile/${artwork.userUid}`;
+        navigate(targetPath);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 1000);
+    }
+
+
+    // loading 狀態
     if (loading) return <p>載入中...</p>;
     if (!artwork) return <p>找不到市集</p>;
+
 
 
     return (
@@ -49,7 +107,7 @@ export default function ArtworkDetailPage({ params }) {
                     <div className="artworkDetails-titleRow">
                         <h1 className="artworkDetails-title">{artwork.marketName}</h1>
                         <p className="artworkDetails-price">
-                            NT.<span className="price-number">{artwork.price}</span>元
+                            NT.<span className="artworkDetails-price-number">{artwork.price}</span>元
                         </p>
                     </div>
 
@@ -59,7 +117,10 @@ export default function ArtworkDetailPage({ params }) {
                             alt="商品圖片"
                             className="artworkDetails-image"
                         />
-                        <div className="artworkDetails-report">❗我要檢舉</div>
+                        <div className="artworkDetails-report">
+                            <img src="/images/icons8-exclamation-mark-64-1.png" alt="reportIcon" />
+                            我要檢舉
+                            </div>
                     </div>
                 </div>
 
@@ -72,6 +133,7 @@ export default function ArtworkDetailPage({ params }) {
                                 src={artistProfileImg}
                                 alt="畫師頭像"
                                 className="artworkDetails-artistAvatar"
+                                onClick={handleArtistProfileClick}
                             />
                             <span className="artworkDetails-artist-name">{artistNickname}</span>
                         </div>
@@ -84,27 +146,39 @@ export default function ArtworkDetailPage({ params }) {
                     </div>
 
                     <div className="artworkDetails-buttonRow">
-                        <button className="buy-button">我要購買</button>
-                        <button className="like-button">❤ 按讚收藏</button>
+                        <button className="buy-button">
+                            <img src="/images/icons8-pay-96-1.png" alt="buyIcon" />
+                            我要購買
+                        </button>
+                        <button className="like-button"
+                            onClick={handleToggleLike}
+                        >
+                            <img src={
+                                isLiked
+                                    ? "/images/icons8-love-48-1.png"
+                                    : "/images/icons8-love-96-26.png"
+                            } alt="likeIcon" />
+                            按讚收藏
+                        </button>
                     </div>
 
                     <div className="artworkDetails-infoTable">
 
                         <div className="artworkDetails-infoTable-group">
-                            <div className="label">市集結束時間</div>
-                            <div className="value">{artwork.endDate}</div>
+                            <div className="artworkDetails-infoTable-label">市集結束時間</div>
+                            <div className="artworkDetails-infoTable-value">{artwork.endDate}</div>
                         </div>
                         <div className="artworkDetails-infoTable-group">
-                            <div className="label">完稿時間</div>
-                            <div className="value">{artwork.completionTime}</div>
+                            <div className="artworkDetails-infoTable-label">完稿時間</div>
+                            <div className="artworkDetails-infoTable-value">{artwork.completionTime}</div>
                         </div>
                         <div className="artworkDetails-infoTable-group">
-                            <div className="label">類別</div>
-                            <div className="value">{artwork.selectedCategory}</div>
+                            <div className="artworkDetails-infoTable-label">類別</div>
+                            <div className="artworkDetails-infoTable-value">{artwork.selectedCategory}</div>
                         </div>
                         <div className="artworkDetails-infoTable-group">
-                            <div className="label">風格</div>
-                            <div className="value">
+                            <div className="artworkDetails-infoTable-label">風格</div>
+                            <div className="artworkDetails-infoTable-value">
                                 {Array.isArray(artwork.selectedStyles)
                                     ? artwork.selectedStyles.join("、")
                                     : artwork.selectedStyles || "未提供"}
@@ -114,69 +188,62 @@ export default function ArtworkDetailPage({ params }) {
 
                     <div className="artworkDetails-rejectInfo">❌ 拒絕接洽：<span>{artwork.rejectedTypes}</span></div>
                     <div className="artworkDetails-referenceImage">
-                        📎 委託方是否需提供參考圖片：<span>{artwork.reference}</span>
+                        <img src="/images/icons8-example-96-1.png" alt="referenceIcon" /> 委託方是否需提供參考圖片：<span>{artwork.reference}</span>
                     </div>
                 </div>
             </div>
 
-            {/* 補充內容 */}
-            {/* <div className="artworkDetails-section">
+            {/* 補充圖片 */}
+            <div className="artworkDetails-section">
                 <h2>補充圖片</h2>
-                <div className="artworkDetails-placeholder">（尚無補充圖片）</div>
+                <Masonry
+                    breakpointCols={breakpointColumnsObj}
+                    className="artworkDetails-masonry"
+                    columnClassName="artworkDetails-masonry-column"
+                >
+                    {artwork.supplementaryImageUrls?.map((url, index) => (
+                        <img
+                            loading="lazy"
+                            key={index}
+                            src={url}
+                            alt={artwork.supplementaryImageName?.[index] || `補充圖片${index + 1}`}
+                            className="artworkDetails-masonry-image"
+                        />
+                    ))}
+                </Masonry>
+            </div>
 
+
+            {/* 補充內文*/}
+            <div className="artworkDetails-section">
                 <h2>詳細內文</h2>
-                <p>
-                    我是詳細內文，我是詳細內文，我是詳細內文，我是詳細內文，我是詳細內文，我是詳細內文，我是詳細內文，我是詳細內文。
-                </p>
-            </div> */}
+                <p className="artworkDetails-innerText">{artwork.description}</p>
+            </div>
+
+
+
 
             {/* 流程圖 */}
-            {/* <div className="artworkDetails-section">
-        <h2>流程圖</h2>
-        <div className="artworkDetails-flowSteps">
-          <span>0%</span>
-          <span>20%</span>
-          <span>40%</span>
-          <span>40%</span>
-          <span>40%</span>
-          <span>100%</span>
-        </div>
-        <div className="artworkDetails-flowLabels">
-          <span>支付款項</span>
-          <span>草稿</span>
-          <span>線稿</span>
-          <span>上色</span>
-          <span>上色</span>
-          <span>交付成品</span>
-        </div>
-      </div> */}
+            <div className="artworkDetails-section">
+                <h2>流程圖</h2>
+            </div>
 
             {/* 補充資訊 */}
-            {/* <div className="artworkDetails-section">
-        <h2>補充資訊</h2>
-        <p>完稿格式：.jpg</p>
-        <p>作品尺寸：2560×1280px</p>
-        <p>釋圖：繪師可將成品公開發佈</p>
-      </div> */}
+            <div className="artworkDetails-supplementaryInfo-section">
+                <h2>補充資訊</h2>
+                <div className="artworkDetails-supplementaryInfo-container">
+                    <p>完稿格式：{artwork.fileFormat}</p>
+                    <p>作品尺寸：{artwork.size}px</p>
+                    <p>權限：{artwork.permission}</p>
+                </div>
+            </div>
 
             {/* 評價 */}
-            {/* <div className="artworkDetails-section">
-        <h2>市集評價</h2>
-        <div className="artworkDetails-reviewBox">
-          <div className="artworkDetails-reviewHeader">
-            <span className="review-user">保密企劃</span>
-            <span className="review-stars">★★★★☆</span>
-          </div>
-          <div className="artworkDetails-reviewDate">2025.01.12</div>
-          <div className="artworkDetails-reviewLabels">
-            <span className="label">短期合作</span>
-            <span className="label">品質保證</span>
-          </div>
-          <p className="artworkDetails-reviewText">
-            委託溝通流暢，成品高質可愛，編輯人特別注重細節，還主動調整風格，團隊人員都非常滿意。您的作品超讚！
-          </p>
+            <div className="artworkDetails-section">
+                <h2>市集評價</h2>
+
+            </div>
         </div>
-      </div> */}
-        </div>
+
     );
 }

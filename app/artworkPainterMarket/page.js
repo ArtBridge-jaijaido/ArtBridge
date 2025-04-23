@@ -50,6 +50,7 @@ const ArtworkPainterMarketPage = () => {
         setIsLoading(false);
     };
 
+
     const tabs = [
         {
             label: "上架中",
@@ -61,10 +62,12 @@ const ArtworkPainterMarketPage = () => {
                         <div className="artworkPainterMarket-marketCard-container">
                             {activeArtworks.slice(0, artworkCardVisibleItems).map((artwork) => (
                                 <ArtworkPainterMarketCard
-                                    key={artwork.artworkId}
+                                    artworkId={artwork.artworkId}
                                     imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
                                     title={artwork.marketName}
                                     price={artwork.price}
+                                    artistNickName={user?.nickname}
+                                    artistProfileImg={user?.profileAvatar || "/images/profile-avatar.png"}
                                 />
                             ))}
                             {artworkCardVisibleItems < activeArtworks.length && (
