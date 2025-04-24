@@ -46,9 +46,9 @@
  .artworkDetails-title {
      color: #4F4F4F;
      text-align: center;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -56,9 +56,9 @@
 
  .artworkDetails-price {
      color: #2DAEF4;
-     font-family: Inter;
+     
      font-size: 22px;
-     font-style: normal;
+    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -66,9 +66,9 @@
 
  .artworkDetails-price-number {
      color: #2DAEF4;
-     font-family: Inter;
+     
      font-size: 34px;
-     font-style: normal;
+     
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -202,9 +202,9 @@
 
  .artworkDetails-stats .blue {
      color: #2DAEF4;
-     font-family: Inter;
+   
      font-size: 24px;
-     font-style: normal;
+    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -231,9 +231,9 @@
      background-color: #4094e5;
      color: #FFF;
      text-align: center;
-     font-family: Inter;
+  
      font-size: 24px;
-     font-style: normal;
+  
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -262,9 +262,9 @@
      border-radius: 6px;
      background-color: #fff;
      text-align: center;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+     
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -299,9 +299,9 @@
 
  .artworkDetails-infoTable-label {
      color: #707070;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -310,9 +310,9 @@
  .artworkDetails-infoTable-value {
      color: #AAA;
      text-align: center;
-     font-family: Inter;
+    
      font-size: 20px;
-     font-style: normal;
+   
      font-weight: 500;
      line-height: normal;
      letter-spacing: 1px;
@@ -321,9 +321,9 @@
  /* 拒絕 & 參考圖片 */
  .artworkDetails-rejectInfo {
      color: #FF5C5C;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+   
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -331,9 +331,9 @@
 
  .artworkDetails-rejectInfo span {
      color: #707070;
-     font-family: Inter;
+    
      font-size: 20px;
-     font-style: normal;
+    
      font-weight: 500;
      line-height: normal;
      letter-spacing: 2px;
@@ -344,9 +344,9 @@
      align-items: center;
      gap: 12px;
      color: #2DAEF4;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+   
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -359,9 +359,9 @@
 
  .artworkDetails-referenceImage span {
      color: #707070;
-     font-family: Inter;
+    
      font-size: 20px;
-     font-style: normal;
+   
      font-weight: 500;
      line-height: normal;
      letter-spacing: 2px;
@@ -381,9 +381,9 @@
      justify-content: flex-start;
      color: #4F4F4F;
      text-align: center;
-     font-family: Inter;
+    
      font-size: 24px;
-     font-style: normal;
+   
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -452,9 +452,9 @@
      justify-content: flex-start;
      color: #4F4F4F;
      text-align: center;
-     font-family: Inter;
+     
      font-size: 24px;
-     font-style: normal;
+    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 2px;
@@ -473,9 +473,9 @@
 
  .artworkDetails-supplementaryInfo-container p {
      color: #707070;
-     font-family: Inter;
+    
      font-size: 20px;
-     font-style: normal;
+    
      font-weight: 500;
      line-height: normal;
      letter-spacing: 2px;
