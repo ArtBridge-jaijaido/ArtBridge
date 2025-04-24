@@ -3,10 +3,11 @@ import React, { use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { notoSansTCClass } from '@/app/layout.js';
 import { fetchArtworkById } from "@/services/artworkMarketService";
-import { toggleArtworkLike } from "@/services/artworkMarketService.js";
+import { toggleArtworkLike, toggleReportArtwork } from "@/services/artworkMarketService.js";
 import { useNavigation } from "@/lib/functions.js";
 import { useSelector } from "react-redux";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
+import { useToast } from "@/app/contexts/ToastContext.js";
 import Masonry from "react-masonry-css";
 import "./artworkDetails.css";
 
@@ -21,6 +22,7 @@ export default function ArtworkDetailPage({ params }) {
     const artistNickname = searchParams.get("nickname");
     const artistProfileImg = searchParams.get("avatar");
     const navigate = useNavigation();
+    const { addToast } = useToast();
     const { setIsLoading } = useLoading();
 
     //  狀態儲存 Firestore 抓到的 artwork 資料
@@ -28,6 +30,7 @@ export default function ArtworkDetailPage({ params }) {
     const [loading, setLoading] = useState(true);
 
     const isLiked = likeStates[artworkId] ?? artwork?.likedBy?.includes(currentUser?.uid);
+    const hasReported = artwork?.reportedBy?.includes(currentUser?.uid);
 
     const breakpointColumnsObj = {
         default: 2,
@@ -81,6 +84,40 @@ export default function ArtworkDetailPage({ params }) {
         }
     }
 
+    /* handle report*/
+    const handleReport = async (e) => {
+        e.stopPropagation();
+      
+        if (!currentUser) {
+          addToast("error", "請先登入才能檢舉！");
+          return;
+        }
+      
+        const hasReported = artwork?.reportedBy?.includes(currentUser.uid);
+      
+        const confirmed = window.confirm(
+          hasReported ? "確定要取消檢舉此市集嗎？" : "確定要檢舉此市集嗎？"
+        );
+        if (!confirmed) return;
+      
+        const result = await toggleReportArtwork(artwork.userUid, artwork.artworkId, currentUser.uid);
+      
+        if (result.success) {
+          setArtwork((prev) => ({
+            ...prev,
+            reportedBy: result.reported
+              ? [...(prev.reportedBy || []), currentUser.uid]
+              : prev.reportedBy.filter((uid) => uid !== currentUser.uid),
+          }));
+      
+          addToast( "success", result.reported ? "已成功送出檢舉" : "已取消檢舉");
+           
+          
+        } else {
+          addToast("error", "操作失敗，請稍後再試！");
+        }
+      };
+
     /*heading artist profile page*/
     const handleArtistProfileClick = (e) => {
         e.stopPropagation();
@@ -117,9 +154,14 @@ export default function ArtworkDetailPage({ params }) {
                             alt="商品圖片"
                             className="artworkDetails-image"
                         />
-                        <div className="artworkDetails-report">
-                            <img src="/images/icons8-exclamation-mark-64-1.png" alt="reportIcon" />
-                            我要檢舉
+                        <div className="artworkDetails-report"
+                        onClick={handleReport}
+                        >
+                        <img
+                            src={hasReported ? "/images/exclamation-icon.png" : "/images/icons8-exclamation-mark-64-1.png"}
+                            alt="reportIcon"
+                        />
+                            {hasReported ? "取消檢舉" : "我要檢舉"}
                             </div>
                     </div>
                 </div>
@@ -146,11 +188,11 @@ export default function ArtworkDetailPage({ params }) {
                     </div>
 
                     <div className="artworkDetails-buttonRow">
-                        <button className="buy-button">
+                        <button className="artworkDetails-buy-button">
                             <img src="/images/icons8-pay-96-1.png" alt="buyIcon" />
                             我要購買
                         </button>
-                        <button className="like-button"
+                        <button className="artworkDetails-like-button"
                             onClick={handleToggleLike}
                         >
                             <img src={

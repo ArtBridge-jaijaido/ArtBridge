@@ -62,6 +62,7 @@ const ArtworkPainterMarketPage = () => {
                         <div className="artworkPainterMarket-marketCard-container">
                             {activeArtworks.slice(0, artworkCardVisibleItems).map((artwork) => (
                                 <ArtworkPainterMarketCard
+                                    key={artwork.artworkId}
                                     artworkId={artwork.artworkId}
                                     imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
                                     title={artwork.marketName}
@@ -90,9 +91,10 @@ const ArtworkPainterMarketPage = () => {
                         <p>載入中...</p>
                     ) : historyArtworks.length > 0 ? (
                         <div className="artworkPainterMarket-marketCard-container">
-                            {historyArtworks.slice(0, historyCardVisibleItems).map((artwork) => (
+                            {historyArtworks.slice(0, historyCardVisibleItems).map(( artwork) => (
                                 <ArtworkPainterMarketCard
-                                    key={artwork.artworkId}
+                                    key={artwork.artworkId} 
+                                    artworkId={artwork.artworkId}
                                     imageSrc={artwork.exampleImageUrl || "/images/default-image.png"}
                                     title={artwork.marketName}
                                     price={artwork.price}

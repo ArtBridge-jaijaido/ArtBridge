@@ -228,6 +228,52 @@ export const fetchArtworkById = async (artworkId) => {
 };
 
 
+/**
+ * 檢舉市集
+ */
+/**
+ * 檢舉市集作品
+ */
+// services/artworkMarketService.js
+
+export const toggleReportArtwork = async (artworkOwnerUid, artworkId, reporterUid) => {
+  try {
+    const artworkRef = doc(db, "artworkMarket", artworkOwnerUid, "artworks", artworkId);
+
+    // 確認作品存在
+    const docSnap = await getDoc(artworkRef);
+    if (!docSnap.exists()) {
+      console.warn("找不到市集，無法檢舉");
+      return { success: false, message: "作品不存在" };
+    }
+
+    const data = docSnap.data();
+    const hasReported = data.reportedBy?.includes(reporterUid);
+
+    if (hasReported) {
+      
+      await updateDoc(artworkRef, {
+        reportedBy: arrayRemove(reporterUid),
+      });
+      return { success: true, reported: false };
+    } else {
+     
+      await updateDoc(artworkRef, {
+        reportedBy: arrayUnion(reporterUid),
+      });
+      return { success: true, reported: true };
+    }
+  } catch (error) {
+    console.error("檢舉 artwork 失敗:", error);
+    return { success: false, message: error.message };
+  }
+};
+
+
+
+
+
+
 /**fetch artwork user avatar and user nickname */
 
 /**
