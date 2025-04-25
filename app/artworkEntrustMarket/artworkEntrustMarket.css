@@ -1,0 +1,114 @@
+.artworkEntrustMarket-page {
+  --artworkEntrustMarket-page-width: 1440px;
+  --artworkEntrustMarket-marketCard-container-height: auto;
+  --artworkEntrustMarket-marketCard-container-gap: 35px;
+  --artworkEntrustMarket-marketCard-container-grid-auto-rows: 300px;
+
+  position: relative;
+  width: 100%;
+  max-width: var(--artworkEntrustMarket-page-width);
+  padding: 100px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.artworkEntrustMarket-tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0px;
+}
+
+.artworkEntrustMarket-setTab-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0px 20px;
+}
+
+.artworkEntrustMarket-marketCard-container {
+  width: 100%;
+  height: var(--artworkEntrustMarket-marketCard-container-height);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: var(--artworkEntrustMarket-marketCard-container-grid-auto-rows);
+  gap: var(--artworkEntrustMarket-marketCard-container-gap);
+  justify-items: stretch;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.artworkEntrustMarket-show-more-button {
+  background: none;
+  color: #2DAEF4;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.artworkEntrustMarket-show-more-button:hover {
+  color: #1C8CD1;
+}
+
+@media (max-width: 1280px) {
+  .artworkEntrustMarketPage {
+      width: 100%;
+  }
+
+  .artworkEntrustMarket-setTab-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .artworkEntrustMarket-marketCard-container {
+      --artworkEntrustMarket-marketCard-container-gap: 26px;
+      --artworkEntrustMarket-marketCard-container-grid-auto-rows: 280px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .artworkEntrustMarket-marketCard-container {
+      grid-template-columns: repeat(4, 1fr);
+      --artworkEntrustMarket-marketCard-container-gap: 35px 20px;
+      --artworkEntrustMarket-marketCard-container-grid-auto-rows: 180px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .artworkEntrustMarket-marketCard-container {
+      grid-template-columns: repeat(3, 1fr);
+      --artworkEntrustMarket-marketCard-container-gap: 50px 21px;
+      --artworkEntrustMarket-marketCard-container-grid-auto-rows: 166px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .artworkEntrustMarket-marketCard-container {
+      grid-template-columns: repeat(2, 1fr);
+      --artworkEntrustMarket-marketCard-container-gap: 32px 21px;
+      --artworkEntrustMarket-marketCard-container-grid-auto-rows: 166px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .artworkEntrustMarket-show-more-button {
+      font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .artworkEntrustMarket-marketCard-container {
+      --artworkEntrustMarket-marketCard-container-gap: 26px 15px;
+  }
+}

@@ -1,0 +1,82 @@
+.artworkUploadEntrust-page {
+  --artworkUploadEntrust-page-width: 1440px;
+  position: relative;
+  width: 100%;
+  max-width: var(--artworkUploadEntrust-page-width);
+  padding: 100px 80px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.artworkUploadEntrust-progressbar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.artworkUploadEntrust-form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ✅ 發佈成功畫面統一命名 */
+.artworkUploadEntrust-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.artworkUploadEntrust-success-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.artworkUploadEntrust-success-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 30px;
+}
+
+.artworkUploadEntrust-success-button {
+  background-color: #40a4da;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 80px;
+}
+
+.artworkUploadEntrust-success-button:hover {
+  background-color: #358bc5;
+}
+
+/* === RWD === */
+@media screen and (min-width: 1280px) {
+  .artworkUploadEntrust-form-content {
+    padding: 0px 30px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .artworkUploadEntrust-page {
+    padding: 100px 40px 20px 40px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .artworkUploadEntrust-page {
+    padding: 100px 20px 20px 20px;
+  }
+}

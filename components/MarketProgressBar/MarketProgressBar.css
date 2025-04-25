@@ -1,37 +1,41 @@
-.MarketProgressBar{
-  display:flex;
-  flex-direction: column;
-  max-width:1440px;
-  width:100%;
-  height:auto;
-  margin-top:0px;
-}
-.Market-progressbar-wrapper{
+/* === MarketProgressBar.css 支援 steps-4 / steps-5 === */
+
+.MarketProgressBar {
   display: flex;
   flex-direction: column;
-  margin-top:20px;
-  width:100%;
-  padding:0px 30px;
-  margin-bottom:20px;
+  max-width: 1440px;
+  width: 100%;
+  height: auto;
+  margin-top: 0px;
 }
-.Market-progressbar-container {
+
+.Market-progressbar-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0px 30px;
+  margin-bottom: 20px;
+}
+
+.Market-progressbar-container.steps-4,
+.Market-progressbar-container.steps-5 {
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   max-width: 100%;
   gap: 20px;
   flex-wrap: nowrap;
 }
 
-/* 每個圓圈或線條獨立放一欄 */
 .Market-progress-item {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 圓圈樣式 */
-.Market-progress-circle {
+/* steps-4 預設樣式 */
+.Market-progressbar-container.steps-4 .Market-progress-circle {
   border-radius: 50%;
   border-style: solid;
   border-color: #a2e2ff;
@@ -42,67 +46,140 @@
   aspect-ratio: 1;
 }
 
-/* 當前步驟及之前的圈圈變藍色 */
-.Market-progress-circle.active {
-  background: #a2e2ff 
+.Market-progressbar-container.steps-4 .Market-progress-circle.active {
+  background: #a2e2ff;
 }
 
-/* 連接線 */
-.Market-progress-line {
+.Market-progressbar-container.steps-4 .Market-progress-line {
   width: 180px;
   height: 1px;
   margin: auto 0;
   border: 1px solid #a2e2ff;
 }
 
+/* steps-5 適配手機縮小樣式 */
+.Market-progressbar-container.steps-5 .Market-progress-circle {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #a2e2ff;
+  border-width: 1px;
+  width: 28px;
+  height: 28px;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.Market-progressbar-container.steps-5 .Market-progress-circle.active {
+  background: #a2e2ff;
+}
+
+.Market-progressbar-container.steps-5 .Market-progress-line {
+  width: 140px;
+  height: 1px;
+  margin: auto 0;
+  border: 1px solid #a2e2ff;
+}
 
 @media (max-width: 1028px) {
-  .Market-progress-line {
-    width: 120px;
+  .Market-progressbar-container.steps-4 .Market-progress-line {
+    width: 140px;
   }
-  .Market-progress-circle {
-    width: 25px;
-    height: 25px;
+  .Market-progressbar-container.steps-4 .Market-progress-circle {
+    width: 26px;
+    height: 26px;
   }
 }
 
 @media (max-width: 834px) {
-  .Market-progress-line {
+  .Market-progressbar-container.steps-4 .Market-progress-line {
     width: 100px;
   }
-  .Market-progress-circle {
+  .Market-progressbar-container.steps-4 .Market-progress-circle {
     width: 20px;
     height: 20px;
   }
 }
-@media (max-width: 760px) {
-  .Market-progress-bar{
-    gap:10px;
-  }
-  .Market-progress-line {
-    width: 60px;
-  }
 
+@media (max-width: 760px) {
+  .Market-progressbar-container.steps-4 {
+    gap: 10px;
+  }
+  .Market-progressbar-container.steps-4 .Market-progress-line {
+    width: 70px;
+  }
 }
 
 @media (max-width: 480px) {
-  .Market-progress-line {
-    width: 40px;
+  .Market-progressbar-container.steps-4 .Market-progress-line {
+    width: 50px;
   }
-  .Market-progress-circle {
-    width: 15px;
-    height: 15px;
+  .Market-progressbar-container.steps-4 .Market-progress-circle {
+    width: 16px;
+    height: 16px;
   }
 }
 
 @media (max-width: 370px) {
-  .Market-progress-bar{
-    gap:8px;
+  .Market-progressbar-container.steps-4 {
+    gap: 8px;
   }
-  .Market-progress-line {
+  .Market-progressbar-container.steps-4 .Market-progress-line {
+    width: 30px;
+  }
+  .Market-progressbar-container.steps-4 .Market-progress-circle {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+
+@media (max-width: 1028px) {
+  .Market-progressbar-container.steps-5 .Market-progress-line {
+    width: 100px;
+  }
+  .Market-progressbar-container.steps-5 .Market-progress-circle {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 834px) {
+  .Market-progressbar-container.steps-5 .Market-progress-line {
+    width: 80px;
+  }
+  .Market-progressbar-container.steps-5 .Market-progress-circle {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .Market-progressbar-container.steps-5 {
+    gap: 10px;
+  }
+  .Market-progressbar-container.steps-5 .Market-progress-line {
+    width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Market-progressbar-container.steps-5 .Market-progress-line {
+    width: 36px;
+  }
+  .Market-progressbar-container.steps-5 .Market-progress-circle {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 370px) {
+  .Market-progressbar-container.steps-5 {
+    gap: 8px;
+  }
+  .Market-progressbar-container.steps-5 .Market-progress-line {
     width: 20px;
   }
-  .Market-progress-circle {
+  .Market-progressbar-container.steps-5 .Market-progress-circle {
     width: 12px;
     height: 12px;
   }
