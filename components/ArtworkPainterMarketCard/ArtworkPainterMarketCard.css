@@ -45,6 +45,7 @@
     line-height: normal;
     letter-spacing: 2px;
     border-radius: 30px;
+    cursor: pointer;
   }
 
  
@@ -57,6 +58,7 @@
 
   .history-market.ArtworkPainterMarketCard-title {
     background: #808080 !important;
+   
   }
 
   .ArtworkPainterMarketCard-image-container{
@@ -71,6 +73,7 @@
     object-fit: cover;
     object-position: center;
     display: none; 
+    cursor:pointer;
   }
 
   .ArtworkPainterMarketCard-loader {

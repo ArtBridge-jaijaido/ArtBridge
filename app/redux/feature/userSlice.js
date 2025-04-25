@@ -40,6 +40,12 @@ const userSlice = createSlice({
             state.allUsers = action.payload;
         },
 
+        // 把註冊者加入 All User
+        addUserToAllUsers: (state, action) => {
+            const { userUid, userData } = action.payload;
+            state.allUsers[userUid] = userData;
+        },
+
         //  更新特定 user
         updateAllUser: (state, action) => {
             const { userUid, userData } = action.payload;
@@ -57,6 +63,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { setUser, logoutUser,updateUser, setAuthLoading,setAllUsers, updateAllUser } = userSlice.actions;
+export const { setUser, logoutUser,updateUser, setAuthLoading,setAllUsers, updateAllUser, addUserToAllUsers } = userSlice.actions;
 export default userSlice.reducer;
 

@@ -87,6 +87,7 @@
 @media screen and (max-width: 440px){
     .loading-button{
         font-size: 12px;
+        
     }
 
     .loading-content span{

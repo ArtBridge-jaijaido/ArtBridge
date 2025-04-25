@@ -1,15 +1,16 @@
 "use client";
 import React, { useState, useEffect } from 'react'
 import { notoSansTCClass } from "@/app/layout.js";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "../painterDashboard/painterDashboard.css";
 import { useNavigation } from "@/lib/functions.js";
-
+import { updateUserRole } from '@/services/userService.js';
+import { updateUser } from "@/app/redux/feature/userSlice.js";
 
 const PainterDashboard = () => {
 
-
+  const dispatch = useDispatch();
   const { user, isAuthLoading } = useSelector((state) => state.user);
   const { setIsLoading } = useLoading();
   const [isFlipped, setIsFlipped] = useState(false);
@@ -38,8 +39,24 @@ const PainterDashboard = () => {
     navigate(targetPath);
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
-   
+
   };
+
+
+  const handleRoleSwitch = async () => {
+    const newRole = user?.role === "artist" ? "client" : "artist";
+    const response = await updateUserRole(user.uid, newRole);
+
+    if (response.success) {
+      dispatch(updateUser({ role: newRole }));
+
+      const targetPath = newRole === "client" ? "/artworkDashboard/artworkConsumerDashboard" : "/artworkDashboard/painterDashboard";
+      navigate(targetPath);
+    } else {
+      console.error("Failed to update user role:", response.message);
+    }
+  }
+
 
   if (isAuthLoading) {
     return null; // 如果仍在加載，先不渲染 Dashboard 內容
@@ -64,14 +81,16 @@ const PainterDashboard = () => {
             <div className="PainterDashboard-painterInfo">
               <h1>{user?.nickname || "使用者名稱"} <span>-繪師</span></h1>
               <div className="PainterDashboard-painterInfo-button-container">
-                <button className="PainterDashboard-painterInfo-button-change">
+                <button className="PainterDashboard-painterInfo-button-change"
+                  onClick={handleRoleSwitch}
+                >
                   切換
                   <img src="/images/icons8-change-48-1.png" alt="change-role-icon" />
                 </button>
-                  <button
-                    className={`PainterDashboard-painterInfo-button-id ${isFlipped ? "flipped" : ""}`}
-                    onClick={handleUserExclusiveIdClick}
-                  >
+                <button
+                  className={`PainterDashboard-painterInfo-button-id ${isFlipped ? "flipped" : ""}`}
+                  onClick={handleUserExclusiveIdClick}
+                >
                   <span>
                     {isFlipped ? user?.userSerialId : "查看專屬ID"}
                   </span>
@@ -112,7 +131,7 @@ const PainterDashboard = () => {
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-edit-text-file-100-1.png" alt="icon" className="artworkDashboardIcon" />
-              <span>我的文章</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkPainterArticle")} >我的文章</span>
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-artwork-100-1.png" alt="icon" className="artworkDashboardIcon" />
@@ -120,7 +139,7 @@ const PainterDashboard = () => {
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-bookmark-96-2.png" alt="icon" className="artworkDashboardIcon" />
-              <span>收藏名單</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkCollectionList")}>收藏名單</span>
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-follow-96-1.png" alt="icon" className="artworkDashboardIcon" />

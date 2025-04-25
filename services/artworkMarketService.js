@@ -197,6 +197,78 @@ export const fetchLikedArtworksByUser = async (currentUserUid) => {
 };
 
 
+/**
+ * fetch artwork by artworkId (details page)
+ */
+export const fetchArtworkById = async (artworkId) => {
+  try {
+    const q = query(
+      collectionGroup(db, "artworks"),
+      where("artworkId", "==", artworkId),
+      orderBy("createdAt", "asc")
+    );
+
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      console.warn(`找不到 artworkId 為 ${artworkId} 的市集`);
+      return null;
+    }
+
+    const docSnap = querySnapshot.docs[0];
+    const artworkData = docSnap.data();
+
+    return {
+      id: docSnap.id,
+      ...artworkData,
+    };
+  } catch (error) {
+    console.error("獲取市集失敗:", error);
+    return null;
+  }
+};
+
+
+/**
+ * 檢舉市集
+ */
+/**
+ * 檢舉市集作品
+ */
+// services/artworkMarketService.js
+
+export const toggleReportArtwork = async (artworkOwnerUid, artworkId, reporterUid) => {
+  try {
+    const artworkRef = doc(db, "artworkMarket", artworkOwnerUid, "artworks", artworkId);
+
+    // 確認作品存在
+    const docSnap = await getDoc(artworkRef);
+    if (!docSnap.exists()) {
+      console.warn("找不到市集，無法檢舉");
+      return { success: false, message: "作品不存在" };
+    }
+
+    const data = docSnap.data();
+    const hasReported = data.reportedBy?.includes(reporterUid);
+
+    if (hasReported) {
+      
+      await updateDoc(artworkRef, {
+        reportedBy: arrayRemove(reporterUid),
+      });
+      return { success: true, reported: false };
+    } else {
+     
+      await updateDoc(artworkRef, {
+        reportedBy: arrayUnion(reporterUid),
+      });
+      return { success: true, reported: true };
+    }
+  } catch (error) {
+    console.error("檢舉 artwork 失敗:", error);
+    return { success: false, message: error.message };
+  }
+};
+
 
 
 

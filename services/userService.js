@@ -85,6 +85,68 @@ export const updateUserData = async (uid, data) => {
 };
 
 
+// 更新使用者驗證資料
+export const updateUserVerifyData = async (uid, data) => {
+  const {
+    frontImageUrl,
+    backImageUrl,
+    bankAccountData,
+    verifyThreeArtwork,
+    verifyProcessFile,
+  } = data;
+
+  try {
+    const verificationRef = (name) => doc(db, `users/${uid}/verification/${name}`);
+
+    await Promise.all([
+      setDoc(verificationRef("verifyId"), {
+        frontImageUrl,
+        backImageUrl,
+      }),
+      setDoc(verificationRef("verifyBankAccount"), {
+        accountName: bankAccountData.accountName,
+        bankCode: bankAccountData.bankCode,
+        bankNumber: bankAccountData.bankNumber,
+      }),
+      setDoc(verificationRef("verifyArtworks"), {
+        verifyThreeArtwork,
+        verifyProcessFile,
+      }),
+    ]);
+
+    return { success: true, message: "驗證資料更新成功" };
+  } catch (error) {
+    console.error("❌ 驗證資料更新失敗:", error);
+    return { success: false, message: `驗證資料更新失敗：${error.message}` };
+  }
+};
+
+
+//取得使用者驗證資料
+export const getUserVerificationData = async (uid) => {
+  try {
+    const verifyIdSnap = await getDoc(doc(db, `users/${uid}/verification/verifyId`));
+    const verifyBankSnap = await getDoc(doc(db, `users/${uid}/verification/verifyBankAccount`));
+    const verifyArtworksSnap = await getDoc(doc(db, `users/${uid}/verification/verifyArtworks`));
+
+    return {
+      frontImageUrl: verifyIdSnap.exists() ? verifyIdSnap.data().frontImageUrl : "",
+      backImageUrl: verifyIdSnap.exists() ? verifyIdSnap.data().backImageUrl : "",
+      bankAccountData: verifyBankSnap.exists()
+        ? {
+            accountName: verifyBankSnap.data().accountName || "",
+            bankCode: verifyBankSnap.data().bankCode || "",
+            bankNumber: verifyBankSnap.data().bankNumber || "",
+          }
+        : { accountName: "", bankCode: "", bankNumber: "" },
+      verifyThreeArtwork: verifyArtworksSnap.exists() ? verifyArtworksSnap.data().verifyThreeArtwork || [] : [],
+      verifyProcessFile: verifyArtworksSnap.exists() ? verifyArtworksSnap.data().verifyProcessFile || null : null,
+    };
+  } catch (error) {
+    console.error("❌ 取得驗證資料失敗：", error);
+    return null;
+  }
+};
 
 // Generate Unique Serial Id for User
 export const generateUniqueSerial = async () => {

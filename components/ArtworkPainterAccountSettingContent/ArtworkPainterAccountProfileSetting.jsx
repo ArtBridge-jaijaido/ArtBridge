@@ -38,7 +38,12 @@ const ArtworkPainterAccountProfileSetting = ({
   const [charCount, setCharCount] = useState(userPainterProfileIntroduction?.length || 0);
 
   useEffect(() => {
-    setIntroduction(userPainterProfileIntroduction || "");
+    const intro =
+    user?.role === "artist"
+      ? user?.painterIntroduction
+      : user?.clientIntroduction;
+
+    setIntroduction(intro || "");
     setCharCount(userPainterProfileIntroduction?.length || 0);
   }, [userPainterProfileIntroduction]);
 
@@ -61,11 +66,14 @@ const ArtworkPainterAccountProfileSetting = ({
 
   const handleSaveIntroduction = async () => {
     if (!user?.uid) return;
-
+  
+    const trimmedText = introduction.trim();
+    const fieldName = user?.role === "artist" ? "painterIntroduction" : "clientIntroduction";
+    const updatedData = { [fieldName]: trimmedText };
+  
     try {
-      const updatedData = { painterIntroduction: introduction.trim() };
       const response = await updateUserData(user.uid, updatedData);
-
+  
       if (response.success) {
         dispatch(updateUser(updatedData));
         setIsEditing(false);
@@ -260,7 +268,7 @@ const ArtworkPainterAccountProfileSetting = ({
       <div className="ArtworkPainterAccountProfileSetting-introduction">
 
         <div className="ArtworkPainterAccountProfileSetting-intro-header">
-          <span className="ArtworkPainterAccountProfileSetting-intro-title">個人簡介 </span> <span className="ArtworkPainterAccountProfileSetting-intro-limit">-最多 250 字</span>
+          <span className="ArtworkPainterAccountProfileSetting-intro-title">{user?.role==="artist"?"繪師個人簡介" : "委託方個人簡介"} </span> <span className="ArtworkPainterAccountProfileSetting-intro-limit">-最多 250 字</span>
          
         </div>
 

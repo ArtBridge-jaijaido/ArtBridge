@@ -78,6 +78,13 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
    
  };
 
+  const handleHeadingToDetail = (e) => {
+    e.stopPropagation();
+    navigate(`/artworkDetails/${artworkId}?nickname=${encodeURIComponent(artistNickName)}&avatar=${encodeURIComponent(artistProfileImg)}&image=${encodeURIComponent(imageSrc)}`);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 800);
+  };
+
   return (
     <div className={`Artwork-card-container ${pageType === "painterProfile" ? "painter-profile" : "market-style"}`}>
       {/* 圖片部分 */}
@@ -103,11 +110,16 @@ const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName,
           className={`Artwork-image ${isImageLoaded ? "loaded" : "hidden"}`}
           onLoad={() => setIsImageLoaded(true)}
           onError={() => setIsImageLoaded(true)} 
+          onClick={handleHeadingToDetail}
         />
       </div>
 
       {/* 商品標題 */}
-      <span className="Artwork-title">{title}</span>
+      <span className="Artwork-title"
+        onClick={handleHeadingToDetail} // 點擊標題時跳轉到詳細頁面
+      >
+        
+        {title}</span>
 
       {/* 按讚按鈕 */}
       

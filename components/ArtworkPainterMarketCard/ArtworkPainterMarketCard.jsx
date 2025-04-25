@@ -1,11 +1,22 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FadeLoader } from "react-spinners"; 
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "./ArtworkPainterMarketCard.css";
 
-const ArtworkPainterMarketCard = ({ imageSrc, title, price, isHistoryTab }) => {
+const ArtworkPainterMarketCard = ({ artworkId, imageSrc, title, price, isHistoryTab, artistNickName, artistProfileImg }) => {
     const [isFavorite, setIsFavorite] = useState(false); 
     const [isImageLoaded, setIsImageLoaded] = useState(false); // 圖片加載狀態
+    const navigate = useNavigation();
+      const { setIsLoading } = useLoading();
+  
+    const handleHeadingToDetail = (e) => {
+        e.stopPropagation();
+        navigate(`/artworkDetails/${artworkId}?nickname=${encodeURIComponent(artistNickName)}&avatar=${encodeURIComponent(artistProfileImg)}&image=${encodeURIComponent(imageSrc)}`);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 800);
+      };
 
     return (
         <div className={`ArtworkPainterMarketCard-card-container ${isHistoryTab ? "history-market" : ""}`}>
@@ -29,11 +40,15 @@ const ArtworkPainterMarketCard = ({ imageSrc, title, price, isHistoryTab }) => {
                     className={`ArtworkPainterMarketCard-image ${isImageLoaded ? "loaded" : "hidden"}`}
                     onLoad={() => setIsImageLoaded(true)}
                     onError={() => setIsImageLoaded(true)} // 如果圖片加載失敗也隱藏 Spinner
+                    onClick={handleHeadingToDetail}
                 />
             </div>
 
             {/* 商品標題 */}
-            <span className={`ArtworkPainterMarketCard-title ${isHistoryTab ? "history-market" : ""}`}>
+            <span 
+            className={`ArtworkPainterMarketCard-title ${isHistoryTab ? "history-market" : ""}`}
+            onClick={handleHeadingToDetail}
+            >
                 {title}
             </span>
 

@@ -94,7 +94,7 @@
 }
 
 
-@media screen and (max-width:320px){
+@media screen and (max-width:370px){
     .registerArtistClientBtn{
         --registerArtistClientBtn-font-size:10px;
         --registerArtistClientBtn-width: 70px;
