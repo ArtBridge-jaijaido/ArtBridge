@@ -8,6 +8,7 @@ import { useNavigation } from "@/lib/functions.js";
 import { useSelector } from "react-redux";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { useToast } from "@/app/contexts/ToastContext.js";
+import ModalImgBuyArtwork from "@/components/ModalImage/ModalImgBuyArtwork.jsx";
 import Masonry from "react-masonry-css";
 import "./artworkDetails.css";
 
@@ -31,6 +32,9 @@ export default function ArtworkDetailPage({ params }) {
 
     const isLiked = likeStates[artworkId] ?? artwork?.likedBy?.includes(currentUser?.uid);
     const hasReported = artwork?.reportedBy?.includes(currentUser?.uid);
+
+    // ModalImgBuyArtwork 的狀態
+    const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
 
     const breakpointColumnsObj = {
         default: 2,
@@ -87,36 +91,67 @@ export default function ArtworkDetailPage({ params }) {
     /* handle report*/
     const handleReport = async (e) => {
         e.stopPropagation();
-      
+
         if (!currentUser) {
-          addToast("error", "請先登入才能檢舉！");
-          return;
+            addToast("error", "請先登入才能檢舉！");
+            return;
         }
-      
+
         const hasReported = artwork?.reportedBy?.includes(currentUser.uid);
-      
+
         const confirmed = window.confirm(
-          hasReported ? "確定要取消檢舉此市集嗎？" : "確定要檢舉此市集嗎？"
+            hasReported ? "確定要取消檢舉此市集嗎？" : "確定要檢舉此市集嗎？"
         );
         if (!confirmed) return;
-      
+
         const result = await toggleReportArtwork(artwork.userUid, artwork.artworkId, currentUser.uid);
-      
+
         if (result.success) {
-          setArtwork((prev) => ({
-            ...prev,
-            reportedBy: result.reported
-              ? [...(prev.reportedBy || []), currentUser.uid]
-              : prev.reportedBy.filter((uid) => uid !== currentUser.uid),
-          }));
-      
-          addToast( "success", result.reported ? "已成功送出檢舉" : "已取消檢舉");
-           
-          
+            setArtwork((prev) => ({
+                ...prev,
+                reportedBy: result.reported
+                    ? [...(prev.reportedBy || []), currentUser.uid]
+                    : prev.reportedBy.filter((uid) => uid !== currentUser.uid),
+            }));
+
+            addToast("success", result.reported ? "已成功送出檢舉" : "已取消檢舉");
+
+
         } else {
-          addToast("error", "操作失敗，請稍後再試！");
+            addToast("error", "操作失敗，請稍後再試！");
         }
-      };
+    };
+
+    const preloadImage = (src) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+        });
+    };
+
+
+    /*handle buy artwork*/
+    const handleBuyArtwork = async (e) => {
+        e.stopPropagation();
+        if (!currentUser) {
+            addToast("error", "請先登入才能購買喔！");
+            return;
+        }
+
+        try {
+            // 預載 artwork 主圖與畫師頭貼
+            await Promise.all([
+                preloadImage(artworkImageUrl),
+                preloadImage(artistProfileImg),
+            ]);
+            setIsBuyModalOpen(true);
+        } catch (err) {
+            addToast("error", "圖片載入失敗，請稍後再試");
+        }
+    };
+
 
     /*heading artist profile page*/
     const handleArtistProfileClick = (e) => {
@@ -155,14 +190,14 @@ export default function ArtworkDetailPage({ params }) {
                             className="artworkDetails-image"
                         />
                         <div className="artworkDetails-report"
-                        onClick={handleReport}
+                            onClick={handleReport}
                         >
-                        <img
-                            src={hasReported ? "/images/exclamation-icon.png" : "/images/icons8-exclamation-mark-64-1.png"}
-                            alt="reportIcon"
-                        />
+                            <img
+                                src={hasReported ? "/images/exclamation-icon.png" : "/images/icons8-exclamation-mark-64-1.png"}
+                                alt="reportIcon"
+                            />
                             {hasReported ? "取消檢舉" : "我要檢舉"}
-                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -188,7 +223,7 @@ export default function ArtworkDetailPage({ params }) {
                     </div>
 
                     <div className="artworkDetails-buttonRow">
-                        <button className="artworkDetails-buy-button">
+                        <button className="artworkDetails-buy-button" onClick={handleBuyArtwork}>
                             <img src="/images/icons8-pay-96-1.png" alt="buyIcon" />
                             我要購買
                         </button>
@@ -285,6 +320,15 @@ export default function ArtworkDetailPage({ params }) {
                 <h2>市集評價</h2>
 
             </div>
+
+            <ModalImgBuyArtwork
+                isOpen={isBuyModalOpen}
+                onClose={() => setIsBuyModalOpen(false)}
+                artwork={artwork}
+                artworkImageUrl={artworkImageUrl}
+                artistNickname={artistNickname}
+                artistProfileImg={artistProfileImg}
+            />
         </div>
 
     );
