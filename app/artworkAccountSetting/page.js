@@ -1,20 +1,35 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+"use client"
+import React from 'react'
+import { notoSansTCClass } from '@/app/layout.js';
+import ArtworkPainterAccountSettingTabs from '@/components/Tabs/ArtworkPainterAccountSettingTab.jsx';
+import './artworkPainterAccountSetting.css';
 
-const ArtworkAccountSetting = () => {
-  const router = useRouter();
-  const { user } = useSelector((state) => state.user);
-  
-  useEffect(() => {
+const ArtworkPainterAccountSettingPage = () => {
 
-    const accountSettingPath = user.role === "artist" 
-    ? "/artworkAccountSetting/artworkPainterAccountSetting" 
-    : "/artworkAccountSetting/artworkConsumerAccountSetting";
+  const tabs = [
+    {
+      label: "帳號設定",
+      
+    },
+    {
+      label: "個人檔案設定",
+     
+    },
+    {
+      label: "封鎖名單",
+     
+    },
+    {
+      label: "官方驗證🚨",
+      
+    }
+  ]
 
-    router.replace(accountSettingPath); 
-  }, [user, router]);
+  return (
+    <div className={`artworkPainterAccountSettingPage ${notoSansTCClass}`}>
+        <ArtworkPainterAccountSettingTabs tabs={tabs} />
+    </div>
+  )
 }
 
-export default  ArtworkAccountSetting;
+export default ArtworkPainterAccountSettingPage 

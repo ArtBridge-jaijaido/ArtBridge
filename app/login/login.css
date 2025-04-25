@@ -1,13 +1,13 @@
-.login-page{
+.login-page {
 
     /*max-width*/
     --login-page-max-width: 1440px;
-    --login-form-remember-me-checkbox-width:24px;
+    --login-form-remember-me-checkbox-width: 24px;
 
 
     /*height*/
     --login-form-group-input-height: 96px;
-    --login-form-remember-me-checkbox-height:24px;
+    --login-form-remember-me-checkbox-height: 24px;
 
     /*font-size*/
     --login-h1-font-size: 40px;
@@ -15,15 +15,15 @@
     --login-form-bottom-part-container-font-size: 20px;
 
     /*font-weight*/
-    --login-h1-font-weight:700;
-    --login-form-group-input-placeholder-font-weight:500;
+    --login-h1-font-weight: 700;
+    --login-form-group-input-placeholder-font-weight: 500;
 
     /*line-height*/
     --login-h1-line-height: 11px;
 
     /*letter-spacing*/
-    --login-h1-letter-spacing:3px;
-    --login-form-group-input-placeholder-letter-spacing:3px;
+    --login-h1-letter-spacing: 3px;
+    --login-form-group-input-placeholder-letter-spacing: 3px;
 
     /*margin bottom*/
     --login-page-h1-margin-bottom: 107px;
@@ -31,91 +31,92 @@
     --login-form-bottom-part-container-margin-bottom: 111px;
 
     /*gap*/
-    --login-form-group-gap:100px;
+    --login-form-group-gap: 100px;
 
     /*border radius*/
-    --login-form-input-border-radius:10px;
+    --login-form-input-border-radius: 10px;
 
 }
 
 
-.login-page{
-    width:100%;
-    max-width:var(--login-page-max-width);
-    padding:107px 127px 81px 127px; /* top right bottom left */
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto; /* center in the viewport */
+.login-page {
+    width: 100%;
+    max-width: var(--login-page-max-width);
+    padding: 107px 127px 81px 127px;
+    /* top right bottom left */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* center in the viewport */
 }
 
-.login-page h1{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    color:#7A82F0;
-    text-align:center;
-    font-size:var(--login-h1-font-size);
-    font-weight:var(--login-h1-font-weight);  
-    line-height:var(--login-h1-line-height);
-    letter-spacing:var(--login-h1-letter-spacing);
-    margin-bottom:var(--login-page-h1-margin-bottom);
-    flex-shrink:0;
+.login-page h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #7A82F0;
+    text-align: center;
+    font-size: var(--login-h1-font-size);
+    font-weight: var(--login-h1-font-weight);
+    line-height: var(--login-h1-line-height);
+    letter-spacing: var(--login-h1-letter-spacing);
+    margin-bottom: var(--login-page-h1-margin-bottom);
+    flex-shrink: 0;
 }
 
-.login-form-container{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:var(--login-form-group-gap);
-    margin-bottom:var(--login-form-container-margin-bottom);
+.login-form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--login-form-group-gap);
+    margin-bottom: var(--login-form-container-margin-bottom);
 }
 
 
 .login-form-group input[type="email"],
-.login-form-group input[type="password"] 
-    {
-      
-        width:100%;
-        height: var(--login-form-group-input-height);
-        padding: 0px 44px;
-        border: 1px solid #7BC8EC;
-        border-radius: var(--login-form-input-border-radius);
-        
-    }
+.login-form-group input[type="password"] {
+
+    width: 100%;
+    height: var(--login-form-group-input-height);
+    padding: 0px 44px;
+    border: 1px solid #7BC8EC;
+    border-radius: var(--login-form-input-border-radius);
+
+}
 
 .login-form-group input[type="email"]::placeholder,
-.login-form-group input[type="password"]::placeholder{
-    color:#7BC8EC;
-    font-size:var(--login-form-group-input-placeholder-font-size);
-    font-weight:var(--login-form-group-input-placeholder-font-weight);
-    letter-spacing:var(--login-form-group-input-placeholder-letter-spacing);
-    line-height:normal; 
+.login-form-group input[type="password"]::placeholder {
+    color: #7BC8EC;
+    font-size: var(--login-form-group-input-placeholder-font-size);
+    font-weight: var(--login-form-group-input-placeholder-font-weight);
+    letter-spacing: var(--login-form-group-input-placeholder-letter-spacing);
+    line-height: normal;
 }
 
 
 .login-form-group input[type="email"]:focus,
-.login-form-group input[type="password"]:focus{
+.login-form-group input[type="password"]:focus {
     border: 2px solid #7BC8EC;
-    outline: none;  
+    outline: none;
 }
 
-.login-form-remember-me{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.login-form-remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.login-form-remember-me input[type="checkbox"]{
-    width:var(--login-form-remember-me-checkbox-width);
-    height:var(--login-form-remember-me-checkbox-height);
+.login-form-remember-me input[type="checkbox"] {
+    width: var(--login-form-remember-me-checkbox-width);
+    height: var(--login-form-remember-me-checkbox-height);
     flex-shrink: 0;
     appearance: none;
-    -webkit-appearance: none; 
-    background-color: white; 
-    border: 2px solid #7BC8EC; 
+    -webkit-appearance: none;
+    background-color: white;
+    border: 2px solid #7BC8EC;
     cursor: pointer;
     position: relative;
 }
@@ -123,189 +124,220 @@
 
 /* 勾選符號 */
 .login-form-remember-me input[type="checkbox"]:checked::after {
-    content: "✓"; 
-    color: black; 
-    font-size: var(--login-form-group-input-placeholder-font-size); 
+    content: "✓";
+    color: black;
+    font-size: var(--login-form-group-input-placeholder-font-size);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.login-form-remember-me span{
-    font-size:var(--login-form-group-input-placeholder-font-size);
-    letter-spacing:var(--login-form-group-input-placeholder-letter-spacing);
-    font-weight:var(--login-form-group-input-placeholder-font-weight);
-    color: #7BC8EC;    
+.login-form-remember-me span {
+    font-size: var(--login-form-group-input-placeholder-font-size);
+    letter-spacing: var(--login-form-group-input-placeholder-letter-spacing);
+    font-weight: var(--login-form-group-input-placeholder-font-weight);
+    color: #7BC8EC;
 }
 
 
 
 
-.login-form-bottom-part-container{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:var(--login-form-bottom-part-container-margin-bottom);
-    font-size:var(--login-form-bottom-part-container-font-size);
-    letter-spacing:var(--login-form-group-input-placeholder-letter-spacing);
-    font-weight:var(--login-form-group-input-placeholder-font-weight);
+.login-form-bottom-part-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--login-form-bottom-part-container-margin-bottom);
+    font-size: var(--login-form-bottom-part-container-font-size);
+    letter-spacing: var(--login-form-group-input-placeholder-letter-spacing);
+    font-weight: var(--login-form-group-input-placeholder-font-weight);
 }
 
-.login-notHasAccount span{
-    color: #7BC8EC;    
+.login-notHasAccount span {
+    color: #7BC8EC;
 }
 
-.login-highlight-blue{
-    cursor:pointer; 
-    color:#417791;
+.login-highlight-blue {
+    cursor: pointer;
+    color: #417791;
 }
 
-.loginBtn{
-    background-color: white !important;
+.login-submit-buttom {
+    width: 166px !important;
+    height: 57px !important;
+    background-color: #fff !important;
+    color: #5ea5d4 !important;
+    font: size 24px !important;
     border: 1.5px solid #5EA5D4 !important;
+    letter-spacing: 5px !important;
+    word-break: break-word !important;
+}
+
+.login-submit-buttom:hover,
+.login-submit-buttom.login-is-loading {
+    background-color: #5ea5d4 !important;
+    color: #fff !important;
 }
 
 
 
+/*RWD*/
+@media screen and (max-width:1280px) {
+    .login-page {
 
-/*RWD*/ 
-@media screen and (max-width:1280px){
-    .login-page{
-        
-        padding:98px 133px 96px 133px; /* top right bottom left */
+        padding: 98px 133px 96px 133px;
+        /* top right bottom left */
     }
 
-    .login-page h1{
-       --login-h1-font-size: 32px;
-       --login-page-h1-margin-bottom: 96px;
+    .login-page h1 {
+        --login-h1-font-size: 32px;
+        --login-page-h1-margin-bottom: 96px;
 
     }
 
-    .login-form-container{
-        --login-form-group-gap:67px;
-        
+    .login-form-container {
+        --login-form-group-gap: 67px;
+
     }
 
-    .login-form-remember-me input[type="checkbox"]{
-        --login-form-remember-me-checkbox-width:22px;
-        --login-form-remember-me-checkbox-height:22px;
+    .login-form-remember-me input[type="checkbox"] {
+        --login-form-remember-me-checkbox-width: 22px;
+        --login-form-remember-me-checkbox-height: 22px;
     }
 
-    .login-form-bottom-part-container{
+    .login-form-bottom-part-container {
         --login-form-bottom-part-container-margin-bottom: 57px;
     }
 
-  
+    /*login btn*/
+    .login-submit-buttom {
+        width: 150px !important;
+        height: 51px !important;
+        font-size: 20px !important;
+
+    }
 
 }
 
-@media screen and (max-width:834px){
-    .login-page{
-       
-        padding:212px 155px 222px 155px; /* top right bottom left */
+@media screen and (max-width:834px) {
+    .login-page {
+
+        padding: 212px 155px 222px 155px;
+        /* top right bottom left */
     }
 
-    .login-page h1{
+    .login-page h1 {
         --login-page-h1-margin-bottom: 167px;
- 
-     }
 
-     
-    .login-form-container{
-        --login-form-group-gap:92px;
-        
     }
 
-    
+
+    .login-form-container {
+        --login-form-group-gap: 92px;
+
+    }
+
+
     .login-form-group input[type="email"],
-    .login-form-group input[type="password"]{
+    .login-form-group input[type="password"] {
         padding: 0px 29px;
-        --login-form-group-input-height:70px;
-    } 
+        --login-form-group-input-height: 70px;
+    }
 
     .login-form-group input[type="email"]::placeholder,
-    .login-form-group input[type="password"]::placeholder{
-        
-        --login-form-group-input-placeholder-font-size:20px;
+    .login-form-group input[type="password"]::placeholder {
+
+        --login-form-group-input-placeholder-font-size: 20px;
     }
 
-    .login-form-remember-me{
-        gap:6px;
+    .login-form-remember-me {
+        gap: 6px;
     }
 
-    .login-form-remember-me input[type="checkbox"]{
-        --login-form-remember-me-checkbox-width:18px;
-        --login-form-remember-me-checkbox-height:18px;
+    .login-form-remember-me input[type="checkbox"] {
+        --login-form-remember-me-checkbox-width: 18px;
+        --login-form-remember-me-checkbox-height: 18px;
     }
 
     .login-form-remember-me input[type="checkbox"]:checked::after {
-        --login-form-group-input-placeholder-font-size:20px;
+        --login-form-group-input-placeholder-font-size: 20px;
     }
 
-    .login-form-remember-me span{
-        --login-form-group-input-placeholder-font-size:16px;
-        }
-
-    .login-form-bottom-part-container{
-        --login-form-bottom-part-container-margin-bottom:121px;
-        --login-form-bottom-part-container-font-size:16px;
+    .login-form-remember-me span {
+        --login-form-group-input-placeholder-font-size: 16px;
     }
-}
 
-
-@media screen and (max-width:768px){
-    .login-page{
-        width:768px;
+    .login-form-bottom-part-container {
+        --login-form-bottom-part-container-margin-bottom: 121px;
+        --login-form-bottom-part-container-font-size: 16px;
     }
 }
 
 
-@media screen and (max-width:440px){
-    .login-page{
-        width:100%;
-        max-width:440px;
-        padding:118px 72px 241px 72px; /* top right bottom left */
+@media screen and (max-width:768px) {
+    .login-page {
+        width: 768px;
+    }
+}
+
+
+@media screen and (max-width:440px) {
+    .login-page {
+        width: 100%;
+        max-width: 440px;
+        padding: 118px 50px 241px 50px;
+        /* top right bottom left */
     }
 
-    .login-page h1{
+    .login-page h1 {
         --login-page-h1-margin-bottom: 134px;
-        --login-h1-font-size:20px;
-     }
+        --login-h1-font-size: 20px;
+    }
 
-     .login-form-container{
-        --login-form-group-gap:59px;
-        
+    .login-form-container {
+        --login-form-group-gap: 59px;
+
     }
 
     .login-form-group input[type="email"],
-    .login-form-group input[type="password"]{
+    .login-form-group input[type="password"] {
         padding: 0px 19px;
-        --login-form-group-input-height:50px;
-    } 
-
-    .login-form-group input[type="email"]::placeholder,
-    .login-form-group input[type="password"]::placeholder{
-        --login-form-group-input-placeholder-font-size:16px;
+        --login-form-group-input-height: 50px;
     }
 
-    .login-form-remember-me input[type="checkbox"]{
-        --login-form-remember-me-checkbox-width:14px;
-        --login-form-remember-me-checkbox-height:14px;  
+    .login-form-group input[type="email"]::placeholder,
+    .login-form-group input[type="password"]::placeholder {
+        --login-form-group-input-placeholder-font-size: 16px;
+    }
+
+    .login-form-remember-me input[type="checkbox"] {
+        --login-form-remember-me-checkbox-width: 14px;
+        --login-form-remember-me-checkbox-height: 14px;
     }
 
     /* 勾選符號 */
-    .login-form-remember-me input[type="checkbox"]:checked::after{
-        --login-form-group-input-placeholder-font-size:12px;
+    .login-form-remember-me input[type="checkbox"]:checked::after {
+        --login-form-group-input-placeholder-font-size: 12px;
     }
 
-    .login-form-remember-me span{
-        --login-form-group-input-placeholder-font-size:12px;
+    .login-form-remember-me span {
+        --login-form-group-input-placeholder-font-size: 12px;
     }
 
-    .login-form-bottom-part-container{
-        --login-form-bottom-part-container-margin-bottom:116px;
-        --login-form-bottom-part-container-font-size:12px;
+    .login-form-bottom-part-container {
+        --login-form-bottom-part-container-margin-bottom: 116px;
+        --login-form-bottom-part-container-font-size: 12px;
+    }
+
+    /*login btn*/
+
+    .login-submit-buttom {
+        min-width:80px !important;
+        width:auto !important;
+        height:25px !important;
+        font-size: 12px !important;
+        padding: 0px 10px !important;
+
     }
 
 
@@ -313,51 +345,60 @@
 
 
 
-@media screen and (max-width:370px){
-    .login-page{
-        width:370px;
-        padding:80px 69px 80px 69px; /* top right bottom left */
+@media screen and (max-width:370px) {
+    .login-page {
+      
+        padding: 80px 44px 80px 44px;
+        /* top right bottom left */
     }
 
-    .login-page h1{
-        --login-page-h1-margin-bottom:80px;
-      
-     }
+    .login-page h1 {
+        --login-page-h1-margin-bottom: 80px;
 
-     .login-form-container{
-        --login-form-group-gap:30px;
-        
+    }
+
+    .login-form-container {
+        --login-form-group-gap: 30px;
+
     }
 
     .login-form-group input[type="email"],
-    .login-form-group input[type="password"]{
+    .login-form-group input[type="password"] {
         padding: 0px 11px;
-      
-        --login-form-group-input-height:30px;
-    } 
+
+        --login-form-group-input-height: 30px;
+    }
 
     .login-form-group input[type="email"]::placeholder,
-    .login-form-group input[type="password"]::placeholder{
-        --login-form-group-input-placeholder-font-size:10px;
+    .login-form-group input[type="password"]::placeholder {
+        --login-form-group-input-placeholder-font-size: 10px;
     }
 
-    .login-form-remember-me input[type="checkbox"]{
-        --login-form-remember-me-checkbox-width:10px;
-        --login-form-remember-me-checkbox-height:10px;  
+    .login-form-remember-me input[type="checkbox"] {
+        --login-form-remember-me-checkbox-width: 10px;
+        --login-form-remember-me-checkbox-height: 10px;
     }
 
-     /* 勾選符號 */
-     .login-form-remember-me input[type="checkbox"]:checked::after{
-        --login-form-group-input-placeholder-font-size:8px;
+    /* 勾選符號 */
+    .login-form-remember-me input[type="checkbox"]:checked::after {
+        --login-form-group-input-placeholder-font-size: 8px;
     }
 
-    .login-form-remember-me span{
-        --login-form-group-input-placeholder-font-size:8px;
+    .login-form-remember-me span {
+        --login-form-group-input-placeholder-font-size: 8px;
     }
 
 
-    .login-form-bottom-part-container{
-        --login-form-bottom-part-container-margin-bottom:86px;
-        --login-form-bottom-part-container-font-size:8px;
+    .login-form-bottom-part-container {
+        --login-form-bottom-part-container-margin-bottom: 86px;
+        --login-form-bottom-part-container-font-size: 8px;
+    }
+
+    /*login btn*/
+    
+    .login-submit-buttom{
+        min-width:70px;
+        height:20px !important;
+        font-size: 10px !important;
     }
 }

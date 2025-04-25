@@ -76,22 +76,21 @@ export default function RootLayout({ children }) {
     const unsubscribeArtworks = subscribeToArtworks();
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
     const unsubscribePainterArticles = subscribeToPainterArticles();
-
-    //  先取消舊的 Users 訂閱，然後重新訂閱
-    if (unsubscribeAllUsers) {
-      unsubscribeAllUsers();
-    }
-    const newUnsubscribeAllUsers = subscribeToAllUsers();
-    setUnsubscribeAllUsers(() => newUnsubscribeAllUsers);
-
+    const unsubscribeUsers = subscribeToAllUsers();
+  
+    setUnsubscribeAllUsers(() => unsubscribeUsers);
+    console.log("🔥 監聽到用戶變更...");
+    
     return () => {
       unsubscribeAuth();
       unsubscribeArtworks();
-      newUnsubscribeAllUsers();
       unsubscribePainterPortfolios();
       unsubscribePainterArticles();
+      unsubscribeUsers();
     };
-  }, [token]); //  當 Token 變更時，重新執行
+
+
+  }, [token]);
 
 
   return (

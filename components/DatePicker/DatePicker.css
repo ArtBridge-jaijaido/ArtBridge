@@ -1,12 +1,43 @@
 .custom-datepicker {
-    width: 100%; /* 讓 Flatpickr 輸入框等寬 */
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  /* 讓 Flatpickr 輸入框等寬 */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.flatpickr-calendar {
+
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+
+}
+
+.flatpickr-innerContainer {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@media screen and (max-width: 440px) {
+  .flatpickr-monthDropdown-months{
+    font-size:14px !important;
   }
-  .flatpickr-calendar {
-    max-width:400px;
-    width: 100%;
-    font-size: 16px;
+
+  .numInputWrapper{
+    font-size:14px !important;
   }
+
+  span.flatpickr-weekday{
+    font-size:60% !important;
+  }
+
+  .flatpickr-day{
+    font-size:60% !important;
+  }
+}

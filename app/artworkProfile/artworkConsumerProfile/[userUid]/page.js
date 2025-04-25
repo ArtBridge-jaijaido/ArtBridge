@@ -150,7 +150,7 @@ const ArtworkConsumerProfilePage = () => {
                     ratingText={"5"}
                     profileImg={user.profileAvatar ?? "/images/profile-avatar.png"}
                     usernameText={user?.nickname}
-                    introductionText={"很好說話，美東時差黨，延遲回覆抱歉。如果超出原本預期的工時，可以直接跟我提價錢，好商量！如果顯示在線卻沒回"}
+                    introductionText={user?.clientIntroduction ? user.clientIntroduction : "請寫下你的自我介紹......."}
                     viewID={user?.userSerialId?user.userSerialId:"A123456"}
                     isHighQuality={true}
                     browsingPainterId={userUid}

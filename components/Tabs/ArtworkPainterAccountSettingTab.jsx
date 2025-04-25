@@ -28,11 +28,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
     phone: user?.phone || ""
   });
 
-  // **本地預覽 & Firebase URL**
-  const [selectedFrontImage, setSelectedFrontImage] = useState(null);
-  const [selectedBackImage, setSelectedBackImage] = useState(null);
-  const [frontImageUrl, setFrontImageUrl] = useState(user?.frontImageUrl || "");
-  const [backImageUrl, setBackImageUrl] = useState(user?.backImageUrl || "");
+  
 
   // **更新表單資料**
   useEffect(() => {
@@ -58,25 +54,9 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
       setSelectedGender("");
     }
 
-    if (user?.frontImageUrl) setFrontImageUrl(user.frontImageUrl);
-    if (user?.backImageUrl) setBackImageUrl(user.backImageUrl);
+   
 
   }, [user]);
-
-
-  // **處理圖片選擇，但不馬上上傳**
-  const handleImageSelect = (event, isFront) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const previewUrl = URL.createObjectURL(file);
-
-    if (isFront) {
-      setSelectedFrontImage({ file, preview: previewUrl });
-    } else {
-      setSelectedBackImage({ file, preview: previewUrl });
-    }
-  };
 
 
 
@@ -109,28 +89,9 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
     setIsSaving(true);
     try {
      
-      let updatedFrontImageUrl = frontImageUrl;
-      let updatedBackImageUrl = backImageUrl;
-
-      if (selectedFrontImage?.file) {
-        updatedFrontImageUrl = await uploadImage(
-          selectedFrontImage.file,
-          `usersIdImage/${user.uid}/IdFrontImage.jpg`
-        );
-      }
-
-      if (selectedBackImage?.file) {
-        updatedBackImageUrl = await uploadImage(
-          selectedBackImage.file,
-          `usersIdImage/${user.uid}/IdBackImage.jpg`
-        );
-      }
-
       const updatedData = {
         nickname: formData.nickname.trim(),
         phone: formData.phone.trim(),
-        frontImageUrl: updatedFrontImageUrl,
-        backImageUrl: updatedBackImageUrl,
         gender: selectedGender,
         birthday: selectedBirthday,
       };
@@ -141,13 +102,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
         addToast("success", "使用者資料已更新！");
         dispatch(updateUser(updatedData));
 
-        // 更新 Firebase 圖片 URL，確保前端顯示 Firebase 下載的圖片
-        setFrontImageUrl(updatedFrontImageUrl);
-        setBackImageUrl(updatedBackImageUrl);
-
-        // 清除選擇的圖片，但保留 Firebase 圖片 URL
-        setSelectedFrontImage(null);
-        setSelectedBackImage(null);
+       
       } else {
         alert(`❌ 更新失敗: ${response.message}`);
       }
@@ -223,7 +178,7 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                 return (
                   <div key={tab.label} className="artworkPainterAccountSetting-tab-panel artworkPainterAccountSetting-tab-panel-accountSetting">
                     <div className="artworkPainterAccountSetting-form-container">
-                      {/* 第一行 */}
+                    
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-nickname">
                         <label>暱稱<span className="artworkPainterAccountSetting-required">*</span></label>
                         <input type="text"
@@ -240,48 +195,17 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                           onChange={(date) => setSelectedBirthday(date)}
                         />
                       </div>
-                      <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-id">
-                        <label>身分證<span className="artworkPainterAccountSetting-required">*</span>  <span className="artworkPainterAccountSetting-pending">⚠️官方驗證中</span></label>
-
-                        <div className="artworkPainterAccountSetting-id-image-container">
-                          {/* 正面 */}
-                          <div className="artworkPainterAccountSetting-id-image">
-                            {selectedFrontImage?.preview ? (
-                              <img src={selectedFrontImage.preview} alt="身分證正面" />
-                            ) : frontImageUrl ? (
-                              <img src={frontImageUrl} alt="身分證正面" />
-                            ) : (
-                              <span>正面</span>
-                            )}
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={(e) => handleImageSelect(e, true)}
-                              className="upload-input"
-                            />
-                          </div>
-
-
-                          {/* 反面 */}
-                          <div className="artworkPainterAccountSetting-id-image">
-                            {selectedBackImage?.preview ? (
-                              <img src={selectedBackImage.preview} alt="身分證反面" />
-                            ) : backImageUrl ? (
-                              <img src={backImageUrl} alt="身分證反面" />
-                            ) : (
-                              <span>反面</span>
-                            )}
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={(e) => handleImageSelect(e, false)}
-                              className="upload-input"
-                            />
-                          </div>
-                        </div>
+                      
+                      <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-gender">
+                        <label>性別<span className="artworkPainterAccountSetting-required">*</span></label>
+                        <select value={selectedGender} onChange={handleGenderChange}>
+                          <option value="">請選擇</option>
+                          <option value="male">男</option>
+                          <option value="female">女</option>
+                          <option value="preferNotToSay">不透露</option>
+                        </select>
                       </div>
 
-                      {/* 第二行 */}
                       <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-email">
                         <label>電子郵件<span className="artworkPainterAccountSetting-required">*</span></label>
                         <input
@@ -302,17 +226,6 @@ const ArtworkPainterAccountSettingTabs = ({ tabs }) => {
                           placeholder={"請輸入手機號碼"}
                           onChange={handleFormDataChange}
                         />
-                      </div>
-
-                      {/* 第三行 */}
-                      <div className="artworkPainterAccountSetting-form-group artworkPainterAccountSetting-gender">
-                        <label>性別<span className="artworkPainterAccountSetting-required">*</span></label>
-                        <select value={selectedGender} onChange={handleGenderChange}>
-                          <option value="">請選擇</option>
-                          <option value="male">男</option>
-                          <option value="female">女</option>
-                          <option value="preferNotToSay">不透露</option>
-                        </select>
                       </div>
                     </div>
 
