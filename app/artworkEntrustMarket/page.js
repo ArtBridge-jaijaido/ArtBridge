@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
-import ArtworkEntrustSetTab from "@/components/ArtworkEntrustSetTab/ArtworkEntrustSetTab.jsx"; // 需檢查
+import ArtworkEntrustSetTab from "@/components/Tabs/ArtworkEntrustSetTab.jsx"; // 需檢查
 import ArtworkEntrustMarketCard from "@/components/ArtworkEntrustMarketCard/ArtworkEntrustMarketCard.jsx"; // 要檢查
 import { fetchUserEntrusts } from "@/services/artworkEntrustService"; // 需檢查
 import "./artworkEntrustMarket.css"; //需檢查
@@ -59,7 +59,7 @@ const ArtworkEntrustMarketPage = () => {
                                     key={entrust.entrustId}
                                     imageSrc={entrust.exampleImageUrl || "/images/default-image.png"}
                                     title={entrust.title}
-                                    budget={entrust.budget}
+                                    price={entrust.price}
                                 />
                             ))}
                             {entrustCardVisibleItems < activeEntrusts.length && (
@@ -87,7 +87,7 @@ const ArtworkEntrustMarketPage = () => {
                                     key={entrust.entrustId}
                                     imageSrc={entrust.exampleImageUrl || "/images/default-image.png"}
                                     title={entrust.title}
-                                    budget={entrust.budget}
+                                    price={entrust.price}
                                     isHistoryTab={true}
                                 />
                             ))}

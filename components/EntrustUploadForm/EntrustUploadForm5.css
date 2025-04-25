@@ -4,13 +4,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: flex-start;
-  padding-left: 120px;
+  align-items: center;
 }
 
 .EntrustUploadForm5-container {
   width: 100%;
-  padding: 20px;
   max-width: 1000px;
   background: white;
   font-family: "Noto Sans TC";
@@ -18,6 +16,7 @@
 
 .EntrustUploadForm5-title {
   font-size: 20px;
+  padding:20px;
   font-weight: 500;
   color: #4F4F4F;
   letter-spacing: 1px;
@@ -26,7 +25,7 @@
 
 .EntrustUploadForm5-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* ❗ 強制單行排列 */
   justify-content: center;
   align-items: stretch;
   gap: 20px;
@@ -39,10 +38,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 1 28%;
   position: relative;
   min-width: 80px;
-  min-height: 140px;
   box-sizing: border-box;
 }
 
@@ -56,7 +53,7 @@
 }
 
 .EntrustUploadForm5-connector-line {
-  width: 80px;
+  width: 50px;
   height: 1px;
   background-color: #A2E2FF;
   align-self: center;
@@ -151,7 +148,6 @@
 
 @media screen and (max-width: 768px) {
   .EntrustUploadForm5-wrapper {
-    padding-left: 20px;
     align-items: center;
   }
 
@@ -160,10 +156,6 @@
     flex-wrap: wrap;
     gap: 20px 10px;
     justify-content: center;
-  }
-
-  .EntrustUploadForm5-item {
-    flex: 0 1 30%;
   }
 
   .EntrustUploadForm5-button-group {
@@ -190,5 +182,19 @@
     gap: 40px;
     flex-direction: row;
     justify-content: center;
+  }
+
+  .EntrustUploadForm5-connector-line {
+    width: 20px;
+    height: 1px;
+    background-color: #A2E2FF;
+    align-self: center;
+    margin-top: -10px;
+  }
+
+  .EntrustUploadForm5-percent,
+  .EntrustUploadForm5-label,
+  .EntrustUploadForm5-delete {
+    font-size: 14px; /* 縮小文字 */
   }
 }
