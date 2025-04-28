@@ -111,11 +111,13 @@ const UserDropdownMenu = ({toggleDropdown,setIsMenuOpen}) => {
       <div className="UserDropdownMenu-items">
 
         <p onClick={(e) => handleNavigateTo(e, "artworkAccountSetting")}>帳戶設定</p>
-        <p onClick={(e) => handleNavigateTo(e, "artworkPainterMarket")}>我的市集</p>
+        <p onClick={(e) => handleNavigateTo(e, user.role === "client" ? "artworkEntrustMarket" : "artworkPainterMarket")}>
+          {user.role === "client" ? "委託專區" : "我的市集"}
+        </p>
         <p>案件管理</p>
         <p onClick={(e) => handleNavigateTo(e, "artworkPainterArticle")}>我的文章</p> 
         <p>粉絲名單</p>
-        <p onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>我的作品</p>
+        <p onClick={(e) => handleNavigateTo(e, "artworkPainterPortfolio")}>{user.role==="client"?"合作作品":"我的作品"}</p>
         <p>追蹤名單</p>
         <p>訂閱專區</p>
         <p onClick={(e)=> handleNavigateTo(e, "artworkCollectionList")}>收藏名單</p>

@@ -30,6 +30,7 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
 
     // 上傳補充圖片（如有）
     const supplementaryImages = formData.supplementaryImages || [];
+
     const supplementaryImageUrls = await Promise.all(
       supplementaryImages.map((img, index) =>
         uploadImage(
@@ -49,8 +50,7 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
       entrustId: entrustId,
       exampleImageUrl,
       supplementaryImageUrls,
-      likes: 0,
-      likedBy: [],
+      applicationCount: 0,
       createdAt: serverTimestamp(),
     };
 

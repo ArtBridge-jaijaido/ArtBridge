@@ -15,14 +15,22 @@ const EntrustUploadForm5 = ({ prev, next, formData }) => {
   ]);
 
   const handleDelete = (id) => {
-    setMilestones((prev) => prev.filter((m) => m.id !== id));
+    setMilestones((prev) =>
+      prev
+        .filter((m) => m.id !== id)
+        .map((m, index) => ({
+          ...m,
+          id: index,
+        }))
+    );
   };
 
   const handlePublishClick = async () => {
     setIsLoading(true);
     try {
-      console.log("📦 formData on publish:", formData);
+     
       await next({ milestones }); // 若 next 是同步可移除 await
+    
     } catch (error) {
       console.error("發佈失敗：", error);
     } finally {
@@ -52,7 +60,7 @@ const EntrustUploadForm5 = ({ prev, next, formData }) => {
         </div>
 
         <div className="EntrustUploadForm5-button-group">
-          <button className="EntrustUploadForm5-prev" onClick={prev}>上一步</button>
+          <button className="EntrustUploadForm5-prev" onClick={() => prev()}>上一步</button>
           <LoadingButton
             isLoading={isLoading}
             onClick={handlePublishClick}

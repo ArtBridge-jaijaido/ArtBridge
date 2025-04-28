@@ -5,6 +5,7 @@ import { useToast } from "@/app/contexts/ToastContext.js";
 import Dropdown from "@/components/Dropdown/Dropdown.jsx";
 import "./EntrustUploadForm3.css";
 
+
 const EntrustUploadForm3 = ({ prev, next, formData }) => {
   const { addToast } = useToast();
   const [fileFormat, setFileFormat] = useState(formData.fileFormat || "");
@@ -12,7 +13,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
   const [permission, setPermission] = useState(formData.permission || "");
   const [reportProgress, setReportProgress] = useState(formData.reportProgress || "");
   const [colorMode, setColorMode] = useState(formData.colorMode || "");
-  const [artist, setArtist] = useState(formData.artist || "");
+  const [assignedArtist, setAssignedArtist] = useState(formData.assignedArtist || "");
 
   const [artistSuggestions, setArtistSuggestions] = useState([]);
   const allArtists = ["小明 (@xiaoming)", "阿花 (@ahua)", "夜貓子 (@nightcat)", "光光 (@guangguang)"];
@@ -32,7 +33,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
 
   const handleArtistInputChange = (e) => {
     const input = e.target.value;
-    setArtist(input);
+    setAssignedArtist(input);
     if (input.trim()) {
       const filtered = allArtists.filter((a) => a.toLowerCase().includes(input.toLowerCase()));
       setArtistSuggestions(filtered);
@@ -42,7 +43,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
   };
 
   const handleSelectArtist = (name) => {
-    setArtist(name);
+    setAssignedArtist(name);
     setArtistSuggestions([]);
   };
 
@@ -56,7 +57,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
 
   const handleNextClick = () => {
     if (validateForm()) {
-      next({ fileFormat, size, permission, reportProgress, colorMode, artist });
+      next({ fileFormat, size, permission, reportProgress, colorMode, assignedArtist });
     }
   };
 
@@ -124,7 +125,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
             <input
               type="text"
               placeholder="請輸入繪師名或帳號"
-              value={artist}
+              value={assignedArtist}
               onChange={handleArtistInputChange}
               className="EntrustUploadForm3-artist-input"
             />
@@ -139,7 +140,7 @@ const EntrustUploadForm3 = ({ prev, next, formData }) => {
         </div>
 
         <div className="EntrustUploadForm3-button-group">
-          <button className="EntrustUploadForm3-prev" onClick={prev}>上一步</button>
+          <button className="EntrustUploadForm3-prev" onClick={() => prev()}>上一步</button>
           <button className="EntrustUploadForm3-next" onClick={handleNextClick}>下一步</button>
         </div>
       </div>

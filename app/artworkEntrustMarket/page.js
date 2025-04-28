@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
-import ArtworkEntrustSetTab from "@/components/Tabs/ArtworkEntrustSetTab.jsx"; 
-import ArtworkEntrustMarketCard from "@/components/ArtworkEntrustMarketCard/ArtworkEntrustMarketCard.jsx"; 
-import { fetchUserEntrusts } from "@/services/artworkEntrustService"; 
-import "./artworkEntrustMarket.css"; 
+import ArtworkEntrustSetTab from "@/components/Tabs/ArtworkEntrustSetTab.jsx";
+import ArtworkEntrustMarketCard from "@/components/ArtworkEntrustMarketCard/ArtworkEntrustMarketCard.jsx";
+import { fetchUserEntrusts } from "@/services/artworkEntrustService";
+import "./artworkEntrustMarket.css";
 
 const ArtworkEntrustMarketPage = () => {
     const [entrustCardVisibleItems, setEntrustCardVisibleItems] = useState(10);

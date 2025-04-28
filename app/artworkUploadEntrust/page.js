@@ -11,6 +11,7 @@ import EntrustUploadForm4 from "@/components/EntrustUploadForm/EntrustUploadForm
 import EntrustUploadForm5 from "@/components/EntrustUploadForm/EntrustUploadForm5.jsx";
 import "./artworkUploadEntrust.css";
 import { useSelector } from "react-redux";
+import { uploadEntrust } from "@/services/artworkEntrustService";
 
 const ArtworkUploadEntrustPage = () => {
   const { addToast } = useToast();
@@ -19,9 +20,11 @@ const ArtworkUploadEntrustPage = () => {
   const { user } = useSelector((state) => state.user);
 
   const [formData, setFormData] = useState({
+    marketName:"",
     startDate: "",
     endDate: "",
     completionTime: "",
+    
     description: "",
     exampleImage: null,
     exampleImageName: "",
@@ -32,7 +35,8 @@ const ArtworkUploadEntrustPage = () => {
     reportProgress: "",
     colorMode: "",
     permission: "",
-    artist: "",
+    milestones:[],
+    assignedArtist: "",
     selectedCategory: "",
     selectedStyles: [],
     usage: ""
@@ -48,12 +52,19 @@ const ArtworkUploadEntrustPage = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handlePublish = (newData) => {
+  const handlePublish = async(newData) => {
     const updatedData = { ...formData, ...newData };
     setFormData(updatedData);
-    console.log("委託新作品表單資料:", updatedData);
-    addToast("success", "已發佈您的委託！");
-    setStep(6);
+    console.log("提交的資料：", updatedData); // Log the data to be sent
+    const userSerialId = user?.userSerialId;
+    const userUid = user?.uid;
+    const response = await uploadEntrust(userSerialId, userUid, updatedData);
+    if (response.success){
+      addToast("success", "已發佈您的委託！");
+      setStep(6); 
+    }else {
+      addToast("error", "發佈失敗，請稍後再試！");
+    }
   };
 
   return (
@@ -66,7 +77,7 @@ const ArtworkUploadEntrustPage = () => {
         {step === 2 && <EntrustUploadForm2 prev={handlePrev} next={handleNext} formData={formData} />}
         {step === 3 && <EntrustUploadForm3 prev={handlePrev} next={handleNext} formData={formData} />}
         {step === 4 && <EntrustUploadForm4 prev={handlePrev} next={handleNext} formData={formData} />}
-        {step === 5 && <EntrustUploadForm5 prev={handlePrev} next={handlePublish} formData={formData} />}
+        {step === 5 && <EntrustUploadForm5 prev={handlePrev} next={handlePublish} formData={formData}  />}
         {step === 6 && (
           <div className="artworkUploadEntrust-success">
             <img src="/images/success-icon.gif" alt="成功" className="artworkUploadEntrust-success-icon" />
