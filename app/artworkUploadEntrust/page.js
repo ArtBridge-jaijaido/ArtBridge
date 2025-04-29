@@ -24,7 +24,7 @@ const ArtworkUploadEntrustPage = () => {
     startDate: "",
     endDate: "",
     completionTime: "",
-    
+    price: "",
     description: "",
     exampleImage: null,
     exampleImageName: "",
@@ -55,10 +55,9 @@ const ArtworkUploadEntrustPage = () => {
   const handlePublish = async(newData) => {
     const updatedData = { ...formData, ...newData };
     setFormData(updatedData);
-    console.log("提交的資料：", updatedData); // Log the data to be sent
     const userSerialId = user?.userSerialId;
     const userUid = user?.uid;
-    const response = await uploadEntrust(userSerialId, userUid, updatedData);
+    const response = await uploadEntrust(userUid, userSerialId, updatedData);
     if (response.success){
       addToast("success", "已發佈您的委託！");
       setStep(6); 
