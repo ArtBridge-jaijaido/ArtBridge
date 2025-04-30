@@ -2,10 +2,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtMarketDropButton from '@/components/CustomButton/ArtMarketDropButton.jsx';
-import {artworkCriteria,artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline,artworkBusiness} from '@/lib/artworkDropdownOptions.js';
+import { artworkCriteria, artMarketCategory, artMarketStyle, artMarketPirceRange, artMarketDeadline, artworkBusiness } from '@/lib/artworkDropdownOptions.js';
 import ArtworkEntrustCard from '@/components/ArtworkEntrustCard/ArtworkEntrustCard.jsx';
 import Pagination from '@/components/Pagination/Pagination.jsx';
-import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx'; 
+import ArtworkSearch from '@/components/ArtworkSearch/ArtworkSearch.jsx';
+import { fetchAllEntrusts } from "@/lib/entrustListener.js";
+import { useSelector } from 'react-redux';
 import "./artworkEntrustLobby.css";
 
 const ArtworkEntrustLobby = () => {
@@ -19,18 +21,22 @@ const ArtworkEntrustLobby = () => {
         deadline: "完稿時間",
         business: "商業用途",
     });
-   
+
+    const entrusts = useSelector((state) => state.entrust.entrusts);
+    const allUsers = useSelector((state) => state.user.allUsers);
+
+
     const [currentPage, setCurrentPage] = useState(1); // 目前頁數
     const [itemsPerPage, setItemsPerPage] = useState(16); //設定預設顯示的商品數量
-    const totalItems = 135; // 商品總數（可以從API獲取）
+    const totalItems = entrusts.length // 商品總數（可以從API獲取）
     const totalPages = Math.ceil(totalItems / itemsPerPage); // 總頁數
-    
     const dropdownRef = useRef(null);// 用於追蹤下拉選單的容器
-    
+  
+
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
     };
-    
+
     const handleOptionSelect = (id, option) => {
         setSelectedOptions((prev) => ({
             ...prev,
@@ -43,38 +49,49 @@ const ArtworkEntrustLobby = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
+    const [isLoading, setIsLoading] = useState(true);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsLoading(false);
+  }, 800); // 人工延遲（或你可以根據圖片 onLoad 判斷）
+
+  return () => clearTimeout(timer);
+}, []);
+
     useEffect(() => {
-            //設定每種螢幕大小顯示的商品數目
-            const updateItemsPerPage = () => {
-                if (window.innerWidth < 768) {
-                    setItemsPerPage(10); // Set to 10 items for smaller screens
-                } else {
-                    setItemsPerPage(16); // Default to 16 items for larger screens
-                }
-            };
-            // Initial check
-            updateItemsPerPage(); 
-            // Add event listener for window resize
-            window.addEventListener("resize", updateItemsPerPage);
+        //設定每種螢幕大小顯示的商品數目
+        const updateItemsPerPage = () => {
+            if (window.innerWidth < 768) {
+                setItemsPerPage(10); // Set to 10 items for smaller screens
+            } else {
+                setItemsPerPage(16); // Default to 16 items for larger screens
+            }
+        };
+        // Initial check
+        updateItemsPerPage();
+        // Add event listener for window resize
+        window.addEventListener("resize", updateItemsPerPage);
 
-            const handleClickOutside = (event) => {
-                if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                    setOpenDropdown(null);
-                }
-            };
-    
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, []);
-    
-        const currentItems = Array.from({ length: totalItems }).slice(
-            (currentPage - 1) * itemsPerPage,
-            currentPage * itemsPerPage
-        );
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setOpenDropdown(null);
+            }
+        };
 
-        
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const currentItems = entrusts.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+
     //按鈕
     return (
         <div className={`artworkEntrustLobbyPage ${notoSansTCClass}`}>
@@ -131,24 +148,31 @@ const ArtworkEntrustLobby = () => {
                     onToggleDropdown={() => handleToggleDropdown("business")}
                 />
             </div>
-            <div className="artworkEntrustCard-container">
-               {currentItems.map((_, index) => (
-                    <ArtworkEntrustCard 
-                    key={index}
-                    title={"企劃名稱(最多15個字"}
-                    usernameText={"使用者名稱"}
-                    applicattionCount={"0"}
-                    descriptionText={"需要一個可以幫我畫角色的繪師，類型像圖片中那樣，偏向可矮Q版的風格，是12345678"}
-                    categoryText={"OC/原創角色"}
-                    dealineText={"2025年02月03日"}
-                    price={"2000-5000"}
-                    artworkImg={"/images/artwork-icon.png"}
-                  /> 
-                ))}
+         
+            <div className="artworkEntrustLobby-artworkEntrustCard-container">
+                
+                {currentItems.map((entrust) => {
+                    const user = allUsers[entrust.userUid];
+                    return (
+                        <ArtworkEntrustCard
+                            key={entrust.entrustId}
+                            EntrustImageUrl={entrust.exampleImageUrl}
+                            marketName={entrust.marketName}
+                            price={entrust.price}
+                            description={entrust.description}
+                            applicationCount={entrust.applicationCount}
+                            categoryText={entrust.selectedCategory}
+                            deadlineText={entrust.endDate}
+                            usernameText={user?.nickname || "使用者名稱"}
+
+                        />
+                    );
+                })}
             </div>
-            
-             {/* 使用分頁元件 */}
-             <Pagination
+
+
+            {/* 使用分頁元件 */}
+            <Pagination
                 totalPages={totalPages}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
@@ -157,6 +181,6 @@ const ArtworkEntrustLobby = () => {
     )
 }
 
-    
+
 
 export default ArtworkEntrustLobby;

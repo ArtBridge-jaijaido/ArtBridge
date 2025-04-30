@@ -13,7 +13,7 @@ const ArtworkEntrustCard = ({ marketName, usernameText, applicationCount, descri
     : description;
 
   return (
-    <div className="artworkEntrust-Card-container">
+    <div className="artworkEntrustCard-container">
       <div className="ArtworkEntrustCard-wrapper">
         <div className="ArtworkEntrustCard-content">
           <div className="ArtworkEntrustCard-main">

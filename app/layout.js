@@ -9,6 +9,7 @@ import { subscribeToArtworks} from "@/lib/artworkListener";
 import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
+import { subscribeToEntrusts } from "@/lib/entrustListener";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -77,6 +78,7 @@ export default function RootLayout({ children }) {
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
     const unsubscribePainterArticles = subscribeToPainterArticles();
     const unsubscribeUsers = subscribeToAllUsers();
+    const unsubscribeEntrusts = subscribeToEntrusts();
   
     setUnsubscribeAllUsers(() => unsubscribeUsers);
     console.log("🔥 監聽到用戶變更...");
@@ -87,6 +89,7 @@ export default function RootLayout({ children }) {
       unsubscribePainterPortfolios();
       unsubscribePainterArticles();
       unsubscribeUsers();
+      unsubscribeEntrusts();
     };
 
 
@@ -103,8 +106,7 @@ export default function RootLayout({ children }) {
 
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-        <Provider store={store}>
-         
+        <Provider store={store}>        
           <LoadingProvider>
             <Header />
             <main>
