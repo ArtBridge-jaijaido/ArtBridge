@@ -50,9 +50,9 @@ const ArtworkEntrustLobby = () => {
         setCurrentPage(page);
     };
 
-   useEffect(()=>{
-    fetchAllEntrusts();
-   },[selectedOptions, currentPage]);
+    useEffect(() => {
+        fetchAllEntrusts();
+    }, [selectedOptions, currentPage]);
 
 
     useEffect(() => {
@@ -81,100 +81,157 @@ const ArtworkEntrustLobby = () => {
         };
     }, []);
 
-    const currentItems = entrusts.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    // 取得當前日期 (去掉時分秒)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const filteredEntrusts = entrusts.filter((entrust) => {
+        const startDate = new Date(entrust.startDate);
+        const endDate = new Date(entrust.endDate);
+
+        // 確保 startDate 和 endDate 是有效的日期
+        if (isNaN(startDate) || isNaN(endDate)) return false;
+
+        // 檢查是否在上架時間內
+        const isOnSale = today <= endDate;
 
 
-    //按鈕
-    return (
-        <div className={`artworkEntrustLobbyPage ${notoSansTCClass}`}>
-            <div className={`artworkEntrustLobbyPage-search-container ${isSearchOpen ? "moved" : ""}`}>
-                <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+        // 類別過濾條件
+        const isMatchingCategory = selectedOptions.category === "類別選擇" 
+        || selectedOptions.category ==="全部" ||
+        entrust.selectedCategory === selectedOptions.category;
+
+        // 風格過濾條件
+        const isMatchingStyle = selectedOptions.style === "風格選擇"
+        || selectedOptions.style ==="全部" ||
+        entrust.selectedStyles.includes(selectedOptions.style);
+
+        // 價格區間過濾條件
+        const isMatchingPriceRange = selectedOptions.priceRange === "價格區間" ||
+        selectedOptions.priceRange ==="全部" ||
+        (selectedOptions.priceRange=== "100-500元" && entrust.price=== "100 ~ 500元")||
+        (selectedOptions.priceRange === "501-1000元" && entrust.price=== "501 ~ 1000元") ||
+        (selectedOptions.priceRange === "1001-2000元" && entrust.price=== "1001 ~ 2000元") ||
+        (selectedOptions.priceRange === "2001-3000元" && entrust.price === "2001 ~ 3000元" )||
+        (selectedOptions.priceRange === "3001-4000元" && entrust.price  === "3001 ~ 4000元") ||
+        (selectedOptions.priceRange === "4001-5000元" && entrust.price  === "4001 ~ 5000元" )||
+        (selectedOptions.priceRange === "5000元以上" && entrust.price  === "5001元 以上") 
+
+
+          //完稿時間過濾條件
+          const isMatchingDeadline = selectedOptions.deadline === "完稿時間" ||
+          selectedOptions.deadline === "全部" ||
+          (selectedOptions.deadline === "24小時以內" && entrust.completionTime == "24小時") ||
+          (selectedOptions.deadline === "2～7天" && entrust.completionTime == "2～7天") ||
+          (selectedOptions.deadline === "8～14天" && entrust.completionTime == "8～14天") ||
+          (selectedOptions.deadline === "15～30天" && entrust.completionTime == "15～30天") ||
+          (selectedOptions.deadline === "31天以上" && entrust.completionTime == "31天以上")
+
+        // 商業用途過濾條件
+        const isMatchingBusiness = selectedOptions.business === "商業用途" ||
+        (selectedOptions.business === "商業用途"  && entrust.usage === "商業用途") ||
+        (selectedOptions.business === "個人需求" && entrust.usage === "個人使用") 
+       
+
+
+        return isOnSale && isMatchingCategory && isMatchingStyle && isMatchingPriceRange &&isMatchingDeadline &&isMatchingBusiness;
+    });
+
+
+        const currentItems = filteredEntrusts.slice(
+            (currentPage - 1) * itemsPerPage,
+            currentPage * itemsPerPage
+        );
+
+
+        //按鈕
+        return (
+            <div className={`artworkEntrustLobbyPage ${notoSansTCClass}`}>
+                <div className={`artworkEntrustLobbyPage-search-container ${isSearchOpen ? "moved" : ""}`}>
+                    <ArtworkSearch onSearchToggle={setIsSearchOpen} />
+                </div>
+                <div className="artworkEntrustLobby-button-container" ref={dropdownRef}>
+                    <ArtMarketDropButton
+                        id="criteria"
+                        buttonText={selectedOptions.criteria}
+                        options={artworkCriteria}
+                        onOptionSelect={(option) => handleOptionSelect("criteria", option)}
+                        isOpen={openDropdown === "criteria"}
+                        onToggleDropdown={() => handleToggleDropdown("criteria")}
+                    />
+                    <ArtMarketDropButton
+                        id="category"
+                        buttonText={selectedOptions.category}
+                        options={artMarketCategory}
+                        onOptionSelect={(option) => handleOptionSelect("category", option)}
+                        isOpen={openDropdown === "category"}
+                        onToggleDropdown={() => handleToggleDropdown("category")}
+                    />
+                    <ArtMarketDropButton
+                        id="style"
+                        buttonText={selectedOptions.style}
+                        options={artMarketStyle}
+                        onOptionSelect={(option) => handleOptionSelect("style", option)}
+                        isOpen={openDropdown === "style"}
+                        onToggleDropdown={() => handleToggleDropdown("style")}
+                    />
+                    <ArtMarketDropButton
+                        id="priceRange"
+                        buttonText={selectedOptions.priceRange}
+                        options={artMarketPirceRange}
+                        onOptionSelect={(option) => handleOptionSelect("priceRange", option)}
+                        isOpen={openDropdown === "priceRange"}
+                        onToggleDropdown={() => handleToggleDropdown("priceRange")}
+                    />
+                    <ArtMarketDropButton
+                        id="deadline"
+                        buttonText={selectedOptions.deadline}
+                        options={artMarketDeadline}
+                        onOptionSelect={(option) => handleOptionSelect("deadline", option)}
+                        isOpen={openDropdown === "deadline"}
+                        onToggleDropdown={() => handleToggleDropdown("deadline")}
+                    />
+                    <ArtMarketDropButton
+                        id="business"
+                        buttonText={selectedOptions.business}
+                        options={artworkBusiness}
+                        onOptionSelect={(option) => handleOptionSelect("business", option)}
+                        isOpen={openDropdown === "business"}
+                        onToggleDropdown={() => handleToggleDropdown("business")}
+                    />
+                </div>
+
+                <div className="artworkEntrustLobby-artworkEntrustCard-container">
+
+                    {currentItems.map((entrust) => {
+                        const user = allUsers[entrust.userUid];
+                        return (
+                            <ArtworkEntrustCard
+                                key={entrust.entrustId}
+                                EntrustImageUrl={entrust.exampleImageUrl}
+                                marketName={entrust.marketName}
+                                price={entrust.price}
+                                description={entrust.description}
+                                applicationCount={entrust.applicationCount}
+                                categoryText={entrust.selectedCategory}
+                                deadlineText={entrust.endDate}
+                                usernameText={user?.nickname || "使用者名稱"}
+
+                            />
+                        );
+                    })}
+                </div>
+
+
+                {/* 使用分頁元件 */}
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                />
             </div>
-            <div className="artworkEntrustLobby-button-container" ref={dropdownRef}>
-                <ArtMarketDropButton
-                    id="criteria"
-                    buttonText={selectedOptions.criteria}
-                    options={artworkCriteria}
-                    onOptionSelect={(option) => handleOptionSelect("criteria", option)}
-                    isOpen={openDropdown === "criteria"}
-                    onToggleDropdown={() => handleToggleDropdown("criteria")}
-                />
-                <ArtMarketDropButton
-                    id="category"
-                    buttonText={selectedOptions.category}
-                    options={artMarketCategory}
-                    onOptionSelect={(option) => handleOptionSelect("category", option)}
-                    isOpen={openDropdown === "category"}
-                    onToggleDropdown={() => handleToggleDropdown("category")}
-                />
-                <ArtMarketDropButton
-                    id="style"
-                    buttonText={selectedOptions.style}
-                    options={artMarketStyle}
-                    onOptionSelect={(option) => handleOptionSelect("style", option)}
-                    isOpen={openDropdown === "style"}
-                    onToggleDropdown={() => handleToggleDropdown("style")}
-                />
-                <ArtMarketDropButton
-                    id="priceRange"
-                    buttonText={selectedOptions.priceRange}
-                    options={artMarketPirceRange}
-                    onOptionSelect={(option) => handleOptionSelect("priceRange", option)}
-                    isOpen={openDropdown === "priceRange"}
-                    onToggleDropdown={() => handleToggleDropdown("priceRange")}
-                />
-                <ArtMarketDropButton
-                    id="deadline"
-                    buttonText={selectedOptions.deadline}
-                    options={artMarketDeadline}
-                    onOptionSelect={(option) => handleOptionSelect("deadline", option)}
-                    isOpen={openDropdown === "deadline"}
-                    onToggleDropdown={() => handleToggleDropdown("deadline")}
-                />
-                <ArtMarketDropButton
-                    id="business"
-                    buttonText={selectedOptions.business}
-                    options={artworkBusiness}
-                    onOptionSelect={(option) => handleOptionSelect("business", option)}
-                    isOpen={openDropdown === "business"}
-                    onToggleDropdown={() => handleToggleDropdown("business")}
-                />
-            </div>
-
-            <div className="artworkEntrustLobby-artworkEntrustCard-container">
-
-                {currentItems.map((entrust) => {
-                    const user = allUsers[entrust.userUid];
-                    return (
-                        <ArtworkEntrustCard
-                            key={entrust.entrustId}
-                            EntrustImageUrl={entrust.exampleImageUrl}
-                            marketName={entrust.marketName}
-                            price={entrust.price}
-                            description={entrust.description}
-                            applicationCount={entrust.applicationCount}
-                            categoryText={entrust.selectedCategory}
-                            deadlineText={entrust.endDate}
-                            usernameText={user?.nickname || "使用者名稱"}
-
-                        />
-                    );
-                })}
-            </div>
-
-
-            {/* 使用分頁元件 */}
-            <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
-        </div>
-    )
-}
+        )
+    }
 
 
 

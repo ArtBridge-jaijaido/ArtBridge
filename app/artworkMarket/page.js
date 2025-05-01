@@ -86,7 +86,7 @@ const ArtMarketPage = () => {
             (selectedOptions.priceRange === "2001-3000元" && artwork.price > 2000 && artwork.price <= 3000) ||
             (selectedOptions.priceRange === "3001-4000元" && artwork.price > 3000 && artwork.price <= 4000) ||
             (selectedOptions.priceRange === "4001-5000元" && artwork.price > 4000 && artwork.price <= 5000) ||
-            (selectedOptions.priceRange === "5000以上" && artwork.price > 5000);
+            (selectedOptions.priceRange === "5000元以上" && artwork.price > 5000);
 
         //完稿時間過濾條件
         const isMatchingDeadline = selectedOptions.deadline === "完稿時間" ||
@@ -96,6 +96,7 @@ const ArtMarketPage = () => {
             (selectedOptions.deadline === "5天內" && artwork.completionTime == "2～7天") ||
             (selectedOptions.deadline === "7天內" && artwork.completionTime == "2～7天") ||
             (selectedOptions.deadline === "14天內" && artwork.completionTime == "8～14天")
+            
 
 
         return isOnSale && isMatchingCategory && isMatchingStyle && isMatchingPriceRange && isMatchingDeadline;
@@ -206,7 +207,7 @@ const ArtMarketPage = () => {
             ) : (
                 <div className="artMarket-product-container">
                     {isLoading ? (
-                        <p>載入中...</p> // 可改成 Spinner 或 Loading 組件
+                        <p>載入中...</p> 
                     ) : (
                         currentItems.map((artwork) => {
                             const user = allUsers[artwork.userUid];
