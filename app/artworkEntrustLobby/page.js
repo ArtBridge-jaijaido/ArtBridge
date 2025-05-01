@@ -31,7 +31,7 @@ const ArtworkEntrustLobby = () => {
     const totalItems = entrusts.length // 商品總數（可以從API獲取）
     const totalPages = Math.ceil(totalItems / itemsPerPage); // 總頁數
     const dropdownRef = useRef(null);// 用於追蹤下拉選單的容器
-  
+
 
     const handleToggleDropdown = (id) => {
         setOpenDropdown((prev) => (prev === id ? null : id));
@@ -50,15 +50,10 @@ const ArtworkEntrustLobby = () => {
         setCurrentPage(page);
     };
 
-    const [isLoading, setIsLoading] = useState(true);
+   useEffect(()=>{
+    fetchAllEntrusts();
+   },[selectedOptions, currentPage]);
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setIsLoading(false);
-  }, 800); // 人工延遲（或你可以根據圖片 onLoad 判斷）
-
-  return () => clearTimeout(timer);
-}, []);
 
     useEffect(() => {
         //設定每種螢幕大小顯示的商品數目
@@ -148,9 +143,9 @@ useEffect(() => {
                     onToggleDropdown={() => handleToggleDropdown("business")}
                 />
             </div>
-         
+
             <div className="artworkEntrustLobby-artworkEntrustCard-container">
-                
+
                 {currentItems.map((entrust) => {
                     const user = allUsers[entrust.userUid];
                     return (

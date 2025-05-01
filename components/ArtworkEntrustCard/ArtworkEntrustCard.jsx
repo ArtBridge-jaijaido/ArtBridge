@@ -2,15 +2,42 @@
 import React, { useState } from "react";
 import { FadeLoader } from "react-spinners";
 import "./ArtworkEntrustCard.css";
+import { usePathname } from "next/navigation";
+import { deleteUserEntrust } from "@/services/artworkEntrustService";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {  deleteEntrust } from "@/app/redux/feature/entrustSlice";
+import { useToast } from "@/app/contexts/ToastContext.js";
 
-const ArtworkEntrustCard = ({ marketName, usernameText, applicationCount, description, categoryText, deadlineText, price, EntrustImageUrl }) => {
+const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCount, description, categoryText, deadlineText, price, EntrustImageUrl,entrustUserUid,entrustUserSerialId, onDeleteSuccess  }) => {
 
-
+  const pathname = usePathname();
+  const isArtworkEntrustMarketPage = pathname.includes("artworkEntrustMarket");
+  const dispatch = useDispatch();
+  const { addToast } = useToast();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const user = useSelector((state) => state.user);
   // 檢查描述文字是否超過 35 字
   const truncatedDescription = description.length > 35
     ? `${description.substring(0, 35)}...`
     : description;
+
+  const handleDelete = async () => {
+    
+    const confirm = window.confirm(`確定要刪除委託「${marketName}」嗎？`);
+    if (!confirm) return;
+    onDeleteSuccess?.(); 
+    const response = await deleteUserEntrust(entrustUserUid, entrustUserSerialId, entrustId);
+    if (response.success) {
+     
+      dispatch(deleteEntrust(entrustId));
+      
+      addToast("success", "委託已刪除成功");
+    } else {
+      addToast("error", "刪除失敗，請稍後再試");
+    }
+  };
+
 
   return (
     <div className="artworkEntrustCard-container">
@@ -61,23 +88,34 @@ const ArtworkEntrustCard = ({ marketName, usernameText, applicationCount, descri
                       width={3}
                       radius={5}
                       margin={-4}
-                      
+
                     />
                   </div>
                 )}
                 <img
                   src={EntrustImageUrl}
                   alt="entrustImg"
-                  onLoad={() => setIsImageLoaded(true)} 
+                  onLoad={() => setIsImageLoaded(true)}
                   style={{ display: isImageLoaded ? 'block' : 'none' }}
                 />
+
               </div>
 
             </div>
           </div>
         </div>
       </div>
+
+
+
+      {isArtworkEntrustMarketPage && (
+        <div className="ArtworkEntrustCard-delete-icon" onClick={handleDelete}>
+          <img src="/images/delete-icon.png" alt="Delete" />
+        </div>
+      )}
+
     </div>
+
   );
 };
 

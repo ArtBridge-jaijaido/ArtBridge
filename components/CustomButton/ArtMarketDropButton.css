@@ -28,6 +28,7 @@
   /* 按鈕樣式 */
   .artMarketDropdown-button {
     width:100%;
+    max-width:150px;
     min-width:var(--artMarketDropdown-button-width);
     height: var(--artMarketDropdown-button-height);
     background-color: #8DD7FF; 

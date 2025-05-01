@@ -1,10 +1,12 @@
-import { db } from "@/lib/firebase";
+import { db,storage } from "@/lib/firebase";
+import { ref, listAll, deleteObject } from "firebase/storage";
 import {
   collectionGroup,
   collection,
   getDoc,
   setDoc,
   getDocs,
+  deleteDoc,
   query,
   orderBy,
   doc,
@@ -80,6 +82,51 @@ export const fetchUserEntrusts = async (userUid) => {
   } catch (error) {
     console.error("獲取委託失敗:", error);
     return [];
+  }
+};
+
+
+
+/**
+ * 刪除指定使用者的委託
+ */
+
+export const deleteUserEntrust = async (userUid, userSerialId, entrustId) => {
+  try {
+
+    console.log ("刪除委託 ID:", entrustId);
+    console.log ("刪除使用者 ID:", userUid);
+    console.log ("刪除使用者序號 ID:", userSerialId);
+
+  
+    const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
+    await deleteDoc(entrustRef);
+
+    // 構建圖片路徑
+    const basePath = `entrustMarket/${userSerialId}/${entrustId}`;
+
+    console.log("刪除圖片路徑:", basePath);
+
+    // 刪除範例圖片
+    const exampleImageRef = ref(storage, `${basePath}/exampleImage.jpg`);
+    await deleteObject(exampleImageRef);
+
+    // 依序刪除補充圖片（最多 5 張）
+    for (let i = 1; i <= 5; i++) {
+      const suppRef = ref(storage, `${basePath}/supplementaryImage_${i}.jpg`);
+      try {
+        await deleteObject(suppRef);
+      } catch (err) {
+        if (err.code !== "storage/object-not-found") {
+          console.warn(`補充圖片 #${i} 刪除失敗:`, err);
+        }
+      }
+    }
+
+    return { success: true, message: "委託刪除成功" };
+  } catch (error) {
+    console.error(" 委託刪除失敗:", error);
+    return { success: false, message: error.message };
   }
 };
 

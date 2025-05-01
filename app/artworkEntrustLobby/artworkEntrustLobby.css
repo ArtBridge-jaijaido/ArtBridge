@@ -79,7 +79,7 @@
 
     .artworkEntrustLobby-button-container {
         padding: 0px 30px;
-        --artworkEntrustLobby-button-container-gap: 40px;
+        --artworkEntrustLobby-button-container-gap: 20px;
     }
 
 }
@@ -147,6 +147,7 @@
     .artworkEntrustLobby-button-container {
         padding: 0px 30px;
         --artworkEntrustLobby-button-container-gap: 10px;
-        gap: var(--artworkEntrustLobby-button-container-gap)
+        gap: var(--artworkEntrustLobby-button-container-gap);
+        margin-bottom:20px;
     }
 }

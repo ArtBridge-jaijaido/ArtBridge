@@ -65,6 +65,7 @@ const ArtworkEntrustMarketPage = () => {
                                 return (
                                     <ArtworkEntrustCard
                                         key={entrust.entrustId}
+                                        entrustId={entrust.entrustId}
                                         EntrustImageUrl={entrust.exampleImageUrl}
                                         marketName={entrust.marketName}
                                         price={entrust.price}
@@ -73,6 +74,13 @@ const ArtworkEntrustMarketPage = () => {
                                         categoryText={entrust.selectedCategory}
                                         deadlineText={entrust.endDate}
                                         usernameText={user?.nickname || "使用者名稱"}
+                                        entrustUserUid={entrust.userUid}
+                                        entrustUserSerialId={entrust.userId}
+                                        onDeleteSuccess={() =>
+                                            setActiveEntrusts((prev) =>
+                                              prev.filter((e) => e.entrustId !== entrust.entrustId)
+                                            )
+                                          }
                                     />
                                 );
                             })}
