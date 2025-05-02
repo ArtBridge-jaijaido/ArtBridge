@@ -10,6 +10,7 @@ import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
 import { fetchPainterPortfolios } from '@/lib/painterPortfolioListener.js';
 import { useSelector } from "react-redux";
 import "./artworkShowcaseLobby.css";
+import ModalImgArtShowcase from '@/components/ModalImage/ModalImgArtShowcase.jsx';
 
 const ArtworkShowcaseLobby = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -150,6 +151,7 @@ const ArtworkShowcaseLobby = () => {
 
 
 
+
     return (
         <div className={`artworkShowcaseLobbyPage ${notoSansTCClass}`}>
             <div className={`artworkShowcaseLobbyPage-search-container ${isSearchOpen ? "moved" : ""}`}>
@@ -207,6 +209,8 @@ const ArtworkShowcaseLobby = () => {
             />}
 
         </div>
+
+
     )
 }
 

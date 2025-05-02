@@ -1,0 +1,311 @@
+/* ModalImgArtShowcase.css（含 RWD 上下結構 + 手機優化 + header 調整） */
+.ModalImgArtShowcase-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ModalImgArtShowcase-content {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 1280px;
+  width: 90%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ModalImgArtShowcase-body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.ModalImgArtShowcase-close {
+  width: 100%;
+  max-width: 120px;
+  height: 40px;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  border-radius: 40px;
+  background: #4A8CB9;
+  z-index: 1;
+}
+
+.ModalImgArtShowcase-image-section {
+  width: 50%;
+  padding: 70px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.ModalImgArtShowcase-info-section {
+  width: 50%;
+  padding: 70px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.ModalImgArtShowcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ModalImgArtShowcase-artistInfo-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ModalImgArtShowcase-artistInfo-text {
+  display: flex;
+  justify-content: center;
+}
+
+.ModalImgArtShowcase-artistName {
+  color: #5F5F5F;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.ModalImgArtShowcase-verifyIcon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 40px;
+  border: 1px solid #8DD7FF;
+  background: #FFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.ModalImgArtShowcase-verifyIcon-container img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ModalImgArtShowcase-artistAvatar-container {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ModalImgArtShowcase-artistAvatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ModalImgArtShowcase-image-container {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ModalImgArtShowcase-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ModalImgArtShowcase-likeOverlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 54px;
+  border-radius: 3px;
+  border: 0.5px solid #FF5C5C;
+  background: #FFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  padding: 0 10px;
+  gap: 6px;
+}
+
+.ModalImgArtShowcase-likeOverlay img {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+
+.ModalImgArtShowcase-likeOverlay span {
+  display: flex;
+  width: 58px;
+  height: 16px;
+  flex-direction: column;
+  justify-content: center;
+  color: #FF5C5C;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.ModalImgArtShowcase-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ModalImgArtShowcase-info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ModalImgArtShowcase-info-label {
+  font-weight: 600;
+  font-size: 20px;
+  color: #4A4A4A;
+}
+
+.ModalImgArtShowcase-info-text {
+  font-weight: 400;
+  font-size: 20px;
+  color: #7A7A7A;
+}
+
+.ModalImgArtShowcase-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding-top: 50px;
+}
+
+.ModalImgArtShowcase-commission-button {
+  width: 132px;
+  height: 38px;
+  border-radius: 5px;
+  border: none;
+  background: #2DAEF4;
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.ModalImgArtShowcase-report {
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 2;
+}
+
+.ModalImgArtShowcase-footer-icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #919191;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ModalImgArtShowcase-footer-icons img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* 📱 RWD: 中小螢幕下改為上下結構 */
+@media screen and (max-width: 1024px) {
+  .ModalImgArtShowcase-body {
+    flex-direction: column;
+  }
+
+  .ModalImgArtShowcase-image-section,
+  .ModalImgArtShowcase-info-section {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  .ModalImgArtShowcase-commission-button {
+    width: 100px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .ModalImgArtShowcase-likeOverlay {
+    top: 16px;
+    right: 16px;
+    transform: scale(0.9);
+  }
+
+  .ModalImgArtShowcase-report {
+    position: static;
+    margin-top: 20px;
+    justify-content: flex-end;
+  }
+
+  .ModalImgArtShowcase-image-container {
+    height: 320px; /* 原本是 520px，這裡縮小 */
+  }
+
+  .ModalImgArtShowcase-artistName,
+  .ModalImgArtShowcase-info-label,
+  .ModalImgArtShowcase-info-text {
+    font-size: 14px;
+  }
+
+  .ModalImgArtShowcase-verifyIcon-container {
+    width: 26px;
+    height: 26px;
+  }
+
+
+  .ModalImgArtShowcase-verifyIcon-container img{
+    width: 17px;
+    height: 17px;
+  }
+
+  .ModalImgArtShowcase-artistAvatar-container {
+    width: 26px;
+    height: 26px;
+  }
+}
