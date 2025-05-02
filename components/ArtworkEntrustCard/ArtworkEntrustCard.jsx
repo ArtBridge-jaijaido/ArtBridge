@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import { deleteUserEntrust } from "@/services/artworkEntrustService";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {  deleteEntrust } from "@/app/redux/feature/entrustSlice";
+import { deleteEntrust} from "@/app/redux/feature/entrustSlice";
 import { useToast } from "@/app/contexts/ToastContext.js";
 
 const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCount, description, categoryText, deadlineText, price, EntrustImageUrl,entrustUserUid,entrustUserSerialId, onDeleteSuccess  }) => {
-
+  
   const pathname = usePathname();
   const isArtworkEntrustMarketPage = pathname.includes("artworkEntrustMarket");
   const dispatch = useDispatch();
@@ -27,9 +27,11 @@ const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCou
     const confirm = window.confirm(`確定要刪除委託「${marketName}」嗎？`);
     if (!confirm) return;
     onDeleteSuccess?.(); 
+  
     const response = await deleteUserEntrust(entrustUserUid, entrustUserSerialId, entrustId);
+
     if (response.success) {
-     
+      console.log (entrustId);
       dispatch(deleteEntrust(entrustId));
       
       addToast("success", "委託已刪除成功");

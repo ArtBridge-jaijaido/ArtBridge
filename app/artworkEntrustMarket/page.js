@@ -99,32 +99,56 @@ const ArtworkEntrustMarketPage = () => {
         {
             label: "歷史委託",
             content: (
-                <div className="artworkEntrustMarket-tab-wrapper">
-                    {isLoading ? (
-                        <p>載入中...</p>
-                    ) : historyEntrusts.length > 0 ? (
-                        <div className="artworkEntrustMarket-marketCard-container">
-                            {historyEntrusts.slice(0, historyEntrustVisibleItems).map((entrust) => (
-                                <ArtworkEntrustCard
-                                    key={entrust.entrustId}
-                                    imageSrc={entrust.exampleImageUrl || "/images/default-image.png"}
-                                    title={entrust.title}
-                                    price={entrust.price}
-                                    isHistoryTab={true}
-                                />
-                            ))}
-                            {historyEntrustVisibleItems < historyEntrusts.length && (
-                                <button onClick={() => setHistoryEntrustVisibleItems((prev) => prev + 10)} className="artworkEntrustMarket-show-more-button">
-                                    顯示更多
-                                </button>
-                            )}
-                        </div>
-                    ) : (
-                        <p>目前沒有歷史委託。</p>
+              <div className="artworkEntrustMarket-tab-wrapper">
+                {isLoading ? (
+                  <p>載入中...</p>
+                ) : historyEntrusts.length > 0 ? (
+                  <div className="artworkEntrustMarket-marketCard-container">
+                    {historyEntrusts
+                      .slice(0, historyEntrustVisibleItems)
+                      .map((entrust) => {
+                        const user = allUsers[entrust.userUid];
+                        return (
+                          <ArtworkEntrustCard
+                            key={entrust.entrustId}
+                            entrustId={entrust.entrustId}
+                            EntrustImageUrl={entrust.exampleImageUrl}
+                            marketName={entrust.marketName}
+                            price={entrust.price}
+                            description={entrust.description}
+                            applicationCount={entrust.applicationCount}
+                            categoryText={entrust.selectedCategory}
+                            deadlineText={entrust.endDate}
+                            usernameText={user?.nickname || "使用者名稱"}
+                            entrustUserUid={entrust.userUid}
+                            entrustUserSerialId={entrust.userId}
+                            isHistoryTab={true}
+                            onDeleteSuccess={() =>
+                              setHistoryEntrusts((prev) =>
+                                prev.filter((e) => e.entrustId !== entrust.entrustId)
+                              )
+                            }
+                          />
+                        );
+                      })}
+                    {historyEntrustVisibleItems < historyEntrusts.length && (
+                      <button
+                        onClick={() =>
+                          setHistoryEntrustVisibleItems((prev) => prev + 10)
+                        }
+                        className="artworkEntrustMarket-show-more-button"
+                      >
+                        顯示更多
+                      </button>
                     )}
-                </div>
+                  </div>
+                ) : (
+                  <p>目前沒有歷史委託。</p>
+                )}
+              </div>
             ),
-        },
+          }
+          
     ];
 
     return (

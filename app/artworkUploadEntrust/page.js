@@ -12,8 +12,11 @@ import EntrustUploadForm5 from "@/components/EntrustUploadForm/EntrustUploadForm
 import "./artworkUploadEntrust.css";
 import { useSelector } from "react-redux";
 import { uploadEntrust } from "@/services/artworkEntrustService";
+import { useDispatch } from "react-redux";
+import {addEntrust} from "@/app/redux/feature/entrustSlice"
 
 const ArtworkUploadEntrustPage = () => {
+  const dispatch = useDispatch();
   const { addToast } = useToast();
   const [step, setStep] = useState(1);
   const router = useRouter();
@@ -59,6 +62,8 @@ const ArtworkUploadEntrustPage = () => {
     const userUid = user?.uid;
     const response = await uploadEntrust(userUid, userSerialId, updatedData);
     if (response.success){
+
+      dispatch(addEntrust(response.entrustData));
       addToast("success", "已發佈您的委託！");
       setStep(6); 
     }else {

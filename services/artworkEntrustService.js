@@ -53,13 +53,13 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
       exampleImageUrl,
       supplementaryImageUrls,
       applicationCount: 0,
-      createdAt: serverTimestamp(),
+      createdAt: new Date().toISOString(),
     };
 
     const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
     await setDoc(entrustRef, entrustData);
+    return { success: true, message: "委託上傳成功", entrustData};
 
-    return { success: true, message: "委託上傳成功", entrustId };
   } catch (error) {
     console.error("委託上傳失敗:", error);
     return { success: false, message: error.message };
