@@ -121,11 +121,13 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     }
   };
 
+  const allUsers = useSelector((state) => state.user.allUsers);
   const handleImageClick = (image) => {
+    const user = allUsers[image.userUid] || {};
     setCurrentData({
       src: image.exampleImageUrl,
-      author: image.artistName || "匿名繪師",
-      authorAvatar: image.artistProfileImg || "/images/testing-artist-profile-image.png",
+      author: user.nickname || image.artistName || "匿名繪師",
+      authorAvatar: user.profileAvatar || image.artistProfileImg || "/images/testing-artist-profile-image.png",
       imageStyles: image.selectedStyles || [],
       imageCategory: image.selectedCategory || "未分類",
       imageSource: image.imageSource || "來源不明",

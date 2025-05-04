@@ -34,9 +34,15 @@
   min-width: 120px;
 }
 
-.EntrustUploadForm3-group.file-type, .EntrustUploadForm3-group.file-size {
+.EntrustUploadForm3-group.file-type {
   flex: 1;
   width: 50%;
+}
+
+.EntrustUploadForm3-group.file-size {
+  flex: 1;
+  width: 50%;
+  position: relative;
 }
 
 .EntrustUploadForm3-group label {
@@ -126,6 +132,11 @@
   overflow-y: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-family: "Noto Sans TC";
+  position: absolute;  /* 新增這一行 */
+  top: 100%;           /* 接在輸入框下方 */
+  left: 0;
+  width: 100%;         /* 和 input 對齊寬度 */
+  z-index: 10;         /* 確保在上層 */
 }
 
 .EntrustUploadForm3-suggestion-list li {

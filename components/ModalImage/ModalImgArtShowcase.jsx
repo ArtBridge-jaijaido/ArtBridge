@@ -13,18 +13,16 @@ const ModalImgArtShowcase = ({ isOpen, onClose, data }) => {
           關閉X
         </button>
         <div className="ModalImgArtShowcase-body">
-          {/* 左側圖片區域 */}
           <div className="ModalImgArtShowcase-image-section">
             <div className="ModalImgArtShowcase-image-container">
               <img src={data.src} alt="Artwork" />
               <div className="ModalImgArtShowcase-likeOverlay">
-                <img src="/images/icons8-love-96 11.png" alt="likesIcon" />
+                <img src="/images/icons8-love-96-11.png" alt="likesIcon" />
                 <span>{data.likes}</span>
               </div>
             </div>
           </div>
 
-          {/* 右側資訊區塊 */}
           <div className="ModalImgArtShowcase-info-section">
             <div className="ModalImgArtShowcase-header">
               <div className="ModalImgArtShowcase-artistInfo-container">
@@ -35,8 +33,14 @@ const ModalImgArtShowcase = ({ isOpen, onClose, data }) => {
                   <span className="ModalImgArtShowcase-artistName">{data.author}</span>
                 </div>
               </div>
-              <div className="ModalImgArtShowcase-verifyIcon-container">
-                <img src="/images/icons8-attendance-100-1.png" alt="verifyIcon" />
+              <div className="ModalImgArtShowcase-icon-group">
+                <div className="ModalImgArtShowcase-collection-container">
+                  <span>{data.likes}</span>
+                  <img src="/images/icons8-star-96-2.png" alt="starIcon" />
+                </div>
+                <div className="ModalImgArtShowcase-verifyIcon-container">
+                  <img src="/images/icons8-attendance-100-1.png" alt="verifyIcon" />
+                </div>
               </div>
             </div>
 
@@ -55,7 +59,6 @@ const ModalImgArtShowcase = ({ isOpen, onClose, data }) => {
               </div>
             </div>
 
-            {/* 新增置中按鈕 */}
             <div className="ModalImgArtShowcase-button-wrapper">
               <button className="ModalImgArtShowcase-commission-button">委託繪師</button>
             </div>
