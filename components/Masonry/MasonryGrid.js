@@ -8,6 +8,7 @@ import { togglePortfolioLike,checkPortfolioIdExists } from "@/services/artworkPo
 import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
 import { useSelector } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
+import ModalImgArtShowcase from '@/components/ModalImage/ModalImgArtShowcase.jsx';
 
 const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
   const [imageLoaded, setImageLoaded] = useState({});
@@ -16,6 +17,10 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
   const currentUser = useSelector((state) => state.user.user);
   const [likeStates, setLikeStates] = useState({});
   const { addToast } = useToast();
+
+    // 🔥 Modal 控制
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentData, setCurrentData] = useState(null);
 
   const breakpointColumns = {
 
@@ -116,15 +121,45 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     }
   };
 
+  const allUsers = useSelector((state) => state.user.allUsers);
+  const handleImageClick = (image) => {
+    const user = allUsers[image.userUid] || {};
+    setCurrentData({
+      src: image.exampleImageUrl,
+      author: user.nickname || image.artistName || "匿名繪師",
+      authorAvatar: user.profileAvatar || image.artistProfileImg || "/images/testing-artist-profile-image.png",
+      imageStyles: image.selectedStyles || [],
+      imageCategory: image.selectedCategory || "未分類",
+      imageSource: image.imageSource || "來源不明",
+      imageReleaseDate: image.createdAt?.slice(0, 10) || "0000-00-00",
+      innerContextTitle: image.title || "標題未提供",
+      innerContext: image.description || "尚無內文",
+      likes: image.likes || 0,
+      comments: image.comments || 0,
+      shares: 0,
+      isCollected: image.collectedBy?.includes(currentUser?.uid),
+      articleId: image.articleId || null,
+      userUid: image.userUid || null
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentData(null);
+  };
+
 
   return (
+  <>
     <Masonry
       breakpointCols={breakpointColumns}
       className="masonry-grid"
       columnClassName="masonry-column"
     >
       {images.map((image, index) => (
-        <div key={index} className="masonry-grid-item">
+        <div key={index} className="masonry-grid-item" onClick={() => handleImageClick(image)} 
+        >
           <img
             src={image.exampleImageUrl}
             alt={`Artwork ${index + 1}`}
@@ -157,11 +192,17 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
                 >{image.likes}</span>
               </div>
+
             </>
           )}
         </div>
       ))}
     </Masonry>
+
+    <ModalImgArtShowcase isOpen={isModalOpen} onClose={handleCloseModal} data={currentData} />
+  </>
+
+
   );
 };
 
