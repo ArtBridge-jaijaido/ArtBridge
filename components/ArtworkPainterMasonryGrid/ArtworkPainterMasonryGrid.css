@@ -146,11 +146,18 @@
   .ArtworkPainter-masonry-grid{
     gap:15px;
   }
+
+  .ArtworkPainter-filter {
+    margin-bottom: 20px;
+  }
+
   .ArtworkPainter-filter-button{
     font-size: 8px;
     max-width:100px;
     height:26px;
   }
+
+
 }
 
 

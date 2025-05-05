@@ -111,7 +111,7 @@ const ConsumerDashboard = () => {
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-post-64-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
-              <span>委託專區</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkEntrustMarket")}>委託專區</span>
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-edit-text-file-100-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
@@ -135,7 +135,7 @@ const ConsumerDashboard = () => {
             <div className="ConsumerDashboard-commission-process-left">
               <h1>我要發布委託案件</h1>
               <p>您可以發布委託案件，有想要接搞得繪師會應徵您的案件，祝您找到合適的繪師</p>
-              <button className="ConsumerDashboard-commission-process-button">
+              <button className="ConsumerDashboard-commission-process-button" onClick={(e) => handleNavigateTo(e, "artworkUploadEntrust")}>
                 前往發佈委託案件 <img src="/images/icons8-go-96-1.png" alt="commission-process-icon" className="ConsumerDashboard-commission-process-icon" />
               </button>
             </div>

@@ -103,11 +103,6 @@
         --artworkPainterMarket-marketCard-container-height:auto;
     }
 }
-@media screen and (max-width:480px){
-    .artworkPainterMarket-show-more-button {
-        font-size:12px;
-    }
-}
 
 @media screen and (max-width: 520px){
     .artworkPainterMarket-marketCard-container{
@@ -117,6 +112,14 @@
         --artworkPainterMarket-marketCard-container-height:auto;
     }
 }
+
+@media screen and (max-width:480px){
+    .artworkPainterMarket-show-more-button {
+        font-size:12px;
+    }
+}
+
+
 
 @media screen and (max-width: 370px){
     .artworkPainterMarket-marketCard-container{

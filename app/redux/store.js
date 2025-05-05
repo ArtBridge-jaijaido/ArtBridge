@@ -3,6 +3,7 @@ import userReducer from './feature/userSlice.js';
 import artworkReducer from './feature/artworkSlice.js';
 import painterPortfolioReducer from './feature/painterPortfolioSlice.js'
 import painterArticleReducer from './feature/painterArticleSlice.js';
+import entrustReducer from './feature/entrustSlice.js'; 
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,6 @@ export const store = configureStore({
     artwork: artworkReducer, // 添加作品狀態管理的 reducer
     painterPortfolio: painterPortfolioReducer, // 添加畫師作品集狀態管理的 reducer
     painterArticle: painterArticleReducer, // 添加畫家文章狀態管理的 reducer
-
+    entrust: entrustReducer, // 添加委託狀態管理的 reducer
   },
 });

@@ -119,7 +119,7 @@ const MarketUploadFormPage2 = ({ prev, next, formData }) => {
                 </div>
 
                 <div className="MarketUploadForm2-button-group">
-                    <button className="MarketUploadForm2-prev" onClick={prev}>上一步</button>
+                    <button className="MarketUploadForm2-prev" onClick={() => prev()}>上一步</button>
                     <button className="MarketUploadForm2-next" onClick={handleNextClick}>下一步</button>
                 </div>
             </div>

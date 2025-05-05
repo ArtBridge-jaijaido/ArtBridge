@@ -24,6 +24,7 @@ const EntrustUploadForm1 = ({ next, formData }) => {
 
   const validateForm = () => {
     if (!marketName.trim()) return addToast("error", "請輸入市集名稱！");
+    if (marketName.length >8) return addToast("error", "市集名稱最多 8 個字！");
     if (!completionTime) return addToast("error", "請選擇完稿時間！");
     if (!price.trim()) return addToast("error", "請選擇價格！");
     if (!description.trim()) return addToast("error", "請輸入詳細解說！");
@@ -35,7 +36,14 @@ const EntrustUploadForm1 = ({ next, formData }) => {
 
   const handleNextClick = () => {
     if (validateForm()) {
-      next({ marketName, startDate, endDate, completionTime, price, description });
+      next({
+        marketName,
+        startDate,
+        endDate,
+        completionTime,
+        price,
+        description
+      });
     }
   };
 

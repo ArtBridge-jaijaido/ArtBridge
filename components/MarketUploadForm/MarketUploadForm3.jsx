@@ -154,7 +154,7 @@ const MarketUploadFormPage3 = ({ prev, next,formData  }) => {
                 </div>
 
                 <div className="MarketUploadForm3-button-group">
-                    <button className="MarketUploadForm3-prev" onClick={prev}>上一步</button>
+                    <button className="MarketUploadForm3-prev" onClick={() => prev()}>上一步</button>
                     <button className="MarketUploadForm3-next" onClick={handleNextClick}>下一步</button>
                 </div>
             </div>

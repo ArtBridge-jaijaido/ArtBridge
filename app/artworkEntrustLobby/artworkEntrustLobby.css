@@ -1,8 +1,8 @@
-.artworkEntrustLobbyPage{
-  
+.artworkEntrustLobbyPage {
+
     /*max width*/
     --artworkEntrustLobbyPage-width: 1440px;
-    --artEntrustCard-container-height: 1200px;  
+    --artEntrustCard-container-height: 1200px;
 
 
     /*gap*/
@@ -10,149 +10,144 @@
     --artworkEntrustCard-container-gap: 30px;
 
     /*margin-bottom*/
-    --artworkEntrustLobby-button-container-margin-bottom:50px;
-    --artworkEntrustCard-container-margin-bottom:20px;
+    --artworkEntrustLobby-button-container-margin-bottom: 50px;
+    --artworkEntrustCard-container-margin-bottom: 20px;
 
     /*grid-auto-rows*/
     --artworkEntrustCard-container-grid-auto-rows: 250px;
 }
 
-.artworkEntrustLobbyPage{
-    width:100%;
-    max-width:var(--artworkEntrustLobbyPage-width);
-    padding: 140px 50px 50px 50px; /* top right bottom left */
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto; 
+.artworkEntrustLobbyPage {
+    
+    width: 100%;
+    max-width: var(--artworkEntrustLobbyPage-width);
+    padding: 140px 50px 50px 50px;
+    /* top right bottom left */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
+
 .artworkEntrustLobbyPage-search-container {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     transition: all 0.5s ease-in-out;
     z-index: 100;
 }
-  
+
 .artworkEntrustLobbyPage-search-container.moved {
-    justify-content: flex-start; 
+    justify-content: flex-start;
 }
 
-.artworkEntrustLobby-button-container{
-    width:100%;
-    display:flex;
-    gap:var(--artworkEntrustLobby-button-container-gap);
+.artworkEntrustLobby-button-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--artworkEntrustLobby-button-container-gap);
     padding: 0px 150px;
     justify-content: center;
     align-items: center;
-    margin-bottom:var(--artworkEntrustLobby-button-container-margin-bottom);
-   
-}
-.artworkEntrustCard-container {
-    width:100%;
-    display:grid;
-    height:var(--artworkEntrustCard-container-height);
-    flex-direction: column;
-    box-sizing: border-box;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: stretch; 
-    align-items: start;
-    margin-bottom:var(--artworkEntrustCard-container-margin-bottom);
-    padding: 0 20px; 
+    margin-bottom: var(--artworkEntrustLobby-button-container-margin-bottom);
+
 }
 
-.ArtworkEntrustCard-wrapper {
-    max-width: 100%; 
+.artworkEntrustLobby-artworkEntrustCard-container {
+    width: 100%;
+    height:auto;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    place-content: center;
+    margin-bottom: 50px;
 }
+
+
 
 
 
 /*RWD*/
 
-@media screen and (max-width:1280px){
-    .artworkEntrustLobbyPage{
+@media screen and (max-width:1280px) {
+    .artworkEntrustLobbyPage {
         padding: 120px 36px 50px 36px;
     }
+    
 
-    .artworkEntrustLobby-button-container{
-        padding: 0px 30px;
-        --artworkEntrustLobby-button-container-gap:40px;
-    }
-    .artworkEntrustCard-container {
-        max-width: 100%; 
-        width:100%;
-        padding: 0 10px; 
-        box-sizing: border-box; 
-        overflow-x: hidden; 
-    } 
-} 
-
-@media screen and (max-width:834px){
-    .artworkEntrustLobbyPage{
-        padding:120px 30px 50px 30px;
-    }
     .artworkEntrustLobby-button-container {
-        gap: 20px; 
-        justify-content: center; 
+        padding: 0px 30px;
+        --artworkEntrustLobby-button-container-gap: 20px;
+    }
+
+}
+
+@media screen and (max-width:834px) {
+    .artworkEntrustLobbyPage {
+        padding: 120px 30px 50px 30px;
+    }
+
+    .artworkEntrustLobby-button-container {
+        gap: 20px;
         padding: 0 16px;
     }
-    .artworkEntrustCard-container {
-        max-width: 100%; 
-        padding: 0 10px; 
-        box-sizing: border-box; 
-        overflow-x: hidden; 
-    }      
-  
+
+
+
 }
-@media screen and (max-width: 810px) {
-    .artworkEntrustLobbyPage{
-        width:100%;
-        max-width: 800px; 
-    }
-    .artworkEntrustCard-container {
-        display: flex;
-        flex-direction: column; 
-        grid-template-columns: repeat(1, 1fr); /* 窄螢幕下顯示單列 */
-        gap:0px;
-    }
-    .artworkEntrustLobby-button-container{
-        padding:0px 15px;
-        display:grid;
-        grid-template-columns: repeat(3, 1fr);
-        place-items: center;
-        --artworkEntrustLobby-button-container-margin-bottom: 30px;
-        justify-items: center;
-        align-items: center;
-    }
-}
-@media screen and (max-width: 500px) {
-    .artworkEntrustLobbyPage{
-        width:100%;
-        max-width:500px;
-        padding : 108px 10px 15px 10px;
+
+
+
+
+@media screen and (max-width: 768px) {
+
+    .artworkEntrustLobbyPage {
+        width: 750px;
+
     }
 
-    .artworkEntrustLobby-button-container{
-        padding:0px 25px;
-        display:grid;
+}
+
+@media screen and (max-width: 440px) {
+    .artworkEntrustLobbyPage {
+        width: 100%;
+        max-width:440px;
+        padding: 108px 20px 15px 20px;
+    }
+
+
+
+    .artworkEntrustLobby-button-container {
+        padding: 0px 25px;
+        display: grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
         --artworkEntrustLobby-button-container-margin-bottom: 30px;
         justify-items: center;
-        align-items: center;
+       
     }
- }
-  @media screen and (max-width: 370px) {
-    .artworkEntrustLobbyPage{
-        width:100%;
-        padding : 108px 10px 15px 10px;
+
+
+    .artworkEntrustLobby-artworkEntrustCard-container {
+        margin-bottom: 30px; 
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+      
     }
-    .artworkEntrustLobby-button-container{
-        padding:0px 30px;
+}
+
+@media screen and (max-width: 370px) {
+    .artworkEntrustLobbyPage {
+        width: 100%;
+        padding: 108px 10px 15px 10px;
+    }
+
+    .artworkEntrustLobby-button-container {
+        padding: 0px 30px;
         --artworkEntrustLobby-button-container-gap: 10px;
-        gap: var(--artworkEntrustLobby-button-container-gap)
+        gap: var(--artworkEntrustLobby-button-container-gap);
+        margin-bottom:20px;
     }
-  }
-  
+}

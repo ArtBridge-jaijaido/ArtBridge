@@ -164,7 +164,7 @@ const EntrustUploadForm4 = ({ prev, next, formData }) => {
                 </div>
 
                 <div className="EntrustUploadForm4-button-group">
-                  <button className="EntrustUploadForm4-prev" onClick={prev}>上一步</button>
+                  <button className="EntrustUploadForm4-prev" onClick={() => prev()}>上一步</button>
                   <button className="EntrustUploadForm4-next" onClick={handleNextClick}>下一步</button>
                 </div>
             </div>

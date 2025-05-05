@@ -210,7 +210,7 @@ const MarketUploadFormPage4 = ({ prev, next,formData }) => {
 
                 {/* 按鈕區域 */}
                 <div className="MarketUploadForm4-button-group">
-                    <button className="MarketUploadForm4-prev" onClick={prev}>上一步</button>
+                    <button className="MarketUploadForm4-prev" onClick={() => prev()}>上一步</button>
                     <LoadingButton
                         isLoading={isLoading}
                         onClick={handlePublishClick}

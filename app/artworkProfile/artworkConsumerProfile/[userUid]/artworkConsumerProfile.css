@@ -52,6 +52,18 @@
     padding: 10px;
     box-sizing: border-box;
 }
+
+.ArtworkConsumerProfile-MasonryArtCommunity-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom:50px;
+    justify-content: flex-start;
+    position: relative;
+}
+
+
+
 .ArtworkConsumerProfile-artworkReview-container{
     display:flex;
     flex-direction: column;
@@ -98,18 +110,31 @@
         width:100%;
     }
 }
-/* 小於 810px 時，改為單欄 */
-@media screen and (max-width: 810px) {
-    .ArtworkConsumerProfile-artworkEntrustCard-container {
-        padding:0px 15px;
-        display: flex;
-        flex-direction: column;
-        grid-template-columns: repeat(1, 1fr); /* 窄螢幕下顯示單列 */
-        gap:0px;
+/* 小於 834px 時，改為單欄 */
+@media screen and (max-width: 834px) {
+    
+}
+
+@media screen and (max-width:768px){
+    .artworkConsumerProfilePage{
+        width:768px;
     }
 }
 
 @media screen and (max-width: 440px) {
+
+    .artworkConsumerProfilePage{
+        width:100%;
+    }
+
+    .ArtworkConsumerProfile-artworkEntrustCard-container {
+      
+        grid-template-columns: repeat(1, 1fr); /* 預設雙欄 */
+        gap: 20px;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
 
 .ArtworkConsumerProfile-MasonryGrid-container {
     --ArtworkConsumerProfile-MasonryGrid-container-margin-bottom: 30px;
