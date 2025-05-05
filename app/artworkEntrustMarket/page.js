@@ -7,6 +7,7 @@ import ArtworkEntrustMarketCard from "@/components/ArtworkEntrustMarketCard/Artw
 import { fetchUserEntrusts } from "@/services/artworkEntrustService"; 
 import "./artworkEntrustMarket.css"; 
 
+
 const ArtworkEntrustMarketPage = () => {
     const [entrustCardVisibleItems, setEntrustCardVisibleItems] = useState(10);
     const [historyEntrustVisibleItems, setHistoryEntrustVisibleItems] = useState(10);
