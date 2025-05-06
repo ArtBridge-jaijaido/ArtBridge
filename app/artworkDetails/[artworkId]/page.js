@@ -14,7 +14,6 @@ import "./artworkDetails.css";
 
 export default function ArtworkDetailPage({ params }) {
 
-
     const currentUser = useSelector((state) => state.user.user);
     const [likeStates, setLikeStates] = useState({});
     const searchParams = useSearchParams();

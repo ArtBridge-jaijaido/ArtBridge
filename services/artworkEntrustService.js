@@ -1,4 +1,4 @@
-import { db,storage } from "@/lib/firebase";
+import { db, storage } from "@/lib/firebase";
 import { ref, listAll, deleteObject } from "firebase/storage";
 import {
   collectionGroup,
@@ -6,6 +6,7 @@ import {
   getDoc,
   setDoc,
   getDocs,
+  where,
   deleteDoc,
   query,
   orderBy,
@@ -58,7 +59,7 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
 
     const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
     await setDoc(entrustRef, entrustData);
-    return { success: true, message: "委託上傳成功", entrustData};
+    return { success: true, message: "委託上傳成功", entrustData };
 
   } catch (error) {
     console.error("委託上傳失敗:", error);
@@ -94,11 +95,11 @@ export const fetchUserEntrusts = async (userUid) => {
 export const deleteUserEntrust = async (userUid, userSerialId, entrustId) => {
   try {
 
-    console.log ("刪除委託 ID:", entrustId);
-    console.log ("刪除使用者 ID:", userUid);
-    console.log ("刪除使用者序號 ID:", userSerialId);
+    console.log("刪除委託 ID:", entrustId);
+    console.log("刪除使用者 ID:", userUid);
+    console.log("刪除使用者序號 ID:", userSerialId);
 
-  
+
     const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
     await deleteDoc(entrustRef);
 
@@ -130,6 +131,34 @@ export const deleteUserEntrust = async (userUid, userSerialId, entrustId) => {
   }
 };
 
+
 /**
- * 獲取所有委託（含使用者資料）
+ * fetch entrust by entrustId (details page)
  */
+export const fetchEntrustById = async (entrustId) => {
+  try {
+    const q = query(
+      collectionGroup(db, "entrusts"),
+      where("entrustId", "==", entrustId),
+      orderBy("createdAt", "asc")
+    );
+
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      console.warn(`找不到 entrustId 為 ${entrustId} 的委託`);
+      return null;
+    }
+
+    const docSnap = querySnapshot.docs[0];
+    const entrustData = docSnap.data();
+
+    return {
+      id: docSnap.id,
+      ...entrustData,
+    };
+  } catch (error) {
+    console.error("獲取委託失敗:", error);
+    return null;
+  }
+
+};

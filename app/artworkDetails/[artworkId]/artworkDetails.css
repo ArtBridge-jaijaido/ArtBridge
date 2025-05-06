@@ -202,9 +202,7 @@
 
  .artworkDetails-stats .blue {
      color: #2DAEF4;
-   
      font-size: 24px;
-    
      font-weight: 600;
      line-height: normal;
      letter-spacing: 1px;
@@ -393,6 +391,7 @@
  .artworkDetails-masonry {
      display: flex;
      width: auto;
+     gap:12px;
  }
 
  .artworkDetails-masonry-column {

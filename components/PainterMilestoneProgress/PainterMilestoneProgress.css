@@ -1,0 +1,88 @@
+.painterMilestoneProgress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    
+  }
+  
+  .painterMilestoneProgress-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    width: 20%; 
+    
+  }
+  
+  .painterMilestoneProgress-item {
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .painterMilestoneProgress-percent {
+    color: #A2E2FF;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  
+  .painterMilestoneProgress-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #A2E2FF;
+    border-radius: 50%;
+  }
+  
+  .painterMilestoneProgress-label {
+    color: #48A8E0;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
+  .painterMilestoneProgress-line {
+    height: 2px;
+    background-color: #bbdefb;
+    flex: 1;
+    margin: 0 20px;
+   
+  }
+  
+
+
+  @media screen and (max-width: 440px) {
+    .painterMilestoneProgress-circle {
+        width: 15px;
+        height: 15px;
+        
+      }
+
+      .painterMilestoneProgress-percent {
+        
+        font-size: 10px;
+        
+      }
+
+      .painterMilestoneProgress-label {
+       
+        font-size: 10px;
+      
+      }
+
+
+      .painterMilestoneProgress-line {
+        
+        margin: 0 5px;
+       
+      }
+  }
+
+  @media screen and (max-width: 370px) {
+    .painterMilestoneProgress-circle {
+        width: 12px;
+        height: 12px;
+        
+      }
+
+  }

@@ -211,6 +211,9 @@ const ArtworkEntrustLobby = () => {
                         return (
                             <ArtworkEntrustCard
                                 key={entrust.entrustId}
+                                entrustId={entrust.entrustId}
+                                entrustNickname={user?.nickname || "使用者名稱"}
+                                entrustProfileImg={user?.profileAvatar|| "/images/kv-min-4.png"}
                                 EntrustImageUrl={entrust.exampleImageUrl}
                                 marketName={entrust.marketName}
                                 price={entrust.price}
@@ -218,7 +221,6 @@ const ArtworkEntrustLobby = () => {
                                 applicationCount={entrust.applicationCount}
                                 categoryText={entrust.selectedCategory}
                                 deadlineText={entrust.endDate}
-                                usernameText={user?.nickname || "使用者名稱"}
                             />
                         );
                     })}
