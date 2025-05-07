@@ -4,6 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { notoSansTCClass } from '@/app/layout.js';
 import { fetchEntrustById } from "@/services/artworkEntrustService.js";
 import { useSelector } from "react-redux";
+import { useToast } from "@/app/contexts/ToastContext.js";
+import ModalImgApplyEntrust from "@/components/ModalImage/ModalImgApplyEntrust";
 import Masonry from "react-masonry-css";
 import PainterMilestoneProgress from "@/components/PainterMilestoneProgress/PainterMilestoneProgress.jsx";
 import "./artworkEntrustDetails.css";
@@ -19,11 +21,14 @@ export default function EntrustDetailPage({ params }) {
     const entrustImageUrl = searchParams.get("image");
     const entrustNickname = searchParams.get("nickname");
     const entrustProfileImg = searchParams.get("avatar");
-
+    const { addToast } = useToast();
 
     // 狀態存儲FireStore抓到的 entrust 資料
     const [entrust, setEntrust] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    // ModalImgApplyEntrust 的狀態
+    const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
     const breakpointColumnsObj = {
         default: 2,
@@ -40,7 +45,33 @@ export default function EntrustDetailPage({ params }) {
         fetchData();
     }, [entrustId]);
 
-    console.log("entrust", entrust);
+    const preloadImage = (src) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+        });
+    };
+
+    /*handle apply entrust*/ 
+    const handleApplyModalOpen = async (e) => {
+        e.stopPropagation();
+        if (!currentUser) {
+            addToast("error", "請先登入才能應徵喔！");
+            return;
+        }
+
+        try {
+            // 預載 artwork 主圖與畫師頭貼
+            await Promise.all([
+                preloadImage(entrustProfileImg),
+            ]);
+            setIsApplyModalOpen(true);
+        } catch (err) {
+            addToast("error", "圖片載入失敗，請稍後再試");
+        }
+    }
 
     // loading 狀態
     if (loading) return <p>載入中...</p>;
@@ -70,7 +101,7 @@ export default function EntrustDetailPage({ params }) {
                             <span className="artworkEntrustDetails-artist-name">{entrustNickname}</span>
                         </div>
                         <div className="artworkEntrustDetails-buttonRow">
-                            <button className="artworkEntrustDetails-apply-button" >
+                            <button className="artworkEntrustDetails-apply-button" onClick={handleApplyModalOpen}>
                                 <img src="/images/icons8-apply-96-1.png" alt="applyIcon" />
                                 我要應徵
                             </button>
@@ -86,7 +117,7 @@ export default function EntrustDetailPage({ params }) {
 
                 {/* 右半邊 */}
                 <div className="artworkEntrustDetails-right">
-                
+
                     <div className="artworkEntrustDetails-infoTable">
                         <div className="artworkEntrustDetails-infoTable-group">
                             <div className="artworkEntrustDetails-infoTable-label">市集結束時間</div>
@@ -167,13 +198,22 @@ export default function EntrustDetailPage({ params }) {
                     <p>完稿格式：{entrust.fileFormat}</p>
                     <p>作品尺寸：{entrust.size}px</p>
                     <p>回報進度：{entrust.reportProgress}</p>
-                    <p>色彩模式:{entrust.colorMode}</p>
+                    <p>色彩模式 : {entrust.colorMode}</p>
                     <p>權限：{entrust.permission}</p>
                     <p>應徵人數：{entrust.applicationCount}人</p>
                 </div>
             </div>
 
-           
+
+            <ModalImgApplyEntrust
+                isOpen={isApplyModalOpen}
+                onClose={() => setIsApplyModalOpen(false)}
+                entrustData={entrust}
+                entrustNickname={entrustNickname}
+                entrustProfileImg={entrustProfileImg}
+            />
+
+
 
         </div>
     );

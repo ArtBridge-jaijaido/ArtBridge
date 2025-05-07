@@ -131,8 +131,8 @@ export default function ArtworkDetailPage({ params }) {
     };
 
 
-    /*handle buy artwork*/
-    const handleBuyArtwork = async (e) => {
+    /*handle buy artwork modal open*/
+    const handleBuyArtworkModalOpen = async (e) => {
         e.stopPropagation();
         if (!currentUser) {
             addToast("error", "請先登入才能購買喔！");
@@ -222,7 +222,7 @@ export default function ArtworkDetailPage({ params }) {
                     </div>
 
                     <div className="artworkDetails-buttonRow">
-                        <button className="artworkDetails-buy-button" onClick={handleBuyArtwork}>
+                        <button className="artworkDetails-buy-button" onClick={handleBuyArtworkModalOpen}>
                             <img src="/images/icons8-pay-96-1.png" alt="buyIcon" />
                             我要購買
                         </button>

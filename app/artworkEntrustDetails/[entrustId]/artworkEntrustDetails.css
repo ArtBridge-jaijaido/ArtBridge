@@ -159,9 +159,7 @@
 
 .artworkEntrustDetails-stats .blue {
     color: #2DAEF4;
-
     font-size: 24px;
-
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1px;
@@ -207,7 +205,7 @@
     background: #FDFDFD;
     height: 220px;
     min-width: 480px;
-
+   
 }
 
 .artworkEntrustDetails-infoTable-group {
@@ -601,7 +599,7 @@
     .artworkEntrustDetails-infoTable {
         min-width: 320px;
         height: 140px;
-        padding: 10px 20px;
+        padding: 10px 10px;
 
     }
 
