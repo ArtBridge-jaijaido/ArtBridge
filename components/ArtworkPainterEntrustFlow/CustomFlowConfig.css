@@ -29,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-width: 80px;
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -43,7 +43,8 @@
 }
 
 .customFlowConfig-connector-line {
-  width: 50px;
+  width: 100%;
+  max-width: 100px;
   height: 1px;
   background-color: #A2E2FF;
   align-self: center;
@@ -79,7 +80,8 @@
 /* === CustomFlowConfig.css === */
 
 .customFlowConfig-divider {
-  width: 1100px;
+  width: 100%;
+  max-width: 1100px;
   height: 2px;
   background: linear-gradient(270deg, #E3F6FF 0%, #AEE6FF 50%, #E3F6FF 100%);
   margin: 40px auto;
@@ -92,6 +94,12 @@
   gap: 20px;
 }
 
+.customFlowConfig-button-group {
+  display: flex;
+  align-items: center; /* ✅ 垂直對齊 */
+  gap: 61px;
+}
+
 .customFlowConfig-add-button {
   display: flex;
   align-items: center;
@@ -100,6 +108,8 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .customFlowConfig-add-icon {
@@ -119,6 +129,7 @@
   transition: color 0.2s ease;
 }
 
+
 /* hover 時同時變更 icon 和 text 顏色 */
 .customFlowConfig-add-button:hover .customFlowConfig-add-icon {
   filter: brightness(0) saturate(100%) invert(27%) sepia(100%) saturate(3403%) hue-rotate(194deg) brightness(93%) contrast(94%);
@@ -132,6 +143,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.customFlowConfig-input-group {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 .customFlowConfig-input-percent {
@@ -155,8 +174,8 @@
   width: 400px;
   height: 50px;
   background: #FFF;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #61ceff;
+  border-radius: 30px;
   padding: 0 16px;
   color: #333;
   font-size: 20px;
@@ -203,26 +222,219 @@
   background-color: #1e90ff;
 }
 
-@media screen and (max-width: 768px) {
-  .customFlowConfig-wrapper {
-    align-items: center;
-  }
+.customFlowConfig-apply-official-button {
+  width: 140px;
+  height: 28px;
+  border-radius: 10px;
+  background: #61CEFF;
+  color: #FFF;
+  text-align: center;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 8px;
+}
 
-  .customFlowConfig-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px 10px;
-    justify-content: center;
-  }
+.customFlowConfig-apply-official-button:hover {
+  background-color: #1e90ff;
+}
 
+@media screen and (max-width: 1280px) {
+  .customFlowConfig-circle {
+    width: 30px;
+    height: 30px;
+  }
   .customFlowConfig-percent,
   .customFlowConfig-label {
-    font-size: 14px;
+    font-size: 24px;
   }
-
-  .customFlowConfig-connector-line {
-    width: 20px;
-    height: 1px;
-    margin-top: -10px;
+  .customFlowConfig-add-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .customFlowConfig-add-text {
+    font-size: 24px;
+  }
+  .customFlowConfig-apply-official-button {
+    width: 120px;
+    height: 24px;
+    font-size: 16px;
+  }
+  .customFlowConfig-input-percent {
+    width: 130px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .customFlowConfig-percent-sign {
+    font-size: 24px;
+  }
+  .customFlowConfig-input-name {
+    width: 350px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .customFlowConfig-input-name::placeholder {
+    font-size: 20px;
+  }
+  .customFlowConfig-delete-button {
+    font-size: 24px;
+  }
+  .customFlowConfig-save-button {
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
   }
 }
+
+@media screen and (max-width: 834px) {
+  .customFlowConfig-circle {
+    width: 26px;
+    height: 26px;
+  }
+  .customFlowConfig-percent,
+  .customFlowConfig-label {
+    font-size: 20px;
+  }
+  .customFlowConfig-add-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .customFlowConfig-add-text {
+    font-size: 20px;
+  }
+  .customFlowConfig-apply-official-button {
+    width: 110px;
+    height: 22px;
+    font-size: 14px;
+  }
+  .customFlowConfig-input-percent {
+    width: 70px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .customFlowConfig-percent-sign {
+    font-size: 20px;
+  }
+  .customFlowConfig-input-name {
+    width: 250px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .customFlowConfig-input-name::placeholder {
+    font-size: 16px;
+  }
+  .customFlowConfig-delete-button {
+    font-size: 20px;
+  }
+  .customFlowConfig-save-button {
+    width: 84px;
+    height: 30px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .customFlowConfig-circle {
+    width: 12px;
+    height: 12px;
+  }
+  .customFlowConfig-percent,
+  .customFlowConfig-label {
+    font-size: 10px;
+  }
+  .customFlowConfig-add-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .customFlowConfig-add-text {
+    font-size: 14px;
+  }
+  .customFlowConfig-apply-official-button {
+    width: 100px;
+    height: 18px;
+    font-size: 12px;
+  }
+  .customFlowConfig-input-percent {
+    width: 50px;
+    height: 22px;
+    font-size: 10px;
+  }
+  .customFlowConfig-percent-sign {
+    font-size: 16px;
+  }
+  .customFlowConfig-input-name {
+    width: 139px;
+    height: 22px;
+    font-size: 10px;
+  }
+  .customFlowConfig-input-name::placeholder {
+    font-size: 10px;
+  }
+  .customFlowConfig-delete-button {
+    font-size: 12px;
+  }
+  .customFlowConfig-save-button {
+    width: 60px;
+    height: 26px;
+    font-size: 14px;
+  }
+  .customFlowConfig-connector-line {
+    flex-grow: 1;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .customFlowConfig-circle {
+    width: 12px;
+    height: 12px;
+  }
+  .customFlowConfig-percent,
+  .customFlowConfig-label {
+    font-size: 10px;
+  }
+  .customFlowConfig-add-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .customFlowConfig-add-text {
+    font-size: 12px;
+  }
+  .customFlowConfig-apply-official-button {
+    width: 100px;
+    height: 18px;
+    font-size: 12px;
+  }
+  .customFlowConfig-input-percent {
+    width: 40px;
+    height: 20px;
+    font-size: 10px;
+  }
+  .customFlowConfig-percent-sign {
+    font-size: 14px;
+  }
+  .customFlowConfig-input-name {
+    width: 139px;
+    height: 20px;
+    font-size: 10px;
+  }
+  .customFlowConfig-input-name::placeholder {
+    font-size: 10px;
+  }
+  .customFlowConfig-delete-button {
+    font-size: 10px;
+  }
+  .customFlowConfig-save-button {
+    width: 54px;
+    height: 22px;
+    font-size: 12px;
+  }
+  .customFlowConfig-connector-line {
+    flex-grow: 1;
+  }
+
+}
+

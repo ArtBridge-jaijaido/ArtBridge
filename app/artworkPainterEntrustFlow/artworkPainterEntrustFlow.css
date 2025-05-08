@@ -33,7 +33,6 @@
   white-space: nowrap;
   background: none;
   border: none;
-  margin-bottom: 50px;
   font-family: Inter;
   font-size: 24px;
   font-style: normal;
@@ -68,9 +67,20 @@
 }
 
 /* RWD */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1280px) {
   .artworkPainterEntrustFlow-page {
-      width: 768px;
+      width: 1280px;
+  }
+  .artworkPainterEntrustFlow-tab-button {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 834px) {
+  .artworkPainterEntrustFlow-page {
+      width: 834px;
+  }
+  .artworkPainterEntrustFlow-tab-button {
+    font-size: 20px;
   }
 }
 
@@ -80,11 +90,39 @@
   }
 
   .artworkPainterEntrustFlow-tab-header {
-      flex-direction: column;
-      gap: 8px;
+      gap: 30px;
+      justify-content: flex-start; /* ✅ 靠左對齊 */
+      padding-left: 0px;
   }
 
   .artworkPainterEntrustFlow-tab-button {
-      width: 100%;
+      width: auto;
+      font-size: 14px;
+  }
+  .artworkPainterEntrustFlow-tab-button.active::after {
+    left: 0;
+    width: 100%; /* ✅ 不再額外加寬 */
   }
 }
+
+@media screen and (max-width: 370px) {
+  .artworkPainterEntrustFlow-page {
+      width: 100%;
+  }
+
+  .artworkPainterEntrustFlow-tab-header {
+      gap: 30px;
+      justify-content: flex-start; /* ✅ 靠左對齊 */
+      padding-left: 0px;
+  }
+
+  .artworkPainterEntrustFlow-tab-button {
+      width: auto;
+      font-size: 12px;
+  }
+  .artworkPainterEntrustFlow-tab-button.active::after {
+    left: 0;
+    width: 100%; /* ✅ 不再額外加寬 */
+  }
+}
+

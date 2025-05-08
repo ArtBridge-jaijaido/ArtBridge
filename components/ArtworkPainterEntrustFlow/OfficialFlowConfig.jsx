@@ -29,6 +29,14 @@ const OfficialFlowConfig = () => {
             </React.Fragment>
           ))}
         </div>
+
+        <div className="officialFlowConfig-banner">
+          <div className="officialFlowConfig-banner-inner">
+            <p className="officialFlowConfig-banner-text">
+              未自訂委託流程則依照官方流程進行接案
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
