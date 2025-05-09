@@ -1,0 +1,128 @@
+.artworkPainterEntrustFlow-page {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  padding: 100px 15px 20px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.artworkPainterEntrustFlow-tab-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0px 20px;
+  margin-top: 20px;
+}
+
+.artworkPainterEntrustFlow-tab-header {
+  gap: 90px;
+  margin-bottom: 20px;
+  display: flex;
+  padding-left: 100px;
+}
+
+.artworkPainterEntrustFlow-tab-button {
+  cursor: pointer;
+  color: #797979;
+  text-align: center;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.artworkPainterEntrustFlow-tab-button.active {
+  color: #2daef4;
+  font-weight: 600;
+  position: relative;
+}
+.artworkPainterEntrustFlow-tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 2px;
+  background-color: #2DAEF4;
+}
+
+.artworkPainterEntrustFlow-tab-button:hover {
+  color: #2daef4; 
+}
+
+.artworkPainterEntrustFlow-tab-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* RWD */
+@media screen and (max-width: 1280px) {
+  .artworkPainterEntrustFlow-page {
+      width: 1280px;
+  }
+  .artworkPainterEntrustFlow-tab-button {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 834px) {
+  .artworkPainterEntrustFlow-page {
+      width: 834px;
+  }
+  .artworkPainterEntrustFlow-tab-button {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .artworkPainterEntrustFlow-page {
+      width: 100%;
+  }
+
+  .artworkPainterEntrustFlow-tab-header {
+      gap: 30px;
+      justify-content: flex-start; /* ✅ 靠左對齊 */
+      padding-left: 0px;
+  }
+
+  .artworkPainterEntrustFlow-tab-button {
+      width: auto;
+      font-size: 14px;
+  }
+  .artworkPainterEntrustFlow-tab-button.active::after {
+    left: 0;
+    width: 100%; /* ✅ 不再額外加寬 */
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .artworkPainterEntrustFlow-page {
+      width: 100%;
+  }
+
+  .artworkPainterEntrustFlow-tab-header {
+      gap: 30px;
+      justify-content: flex-start; /* ✅ 靠左對齊 */
+      padding-left: 0px;
+  }
+
+  .artworkPainterEntrustFlow-tab-button {
+      width: auto;
+      font-size: 12px;
+  }
+  .artworkPainterEntrustFlow-tab-button.active::after {
+    left: 0;
+    width: 100%; /* ✅ 不再額外加寬 */
+  }
+}
+
