@@ -74,7 +74,8 @@ const ArtworkEntrustMarketPage = () => {
                                         applicationCount={entrust.applicationCount}
                                         categoryText={entrust.selectedCategory}
                                         deadlineText={entrust.endDate}
-                                        usernameText={user?.nickname || "使用者名稱"}
+                                        entrustNickname={user?.nickname || "使用者名稱"}
+                                        entrustProfileImg={user?.profileAvatar|| "/images/kv-min-4.png"}
                                         entrustUserUid={entrust.userUid}
                                         entrustUserSerialId={entrust.userId}
                                         onDeleteSuccess={() =>
@@ -120,7 +121,8 @@ const ArtworkEntrustMarketPage = () => {
                             applicationCount={entrust.applicationCount}
                             categoryText={entrust.selectedCategory}
                             deadlineText={entrust.endDate}
-                            usernameText={user?.nickname || "使用者名稱"}
+                            entrustNickname={user?.nickname || "使用者名稱"}
+                            entrustProfileImg={user?.profileAvatar|| "/images/kv-min-4.png"}
                             entrustUserUid={entrust.userUid}
                             entrustUserSerialId={entrust.userId}
                             isHistoryTab={true}

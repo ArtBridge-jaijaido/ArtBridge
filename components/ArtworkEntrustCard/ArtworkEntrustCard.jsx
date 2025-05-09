@@ -1,48 +1,63 @@
 "use client";
 import React, { useState } from "react";
 import { FadeLoader } from "react-spinners";
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "./ArtworkEntrustCard.css";
 import { usePathname } from "next/navigation";
 import { deleteUserEntrust } from "@/services/artworkEntrustService";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { deleteEntrust} from "@/app/redux/feature/entrustSlice";
+import { deleteEntrust } from "@/app/redux/feature/entrustSlice";
 import { useToast } from "@/app/contexts/ToastContext.js";
 
-const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCount, description, categoryText, deadlineText, price, EntrustImageUrl,entrustUserUid,entrustUserSerialId, onDeleteSuccess  }) => {
-  
+
+const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, marketName, applicationCount, description, categoryText, deadlineText, price, EntrustImageUrl, entrustUserUid, entrustUserSerialId, onDeleteSuccess }) => {
+
   const pathname = usePathname();
   const isArtworkEntrustMarketPage = pathname.includes("artworkEntrustMarket");
   const dispatch = useDispatch();
   const { addToast } = useToast();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const user = useSelector((state) => state.user);
+  const { setIsLoading } = useLoading();
+  const navigate = useNavigation();
+
   // 檢查描述文字是否超過 35 字
   const truncatedDescription = description.length > 35
     ? `${description.substring(0, 35)}...`
     : description;
 
-  const handleDelete = async () => {
-    
+  const handleDelete = async (e) => {
+    e.stopPropagation();
     const confirm = window.confirm(`確定要刪除委託「${marketName}」嗎？`);
     if (!confirm) return;
-    onDeleteSuccess?.(); 
-  
+    onDeleteSuccess?.();
+
     const response = await deleteUserEntrust(entrustUserUid, entrustUserSerialId, entrustId);
 
     if (response.success) {
-      console.log (entrustId);
+      console.log(entrustId);
       dispatch(deleteEntrust(entrustId));
-      
+
       addToast("success", "委託已刪除成功");
     } else {
       addToast("error", "刪除失敗，請稍後再試");
     }
   };
 
+  const handleHeadingToDetail = (e) => {
+    e.stopPropagation();
+    navigate(`/artworkEntrustDetails/${entrustId}?nickname=${encodeURIComponent(entrustNickname)}&avatar=${encodeURIComponent(entrustProfileImg)}&image=${encodeURIComponent(EntrustImageUrl)}`);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 800);
+  }
+
 
   return (
-    <div className="artworkEntrustCard-container">
+    <div className="artworkEntrustCard-container"
+      onClick={handleHeadingToDetail}
+    >
       <div className="ArtworkEntrustCard-wrapper">
         <div className="ArtworkEntrustCard-content">
           <div className="ArtworkEntrustCard-main">
@@ -50,7 +65,12 @@ const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCou
               <div className="ArtworkEntrustCard-title">{marketName}</div>
               <div className="ArtworkEntrustCard-meta-info">
                 <div className="ArtworkEntrustCard-user-info">
-                  <div className="ArtworkEntrustCard-username">{usernameText}</div>
+                  <div className="ArtworkEntrustCard-username"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  >{entrustNickname}
+                  </div>
                   <img src="/images/user-icon.png" className="ArtworkEntrustCard-user-icon" />
                 </div>
                 <div className="ArtworkEntrustCard-applicants">
@@ -111,7 +131,7 @@ const ArtworkEntrustCard = ({entrustId, marketName, usernameText, applicationCou
 
 
       {isArtworkEntrustMarketPage && (
-        <div className="ArtworkEntrustCard-delete-icon" onClick={handleDelete}>
+        <div className="ArtworkEntrustCard-delete-icon" onClick={(e) => handleDelete(e)}>
           <img src="/images/delete-icon.png" alt="Delete" />
         </div>
       )}

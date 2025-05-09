@@ -1,30 +1,36 @@
 "use client";
-
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Masonry from "react-masonry-css";
 import "./MasonryGrid.css";
 import { useImageLoading } from "@/app/contexts/ImageLoadingContext.js";
-import { togglePortfolioLike,checkPortfolioIdExists } from "@/services/artworkPortfolioService";
+import {
+  togglePortfolioLike,
+  checkPortfolioIdExists,
+} from "@/services/artworkPortfolioService";
 import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
 import { useSelector } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
-import ModalImgArtShowcase from '@/components/ModalImage/ModalImgArtShowcase.jsx';
+import ModalImgArtShowcase from "@/components/ModalImage/ModalImgArtShowcase.jsx";
 
-const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded }) => {
+const MasonryGrid = ({
+  images,
+  onMasonryReady,
+  isMasonryReady,
+  isPreloaded,
+  setIsPreloaded,
+}) => {
   const [imageLoaded, setImageLoaded] = useState({});
   const [currentBreakpoint, setCurrentBreakpoint] = useState(null);
   const { setIsImageLoading } = useImageLoading();
   const currentUser = useSelector((state) => state.user.user);
+  const allUsers = useSelector((state) => state.user.allUsers);
   const [likeStates, setLikeStates] = useState({});
   const { addToast } = useToast();
-
-    // 🔥 Modal 控制
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentData, setCurrentData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentData, setCurrentData] = useState(null);
 
   const breakpointColumns = {
-
-    default: 5, // 桌機最多 5 欄
+    default: 5,
     1280: 5,
     834: 4,
     440: 2,
@@ -32,23 +38,28 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
 
   const getCurrentBreakpoint = () => {
     const width = window.innerWidth;
-    let matchedBreakpoint = "default"; // 預設最大值
-
+    let matchedBreakpoint = "default";
     Object.keys(breakpointColumns).forEach((bp) => {
       if (width <= parseInt(bp)) {
         matchedBreakpoint = bp;
       }
     });
-
     return matchedBreakpoint;
   };
 
-
+  // 預先記憶每張圖是否被按讚，避免每次都跑 includes()
+  const likedMap = useMemo(() => {
+    const map = {};
+    images.forEach((img) => {
+      const liked = img.likedBy?.includes(currentUser?.uid);
+      map[img.portfolioId] = liked;
+    });
+    return map;
+  }, [images, currentUser?.uid]);
 
   useEffect(() => {
-
     setIsPreloaded(false);
-    setImageLoaded({}); // 重置圖片載入狀態
+    setImageLoaded({});
 
     let loadedCount = 0;
     images.forEach((image) => {
@@ -60,12 +71,9 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
           ...prev,
           [image.portfolioId]: true,
         }));
-
         if (loadedCount === images.length) {
           setIsPreloaded(true);
-
           onMasonryReady();
-
         }
       };
     });
@@ -79,21 +87,16 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
       }
     };
 
-    handleResize(); // 先執行一次
+    handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, [currentBreakpoint]);
 
-
-  /* 按讚功能 */
   const handleToggleLike = async (e, image) => {
     e.stopPropagation();
 
-    const portfoliExist =await checkPortfolioIdExists(image.userUid, image.portfolioId);
-    if (!portfoliExist) {
+    const exists = await checkPortfolioIdExists(image.userUid, image.portfolioId);
+    if (!exists) {
       addToast("error", "sorry 該作品已被原作者刪除");
       fetchPainterPortfolios();
       return;
@@ -105,11 +108,13 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     }
 
     try {
-      const response = await togglePortfolioLike(image.userUid, image.portfolioId, currentUser.uid);
-
+      const response = await togglePortfolioLike(
+        image.userUid,
+        image.portfolioId,
+        currentUser.uid
+      );
       if (response.success) {
-        const hasLiked = image.likedBy?.includes(currentUser.uid);
-
+        const hasLiked = likedMap[image.portfolioId];
         setLikeStates((prev) => ({
           ...prev,
           [image.portfolioId]: !hasLiked,
@@ -121,25 +126,36 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     }
   };
 
-  const allUsers = useSelector((state) => state.user.allUsers);
-  const handleImageClick = (image) => {
+  const preloadImage = (src) =>
+    new Promise((resolve) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve;
+      img.src = src;
+    });
+
+  const handleImageClick = async (image) => {
     const user = allUsers[image.userUid] || {};
+    const avatar =
+      user.profileAvatar ||
+      image.artistProfileImg ||
+      "/images/testing-artist-profile-image.png";
+    await Promise.all([
+      preloadImage(image.exampleImageUrl),
+      preloadImage(avatar),
+    ]);
+
     setCurrentData({
       src: image.exampleImageUrl,
       author: user.nickname || image.artistName || "匿名繪師",
-      authorAvatar: user.profileAvatar || image.artistProfileImg || "/images/testing-artist-profile-image.png",
+      authorAvatar: avatar,
       imageStyles: image.selectedStyles || [],
       imageCategory: image.selectedCategory || "未分類",
       imageSource: image.imageSource || "來源不明",
       imageReleaseDate: image.createdAt?.slice(0, 10) || "0000-00-00",
-      innerContextTitle: image.title || "標題未提供",
-      innerContext: image.description || "尚無內文",
       likes: image.likes || 0,
-      comments: image.comments || 0,
-      shares: 0,
-      isCollected: image.collectedBy?.includes(currentUser?.uid),
       articleId: image.articleId || null,
-      userUid: image.userUid || null
+      userUid: image.userUid || null,
     });
     setIsModalOpen(true);
   };
@@ -149,60 +165,71 @@ const MasonryGrid = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setI
     setCurrentData(null);
   };
 
-
   return (
-  <>
-    <Masonry
-      breakpointCols={breakpointColumns}
-      className="masonry-grid"
-      columnClassName="masonry-column"
-    >
-      {images.map((image, index) => (
-        <div key={index} className="masonry-grid-item" onClick={() => handleImageClick(image)} 
-        >
-          <img
-            src={image.exampleImageUrl}
-            alt={`Artwork ${index + 1}`}
-            style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
-          />
+    <>
+      <Masonry
+        breakpointCols={breakpointColumns}
+        className="masonry-grid"
+        columnClassName="masonry-column"
+      >
+        {images.map((image, index) => {
+          const isLiked = likeStates[image.portfolioId] ?? likedMap[image.portfolioId] ?? false;
 
-          {/* 只有當圖片載入後才顯示按鈕 */}
-          {isPreloaded && isMasonryReady && imageLoaded[image.portfolioId] && image.exampleImageUrl && (
-            <>
-              {/* 下載按鈕（僅當 image.download === "是" 時顯示） */}
-              {image.download === "是" && (
-                <div className="masonry-downloadIcon-container">
-                  <img src="/images/download-icon.png" alt="Download" />
-                </div>
-              )}
+          return (
+            <div
+              key={index}
+              className="masonry-grid-item"
+              onClick={() => handleImageClick(image)}
+            >
+              <img
+                src={image.exampleImageUrl}
+                alt={`Artwork ${index + 1}`}
+                style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
+              />
 
-              {/* Like 按鈕 */}
-              <div className="masonry-likesIcon-container"
-                onClick={(e) => handleToggleLike(e, image)}
-              >
-                <img
-                      src={
-                        image.likedBy?.includes(currentUser?.uid)
-                          ? "/images/icons8-love-48-1.png"
-                          : "/images/icons8-love-96-26.png"
-                      }
-                      alt="numberOfLikes"
-                    />
-                <span className="masonry-likes-number"
+              {isPreloaded &&
+                isMasonryReady &&
+                imageLoaded[image.portfolioId] &&
+                image.exampleImageUrl && (
+                  <>
+                    {image.download === "是" && (
+                      <div className="masonry-downloadIcon-container">
+                        <img
+                          src="/images/download-icon.png"
+                          alt="Download"
+                        />
+                      </div>
+                    )}
 
-                >{image.likes}</span>
-              </div>
+                    <div
+                      className="masonry-likesIcon-container"
+                      onClick={(e) => handleToggleLike(e, image)}
+                    >
+                      <img
+                        src={
+                          isLiked
+                            ? "/images/icons8-love-48-1.png"
+                            : "/images/icons8-love-96-26.png"
+                        }
+                        alt="numberOfLikes"
+                      />
+                      <span className="masonry-likes-number">
+                        {image.likes}
+                      </span>
+                    </div>
+                  </>
+                )}
+            </div>
+          );
+        })}
+      </Masonry>
 
-            </>
-          )}
-        </div>
-      ))}
-    </Masonry>
-
-    <ModalImgArtShowcase isOpen={isModalOpen} onClose={handleCloseModal} data={currentData} />
-  </>
-
-
+      <ModalImgArtShowcase
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        data={currentData}
+      />
+    </>
   );
 };
 
