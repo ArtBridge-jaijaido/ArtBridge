@@ -24,6 +24,7 @@ const ArtworkPainterProfilePage = () => {
     const user = useSelector((state) => state.user.allUsers[userUid]) || {};
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
     const artworks = useSelector((state) => state.artwork.artworks);
+    const allUsers = useSelector((state) => state.user.allUsers);
     const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價
     const reviewTotalItems = 30; //總數
     const [isUserLoaded, setIsUserLoaded] = useState(false);
@@ -32,7 +33,7 @@ const ArtworkPainterProfilePage = () => {
         profileImg: false,
     })
     const [artworkCardVisibleItems, setArtworkCardVisibleItems] = useState(10); // 市集
-  
+
     const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio); // 作品集
     // ** 過濾出當前使用者的 portfolio**
     const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
@@ -138,7 +139,7 @@ const ArtworkPainterProfilePage = () => {
                     />
                 </div>
 
-                {masonryVisibleItems < masonryTotalItems &&  masonryTotalItems>9&&(
+                {masonryVisibleItems < masonryTotalItems && masonryTotalItems > 9 && (
                     <button onClick={handleMasonryShowMore} className="artworkPainter-show-more-button" style={{ gridColumn: "span 5", marginTop: "20px" }}>
                         顯示更多
                     </button>
@@ -171,53 +172,62 @@ const ArtworkPainterProfilePage = () => {
         },
         {
             label: "市集",
-            content: (<div className="artworkPainterProfile-Tab-wrapper">
-                <div className="artworkPainterProfile-artworkCard-container">
-                    {filteredArtworks.slice(0, artworkCardVisibleItems).map((artwork, index) => (
-                        <ArtworkCard
-                            key={artwork.artworkId}
-                            imageSrc={artwork.exampleImageUrl}
-                            title={artwork.marketName}
-                            price={artwork.price}
-                            artistProfileImg={artwork.artistProfileImg || "/images/kv-min-4.png"}
-                            artistNickName={artwork.artistNickName || "使用者名稱"}
-                            artistUid={artwork.userUid}
-                            artworkId={artwork.artworkId}
-                            likedby={artwork.likedBy || []}
-                            deadline={`截止日期: ${artwork.endDate}`}
-                        />
-                    ))}
+            content: (
+                <div className="artworkPainterProfile-Tab-wrapper">
+                    <div className="artworkPainterProfile-artworkCard-container">
+                        {filteredArtworks.slice(0, artworkCardVisibleItems).map((artwork, index) => {
+                            const user = allUsers[artwork.userUid];
+                            return (
+                                <ArtworkCard
+                                    key={artwork.artworkId}
+                                    imageSrc={artwork.exampleImageUrl}
+                                    title={artwork.marketName}
+                                    price={artwork.price}
+                                    artistProfileImg={user?.profileAvatar || "/images/kv-min-4.png"}
+                                    artistNickName={user?.nickname || "使用者名稱"}
+                                    artistUid={artwork.userUid}
+                                    artworkId={artwork.artworkId}
+                                    likedby={artwork.likedBy || []}
+                                    deadline={`截止日期: ${artwork.endDate}`}
+                                />
+                            );
+                        })}
+                    </div>
+                    {artworkCardVisibleItems < artworkCardTotalItems && artworkCardTotalItems > 9 && (
+                        <button
+                            onClick={() => setArtworkCardVisibleItems(prev => prev + 10)}
+                            className="artworkPainter-show-more-button"
+                        >
+                            顯示更多
+                        </button>
+                    )}
                 </div>
-                {artworkCardVisibleItems < artworkCardTotalItems && artworkCardTotalItems>9&& (
-                    <button onClick={() => setArtworkCardVisibleItems(prev => prev + 10)} className="artworkPainter-show-more-button">
-                        顯示更多
-                    </button>
-                )}
-            </div>),
+            ),
         },
+
         {
             label: "曾發布文章",
             content: <div className="artworkPainterProfile-Tab-wrapper">
-                <div className="artworkPainterProfile-MasonryArtCommunity-container">          
-                            <div style={{ visibility: isArticleMasonryReady ? "visible" : "hidden" }}>
-                    <MasonryArtCommunity
-                        images={currentArticles}
-                        isPreloaded={isPreloaded}
-                        setIsPreloaded={setIsPreloaded}
-                        isMasonryReady={isArticleMasonryReady}
-                        onMasonryReady={handleArticleMasonryReady}
-                    />
+                <div className="artworkPainterProfile-MasonryArtCommunity-container">
+                    <div style={{ visibility: isArticleMasonryReady ? "visible" : "hidden" }}>
+                        <MasonryArtCommunity
+                            images={currentArticles}
+                            isPreloaded={isPreloaded}
+                            setIsPreloaded={setIsPreloaded}
+                            isMasonryReady={isArticleMasonryReady}
+                            onMasonryReady={handleArticleMasonryReady}
+                        />
                     </div>
-                    {!isArticleMasonryReady&&currentArticles.length!==0? (
-                    <p className="artworkPainterProfile-MasonryArtCommunity-loading"style={{ position: 'absolute', top: 10 }} >文章載入中...</p>
-                    ): currentArticles.length === 0 ? (
+                    {!isArticleMasonryReady && currentArticles.length !== 0 ? (
+                        <p className="artworkPainterProfile-MasonryArtCommunity-loading" style={{ position: 'absolute', top: 10 }} >文章載入中...</p>
+                    ) : currentArticles.length === 0 ? (
                         <div className="artworkPainterProfile-artworkCollectionList-noData" style={{ position: 'absolute', top: 10 }}>
                             目前還沒有發布的文章喔!
                         </div>
                     ) : null
-                }
+                    }
                 </div>
-                {articleVisibleItems < articleMasonryTotalItems && articleMasonryTotalItems>9&& (
+                {articleVisibleItems < articleMasonryTotalItems && articleMasonryTotalItems > 9 && (
                     <button onClick={handleArticleShowMore} className="artworkPainterProfile-show-more-button" style={{ gridColumn: "span 5", marginTop: "20px" }}>
                         顯示更多
                     </button>

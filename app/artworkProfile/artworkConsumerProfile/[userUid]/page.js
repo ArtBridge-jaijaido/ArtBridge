@@ -17,13 +17,14 @@ import "./artworkConsumerProfile.css";
 
 
 
+
 const ArtworkConsumerProfilePage = () => {
     const { userUid } = useParams();
     const { setIsLoading } = useLoading();
     const user = useSelector((state) => state.user.allUsers[userUid]) || {};
     const [isUserLoaded, setIsUserLoaded] = useState(false);
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
-
+    const allUsers = useSelector((state) => state.user.allUsers);
     //文章
     const [isPreloaded, setIsPreloaded] = useState(false);
     const [articleVisibleItems, setArticleVisibleItems] = useState(10); // 文章
@@ -112,11 +113,15 @@ const ArtworkConsumerProfilePage = () => {
             label: "委託",
             content: <div className="ArtworkConsumerProfile-Tab-wrapper">
                 <div className="ArtworkConsumerProfile-artworkEntrustCard-container">
-                    {filteredEntrusts.slice(0, entrustVisibleItems).map((entrust, index) => (
+                    {filteredEntrusts.slice(0, entrustVisibleItems).map((entrust, index) => {
+                        const user=allUsers[entrust.userUid];
+                        return (
                         <ArtworkEntrustCard
                             key={entrust.entrustId}
+                            entrustId={entrust.entrustId}
                             marketName={entrust.marketName}
-                            usernameText={user?.nickname || "使用者名稱"}
+                            entrustNickname={user?.nickname || "使用者名稱"}
+                            entrustProfileImg={user?.profileAvatar|| "/images/kv-min-4.png"}
                             applicationCount={entrust.applicationCount}
                             description={entrust.description}
                             categoryText={entrust.selectedCategory}
@@ -124,7 +129,8 @@ const ArtworkConsumerProfilePage = () => {
                             price={entrust.price}
                             EntrustImageUrl={entrust.exampleImageUrl}
                         />
-                    ))}
+                    );
+                    })}
                 </div>
                 {/* 顯示更多按鈕 */}
                 {entrustVisibleItems < entrustTotalItems && (

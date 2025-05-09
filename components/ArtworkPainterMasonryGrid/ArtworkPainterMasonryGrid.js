@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./ArtworkPainterMasonryGrid.css";
 import { togglePortfolioLike, checkPortfolioIdExists } from "@/services/artworkPortfolioService";
 import { fetchPainterPortfolios } from "@/lib/painterPortfolioListener";
 import { useSelector } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { usePathname } from "next/navigation";
-
+import ModalImgArtShowcase from "@/components/ModalImage/ModalImgArtShowcase.jsx";
 
 const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onUnlike }) => {
   const pathname = usePathname();
@@ -23,9 +23,19 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
   const currentUser = useSelector((state) => state.user.user);
   const [likeStates, setLikeStates] = useState({});
   const { addToast } = useToast();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentData, setCurrentData] = useState(null);
+  const allUsers = useSelector((state) => state.user.allUsers);
 
+  const likedMap = useMemo(() => {
+    const map = {};
+    images.forEach((img) => {
+      const liked = img.likedBy?.includes(currentUser?.uid);
+      map[img.portfolioId] = liked;
+    });
+    return map;
+  }, [images, currentUser?.uid]);
 
-  // **初始化分類計數**
   useEffect(() => {
     if (!images || images.length === 0) return;
 
@@ -40,18 +50,11 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
     setFilteredImages(images);
   }, [images]);
 
-  // **處理篩選變更**
   useEffect(() => {
-    let newFilteredImages;
-    if (selectedFilter === "all") {
-      newFilteredImages = images;
-    } else {
-      newFilteredImages = images.filter((image) => image.selectedCategory === selectedFilter);
-    }
+    let newFilteredImages = selectedFilter === "all" ? images : images.filter((image) => image.selectedCategory === selectedFilter);
 
-    // **開始預載入新篩選結果的圖片**
     setIsPreloaded(false);
-    setImageLoaded({}); // 重置圖片載入狀態
+    setImageLoaded({});
 
     let loadedCount = 0;
     newFilteredImages.forEach((image) => {
@@ -64,7 +67,6 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
           [image.portfolioId]: true,
         }));
 
-        // **當所有篩選結果的圖片載入後才顯示**
         if (loadedCount === newFilteredImages.length) {
           setIsPreloaded(true);
         }
@@ -74,20 +76,13 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
     setFilteredImages(newFilteredImages);
   }, [selectedFilter, images.length]);
 
-  // **更新 Masonry 欄位配置**
   useEffect(() => {
     const updateColumnWidths = () => {
-      if (window.innerWidth <= 370) {
-        setColumnWidths([170, 170]);
-      } else if (window.innerWidth <= 440) {
-        setColumnWidths([190, 190]);
-      } else if (window.innerWidth <= 834) {
-        setColumnWidths([180, 180, 180, 180]);
-      } else if (window.innerWidth <= 1280) {
-        setColumnWidths([240, 240, 240, 240, 240]);
-      } else {
-        setColumnWidths(defaultColumnWidths);
-      }
+      if (window.innerWidth <= 370) setColumnWidths([170, 170]);
+      else if (window.innerWidth <= 440) setColumnWidths([190, 190]);
+      else if (window.innerWidth <= 834) setColumnWidths([180, 180, 180, 180]);
+      else if (window.innerWidth <= 1280) setColumnWidths([240, 240, 240, 240, 240]);
+      else setColumnWidths(defaultColumnWidths);
     };
 
     updateColumnWidths();
@@ -95,26 +90,18 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
     return () => window.removeEventListener("resize", updateColumnWidths);
   }, []);
 
-  // **分配圖片到 Masonry 欄位**
   useEffect(() => {
-    if (!isPreloaded) return; // **確保圖片載入完畢後再處理 Masonry 佈局**
-
+    if (!isPreloaded) return;
     const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
     filteredImages.forEach((image, index) => {
       const columnIndex = index % columnWidths.length;
       newColumnItems[columnIndex].push(image);
     });
-
     setColumnItems(newColumnItems);
   }, [filteredImages, columnWidths, isPreloaded]);
 
-
-  // **切換愛心狀態**
   const handleToggleLike = async (e, image) => {
-
     e.stopPropagation();
-
-
 
     const portfoliExist = await checkPortfolioIdExists(image.userUid, image.portfolioId);
     if (!portfoliExist) {
@@ -130,19 +117,10 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
 
     try {
       const response = await togglePortfolioLike(image.userUid, image.portfolioId, currentUser.uid);
-
       if (response.success) {
-        const hasLiked = image.likedBy?.includes(currentUser.uid);
-
-        if (isCollectionPage) {
-          console.log("isCollectionPage")
-          onUnlike(image.portfolioId);
-        }
-
-        setLikeStates((prev) => ({
-          ...prev,
-          [image.portfolioId]: !hasLiked,
-        }));
+        const hasLiked = likedMap[image.portfolioId];
+        if (isCollectionPage) onUnlike(image.portfolioId);
+        setLikeStates((prev) => ({ ...prev, [image.portfolioId]: !hasLiked }));
       }
     } catch (err) {
       console.error("按讚失敗", err);
@@ -150,7 +128,6 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
     }
   };
 
-  // **下載圖片**
   const downloadImage = (imageUrl, e) => {
     e.stopPropagation();
     const a = document.createElement("a");
@@ -159,48 +136,50 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
     a.click();
   };
 
-  if (!images || images.length === 0) {
-    return <div className="ArtworkPainter-noData">目前還沒有任何作品喔！</div>;
+  const handleImageClick = async (image) => {
+    const user = allUsers[image.userUid] || {};
+    const avatar = user.profileAvatar || image.artistProfileImg || "/images/testing-artist-profile-image.png";
 
-  }
+    setCurrentData({
+      src: image.exampleImageUrl,
+      author: user.nickname || image.artistName || "匿名繪師",
+      authorAvatar: avatar,
+      imageStyles: image.selectedStyles || [],
+      imageCategory: image.selectedCategory || "未分類",
+      imageSource: image.imageSource || "來源不明",
+      imageReleaseDate: image.createdAt?.slice(0, 10) || "0000-00-00",
+      likes: image.likes || 0,
+      articleId: image.articleId || null,
+      userUid: image.userUid || null,
+    });
+    setIsModalOpen(true);
+  };
+
+  if (!images || images.length === 0) return <div className="ArtworkPainter-noData">目前還沒有任何作品喔！</div>;
 
   return (
     <div className="ArtworkPainter-masonry-container">
-      {/* 篩選按鈕 */}
       {!isCollectionPage && (
         <div className="ArtworkPainter-filter">
-          <button
-            className={`ArtworkPainter-filter-button ${selectedFilter === "all" ? "selected" : ""}`}
-            onClick={() => setSelectedFilter("all")}
-          >
-            全部 {images.length}
-          </button>
+          <button className={`ArtworkPainter-filter-button ${selectedFilter === "all" ? "selected" : ""}`} onClick={() => setSelectedFilter("all")}>全部 {images.length}</button>
           {Object.entries(categoryCounts).map(([category, count]) => (
-            <button
-              key={category}
-              className={`ArtworkPainter-filter-button ${selectedFilter === category ? "selected" : ""}`}
-              onClick={() => setSelectedFilter(category)}
-            >
+            <button key={category} className={`ArtworkPainter-filter-button ${selectedFilter === category ? "selected" : ""}`} onClick={() => setSelectedFilter(category)}>
               {category} {count}
             </button>
           ))}
         </div>
       )}
 
-      {/* **只有當圖片完全載入後才顯示 Masonry** */}
       {isPreloaded ? (
         <div className="ArtworkPainter-masonry-grid">
           {columnItems.map((column, columnIndex) => (
             <div key={columnIndex} className="ArtworkPainter-masonry-grid-column" style={{ maxWidth: `${columnWidths[columnIndex]}px` }}>
               {column.map((image, imageIndex) => {
-                const isLiked = likeStates[image.portfolioId] ?? image.likedBy?.includes(currentUser?.uid);
+                const isLiked = likeStates[image.portfolioId] ?? likedMap[image.portfolioId] ?? false;
 
                 return (
-                  <div key={imageIndex} className="ArtworkPainter-masonry-grid-item">
-                    <img
-                      src={image.exampleImageUrl}
-                      alt={`Artwork ${imageIndex + 1}`}
-                    />
+                  <div key={imageIndex} className="ArtworkPainter-masonry-grid-item" onClick={() => handleImageClick(image)}>
+                    <img src={image.exampleImageUrl} alt={`Artwork ${imageIndex + 1}`} />
 
                     {imageLoaded[image.portfolioId] && image.exampleImageUrl && image.download === "是" && !isCollectionPage && (
                       <div className="ArtworkPainter-masonry-downloadIcon-container" onClick={(e) => downloadImage(image.exampleImageUrl, e)}>
@@ -211,11 +190,7 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
                     {imageLoaded[image.portfolioId] && image.exampleImageUrl && (
                       <button className="ArtworkPainter-masonry-likesIcon-container" onClick={(e) => handleToggleLike(e, image)}>
                         <img
-                          src={
-                            isLiked
-                              ? "/images/icons8-love-48-1.png"
-                              : "/images/icons8-love-96-26.png"
-                          }
+                          src={isLiked ? "/images/icons8-love-48-1.png" : "/images/icons8-love-96-26.png"}
                           alt="favorite"
                           className="ArtworkPainter-favorite-icon"
                         />
@@ -224,13 +199,14 @@ const ArtworkPainterMasonryGrid = ({ images, onMasonryReady, isMasonryReady, onU
                   </div>
                 );
               })}
-
             </div>
           ))}
         </div>
       ) : (
         <p>圖片載入中...</p>
       )}
+
+      <ModalImgArtShowcase isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} data={currentData} />
     </div>
   );
 };

@@ -1,0 +1,244 @@
+.ModalImgApplyEntrust-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .ModalImgApplyEntrust-modal {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    font-family: "Noto Sans TC", sans-serif;
+  }
+  
+  .ModalImgApplyEntrust-warning {
+    color: #FF5F5F;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .ModalImgApplyEntrust-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .ModalImgApplyEntrust-entrustInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+  
+  .ModalImgApplyEntrust-profile-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .ModalImgApplyEntrust-title {
+    color: #4F4F4F;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+  
+  .ModalImgApplyEntrust-section {
+    display:flex;
+    flex-direction: column;
+    gap:30px;
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+  
+  .ModalImgApplyEntrust-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #4F4F4F;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+
+  .ModalImgApplyEntrust-input-group {
+    position:relative;
+  }
+
+  .ModalImgApplyEntrust-unit {
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    color: #8C8C8C;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+  
+  .ModalImgApplyEntrust-form input[type="text"],
+  .ModalImgApplyEntrust-form input[type="file"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    padding-right:40px;
+  }
+
+  
+  .ModalImgApplyEntrust-filenames {
+    font-size: 14px;
+    color: #aaa;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .ModalImgApplyEntrust-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    gap: 12px;
+  }
+  
+  .ModalImgApplyEntrust-cancel-btn,
+  .ModalImgApplyEntrust-confirm-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    max-width: 160px;
+    width: 100%;
+  }
+  
+  .ModalImgApplyEntrust-cancel-btn {
+    background-color: #aaa;
+    color: #fff;
+  }
+  
+  .ModalImgApplyEntrust-cancel-btn:hover {
+    background-color: #888;
+  }
+  
+  .ModalImgApplyEntrust-confirm-btn {
+    background-color: #3395ff;
+    color: #fff;
+  }
+  
+  .ModalImgApplyEntrust-confirm-btn:hover {
+    background-color: #1976d2;
+  }
+  
+
+
+  
+/*RWD*/
+
+@media screen and (max-width:440px){
+    .ModalImgApplyEntrust-modal {
+        max-width:320px;
+        padding: 20px 20px;
+    }
+
+    .ModalImgApplyEntrust-warning {
+        font-size: 10px;
+    }
+
+    .ModalImgApplyEntrust-header {
+        margin-bottom:20px;
+    }
+
+    .ModalImgApplyEntrust-entrustInfo {
+        font-size: 12px;
+    }
+
+    .ModalImgApplyEntrust-profile-img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ModalImgApplyEntrust-section {
+        gap: 20px;
+        font-size:12px;
+        margin-bottom: 20px;
+    }
+
+    .ModalImgApplyEntrust-title {
+        font-size: 12px;
+    }
+
+    .ModalImgApplyEntrust-form {
+        font-size: 12px;
+    }
+
+    .ModalImgApplyEntrust-unit {
+        top: 20%;
+        right: 10px;
+        font-size: 12px;
+      }
+
+    .ModalImgApplyEntrust-form input[type="number"],
+    .ModalImgApplyEntrust-form input[type="file"] {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .ModalImgApplyEntrust-filenames {
+        font-size: 10px;
+    }
+
+
+    .ModalImgApplyEntrust-cancel-btn,
+    .ModalImgApplyEntrust-confirm-btn {
+        padding: 6px 0;
+        max-width: 80px;
+        font-size: 12px;
+    }
+}
