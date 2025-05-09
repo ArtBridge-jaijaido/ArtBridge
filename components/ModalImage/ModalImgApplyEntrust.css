@@ -97,14 +97,30 @@
     line-height: normal;
     letter-spacing: 1px;
   }
+
+  .ModalImgApplyEntrust-input-group {
+    position:relative;
+  }
+
+  .ModalImgApplyEntrust-unit {
+    position: absolute;
+    top: 20%;
+    right: 10px;
+    color: #8C8C8C;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
   
-  .ModalImgApplyEntrust-form input[type="number"],
+  .ModalImgApplyEntrust-form input[type="text"],
   .ModalImgApplyEntrust-form input[type="file"] {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 6px;
     width: 100%;
+    padding-right:40px;
   }
 
   
@@ -201,6 +217,12 @@
     .ModalImgApplyEntrust-form {
         font-size: 12px;
     }
+
+    .ModalImgApplyEntrust-unit {
+        top: 20%;
+        right: 10px;
+        font-size: 12px;
+      }
 
     .ModalImgApplyEntrust-form input[type="number"],
     .ModalImgApplyEntrust-form input[type="file"] {
