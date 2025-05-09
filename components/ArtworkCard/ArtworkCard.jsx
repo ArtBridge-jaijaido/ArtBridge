@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
  * @returns 
  */
 
-const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid,artworkId,likedby , onUnlike }) => {
+const ArtworkCard = ({ imageSrc, title, price, artistProfileImg, artistNickName, deadline,artistUid,artworkId,likedby , onUnlike  }) => {
   const pathname = usePathname();
   const isCollectionPage = pathname.includes("artworkCollectionList");
   const [likeStates, setLikeStates] = useState({});

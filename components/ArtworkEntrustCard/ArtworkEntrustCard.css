@@ -230,11 +230,18 @@
   max-width:100%;
 }
 .ArtworkEntrustCard-preview-image {
-  aspect-ratio: 1;
   width:100%;
   max-width:170px;
+  height: 170px;
+  aspect-ratio: 1 / 1; 
   background-color: #636363;
   position: relative;
+}
+
+.ArtworkEntrustCard-preview-image img{
+  width:100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ArtworkEntrustCard-loader {
@@ -255,7 +262,6 @@
   height: 100%;
   object-fit: cover;
 }
-
 
 
 
@@ -299,6 +305,11 @@
       width:10px;
       align-items: center;
   }
+
+  .ArtworkEntrustCard-preview-image {
+    height:130px;
+  }
+
   .ArtworkEntrustCard-user-icon{
       width:24px;
   }
@@ -369,6 +380,10 @@
   .ArtworkEntrustCard-details {
     gap: 12px;
   }
+
+  .ArtworkEntrustCard-preview-image {
+    height:110px;
+  }
 }
 
 
@@ -429,6 +444,10 @@
   .ArtworkEntrustCard-deadline-icon{
       width:12px;
   }
+
+  .ArtworkEntrustCard-preview-image {
+    height:100px;
+  }
   .ArtworkEntrustCard-price-icon{
       width:8px;
       align-items: center;
@@ -487,6 +506,11 @@
   .ArtworkEntrustCard-price-icon{
       width:7px;
   }
+
+  .ArtworkEntrustCard-preview-image {
+    height:90px;
+  }
+
   .ArtworkEntrustCard-user-icon{
       width:14px;
   }
