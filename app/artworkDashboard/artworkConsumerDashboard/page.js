@@ -99,7 +99,7 @@ const ConsumerDashboard = () => {
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-computer-100-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
-              <span>案件管理</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkOrdersManagement")}>案件管理</span>
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkConsumerDashboardIcon" />

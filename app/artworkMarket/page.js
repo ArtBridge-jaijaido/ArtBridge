@@ -222,13 +222,6 @@ const ArtMarketPage = () => {
                                     artistUid={artwork.userUid}
                                     artworkId={artwork.artworkId}
                                     likedby={artwork.likedBy || []}
-                                    painterMilestone={user?.painterMilestone || [
-                                        { label: "0% 支付款項", percent:0, id: 0 },
-                                        { label: "20% 草稿", percent:20, id: 1 },
-                                        { label: "30% 線稿", percent:30, id: 2 },
-                                        { label: "60% 上色", percent:60, id: 3 },
-                                        { label: "100% 完稿", percent:100, id: 4 }
-                                      ]}
                                 />
                             );
                         }) // 

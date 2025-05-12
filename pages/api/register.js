@@ -50,6 +50,15 @@ export default async function handler(req, res) {
         // 生日格式
         const formattedBirthday = birthday ? birthday.replace(/\//g, '-') : "0000-00-00";
 
+        // default painter milestone
+        const painterMilestone = [
+            { label: "0% 支付款項", percent:0, id: 0 },
+            { label: "20% 草稿", percent:20, id: 1 },
+            { label: "30% 線稿", percent:30, id: 2 },
+            { label: "60% 上色", percent:60, id: 3 },
+            { label: "100% 完稿", percent:100, id: 4 }
+          ]
+
         // 將用戶資料儲存到 Firestore
         const userDoc = doc(collection(db, "users"), userId);
         await setDoc(userDoc, {
@@ -65,6 +74,7 @@ export default async function handler(req, res) {
             verificationCodeExpiresAt: new Date(Date.now() + 10 * 60 * 1000), // 驗證碼 10 分鐘後過期
             createdAt: new Date(),
             isEmailCodeVerified: false,
+            painterMilestone: painterMilestone
         });
 
         // 寄送驗證信件

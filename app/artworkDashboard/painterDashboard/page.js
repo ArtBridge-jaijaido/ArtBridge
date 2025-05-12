@@ -113,7 +113,7 @@ const PainterDashboard = () => {
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-computer-100-1.png" alt="icon" className="artworkDashboardIcon" />
-              <span>案件管理</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkOrdersManagement")}>案件管理</span>
 
             </div>
             <div className="PainterDashboard-option-item">
