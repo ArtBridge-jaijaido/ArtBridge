@@ -136,20 +136,20 @@
   .artworkOrderCard-meta {
     flex:4;
     display:flex;
-
+    gap:10px;
     width: 160px;
     text-align: center;
     font-size: 14px;
-    color: #666;
+    color: #8C8C8C;
   }
   
   .artworkOrderCard-vertical-id {
     writing-mode: vertical-rl;
-  text-orientation: upright; 
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: nowrap;
+    text-orientation: upright; 
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: nowrap;
   }
   
   .artworkOrderCard-image {
