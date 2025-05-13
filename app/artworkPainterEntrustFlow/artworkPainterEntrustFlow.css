@@ -68,26 +68,17 @@
 
 /* RWD */
 @media screen and (max-width: 1280px) {
-  .artworkPainterEntrustFlow-page {
-      width: 1280px;
-  }
   .artworkPainterEntrustFlow-tab-button {
     font-size: 20px;
   }
 }
 @media screen and (max-width: 834px) {
-  .artworkPainterEntrustFlow-page {
-      width: 834px;
-  }
   .artworkPainterEntrustFlow-tab-button {
     font-size: 20px;
   }
 }
 
 @media screen and (max-width: 440px) {
-  .artworkPainterEntrustFlow-page {
-      width: 100%;
-  }
 
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;
@@ -106,9 +97,6 @@
 }
 
 @media screen and (max-width: 370px) {
-  .artworkPainterEntrustFlow-page {
-      width: 100%;
-  }
 
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;

@@ -1,0 +1,162 @@
+.artworkNotification-page {
+  max-width: 1440px;
+  width:100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative; /* ✅ 確保不是 fixed */
+  overflow: visible;  /* ✅ 確保可見內容 */
+  padding-left: 65px;
+  padding-right: 65px;
+}
+
+
+.artworkNotification-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.artworkNotification-offset {
+  height: 80px;
+}
+
+
+.artworkNotification-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.artworkNotification-container {
+  max-height: 450px;  /* 可視高度 */
+  max-width: 1310px;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+}
+
+.artworkNotification-headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.artworkNotification-markAllReadBtn {
+  display: flex;
+  width: 100px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+
+  color: #48A8E0;
+  font-family: "Noto Sans TC";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  margin-bottom: 30px;
+}
+
+.artworkNotification-markAllReadBtn:hover {
+  color: #0070f3;
+}
+
+@media screen and (max-width: 1280px) {
+  .artworkNotification-page {
+    gap: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .artworkNotification-title {
+    margin-bottom: 25px;
+    font-size: 20px;
+  }
+  .artworkNotification-markAllReadBtn {
+    width: 100px;
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  .artworkNotification-container {
+    max-height: 420px;  /* 可視高度 */
+  }
+
+}
+
+@media screen and (max-width: 834px) {
+  .artworkNotification-page {
+    gap: 30px;
+    padding-left: 47px;
+    padding-right: 47px;
+  }
+  .artworkNotification-title {
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  .artworkNotification-markAllReadBtn {
+    width: 78px;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .artworkNotification-container {
+    max-height: 420px;  /* 可視高度 */
+  }
+
+}
+@media screen and (max-width: 440px) {
+  .artworkNotification-page {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .artworkNotification-title {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .artworkNotification-markAllReadBtn {
+    width: 60px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .artworkNotification-container {
+    max-height: 280px;  /* 可視高度 */
+  }
+
+  
+}
+@media screen and (max-width: 370px) {
+  .artworkNotification-page {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .artworkNotification-title {
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .artworkNotification-markAllReadBtn {
+    width: 52px;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .artworkNotification-container {
+    max-height: 240px;  /* 可視高度 */
+  }
+
+}
