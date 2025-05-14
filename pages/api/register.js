@@ -52,11 +52,11 @@ export default async function handler(req, res) {
 
         // default painter milestone
         const painterMilestone = [
-            { label: "0% 支付款項", percent:0, id: 0 },
-            { label: "20% 草稿", percent:20, id: 1 },
-            { label: "30% 線稿", percent:30, id: 2 },
-            { label: "60% 上色", percent:60, id: 3 },
-            { label: "100% 完稿", percent:100, id: 4 }
+            { label: "0% 支付款項", percent:0, id: 0, status:"等待中" },
+            { label: "20% 草稿", percent:20, id: 1 , status:"等待中"},
+            { label: "30% 線稿", percent:30, id: 2 , status:"等待中"},
+            { label: "60% 上色", percent:60, id: 3, status:"等待中" },
+            { label: "100% 完稿", percent:100, id: 4 , status:"等待中"}
           ]
 
         // 將用戶資料儲存到 Firestore

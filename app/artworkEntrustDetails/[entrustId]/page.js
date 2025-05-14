@@ -219,12 +219,4 @@ export default function EntrustDetailPage({ params }) {
     );
 
 
-
-
-
-
-
-
-
-
 }

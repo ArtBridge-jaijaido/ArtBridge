@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
-
 import ArtworkEntrustSetTab from "@/components/Tabs/ArtworkEntrustSetTab.jsx";
 import ArtworkEntrustCard from "@/components/ArtworkEntrustCard/ArtworkEntrustCard.jsx";
 import { fetchUserEntrusts } from "@/services/artworkEntrustService";

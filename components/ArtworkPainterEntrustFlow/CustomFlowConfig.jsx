@@ -15,8 +15,8 @@ const CustomFlowConfig = () => {
   const dispatch = useDispatch();
 
   const baseMilestones = [
-    { label: "0% 支付款項", percent: 0 },
-    { label: "100% 完稿", percent: 100 }
+    { label: "0% 支付款項", percent: 0, status:"等待中" },
+    { label: "100% 完稿", percent: 100, status:"等待中" }
   ];
 
   const extractInputsFromMilestones = (milestones) =>
@@ -53,9 +53,9 @@ const CustomFlowConfig = () => {
 
   const applyOfficialFlow = () => {
     const officialInputs = [
-      { percent: "20", name: "草稿" },
-      { percent: "30", name: "線稿" },
-      { percent: "60", name: "上色" }
+      { percent: "20", name: "草稿" , status:"等待中"},
+      { percent: "30", name: "線稿" , status:"等待中"},
+      { percent: "60", name: "上色", status:"等待中" }
     ];
     setInputs(officialInputs);
     syncMilestonesFromInputs(officialInputs);

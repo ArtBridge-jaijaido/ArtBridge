@@ -1,43 +1,37 @@
+"use client";
+import { useEffect } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkOrderManagementTabs from '@/components/Tabs/ArtworkOrderManagementTab';
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
 import "./consumerOrdersManagement.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 const ConsumerOrdersManagementPage = () => {
+  
 
+    const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
 
+  
+  
     const tabs = [
         {
             label: "目前案件",
             content:
                 <div className="ConsumerOrdersManagement-currentCase-container">
+                  {artworkOrders.map((order, index) => (
                     <ArtworkOrderCard
-                        orderIndex="1"
-                        statusLabel="等待承接"
-                        OrderTitle="封面插畫"
-                        OrderSource="我的邀約 / 繪師應徵"
-                        OrderEndDate="2025/01/05 ~ 2025/02/05"
-                        orderId="00000000"
-                        imageUrl=""
+                        key={order.artworkOrderId}
+                        orderIndex={index + 1}
+                        statusLabel={order.status}
+                        OrderTitle={order.marketName}
+                        OrderSource={order.orderSource}
+                        OrderEndDate={order.endDate}
+                        orderId={order.artworkOrderId}
+                        imageUrl={order.exampleImageUrl || ""}
                     />
-                    <ArtworkOrderCard
-                        orderIndex="2"
-                        statusLabel="進行中"
-                        OrderTitle="角色設計"
-                        OrderSource="我的邀約 / 繪師應徵"
-                        OrderEndDate="2025/03/01 ~ 2025/04/01"
-                        orderId="00000000"
-                        imageUrl=""
-                    />
-                    <ArtworkOrderCard
-                        orderIndex="3"
-                        statusLabel="準時完成"
-                        OrderTitle="角色設計"
-                        OrderSource="我的邀約 / 繪師應徵"
-                        OrderEndDate="2025/03/05 ~ 2025/04/11"
-                        orderId="00000000"
-                        imageUrl=""
-                    />
+                ))}
                 </div>,
         },
         {
