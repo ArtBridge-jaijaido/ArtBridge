@@ -13,9 +13,11 @@ import "./artworkUploadEntrust.css";
 import { useSelector } from "react-redux";
 import { uploadEntrust } from "@/services/artworkEntrustService";
 import { createOrderFromEntrust } from "@/services/artworkOrderService.js";
+import {updateEntrustLinkedOrderId } from "@/services/artworkEntrustService.js";
 import { useDispatch } from "react-redux";
 import { addEntrust } from "@/app/redux/feature/entrustSlice"
 import { addArtworkOrder } from "@/app/redux/feature/artworkOrderSlice";
+
 
 const ArtworkUploadEntrustPage = () => {
   const dispatch = useDispatch();
@@ -71,12 +73,24 @@ const ArtworkUploadEntrustPage = () => {
       const orderResponse = await createOrderFromEntrust(response.entrustData);
       if (orderResponse.success) {
         dispatch(addArtworkOrder(orderResponse.orderData)); 
+        const createdOrder = orderResponse.orderData;
+        
+        addToast("success", "已發佈您的委託！");
+        setStep(6);
+
+        // 更新 artworkOrder 的 id 到 entrust
+        try {
+          await updateEntrustLinkedOrderId(userUid, createdOrder.fromEntrustId, createdOrder.artworkOrderId);
+        } catch (err) {
+          console.error(" linkedOrderId 更新失敗", err);
+         
+        }
       } else {
         console.error("建立 artworkOrder 失敗", orderResponse.message);
         addToast("error", "建立案件管理資料失敗");
       }
-      addToast("success", "已發佈您的委託！");
-      setStep(6);
+     
+     
     } else {
       addToast("error", "發佈失敗，請稍後再試！");
     }

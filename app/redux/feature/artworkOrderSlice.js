@@ -30,6 +30,14 @@ const artworkOrderSlice = createSlice({
                 };
             }
         },
+
+        deleteArtworkOrder: (state, action) => {
+            const orderIdToDelete = action.payload;
+            state.artworkOrders = state.artworkOrders.filter(
+              (order) => order.artworkOrderId !== orderIdToDelete
+            );
+          },
+          
         setLoading: (state, action) => {
             state.loading = action.payload;
           },
@@ -45,6 +53,7 @@ export const {
   setArtworkOrders,
   addArtworkOrder,
   updateArtworkOrder,
+  deleteArtworkOrder,
   setLoading,
   setError,
   } = artworkOrderSlice.actions;

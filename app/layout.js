@@ -62,7 +62,6 @@ export default function RootLayout({ children }) {
     const unsubscribeAuthState = onAuthStateChanged(auth, async (user) => {
       if (user) {
 
-      
         const unsubscribe = subscribeToConsumerOrders(user.uid);
         setUnsubscribeConsumerOrders(() => unsubscribe);
         
@@ -73,7 +72,7 @@ export default function RootLayout({ children }) {
         }
       } else {
         setToken(null);
-        if (unsubscribeConsumerOrders) unsubscribeConsumerOrders(); // ✅ 清除 listener
+        if (unsubscribeConsumerOrders) unsubscribeConsumerOrders(); //  清除 listener
         setUnsubscribeConsumerOrders(null);
       }
     });

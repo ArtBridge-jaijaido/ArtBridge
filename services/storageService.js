@@ -12,3 +12,12 @@ export const uploadImage = async (file, path) => {
     return null;
   }
 };
+
+
+export const uploadPainterResumePdf = async (file, orderId, painterUid) => {
+  const path = `artworkOrders/${orderId}/applicants/${painterUid}/resume.pdf`;
+  const fileRef = ref(storage, path);
+  await uploadBytes(fileRef, file);
+  const url = await getDownloadURL(fileRef);
+  return url;
+};

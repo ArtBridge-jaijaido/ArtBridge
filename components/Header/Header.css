@@ -151,13 +151,13 @@
 .header-user-dropdownMenu-container {
     position:relative;
     cursor:pointer;
-   
+     
+  
 }
 
 .header-user-dropdownMenu-container span{
 
-    
-    
+  
     color: #80D2FF;
     text-align: center;
     font-family: Inter;
