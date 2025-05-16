@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import "./ArtworkOrderCard.css";
+import { useNavigation } from "@/lib/functions.js";
+import { useLoading } from "@/app/contexts/LoadingContext.js";
 
 const ArtworkOrderCard = ({
     orderIndex = "",
@@ -11,6 +13,18 @@ const ArtworkOrderCard = ({
     orderId = "",
     imageUrl = "",
 }) => {
+
+    const navigate = useNavigation();
+    const { setIsLoading } = useLoading();
+
+    const handleNavigateTo = (e) => {
+        e.stopPropagation();
+        const targetPath =  `/artworkOrdersManagement/consumerOrdersManagement/entrustApplicants/${orderId}`;
+        navigate(targetPath);
+        setIsLoading(true);
+        setTimeout(() => setIsLoading(false), 1000);
+    }
+
     return (
         <div className="artworkOrderCard-wrapper">
             <div className="artworkOrderCard-status">
@@ -50,7 +64,7 @@ const ArtworkOrderCard = ({
                     <p><strong className="label">名稱</strong> {OrderTitle}</p>
                     <p><strong className="label">來源</strong> {OrderSource}</p>
                     <p><strong className="label">日期</strong> {OrderEndDate}</p>
-                    <button className="artworkOrderCard-link">
+                    <button className="artworkOrderCard-link" onClick={handleNavigateTo}>
                         查看應徵資訊
                     </button>
                 </div>

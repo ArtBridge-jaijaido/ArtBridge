@@ -91,28 +91,41 @@ export const updateArtworkOrder = async (orderId, updateData) => {
     await updateDoc(orderRef, updateData);
 };
 
-
-// 刪除訂單
+  
+//  刪除訂單服務
 export const deleteArtworkOrderFromService = async (orderId) => {
-    try {
-      // 刪除 Firestore 文件
-      const orderRef = doc(db, "artworkOrders", orderId);
-      await deleteDoc(orderRef);
+try {
+    // 刪除 Firestore 訂單文件
+    const orderRef = doc(db, "artworkOrders", orderId);
+    await deleteDoc(orderRef);
+
+    // 刪除 Storage 中對應資料夾（包括 applicants）
+    const basePath = `artworkOrders/${orderId}`;
+    await deleteFolderRecursive(basePath);
+
+    console.log(" 已刪除訂單與相關圖片");
+    return { success: true, message: "訂單刪除成功" };
+} catch (error) {
+    console.error(" 刪除訂單失敗:", error);
+    return { success: false, message: error.message };
+}
+};
+
+
+// 刪除資料夾底下的子資料夾
+const deleteFolderRecursive = async (folderPath) => {
+    const folderRef = ref(storage, folderPath);
+    const listResult = await listAll(folderRef);
   
-      // 刪除 Storage 圖片（exampleImage 與 supplementaryImages）
-      const basePath = `artworkOrders/${orderId}`;
-      const folderRef = ref(storage, basePath);
+    // 刪除所有檔案
+    const deleteFiles = listResult.items.map((itemRef) => deleteObject(itemRef));
   
-      const listResult = await listAll(folderRef);
-      const deletePromises = listResult.items.map((itemRef) => deleteObject(itemRef));
-      await Promise.all(deletePromises);
+    // 遞迴刪除所有子資料夾
+    const deleteSubfolders = listResult.prefixes.map((subfolderRef) =>
+      deleteFolderRecursive(subfolderRef.fullPath)
+    );
   
-      console.log(" 已刪除訂單與相關圖片");
-      return { success: true, message: "訂單刪除成功" };
-    } catch (error) {
-      console.error("刪除訂單失敗:", error);
-      return { success: false, message: error.message };
-    }
+    await Promise.all([...deleteFiles, ...deleteSubfolders]);
   };
 
 
@@ -173,6 +186,25 @@ export const handlePainterApplyEntrust = async ({
     });
   };
 
+// fetch Entrust painter applicants
+export const fetchEntrustPainterApplicants = async (orderId) => {
+    try {
+      const orderRef = doc(db, "artworkOrders", orderId);
+      const orderSnap = await getDoc(orderRef);
+  
+      if (!orderSnap.exists()) {
+        throw new Error("找不到該訂單");
+      }
+  
+      const orderData = orderSnap.data();
+      const applicants = orderData.applicants || [];
+  
+      return applicants;
+    } catch (error) {
+      console.error("❌ 取得應徵者資料失敗:", error);
+      return [];
+    }
+  };
 
 
 // 訂單編號生成器

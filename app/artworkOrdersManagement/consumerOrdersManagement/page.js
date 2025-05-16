@@ -13,7 +13,7 @@ const ConsumerOrdersManagementPage = () => {
 
     const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
 
-  
+    console.log("ConsumerOrdersManagementPage artworkOrders:", artworkOrders);
   
     const tabs = [
         {
