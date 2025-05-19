@@ -12,6 +12,10 @@
     width: 20%; 
     
   }
+
+  .painterMilestoneProgress-wrapper.last {
+    width: 8%;
+  }
   
   .painterMilestoneProgress-item {
   

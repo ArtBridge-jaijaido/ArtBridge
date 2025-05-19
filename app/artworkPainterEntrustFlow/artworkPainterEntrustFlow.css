@@ -90,9 +90,13 @@
 }
 
 @media screen and (max-width: 440px) {
+
+  .artworkPainterEntrustFlow-page {
+    width: 100%;
+  }
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;
-      justify-content: flex-start; /* ✅ 靠左對齊 */
+      justify-content: flex-start; 
       padding-left: 0px;
   }
 

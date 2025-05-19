@@ -12,6 +12,7 @@
   font-family: "Noto Sans TC";
 }
 
+/* 不再需要 
 .customFlowConfig-list {
   display: flex;
   flex-wrap: nowrap;
@@ -81,6 +82,12 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   word-break: break-word;
+} */
+
+.customFlowConfig-painterMilestoneProgress-container{
+  width:100%;
+  margin-top:60px;
+  margin-bottom:60px;
 }
 
 /* === CustomFlowConfig.css === */
@@ -250,14 +257,14 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .customFlowConfig-circle {
+  /* .customFlowConfig-circle {
     width: 30px;
     height: 30px;
   }
   .customFlowConfig-percent,
   .customFlowConfig-label {
     font-size: 24px;
-  }
+  } */
   .customFlowConfig-add-icon {
     width: 34px;
     height: 34px;
@@ -297,7 +304,7 @@
 }
 
 @media screen and (max-width: 834px) {
-  .customFlowConfig-circle {
+  /* .customFlowConfig-circle {
     width: 26px;
     height: 26px;
   }
@@ -310,7 +317,7 @@
     width: 42px;
     height: 40px;
     -webkit-line-clamp: 2;
-  }
+  } */
   .customFlowConfig-add-icon {
     width: 30px;
     height: 30px;
@@ -357,7 +364,7 @@
 }
 
 @media screen and (max-width: 440px) {
-  .customFlowConfig-circle {
+  /* .customFlowConfig-circle {
     width: 12px;
     height: 12px;
   }
@@ -370,7 +377,7 @@
     width: 34px;
     height: 32px;
     -webkit-line-clamp: 2;
-  }
+  } */
   .customFlowConfig-add-icon {
     width: 20px;
     height: 20px;
@@ -414,7 +421,7 @@
 }
 
 @media screen and (max-width: 370px) {
-  .customFlowConfig-circle {
+  /* .customFlowConfig-circle {
     width: 12px;
     height: 12px;
   }
@@ -426,7 +433,7 @@
     line-height: 16px;
     width: 34px;
     height: 32px;
-  }
+  } */
   .customFlowConfig-add-icon {
     width: 20px;
     height: 20px;

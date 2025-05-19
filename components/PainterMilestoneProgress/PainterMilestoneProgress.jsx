@@ -10,7 +10,10 @@ const PainterMilestoneProgress = ({ milestones }) => {
         const isLast = index === milestones.length - 1;
 
         return (
-          <div className="painterMilestoneProgress-wrapper" key={milestone.id}>
+          <div
+          className={`painterMilestoneProgress-wrapper ${isLast ? 'last' : ''}`}
+          key={milestone.id}
+        >
             <div className="painterMilestoneProgress-item">
               <div className="painterMilestoneProgress-percent">{percent}</div>
               <div className="painterMilestoneProgress-circle" />
