@@ -63,7 +63,7 @@ const ArtworkOrderCard = ({
                 <div className="artworkOrderCard-info">
                     <p><strong className="label">名稱</strong> {OrderTitle}</p>
                     <p><strong className="label">來源</strong> {OrderSource}</p>
-                    <p><strong className="label">日期</strong> {OrderEndDate}</p>
+                    <p><strong className="label">日期</strong> 2025/01/05~2025/02/05</p>
                     <button className="artworkOrderCard-link" onClick={handleNavigateTo}>
                         查看應徵資訊
                     </button>

@@ -13,27 +13,30 @@ const ConsumerOrdersManagementPage = () => {
 
     const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
 
-    console.log("ConsumerOrdersManagementPage artworkOrders:", artworkOrders);
+ 
   
     const tabs = [
         {
             label: "目前案件",
-            content:
-                <div className="ConsumerOrdersManagement-currentCase-container">
-                  {artworkOrders.map((order, index) => (
+            content: (
+              <div className="ConsumerOrdersManagement-currentCase-container">
+                {[...artworkOrders]
+                  .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+                  .map((order, index) => (
                     <ArtworkOrderCard
-                        key={order.artworkOrderId}
-                        orderIndex={index + 1}
-                        statusLabel={order.status}
-                        OrderTitle={order.marketName}
-                        OrderSource={order.orderSource}
-                        OrderEndDate={order.endDate}
-                        orderId={order.artworkOrderId}
-                        imageUrl={order.exampleImageUrl || ""}
+                      key={order.artworkOrderId}
+                      orderIndex={index + 1}
+                      statusLabel={order.status}
+                      OrderTitle={order.marketName}
+                      OrderSource={order.orderSource}
+                      OrderEndDate={order.endDate}
+                      orderId={order.artworkOrderId}
+                      imageUrl={order.exampleImageUrl || ""}
                     />
-                ))}
-                </div>,
-        },
+                  ))}
+              </div>
+            ),
+          },
         {
             label: "歷史案件",
             content: <div>Consumer歷史案件內容</div>,

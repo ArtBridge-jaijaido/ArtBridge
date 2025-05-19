@@ -22,6 +22,28 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    gap:10px;
+}
+
+.entrustApplicants-back-button img {
+    width: 28px;
+    height: 28px;
+}
+
+.entrustApplicants-back-button span{
+    color: #8BB7F0;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
 }
 
 .entrustApplicants-applicants-container{

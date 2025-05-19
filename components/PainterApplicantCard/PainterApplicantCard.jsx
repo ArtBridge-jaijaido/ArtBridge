@@ -14,7 +14,9 @@ const PainterApplicantCard = ({
 }) => {
   return (
     <div className="PainterApplicantCard-wrapper">
-      <div className="PainterApplicantCard-header-buttom">選定繪師</div>
+      <div className="PainterApplicantCard-header-buttom">
+        選定繪師
+      </div>
 
       <div className="PainterApplicantCard-body-grid">
         {/* 左側區塊 */}

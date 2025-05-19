@@ -9,7 +9,7 @@
     position: relative;
     width:100%;
     max-width:660px;
-    
+  
   }
   
   .artworkOrderCard-status {
@@ -17,7 +17,7 @@
     display:flex;
     gap:12px;
     top:-16px;
-    left:-10;
+    left:-18px;
     
   }
   
@@ -30,11 +30,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
    
   }
 
@@ -58,7 +58,7 @@
     justify-content: center;
     background-color: #94A0DB;
     color: white;
-    padding: 4px 12px;
+
     border-radius: 5px;
     font-size: 16px;
     font-style: normal;
@@ -84,6 +84,7 @@
     display: flex;
     justify-content: space-between;
     gap: 12px;
+    flex-wrap: wrap;
   }
   
   .artworkOrderCard-info {
@@ -91,6 +92,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    word-break: break-word;
     flex: 6;
   }
   
@@ -102,6 +104,7 @@
     line-height: normal;
     letter-spacing: 1px;
     color: #8C8C8C;
+    
   }
   
   .artworkOrderCard-info .label {
@@ -112,6 +115,7 @@
     line-height: normal;
     letter-spacing: 1px;
     margin-right: 8px;
+
   }
   
   .artworkOrderCard-link {
@@ -137,10 +141,8 @@
     flex:4;
     display:flex;
     gap:10px;
-    width: 160px;
     text-align: center;
-    font-size: 14px;
-    color: #8C8C8C;
+    
   }
   
   .artworkOrderCard-vertical-id {
@@ -150,12 +152,14 @@
     font-size: 14px;
     line-height: 1.6;
     white-space: nowrap;
+    color: #8C8C8C;
   }
   
   .artworkOrderCard-image {
+    width:100%;
     margin-top: 8px;
-    width: 230px;
-    height:230px;
+    max-width: 230px;
+ 
     aspect-ratio: 1/1;
     border: 1px dashed #ccc;
     border-radius: 4px;
@@ -179,3 +183,178 @@
     line-height: 1.4;
   }
   
+/*Rwd*/
+@media screen and (max-width:1280px){
+
+  .artworkOrderCard-wrapper {
+    padding: 35px 20px;
+    max-width:570px;
+  }
+
+  .artworkOrderCard-status {
+
+    left:-14px;
+  }
+
+  .artworkOrderCard-index {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .artworkOrderCard-label{
+    
+    height: 28px;
+    font-size:14px;
+  }
+
+  .artworkOrderCard-info p {
+    font-size: 16px;
+  }
+
+  .artworkOrderCard-info .label {
+    font-size: 16px;
+  }
+
+  .artworkOrderCard-link {
+    font-size: 16px;
+  }
+
+  .artworkOrderCard-meta {
+    gap:6px;
+  }
+
+  .artworkOrderCard-vertical-id {
+    font-size: 12px;
+  }
+
+  .artworkOrderCard-image {
+    max-width: 180px;
+    
+  }
+
+  .artworkOrderCard-image-placeholder {
+    font-size: 12px;
+  }
+
+
+}
+
+
+@media screen and (max-width:440px){
+  .artworkOrderCard-wrapper {
+    padding: 25px 15px;
+    max-width:400px;
+  }
+
+
+  .artworkOrderCard-status {
+
+    top:-12px;
+    left:-12px;
+  }
+
+  .artworkOrderCard-label {
+    width: 86px;
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  .artworkOrderCard-index {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .artworkOrderCard-info p {
+    font-size: 12px;
+  }
+
+
+  .artworkOrderCard-info .label {
+    font-size: 12px;
+  }
+
+  .artworkOrderCard-link {
+    font-size: 12px;
+  }
+
+  .artworkOrderCard-meta {
+    gap:4px;
+  }
+
+  .artworkOrderCard-vertical-id {
+    font-size: 10px;
+  }
+
+
+  .artworkOrderCard-image {
+    max-width: 150px;
+    
+  }
+
+  .artworkOrderCard-image-placeholder {
+    font-size: 10px;
+  }
+
+
+}
+
+@media screen and (max-width:370px){
+  .artworkOrderCard-wrapper {
+    padding: 15px 10px;
+    
+  }
+
+
+  .artworkOrderCard-status {
+
+    top:-12px;
+    left:-12px;
+  }
+
+  .artworkOrderCard-label {
+    width: 70px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .artworkOrderCard-index {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .artworkOrderCard-info p {
+    font-size: 10px;
+  }
+
+
+  .artworkOrderCard-info .label {
+    font-size: 10x;
+  }
+
+  .artworkOrderCard-link {
+    font-size: 10px;
+  }
+
+  .artworkOrderCard-meta {
+    gap:2px;
+  }
+
+  .artworkOrderCard-vertical-id {
+    font-size: 9px;
+  }
+
+
+  .artworkOrderCard-image {
+    max-width: 130px;
+    
+  }
+
+  .artworkOrderCard-image-placeholder {
+    font-size: 8px;
+  }
+
+
+}

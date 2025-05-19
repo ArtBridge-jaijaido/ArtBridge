@@ -28,7 +28,8 @@ const EntrustApplicantsPage = () => {
     <div className="entrustApplicants-page">
     <div className="entrustApplicants-button-container">
       <button className="entrustApplicants-back-button" onClick={() => router.back()}>
-        ← 返回案件管理
+        <img src="/images/icons8-return-80.png" alt="Back" />
+        <span>返回</span>
       </button>
     </div>
 

@@ -24,3 +24,44 @@
     gap:30px;
   
 }
+
+
+
+
+@media screen and (max-width:834px){
+
+    .ConsumerOrdersManagement-currentCase-container{
+    
+        grid-template-columns: 1fr;
+        gap:30px;
+      
+    }
+}
+
+
+@media screen and (max-width:768px){
+
+    .consumerOrdersManagementPage{
+       
+        width:768px;
+      
+        
+    }
+
+}
+
+
+@media screen and (max-width:440px){
+
+    .consumerOrdersManagementPage{
+       
+        width:100%;
+    
+        
+    }
+
+    .consumerOrdersManagement-tab-container{
+        padding:0px 0px;
+    }
+
+}

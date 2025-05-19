@@ -26,7 +26,7 @@ const ArtworkOrderManagementTabs = ({ tabs}) => {
             switch (tab.label) {
               case "目前案件":
                 return (
-                  <div key={tab.label} className="ArtworkOrderManagement-tab-panel">
+                  <div key={tab.label} className="ArtworkOrderManagement-tab-panel ">
                      {tab.content}
                     </div>
                 );

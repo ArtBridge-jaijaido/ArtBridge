@@ -114,7 +114,7 @@
     }
 
     .ArtworkOrderManagement-tab-content {
-        padding: 10px 0px;
+        padding: 30px 0px;
     }
 
 
@@ -125,4 +125,16 @@
 
 }
 
-@media screen and (max-width: 375px) {}
+@media screen and (max-width: 375px) {
+
+    .ArtworkOrderManagement-tabs {
+        gap: 10px;
+    }
+
+    .ArtworkOrderManagement-tab.active:after {
+    
+        width: calc(100% + 15px);
+     
+    }
+
+}
