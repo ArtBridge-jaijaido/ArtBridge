@@ -1,0 +1,57 @@
+.ArtworkNotificationList-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ArtworkNotificationList-loadMoreBtn {
+  display: flex;
+  max-width: 135px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self:center;
+
+  color: #48A8E0;
+  font-family: "Noto Sans TC";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.ArtworkNotificationList-loadMoreBtn:hover {
+  color: #0070f3;
+}
+
+@media screen and (max-width: 1280px) {
+  .ArtworkNotificationList-loadMoreBtn {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 834px) {
+  .ArtworkNotificationList-loadMoreBtn {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 440px) {
+  .ArtworkNotificationList-loadMoreBtn {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 370px) {
+  .ArtworkNotificationList-loadMoreBtn {
+    font-size: 10px;
+  }
+}
