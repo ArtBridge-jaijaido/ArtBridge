@@ -68,14 +68,25 @@
 
 /* RWD */
 @media screen and (max-width: 1280px) {
+
   .artworkPainterEntrustFlow-tab-button {
     font-size: 20px;
   }
 }
+
 @media screen and (max-width: 834px) {
+
+
   .artworkPainterEntrustFlow-tab-button {
     font-size: 20px;
   }
+}
+
+@media screen and (max-width: 768px) {
+
+  .artworkPainterEntrustFlow-page {
+    width: 768px;
+}
 }
 
 @media screen and (max-width: 440px) {

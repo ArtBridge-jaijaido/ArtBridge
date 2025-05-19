@@ -10,11 +10,14 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import ModalImgBuyArtwork from "@/components/ModalImage/ModalImgBuyArtwork.jsx";
 import Masonry from "react-masonry-css";
+import PainterMilestoneProgress from "@/components/PainterMilestoneProgress/PainterMilestoneProgress.jsx";
 import "./artworkDetails.css";
+
 
 export default function ArtworkDetailPage({ params }) {
 
     const currentUser = useSelector((state) => state.user.user);
+    const allUsers = useSelector((state) => state.user.allUsers);
     const [likeStates, setLikeStates] = useState({});
     const searchParams = useSearchParams();
     const { artworkId } = use(params);
@@ -28,6 +31,9 @@ export default function ArtworkDetailPage({ params }) {
     //  狀態儲存 Firestore 抓到的 artwork 資料
     const [artwork, setArtwork] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [painterMilestone, setPainterMilestone] = useState([]);
+
+    
 
     const isLiked = likeStates[artworkId] ?? artwork?.likedBy?.includes(currentUser?.uid);
     const hasReported = artwork?.reportedBy?.includes(currentUser?.uid);
@@ -44,11 +50,20 @@ export default function ArtworkDetailPage({ params }) {
         const fetchData = async () => {
             const data = await fetchArtworkById(artworkId);
             setArtwork(data);
+
+            // 同步找出該畫師的 milestone
+            const artist = allUsers[data.userUid];
+            if (artist?.painterMilestone) {
+            setPainterMilestone(artist.painterMilestone);
+            }
+            
             setLoading(false);
         };
 
         fetchData();
     }, [artworkId]);
+
+   
 
     /*toggle like*/
     const handleToggleLike = async (e) => {
@@ -302,6 +317,10 @@ export default function ArtworkDetailPage({ params }) {
             {/* 流程圖 */}
             <div className="artworkDetails-section">
                 <h2>流程圖</h2>
+
+                <div className="artworkDetails-progress-container">
+                    <PainterMilestoneProgress milestones={painterMilestone} />
+                </div>
             </div>
 
             {/* 補充資訊 */}

@@ -1,0 +1,169 @@
+.PainterApplicantCard-wrapper {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 50px;
+  background-color: #fff;
+  font-family: "Noto Sans TC", sans-serif;
+  margin-bottom: 20px;
+  max-width:600px;
+  width:100%;
+  height:300px;
+
+}
+
+.PainterApplicantCard-header-buttom {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background-color: #2DAEF4;
+  color: white;
+  padding: 4px 12px;
+  width:120px;
+  height:35px;
+  border-radius: 10px;
+  color: #FFF;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  cursor:pointer;
+}
+
+/* Grid: 左右區塊 */
+.PainterApplicantCard-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 左側內容 */
+.PainterApplicantCard-left {
+  display: flex;
+  flex-direction: column;
+  gap:30px;
+}
+
+.PainterApplicantCard-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+.PainterApplicantCard-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.PainterApplicantCard-nickname {
+  color: #2DAEF4;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.PainterApplicantCard-info {
+  display:flex;
+  flex-direction: column;
+  gap:30px;
+  font-size: 14px;
+  color: #333;
+}
+
+.PainterApplicantCard-info a {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+/* 右側統計區與月份按鈕 */
+.PainterApplicantCard-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.PainterApplicantCard-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.PainterApplicantCard-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap:10px;
+}
+
+.PainterApplicantCard-statValue {
+  color: #707070;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.PainterApplicantCard-statValue.blue {
+  color: #3498db;
+}
+
+/* 月份區塊：3 欄 Grid */
+.PainterApplicantCard-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px 30px;
+  
+}
+
+.PainterApplicantCard-monthBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px 2px 1px 1px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #707070;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 3px;
+  cursor: default;
+  max-width:80px;
+  width:100%;
+  height:40px;
+}
+
+.PainterApplicantCard-monthBtn.green {
+  border-bottom: 3px solid #2ecc71;
+}
+
+.PainterApplicantCard-monthBtn.red {
+  border-bottom: 3px solid #e74c3c;
+}
+
+.PainterApplicantCard-monthBtn.gray {
+  border-bottom: 3px solid #aaa;
+}

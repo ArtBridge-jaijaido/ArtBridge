@@ -1,0 +1,54 @@
+
+.entrustApplicants-page{
+    position: relative;
+    width:100%;
+    max-width:1440px;
+    padding: 100px 30px 20px 30px; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+}
+
+.entrustApplicants-button-container{
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+}
+
+.entrustApplicants-back-button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap:10px;
+}
+
+.entrustApplicants-back-button img {
+    width: 28px;
+    height: 28px;
+}
+
+.entrustApplicants-back-button span{
+    color: #8BB7F0;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.entrustApplicants-applicants-container{
+    width:100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top:60px;
+}

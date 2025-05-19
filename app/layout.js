@@ -10,6 +10,7 @@ import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import { subscribeToEntrusts } from "@/lib/entrustListener";
+import { subscribeToConsumerOrders } from "@/lib/artworkOrdersListener";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -40,6 +41,7 @@ const notoSansTC = Noto_Sans_TC({
 export default function RootLayout({ children }) {
   const [token, setToken] = useState(null);
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
+  const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
 
   //  透過 API 獲取 HttpOnly Cookie 內的 token
   const fetchToken = async () => {
@@ -59,12 +61,19 @@ export default function RootLayout({ children }) {
 
     const unsubscribeAuthState = onAuthStateChanged(auth, async (user) => {
       if (user) {
+
+        const unsubscribe = subscribeToConsumerOrders(user.uid);
+        setUnsubscribeConsumerOrders(() => unsubscribe);
+        
+
         const newToken = await user.getIdToken();
         if (!token || token !== newToken) {      
           fetchToken(); 
         }
       } else {
         setToken(null);
+        if (unsubscribeConsumerOrders) unsubscribeConsumerOrders(); //  清除 listener
+        setUnsubscribeConsumerOrders(null);
       }
     });
 
@@ -79,7 +88,7 @@ export default function RootLayout({ children }) {
     const unsubscribePainterArticles = subscribeToPainterArticles();
     const unsubscribeUsers = subscribeToAllUsers();
     const unsubscribeEntrusts = subscribeToEntrusts();
-  
+   
     setUnsubscribeAllUsers(() => unsubscribeUsers);
     console.log("🔥 監聽到用戶變更...");
     
@@ -90,6 +99,7 @@ export default function RootLayout({ children }) {
       unsubscribePainterArticles();
       unsubscribeUsers();
       unsubscribeEntrusts();
+    
     };
 
 

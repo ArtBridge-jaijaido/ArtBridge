@@ -3,6 +3,7 @@ import { ref, listAll, deleteObject } from "firebase/storage";
 import {
   collectionGroup,
   collection,
+  updateDoc,
   getDoc,
   setDoc,
   getDocs,
@@ -31,7 +32,7 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
       );
     }
 
-    // 上傳補充圖片（如有）
+    // 上傳補充圖片
     const supplementaryImages = formData.supplementaryImages || [];
 
     const supplementaryImageUrls = await Promise.all(
@@ -67,6 +68,24 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
   }
 };
 
+
+/**
+ * link id between entrust and order
+ */
+export const updateEntrustLinkedOrderId = async (userUid, entrustId, orderId) => {
+  try {
+    const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
+    await updateDoc(entrustRef, {
+      linkedArtworkOrderId: orderId,
+    });
+    return { success: true, message: "已成功寫入 linkedArtworkOrderId" };
+  } catch (error) {
+    console.error("更新 linkedArtworkOrderId 失敗:", error);
+    return { success: false, message: error.message };
+  }
+};
+
+
 /**
  * 獲取指定使用者的委託
  */
@@ -94,11 +113,6 @@ export const fetchUserEntrusts = async (userUid) => {
 
 export const deleteUserEntrust = async (userUid, userSerialId, entrustId) => {
   try {
-
-    console.log("刪除委託 ID:", entrustId);
-    console.log("刪除使用者 ID:", userUid);
-    console.log("刪除使用者序號 ID:", userSerialId);
-
 
     const entrustRef = doc(db, "entrustMarket", userUid, "entrusts", entrustId);
     await deleteDoc(entrustRef);

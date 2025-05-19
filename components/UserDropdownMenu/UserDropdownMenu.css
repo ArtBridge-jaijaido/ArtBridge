@@ -11,7 +11,16 @@
     z-index: 1000;
     -webkit-overflow-scrolling: touch;
     animation: fadeInScale 0.2s ease-out;
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;               
+    overflow-y: scroll;       
+    scrollbar-width: none;       
+    -ms-overflow-style: none;    
 }
+
+.UserDropdownMenu-container::-webkit-scrollbar {
+    display: none;
+  }
 
 .UserDropdownMenu-profile {
     width:100%;

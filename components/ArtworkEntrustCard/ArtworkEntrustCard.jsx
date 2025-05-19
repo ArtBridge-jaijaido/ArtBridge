@@ -6,9 +6,11 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import "./ArtworkEntrustCard.css";
 import { usePathname } from "next/navigation";
 import { deleteUserEntrust } from "@/services/artworkEntrustService";
+import {deleteArtworkOrderFromService  } from "@/services/artworkOrderService.js";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { deleteEntrust } from "@/app/redux/feature/entrustSlice";
+import { deleteArtworkOrder} from "@/app/redux/feature/artworkOrderSlice";
 import { useToast } from "@/app/contexts/ToastContext.js";
 
 
@@ -22,6 +24,8 @@ const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, mar
   const user = useSelector((state) => state.user);
   const { setIsLoading } = useLoading();
   const navigate = useNavigation();
+  const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
+ 
 
   // 檢查描述文字是否超過 35 字
   const truncatedDescription = description.length > 35
@@ -32,13 +36,25 @@ const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, mar
     e.stopPropagation();
     const confirm = window.confirm(`確定要刪除委託「${marketName}」嗎？`);
     if (!confirm) return;
+
+    const linkedOrder = artworkOrders.find(
+      (order) => order.fromEntrustId === entrustId
+    );
+
+
     onDeleteSuccess?.();
 
+   
     const response = await deleteUserEntrust(entrustUserUid, entrustUserSerialId, entrustId);
 
     if (response.success) {
       console.log(entrustId);
       dispatch(deleteEntrust(entrustId));
+
+      if (linkedOrder&& linkedOrder.status==="等待承接") {
+        await deleteArtworkOrderFromService(linkedOrder.artworkOrderId);
+        dispatch(deleteArtworkOrder(linkedOrder.artworkOrderId));
+      }
 
       addToast("success", "委託已刪除成功");
     } else {

@@ -62,6 +62,11 @@ export default function EntrustDetailPage({ params }) {
             return;
         }
 
+        if (currentUser?.role!== "artist") {
+            addToast("error", "請先切換為繪師才能應徵喔！");
+            return;
+        }
+
         try {
             // 預載 artwork 主圖與畫師頭貼
             await Promise.all([
@@ -211,20 +216,13 @@ export default function EntrustDetailPage({ params }) {
                 entrustData={entrust}
                 entrustNickname={entrustNickname}
                 entrustProfileImg={entrustProfileImg}
+            
             />
 
 
 
         </div>
     );
-
-
-
-
-
-
-
-
 
 
 }

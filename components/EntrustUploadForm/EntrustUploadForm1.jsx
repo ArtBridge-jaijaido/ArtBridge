@@ -53,7 +53,7 @@ const EntrustUploadForm1 = ({ next, formData }) => {
         {/* 第一列：市集名稱 + 開始/結束時間 */}
         <div className="EntrustUploadForm1-row">
           <div className="EntrustUploadForm1-group market-name">
-            <label>市集名稱</label>
+            <label>委託名稱</label>
             <input
               type="text"
               value={marketName}

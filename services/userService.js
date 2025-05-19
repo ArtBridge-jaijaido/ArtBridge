@@ -186,3 +186,6 @@ export const generateUniqueSerial = async () => {
       return newSerial;
   });
 };
+
+
+// save painter mileStone

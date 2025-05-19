@@ -1,6 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ModalImgApplyEntrust.css";
+import { useToast } from "@/app/contexts/ToastContext.js";
+import { useSelector } from "react-redux";
+import { handlePainterApplyEntrust, checkIfPainterApplied } from "@/services/artworkOrderService.js";
+import { useDispatch } from "react-redux";
+import { updateEntrust} from "@/app/redux/feature/entrustSlice.js";
+import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 
 const ModalImgApplyEntrust = ({
     isOpen,
@@ -12,12 +18,77 @@ const ModalImgApplyEntrust = ({
     const [expectedDays, setExpectedDays] = useState("");
     const [expectedPrice, setExpectedPrice] = useState("");
     const [uploadedFiles, setUploadedFiles] = useState([]);
+    const currentUser = useSelector((state) => state.user.user);    // 當前應徵繪師
+    const  [isSaving, setIsSaving] = useState(false); 
+    const dispatch = useDispatch();
+    
+    
+    const { addToast } = useToast();
+
+    useEffect(() => {
+        if (!isOpen) {
+          setExpectedDays("");
+          setExpectedPrice("");
+          setUploadedFiles([]);
+        }
+      }, [isOpen]);
 
     if (!isOpen || !entrustData) return null;
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         setUploadedFiles(files);
+    };
+
+    const handleConfirmApply = async () => {
+
+      
+        
+        if (!expectedDays || !expectedPrice|| uploadedFiles.length === 0) {
+            addToast("error", "請完整填寫並上傳履歷");
+            return;
+        }
+
+        const isAlreadyApplied = await checkIfPainterApplied(
+            entrustData.linkedArtworkOrderId,
+            currentUser.uid
+          );
+
+        if (isAlreadyApplied) {
+            addToast("error", "您已經應徵過該委託，請勿重複應徵");
+            return;
+        }
+
+        setIsSaving(true);
+
+        const file = uploadedFiles[0]; 
+
+        try {
+            await handlePainterApplyEntrust({
+              file,
+              user: currentUser,
+              expectedDays,
+              expectedPrice,
+              orderId: entrustData.linkedArtworkOrderId,
+              entrustId: entrustData.entrustId,
+              entrustUserUid: entrustData.userUid,
+            });
+
+            console.log(entrustData.entrustId)
+
+            dispatch(updateEntrust({
+                entrustId: entrustData.entrustId,
+                applicationCount: entrustData.applicationCount + 1,
+              }));
+        
+            addToast("success", "應徵成功！");
+            onClose();
+          } catch (err) {
+            console.error("❌ 應徵失敗:", err);
+            addToast("error", "應徵失敗，請稍後再試");
+          }finally{
+            setIsSaving(false);
+          }
     };
 
     return (
@@ -85,21 +156,27 @@ const ModalImgApplyEntrust = ({
                         <span className="ModalImgApplyEntrust-unit">元</span>
                     </div>
 
-                    <label>上傳作品或履歷照片(JPG或PNG，最大5MB):</label>
+                    <label>上傳履歷 (僅限 PDF，最大 5MB):</label>
                     <input
                         type="file"
-                        accept=".jpg,.jpeg,.png"
-                        multiple
+                        accept=".pdf"
                         onChange={handleFileChange}
                     />
-                   
+
                 </div>
 
                 <div className="ModalImgApplyEntrust-buttons">
                     <button className="ModalImgApplyEntrust-cancel-btn" onClick={onClose}>
                         取消
                     </button>
-                    <button className="ModalImgApplyEntrust-confirm-btn">確認應徵</button>
+                    <LoadingButton
+                        className="ModalImgApplyEntrust-confirm-btn"
+                        onClick={handleConfirmApply}
+                        isLoading={isSaving}
+                        loadingText="應徵中..."
+                    >
+                        確認應徵
+                    </LoadingButton>
                 </div>
             </div>
         </div>

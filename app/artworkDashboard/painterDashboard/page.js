@@ -113,7 +113,7 @@ const PainterDashboard = () => {
             </div>
             <div className="PainterDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-computer-100-1.png" alt="icon" className="artworkDashboardIcon" />
-              <span>案件管理</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkOrdersManagement")}>案件管理</span>
 
             </div>
             <div className="PainterDashboard-option-item">
@@ -151,7 +151,7 @@ const PainterDashboard = () => {
             <div className="PainterDashboard-commission-process-left">
               <h1>自訂我的委託流程</h1>
               <p>您可以自行安排接委託的流程，包含單一案件截稿時間、進程，也可以設定固定的流程。</p>
-              <button className="PainterDashboard-commission-process-button">
+              <button className="PainterDashboard-commission-process-button" onClick={(e) => handleNavigateTo(e, "artworkPainterEntrustFlow")}>
                 前往自訂委託設定  <img src="/images/icons8-go-96-1.png" alt="commission-process-icon" className="commission-process-icon" />
               </button>
             </div>
