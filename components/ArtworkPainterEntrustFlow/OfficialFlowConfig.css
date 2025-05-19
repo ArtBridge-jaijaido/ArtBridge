@@ -82,8 +82,6 @@
   overflow: hidden;
   word-break: break-word;
 }
-
-
 .officialFlowConfig-banner {
   width: 100%;
   height: 120px;
@@ -131,6 +129,7 @@
     width: 26px;
     height: 26px;
   }
+
   .officialFlowConfig-percent{
     font-size: 20px;
   }

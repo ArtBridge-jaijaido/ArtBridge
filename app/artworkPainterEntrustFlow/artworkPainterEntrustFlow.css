@@ -79,7 +79,6 @@
 }
 
 @media screen and (max-width: 440px) {
-
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;
       justify-content: flex-start; /* ✅ 靠左對齊 */
@@ -97,7 +96,6 @@
 }
 
 @media screen and (max-width: 370px) {
-
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;
       justify-content: flex-start; /* ✅ 靠左對齊 */
