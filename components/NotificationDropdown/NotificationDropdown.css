@@ -1,0 +1,153 @@
+/* === 通知 dropdown 外層容器 === */
+.header-notification-dropdown-container {
+  position: relative;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* === 手機版容器，結構同 user dropdown 的 mobile 容器 === */
+.header-notification-dropdown-container-mobile {
+  position: relative;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* === dropdown 面板本體 === */
+.notificationDropdown-panel {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  width: 440px;
+  max-height: calc(100vh - 400px);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  z-index: 9999;
+
+  /* ✅ 滾動設定 */
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;           /* Firefox 隱藏 */
+  -ms-overflow-style: none;        /* IE 隱藏 */
+  animation: fadeInScale 0.2s ease-out;
+}
+
+/* ✅ 隱藏 scrollbar（Chrome, Safari） */
+.notificationDropdown-panel::-webkit-scrollbar {
+  display: none;
+}
+
+
+.notificationDropdown-panel .ArtworkNotificationItem-item {
+  padding: 25px;
+}
+
+.notificationDropdown-panel .ArtworkNotificationItem-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* 只在 NotificationDropdown 裡的文字內容生效 */
+.notificationDropdown-panel .ArtworkNotificationItem-text {
+  font-size: 16px;
+}
+
+/* === 下拉控制箭頭/文字樣式（可選）=== */
+.header-notification-dropdown-container span {
+  color: #80D2FF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+/* === RWD: 平板與桌機微調字體 === */
+@media screen and (max-width: 1280px) {
+  .header-notification-dropdown-container span {
+    font-size: 24px;
+  }
+  .notificationDropdown-panel {
+    width: 400px;
+    max-height: 400px;
+  }
+  .notificationDropdown-panel .ArtworkNotificationItem-item {
+    padding: 20px;
+  }
+  
+  .notificationDropdown-panel .ArtworkNotificationItem-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  /* 只在 NotificationDropdown 裡的文字內容生效 */
+  .notificationDropdown-panel .ArtworkNotificationItem-text {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .header-notification-dropdown-container span {
+    font-size: 20px;
+  }
+  .notificationDropdown-panel {
+    width: 280px;
+    max-height: 400px;
+  }
+  .notificationDropdown-panel .ArtworkNotificationItem-item {
+    padding: 15px;
+  }
+  
+  .notificationDropdown-panel .ArtworkNotificationItem-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  /* 只在 NotificationDropdown 裡的文字內容生效 */
+  .notificationDropdown-panel .ArtworkNotificationItem-text {
+    font-size: 12px;
+  }
+}
+
+/* === RWD: 手機版調整寬度與內距 === */
+@media screen and (max-width: 440px) {
+  .header-notification-dropdown-container span {
+    font-size: 16px;
+  }
+
+  .notificationDropdown-panel {
+    width: 250px;
+    max-height: 400px;
+  }
+
+  .notificationDropdown-panel .ArtworkNotificationItem-item {
+    padding: 10px;
+  }
+
+  .notificationDropdown-panel .ArtworkNotificationItem-title {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  
+  /* 只在 NotificationDropdown 裡的文字內容生效 */
+  .notificationDropdown-panel .ArtworkNotificationItem-text {
+    font-size: 10px;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import styles from "./headerButton.module.css";
 import "./Header.css";
+import NotificationDropdown from "@/components/NotificationDropdown/NotificationDropdown.jsx";
 
 const Header = () => {
     const [isMounted, setIsMounted] = useState(false); // 判斷是否已加載客戶端
@@ -85,6 +86,10 @@ const Header = () => {
         setTimeout(() => setIsLoading(false), 1000);
         setIsMenuOpen(false); // 關閉菜單
     }
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const notificationDropdownRef = useRef(null);
+    const notificationDropdownRefmobile = useRef(null); // ✅ 手機版
+    const [notifications, setNotifications] = useState([]);
 
 
 
@@ -99,6 +104,46 @@ const Header = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+    
+    //控制傳入通知panel 的資料數量與內容
+    useEffect(() => {
+        const personal = Array.from({ length: 5 }).map((_, i) => ({
+          id: `personal-${i}`,
+          title: '【個人通知】',
+          content: `這是個人通知 ${i + 1}`,
+          read: false,
+        }));
+        const system = Array.from({ length: 5 }).map((_, i) => ({
+          id: `system-${i}`,
+          title: '【系統通知】',
+          content: `這是系統通知 ${i + 1}`,
+          read: true,
+        }));
+        setNotifications([...personal, ...system]);
+      }, []);
+      
+      const markAsRead = (id) => {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+        );
+      };
+    
+    //點擊外部關閉通知小視窗
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (
+            (!notificationDropdownRef.current || !notificationDropdownRef.current.contains(event.target)) &&
+            (!notificationDropdownRefmobile.current || !notificationDropdownRefmobile.current.contains(event.target))
+          ) {
+            setIsNotificationOpen(false);
+          }
+        };
+      
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+      }, []);
+      
+      
 
     if (!showHeader || isLoading) return null; //如果還在 loading，完全不渲染 Header
 
@@ -114,10 +159,30 @@ const Header = () => {
 
             <div className="header-loginUser-buttons-container">
                 {user&&<div className="header-loginUser-buttons-mobile">
-                    <div className="header-notification-bell">
+                    <div
+                        className="header-notification-wrapper-mobile" // 可以新加這層 class
+                        ref={notificationDropdownRefmobile}
+                    >
+                    <div
+                        className="header-notification-bell"
+                        onClick={() => setIsNotificationOpen(prev => !prev)}
+                    >
                         <img src="/images/icons8-bell-96-1.png" alt="通知" />
-                        <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
+                        <span className="header-notification-badge">
+                            {notifications.filter(n => !n.read).length}
+                        </span>
                     </div>
+
+                        {isNotificationOpen && (
+                            <div className="header-notification-dropdown-container-mobile">
+                            <NotificationDropdown
+                                notifications={notifications}
+                                markAsRead={markAsRead}
+                            />
+                            </div>
+                        )}
+                    </div>
+
                     <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
                         <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                     </div>
@@ -171,10 +236,30 @@ const Header = () => {
                 </div>
                 {user ? (
                     <div className="header-loginUser-buttons" >
-                        <div className="header-notification-bell">
+                        <div
+                            className="header-notification-wrapper" // ✅ 新加這層
+                            ref={notificationDropdownRef}
+                        >
+                        <div
+                            className="header-notification-bell"
+                            onClick={() => setIsNotificationOpen(prev => !prev)}
+                        >
                             <img src="/images/icons8-bell-96-1.png" alt="通知" />
-                            <span className="header-notification-badge">9+</span> {/*未讀訊息 */}
+                            <span className="header-notification-badge">
+                                {notifications.filter(n => !n.read).length}
+                            </span>
                         </div>
+
+                        {isNotificationOpen && (
+                            <div className="header-notification-dropdown-container">
+                            <NotificationDropdown
+                                notifications={notifications}
+                                markAsRead={markAsRead}
+                            />
+                            </div>
+                        )}
+                        </div>
+
                         <div className="header-user-avatar" onClick={handleNavigateToDashboard}>
                             <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="使用者頭像" />
                         </div>
