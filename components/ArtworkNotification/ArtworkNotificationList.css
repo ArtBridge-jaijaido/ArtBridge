@@ -6,7 +6,6 @@
 .ArtworkNotificationList-loadMoreBtn {
   display: flex;
   max-width: 135px;
-  width:100%;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;

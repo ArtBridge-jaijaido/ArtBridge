@@ -7,7 +7,7 @@
 
 .customFlowConfig-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   background: white;
   font-family: "Noto Sans TC";
 }
@@ -43,8 +43,8 @@
 }
 
 .customFlowConfig-connector-line {
-  width: 100%;
-  max-width: 100px;
+  flex-grow: 1;
+  margin: 0 6px;
   height: 1px;
   background-color: #A2E2FF;
   align-self: center;
@@ -70,11 +70,17 @@
   font-size: 26px;
   font-weight: 500;
   color: #61CEFF;
-  letter-spacing: 1px;
-  line-height: 10px;
+  line-height: 28px;
   margin-top: 5px;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  width: 52px;
+  height: 56px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 /* === CustomFlowConfig.css === */
@@ -295,9 +301,15 @@
     width: 26px;
     height: 26px;
   }
-  .customFlowConfig-percent,
+  .customFlowConfig-percent {
+    font-size: 20px;
+  }
   .customFlowConfig-label {
     font-size: 20px;
+    line-height: 20px;
+    width: 42px;
+    height: 40px;
+    -webkit-line-clamp: 2;
   }
   .customFlowConfig-add-icon {
     width: 30px;
@@ -335,6 +347,13 @@
     height: 30px;
     font-size: 18px;
   }
+  .customFlowConfig-list {
+    gap: 2px;
+  }
+  .customFlowConfig-connector-line {
+    flex-grow: 1;
+    margin: 0 2px;
+  }
 }
 
 @media screen and (max-width: 440px) {
@@ -342,9 +361,15 @@
     width: 12px;
     height: 12px;
   }
-  .customFlowConfig-percent,
-  .customFlowConfig-label {
+  .customFlowConfig-percent {
     font-size: 10px;
+  }
+  .customFlowConfig-label {
+    font-size: 12px;
+    line-height: 16px;
+    width: 34px;
+    height: 32px;
+    -webkit-line-clamp: 2;
   }
   .customFlowConfig-add-icon {
     width: 20px;
@@ -384,6 +409,7 @@
   }
   .customFlowConfig-connector-line {
     flex-grow: 1;
+    margin: 0 0px;
   }
 }
 
@@ -392,9 +418,14 @@
     width: 12px;
     height: 12px;
   }
-  .customFlowConfig-percent,
-  .customFlowConfig-label {
+  .customFlowConfig-percent {
     font-size: 10px;
+  }
+  .customFlowConfig-label {
+    font-size: 12px;
+    line-height: 16px;
+    width: 34px;
+    height: 32px;
   }
   .customFlowConfig-add-icon {
     width: 20px;

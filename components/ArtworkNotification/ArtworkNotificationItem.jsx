@@ -4,7 +4,10 @@ function NotificationItem({ data, onClick }) {
   return (
     <div
       className={`ArtworkNotificationItem-item ${data.read ? "read" : "unread"}`}
-      onClick={onClick}
+      onClick={(e) => {
+        e.stopPropagation(); // ✅ 阻止事件往上冒泡，避免被當成外部點擊
+        onClick();           // ✅ 確實執行已讀
+      }}
     >
       <div className="ArtworkNotificationItem-content">
         <div className="ArtworkNotificationItem-title">

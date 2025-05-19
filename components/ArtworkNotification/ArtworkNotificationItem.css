@@ -43,7 +43,7 @@
 .ArtworkNotificationItem-text {
   font-size: 20px;
   color: #525252;
-  margin-left:-10px;
+  margin-left: 28px;
 }
 
 @media screen and (max-width: 1280px) {
@@ -78,6 +78,7 @@
   }
   .ArtworkNotificationItem-text {
     font-size: 11px;
+    margin-left: 24px;
   }
 }
 @media screen and (max-width: 370px) {
@@ -90,5 +91,6 @@
   }
   .ArtworkNotificationItem-text {
     font-size: 9px;
+    margin-left: 24px;
   }
 }
