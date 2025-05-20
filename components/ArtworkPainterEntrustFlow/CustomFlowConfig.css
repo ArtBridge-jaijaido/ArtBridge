@@ -446,8 +446,13 @@
     height: 18px;
     font-size: 12px;
   }
+
+  .customFlowConfig-input-group {
+    gap: 10px;
+  }
+
   .customFlowConfig-input-percent {
-    width: 40px;
+    width: 50px;
     height: 20px;
     font-size: 10px;
   }

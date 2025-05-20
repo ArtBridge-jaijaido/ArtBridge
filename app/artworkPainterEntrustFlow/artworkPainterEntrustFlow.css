@@ -22,7 +22,7 @@
   gap: 90px;
   margin-bottom: 20px;
   display: flex;
-  padding-left: 100px;
+ 
 }
 
 .artworkPainterEntrustFlow-tab-button {
@@ -106,14 +106,14 @@
   }
   .artworkPainterEntrustFlow-tab-button.active::after {
     left: 0;
-    width: 100%; /* ✅ 不再額外加寬 */
+    width: 100%; 
   }
 }
 
 @media screen and (max-width: 370px) {
   .artworkPainterEntrustFlow-tab-header {
       gap: 30px;
-      justify-content: flex-start; /* ✅ 靠左對齊 */
+      justify-content: flex-start; 
       padding-left: 0px;
   }
 
@@ -123,7 +123,7 @@
   }
   .artworkPainterEntrustFlow-tab-button.active::after {
     left: 0;
-    width: 100%; /* ✅ 不再額外加寬 */
+    width: 100%; 
   }
 }
 

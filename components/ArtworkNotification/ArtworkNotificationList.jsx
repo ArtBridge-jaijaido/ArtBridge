@@ -17,7 +17,7 @@ const NotificationList = forwardRef(function NotificationList({ type }, ref) {
 
   const loadNotifications = async (pageNum) => {
     const fetched = Array.from({ length: 10 }).map((_, idx) => ({
-      id: `${type}-${pageNum}-${idx}`,
+       id: `${type}-${crypto.randomUUID()}`, // temporary unique ID
       title: type === "personal" ? "【個人通知】" : "【系統通知】",
       content: `這是第 ${pageNum * 10 + idx + 1} 條通知內容`,
       read: readAll, // ✅ 若一鍵已讀過，新通知預設也為已讀

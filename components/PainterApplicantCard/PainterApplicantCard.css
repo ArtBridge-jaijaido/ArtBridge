@@ -35,6 +35,10 @@
   cursor:pointer;
 }
 
+.PainterApplicantCard-header-buttom:hover {
+  background-color: #1a8cd8; 
+}
+
 /* Grid: 左右區塊 */
 .PainterApplicantCard-body-grid {
   display: grid;
@@ -62,6 +66,7 @@
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
+  background-color: LightGray;
 }
 
 .PainterApplicantCard-nickname {
@@ -79,6 +84,8 @@
   text-underline-offset: auto;
   text-underline-position: from-font;
 }
+
+
 
 .PainterApplicantCard-info {
   display:flex;
@@ -111,6 +118,13 @@
   flex-direction: column;
   align-items: flex-start;
   gap:10px;
+  color: #707070;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 20px;
 }
 
 .PainterApplicantCard-statValue {
@@ -119,7 +133,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+ 
   letter-spacing: 1px;
 }
 
@@ -131,7 +145,7 @@
 .PainterApplicantCard-months {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px 30px;
+  gap: 20px 20px;
   
 }
 
@@ -145,7 +159,7 @@
   color: #707070;
   text-align: center;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -166,4 +180,132 @@
 
 .PainterApplicantCard-monthBtn.gray {
   border-bottom: 3px solid #aaa;
+}
+
+
+@media screen and (max-width: 1280px) {
+
+  .PainterApplicantCard-wrapper {
+
+    padding:40px;
+    height:280px;
+  }
+
+
+  .PainterApplicantCard-header-buttom {
+    width:100px;
+    height:30px;
+    font-size: 16px;
+  }
+
+  .PainterApplicantCard-body-grid {
+    gap: 10px;
+  }
+
+  .PainterApplicantCard-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .PainterApplicantCard-nickname {
+    font-size: 16px;
+  }
+
+
+  .PainterApplicantCard-stat {
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .PainterApplicantCard-statValue {
+    font-size: 14px;
+  }
+
+
+  .PainterApplicantCard-monthBtn {
+    font-size: 14px;
+  }
+
+}
+
+
+@media screen and (max-width: 440px) {
+  .PainterApplicantCard-wrapper {
+
+    padding:30px;
+    height:200px;
+  }
+
+  .PainterApplicantCard-header-buttom {
+    width:90px;
+    height:25px;
+    font-size: 14px;
+    padding: 2px 6px;
+  }
+
+  .PainterApplicantCard-left {
+   
+    gap:20px;
+  }
+
+  .PainterApplicantCard-avatar {
+    width: 24px;
+    height: 24px;
+   
+  }
+
+  .PainterApplicantCard-nickname {
+   
+    font-size: 14px;
+  
+  }
+
+  .PainterApplicantCard-info {
+    
+    gap:20px;
+    font-size: 12px;
+    
+  }
+
+  .PainterApplicantCard-right {
+ 
+    gap: 20px;
+  }
+  
+  .PainterApplicantCard-stat {
+   
+    gap:6px;
+   
+    font-size: 10px;
+  
+  }
+
+  .PainterApplicantCard-statValue {
+    font-size: 10px;
+  }
+
+  .PainterApplicantCard-months {
+   
+    gap: 20px 20px;
+    
+  }
+
+  .PainterApplicantCard-monthBtn {
+    font-size: 8px;
+    max-width:40px;
+    height:20px;
+    letter-spacing: 1px;
+  }
+  
+}
+
+
+@media screen and (max-width: 370px) {
+  .PainterApplicantCard-wrapper {
+
+    padding:20px;
+    height:180px;
+    min-width:280px;
+  }
+
 }

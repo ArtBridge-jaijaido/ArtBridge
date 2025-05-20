@@ -51,4 +51,47 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
     margin-top:60px;
+    gap:30px;
+}
+
+
+@media screen and (max-width: 834px) {
+
+    .entrustApplicants-applicants-container{
+       
+        grid-template-columns: 1fr;
+        margin-top:30px;
+        gap:20px;
+    }
+
+    .entrustApplicants-back-button img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .entrustApplicants-back-button span{
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .entrustApplicants-page{
+      
+        width:768px;
+    }
+
+}
+
+
+@media screen and (max-width: 440px) {
+    .entrustApplicants-page{
+        width:100%;
+    }
+
+    .entrustApplicants-applicants-container{
+       
+        gap:10px;
+    }
+
 }

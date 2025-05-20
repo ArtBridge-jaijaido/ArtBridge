@@ -5,7 +5,6 @@ import ArtworkOrderManagementTabs from '@/components/Tabs/ArtworkOrderManagement
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
 import "./consumerOrdersManagement.css";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 
 const ConsumerOrdersManagementPage = () => {
