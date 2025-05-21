@@ -16,12 +16,17 @@ const PainterApplicantCard = ({
 }) => {
 
   const handleAssignArtist = async () => {
+   
+
     const res = await fetch("/api/newebpay/initiate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         artistNickname,
         amount: expectedPrice.toString(),
+        orderId: artworkOrderId,
+        artistUid: artistUid,
+        expectedDays: expectedDays,
       }),
     });
   
@@ -32,7 +37,7 @@ const PainterApplicantCard = ({
     const url = URL.createObjectURL(blob);
   
     
-    window.open(url, "_blank");
+    window.location.href = url;
   };
   
 

@@ -1,11 +1,10 @@
 import crypto from "crypto";
+import { pendingPainterTempData } from "@/services/artworkOrderServiceAdmin";
 
 const merchantID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const HashKey = process.env.NEWEBPAY_HASH_KEY;
 const HashIV = process.env.NEWEBPAY_HASH_IV;
-const actionURL = "https://ccore.newebpay.com/MPG/mpg_gateway";
-
-
+const actionURL = "https://ccore.newebpay.com/MPG/mpg_gateway"; // 測試環境
 
 function aesEncrypt(data, key, iv) {
   const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
@@ -20,37 +19,50 @@ function shaEncrypt(data) {
 }
 
 export default async function handler(req, res) {
-  const { artistNickname, amount } = req.body;
-  const orderId = "ORDER" + Date.now();
+  if (req.method !== "POST") return res.status(405).end("Method Not Allowed");
+
+
+  const { artistNickname, amount, orderId, artistUid, expectedDays } = req.body;
+
+  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays) {
+    return res.status(400).send("missing required fields");
+  }
+
+  const uniqueOrderNo = `${orderId}_${Date.now()}`;
+
+
+  // 暫存繪師資料
+  await pendingPainterTempData(orderId, artistUid, expectedDays);
+
 
   const tradeInfoObject = {
-    MerchantID: merchantID,
+    MerchantID: merchantID, 
     RespondType: "JSON",
     TimeStamp: Math.floor(Date.now() / 1000).toString(),
     Version: "2.0",
-    MerchantOrderNo: orderId,
+    MerchantOrderNo: uniqueOrderNo,
     Amt: amount,
     ItemDesc: `繪師委託-${artistNickname}`,
-    ReturnURL: "https://yourdomain.com/api/newebpay/notify",
-    ClientBackURL: "http://localhost:3000/artworkOrdersManagement/consumerOrdersManagement"
+    ReturnURL: "https://c63a-1-168-22-210.ngrok-free.app/api/newebpay/return", 
+    NotifyURL: "https://c63a-1-168-22-210.ngrok-free.app/api/newebpay/notify", 
+    ClientBackURL: "https://c63a-1-168-22-210.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement"
   };
-  
+
   const tradeInfoStr = new URLSearchParams(tradeInfoObject).toString();
   const encrypted = aesEncrypt(tradeInfoStr, Buffer.from(HashKey, "utf8"), Buffer.from(HashIV, "utf8"));
   const sha = shaEncrypt(`HashKey=${HashKey}&${encrypted}&HashIV=${HashIV}`);
 
-  console.log("Trade Info:", tradeInfoStr);
-
-
-  res.status(200).send(`
-    <html><body>
-      <form id="newebpayForm" method="post" action="${actionURL}">
-        <input type="hidden" name="MerchantID" value="${merchantID}" />
-        <input type="hidden" name="TradeInfo" value="${encrypted}" />
-        <input type="hidden" name="TradeSha" value="${sha}" />
-        <input type="hidden" name="Version" value="2.0" />
-      </form>
-      <script>document.getElementById("newebpayForm").submit();</script>
-    </body></html>
-  `);
+  res.status(200).send(`<!DOCTYPE html>
+<html>
+  <body>
+    <form id="newebpayForm" method="post" action="${actionURL}">
+      <input type="hidden" name="MerchantID" value="${merchantID}" />
+      <input type="hidden" name="TradeInfo" value="${encrypted}" />
+      <input type="hidden" name="TradeSha" value="${sha}" />
+      <input type="hidden" name="Version" value="2.0" />
+    </form>
+    <script>document.getElementById("newebpayForm").submit();</script>
+  </body>
+</html>`);
 }
+

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import {useState, useEffect } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkOrderManagementTabs from '@/components/Tabs/ArtworkOrderManagementTab';
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
@@ -9,10 +9,10 @@ import { useSelector } from "react-redux";
 
 const ConsumerOrdersManagementPage = () => {
   
-
+  
     const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
 
- 
+  
   
     const tabs = [
         {
@@ -29,6 +29,7 @@ const ConsumerOrdersManagementPage = () => {
                       OrderTitle={order.marketName}
                       OrderSource={order.orderSource}
                       OrderEndDate={order.endDate}
+                      OrderAssignedPainter={order.assignedPainterUid}
                       orderId={order.artworkOrderId}
                       imageUrl={order.exampleImageUrl || ""}
                     />

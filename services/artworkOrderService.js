@@ -13,6 +13,7 @@ import {
 import { uploadPainterResumePdf  } from "@/services/storageService.js";
 import { ref, listAll, deleteObject } from "firebase/storage";
 
+
 // 建立訂單
 export const createOrderFromEntrust = async (entrustData) => {
   try {
@@ -63,7 +64,7 @@ export const createOrderFromEntrust = async (entrustData) => {
       reportProgress: entrustData.reportProgress,
       createdAt: new Date().toISOString(),
       status: "等待承接",
-      orderSource: "尚無資訊",
+      orderSource: "委託大廳",
       endDate: "尚無資訊",
       price: entrustData.price,
       assignedPainterUid: null,
@@ -206,6 +207,40 @@ export const fetchEntrustPainterApplicants = async (orderId) => {
     }
   };
 
+
+// 更新付款後訂單資料
+export const updateOrderAfterPayment = async (orderId) => {
+  try {
+    const orderRef = doc(db, "artworkOrders", orderId);
+    const orderSnap = await getDoc(orderRef);
+
+    if (!orderSnap.exists()) {
+      console.warn("❌ 查無此訂單：", orderId);
+      return;
+    }
+
+    const orderData = orderSnap.data();
+    const updatedMilestones = [...orderData.artworkOrderMilestones];
+
+    // 尋找 id 為 0 的 milestone（可根據你實際邏輯調整）
+    const index = updatedMilestones.findIndex(m => m.id === 0);
+    if (index === -1) {
+      console.warn("找不到 id 為 0 的 milestone");
+      return;
+    }
+
+    updatedMilestones[index].status = "已付款";
+
+    await updateDoc(orderRef, {
+      artworkOrderMilestones: updatedMilestones,
+      status: "進行中",
+    });
+
+    console.log("✅ artworkOrderMilestones 已成功更新為已付款");
+  } catch (error) {
+    console.error("❌ 更新付款狀態失敗：", error);
+  }
+};
 
 // 訂單編號生成器
 export const generateOrderSerial = async () => {
