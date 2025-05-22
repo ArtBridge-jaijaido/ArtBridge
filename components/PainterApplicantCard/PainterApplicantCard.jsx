@@ -27,6 +27,7 @@ const PainterApplicantCard = ({
         orderId: artworkOrderId,
         artistUid: artistUid,
         expectedDays: expectedDays,
+        expectedPrice: expectedPrice,
       }),
     });
   

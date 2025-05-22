@@ -35,22 +35,20 @@ export default async function handler(req, res) {
     const body = querystring.parse(rawBody);
     const { TradeInfo } = body;
 
-    console.log("TradeInfo:", TradeInfo);
-
+   
     const result = decryptHex(TradeInfo);
-    console.log("解密成功：", result);
-
+    
     if (result.Status === "SUCCESS") {
       console.log("付款成功，更新訂單狀態");
       const merchantOrderNo = result.Result.MerchantOrderNo;
-      const firebaseOrderId = merchantOrderNo.split("_")[0]; // 只取前半段
+      const firebaseOrderId = merchantOrderNo.split("_")[0]; // order id = [0]
       await updateOrderAfterPaymentAdmin(firebaseOrderId);
     } else {
       console.warn("付款狀態非 SUCCESS：", result.Status);
     }
   } catch (error) {
     console.error("解密或更新失敗：", error);
-    // 🔽 即使錯誤也要回 OK，避免金流重發通知
+    //  即使錯誤也要回 OK，避免金流重發通知
   }
 
   return res.status(200).send("OK");

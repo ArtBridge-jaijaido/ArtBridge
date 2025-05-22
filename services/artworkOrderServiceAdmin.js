@@ -37,6 +37,7 @@ export const updateOrderAfterPaymentAdmin = async (orderId) => {
     await orderRef.update({
       artworkOrderMilestones: updatedMilestones,
       assignedPainterUid: orderData.pendingPainterArtistUid,
+      price: orderData.pendingPainterExpectedPrice,
       endDate:endDate,
       status: "進行中",
     });
@@ -47,7 +48,7 @@ export const updateOrderAfterPaymentAdmin = async (orderId) => {
   }
 };
 
-export const pendingPainterTempData = async (orderId, artistUid, expectedDays) => {
+export const pendingPainterTempData = async (orderId, artistUid, expectedDays, expectedPrice) => {
     try {
         console.log("test")
     console.log(orderId);
@@ -62,6 +63,7 @@ export const pendingPainterTempData = async (orderId, artistUid, expectedDays) =
       await orderRef.update({
         pendingPainterArtistUid: artistUid,
         pendingPainterExpectedDays: expectedDays,
+        pendingPainterExpectedPrice: expectedPrice,
         paymentInitiatedAt: new Date().toISOString(),
       });
   

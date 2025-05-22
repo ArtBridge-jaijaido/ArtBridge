@@ -22,9 +22,9 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end("Method Not Allowed");
 
 
-  const { artistNickname, amount, orderId, artistUid, expectedDays } = req.body;
+  const { artistNickname, amount, orderId, artistUid, expectedDays, expectedPrice } = req.body;
 
-  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays) {
+  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays || !expectedPrice) {
     return res.status(400).send("missing required fields");
   }
 
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
 
   // 暫存繪師資料
-  await pendingPainterTempData(orderId, artistUid, expectedDays);
+  await pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
 
 
   const tradeInfoObject = {
@@ -43,9 +43,9 @@ export default async function handler(req, res) {
     MerchantOrderNo: uniqueOrderNo,
     Amt: amount,
     ItemDesc: `繪師委託-${artistNickname}`,
-    ReturnURL: "https://c63a-1-168-22-210.ngrok-free.app/api/newebpay/return", 
-    NotifyURL: "https://c63a-1-168-22-210.ngrok-free.app/api/newebpay/notify", 
-    ClientBackURL: "https://c63a-1-168-22-210.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement"
+    ReturnURL: "https://ce29-1-168-22-210.ngrok-free.app/api/newebpay/return", 
+    NotifyURL: "https://ce29-1-168-22-210.ngrok-free.app/api/newebpay/notify", 
+    ClientBackURL: "https://ce29-1-168-22-210.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement"
   };
 
   const tradeInfoStr = new URLSearchParams(tradeInfoObject).toString();

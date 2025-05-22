@@ -208,39 +208,26 @@ export const fetchEntrustPainterApplicants = async (orderId) => {
   };
 
 
-// 更新付款後訂單資料
-export const updateOrderAfterPayment = async (orderId) => {
+// fetch order data by orderId
+export const fetchArtworkOrderById = async (orderId) => {
   try {
     const orderRef = doc(db, "artworkOrders", orderId);
     const orderSnap = await getDoc(orderRef);
 
     if (!orderSnap.exists()) {
-      console.warn("❌ 查無此訂單：", orderId);
-      return;
+      console.warn(`找不到該訂單：${orderId}`);
+      return null;
     }
 
-    const orderData = orderSnap.data();
-    const updatedMilestones = [...orderData.artworkOrderMilestones];
-
-    // 尋找 id 為 0 的 milestone（可根據你實際邏輯調整）
-    const index = updatedMilestones.findIndex(m => m.id === 0);
-    if (index === -1) {
-      console.warn("找不到 id 為 0 的 milestone");
-      return;
-    }
-
-    updatedMilestones[index].status = "已付款";
-
-    await updateDoc(orderRef, {
-      artworkOrderMilestones: updatedMilestones,
-      status: "進行中",
-    });
-
-    console.log("✅ artworkOrderMilestones 已成功更新為已付款");
+    return orderSnap.data(); // 直接回傳資料
   } catch (error) {
-    console.error("❌ 更新付款狀態失敗：", error);
+    console.error("取得訂單資料失敗:", error);
+    return null;
   }
 };
+
+
+
 
 // 訂單編號生成器
 export const generateOrderSerial = async () => {
@@ -265,3 +252,4 @@ export const generateOrderSerial = async () => {
     return String(newSerial).padStart(8, "0"); // e.g. 00000001
   });
 };
+

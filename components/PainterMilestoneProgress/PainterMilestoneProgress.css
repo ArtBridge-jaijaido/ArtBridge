@@ -51,6 +51,39 @@
     margin: 0 20px;
    
   }
+
+  .painterMilestoneProgress-status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    text-align: center;
+    font-family: "Noto Sans TC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px; 
+    letter-spacing: 1px;
+    width: 68px;
+    height: 26px;
+    margin-top:10px;
+    border-radius: 20px;
+  }
+
+  .painterMilestoneProgress-status.green {
+    background-color: #74DB85;
+    
+  }
+  
+  .painterMilestoneProgress-status.blue {
+    background-color: #2DAEF4;
+   
+  }
+  
+  .painterMilestoneProgress-status.gray {
+    background-color: #8E8E8E;
+   
+  }
   
 
 

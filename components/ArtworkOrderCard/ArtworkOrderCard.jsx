@@ -29,8 +29,24 @@ const ArtworkOrderCard = ({
         setTimeout(() => setIsLoading(false), 1000);
     }
 
+    const handleNavigateToOrderDetail = (e) => {
+        e.stopPropagation();
+      
+        if (OrderAssignedPainter) {
+          const targetPath = `/artworkOrdersManagement/artworkOrderDetails/${orderId}`;
+          navigate(targetPath);
+      
+          setIsLoading(true);
+          setTimeout(() => setIsLoading(false), 1000);
+        }
+    };
+      
+
     return (
-        <div className="artworkOrderCard-wrapper">
+        <div
+            className={`artworkOrderCard-wrapper ${OrderAssignedPainter ? "clickable" : ""}`}
+            onClick={handleNavigateToOrderDetail}
+        >
             <div className="artworkOrderCard-status">
                 <span
                     className={`artworkOrderCard-index ${
@@ -67,7 +83,7 @@ const ArtworkOrderCard = ({
                 <div className="artworkOrderCard-info">
                     <p><strong className="label">名稱</strong> {OrderTitle}</p>
                     <p><strong className="label">來源</strong> {OrderSource}</p>
-                    <p><strong className="label">日期</strong> {OrderEndDate}</p>
+                    <p><strong className="label">截止日期</strong> {OrderEndDate}</p>
                     {OrderAssignedPainter ? (
                         <p><strong className="label">指定繪師</strong> {assignedPainterNickname}</p>
                         ) : (
