@@ -10,7 +10,7 @@ import {deleteArtworkOrderFromService  } from "@/services/artworkOrderService.js
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { deleteEntrust } from "@/app/redux/feature/entrustSlice";
-import { deleteArtworkOrder} from "@/app/redux/feature/artworkOrderSlice";
+import { deleteConsumerOrder} from "@/app/redux/feature/artworkOrderSlice";
 import { useToast } from "@/app/contexts/ToastContext.js";
 
 
@@ -53,7 +53,7 @@ const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, mar
 
       if (linkedOrder&& linkedOrder.status==="等待承接") {
         await deleteArtworkOrderFromService(linkedOrder.artworkOrderId);
-        dispatch(deleteArtworkOrder(linkedOrder.artworkOrderId));
+        dispatch(deleteConsumerOrder(linkedOrder.artworkOrderId));
       }
 
       addToast("success", "委託已刪除成功");

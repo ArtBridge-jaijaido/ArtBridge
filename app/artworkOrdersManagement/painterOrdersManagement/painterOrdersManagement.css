@@ -18,3 +18,11 @@
     width:100%;
     padding:0px 20px;
 }
+
+
+.painterOrdersManagement-currentCase-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:30px;
+  
+}
