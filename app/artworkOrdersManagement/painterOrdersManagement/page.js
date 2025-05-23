@@ -4,6 +4,8 @@ import "./painterOrdersManagement.css";
 
 const painterOrdersManagementPage =() =>{
 
+    
+
     const tabs = [
         {
             label: "目前案件",

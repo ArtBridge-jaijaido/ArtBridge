@@ -18,8 +18,7 @@ export default function ArtworkOrderDetailsPage() {
     const allUsers = useSelector((state) => state.user.allUsers);
     const assignedPainterNickname = allUsers[artworkOrder?.assignedPainterUid]?.nickname || "使用者名稱";
     const breakpointColumnsObj = {
-        default: 2,
-        440: 1,
+        default: 2, 
     };
 
     useEffect(() => {

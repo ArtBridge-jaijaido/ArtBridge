@@ -12,7 +12,7 @@
 
 .artworkOrderDetails-wrapper {
     width: 100%;
-    padding:60px 30px;
+    padding: 60px 30px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -23,7 +23,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap:30px;
+    gap: 30px;
 }
 
 
@@ -40,7 +40,6 @@
     padding-top: 30px;
     display: flex;
     flex-direction: column;
-
     align-items: flex-start;
     gap: 30px;
 }
@@ -141,7 +140,7 @@
 .artworkOrderDetails-description-container p {
     color: #8C8C8C;
     font-family: "Noto Sans TC";
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 40px;
@@ -213,12 +212,13 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap:20px;
+    gap: 10px;
 }
-.artworkOrderDetails-requirement-infoItem{
+
+.artworkOrderDetails-requirement-infoItem {
     display: flex;
     gap: 10px;
-   
+
 }
 
 .artworkOrderDetails-requirement-infoItem strong {
@@ -235,21 +235,21 @@
 .artworkOrderDetails-requirement-infoItem span {
     color: #8C8C8C;
     font-family: "Noto Sans TC";
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 1px;
 }
 
-.artworkOrderDetails-progress-container{
+.artworkOrderDetails-progress-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-.artworkOrderDetails-progress-container h2{
+.artworkOrderDetails-progress-container h2 {
     color: #2DAEF4;
     font-family: "Noto Sans TC";
     font-size: 20px;
@@ -259,33 +259,33 @@
     letter-spacing: 1px;
 }
 
-.artworkOrderDetails-reminder-container{
+.artworkOrderDetails-reminder-container {
     margin-top: 30px;
-    width:100%;
+    width: 100%;
     background-color: #FFE8E8;
-    padding:30px;
-    display:flex;
+    padding: 30px;
+    display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.artworkOrderDetails-reminder-container h2{
+.artworkOrderDetails-reminder-container h2 {
     color: #FF5F5F;
     font-family: "Noto Sans TC";
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 15px; 
+    line-height: 15px;
     letter-spacing: 1px;
 }
 
-.artworkOrderDetails-reminder-container p{
+.artworkOrderDetails-reminder-container p {
     color: #FF7171;
     font-family: "Noto Sans TC";
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    line-height: 35px; 
+    line-height: 35px;
     letter-spacing: 1px;
 }
 
@@ -328,18 +328,398 @@
 
 }
 
-.artworkOrderDetails-id{
+.artworkOrderDetails-id {
 
     max-width: 320px;
     width: 100%;
     align-items: center;
     color: #8C8C8C;
     text-align: center;
-  
+
     font-family: "Noto Sans TC";
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 1px;
+}
+
+
+
+
+@media screen and (max-width: 1280px) {
+
+    .artworkOrderDetails-back-button img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .artworkOrderDetails-back-button span {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-info-item {
+
+        gap: 16px;
+    }
+
+    .artworkOrderDetails-info-item strong {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-info-item span {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-description-container strong {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-description-container p {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-supplementaryImage-container strong {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-requirement-container h2 {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem {
+
+        gap: 6px;
+
+    }
+
+    .artworkOrderDetails-requirement-infoItem strong {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem span {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-progress-container h2 {
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-reminder-container h2 {
+        font-size: 20px;
+
+    }
+
+    .artworkOrderDetails-reminder-container p {
+        font-size: 18px;
+    }
+
+
+    /*右側區塊*/
+    .artworkOrderDetails-terminate-button {
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .artworkOrderDetails-image-containter {
+        width: 300px;
+        height: 300px;
+    }
+
+    .artworkOrderDetails-id {
+        max-width: 300px;
+        font-size: 18px;
+    }
+}
+
+
+
+@media screen and (max-width: 834px) {
+
+    .artworkOrderDetails-back-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .artworkOrderDetails-back-button span {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-left {
+
+        gap: 20px;
+    }
+
+    .artworkOrderDetails-right {
+        padding-top: 20px;
+        gap: 20px;
+    }
+
+
+    .artworkOrderDetails-orderInfo-container {
+
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+    }
+
+    .artworkOrderDetails-info-item {
+
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-info-item strong {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-info-item span {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-description-container {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-description-container strong {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-description-container p {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-supplementaryImage-container {
+        gap: 20px;
+    }
+
+    .artworkOrderDetails-supplementaryImage-container strong {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-masonry {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-requirement-container {
+        gap: 20px;
+    }
+
+    .artworkOrderDetails-requirement-container h2 {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .artworkOrderDetails-requirement-infoItem {
+
+        gap: 6px;
+
+    }
+
+    .artworkOrderDetails-requirement-infoItem strong {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem span {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-progress-container {
+        gap: 20px;
+    }
+
+
+    .artworkOrderDetails-progress-container h2 {
+        font-size: 16px;
+    }
+
+    .artworkOrderDetails-reminder-container h2 {
+        font-size: 18px;
+
+    }
+
+    .artworkOrderDetails-reminder-container p {
+        font-size: 16px;
+    }
+
+    /*右側區塊*/
+    .artworkOrderDetails-terminate-button {
+        width: 260px;
+        font-size: 18px;
+    }
+
+    .artworkOrderDetails-image-containter {
+        width: 260px;
+        height: 260px;
+    }
+
+    .artworkOrderDetails-id {
+        max-width: 260px;
+        font-size: 16px;
+    }
+
+
+}
+
+@media screen and (max-width: 834px) {
+
+    .artworkOrderDetailsPage {
+        width: 768px;
+    }
+}
+
+
+@media screen and (max-width: 440px) {
+
+
+    .artworkOrderDetailsPage {
+        width: 100%;
+
+    }
+
+    .artworkOrderDetails-wrapper {
+        padding: 20px 10px;
+        gap: 10px;
+
+    }
+
+    .artworkOrderDetails-header {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-left {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-right {
+        padding-top: 10px;
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-back-button img {
+        width: 16px;
+        height:16px;
+    }
+
+    .artworkOrderDetails-back-button span {
+        font-size: 12px;
+    }
+
+    .artworkOrderDetails-orderInfo-container {
+      
+        gap: 10px;
+    
+    }
+
+    .artworkOrderDetails-info-item {
+   
+        gap: 6px;
+    }
+
+    .artworkOrderDetails-info-item strong {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-info-item span {
+        font-size: 14px;
+    }
+    
+    .artworkOrderDetails-description-container {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-description-container strong {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-description-container p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .artworkOrderDetails-supplementaryImage-container {
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-supplementaryImage-container strong {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-masonry-image {
+        max-width: 140px;
+        margin-bottom: 10px;
+    }
+
+    .artworkOrderDetails-requirement-container {
+       
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-requirement-container h2 {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem strong {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-requirement-infoItem span {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-progress-container {
+        gap: 10px;
+        margin-bottom:20px;
+    }
+
+    .artworkOrderDetails-progress-container h2 {
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-reminder-container {
+        padding: 10px;
+        margin-top:10px;
+        gap: 10px;
+    }
+
+    .artworkOrderDetails-reminder-container h2 {
+        font-size: 14px;
+        line-height: 10px;
+    }
+
+    .artworkOrderDetails-reminder-container p {
+        font-size: 12px;
+        line-height: 25px;
+    }
+
+
+    /*右側區塊*/
+    .artworkOrderDetails-terminate-button {
+        width: 130px;
+        height: 25px;
+        font-size: 14px;
+    }
+
+    .artworkOrderDetails-image-containter {
+        width: 130px;
+        height: 130px;
+    }
+
+    .artworkOrderDetails-id {
+        max-width: 130px;
+        font-size: 12px;
+    }
+
+
 }

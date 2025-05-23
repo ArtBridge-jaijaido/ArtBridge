@@ -88,7 +88,7 @@ const Header = () => {
     }
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const notificationDropdownRef = useRef(null);
-    const notificationDropdownRefmobile = useRef(null); // ✅ 手機版
+    const notificationDropdownRefmobile = useRef(null); //  手機版
     const [notifications, setNotifications] = useState([]);
 
 

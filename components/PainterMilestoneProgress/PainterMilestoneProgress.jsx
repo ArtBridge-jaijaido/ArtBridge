@@ -18,6 +18,20 @@ const PainterMilestoneProgress = ({ milestones, status = false }) => {
 
   }
 
+
+  const getCircleColorClass = (status) => {
+    switch (status) {
+      case "已付款":
+        return "brightBlue";
+      case "已驗收":
+        return "brightBlue";
+      case "確認":
+        return "white";
+      default:
+        return "white";
+    }
+  }
+
   return (
     <div className="painterMilestoneProgress-container">
       {milestones.map((milestone, index) => {
@@ -31,7 +45,7 @@ const PainterMilestoneProgress = ({ milestones, status = false }) => {
           >
             <div className="painterMilestoneProgress-item">
               <div className="painterMilestoneProgress-percent">{percent}</div>
-              <div className="painterMilestoneProgress-circle" />
+              <div className={`painterMilestoneProgress-circle  ${getCircleColorClass(milestone.status)}`} />
               <div className="painterMilestoneProgress-label">{label}</div>
               {status && <div className={`painterMilestoneProgress-status ${getStatusColorClass(milestone.status)}`}>
                 {milestone.status}

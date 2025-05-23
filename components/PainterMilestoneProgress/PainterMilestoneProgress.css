@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     width: 20%; 
-    
+    position:relative;
   }
 
   .painterMilestoneProgress-wrapper.last {
@@ -34,8 +34,16 @@
   .painterMilestoneProgress-circle {
     width: 30px;
     height: 30px;
-    background-color: #A2E2FF;
+    border: 2px solid #A2E2FF;
     border-radius: 50%;
+  }
+
+  .painterMilestoneProgress-circle.brightBlue{
+    background-color: #A2E2FF;
+  }
+
+  .painterMilestoneProgress-circle.white{
+    background-color: #FFF;
   }
   
   .painterMilestoneProgress-label {
@@ -49,25 +57,26 @@
     background-color: #bbdefb;
     flex: 1;
     margin: 0 20px;
-   
+    
   }
 
   .painterMilestoneProgress-status{
+    position:absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #FFF;
     text-align: center;
     font-family: "Noto Sans TC";
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 15px; 
     letter-spacing: 1px;
     width: 68px;
     height: 26px;
-    margin-top:10px;
     border-radius: 20px;
+    bottom: -30px;
   }
 
   .painterMilestoneProgress-status.green {
@@ -84,10 +93,15 @@
     background-color: #8E8E8E;
    
   }
+
+
+  
   
 
 
   @media screen and (max-width: 440px) {
+
+    
 
     .painterMilestoneProgress-item {
         width:40px;
@@ -120,6 +134,18 @@
         margin: 0 5px;
        
       }
+
+      .painterMilestoneProgress-status{
+      
+        font-size: 8px;
+        line-height: 10px; 
+        width: 46px;
+        height: 18px;
+        margin-top:6px;
+        bottom: -20px;
+      }
+
+      
   }
 
   @media screen and (max-width: 370px) {
@@ -128,5 +154,16 @@
         height: 12px;
         
       }
+
+      .painterMilestoneProgress-status{
+      
+        font-size: 8px;
+        line-height: 8px; 
+        width: 40px;
+        height: 16px;
+       
+      
+      }
+
 
   }
