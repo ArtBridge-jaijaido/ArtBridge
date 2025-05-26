@@ -1,60 +1,66 @@
 'use client'
 
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import NotificationItem from "@/components/ArtworkNotification/ArtworkNotificationItem.jsx";
 import "@/components/ArtworkNotification/ArtworkNotificationList.css";
+import {
+  markNotificationAsRead,
+  markNotificationsAsReadBulk,
+} from "@/services/notificationService"; // 使用 service 集中邏輯
+
+import {
+  updateNotification,
+  markAllAsRead as markAllAsReadRedux,
+} from "@/app/redux/feature/notificationSlice";
 
 const NotificationList = forwardRef(function NotificationList({ type }, ref) {
-  const [notifications, setNotifications] = useState([]);
-  const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const [readAll, setReadAll] = useState(false); // ✅ 新增：記錄是否一鍵已讀
+  const dispatch = useDispatch();
+  const notifications = useSelector((state) =>
+    state.notifications.items.filter((n) => n.type === type)
+  );
 
-  useEffect(() => {
-    loadNotifications(page);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  const loadNotifications = async (pageNum) => {
-    const fetched = Array.from({ length: 10 }).map((_, idx) => ({
-      id: `${type}-${pageNum}-${idx}`,
-      title: type === "personal" ? "【個人通知】" : "【系統通知】",
-      content: `這是第 ${pageNum * 10 + idx + 1} 條通知內容`,
-      read: readAll, // ✅ 若一鍵已讀過，新通知預設也為已讀
-    }));
-
-    setNotifications((prev) => [...prev, ...fetched]);
-    if (fetched.length < 10) setHasMore(false);
+  // 點擊單一通知
+  const handleMarkAsRead = async (id) => {
+    try {
+      await markNotificationAsRead(id);
+      const target = notifications.find((n) => n.id === id);
+      if (target) {
+        dispatch(updateNotification({ ...target, isRead: true }));
+      }
+    } catch (error) {
+      console.error(" 更新已讀失敗：", error);
+    }
   };
 
-  const handleLoadMore = () => {
-    setPage((prev) => prev + 1);
+  // 一鍵標記為已讀
+  const markAllAsRead = async () => {
+    try {
+      const ids = notifications.map((n) => n.id);
+      await markNotificationsAsReadBulk(ids);
+      dispatch(markAllAsReadRedux());
+    } catch (error) {
+      console.error(" 一鍵已讀失敗：", error);
+    }
   };
 
-  const markAsRead = (id) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-    );
-  };
-
-  const markAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-    setReadAll(true); // ✅ 讓之後的通知預設為已讀
-  };
-
+  // 給父層 ArtworkNotificationPage 呼叫
   useImperativeHandle(ref, () => ({
     markAllAsRead,
   }));
 
   return (
     <div className="ArtworkNotificationList-list">
-      {notifications.map((n) => (
-        <NotificationItem key={n.id} data={n} onClick={() => markAsRead(n.id)} />
-      ))}
-      {hasMore && (
-        <button className="ArtworkNotificationList-loadMoreBtn" onClick={handleLoadMore}>
-          載入更多
-        </button>
+      {notifications.length === 0 ? (
+        <div className="ArtworkNotificationList-empty">目前尚無通知</div>
+      ) : (
+        notifications.map((n) => (
+          <NotificationItem
+            key={n.id}
+            data={n}
+            onClick={() => handleMarkAsRead(n.id)}
+          />
+        ))
       )}
     </div>
   );

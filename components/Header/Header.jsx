@@ -6,11 +6,18 @@ import UserDropdownMenu from "@/components/UserDropdownMenu/UserDropdownMenu.jsx
 import { useNavigation } from "@/lib/functions.js";
 import useAuthLoading from "@/hooks/useAuthLoading";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { usePathname } from "next/navigation";
 import styles from "./headerButton.module.css";
 import "./Header.css";
 import NotificationDropdown from "@/components/NotificationDropdown/NotificationDropdown.jsx";
+import { markNotificationAsRead } from "@/services/notificationService";
+import { updateNotification } from "@/app/redux/feature/notificationSlice";
+import useNotificationListener from "@/lib/notificationListener";
+
+
+
+
 
 const Header = () => {
     const [isMounted, setIsMounted] = useState(false); // 判斷是否已加載客戶端
@@ -22,10 +29,19 @@ const Header = () => {
     const pathname = usePathname();
     const isLoading = useAuthLoading();
     const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const notifications = useSelector((state) => state.notifications.items);
+    const unreadCount = useSelector((state) => state.notifications.unreadCount);
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const notificationDropdownRef = useRef(null);
+    const notificationDropdownRefmobile = useRef(null);
+
+    useNotificationListener(user?.uid); // 掛上通知監聽（原本是 Provider 負責）
+
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
 
-
+    
 
     // 僅在客戶端加載後執行路徑判斷，避免 SSR 和 CSR 不一致
     useEffect(() => {
@@ -39,7 +55,7 @@ const Header = () => {
     };
 
     const toggleDropdown = (e) => {
-       
+
         setIsDropdownOpen((prev) => !prev);
     };
     
@@ -86,10 +102,7 @@ const Header = () => {
         setTimeout(() => setIsLoading(false), 1000);
         setIsMenuOpen(false); // 關閉菜單
     }
-    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-    const notificationDropdownRef = useRef(null);
-    const notificationDropdownRefmobile = useRef(null); // ✅ 手機版
-    const [notifications, setNotifications] = useState([]);
+
 
 
 
@@ -104,29 +117,20 @@ const Header = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-    
-    //控制傳入通知panel 的資料數量與內容
-    useEffect(() => {
-        const personal = Array.from({ length: 5 }).map((_, i) => ({
-          id: `personal-${i}`,
-          title: '【個人通知】',
-          content: `這是個人通知 ${i + 1}`,
-          read: false,
-        }));
-        const system = Array.from({ length: 5 }).map((_, i) => ({
-          id: `system-${i}`,
-          title: '【系統通知】',
-          content: `這是系統通知 ${i + 1}`,
-          read: true,
-        }));
-        setNotifications([...personal, ...system]);
-      }, []);
-      
-      const markAsRead = (id) => {
-        setNotifications((prev) =>
-          prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-        );
+
+    const markAsRead = async (id) => {
+        try {
+          await markNotificationAsRead(id); // 更新 Firestore
+          const notification = notifications.find((n) => n.id === id);
+          if (notification) {
+            dispatch(updateNotification({ ...notification, isRead: true }));
+          }
+        } catch (err) {
+          console.error(" 更新通知為已讀失敗", err);
+        }
       };
+
+      
     
     //點擊外部關閉通知小視窗
     useEffect(() => {
@@ -168,9 +172,11 @@ const Header = () => {
                         onClick={() => setIsNotificationOpen(prev => !prev)}
                     >
                         <img src="/images/icons8-bell-96-1.png" alt="通知" />
-                        <span className="header-notification-badge">
-                            {notifications.filter(n => !n.read).length}
-                        </span>
+                        {unreadCount > 0 && (
+                            <span className="header-notification-badge">
+                                {unreadCount}
+                            </span>
+                        )}
                     </div>
 
                         {isNotificationOpen && (
@@ -237,7 +243,7 @@ const Header = () => {
                 {user ? (
                     <div className="header-loginUser-buttons" >
                         <div
-                            className="header-notification-wrapper" // ✅ 新加這層
+                            className="header-notification-wrapper" // 新加這層
                             ref={notificationDropdownRef}
                         >
                         <div
@@ -245,9 +251,11 @@ const Header = () => {
                             onClick={() => setIsNotificationOpen(prev => !prev)}
                         >
                             <img src="/images/icons8-bell-96-1.png" alt="通知" />
-                            <span className="header-notification-badge">
-                                {notifications.filter(n => !n.read).length}
-                            </span>
+                            {unreadCount > 0 && (
+                                <span className="header-notification-badge">
+                                    {unreadCount}
+                                </span>
+                            )}
                         </div>
 
                         {isNotificationOpen && (

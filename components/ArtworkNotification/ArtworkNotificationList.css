@@ -35,23 +35,48 @@
   color: #0070f3;
 }
 
+.ArtworkNotificationList-empty {
+  font-size: 20px;
+  color: #525252;
+  display: flex;
+  height: 450px;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 1280px) {
   .ArtworkNotificationList-loadMoreBtn {
     font-size: 20px;
+  }
+  .ArtworkNotificationList-empty {
+    font-size: 18px;
+    height: 420px;
   }
 }
 @media screen and (max-width: 834px) {
   .ArtworkNotificationList-loadMoreBtn {
     font-size: 18px;
   }
+  .ArtworkNotificationList-empty {
+    font-size: 16px;
+    height: 280px;
+  }
 }
 @media screen and (max-width: 440px) {
   .ArtworkNotificationList-loadMoreBtn {
     font-size: 12px;
   }
+  .ArtworkNotificationList-empty {
+    font-size: 11px;
+    height: 280px;
+  }
 }
 @media screen and (max-width: 370px) {
   .ArtworkNotificationList-loadMoreBtn {
     font-size: 10px;
+  }
+  .ArtworkNotificationList-empty {
+    font-size: 9px;
+    height: 240px;
   }
 }

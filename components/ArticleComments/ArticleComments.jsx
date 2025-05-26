@@ -5,6 +5,8 @@ import "./ArticleComment.css";
 import { useSelector } from 'react-redux';
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { usePathname } from "next/navigation";
+import { triggerNotificationOnComment } from "@/services/notificationService"; 
+
 
 
 const ArticleComment = ({ userUid, articleId }) => {
@@ -111,6 +113,16 @@ const ArticleComment = ({ userUid, articleId }) => {
       content: newComment,
       userUid: currentUser.uid,
     });
+
+    // 新增通知（通知給文章作者）
+    if (userUid !== currentUser.uid) {
+      await triggerNotificationOnComment({
+        targetUserId: userUid,
+        commenterUid: currentUser.uid,
+        articleId,
+        commentContent: newComment,
+      });
+    }
 
     setNewComment("");
   };
