@@ -28,6 +28,7 @@ const PainterApplicantCard = ({
         artistUid: artistUid,
         expectedDays: expectedDays,
         expectedPrice: expectedPrice,
+        type: "entrust"
       }),
     });
   

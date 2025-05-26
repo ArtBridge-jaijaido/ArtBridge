@@ -30,7 +30,7 @@
 
 @media screen and (max-width:834px){
 
-    .ConsumerOrdersManagement-currentCase-container{
+    .consumerOrdersManagement-currentCase-container{
     
         grid-template-columns: 1fr;
         gap:30px;

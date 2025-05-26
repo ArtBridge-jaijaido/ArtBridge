@@ -48,11 +48,13 @@ const ArtworkConsumerProfilePage = () => {
         const startDate = new Date(entrust.startDate);
         const endDate = new Date(entrust.endDate);
 
+        const isActive = entrust.isActive === true;
+
         // 確保 startDate 和 endDate 是有效的日期
         if (isNaN(startDate) || isNaN(endDate)) return false;
 
         // 確保作品目前在上架期間內
-        return today <= endDate;
+        return isActive && today <= endDate;
     });
 
     const entrustTotalItems = filteredEntrusts.length; // 總數

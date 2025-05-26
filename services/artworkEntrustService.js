@@ -55,6 +55,7 @@ export const uploadEntrust = async (userUid, userSerialId, formData) => {
       exampleImageUrl,
       supplementaryImageUrls,
       applicationCount: 0,
+      issActive: true,
       createdAt: new Date().toISOString(),
     };
 

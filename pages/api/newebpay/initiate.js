@@ -22,17 +22,32 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end("Method Not Allowed");
 
 
-  const { artistNickname, amount, orderId, artistUid, expectedDays, expectedPrice } = req.body;
+  const { artistNickname, amount, orderId, artistUid, expectedDays, expectedPrice,type } = req.body;
 
-  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays || !expectedPrice) {
+  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays || !expectedPrice || !type ) {
     return res.status(400).send("missing required fields");
   }
 
-  const uniqueOrderNo = `${orderId}_${Date.now()}`;
+  const uniqueOrderNo = `${type}_${orderId}_${Date.now()}`; 
+  let clickBackURL = "";
+  let itemDesc = "";
+  let tradeTempStoragePromise = Promise.resolve();
 
-
-  // 暫存繪師資料
-  await pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
+  switch (type) {
+      case "entrust":
+        clickBackURL = "https://5d3d-114-46-27-46.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
+        itemDesc = `繪師委託-${artistNickname}`;
+        tradeTempStoragePromise = pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
+        break;
+      case "market":
+     
+        break;
+    default:
+      return res.status(400).send("無效的付款類型");
+}
+       
+  
+  await tradeTempStoragePromise; 
 
 
   const tradeInfoObject = {
@@ -42,10 +57,10 @@ export default async function handler(req, res) {
     Version: "2.0",
     MerchantOrderNo: uniqueOrderNo,
     Amt: amount,
-    ItemDesc: `繪師委託-${artistNickname}`,
-    ReturnURL: "https://ce29-1-168-22-210.ngrok-free.app/api/newebpay/return", 
-    NotifyURL: "https://ce29-1-168-22-210.ngrok-free.app/api/newebpay/notify", 
-    ClientBackURL: "https://ce29-1-168-22-210.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement"
+    ItemDesc: itemDesc,
+    ReturnURL: "https://5d3d-114-46-27-46.ngrok-free.app/api/newebpay/return", 
+    NotifyURL: "https://5d3d-114-46-27-46.ngrok-free.app/api/newebpay/notify", 
+    ClientBackURL: clickBackURL
   };
 
   const tradeInfoStr = new URLSearchParams(tradeInfoObject).toString();

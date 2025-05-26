@@ -95,6 +95,8 @@ const ArtworkEntrustLobby = () => {
         // 檢查是否在上架時間內
         const isOnSale = today <= endDate;
 
+        // isActive 條件
+        const isActive = entrust.isActive === true;
 
         // 類別過濾條件
         const isMatchingCategory = selectedOptions.category === "類別選擇"
@@ -134,7 +136,7 @@ const ArtworkEntrustLobby = () => {
 
 
 
-        return isOnSale && isMatchingCategory && isMatchingStyle && isMatchingPriceRange && isMatchingDeadline && isMatchingBusiness;
+        return isOnSale && isActive && isMatchingCategory && isMatchingStyle && isMatchingPriceRange && isMatchingDeadline && isMatchingBusiness;
     });
 
 

@@ -15,7 +15,7 @@ export const store = configureStore({
     painterPortfolio: painterPortfolioReducer, // 添加畫師作品集狀態管理的 reducer
     painterArticle: painterArticleReducer, // 添加畫家文章狀態管理的 reducer
     entrust: entrustReducer, // 添加委託狀態管理的 reducer
-    artworkOrder: artworkOrderReducer, 
+    artworkOrder: artworkOrderReducer, // 添加artwork訂單狀態管理的 reducer
  
   },
 });

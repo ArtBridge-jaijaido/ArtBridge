@@ -27,8 +27,6 @@ const ArtworkEntrustMarketPage = () => {
         setIsLoading(true);
         const fetchedEntrusts = await fetchUserEntrusts(userUid);
 
-        console.log("Fetched Entrusts:", fetchedEntrusts);
-
         const currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
 
@@ -36,8 +34,13 @@ const ArtworkEntrustMarketPage = () => {
         const history = [];
 
         fetchedEntrusts.forEach((entrust) => {
+
             const endDate = new Date(entrust.endDate);
-            if (currentDate <= endDate) {
+
+            const isActive = entrust.isActive === true;
+            const isNotExpired = currentDate <= endDate;
+
+            if (isActive && isNotExpired) {
                 active.push(entrust);
             } else {
                 history.push(entrust);

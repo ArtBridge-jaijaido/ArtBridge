@@ -32,8 +32,6 @@ export const updateOrderAfterPaymentAdmin = async (orderId) => {
     endDate = today.toISOString().split("T")[0]; // 只保留日期部分，如 2025-05-21
     }
 
-    console.log("endDate", endDate);
-
     await orderRef.update({
       artworkOrderMilestones: updatedMilestones,
       assignedPainterUid: orderData.pendingPainterArtistUid,
@@ -49,9 +47,7 @@ export const updateOrderAfterPaymentAdmin = async (orderId) => {
 };
 
 export const pendingPainterTempData = async (orderId, artistUid, expectedDays, expectedPrice) => {
-    try {
-        console.log("test")
-    console.log(orderId);
+    try {   
       const orderRef = adminDb.doc(`artworkOrders/${orderId}`);
       const orderSnap = await orderRef.get();
   
