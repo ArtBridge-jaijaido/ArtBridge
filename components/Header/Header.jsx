@@ -13,7 +13,6 @@ import "./Header.css";
 import NotificationDropdown from "@/components/NotificationDropdown/NotificationDropdown.jsx";
 import { markNotificationAsRead } from "@/services/notificationService";
 import { updateNotification } from "@/app/redux/feature/notificationSlice";
-import useNotificationListener from "@/lib/notificationListener";
 
 
 
@@ -36,7 +35,7 @@ const Header = () => {
     const notificationDropdownRef = useRef(null);
     const notificationDropdownRefmobile = useRef(null);
 
-    useNotificationListener(user?.uid); // 掛上通知監聽（原本是 Provider 負責）
+
 
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
