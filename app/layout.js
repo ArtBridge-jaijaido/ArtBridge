@@ -16,7 +16,6 @@ import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import useNotificationListener from "@/lib/notificationListener";
 
 
 import "./globals.css";
@@ -48,8 +47,6 @@ export default function RootLayout({ children }) {
   const [userId, setUserId] = useState(null); // 新增 userId
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
   const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
-
-  useNotificationListener(userId); // 掛載通知監聽，userId 是登入者
 
 
   //  透過 API 獲取 HttpOnly Cookie 內的 token

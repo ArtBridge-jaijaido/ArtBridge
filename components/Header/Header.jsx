@@ -13,6 +13,7 @@ import "./Header.css";
 import NotificationDropdown from "@/components/NotificationDropdown/NotificationDropdown.jsx";
 import { markNotificationAsRead } from "@/services/notificationService";
 import { updateNotification } from "@/app/redux/feature/notificationSlice";
+import useNotificationListener from "@/lib/notificationListener";
 
 
 
@@ -39,6 +40,8 @@ const Header = () => {
 
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
+
+    useNotificationListener(user?.uid); // 掛載通知監聽，userId 是登入者
 
     
 
@@ -146,7 +149,7 @@ const Header = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
       }, []);
       
-      
+
 
     if (!showHeader || isLoading) return null; //如果還在 loading，完全不渲染 Header
 
