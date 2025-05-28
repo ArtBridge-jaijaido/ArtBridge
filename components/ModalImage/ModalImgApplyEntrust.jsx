@@ -7,6 +7,8 @@ import { handlePainterApplyEntrust, checkIfPainterApplied } from "@/services/art
 import { useDispatch } from "react-redux";
 import { updateEntrust} from "@/app/redux/feature/entrustSlice.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
+import { triggerNotificationOnApply } from "@/services/notificationService";
+
 
 const ModalImgApplyEntrust = ({
     isOpen,
@@ -41,6 +43,12 @@ const ModalImgApplyEntrust = ({
     };
 
     const handleConfirmApply = async () => {
+        // 新增登入狀態檢查
+        if (!currentUser || !currentUser.uid) {
+            addToast("error", "請先登入後再應徵");
+            console.error("未登入使用者，無法應徵");
+            return;
+        }
 
       
         
@@ -75,6 +83,16 @@ const ModalImgApplyEntrust = ({
             });
 
             console.log(entrustData.entrustId)
+            // 新增 log 檢查登入使用者 uid
+            console.log("觸發通知 userId:", currentUser.uid);
+
+            await triggerNotificationOnApply({
+                targetUserId: entrustData.userUid,
+                artistUid: currentUser.uid,
+                entrustTitle: entrustData.marketName || "未命名委託",
+                entrustId: entrustData.entrustId
+              });   //新增通知
+                          
 
             dispatch(updateEntrust({
                 entrustId: entrustData.entrustId,
@@ -84,7 +102,7 @@ const ModalImgApplyEntrust = ({
             addToast("success", "應徵成功！");
             onClose();
           } catch (err) {
-            console.error("❌ 應徵失敗:", err);
+            console.error(" 應徵失敗:", err);
             addToast("error", "應徵失敗，請稍後再試");
           }finally{
             setIsSaving(false);

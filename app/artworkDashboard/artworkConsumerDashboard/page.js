@@ -53,6 +53,8 @@ const ConsumerDashboard = () => {
     }
   }
 
+  const unreadCount = useSelector((state) => state.notifications.unreadCount);
+
   if (isAuthLoading) {
     return null;
   }
@@ -102,8 +104,13 @@ const ConsumerDashboard = () => {
               <span onClick={(e) => handleNavigateTo(e, "artworkOrdersManagement")}>案件管理</span>
             </div>
             <div className="ConsumerDashboard-option-item">
-              <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
-              <span>我的通知</span>
+              <div className="ConsumerDashboard-icon-wrapper">
+                <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
+                {unreadCount > 0 && (
+                    <span className="ConsumerDashboard-badge">{unreadCount}</span>
+                )}
+              </div>
+              <span onClick={(e) => handleNavigateTo(e, "artworkNotification")}>我的通知</span>
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-impression-64-1.png" alt="icon" className="artworkConsumerDashboardIcon" />

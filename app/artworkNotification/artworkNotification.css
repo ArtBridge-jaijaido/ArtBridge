@@ -31,7 +31,7 @@
 }
 
 .artworkNotification-container {
-  max-height: 450px;  /* 可視高度 */
+  height: 450px;  /* 固定高度 */
   max-width: 1310px;
   width: 100%;
   overflow-y: auto;
@@ -94,7 +94,7 @@
     margin-bottom: 25px;
   }
   .artworkNotification-container {
-    max-height: 420px;  /* 可視高度 */
+    height: 420px;  /* 可視高度 */
   }
 
 }
@@ -115,7 +115,7 @@
     margin-bottom: 30px;
   }
   .artworkNotification-container {
-    max-height: 420px;  /* 可視高度 */
+    height: 420px;  /* 可視高度 */
   }
 
 }
@@ -135,7 +135,7 @@
     margin-bottom: 20px;
   }
   .artworkNotification-container {
-    max-height: 280px;  /* 可視高度 */
+    height: 280px;  /* 可視高度 */
   }
 
   
@@ -156,7 +156,7 @@
     margin-bottom: 20px;
   }
   .artworkNotification-container {
-    max-height: 240px;  /* 可視高度 */
+    height: 240px;  /* 可視高度 */
   }
 
 }

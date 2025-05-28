@@ -136,8 +136,11 @@
     justify-content: center;
     line-height: 1;
     box-sizing: border-box;
+
     aspect-ratio: 1/1;
   }
+
+
 
 
 .header-user-avatar{

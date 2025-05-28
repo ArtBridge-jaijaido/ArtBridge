@@ -208,6 +208,7 @@
 .artworkDashboardIcon {
     width: 40px;
     height: 40px;
+    min-width: 40px;
 
 }
 
@@ -313,6 +314,30 @@
 
 }
 
+.PainterDashboard-icon-wrapper {
+  position: relative;
+}
+
+.PainterDashboard-badge {
+    position: absolute;
+    top: -4px;
+    left: -5px;
+    background-color: #FF3E3E;
+    color: white !important;
+    font-size: 12px;
+    font-weight: 600;
+    width: 26px;
+    height: 26px;
+    padding: 0 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-sizing: border-box;
+    aspect-ratio: 1/1;;
+}
+
 
 
 /*RWD*/
@@ -400,6 +425,7 @@
     .artworkDashboardIcon {
         width: 35px;
         height: 35px;
+        min-width: 35px;
 
     }
 
@@ -444,6 +470,12 @@
         max-width: 180px;
     }
 
+    .PainterDashboard-badge {
+        font-size: 10px;
+        width: 22px;
+        height: 22px;
+    }
+
 
 }
 
@@ -465,6 +497,8 @@
     .PainterDashboardPage {
         width: 968px;
     }
+
+
 }
 
 
@@ -560,6 +594,7 @@
     .artworkDashboardIcon {
         width: 28px;
         height: 28px;
+        min-width: 28px
 
     }
 
@@ -571,6 +606,12 @@
         max-width: none;
         height: 220px;
         padding: 30px 55px;
+    }
+
+    .PainterDashboard-badge {
+        font-size: 10px;
+        width: 20px;
+        height: 20px;
     }
 
 
@@ -662,6 +703,7 @@
     .artworkDashboardIcon {
         width: 22px;
         height: 22px;
+        min-width: 22px;
 
     }
 
@@ -703,6 +745,12 @@
 
     .PainterDashboard-commission-process-right {
         max-width: 140px;
+    }
+
+    .PainterDashboard-badge {
+        font-size: 8px;
+        width: 14px;
+        height: 14px;
     }
 
 }
@@ -751,6 +799,7 @@
     .artworkDashboardIcon {
         width: 18px;
         height: 18px;
+        min-width: 18px;
 
     }
 
