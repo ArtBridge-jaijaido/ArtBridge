@@ -13,7 +13,7 @@ import "./Header.css";
 import NotificationDropdown from "@/components/NotificationDropdown/NotificationDropdown.jsx";
 import { markNotificationAsRead } from "@/services/notificationService";
 import { updateNotification } from "@/app/redux/feature/notificationSlice";
-import useNotificationListener from "@/lib/notificationListener";
+import NotificationListener from "@/lib/notificationListener";
 
 
 
@@ -41,7 +41,7 @@ const Header = () => {
     // 指定不需要顯示 Header 的路徑
     const noHeaderRoutes = ["/login", "/register", "/emailValidation"];
 
-    useNotificationListener(user?.uid); // 掛載通知監聽，userId 是登入者
+    NotificationListener(user?.uid); // 掛載通知監聽，userId 是登入者
 
     
 
