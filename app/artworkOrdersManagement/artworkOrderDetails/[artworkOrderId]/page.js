@@ -28,11 +28,10 @@ export default function ArtworkOrderDetailsPage() {
             setLoading(false);
         };
 
-
         getOrderData();
     }, [artworkOrderId]);
 
-
+   
 
     if (loading) return <p>載入中...</p>;
 

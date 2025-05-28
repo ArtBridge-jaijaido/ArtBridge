@@ -176,6 +176,7 @@ export default function ArtworkDetailPage({ params }) {
         setTimeout(() => setIsLoading(false), 1000);
     }
 
+    
 
     // loading 狀態
     if (loading) return <p>載入中...</p>;
@@ -239,7 +240,7 @@ export default function ArtworkDetailPage({ params }) {
                     <div className="artworkDetails-buttonRow">
                         <button className="artworkDetails-buy-button" onClick={handleBuyArtworkModalOpen}>
                             <img src="/images/icons8-pay-96-1.png" alt="buyIcon" />
-                            我要購買
+                            我要下訂
                         </button>
                         <button className="artworkDetails-like-button"
                             onClick={handleToggleLike}
@@ -319,7 +320,7 @@ export default function ArtworkDetailPage({ params }) {
                 <h2>流程圖</h2>
 
                 <div className="artworkDetails-progress-container">
-                    <PainterMilestoneProgress milestones={painterMilestone} />
+                    <PainterMilestoneProgress milestones={painterMilestone}/>
                 </div>
             </div>
 

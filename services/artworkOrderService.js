@@ -10,9 +10,8 @@ import {
   increment,
 
 } from "firebase/firestore";
-import { uploadPainterResumePdf  } from "@/services/storageService.js";
+import { uploadPainterResumePdf,uploadImage  } from "@/services/storageService.js";
 import { ref, listAll, deleteObject } from "firebase/storage";
-
 
 // 建立委託訂單
 export const createOrderFromEntrust = async (entrustData) => {
@@ -84,9 +83,21 @@ export const createOrderFromEntrust = async (entrustData) => {
 };
 
 // 建立市集訂單
-export const createOrderFromMarket = async (marketData,painterMilestone,currentUser) => {
+export const createOrderFromMarket = async (marketData,painterMilestone,currentUser, referenceFile ,customRequirement ) => {
   try {
     const artworkOrderId = await generateOrderSerial();
+
+    
+    // 上傳 reference image
+    let referenceImageUrl = "";
+    if (referenceFile) {
+      const imagePath = `artworkOrders/${artworkOrderId}/reference.jpg`;
+      referenceImageUrl = await uploadImage(referenceFile, imagePath);
+
+      if (!referenceImageUrl) {
+        throw new Error("參考圖片上傳失敗");
+      }
+    }
 
     // 複製圖片（如有需要，這裡可以加入圖片複製 API 呼叫邏輯）
     const copyRes = await fetch("/api/copyMarketImage", {
@@ -136,6 +147,9 @@ export const createOrderFromMarket = async (marketData,painterMilestone,currentU
       assignedPainterUid: marketData.userUid,
       artworkOrderMilestones: painterMilestone,
       currentMilestoneIndex: 0,
+      referenceImageUrl: referenceImageUrl, // 參考圖片 URL
+      customRequirement: customRequirement || "", // 使用者自訂需求
+
     };
 
     const orderRef = doc(db, "artworkOrders", artworkOrderId);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
+import {createOrderFromMarket} from "@/services/artworkOrderService.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
 
 import "./ModalImgBuyArtwork.css";
@@ -15,34 +16,59 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
   const  [isSaving, setIsSaving] = useState(false); 
   const { addToast } = useToast();
   const [customRequirement, setCustomRequirement] = useState("");
-  const [referenceFiles, setReferenceFiles] = useState([]);
+  const [referenceFile, setReferenceFile] = useState(null);
 
   const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
+    const file = e.target.files?.[0]; 
   
-    const validImages = files.filter((file) =>
-      ["image/jpeg", "image/png"].includes(file.type)
-    );
+    if (!file) return;
   
-    const combined = [...referenceFiles, ...validImages];
-  
-    if (combined.length > 3) {
-      addToast("error", "最多只能上傳 3 張參考圖片");
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+      addToast("error", "請上傳 JPG 或 PNG 格式的圖片");
       return;
     }
   
-    setReferenceFiles(combined);
+    setReferenceFile(file); 
+    e.target.value = ""; 
   };
-  
-  
+
 
   const handleConfirmPurchase = async () => {
+    if (!customRequirement.trim()) {
+      addToast("error", "請填寫詳細需求");
+      return;
+    }
+  
+    if (!referenceFile) {
+      addToast("error", "請上傳一張參考圖片");
+      return;
+    }
+  
+    setIsSaving(true);
 
-
-  }
- 
-
-
+    try {
+      const result = await createOrderFromMarket(
+        artwork,              // marketData
+        painterMilestone,     // painterMilestone
+        currentUser,          // currentUser
+        referenceFile,        // 使用者上傳的參考圖
+        customRequirement     // 使用者填寫的需求說明
+      );
+  
+      if (result.success) {
+        addToast("success", "市集訂單建立成功！");
+        onClose(); 
+      } else {
+        addToast("error", "建立訂單失敗，請稍後再試");
+      }
+    } catch (error) {
+      console.error("建立訂單時發生錯誤:", error);
+      addToast("error", "建立訂單時發生錯誤，請稍後再試");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+  
   return (
     <div className="ModalImgBuyArtwork-modal-overlay" onClick={onClose}>
       <div className="ModalImgBuyArtwork-modal" onClick={(e) => e.stopPropagation()}>
@@ -58,8 +84,6 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
           <p>{artwork.marketName || "商品標題（至多8字）"}</p>
         </div>
 
-        {/* <img src={artworkImageUrl} alt="預覽圖" className="ModalImgBuyArtwork-preview-img" /> */}
-
         <div className="ModalImgBuyArtwork-section">
           <label className="ModalImgBuyArtwork-label">詳細需求：</label>
           <textarea
@@ -70,7 +94,7 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
           />
         </div>
         <div className="ModalImgBuyArtwork-section">
-        <label className="ModalImgBuyArtwork-label">上傳參考圖片（點擊欄位以選擇）：</label>
+        <label className="ModalImgBuyArtwork-label">上傳參考圖片（JPG或PNG）：</label>
 
         {/* 隱藏的 file input */}
         <input
@@ -78,7 +102,6 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
           id="hiddenFileInput"
           style={{ display: "none" }}
           accept="image/jpeg,image/png"
-          multiple
           onChange={handleImageUpload}
         />
 
@@ -86,17 +109,12 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
         <input
           type="text"
           className="ModalImgBuyArtwork-filename-display"
-          value={referenceFiles.map((file) => file.name).join("、")}
+          value={referenceFile?.name || ""}
           readOnly
-          placeholder="請選擇參考圖片（最多5張）"
+          placeholder="點擊欄位以選擇"
           onClick={() => document.getElementById("hiddenFileInput").click()}
         />
       </div>
-
-
-
-
-
 
         <div className="ModalImgBuyArtwork-detail-row">
           <p>金額：{artwork.price}元</p>
@@ -105,7 +123,14 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
 
         <div className="ModalImgBuyArtwork-buttons">
           <button className="ModalImgBuyArtwork-cancel" onClick={onClose}>取消</button>
-          <button className="ModalImgBuyArtwork-confirm">確認購買</button>
+          <LoadingButton
+                        className="ModalImgBuyArtwork-confirm"
+                        onClick={handleConfirmPurchase }
+                        isLoading={isSaving}
+                        loadingText="請稍後..."
+                    >
+                       確認下訂
+                    </LoadingButton>
         </div>
       </div>
     </div>
