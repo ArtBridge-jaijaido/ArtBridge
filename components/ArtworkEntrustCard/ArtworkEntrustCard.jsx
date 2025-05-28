@@ -24,7 +24,7 @@ const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, mar
   const user = useSelector((state) => state.user);
   const { setIsLoading } = useLoading();
   const navigate = useNavigation();
-  const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
+  const artworkOrders = useSelector((state) => state.artworkOrder.consumerOrders);
  
 
   // 檢查描述文字是否超過 35 字
@@ -36,6 +36,9 @@ const ArtworkEntrustCard = ({ entrustId, entrustNickname, entrustProfileImg, mar
     e.stopPropagation();
     const confirm = window.confirm(`確定要刪除委託「${marketName}」嗎？`);
     if (!confirm) return;
+
+
+   
 
     const linkedOrder = artworkOrders.find(
       (order) => order.fromEntrustId === entrustId
