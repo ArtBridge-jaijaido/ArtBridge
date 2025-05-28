@@ -120,6 +120,7 @@ const PainterDashboard = () => {
 
             </div>
             <div className="PainterDashboard-option-item">
+
               <div className="PainterDashboard-icon-wrapper">
                 <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkDashboardIcon" />
                 {unreadCount > 0 && (
@@ -127,6 +128,7 @@ const PainterDashboard = () => {
                 )}
               </div>
               <span onClick={(e) => handleNavigateTo(e, "artworkNotification")}>我的通知</span>
+
 
             </div>
             <div className="PainterDashboard-option-item">

@@ -10,7 +10,7 @@ import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import { subscribeToEntrusts } from "@/lib/entrustListener";
-import { subscribeToConsumerOrders } from "@/lib/artworkOrdersListener";
+import { subscribeToConsumerOrders,subscribeToPainterOrders  } from "@/lib/artworkOrdersListener";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -47,6 +47,7 @@ export default function RootLayout({ children }) {
   const [userId, setUserId] = useState(null); // 新增 userId
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
   const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
+  const [unsubscribePainterOrders, setUnsubscribePainterOrders] = useState(null);
 
 
   //  透過 API 獲取 HttpOnly Cookie 內的 token
@@ -72,6 +73,9 @@ export default function RootLayout({ children }) {
 
         const unsubscribe = subscribeToConsumerOrders(user.uid);
         setUnsubscribeConsumerOrders(() => unsubscribe);
+
+        const unsubscribePainter = subscribeToPainterOrders(user.uid);
+        setUnsubscribePainterOrders(() => unsubscribePainter);
         
 
         const newToken = await user.getIdToken();
@@ -83,6 +87,8 @@ export default function RootLayout({ children }) {
         setToken(null);
         if (unsubscribeConsumerOrders) unsubscribeConsumerOrders(); //  清除 listener
         setUnsubscribeConsumerOrders(null);
+        if (unsubscribePainterOrders) unsubscribePainterOrders(); //  清除 listener
+        setUnsubscribePainterOrders(null);
       }
     });
 

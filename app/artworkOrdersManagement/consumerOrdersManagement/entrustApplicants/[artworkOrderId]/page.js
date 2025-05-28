@@ -45,6 +45,8 @@ const EntrustApplicantsPage = () => {
              return(
             <PainterApplicantCard
               key={index}
+              artworkOrderId={artworkOrderId}
+              artistUid={applicant.painterUid}
               artistNickname={user?.nickname || "使用者名稱"}
               artistProfileImg={user?.profileAvatar ||"/images/kv-min-4.png"}
               expectedDays={applicant.expectedDays}

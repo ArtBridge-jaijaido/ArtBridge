@@ -1,26 +1,24 @@
 "use client";
-import { useEffect } from "react";
+import {useState, useEffect } from "react";
 import { notoSansTCClass } from '@/app/layout.js';
 import ArtworkOrderManagementTabs from '@/components/Tabs/ArtworkOrderManagementTab';
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
 import "./consumerOrdersManagement.css";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 
 const ConsumerOrdersManagementPage = () => {
   
-
-    const artworkOrders = useSelector((state) => state.artworkOrder.artworkOrders);
-
- 
   
+    const consumerOrders = useSelector((state) => state.artworkOrder.consumerOrders);
+
+   
     const tabs = [
         {
             label: "目前案件",
             content: (
-              <div className="ConsumerOrdersManagement-currentCase-container">
-                {[...artworkOrders]
+              <div className="consumerOrdersManagement-currentCase-container">
+                {[...consumerOrders]
                   .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
                   .map((order, index) => (
                     <ArtworkOrderCard
@@ -30,6 +28,7 @@ const ConsumerOrdersManagementPage = () => {
                       OrderTitle={order.marketName}
                       OrderSource={order.orderSource}
                       OrderEndDate={order.endDate}
+                      OrderAssignedPainter={order.assignedPainterUid}
                       orderId={order.artworkOrderId}
                       imageUrl={order.exampleImageUrl || ""}
                     />

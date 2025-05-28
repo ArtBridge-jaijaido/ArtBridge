@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import "./OfficialFlowConfig.css";
+import PainterMilestoneProgress from "@/components/PainterMilestoneProgress/PainterMilestoneProgress.jsx";
 
 
 const OfficialFlowConfig = () => {
@@ -14,7 +15,7 @@ const OfficialFlowConfig = () => {
 
   return (
     <div className="officialFlowConfig-wrapper">
-      <div className="officialFlowConfig-container">
+      {/* <div className="officialFlowConfig-container">
         <div className="officialFlowConfig-list">
           {officialMilestones.map((m, index) => (
             <React.Fragment key={m.id}>
@@ -28,6 +29,9 @@ const OfficialFlowConfig = () => {
               )}
             </React.Fragment>
           ))}
+        </div> */}
+        <div className="officialFlowConfig-painterMilestoneProgress-container">
+         <PainterMilestoneProgress milestones={officialMilestones} />
         </div>
 
         <div className="officialFlowConfig-banner">
@@ -38,7 +42,7 @@ const OfficialFlowConfig = () => {
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 };
 

@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateUser } from "@/app/redux/feature/userSlice.js";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx"; 
+import PainterMilestoneProgress from "@/components/PainterMilestoneProgress/PainterMilestoneProgress.jsx";
+
 
 const CustomFlowConfig = () => {
   const { addToast } = useToast();
@@ -85,7 +87,8 @@ const CustomFlowConfig = () => {
       percentSet.add(percentNum);
       intermediateMilestones.push({
         label: `${percentNum}% ${name}`,
-        percent: percentNum
+        percent: percentNum,
+        status: "等待中"
       });
     }
 
@@ -155,7 +158,8 @@ const CustomFlowConfig = () => {
       percentSet.add(percentNum);
       intermediateMilestones.push({
         label: `${percentNum}% ${name}`,
-        percent: percentNum
+        percent: percentNum,
+        status: "等待中" 
       });
     }
 
@@ -185,7 +189,7 @@ const CustomFlowConfig = () => {
     <div className="customFlowConfig-wrapper">
       <div className="customFlowConfig-container">
         {/* 流程預覽 */}
-        <div className="customFlowConfig-list">
+        {/* <div className="customFlowConfig-list">
           {milestones.map((m, index) => (
             <React.Fragment key={index}>
               <div className="customFlowConfig-item">
@@ -196,7 +200,15 @@ const CustomFlowConfig = () => {
               {index !== milestones.length - 1 && <div className="customFlowConfig-connector-line" />}
             </React.Fragment>
           ))}
-        </div>
+        </div> */}
+     <div className="customFlowConfig-painterMilestoneProgress-container">
+        <PainterMilestoneProgress
+          milestones={milestones.map((m) => ({
+            ...m,
+            id: `${m.percent}-${m.label}`,
+          }))}
+        />
+      </div>
 
         <div className="customFlowConfig-divider" />
 

@@ -81,7 +81,9 @@
   }
   .notificationDropdown-panel {
     width: 400px;
-    height: 400px;
+
+   
+
   }
   .notificationDropdown-panel .ArtworkNotificationItem-item {
     padding: 20px;
@@ -104,7 +106,7 @@
   }
   .notificationDropdown-panel {
     width: 280px;
-    height: 400px;
+   
   }
   .notificationDropdown-panel .ArtworkNotificationItem-item {
     padding: 15px;

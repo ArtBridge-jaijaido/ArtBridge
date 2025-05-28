@@ -3,6 +3,8 @@ import React from "react";
 import "./PainterApplicantCard.css";
 
 const PainterApplicantCard = ({
+  artworkOrderId,
+  artistUid,
   artistNickname,
   artistProfileImg,
   expectedDays,
@@ -12,9 +14,40 @@ const PainterApplicantCard = ({
   reputationScore,
   monthlyStats = [],
 }) => {
+
+  const handleAssignArtist = async () => {
+   
+
+    const res = await fetch("/api/newebpay/initiate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        artistNickname,
+        amount: expectedPrice.toString(),
+        orderId: artworkOrderId,
+        artistUid: artistUid,
+        expectedDays: expectedDays,
+        expectedPrice: expectedPrice,
+        type: "entrust"
+      }),
+    });
+  
+    const html = await res.text();
+  
+    
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+  
+    
+    window.location.href = url;
+  };
+  
+
+
+
   return (
     <div className="PainterApplicantCard-wrapper">
-      <div className="PainterApplicantCard-header-buttom">
+      <div className="PainterApplicantCard-header-buttom" onClick={handleAssignArtist}>
         選定繪師
       </div>
 

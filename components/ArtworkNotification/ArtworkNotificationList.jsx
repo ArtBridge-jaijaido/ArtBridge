@@ -9,10 +9,12 @@ import {
   markNotificationsAsReadBulk,
 } from "@/services/notificationService"; // 使用 service 集中邏輯
 
+
 import {
   updateNotification,
   markAllAsRead as markAllAsReadRedux,
 } from "@/app/redux/feature/notificationSlice";
+
 
 const NotificationList = forwardRef(function NotificationList({ type }, ref) {
   const dispatch = useDispatch();
