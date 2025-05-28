@@ -9,13 +9,17 @@ function NotificationDropdown({ notifications, markAsRead }) {
   return (
     <div className="notificationDropdown-panel">
       <div className="ArtworkNotificationList-list">
-        {notifications.map((n) => (
-          <NotificationItem
-            key={n.id}
-            data={n}
-            onClick={() => markAsRead(n.id)}
-          />
-        ))}
+        {notifications.length === 0 ? (
+          <div className="ArtworkNotificationList-empty">目前尚無通知</div>
+          ) : (
+          notifications.map((n) => (
+            <NotificationItem
+              key={n.id}
+              data={n}
+              onClick={() => markAsRead(n.id)}
+            />
+          ))
+        )}
       </div>
     </div>
   );

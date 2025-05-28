@@ -57,6 +57,9 @@ const PainterDashboard = () => {
     }
   }
 
+  const unreadCount = useSelector((state) => state.notifications.unreadCount);
+
+
 
   if (isAuthLoading) {
     return null; // 如果仍在加載，先不渲染 Dashboard 內容
@@ -117,8 +120,13 @@ const PainterDashboard = () => {
 
             </div>
             <div className="PainterDashboard-option-item">
-              <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkDashboardIcon" />
-              <span>我的通知</span>
+              <div className="PainterDashboard-icon-wrapper">
+                <img src="/images/artworkDashboardIcon/icons8-bell-96-1.png" alt="icon" className="artworkDashboardIcon" />
+                {unreadCount > 0 && (
+                  <span className="PainterDashboard-badge">{unreadCount}</span>
+                )}
+              </div>
+              <span onClick={(e) => handleNavigateTo(e, "artworkNotification")}>我的通知</span>
 
             </div>
             <div className="PainterDashboard-option-item">

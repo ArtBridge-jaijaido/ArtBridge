@@ -16,6 +16,8 @@ import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,10 +40,14 @@ const notoSansTC = Noto_Sans_TC({
 
 
 
+
+
 export default function RootLayout({ children }) {
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null); // 新增 userId
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
   const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
+
 
   //  透過 API 獲取 HttpOnly Cookie 內的 token
   const fetchToken = async () => {
@@ -62,6 +68,8 @@ export default function RootLayout({ children }) {
     const unsubscribeAuthState = onAuthStateChanged(auth, async (user) => {
       if (user) {
 
+        setUserId(user.uid); // 登入後設定 userId 給通知 listener
+
         const unsubscribe = subscribeToConsumerOrders(user.uid);
         setUnsubscribeConsumerOrders(() => unsubscribe);
         
@@ -71,6 +79,7 @@ export default function RootLayout({ children }) {
           fetchToken(); 
         }
       } else {
+        setUserId(null); // 登出時清空
         setToken(null);
         if (unsubscribeConsumerOrders) unsubscribeConsumerOrders(); //  清除 listener
         setUnsubscribeConsumerOrders(null);
@@ -116,7 +125,7 @@ export default function RootLayout({ children }) {
 
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-        <Provider store={store}>        
+        <Provider store={store}>               
           <LoadingProvider>
             <Header />
             <main>
