@@ -58,7 +58,7 @@ export async function triggerNotificationOnApply({ targetUserId, artistUid, entr
     const payload = {
       userId: targetUserId,
       type: 'personal',
-      category: 'apply',
+      category: 'applyEntrust',
       message,
       relatedUserId: artistUid,
       relatedItemId: entrustId,
@@ -67,13 +67,57 @@ export async function triggerNotificationOnApply({ targetUserId, artistUid, entr
     };
     
     await setDoc(doc(db, 'artworkNotifications', applyID), payload);
-    console.log(" 通知成功寫入 Firestore");
-
     console.log('成功發出應徵通知')
   } catch (error) {
     console.error('triggerNotificationOnApply 發生錯誤：', error)
   }
 }
+
+
+
+// 新增：當委託方下訂市集作品時通知繪師
+export async function triggerNotificationOnMarketOrder({ targetUserId, buyerUid, marketName, marketId }) {
+  try {
+    // 1. 取得買家的 nickname
+    const buyerRef = doc(db, "users", buyerUid);
+    const buyerSnap = await getDoc(buyerRef);
+
+    if (!buyerSnap.exists()) {
+      console.error("找不到該下訂者的使用者資料");
+      return;
+    }
+
+    const buyerData = buyerSnap.data();
+    const nickname = buyerData.nickname || "未知用戶";
+
+    // 2. 建立訊息
+    const message = `委託方（${nickname}）已下訂您的市集作品《${marketName}》，請至案件管理頁面查看細節`;
+
+    // 3. 建立唯一通知 ID
+    const now = new Date();
+    const pad = (n) => n.toString().padStart(2, "0");
+    const timestamp = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+    const notifyId = `order-${buyerUid}-${timestamp}`;
+
+    // 4. 寫入 Firestore 通知
+    const payload = {
+      userId: targetUserId,
+      type: "personal",
+      category: "placeMarketOrder",
+      message,
+      relatedUserId: buyerUid,
+      relatedItemId: marketId,
+      isRead: false,
+      createdAt: new Date().toISOString(),
+    };
+
+    await setDoc(doc(db, "artworkNotifications", notifyId), payload);
+    console.log("市集下訂通知已寫入 Firestore");
+  } catch (error) {
+    console.error("推送市集下訂通知失敗：", error);
+  }
+}
+
 
 
 

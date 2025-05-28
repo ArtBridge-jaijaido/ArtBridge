@@ -154,6 +154,11 @@ export default function ArtworkDetailPage({ params }) {
             return;
         }
 
+        if (currentUser.role !=="client"){
+            addToast("error", "請先切換成委託方再下訂市集商品！");
+            return;
+        }
+
         try {
             // 預載 artwork 主圖與畫師頭貼
             await Promise.all([

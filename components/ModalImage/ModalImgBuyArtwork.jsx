@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import {createOrderFromMarket} from "@/services/artworkOrderService.js";
+import {triggerNotificationOnMarketOrder} from "@/services/notificationService";
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
-
 import "./ModalImgBuyArtwork.css";
+
 
 const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistNickname, artistProfileImg, painterMilestone ,currentUser  }) => {
   if (!isOpen || !artistProfileImg || !artworkImageUrl  ) return null;
@@ -45,7 +46,7 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
     }
   
     setIsSaving(true);
-
+  
     try {
       const result = await createOrderFromMarket(
         artwork,              // marketData
@@ -54,10 +55,19 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
         referenceFile,        // 使用者上傳的參考圖
         customRequirement     // 使用者填寫的需求說明
       );
-  
+
+      
       if (result.success) {
+        await triggerNotificationOnMarketOrder({
+          targetUserId: artwork.userUid,
+          buyerUid: currentUser.uid,
+          marketName: artwork.marketName,
+          marketId: artwork.artworkId,
+        });
+  
         addToast("success", "市集訂單建立成功！");
-        onClose(); 
+       
+        onClose();
       } else {
         addToast("error", "建立訂單失敗，請稍後再試");
       }
@@ -66,8 +76,11 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
       addToast("error", "建立訂單時發生錯誤，請稍後再試");
     } finally {
       setIsSaving(false);
+      setCustomRequirement(""); // 清空需求說明
+      setReferenceFile(null); // 清空參考圖片
     }
   };
+  
   
   return (
     <div className="ModalImgBuyArtwork-modal-overlay" onClick={onClose}>
@@ -127,7 +140,7 @@ const ModalImgBuyArtwork = ({ isOpen, onClose, artwork, artworkImageUrl, artistN
                         className="ModalImgBuyArtwork-confirm"
                         onClick={handleConfirmPurchase }
                         isLoading={isSaving}
-                        loadingText="請稍後..."
+                        loadingText="下訂中..."
                     >
                        確認下訂
                     </LoadingButton>
