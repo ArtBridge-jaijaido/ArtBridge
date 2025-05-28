@@ -87,7 +87,8 @@ const CustomFlowConfig = () => {
       percentSet.add(percentNum);
       intermediateMilestones.push({
         label: `${percentNum}% ${name}`,
-        percent: percentNum
+        percent: percentNum,
+        status: "等待中"
       });
     }
 
@@ -157,7 +158,8 @@ const CustomFlowConfig = () => {
       percentSet.add(percentNum);
       intermediateMilestones.push({
         label: `${percentNum}% ${name}`,
-        percent: percentNum
+        percent: percentNum,
+        status: "等待中" 
       });
     }
 

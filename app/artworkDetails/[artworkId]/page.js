@@ -346,6 +346,8 @@ export default function ArtworkDetailPage({ params }) {
                 artworkImageUrl={artworkImageUrl}
                 artistNickname={artistNickname}
                 artistProfileImg={artistProfileImg}
+                painterMilestone={painterMilestone}
+                currentUser={currentUser}
             />
         </div>
 

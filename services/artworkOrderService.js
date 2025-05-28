@@ -14,7 +14,7 @@ import { uploadPainterResumePdf  } from "@/services/storageService.js";
 import { ref, listAll, deleteObject } from "firebase/storage";
 
 
-// 建立訂單
+// 建立委託訂單
 export const createOrderFromEntrust = async (entrustData) => {
   try {
     const artworkOrderId = await generateOrderSerial();
@@ -38,12 +38,10 @@ export const createOrderFromEntrust = async (entrustData) => {
         throw new Error(copyData?.error || "圖片複製失敗");
       }
 
-      const copiedExampleImageUrl = copyData.copiedExampleImageUrl;
-      const copiedSupplementaryImageUrls = copyData.copiedSupplementaryImageUrls || [];
+    const copiedExampleImageUrl = copyData.copiedExampleImageUrl;
+    const copiedSupplementaryImageUrls = copyData.copiedSupplementaryImageUrls || [];
 
-      
-  
-
+    
     // 訂單資料
     const artworkOrder = {
       artworkOrderId,
@@ -85,6 +83,70 @@ export const createOrderFromEntrust = async (entrustData) => {
   }
 };
 
+// 建立市集訂單
+export const createOrderFromMarket = async (marketData,painterMilestone,currentUser) => {
+  try {
+    const artworkOrderId = await generateOrderSerial();
+
+    // 複製圖片（如有需要，這裡可以加入圖片複製 API 呼叫邏輯）
+    const copyRes = await fetch("/api/copyMarketImage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: marketData.userId,
+        artworkId: marketData.artworkId,
+        orderId: artworkOrderId,
+        supplementaryImageUrls: marketData.supplementaryImageUrls || [],
+      }),
+    });
+
+    const copyData = await copyRes.json();
+
+    if (!copyRes.ok || !copyData?.copiedExampleImageUrl) {
+      throw new Error(copyData?.error || "圖片複製失敗");
+    }
+
+    const copiedExampleImageUrl = copyData.copiedExampleImageUrl;
+    const copiedSupplementaryImageUrls = copyData.copiedSupplementaryImageUrls || [];
+
+    const artworkOrder = {
+      artworkOrderId,
+      type: "fromMarket",
+      fromMarketId: marketData.artworkId,
+      userUid: currentUser.uid,   // 購買方
+      userId: currentUser.userSerialId, // 購買方的 userId
+      marketName: marketData.marketName,
+      exampleImageUrl: copiedExampleImageUrl,
+      supplementaryImageUrls: copiedSupplementaryImageUrls,
+      description: marketData.description,
+      category: marketData.selectedCategory,
+      styles: marketData.selectedStyles,
+      size: marketData.size,
+      fileFormat: marketData.fileFormat,
+      colorMode: marketData.colorMode ||"尚無資訊",
+      permission: marketData.permission,
+      reportProgress: marketData.reportProgress || "尚無資訊",
+      createdAt: new Date().toISOString(),
+      status: "等待承接", 
+      orderSource: "市集",
+      endDate: "尚無資訊",
+      price: marketData.price,
+      assignedPainterUid: marketData.userUid,
+      artworkOrderMilestones: painterMilestone,
+      currentMilestoneIndex: 0,
+    };
+
+    const orderRef = doc(db, "artworkOrders", artworkOrderId);
+    await setDoc(orderRef, artworkOrder);
+
+    return { success: true, message: "市集訂單已建立", orderData: artworkOrder };
+  } catch (err) {
+    console.error("❌ 建立市集訂單失敗:", err);
+    return { success: false, message: err.message };
+  }
+};
 
 // 更新訂單
 export const updateArtworkOrder = async (orderId, updateData) => {
