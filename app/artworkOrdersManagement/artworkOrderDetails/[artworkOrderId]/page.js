@@ -18,7 +18,7 @@ export default function ArtworkOrderDetailsPage() {
     const allUsers = useSelector((state) => state.user.allUsers);
     const assignedPainterNickname = allUsers[artworkOrder?.assignedPainterUid]?.nickname || "使用者名稱";
     const breakpointColumnsObj = {
-        default: 2, 
+        default: 2,
     };
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function ArtworkOrderDetailsPage() {
         getOrderData();
     }, [artworkOrderId]);
 
-   
+
 
     if (loading) return <p>載入中...</p>;
 
@@ -94,7 +94,10 @@ export default function ArtworkOrderDetailsPage() {
 
                     {/* 右側：圖片與按鈕 */}
                     <div className="artworkOrderDetails-right">
-                        <button className="artworkOrderDetails-terminate-button">終止委託</button>
+                        {artworkOrder.status === "進行中" && (
+                            <button className="artworkOrderDetails-terminate-button">終止委託</button>
+                        )}
+
 
                         <div className="artworkOrderDetails-image-containter">
                             {artworkOrder.exampleImageUrl ? (
@@ -107,7 +110,7 @@ export default function ArtworkOrderDetailsPage() {
                         <p className="artworkOrderDetails-id">案件編號：{artworkOrder.artworkOrderId}</p>
                     </div>
                 </div>
-                {/*補充資訊*/}            
+                {/*補充資訊*/}
                 <div className="artworkOrderDetails-requirement-container">
 
                     <h2>詳細要求</h2>

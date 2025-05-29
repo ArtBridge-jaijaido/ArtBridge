@@ -13,6 +13,7 @@ const ConsumerOrdersManagementPage = () => {
     const consumerOrders = useSelector((state) => state.artworkOrder.consumerOrders);
 
    
+   
     const tabs = [
         {
             label: "目前案件",
@@ -30,7 +31,9 @@ const ConsumerOrdersManagementPage = () => {
                       OrderEndDate={order.endDate}
                       OrderAssignedPainter={order.assignedPainterUid}
                       orderId={order.artworkOrderId}
-                      imageUrl={order.exampleImageUrl || ""}
+                      exampleImageUrl={order.exampleImageUrl || ""}
+                      referenceImageUrl={order.referenceImageUrl || ""}
+                      customRequirement={order.customRequirement || ""}
                     />
                   ))}
               </div>

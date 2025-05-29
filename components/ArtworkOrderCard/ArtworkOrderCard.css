@@ -9,13 +9,10 @@
     position: relative;
     width:100%;
     max-width:660px;
-  
-  }
-
-  .artworkOrderCard-wrapper.clickable {
     cursor: pointer;
   }
 
+ 
   
   
   .artworkOrderCard-status {
@@ -188,6 +185,73 @@
     padding: 4px;
     line-height: 1.4;
   }
+
+
+  /*市集訂單*/
+  .artworkOrderCard-market-buttons{
+    width:80%;
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .artworkOrderCard-confirm-button{
+    width:105px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2DAEF4;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+
+  .artworkOrderCard-confirm-button:hover {
+    background-color: #1890d9; 
+  }
+
+  .artworkOrderCard-reject-button{
+    width:105px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FF6262;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+
+  .artworkOrderCard-reject-button:hover {
+    background: #e94444; 
+  }
+
+  .artworkOrderCard-market-image-placeholder{
+    color: #FF3C3C;
+    text-align: center;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    cursor: pointer;
+  }
+
   
 /*Rwd*/
 @media screen and (max-width:1280px){

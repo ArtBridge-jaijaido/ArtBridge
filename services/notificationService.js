@@ -103,7 +103,7 @@ export async function triggerNotificationOnMarketOrder({ targetUserId, buyerUid,
     const payload = {
       userId: targetUserId,
       type: "personal",
-      category: "placeMarketOrder",
+      category: "marketOrder",
       message,
       relatedUserId: buyerUid,
       relatedItemId: marketId,

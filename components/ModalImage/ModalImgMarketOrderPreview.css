@@ -1,0 +1,64 @@
+.ModalImgMarketOrderPreview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ModalImgMarketOrderPreview-content {
+    position: relative;
+    width: 700px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  }
+  
+  .ModalImgMarketOrderPreview-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+  }
+  
+  .ModalImgMarketOrderPreview-text {
+    flex: 0 0 150px;
+    overflow-y: auto;
+    color: #797979;
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: 2px;
+    margin-bottom:30px;
+  }
+  
+  .ModalImgMarketOrderPreview-img {
+    width:280px;
+    height:280px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+  }
+  

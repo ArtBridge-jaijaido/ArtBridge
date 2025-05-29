@@ -31,7 +31,9 @@ const painterOrdersManagementPage =() =>{
                       OrderEndDate={order.endDate}
                       OrderAssignedPainter={order.assignedPainterUid}
                       orderId={order.artworkOrderId}
-                      imageUrl={order.exampleImageUrl || ""}
+                      exampleImageUrl={order.exampleImageUrl || ""}
+                      referenceImageUrl={order.referenceImageUrl || ""}
+                      customRequirement={order.customRequirement || ""}
                     />
                   ))}
               </div>

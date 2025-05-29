@@ -68,6 +68,7 @@ export const createOrderFromEntrust = async (entrustData) => {
       applicants: [],
       artworkOrderMilestones: entrustData.milestones,
       currentMilestoneIndex: 0,
+      isVisibleToConsumer: true
     };
 
 
@@ -149,7 +150,7 @@ export const createOrderFromMarket = async (marketData,painterMilestone,currentU
       currentMilestoneIndex: 0,
       referenceImageUrl: referenceImageUrl, // 參考圖片 URL
       customRequirement: customRequirement || "", // 使用者自訂需求
-
+      isVisibleToConsumer: false
     };
 
     const orderRef = doc(db, "artworkOrders", artworkOrderId);
@@ -328,4 +329,5 @@ export const generateOrderSerial = async () => {
     return String(newSerial).padStart(8, "0"); // e.g. 00000001
   });
 };
+
 
