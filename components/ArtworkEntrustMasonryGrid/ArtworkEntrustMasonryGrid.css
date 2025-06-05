@@ -1,0 +1,150 @@
+.ArtworkEntrust-masonry-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.ArtworkEntrust-masonry-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.ArtworkEntrust-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.ArtworkEntrust-filter-button {
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #afafaf;
+  border-width: 1px;
+  padding: 5px 10px;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #afafaf;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  max-width: 140px;
+  height: 30px;
+}
+
+.ArtworkEntrust-filter-button.selected {
+  color: #61bced;
+  border-color: #61bced;
+}
+
+.ArtworkEntrust-masonry-grid-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.ArtworkEntrust-masonry-grid-item {
+  position: relative;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.ArtworkEntrust-masonry-grid-item img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ArtworkEntrust-masonry-likesIcon-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50px;
+  border: 0.5px solid #FF5C5C;
+  background: #FFF;
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ArtworkEntrust-masonry-downloadIcon-container {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.ArtworkEntrust-masonry-downloadIcon-container img {
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain;
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ArtworkEntrust-masonry-likesIcon-container img {
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain;
+}
+
+.ArtworkEntrust-favorite-icon {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.ArtworkEntrust-masonry-grid-item:hover {
+  transform: translateY(-8px);
+}
+
+/* RWD */
+
+@media screen and (max-width: 834px) {
+  .ArtworkEntrust-masonry-grid {
+    gap: 10px;
+  }
+
+  .ArtworkEntrust-masonry-grid-item {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .ArtworkEntrust-masonry-grid-item {
+    min-width: auto;
+  }
+
+  .ArtworkEntrust-masonry-grid {
+    gap: 15px;
+  }
+
+  .ArtworkEntrust-filter {
+    margin-bottom: 20px;
+  }
+
+  .ArtworkEntrust-filter-button {
+    font-size: 8px;
+    max-width: 100px;
+    height: 26px;
+  }
+}

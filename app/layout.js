@@ -8,6 +8,7 @@ import { subscribeToAuth } from "@/lib/authListener";
 import { subscribeToArtworks} from "@/lib/artworkListener";
 import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
+import { subscribeToEntrustPortfolios } from "@/lib/entrustPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import { subscribeToEntrusts } from "@/lib/entrustListener";
 import { subscribeToConsumerOrders,subscribeToPainterOrders  } from "@/lib/artworkOrdersListener";
@@ -100,6 +101,7 @@ export default function RootLayout({ children }) {
     const unsubscribeAuth = subscribeToAuth();
     const unsubscribeArtworks = subscribeToArtworks();
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
+    const unsubscribeEntrustPortfolios = subscribeToEntrustPortfolios();
     const unsubscribePainterArticles = subscribeToPainterArticles();
     const unsubscribeUsers = subscribeToAllUsers();
     const unsubscribeEntrusts = subscribeToEntrusts();
@@ -111,6 +113,7 @@ export default function RootLayout({ children }) {
       unsubscribeAuth();
       unsubscribeArtworks();
       unsubscribePainterPortfolios();
+      unsubscribeEntrustPortfolios();
       unsubscribePainterArticles();
       unsubscribeUsers();
       unsubscribeEntrusts();

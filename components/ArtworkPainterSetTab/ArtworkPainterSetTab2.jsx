@@ -9,7 +9,7 @@ const ArtworkPainterSetTab2 = ({ tabs}) => {
 
   // 按鈕點擊處理函式
   const handleUploadMarketClick = () => {
-    router.push("/artworkUploadPortfolio"); 
+    router.push("/artworkUploadPortfolio?type=painter"); 
   };
 
   return (

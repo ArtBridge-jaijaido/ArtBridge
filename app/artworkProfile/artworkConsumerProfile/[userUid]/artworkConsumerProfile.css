@@ -69,11 +69,11 @@
     flex-direction: column;
     width:100%;
 }
-.ArtworkConsumerProfile-MasonryGrid-container{
+.ArtworkConsumerProfile-artworkEntrustMasonryGrid-container{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    margin-bottom: var(--ArtworkConsumerProfile-MasonryGrid-container-margin-bottom);
+    margin-bottom: var(--ArtworkConsumerProfile-artworkEntrustMasonryGrid-container-margin-bottom);
     justify-content: center;
 }
 
@@ -105,6 +105,11 @@
         width:100%;
     }
     .artworkConsumerCooperation-container{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+    }
+    .artworkConsumerProfileTab-container{
         display:flex;
         flex-direction: column;
         width:100%;

@@ -4,13 +4,19 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle, downloadOption } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
-import { uploadPortfolio } from "@/services/artworkPortfolioService";
 import { useSelector,useDispatch  } from "react-redux";
-import { addPainterPortfolio } from "@/app/redux/feature/painterPortfolioSlice";
 
+// 根據 type 決定使用哪個 slice 和 service
+import { uploadPortfolio as uploadPainterPortfolio } from "@/services/artworkPortfolioService";
+import { uploadEntrustPortfolio } from "@/services/artworkEntrustPortfolioService";
+import { addPainterPortfolio } from "@/app/redux/feature/painterPortfolioSlice";
+import { addEntrustPortfolio } from "@/app/redux/feature/entrustPortfolioSlice";
 import "./PortfolioUploadForm.css";
 
-const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
+
+
+const PortfolioUploadForm = ({ type = "painter", formData = {}, onSubmit }) => {
+    console.log("PortfolioUploadForm type:", type);
     const dispatch = useDispatch();
     const router = useRouter();
     const { addToast } = useToast();
@@ -155,27 +161,26 @@ const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
 
             }
 
-            //  上傳 Portfolio 到 Firebase
-            const response = await uploadPortfolio(userUid, userSerialId, data);
-           
-            if (response.success) {
-                //  Redux 更新狀態 (新增到 Redux store)
-                dispatch(addPainterPortfolio(response.portfolioData));
-                addToast("success", "作品發布成功！");
-                setTimeout(() => {
-                    router.push("/artworkPainterPortfolio");
-                }, 1000);
+            // 根據 type 上傳與更新對應 redux
+            const uploadFn = type === "entrust" ? uploadEntrustPortfolio : uploadPainterPortfolio;
+            const addFn = type === "entrust" ? addEntrustPortfolio : addPainterPortfolio;
+            const route = type === "entrust" ? "/artworkEntrustPortfolio" : "/artworkPainterPortfolio";
 
+            const response = await uploadFn(userUid, userSerialId, data);
+
+            if (response.success) {
+                dispatch(addFn(response.portfolioData));
+                addToast("success", "作品發布成功！");
+                setTimeout(() => router.push(route), 1000);
             } else {
                 console.error("作品上傳失敗:", response.message);
                 addToast("error", "發布失敗，請稍後再試！");
             }
-        } catch (error) {
-            console.error("作品上傳失敗:", error);
+        } catch (err) {
+            console.error("作品上傳失敗:", err);
             addToast("error", "發布失敗，請稍後再試！");
         } finally {
             setIsSubmitting(false);
-
         }
     };
 
@@ -293,7 +298,13 @@ const PortfolioUploadForm = ({ formData = {}, onSubmit }) => {
                 </div>
                 {/* 按鈕區域 */}
                 <div className="PortfolioUploadForm-button-group">
-                    <button className="PortfolioUploadForm-prev" onClick={() => router.push("/artworkPainterPortfolio")}>取消</button>
+                    <button
+                    className="PortfolioUploadForm-prev"
+                    onClick={() => {
+                        const backRoute = type === "entrust" ? "/artworkEntrustPortfolio" : "/artworkPainterPortfolio";
+                        router.push(backRoute);
+                    }}
+                    >取消</button>
                     <LoadingButton isLoading={isSubmitting} onClick={handleSubmit} loadingText={"發布中"} >發佈</LoadingButton>
                 </div>
             </div>

@@ -40,6 +40,7 @@ export const uploadPortfolio = async (userUid, userSerialId, formData) => {
             likes: 0,
             likedBy: [],
             createdAt: new Date().toISOString(),
+            type: "painter", // 作品集類型 
         };
 
         // ✅ 寫入 Firestore
