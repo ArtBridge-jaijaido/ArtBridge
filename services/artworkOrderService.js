@@ -141,7 +141,7 @@ export const createOrderFromMarket = async (marketData,painterMilestone,currentU
       permission: marketData.permission,
       reportProgress: marketData.reportProgress || "尚無資訊",
       createdAt: new Date().toISOString(),
-      status: "等待承接", 
+      status: "等待回應", 
       orderSource: "市集",
       endDate: "尚無資訊",
       price: marketData.price,

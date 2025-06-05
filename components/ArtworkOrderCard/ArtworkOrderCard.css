@@ -9,7 +9,9 @@
     position: relative;
     width:100%;
     max-width:660px;
+    min-width:420px;
     cursor: pointer;
+   
   }
 
  
@@ -87,7 +89,7 @@
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    flex-wrap: wrap;
+    
   }
   
   .artworkOrderCard-info {
@@ -162,7 +164,6 @@
     width:100%;
     margin-top: 8px;
     max-width: 230px;
- 
     aspect-ratio: 1/1;
     border: 1px dashed #ccc;
     border-radius: 4px;
@@ -171,6 +172,8 @@
     align-items: center;
     justify-content: center;
   }
+
+ 
   
   .artworkOrderCard-image img {
     width: 100%;
@@ -179,6 +182,8 @@
   }
   
   .artworkOrderCard-image-placeholder {
+    width:100%;
+    height: 100%;
     color: #AFAFAF;
     font-size: 13px;
     text-align: center;
@@ -186,12 +191,15 @@
     line-height: 1.4;
   }
 
+  
+ 
 
   /*市集訂單*/
   .artworkOrderCard-market-buttons{
     width:80%;
     display:flex;
     justify-content: space-between;
+    gap:10px;
   }
 
   .artworkOrderCard-confirm-button{
@@ -234,7 +242,13 @@
     background: #e94444; 
   }
 
-  .artworkOrderCard-market-image-placeholder{
+  .artworkOrderCard-market-image-placeholder {
+    width:100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     color: #FF3C3C;
     text-align: center;
     font-family: "Noto Sans TC";
@@ -308,14 +322,39 @@
   }
 
 
+  /*市集訂單*/
+  .artworkOrderCard-confirm-button{
+    width: 86px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .artworkOrderCard-reject-button{
+    width: 86px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .artworkOrderCard-market-image-placeholder {
+    font-size: 12px;
+  }
+
+
 }
 
 
 @media screen and (max-width:440px){
   .artworkOrderCard-wrapper {
-    padding: 25px 15px;
+    padding: 20px 10px;
     max-width:400px;
+    min-width:320px;
   }
+
+  .artworkOrderCard-main {
+    gap:2px;
+  }
+
+  
 
 
   .artworkOrderCard-status {
@@ -367,14 +406,34 @@
     font-size: 10px;
   }
 
+   /*市集訂單*/
+   .artworkOrderCard-confirm-button{
+    width: 70px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .artworkOrderCard-reject-button{
+    width: 70px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .artworkOrderCard-market-image-placeholder {
+    font-size: 10px;
+  }
+
+
 
 }
 
 @media screen and (max-width:370px){
   .artworkOrderCard-wrapper {
-    padding: 15px 10px;
-    
+    padding: 10px 5px;
+    min-width:300px;
   }
+
+  
 
 
   .artworkOrderCard-status {

@@ -88,7 +88,7 @@ const ArtworkOrderCard = ({
         >
             <div className="artworkOrderCard-status">
                 <span
-                    className={`artworkOrderCard-index ${statusLabel === "等待承接"
+                    className={`artworkOrderCard-index ${statusLabel === "等待承接" || statusLabel === "等待回應"
                         ? "waiting"
                         : statusLabel === "進行中"
                             ? "in-progress"
@@ -101,7 +101,7 @@ const ArtworkOrderCard = ({
                 </span>
 
                 <span
-                    className={`artworkOrderCard-label ${statusLabel === "等待承接"
+                    className={`artworkOrderCard-label ${statusLabel === "等待承接" || statusLabel === "等待回應"
                         ? "waiting"
                         : statusLabel === "進行中"
                             ? "in-progress"
@@ -125,7 +125,7 @@ const ArtworkOrderCard = ({
                         <button className="artworkOrderCard-link" onClick={handleViewEntrustApplicant}>
                             查看應徵資訊
                         </button>
-                    ) : OrderSource === "市集" && statusLabel === "等待承接" ? (
+                    ) : OrderSource === "市集" && statusLabel === "等待回應" ? (
                         <div className="artworkOrderCard-market-buttons">
                             <button className="artworkOrderCard-confirm-button" onClick={(e) => handleAcceptOrder(e, orderId)}>
                                 確認承接
