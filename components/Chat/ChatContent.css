@@ -1,0 +1,185 @@
+.chatContent {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px 0px 0px;
+    box-sizing: border-box;
+  }
+  
+  .chatContent-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 20px;
+    gap:20px;
+  }
+  
+  .chatContent-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+  }
+  
+  .chatContent-userInfo {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .chatContent-username {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .chatContent-online {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .chatContent-manageBtn {
+    background: #73BCE4;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+  
+  /* 箭頭 */
+  .chatContent-manageBtn::after {
+   
+    content: "▼";
+    font-size: 20px;
+    margin-left: 6px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    
+  }
+  
+  /* 展開狀態時旋轉箭頭 */
+  .chatContent-manageBtn.open::after {
+    transform: rotate(180deg);
+  }
+  
+  .chatContent-milestone-container {
+    width: 100%;
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    padding:10px;
+  }
+  
+  .chatContent-milestone-container.visible {
+    animation: fadeInScale 0.2s ease-out;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  .chatContent-divider {
+    width: 95%;
+    height: 2px;
+    background-color: #bfbfbf; /* 或用 #ccc、#dcdcdc 視 UI 調性 */
+    margin: 50px 20px 30px 20px; 
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  
+  .chatContent-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding:20px;
+  }
+  /* 
+  .chatContent-date {
+    background-color: #999;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin: 8px auto;
+    text-align: center;
+  }
+  
+  .chatContent-systemMsg {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 8px;
+  }
+  
+  .systemMsg-bubble {
+    background-color: white;
+    border: 1px solid #2d5885;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+  } */
+  
+  /* .systemMsg-time {
+    font-size: 12px;
+    color: #999;
+    margin-left: 8px;
+    white-space: nowrap;
+    align-self: flex-end;
+  } */
+  
+  .chatContent-inputBar {
+    display: flex;
+    align-items: center;
+    background-color: #2d5885;
+    padding: 10px 16px;
+    gap: 8px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .chatContent-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .chatContent-input::placeholder {
+    color: #eee;
+  }
+  
+  .chatContent-sendBtn,
+  .chatContent-attachBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    transition: transform 0.2s ease;
+  }
+  
+  .chatContent-sendBtn:hover,
+  .chatContent-attachBtn:hover {
+    transform: scale(1.2);
+  }

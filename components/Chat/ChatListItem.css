@@ -1,0 +1,103 @@
+.ChatListItem-container {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+   
+  }
+  
+  .ChatListItem-container:hover {
+    background-color: #f3f6fb;
+  }
+
+  .ChatListItem-avatar{
+    width: 52px;
+    height: 52px;
+   
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: 12px;
+    overflow: hidden;
+  }
+  
+  .ChatListItem-avatar img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+   
+  }
+  
+  .ChatListItem-user {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ChatListItem-info {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .ChatListItem-username {
+    color: #525252;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+  }
+  
+  .ChatListItem-last {
+    color: #747474;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin: 2px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* 控制訊息摘要寬度 */
+  }
+  
+  .ChatListItem-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-left: 10px;
+  }
+  
+  .ChatListItem-time {
+    color: #747474;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .ChatListItem-badge {
+    width:26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f25c5c;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .ChatListItem-badge:empty {
+    background-color: transparent;
+  }

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
 import { ToastProvider } from "@/app/contexts/ToastContext.js";
 import { LoadingProvider } from "@/app/contexts/LoadingContext.js";
@@ -16,6 +17,8 @@ import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import ChatOpenButton from "@/components/Chat/ChatOpenButton.jsx";
+import ChatWindow from "@/components/Chat/ChatWindow.jsx";
 
 
 import "./globals.css";
@@ -48,6 +51,8 @@ export default function RootLayout({ children }) {
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
   const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
   const [unsubscribePainterOrders, setUnsubscribePainterOrders] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const pathname = usePathname(); // 取得目前路徑
 
 
   //  透過 API 獲取 HttpOnly Cookie 內的 token
@@ -139,6 +144,12 @@ export default function RootLayout({ children }) {
               <ToastProvider>{children}</ToastProvider>
               </ImageLoadingProvider>
             </main>
+            {userId && pathname !== "/" && (
+              <>
+                <ChatOpenButton onClick={() => setIsChatOpen(true)} />
+                {isChatOpen && <ChatWindow onClose={() => setIsChatOpen(false)} />}
+              </>
+            )}
           </LoadingProvider>
         </Provider>
       </body>

@@ -15,21 +15,6 @@ const OfficialFlowConfig = () => {
 
   return (
     <div className="officialFlowConfig-wrapper">
-      {/* <div className="officialFlowConfig-container">
-        <div className="officialFlowConfig-list">
-          {officialMilestones.map((m, index) => (
-            <React.Fragment key={m.id}>
-              <div className="officialFlowConfig-item">
-                <div className="officialFlowConfig-circle" />
-                <div className="officialFlowConfig-percent">{m.label.split(" ")[0]}</div>
-                <div className="officialFlowConfig-label">{m.label.split(" ")[1]}</div>
-              </div>
-              {index !== officialMilestones.length - 1 && (
-                <div className="officialFlowConfig-connector-line" />
-              )}
-            </React.Fragment>
-          ))}
-        </div> */}
         <div className="officialFlowConfig-painterMilestoneProgress-container">
          <PainterMilestoneProgress milestones={officialMilestones} />
         </div>
