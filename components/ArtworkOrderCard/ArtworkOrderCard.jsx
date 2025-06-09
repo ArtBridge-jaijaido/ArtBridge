@@ -4,8 +4,10 @@ import "./ArtworkOrderCard.css";
 import { useNavigation } from "@/lib/functions.js";
 import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { updateArtworkOrder } from "@/services/artworkOrderService.js";
+import { createChatWithMessage } from "@/services/chatService";
 import ModalImgMarketOrderPreview from "@/components/ModalImage/ModalImgMarketOrderPreview.jsx";
 import { useSelector } from "react-redux";
+
 
 const preloadImage = (src) =>
     new Promise((resolve, reject) => {
@@ -23,6 +25,7 @@ const ArtworkOrderCard = ({
     OrderSource = "",
     OrderEndDate = "",
     OrderAssignedPainter = "",
+    OrderEntruster = "",
     orderId = "",
     exampleImageUrl = "",
     referenceImageUrl = "",
@@ -61,7 +64,17 @@ const ArtworkOrderCard = ({
         try {
             await updateArtworkOrder(orderId, {
                 isVisibleToConsumer: true,
+                status:"進行中",
             });
+
+            // 創建聊天並發送初始消息
+            await createChatWithMessage({
+                participants: [OrderAssignedPainter,OrderEntruster],
+                senderUid: OrderAssignedPainter,
+                text: "繪師已承接此委託。",
+                orderId,
+              });
+
             console.log(" 承接成功並已更新訂單狀態");
         } catch (error) {
             console.error(" 接受訂單失敗", error);

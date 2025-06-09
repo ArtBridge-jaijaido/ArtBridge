@@ -4,10 +4,9 @@ import artworkReducer from './feature/artworkSlice.js';
 import painterPortfolioReducer from './feature/painterPortfolioSlice.js'
 import painterArticleReducer from './feature/painterArticleSlice.js';
 import entrustReducer from './feature/entrustSlice.js'; 
-
-
 import artworkOrderReducer from './feature/artworkOrderSlice.js'; // 引入作品訂單的 reducer
-import notificationReducer from './feature/notificationSlice'
+import notificationReducer from './feature/notificationSlice.js'; // 引入通知的 reducer
+import chatReducer from './feature/chatSlice.js'; // 引入聊天的 reducer
 
 
 export const store = configureStore({
@@ -21,7 +20,7 @@ export const store = configureStore({
 
     artworkOrder: artworkOrderReducer, // 添加作品訂單狀態管理的 reducer
     notifications: notificationReducer, // 添加通知狀態管理的 reducer
-
+    chat: chatReducer, // 添加聊天狀態管理的 reducer
  
   },
 });

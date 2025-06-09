@@ -2,6 +2,8 @@ import React from "react";
 import "./ChatListItem.css";
 
 const ChatListItem = ({ avatar, username, lastMessage, lastMessageTime, unreadCount }) => {
+    
+    console.log(lastMessageTime, "lastMessageTime");
     return (
         <div className="ChatListItem-container">
             <div className="ChatListItem-avatar">

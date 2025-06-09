@@ -12,6 +12,7 @@ import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import { subscribeToEntrusts } from "@/lib/entrustListener";
 import { subscribeToConsumerOrders,subscribeToPainterOrders  } from "@/lib/artworkOrdersListener";
+import {subscribeToChats } from "@/lib/chatListener.js";
 import {store} from "@/app/redux/store.js";
 import {Provider } from "react-redux";
 import Header from "@/components/Header/Header.jsx";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
   const [unsubscribeAllUsers, setUnsubscribeAllUsers] = useState(null);
   const [unsubscribeConsumerOrders, setUnsubscribeConsumerOrders] = useState(null);
   const [unsubscribePainterOrders, setUnsubscribePainterOrders] = useState(null);
+  const [unsubscribeChats, setUnsubscribeChats] = useState(null); // 新增聊天監聽
   const [isChatOpen, setIsChatOpen] = useState(false);
   const pathname = usePathname(); // 取得目前路徑
 
@@ -81,6 +83,9 @@ export default function RootLayout({ children }) {
 
         const unsubscribePainter = subscribeToPainterOrders(user.uid);
         setUnsubscribePainterOrders(() => unsubscribePainter);
+
+        const unsubscribeChats = subscribeToChats(user.uid);
+        setUnsubscribeChats(() => unsubscribeChats);
         
 
         const newToken = await user.getIdToken();
@@ -94,6 +99,8 @@ export default function RootLayout({ children }) {
         setUnsubscribeConsumerOrders(null);
         if (unsubscribePainterOrders) unsubscribePainterOrders(); //  清除 listener
         setUnsubscribePainterOrders(null);
+        if (unsubscribeChats) unsubscribeChats(); //  清除聊天 listener
+        setUnsubscribeChats(null);
       }
     });
 

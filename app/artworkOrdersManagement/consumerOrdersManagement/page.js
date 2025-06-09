@@ -30,6 +30,7 @@ const ConsumerOrdersManagementPage = () => {
                       OrderSource={order.orderSource}
                       OrderEndDate={order.endDate}
                       OrderAssignedPainter={order.assignedPainterUid}
+                      OrderEntruster={order.userUid}
                       orderId={order.artworkOrderId}
                       exampleImageUrl={order.exampleImageUrl || ""}
                       referenceImageUrl={order.referenceImageUrl || ""}

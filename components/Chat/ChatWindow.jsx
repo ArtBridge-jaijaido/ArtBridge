@@ -12,6 +12,7 @@ const ChatWindow = ({ onClose }) => {
     };
 
     const [selectedChat, setSelectedChat] = useState(null);
+    
 
     return (
         <div className="chatWindow-overlay" onClick={handleOverlayClick} >
