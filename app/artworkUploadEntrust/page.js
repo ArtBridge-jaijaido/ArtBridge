@@ -16,7 +16,6 @@ import { createOrderFromEntrust } from "@/services/artworkOrderService.js";
 import {updateEntrustLinkedOrderId } from "@/services/artworkEntrustService.js";
 import { useDispatch } from "react-redux";
 import { addEntrust } from "@/app/redux/feature/entrustSlice"
-import { addConsumerOrder} from "@/app/redux/feature/artworkOrderSlice";
 
 
 const ArtworkUploadEntrustPage = () => {
@@ -72,9 +71,7 @@ const ArtworkUploadEntrustPage = () => {
       // 同步建立 artworkOrder 
       const orderResponse = await createOrderFromEntrust(response.entrustData);
       if (orderResponse.success) {
-        dispatch(addConsumerOrder(orderResponse.orderData)); 
         const createdOrder = orderResponse.orderData;
-        
         addToast("success", "已發佈您的委託！");
         setStep(6);
 
