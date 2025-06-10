@@ -5,15 +5,14 @@ import { useNavigation } from "@/lib/functions";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import Link from "next/link";
 import "./login.css";
-// import styles from "../register/registerButton.module.css";
-// import CustomButton from "@/components/CustomButton/CustomButton.jsx";
 import LoadingButton from "@/components/LoadingButton/LoadingButton";
-import {getUserData} from "@/services/userService.js";
+import {getUserData, updateUserData} from "@/services/userService.js";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../app/redux/feature/userSlice.js';
 import { logoutUser } from "@/app/redux/feature/userSlice.js";
 import { auth } from "@/lib/firebase.js";
 import { setPersistence, signInWithEmailAndPassword, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
+
 
 const LoginPage = () => {
 
@@ -97,6 +96,9 @@ const LoginPage = () => {
       console.log(result);
       if (response.ok) {
         dispatch(setUser(result.user));
+        await updateUserData(user.uid, {
+          lastOnline: new Date().toISOString()
+        });
         addToast("success", "成功:登入成功");
 
         setTimeout(() => {

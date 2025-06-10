@@ -4,13 +4,9 @@ import { collection, query, where, getDocs, doc, getDoc, setDoc, updateDoc, runT
 // 透過電子郵件取得使用者資料
 export async function getUserByEmail(email) {
     
-    console.log("email:", email);
-   
     const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
-   
-  
     if (!querySnapshot.empty) {
       const doc = querySnapshot.docs[0];
       return { uid: doc.id, ...doc.data() }; 
@@ -79,7 +75,7 @@ export const updateUserData = async (uid, data) => {
 
       return { success: true, message: "資料更新成功" };
   } catch (error) {
-      console.error("❌ 更新資料失敗：", error.message);
+      console.error(" 更新資料失敗：", error.message);
       return { success: false, message: `資料更新失敗：${error.message}` };
   }
 };

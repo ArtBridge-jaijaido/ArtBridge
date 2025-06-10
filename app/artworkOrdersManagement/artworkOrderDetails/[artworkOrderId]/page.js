@@ -60,7 +60,7 @@ export default function ArtworkOrderDetailsPage() {
                                 <strong>來源</strong> <span>{artworkOrder.orderSource}</span>
                             </div>
                             <div className="artworkOrderDetails-info-item">
-                                <strong>價格</strong> <span>{artworkOrder.price}元</span>
+                                <strong>價格</strong> <span>{artworkOrder.price}</span>
                             </div>
                             <div className="artworkOrderDetails-info-item">
                                 <strong>截止日期</strong> <span>{artworkOrder.endDate}</span>

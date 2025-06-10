@@ -1,9 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import PainterMilestoneProgress from "../PainterMilestoneProgress/PainterMilestoneProgress";
+import { formatLastOnline } from "@/lib/functions";
 import "./ChatContent.css";
 
 const ChatContent = ({ chat }) => {
+
+
     const [isMilestoneOpen, setIsMilestoneOpen] = useState(false);
+    const allUsers = useSelector((state) => state.user.allUsers);
+    const currentUser = useSelector((state) => state.user.user);
+    const otherUid = chat?.participants?.find((uid) => uid !== currentUser?.uid);
+    const otherUser = allUsers?.[otherUid] || {};
+
+    const lastOnlineText = formatLastOnline(otherUser?.lastOnline);
+
 
     const testingMilestones = [
         { label: "0% 支付款項", percent: 0, id: 0, status: "等待中" },
@@ -20,10 +31,10 @@ const ChatContent = ({ chat }) => {
             {chat && (
                 <>
                     <div className="chatContent-header">
-                        <img src={chat.avatarUrl} alt="avatar" className="chatContent-avatar" />
+                        <img src={otherUser.profileAvatar || "/images/default-avatar.png"} alt="avatar" className="chatContent-avatar" />
                         <div className="chatContent-userInfo">
-                            <div className="chatContent-username">{chat.username}</div>
-                            <div className="chatContent-online">3天前上線</div>
+                        <div className="chatContent-username">{otherUser.nickname}</div>
+                            <div className="chatContent-online">{lastOnlineText}</div>
                         </div>
                         <button
                             className={`chatContent-manageBtn ${isMilestoneOpen ? "open" : ""}`}
