@@ -1,10 +1,9 @@
-// ModallmageEntrustPortfolio.jsx
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import { artMarketCategory, artMarketStyle } from '@/lib/artworkDropdownOptions.js';
 import LoadingButton from "@/components/LoadingButton/LoadingButton.jsx";
-import { updatePortfolio } from "@/services/artworkPortfolioService"; 
+import { updateEntrustPortfolio } from "@/services/artworkEntrustPortfolioService"; 
 import "./ModallmageEntrustPortfolio.css";
 
 const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
@@ -12,6 +11,7 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [tempSelectedCategory, setTempSelectedCategory] = useState("");
     const [tempSelectedStyles, setTempSelectedStyles] = useState([]);
+    const [tempAssignedArtist, setTempAssignedArtist] = useState("");
     const [isCategoryOpen, setIsCategoryOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
     const categoryRef = useRef(null);
@@ -24,6 +24,7 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
         if (isOpen) {
             setTempSelectedCategory(data.selectedCategory || ""); 
             setTempSelectedStyles(data.selectedStyles || []);
+            setTempAssignedArtist(data.assignedArtist || "");
         }
     }, [isOpen, data]);
 
@@ -54,7 +55,9 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
         };
 
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
 
     useEffect(() => {
@@ -90,9 +93,10 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
             return;
         }
 
-        const response = await updatePortfolio(data.userUid, data.portfolioId, {
+        const response = await updateEntrustPortfolio(data.userUid, data.portfolioId, {
             selectedCategory: tempSelectedCategory,
             selectedStyles: tempSelectedStyles,
+            assignedArtist: tempAssignedArtist,
         });
 
         if (response.success) {
@@ -108,6 +112,7 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
     const handleClose = () => {
         setTempSelectedCategory("");
         setTempSelectedStyles([]);
+        setTempAssignedArtist("");
         onClose();
     };
 
@@ -123,6 +128,7 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
                             <button className="ModallmageEntrustPortfolio-close" onClick={handleClose}>X</button>
                         </div>
                     </div>
+
                     <div className="ModallmageEntrustPortfolio-select-section">
                         <div className="ModallmageEntrustPortfolio-category-width" ref={categoryRef}>
                             <div className="ModallmageEntrustPortfolio-dropdown-container">
@@ -188,6 +194,17 @@ const ModallmageEntrustPortfolio = ({ isOpen, onClose, data }) => {
                                 value={tempSelectedStyles.length > 0 ? tempSelectedStyles.join("、") : "風格1、風格2、風格3"}
                                 readOnly
                                 className={`ModallmageEntrustPortfolio-input-box ${tempSelectedStyles.length > 0 ? "black-text" : "gray-text"}`}
+                            />
+                        </div>
+
+                        <div className="ModallmageEntrustPortfolio-artist-width">
+                            <label className="ModallmageEntrustPortfolio-artist-label">合作繪師</label>
+                            <input
+                                type="text"
+                                value={tempAssignedArtist}
+                                onChange={(e) => setTempAssignedArtist(e.target.value)}
+                                placeholder="請輸入繪師名稱"
+                                className={`ModallmageEntrustPortfolio-input-box ${data.assignedArtist ? "black-text" : "gray-text"}`}
                             />
                         </div>
 

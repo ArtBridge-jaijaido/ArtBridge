@@ -36,9 +36,7 @@ const ArtworkPainterProfilePage = () => {
 
     const { painterPortfolios, loading } = useSelector((state) => state.painterPortfolio); // 作品集
     // ** 過濾出當前使用者的 portfolio**
-    const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid
-        && portfolio.type === "painter"
-    );
+    const userPortfolios = painterPortfolios.filter((portfolio) => portfolio.userUid == userUid)
 
 
     //文章

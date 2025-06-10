@@ -16,9 +16,7 @@ const ArtworkPainterPortfolioPage = () => {
    
     // ** 過濾出當前使用者的 portfolio**
     const userPortfolios = user?.uid
-    ? painterPortfolios.filter(
-        (portfolio) => portfolio.userUid === user.uid && portfolio.type === "painter"
-    )
+    ? painterPortfolios.filter((portfolio) => portfolio.userUid === user.uid )
     : [];
 
     const {  setIsImageLoading, setIsEmpty } = useImageLoading();

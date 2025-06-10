@@ -13,7 +13,7 @@ const ArtworkEntrustUploadPortfolioPage = () => {
     return (
         <div className={`artworkEntrustUploadPortfolio-page ${notoSansTCClass}`}>
             <div className="artworkEntrustUploadPortfolio-form-content">
-              <PortfolioUploadForm type="entrust" onSubmit={handleFormSubmit} />
+              <PortfolioUploadForm onSubmit={handleFormSubmit} />
             </div>
         </div>
     );

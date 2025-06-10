@@ -8,7 +8,7 @@ const ArtworkEntrustSetTab2 = ({ tabs }) => {
   const router = useRouter();
 
   const handleUploadMarketClick = () => {
-    router.push("/artworkUploadPortfolio?type=entrust");
+    router.push("/artworkUploadPortfolio");
   };
 
   return (

@@ -108,6 +108,8 @@ export default function RootLayout({ children }) {
    
     setUnsubscribeAllUsers(() => unsubscribeUsers);
     console.log("🔥 監聽到用戶變更...");
+
+
     
     return () => {
       unsubscribeAuth();
@@ -121,7 +123,7 @@ export default function RootLayout({ children }) {
     };
 
 
-  }, [token]);
+  }, [token ]); // 這里為了subscribeToEntrustPortfolios 加了userId
 
 
   return (

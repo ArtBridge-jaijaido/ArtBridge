@@ -69,9 +69,7 @@ const ArtworkConsumerProfilePage = () => {
 
     const { entrustPortfolios, loading } = useSelector((state) => state.entrustPortfolio); // 作品集
     // ** 過濾出當前使用者的 portfolio**
-    const userPortfolios = entrustPortfolios.filter(
-        (portfolio) => portfolio.userUid === userUid && portfolio.type === "entrust"
-    );
+    const userPortfolios = entrustPortfolios.filter((portfolio) => portfolio.userUid === userUid);
 
     const [isMasonryReady, setIsMasonryReady] = useState(false);
     const masonryTotalItems = userPortfolios.length; // portfolio 總數
@@ -131,9 +129,14 @@ const ArtworkConsumerProfilePage = () => {
 
     useEffect(() => {
         fetchAllEntrusts();
-        fetchEntrustPortfolios();
         fetchPainterArticles();
     }, [])
+
+    useEffect(() => {
+        if (user?.uid) {
+            fetchEntrustPortfolios(user.uid);
+        }
+    }, [user?.uid]);
 
     const tabs = [
         {

@@ -1,81 +1,93 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import "./ArtworkEntrustMasonryGrid.css";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import ModalImgEntrustArtShowcase from "@/components/ModalImage/ModalImgEntrustArtShowcase.jsx";
 import { useSelector } from "react-redux";
-import { useToast } from "@/app/contexts/ToastContext.js";
-import { usePathname } from "next/navigation";
-import ModalImgArtShowcase from "@/components/ModalImage/ModalImgArtShowcase.jsx";
+import "./ArtworkEntrustMasonryGrid.css";
 
-const ArtworkEntrustMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
-  const pathname = usePathname();
-  const defaultColumnWidths = [270, 270, 270, 270, 270];
+const ArtworkEntrustMasonryGrid = ({ images, onMasonryReady }) => {
+  const defaultColumnWidths = [256, 206, 317, 236, 190];
+
+  const columnWidthsObj = {
+    5: [256, 206, 317, 236, 190],
+    4: [180, 180, 200, 160],
+    2: [170, 190],
+  };
+
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
+  const prevColumnWidths = useRef(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
-  const [filteredImages, setFilteredImages] = useState([]);
   const [imageLoaded, setImageLoaded] = useState({});
-  const [isPreloaded, setIsPreloaded] = useState(false);
+  const totalImages = images.length;
+  const [imageLoadedCount, setImageLoadedCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
-  const { addToast } = useToast();
+
   const allUsers = useSelector((state) => state.user.allUsers);
 
-  useEffect(() => {
-    if (!images || images.length === 0) return;
+  const updateColumnWidths = useCallback(() => {
+    const baseWidth1440 = 1440;
+    const baseWidth834 = 834;
+    const width = window.innerWidth;
 
-    setFilteredImages(images);
-  }, [images]);
+    let newWidths;
 
-  useEffect(() => {
-    if (!filteredImages || filteredImages.length === 0) return;
+    if (width > 1440) {
+      newWidths = columnWidthsObj[5];
+    } else if (width > 834) {
+      const scale = width / baseWidth1440;
+      newWidths = columnWidthsObj[5].map((w) => Math.round(w * scale));
+    } else if (width > 440) {
+      const scale = width / baseWidth834;
+      newWidths = columnWidthsObj[4].map((w) => Math.round(w * scale));
+    } else {
+      newWidths = columnWidthsObj[2];
+    }
 
-    setIsPreloaded(false);
-    setImageLoaded({});
-
-    let loadedCount = 0;
-    filteredImages.forEach((image) => {
-      const img = new Image();
-      img.src = image.exampleImageUrl;
-      img.onload = () => {
-        loadedCount++;
-        setImageLoaded((prev) => ({
-          ...prev,
-          [image.portfolioId]: true,
-        }));
-        if (loadedCount === filteredImages.length) {
-          setIsPreloaded(true);
-          onMasonryReady();
-        }
-      };
-    });
-  }, [filteredImages]);
-
-  useEffect(() => {
-    const updateColumnWidths = () => {
-      if (window.innerWidth <= 370) setColumnWidths([170, 170]);
-      else if (window.innerWidth <= 440) setColumnWidths([190, 190]);
-      else if (window.innerWidth <= 834) setColumnWidths([180, 180, 180, 180]);
-      else if (window.innerWidth <= 1280) setColumnWidths([240, 240, 240, 240, 240]);
-      else setColumnWidths(defaultColumnWidths);
-    };
-    updateColumnWidths();
-    window.addEventListener("resize", updateColumnWidths);
-    return () => window.removeEventListener("resize", updateColumnWidths);
+    if (JSON.stringify(prevColumnWidths.current) !== JSON.stringify(newWidths)) {
+      prevColumnWidths.current = newWidths;
+      setColumnWidths(newWidths);
+    }
   }, []);
 
   useEffect(() => {
-    if (!isPreloaded) return;
+    updateColumnWidths();
+    window.addEventListener("resize", updateColumnWidths);
+
+    return () => {
+      window.removeEventListener("resize", updateColumnWidths);
+    };
+  }, [updateColumnWidths]);
+
+  useEffect(() => {
     const newColumnItems = new Array(columnWidths.length).fill(null).map(() => []);
-    filteredImages.forEach((image, index) => {
+    images.forEach((image, index) => {
       const columnIndex = index % columnWidths.length;
       newColumnItems[columnIndex].push(image);
     });
     setColumnItems(newColumnItems);
-  }, [filteredImages, columnWidths, isPreloaded]);
+  }, [images, columnWidths]);
+
+  useEffect(() => {
+    if (imageLoadedCount >= totalImages && totalImages > 0) {
+      setTimeout(() => {
+        onMasonryReady();
+      }, 300);
+    }
+  }, [imageLoadedCount, totalImages, onMasonryReady]);
+
+  const handleImageLoad = (portfolioId, imageUrl) => {
+    setImageLoaded((prev) => ({
+      ...prev,
+      [portfolioId]: !!imageUrl,
+    }));
+    setImageLoadedCount((prev) => prev + 1);
+  };
 
   const handleImageClick = (image) => {
     const user = allUsers[image.userUid] || {};
     const avatar = user.profileAvatar || image.artistProfileImg || "/images/testing-artist-profile-image.png";
+
     setCurrentData({
       src: image.exampleImageUrl,
       author: user.nickname || image.artistName || "匿名繪師",
@@ -87,30 +99,52 @@ const ArtworkEntrustMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) =
       likes: image.likes || 0,
       articleId: image.articleId || null,
       userUid: image.userUid || null,
+      assignedArtist: image.assignedArtist || ""
     });
+
     setIsModalOpen(true);
   };
 
-  if (!images || images.length === 0) return <div className="ArtworkEntrust-noData">目前還沒有任何合作作品喔！</div>;
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentData(null);
+  };
+
+  if (!images || images.length === 0) {
+    return <div className="ArtworkEntrust-noData">目前還沒有任何合作作品喔！</div>;
+  }
 
   return (
     <div className="ArtworkEntrust-masonry-container">
-      {isPreloaded ? (
-        <div className="ArtworkEntrust-masonry-grid">
-          {columnItems.map((column, columnIndex) => (
-            <div key={columnIndex} className="ArtworkEntrust-masonry-grid-column" style={{ maxWidth: `${columnWidths[columnIndex]}px` }}>
-              {column.map((image, imageIndex) => (
-                <div key={imageIndex} className="ArtworkEntrust-masonry-grid-item" onClick={() => handleImageClick(image)}>
-                  <img src={image.exampleImageUrl} alt={`EntrustArtwork ${imageIndex + 1}`} />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>圖片載入中...</p>
-      )}
-      <ModalImgArtShowcase isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} data={currentData} />
+      <div className="ArtworkEntrust-masonry-grid">
+        {columnItems.map((column, colIndex) => (
+          <div
+            key={colIndex}
+            className="ArtworkEntrust-masonry-grid-column"
+            style={{ width: `${columnWidths[colIndex]}px` }}
+          >
+            {column.map((image, imageIndex) => (
+              <div
+                key={imageIndex}
+                className="ArtworkEntrust-masonry-grid-item"
+                onClick={() => handleImageClick(image)}
+              >
+                <img
+                  src={image.exampleImageUrl}
+                  alt={`EntrustArtwork ${imageIndex + 1}`}
+                  onLoad={() => handleImageLoad(image.portfolioId, image.exampleImageUrl)}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <ModalImgEntrustArtShowcase
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        data={currentData}
+      />
     </div>
   );
 };

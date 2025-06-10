@@ -1,53 +1,19 @@
 .ArtworkEntrust-masonry-grid {
   display: flex;
+  justify-content: center; /* 讓整體居中 */
   gap: 20px;
 }
 
 .ArtworkEntrust-masonry-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
-}
-
-.ArtworkEntrust-filter {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  width: 100%;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-
-.ArtworkEntrust-filter-button {
-  border-radius: 15px;
-  border-style: solid;
-  border-color: #afafaf;
-  border-width: 1px;
-  padding: 5px 10px;
-  background: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #afafaf;
-  font-family: "Inter-SemiBold", sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  max-width: 140px;
-  height: 30px;
-}
-
-.ArtworkEntrust-filter-button.selected {
-  color: #61bced;
-  border-color: #61bced;
 }
 
 .ArtworkEntrust-masonry-grid-column {
   display: flex;
   flex-direction: column;
+  /* 重要：寬度用 style 動態塞 px，不需要寫死在這邊 */
 }
 
 .ArtworkEntrust-masonry-grid-item {
@@ -60,8 +26,10 @@
 
 .ArtworkEntrust-masonry-grid-item img {
   width: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
+  display: block;
 }
 
 .ArtworkEntrust-masonry-likesIcon-container {
@@ -78,6 +46,12 @@
   border: 0.5px solid #FF5C5C;
   background: #FFF;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.ArtworkEntrust-masonry-likesIcon-container img {
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain;
 }
 
 .ArtworkEntrust-masonry-downloadIcon-container {
@@ -98,19 +72,6 @@
   height: 20px !important;
   object-fit: contain;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
-}
-
-.ArtworkEntrust-masonry-likesIcon-container img {
-  width: 15px !important;
-  height: 15px !important;
-  object-fit: contain;
-}
-
-.ArtworkEntrust-favorite-icon {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
 }
 
 .ArtworkEntrust-masonry-grid-item:hover {
@@ -136,15 +97,5 @@
 
   .ArtworkEntrust-masonry-grid {
     gap: 15px;
-  }
-
-  .ArtworkEntrust-filter {
-    margin-bottom: 20px;
-  }
-
-  .ArtworkEntrust-filter-button {
-    font-size: 8px;
-    max-width: 100px;
-    height: 26px;
   }
 }

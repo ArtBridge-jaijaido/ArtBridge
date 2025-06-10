@@ -47,10 +47,9 @@ export const uploadEntrustPortfolio = async (userUid, userSerialId, formData) =>
       exampleImageUrl,
       blurredImageUrl,
       createdAt: new Date().toISOString(),
-      type: "entrust", // 作品集類型
     };
 
-    const portfolioRef = doc(db, basePath, userUid, "portfolios", portfolioId);
+    const portfolioRef = doc(db, basePath, userUid, "entrustportfolios", portfolioId);
     await setDoc(portfolioRef, portfolioData);
     return { success: true, message: "委託作品上傳成功", portfolioData };
   } catch (error) {
@@ -62,7 +61,7 @@ export const uploadEntrustPortfolio = async (userUid, userSerialId, formData) =>
 export const fetchUserEntrustPortfolios = async (userUid) => {
   try {
     const q = query(
-      collection(db, basePath, userUid, "portfolios"),
+      collection(db, basePath, userUid, "entrustportfolios"),
       orderBy("createdAt", "asc")
     );
     const querySnapshot = await getDocs(q);
@@ -75,7 +74,7 @@ export const fetchUserEntrustPortfolios = async (userUid) => {
 
 export const deleteEntrustPortfolio = async (userUid, userId, portfolioId) => {
   try {
-    const portfolioRef = doc(db, basePath, userUid, "portfolios", portfolioId);
+    const portfolioRef = doc(db, basePath, userUid, "entrustportfolios", portfolioId);
     await deleteDoc(portfolioRef);
 
     const imageRef = ref(storage, `${basePath}/${userId}/${portfolioId}/exampleImage.jpg`);
@@ -93,7 +92,7 @@ export const deleteEntrustPortfolio = async (userUid, userId, portfolioId) => {
 
 export const updateEntrustPortfolio = async (userUid, portfolioId, updatedData) => {
   try {
-    const portfolioRef = doc(db, basePath, userUid, "portfolios", portfolioId);
+    const portfolioRef = doc(db, basePath, userUid, "entrustportfolios", portfolioId);
     await updateDoc(portfolioRef, updatedData);
     return { success: true };
   } catch (error) {
@@ -104,7 +103,7 @@ export const updateEntrustPortfolio = async (userUid, portfolioId, updatedData) 
 
 export const checkEntrustPortfolioIdExists = async (userUid, portfolioId) => {
   try {
-    const portfolioRef = doc(db, basePath, userUid, "portfolios", portfolioId);
+    const portfolioRef = doc(db, basePath, userUid, "entrustportfolios", portfolioId);
     const docSnap = await getDoc(portfolioRef);
     return docSnap.exists();
   } catch (error) {

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import ModallmageEntrustPortfolio from "@/components/ModalImage/ModallmageEntrustPortfolio.jsx";
 import { useDispatch } from "react-redux";
@@ -8,9 +9,17 @@ import { useToast } from "@/app/contexts/ToastContext.js";
 import "./EntrustPortfolioMasonryGrid.css";
 
 const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady }) => {
-  console.log("📸 images props received:", images); 
-  console.log("📸 <EntrustPortfolioMasonryGrid /> 渲染中", images);
+  const dispatch = useDispatch();
+  const { addToast } = useToast();
+
   const defaultColumnWidths = [256, 206, 317, 236, 190];
+
+  const columnWidthsObj = {
+    5: [256, 206, 317, 236, 190],
+    4: [180, 180, 200, 160],
+    2: [170, 190],
+  };
+
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
   const prevColumnWidths = useRef(defaultColumnWidths);
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
@@ -19,28 +28,24 @@ const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady })
   const [imageLoaded, setImageLoaded] = useState({});
   const totalImages = images.length;
   const [imageLoadedCount, setImageLoadedCount] = useState(0);
-  const dispatch = useDispatch();
-  const { addToast } = useToast();
-
-  useEffect(() => {
-    if (imageLoadedCount >= totalImages && totalImages > 0) {
-      setTimeout(() => {
-        onMasonryReady();
-      }, 300);
-    }
-  }, [imageLoadedCount, totalImages, onMasonryReady]);
 
   const updateColumnWidths = useCallback(() => {
-    let newWidths = defaultColumnWidths;
+    const baseWidth1440 = 1440;
+    const baseWidth834 = 834;
+    const width = window.innerWidth;
 
-    if (window.innerWidth <= 370) {
-      newWidths = [150, 160];
-    } else if (window.innerWidth <= 440) {
-      newWidths = [170, 190];
-    } else if (window.innerWidth <= 834) {
-      newWidths = [160, 200, 180, 180];
-    } else if (window.innerWidth <= 1280) {
-      newWidths = [190, 190, 260, 206, 210];
+    let newWidths;
+
+    if (width > 1440) {
+      newWidths = columnWidthsObj[5];
+    } else if (width > 834) {
+      const scale = width / baseWidth1440;
+      newWidths = columnWidthsObj[5].map((w) => Math.round(w * scale));
+    } else if (width > 440) {
+      const scale = width / baseWidth834;
+      newWidths = columnWidthsObj[4].map((w) => Math.round(w * scale));
+    } else {
+      newWidths = columnWidthsObj[2];
     }
 
     if (JSON.stringify(prevColumnWidths.current) !== JSON.stringify(newWidths)) {
@@ -67,6 +72,14 @@ const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady })
     setColumnItems(newColumnItems);
   }, [images, columnWidths]);
 
+  useEffect(() => {
+    if (imageLoadedCount >= totalImages && totalImages > 0) {
+      setTimeout(() => {
+        onMasonryReady();
+      }, 300);
+    }
+  }, [imageLoadedCount, totalImages, onMasonryReady]);
+
   const handleImageLoad = (portfolioId, imageUrl) => {
     setImageLoaded((prev) => ({
       ...prev,
@@ -85,11 +98,8 @@ const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady })
       if (response.success) {
         dispatch(deleteEntrustPortfolioAction(portfolio.portfolioId));
         setColumnItems((prev) =>
-          prev.map((column, idx) => idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column)
+          prev.map((column, idx) => (idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column))
         );
-        if (Object.keys(imageLoaded).length === 1) {
-          onMasonryReady();
-        }
         addToast("success", "作品已刪除");
       } else {
         addToast("error", "刪除失敗，請稍後再試");
@@ -108,43 +118,17 @@ const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady })
     setIsModalOpen(false);
     setCurrentData(null);
   };
+
   return (
-    <div className="entrustPortfolio-masonry-grid">
-      {columnItems.map((column, colIndex) => (
-        <div
-          key={colIndex}
-          className="entrustPortfolio-masonry-grid-column"
-          style={{ maxWidth: `${columnWidths[colIndex]}px` }}
-        >
-          {/* {column.map((portfolio, imageIndex) => (
-
-            <div key={imageIndex} className="entrustPortfolio-masonry-grid-item">
-              <img
-                src={portfolio.exampleImageUrl}
-                alt={portfolio.exampleImageName || `ArtworkEntrustPortfolio ${imageIndex + 1}`}
-                className="entrustPortfolio-grid-item-image"
-                onClick={() => handleImageClick(portfolio)}
-                onLoad={() => handleImageLoad(portfolio.portfolioId, portfolio.exampleImageUrl)}
-                style={{ visibility: isMasonryReady ? "visible" : "hidden" }}
-              />
-              {isMasonryReady && imageLoaded[portfolio.portfolioId] && portfolio.exampleImageUrl && (
-                <div
-                  className="entrustPortfolio-masonry-delete-container"
-                  onClick={(e) => handleDelete(portfolio, colIndex, imageIndex, e)}
-                >
-                  <img src="/images/delete-icon.png" alt="Delete" />
-                </div>
-              )}
-            </div>
-          ))} */}
-          {column.map((portfolio, imageIndex) => {
-            console.log("🔍 portfolio image", {
-              portfolioId: portfolio.portfolioId,
-              imageUrl: portfolio.exampleImageUrl,
-              name: portfolio.exampleImageName
-            });
-
-            return (
+    <div className="entrustPortfolio-masonry-grid-wrapper">
+      <div className="entrustPortfolio-masonry-grid">
+        {columnItems.map((column, colIndex) => (
+          <div
+            key={colIndex}
+            className="entrustPortfolio-masonry-grid-column"
+            style={{ width: `${columnWidths[colIndex]}px` }}
+          >
+            {column.map((portfolio, imageIndex) => (
               <div key={imageIndex} className="entrustPortfolio-masonry-grid-item">
                 <img
                   src={portfolio.exampleImageUrl}
@@ -163,10 +147,10 @@ const EntrustPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady })
                   </div>
                 )}
               </div>
-            );
-          })}
-        </div>
-      ))}
+            ))}
+          </div>
+        ))}
+      </div>
       <ModallmageEntrustPortfolio isOpen={isModalOpen} onClose={closeModal} data={currentData} />
     </div>
   );

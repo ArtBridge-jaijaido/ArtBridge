@@ -1,24 +1,62 @@
-"use client"; 
+// "use client"; 
+// import { notoSansTCClass } from '@/app/layout.js';
+// import PortfolioUploadForm from "@/components/PortfolioUploadForm/PortfolioUploadForm.jsx";
+// import "./artworkUploadPortfolio.css"; 
+
+// const ArtworkUploadPortfolioPage = () => {
+
+//     const handleFormSubmit = (formData) => {
+//         console.log("Form Data from page.js:", formData); 
+//     };
+
+//     return (
+//         <div className={`artworkUploadPortfolio-page ${notoSansTCClass}`}>
+//             <div className="artworkUploadPortfolio-form-content">
+//                 <PortfolioUploadForm onSubmit={handleFormSubmit} />
+//             </div>
+//         </div>
+//     );
+// }
+
+
+// export default ArtworkUploadPortfolioPage
+
+"use client";
+import { useSelector } from "react-redux";
 import { notoSansTCClass } from '@/app/layout.js';
 import PortfolioUploadForm from "@/components/PortfolioUploadForm/PortfolioUploadForm.jsx";
-import "./artworkUploadPortfolio.css"; 
-import { useSearchParams } from 'next/navigation';
+import PortfolioEntrustUploadForm from "@/components/PortfolioEntrustUploadForm/PortfolioEntrustUploadForm.jsx";
+import "./artworkUploadPortfolio.css";
 
 const ArtworkUploadPortfolioPage = () => {
-    const searchParams = useSearchParams();
-    const type = searchParams.get('type') || 'painter'; // 預設為 'painter'
+    const { user } = useSelector((state) => state.user);
+
     const handleFormSubmit = (formData) => {
-        console.log("Form Data from page.js:", formData); 
+        console.log("📤 Form Data:", formData);
+    };
+
+    const renderForm = () => {
+        if (!user) return null;
+
+        if (user.role === "artist") {
+            return <PortfolioUploadForm onSubmit={handleFormSubmit} />;
+        }
+
+        if (user.role === "client") {
+            return <PortfolioEntrustUploadForm onSubmit={handleFormSubmit} />;
+        }
+
+        return <p>不支援的角色：{user.role}</p>;
     };
 
     return (
         <div className={`artworkUploadPortfolio-page ${notoSansTCClass}`}>
             <div className="artworkUploadPortfolio-form-content">
-                <PortfolioUploadForm type={type} onSubmit={handleFormSubmit} />
+                {renderForm()}
             </div>
         </div>
     );
-}
+};
 
+export default ArtworkUploadPortfolioPage;
 
-export default ArtworkUploadPortfolioPage

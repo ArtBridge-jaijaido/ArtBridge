@@ -5,7 +5,7 @@ import { ref, deleteObject } from "firebase/storage";
 import {createLowResImage} from "@/lib/functions";
 
 
-export const uploadPortfolio = async (userUid, userSerialId, formData) => {
+export const uploadPainterPortfolio = async (userUid, userSerialId, formData) => {
     try {
         const portfolioId = userSerialId + "_" + Date.now().toString()+"_"+"portfolio";
          //  上傳作品圖片
@@ -40,7 +40,6 @@ export const uploadPortfolio = async (userUid, userSerialId, formData) => {
             likes: 0,
             likedBy: [],
             createdAt: new Date().toISOString(),
-            type: "painter", // 作品集類型 
         };
 
         // ✅ 寫入 Firestore
