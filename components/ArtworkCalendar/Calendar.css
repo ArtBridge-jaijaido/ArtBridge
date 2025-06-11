@@ -8,3 +8,58 @@
 .Calendar-row {
   display: table-row;
 }
+
+.Calendar-header-cell {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 600;
+  height: 2.5rem; /* h-10 */
+  border: 1px solid #60a5fa;
+  color: #4a8cb9;
+  font-family: "Noto Sans TC";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  padding: 20px 0;
+}
+
+.Calendar-cell {
+  display: table-cell;
+  vertical-align: top;
+  height: 6rem; /* h-24 */
+  padding: 0.25rem; /* p-1 */
+  border: 1px solid #60a5fa;
+}
+
+.Calendar-text {
+  color: #4a8cb9;
+}
+
+.Calendar-text--other {
+  color: #e7e7e7;
+}
+
+.Calendar-date {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Noto Sans TC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.Calendar-event-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem; /* gap-1 */
+  margin-top: 0.25rem; /* mt-1 */
+}
