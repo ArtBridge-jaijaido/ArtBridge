@@ -1,0 +1,12 @@
+.CaseListHeader {
+  display: flex;
+  gap: 25px;
+  color: #4a8cb9;
+  text-align: center;
+  font-family: "Noto Sans TC";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+}
