@@ -71,7 +71,7 @@ const ArtworkOrderCard = ({
             await createChatWithMessage({
                 participants: [OrderAssignedPainter,OrderEntruster],
                 senderUid: OrderAssignedPainter,
-                text: "繪師已承接此委託。",
+                content: "繪師已承接此委託。",
                 orderId,
               });
 

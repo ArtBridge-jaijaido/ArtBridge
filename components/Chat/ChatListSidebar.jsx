@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { useSelector } from "react-redux";
 import ChatListItem from "./ChatListItem";
+import { markMessagesAsRead } from "@/services/chatService.js";
 import "./ChatListSidebar.css";
 
 
@@ -11,6 +13,15 @@ const ChatListSidebar = ({ onSelectChat }) => {
   const chats = useSelector((state) => state.chat.chats);
   const allUsers = useSelector((state) => state.user.allUsers);
   const currentUser = useSelector((state) => state.user.user);
+
+  //  點擊聊天室時：同步清除未讀數 + 設定選擇的 chat
+  const handleChatClick = async (chat) => {
+    const unread = chat.unreadCounts?.[currentUser?.uid] || 0;
+    if (unread > 0) {
+      await markMessagesAsRead(chat.id, currentUser.uid);
+    }
+    onSelectChat(chat);
+  };
   
   return (
     <div className="chatListSidebar">
@@ -41,7 +52,7 @@ const ChatListSidebar = ({ onSelectChat }) => {
 
 
           return (
-            <div onClick={() => onSelectChat(chat)} key={chat.id}>
+            <div onClick={() => handleChatClick(chat)} key={chat.id}>
               <ChatListItem
                 avatar={avatarUrl}
                 username={nickname}

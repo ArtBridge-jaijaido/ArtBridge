@@ -41,7 +41,6 @@ const ArtworkPainterProfilePage = () => {
 
     //文章
     const [isPreloaded, setIsPreloaded] = useState(false);
-
     const [articleVisibleItems, setArticleVisibleItems] = useState(10); // 文章
     const { painterArticles } = useSelector((state) => state.painterArticle);
     // ** 過濾出當前使用者的 article**

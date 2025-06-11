@@ -7,6 +7,7 @@ import entrustReducer from './feature/entrustSlice.js';
 import artworkOrderReducer from './feature/artworkOrderSlice.js'; // 引入作品訂單的 reducer
 import notificationReducer from './feature/notificationSlice.js'; // 引入通知的 reducer
 import chatReducer from './feature/chatSlice.js'; // 引入聊天的 reducer
+import messageReducer from './feature/messageSlice.js'; // 引入訊息的 reducer
 
 
 export const store = configureStore({
@@ -17,10 +18,10 @@ export const store = configureStore({
     painterPortfolio: painterPortfolioReducer, // 添加畫師作品集狀態管理的 reducer
     painterArticle: painterArticleReducer, // 添加畫家文章狀態管理的 reducer
     entrust: entrustReducer, // 添加委託狀態管理的 reducer
-
     artworkOrder: artworkOrderReducer, // 添加作品訂單狀態管理的 reducer
     notifications: notificationReducer, // 添加通知狀態管理的 reducer
     chat: chatReducer, // 添加聊天狀態管理的 reducer
+    messages: messageReducer, // 添加訊息狀態管理的 reducer
  
   },
 });

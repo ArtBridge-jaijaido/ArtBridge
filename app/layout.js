@@ -143,12 +143,13 @@ export default function RootLayout({ children }) {
 
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
-        <Provider store={store}>               
+        <Provider store={store}>
+        <ToastProvider>               
           <LoadingProvider>
             <Header />
             <main>
               <ImageLoadingProvider>
-              <ToastProvider>{children}</ToastProvider>
+             {children}
               </ImageLoadingProvider>
             </main>
             {userId && pathname !== "/" && (
@@ -158,6 +159,7 @@ export default function RootLayout({ children }) {
               </>
             )}
           </LoadingProvider>
+          </ToastProvider>
         </Provider>
       </body>
     </html>

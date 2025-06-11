@@ -4,13 +4,12 @@ const chatSlice = createSlice({
   name: "chat",
   initialState: {
     chats: [],
-    unreadCount: 0,
   },
   reducers: {
     // 設定聊天清單
     setChats: (state, action) => {
       state.chats = action.payload;
-      state.unreadCount = action.payload.filter(chat => !chat.lastMessageIsRead).length;
+    
     },
 
     // 新增聊天（避免重複）
@@ -18,9 +17,6 @@ const chatSlice = createSlice({
       const exists = state.chats.some(chat => chat.id === action.payload.id);
       if (!exists) {
         state.chats.unshift(action.payload);
-        if (!action.payload.lastMessageIsRead) {
-          state.unreadCount += 1;
-        }
       }
     },
 
@@ -30,15 +26,16 @@ const chatSlice = createSlice({
       if (index !== -1) {
         state.chats[index] = action.payload;
       }
-      state.unreadCount = state.chats.filter(chat => !chat.lastMessageIsRead).length;
     },
+
 
     // 標記聊天為已讀
     markChatAsRead: (state, action) => {
       const chat = state.chats.find(c => c.id === action.payload);
-      if (chat) chat.lastMessageIsRead = true;
-      state.unreadCount = state.chats.filter(chat => !chat.lastMessageIsRead).length;
-    }
+      if (chat && chat.unreadCounts) {
+        chat.unreadCounts[action.meta.uid] = 0;
+      }
+    },
   },
 });
 

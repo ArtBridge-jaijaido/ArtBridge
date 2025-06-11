@@ -119,9 +119,22 @@
   
   
   .chatContent-messages {
+    width:100%;
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto;     
+  overflow-x: hidden;   
     padding:20px;
+  }
+
+  .chatContent-date-divider {
+    text-align: center;
+    background-color: #999;
+    color: white;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 16px auto;
+    width: fit-content;
   }
   /* 
   .chatContent-date {

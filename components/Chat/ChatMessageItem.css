@@ -1,0 +1,83 @@
+.ChatMessage-item {
+    display: flex;
+    
+    width:100%;
+    margin: 10px;
+    word-break: break-word;
+  }
+  
+  .ChatMessage-item.own {
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: right;
+    margin-top:20px;
+  }
+  
+  .ChatMessage-item.other {
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    text-align: left;
+    margin-top:20px;
+  }
+  
+  .ChatMessage-text {
+    width:50%;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
+    display: inline-block;
+  }
+  
+  .ChatMessage-image-wrapper img {
+    max-width: 200px;
+    border-radius: 8px;
+  }
+  
+  .ChatMessage-system {
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    align-self: center;
+  }
+  
+  .ChatMessage-milestone-notice {
+    background-color: #eef5fb;
+    border: 1px solid #99bfe9;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #2a4a7f;
+    line-height: 1.5;
+  }
+  
+  .ChatMessage-milestone-notice .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .ChatMessage-milestone-notice .highlight {
+    color: #d94444;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .ChatMessage-time{
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+  }
+  
+  .ChatMessage-item.own .ChatMessage-time {
+    order: -1; /* 時間排在氣泡左邊 */
+  }
+  
+  .ChatMessage-item.other .ChatMessage-time {
+    order: 1; /* 時間排在氣泡右邊 */
+  }
