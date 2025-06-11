@@ -1,0 +1,6 @@
+.Calendar-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #60a5fa; /* Tailwind border-blue-400 */
+}
