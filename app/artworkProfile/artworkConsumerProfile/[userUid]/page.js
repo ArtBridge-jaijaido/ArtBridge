@@ -134,6 +134,7 @@ const ArtworkConsumerProfilePage = () => {
 
     useEffect(() => {
         if (user?.uid) {
+            setIsMasonryReady(false);
             fetchEntrustPortfolios(user.uid);
         }
     }, [user?.uid]);
@@ -228,11 +229,23 @@ const ArtworkConsumerProfilePage = () => {
             label: "合作案例",
             content: <div className="ArtworkConsumerProfile-Tab-wrapper">
                 <div className="ArtworkConsumerProfile-artworkEntrustMasonryGrid-container">
-                    <ArtworkEntrustMasonryGrid
-                        images={currentImages}
-                        onMasonryReady={handleMasonryReady}
-                        isMasonryReady={isMasonryReady}
-                    />
+                    <div style={{ visibility: isMasonryReady ? "visible" : "hidden" }}>
+                        <ArtworkEntrustMasonryGrid
+                            images={currentImages}
+                            onMasonryReady={handleMasonryReady}
+                            isMasonryReady={isMasonryReady}
+                        />
+                    </div>
+
+                    {!isMasonryReady && currentImages.length !== 0 ? (
+                        <p className="ArtworkConsumerProfile-ArtworkEntrustMasonryGrid-loading" style={{ position: 'absolute', top: 10, left: 0 }}>
+                            合作案例載入中...
+                        </p>
+                    ) : currentImages.length === 0 ? (
+                        <div className="ArtworkConsumerProfile-ArtworkEntrustMasonryGrid-noData" style={{ position: 'absolute', top: 10 }}>
+                            目前還沒有合作案例喔！
+                        </div>
+                    ) : null}
                 </div>
 
 
