@@ -126,7 +126,7 @@ const ConsumerDashboard = () => {
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-artwork-100-1.png" alt="icon" className="artworkConsumerDashboardIcon" />
-              <span>合作作品</span>
+              <span onClick={(e) => handleNavigateTo(e, "artworkEntrustPortfolio")}>合作作品</span>
             </div>
             <div className="ConsumerDashboard-option-item">
               <img src="/images/artworkDashboardIcon/icons8-bookmark-96-2.png" alt="icon" className="artworkConsumerDashboardIcon" />

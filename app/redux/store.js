@@ -7,7 +7,9 @@ import entrustReducer from './feature/entrustSlice.js';
 
 
 import artworkOrderReducer from './feature/artworkOrderSlice.js'; // 引入作品訂單的 reducer
-import notificationReducer from './feature/notificationSlice'
+import notificationReducer from './feature/notificationSlice';
+import entrustPortfolioReducer from './feature/entrustPortfolioSlice.js';
+
 
 
 export const store = configureStore({
@@ -21,6 +23,8 @@ export const store = configureStore({
 
     artworkOrder: artworkOrderReducer, // 添加作品訂單狀態管理的 reducer
     notifications: notificationReducer, // 添加通知狀態管理的 reducer
+    entrustPortfolio: entrustPortfolioReducer, // 添加委託作品集狀態管理的 reducer
+    
 
  
   },

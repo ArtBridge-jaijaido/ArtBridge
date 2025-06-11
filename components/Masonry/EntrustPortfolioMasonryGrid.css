@@ -1,0 +1,105 @@
+.entrustPortfolio-masonry-grid-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.entrustPortfolio-masonry-grid {
+  display: flex;
+  gap: 30px; /* gutter */
+}
+
+.entrustPortfolio-masonry-grid-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.entrustPortfolio-masonry-grid-item {
+  position: relative;
+  margin-bottom: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.entrustPortfolio-grid-item-image {
+  width: 100%; /* 填滿 column */
+  height: auto; /* 等比例縮放 */
+  border-radius: 10px;
+  object-fit: contain; /* 小圖會放大，整張圖顯示 */
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.entrustPortfolio-grid-item-image:hover {
+  transform: translateY(-8px);
+}
+
+.entrustPortfolio-masonry-delete-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  z-index: 2; /* 保證在圖片上方 */
+}
+
+.entrustPortfolio-masonry-delete-container img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* RWD */
+@media screen and (max-width: 1280px) {
+  .entrustPortfolio-masonry-grid {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .entrustPortfolio-masonry-grid {
+    gap: 10px;
+  }
+
+  .entrustPortfolio-masonry-grid-item {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .entrustPortfolio-masonry-grid {
+    gap: 15px;
+  }
+
+  .entrustPortfolio-grid-item-image {
+    min-width: auto;
+    min-height: 140px;
+  }
+
+  .entrustPortfolio-masonry-delete-container {
+    width: 25px;
+    height: 25px;
+  }
+
+  .entrustPortfolio-masonry-delete-container img {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .entrustPortfolio-masonry-delete-container {
+    width: 20px;
+    height: 20px;
+  }
+
+  .entrustPortfolio-masonry-delete-container img {
+    width: 15px;
+    height: 15px;
+  }
+}

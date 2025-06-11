@@ -12,7 +12,7 @@ import { useToast } from "@/app/contexts/ToastContext.js";
 const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   }) => {
   const defaultColumnWidths = [256, 206, 317, 236, 190];
   const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
-  const prevColumnWidths = useRef(defaultColumnWidths); // 🎯 追蹤上次的 columnWidths
+  const prevColumnWidths = useRef(defaultColumnWidths); //  追蹤上次的 columnWidths
   const [columnItems, setColumnItems] = useState(new Array(defaultColumnWidths.length).fill([]));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState(null);
@@ -25,7 +25,7 @@ const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   
   useEffect(() => {
     if (imageLoadedCount >= totalImages && totalImages > 0) {
         setTimeout(() => {
-            onMasonryReady(); // 🔥 觸發 Masonry 完成
+            onMasonryReady(); //  觸發 Masonry 完成
         }, 300);
     }
 
@@ -101,10 +101,10 @@ const PainterPortfolioMasonryGrid = ({ images, onMasonryReady, isMasonryReady   
       const response = await deletePortfolio(portfolio.userUid,portfolio.userId, portfolio.portfolioId);
 
       if (response.success) {
-        // ✅ Redux 更新狀態 (刪除 Redux store 內的 portfolio)
+        //  Redux 更新狀態 (刪除 Redux store 內的 portfolio)
         dispatch(deletePainterPortfolio(portfolio.portfolioId));
   
-        // ✅ 更新 UI，從狀態中移除該 portfolio
+        //  更新 UI，從狀態中移除該 portfolio
         setColumnItems((prevColumnItems) =>
           prevColumnItems.map((column, idx) =>
             idx === colIndex ? column.filter((_, i) => i !== imageIndex) : column

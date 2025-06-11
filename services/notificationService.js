@@ -3,7 +3,6 @@
 import { collection, getDoc, doc, updateDoc, query,
   where, orderBy, getDocs, setDoc, addDoc, serverTimestamp} from 'firebase/firestore'
 import { db } from '../lib/firebase'
-import { nanoid } from 'nanoid';
 
 // 新增：當使用者留言時觸發通知
 export async function triggerNotificationOnComment({ targetUserId, commenterUid, articleId, commentContent }) {

@@ -7,11 +7,13 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import ArtworkPainterDetail from '@/components/ArtworkPainterDetail/ArtworkPainterDetail.jsx';
 import ArtworkConsumerCooperation from '@/components/ArtworkConsumerCooperation/ArtworkConsumerCooperation.jsx';
 import ArtworkConsumerProfileTab from "@/components/ArtworkConsumerProfile-tab/ArtworkConsumerProfile-tab.jsx";
+import ArtworkEntrustMasonryGrid from "@/components/ArtworkEntrustMasonryGrid/ArtworkEntrustMasonryGrid.js";
 import ArtworkReview from "@/components/ArtworkReview/ArtworkReview.jsx";
 import MasonryArtCommunity from '@/components/Masonry/MasonryArtCommunity.js';
 import ArtworkEntrustCard from "@/components/ArtworkEntrustCard/ArtworkEntrustCard.jsx";
 import MasonryGrid from "@/components/Masonry/MasonryGrid.js";
 import { fetchAllEntrusts } from "@/lib/entrustListener.js";
+import { fetchEntrustPortfolios } from '@/lib/entrustPortfolioListener.js'; // 展示大廳
 import { fetchPainterArticles } from '@/lib/painterArticleListener';
 import "./artworkConsumerProfile.css";
 
@@ -40,6 +42,7 @@ const ArtworkConsumerProfilePage = () => {
     const { entrusts } = useSelector((state) => state.entrust);
     const [entrustVisibleItems, setEntrustVisibleItems] = useState(6); // 委託初始預設顯示數量
 
+
     // 過濾出當前使用者的委託
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -62,6 +65,16 @@ const ArtworkConsumerProfilePage = () => {
     // 評價 Review
     const [reviewVisibleItems, setReviewVisibleItems] = useState(10); // 查看評價預設顯示數量
     const reviewTotalItems = 30; // 總數
+
+
+    const { entrustPortfolios, loading } = useSelector((state) => state.entrustPortfolio); // 作品集
+    // ** 過濾出當前使用者的 portfolio**
+    const userPortfolios = entrustPortfolios.filter((portfolio) => portfolio.userUid === userUid);
+
+    const [isMasonryReady, setIsMasonryReady] = useState(false);
+    const masonryTotalItems = userPortfolios.length; // portfolio 總數
+    const currentImages = userPortfolios.slice(0, masonryVisibleItems); // 當前顯示的 portfolio
+
 
     const testingImages = [
         "/images/testing-Arkwork-image-5.png",
@@ -90,12 +103,16 @@ const ArtworkConsumerProfilePage = () => {
         "/images/testing-Arkwork-image-4.png",
         "/images/testing-Arkwork-image-3.png",
     ];
-    const masonryTotalItems = testingImages.length; // 總數
-    const currentImages = testingImages.slice(0, masonryVisibleItems);
 
     const handleArticleMasonryReady = () => {
         setTimeout(() => {
             setIsArticleMasonryReady(true);
+        }, 300);
+    };
+
+    const handleMasonryReady = () => {
+        setTimeout(() => {
+            setIsMasonryReady(true);
         }, 300);
     };
 
@@ -104,11 +121,23 @@ const ArtworkConsumerProfilePage = () => {
         setArticleVisibleItems(prev => prev + 10);
     }
 
+    const handleMasonryShowMore = () => {
+        fetchEntrustPortfolios();
+        setMasonryVisibleItems(prev => prev + 10);
+    }
+
 
     useEffect(() => {
         fetchAllEntrusts();
         fetchPainterArticles();
     }, [])
+
+    useEffect(() => {
+        if (user?.uid) {
+            setIsMasonryReady(false);
+            fetchEntrustPortfolios(user.uid);
+        }
+    }, [user?.uid]);
 
     const tabs = [
         {
@@ -199,12 +228,29 @@ const ArtworkConsumerProfilePage = () => {
         {
             label: "合作案例",
             content: <div className="ArtworkConsumerProfile-Tab-wrapper">
-                <div className="ArtworkConsumerProfile-MasonryGrid-container">
-                    <MasonryGrid images={currentImages} />
+                <div className="ArtworkConsumerProfile-artworkEntrustMasonryGrid-container">
+                    <div style={{ visibility: isMasonryReady ? "visible" : "hidden" }}>
+                        <ArtworkEntrustMasonryGrid
+                            images={currentImages}
+                            onMasonryReady={handleMasonryReady}
+                            isMasonryReady={isMasonryReady}
+                        />
+                    </div>
+
+                    {!isMasonryReady && currentImages.length !== 0 ? (
+                        <p className="ArtworkConsumerProfile-ArtworkEntrustMasonryGrid-loading" style={{ position: 'absolute', top: 10, left: 0 }}>
+                            合作案例載入中...
+                        </p>
+                    ) : currentImages.length === 0 ? (
+                        <div className="ArtworkConsumerProfile-ArtworkEntrustMasonryGrid-noData" style={{ position: 'absolute', top: 10 }}>
+                            目前還沒有合作案例喔！
+                        </div>
+                    ) : null}
                 </div>
 
-                {masonryVisibleItems < masonryTotalItems && (
-                    <button onClick={() => setMasonryVisibleItems(prev => prev + 10)} className="ArtworkConsumerProfile-show-more-button">
+
+                {masonryVisibleItems < masonryTotalItems && masonryTotalItems > 9 && (
+                    <button onClick={handleMasonryShowMore} className="ArtworkConsumerProfile-show-more-button" style={{ gridColumn: "span 5", marginTop: "20px" }}>
                         顯示更多
                     </button>
                 )}

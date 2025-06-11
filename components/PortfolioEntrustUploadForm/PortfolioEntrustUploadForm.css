@@ -1,0 +1,420 @@
+.PortfolioEntrustUploadForm-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.PortfolioEntrustUploadForm-container {
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  max-width:1200px;
+  background: white;
+}
+
+.PortfolioEntrustUploadForm-grid {
+  display:grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap:20px;
+  width: 100%;
+}
+
+/* 左側圖片上傳 */
+.PortfolioEntrustUploadForm-image-upload {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.PortfolioEntrustUploadForm-image-upload label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+  color: #4F4F4F;
+  font-size: 18px;
+}
+
+.PortfolioEntrustUploadForm-uploadImg-box {
+  max-width: 620px;
+  width: 100%;
+  max-height:520px;
+  height: 520px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.PortfolioEntrustUploadForm-uploadImg-box input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%; 
+  height: 100%;
+}
+
+.PortfolioEntrustUploadForm-preview {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.PortfolioEntrustUploadForm-gray-text {
+  color: gray;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* 右側表單區域 */
+.PortfolioEntrustUploadForm-form-area {
+  grid-column: 2;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.PortfolioEntrustUploadForm-category-width,
+.PortfolioEntrustUploadForm-style-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 下拉按鈕 */
+.PortfolioEntrustUploadForm-dropdown-container {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.PortfolioEntrustUploadForm-max-selection {
+  font-size: 15px;
+  min-width:max-content;
+  color:  #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+/* 類別選擇 & 風格選擇的下拉按鈕樣式 */
+#category-dropdown, #style-dropdown {
+  background-color: #8DD7FF;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 10px;
+  min-width: 120px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height:auto;
+  font-family: Inter;
+  font-style: normal;
+}
+
+#category-dropdown::after, #style-dropdown::after {
+  content: "▼";
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#category-dropdown.open::after, #style-dropdown.open::after {
+  content: "▲";
+}
+
+.PortfolioEntrustUploadForm-dropdown-option input[type="checkbox"] {
+  cursor: pointer;
+  width:20px;
+  height:20px;
+}
+
+.PortfolioEntrustUploadForm-input-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing:border-box;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  color:8C8C8C;
+}
+
+.gray-text {
+  font-family: Noto Sans TC;
+  font-style: normal;
+  font-weight: 500;
+  color: #999;
+}
+
+.black-text {
+  font-family: Noto Sans TC;
+  font-style: normal;
+  font-weight: 500;
+  color: black;
+}
+
+.PortfolioEntrustUploadForm-dropdown {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  box-sizing:border-box;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.PortfolioEntrustUploadForm-dropdown::after {
+  content: "▼";
+  font-size: 14px;
+  color: #555;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.PortfolioEntrustUploadForm-dropdown.open::after {
+  content: "▲";
+}
+
+.PortfolioEntrustUploadForm-dropdown-options {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  left: 0;
+  top: 100%; 
+  min-width:max-content;
+  width:100%;
+}
+
+.PortfolioEntrustUploadForm-dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color:#555;
+  gap:10px;
+}
+
+.PortfolioEntrustUploadForm-dropdown-option:hover {
+  background-color: #40a4da;
+  color: white;
+}
+
+.PortfolioEntrustUploadForm-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+  gap: 100px;
+}
+
+.PortfolioEntrustUploadForm-button-group button {
+  padding: 0px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 120px;
+  height: 40px;
+  transition: background-color 0.3s ease;
+}
+
+.PortfolioEntrustUploadForm-prev {
+  background-color: #40a4da;
+  color: white;
+}
+
+.PortfolioEntrustUploadForm-prev:hover {
+  background-color: #358bc5;
+}
+
+.PortfolioEntrustUploadForm-next {
+  background-color: #40a4da;
+  color: white;
+}
+
+.PortfolioEntrustUploadForm-next:hover {
+  background-color: #358bc5;
+}
+
+.PortfolioEntrustUploadForm-artist-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 1280px) {
+  .PortfolioEntrustUploadForm-uploadImg-box {
+      max-width:500px;
+      max-height: 370px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .PortfolioEntrustUploadForm-grid {
+      grid-template-columns: 1fr;     
+      grid-template-rows: auto auto; 
+      gap: 20px;
+  }
+
+  .PortfolioEntrustUploadForm-image-upload {
+      justify-content: center;
+      align-items: center;
+  }
+
+  .PortfolioEntrustUploadForm-uploadImg-box {
+      max-width:700px;
+  }
+
+  .PortfolioEntrustUploadForm-form-area {
+      flex-direction: row;
+      gap: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+  }
+
+  .PortfolioEntrustUploadForm-category-width,
+  .PortfolioEntrustUploadForm-style-width {
+      flex: 1;
+      min-width: 45%;
+  }
+
+  .PortfolioEntrustUploadForm-artist-width {
+    width: 100%;
+    min-width: 45%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .PortfolioEntrustUploadForm-button-group {
+      gap: 70px;
+      margin-top: 70px;
+  }
+
+  .PortfolioEntrustUploadForm-button-group button {
+      font-size: 14px;
+      width: 100px;
+      height: 35px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .PortfolioEntrustUploadForm-grid {
+      gap: 0px;
+  }
+
+  .PortfolioEntrustUploadForm-uploadImg-box {
+      max-width:371px;
+      max-height:220px;
+  }
+
+  .PortfolioEntrustUploadForm-form-area {
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .PortfolioEntrustUploadForm-category-width,
+  .PortfolioEntrustUploadForm-style-width {
+      width: 100%;
+  }
+
+  #category-dropdown, #style-dropdown,
+  .PortfolioEntrustUploadForm-dropdown-option {
+      font-size:14px;
+  }
+
+  .PortfolioEntrustUploadForm-max-selection {
+      font-size:13px;
+  }
+
+  .PortfolioEntrustUploadForm-dropdown::after,
+  .PortfolioEntrustUploadForm-dropdown.open::after {
+      font-size:12px;
+  }
+
+  #category-dropdown, #style-dropdown {
+      min-width:100px;
+  }
+
+  .PortfolioEntrustUploadForm-button-group {
+      gap: 60px;
+      margin-top: 40px;
+  }
+
+  .PortfolioEntrustUploadForm-button-group button {
+      font-size: 12px;
+      width: 80px;
+      height: 35px;
+  }
+
+  .PortfolioEntrustUploadForm-input-box {
+      padding:5px;
+      font-size: 13px;
+  }
+
+  .PortfolioEntrustUploadForm-artist-width {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 370px) {
+  .PortfolioEntrustUploadForm-container {
+      padding:10px;
+  }
+
+  .PortfolioEntrustUploadForm-uploadImg-box {
+      max-width:341px;
+      max-height:174px;
+  }
+}

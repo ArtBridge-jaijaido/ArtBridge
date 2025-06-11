@@ -8,6 +8,7 @@ import { subscribeToAuth } from "@/lib/authListener";
 import { subscribeToArtworks} from "@/lib/artworkListener";
 import { subscribeToAllUsers } from "@/lib/userListener";
 import {subscribeToPainterPortfolios} from "@/lib/painterPortfolioListener";
+import { subscribeToEntrustPortfolios } from "@/lib/entrustPortfolioListener";
 import { subscribeToPainterArticles } from "@/lib/painterArticleListener";
 import { subscribeToEntrusts } from "@/lib/entrustListener";
 import { subscribeToConsumerOrders,subscribeToPainterOrders  } from "@/lib/artworkOrdersListener";
@@ -100,17 +101,21 @@ export default function RootLayout({ children }) {
     const unsubscribeAuth = subscribeToAuth();
     const unsubscribeArtworks = subscribeToArtworks();
     const unsubscribePainterPortfolios = subscribeToPainterPortfolios();
+    const unsubscribeEntrustPortfolios = subscribeToEntrustPortfolios();
     const unsubscribePainterArticles = subscribeToPainterArticles();
     const unsubscribeUsers = subscribeToAllUsers();
     const unsubscribeEntrusts = subscribeToEntrusts();
    
     setUnsubscribeAllUsers(() => unsubscribeUsers);
     console.log("🔥 監聽到用戶變更...");
+
+
     
     return () => {
       unsubscribeAuth();
       unsubscribeArtworks();
       unsubscribePainterPortfolios();
+      unsubscribeEntrustPortfolios();
       unsubscribePainterArticles();
       unsubscribeUsers();
       unsubscribeEntrusts();
@@ -118,7 +123,7 @@ export default function RootLayout({ children }) {
     };
 
 
-  }, [token]);
+  }, [token ]); // 這里為了subscribeToEntrustPortfolios 加了userId
 
 
   return (

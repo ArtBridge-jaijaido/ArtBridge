@@ -1,0 +1,452 @@
+.ModallmageEntrustPortfolio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ModallmageEntrustPortfolio-content {
+  max-width: 1280px;
+  width: 90%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ModallmageEntrustPortfolio-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.ModallmageEntrustPortfolio-image-section {
+  width: 100%;
+  max-height: 80vh;
+  flex: 1.5;
+  padding: 30px 35px;
+  display: flex;
+}
+
+.ModallmageEntrustPortfolio-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.ModallmageEntrustPortfolio-image-container img {
+  position: relative;
+  width: 100%;
+  object-fit: cover;
+  height: 80vh;
+  border-radius: 15px;
+}
+
+.ModallmageEntrustPortfolio-close {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+  font-family: "Noto Sans TC";
+  font-weight: 600;
+  border-radius: 50%;
+  background: #4A8CB9;
+  z-index: 1;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.ModallmageEntrustPortfolio-close:active {
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5),
+      0 2px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(4px);
+}
+
+.ModallmageEntrustPortfolio-select-section {
+  border-radius: 10px;
+  background-color: white;
+  width: 100%;
+  max-width: 570px;
+  flex: 1;
+  padding: 50px 35px;
+  position: relative;
+}
+
+.ModallmageEntrustPortfolio-category-width,
+.ModallmageEntrustPortfolio-style-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.ModallmageEntrustPortfolio-dropdown-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ModallmageEntrustPortfolio-max-selection {
+  font-size: 15px;
+  min-width: max-content;
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+#category-dropdown,
+#style-dropdown {
+  background-color: #8DD7FF;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  max-width: 120px;
+  position: relative;
+}
+
+#category-dropdown::after,
+#style-dropdown::after {
+  content: "▼";
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#category-dropdown.open::after,
+#style-dropdown.open::after {
+  content: "▲";
+}
+
+.ModallmageEntrustPortfolio-dropdown {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  box-sizing:border-box;
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.ModallmageEntrustPortfolio-dropdown::after {
+  content: "▼";
+  font-size: 14px;
+  color: #555;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.ModallmageEntrustPortfolio-dropdown.open::after {
+  content: "▲";
+}
+
+.ModallmageEntrustPortfolio-dropdown-options {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: max-content;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  left: 0;
+  top: 100%;
+  width: 100%;
+}
+
+.ModallmageEntrustPortfolio-dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color: #555;
+  gap: 10px;
+}
+
+.ModallmageEntrustPortfolio-dropdown-option:hover {
+  background-color: #40a4da;
+  color: white;
+}
+
+.ModallmageEntrustPortfolio-dropdown-option input[type="checkbox"] {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.ModallmageEntrustPortfolio-input-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing: border-box;
+  font-family: "Noto Sans TC";
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.gray-text {
+  color: #999;
+}
+
+.black-text {
+  color: black;
+}
+
+.ModallmageEntrustPortfolio-artist-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.ModallmageEntrustPortfolio-artist-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4F4F4F;
+  font-family: "Noto Sans TC";
+  letter-spacing: 1px;
+}
+
+.ModallmageEntrustPortfolio-save-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.ModallmageEntrustPortfolio-save-button button {
+  padding: 0px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 16px;
+  width: 120px;
+  height: 40px;
+}
+
+/* RWD */
+@media screen and (max-width: 1280px) {
+  .ModallmageEntrustPortfolio-content {
+      max-width: 1160px;
+  }
+
+  .ModallmageEntrustPortfolio-close {
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
+  }
+
+  .ModallmageEntrustPortfolio-image-section {
+      padding: 30px 35px;
+  }
+
+  .ModallmageEntrustPortfolio-select-section {
+      max-width: 510px;
+  }
+
+  .ModallmageEntrustPortfolio-save-button {
+      margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .ModallmageEntrustPortfolio-content {
+      max-width: 80vh;
+      max-height: 80vh;
+  }
+
+  .ModallmageEntrustPortfolio-body {
+      flex-direction: column;
+  }
+
+  .ModallmageEntrustPortfolio-close {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+      top: -10px;
+      left: -5px;
+  }
+
+  .ModallmageEntrustPortfolio-image-container img {
+      width: 100%;
+      max-height: 55vh;
+      object-fit: cover;
+  }
+
+  .ModallmageEntrustPortfolio-image-section {
+      padding: 10px 10px;
+  }
+
+  .ModallmageEntrustPortfolio-select-section {
+      width: calc(100% - 30px);
+      max-width: 100%;
+      padding: 20px 35px;
+  }
+
+  .ModallmageEntrustPortfolio-save-button {
+      margin-top: 20px;
+  }
+
+  #category-dropdown,
+  #style-dropdown {
+      max-width: 150px;
+      max-height: 36px;
+      padding-left: 30px;
+  }
+
+  #category-dropdown::after,
+  #style-dropdown::after {
+      right: 20px;
+      top: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ModallmageEntrustPortfolio-content {
+      max-width: 390px;
+  }
+
+  .ModallmageEntrustPortfolio-close {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+      left: -8px;
+  }
+
+  .ModallmageEntrustPortfolio-image-section {
+      padding: 25px 25px 0px 25px;
+  }
+
+  .ModallmageEntrustPortfolio-image-container img {
+      max-height: 40vh;
+  }
+
+  .ModallmageEntrustPortfolio-select-section {
+      width: calc(100% - 60px);
+      max-width: 100%;
+      padding: 20px 20px;
+  }
+
+  .ModallmageEntrustPortfolio-save-button {
+      margin-top: 15px;
+  }
+
+  .ModallmageEntrustPortfolio-save-button button {
+      padding: 0px 9px;
+      font-size: 13px;
+      width: 90px;
+      height: 30px;
+  }
+
+  #category-dropdown,
+  #style-dropdown {
+      max-width: 118px;
+      max-height: 30px;
+      font-size: 14px;
+      padding-left: 20px;
+  }
+
+  .ModallmageEntrustPortfolio-input-box {
+      font-size: 14px;
+      padding: 5px;
+  }
+
+  .ModallmageEntrustPortfolio-max-selection {
+      font-size: 12px;
+  }
+
+  .ModallmageEntrustPortfolio-dropdown-option {
+      font-size: 14px;
+  }
+
+  .ModallmageEntrustPortfolio-artist-label {
+      font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .ModallmageEntrustPortfolio-close {
+      top: -10px;
+  }
+
+  .ModallmageEntrustPortfolio-image-section {
+      padding: 20px 20px 0px 20px;
+  }
+
+  .ModallmageEntrustPortfolio-select-section {
+      width: calc(100% - 50px);
+  }
+
+  #category-dropdown,
+  #style-dropdown {
+      max-width: 102px;
+      max-height: 24px;
+      font-size: 12px;
+  }
+
+  #category-dropdown::after,
+  #style-dropdown::after {
+      right: 10px;
+      top: 50%;
+      font-size: 10px;
+  }
+
+  .ModallmageEntrustPortfolio-input-box {
+      font-size: 12px;
+  }
+
+  .ModallmageEntrustPortfolio-save-button button {
+      font-size: 10px;
+      width: 80px;
+      height: 28px;
+  }
+
+  .ModallmageEntrustPortfolio-dropdown-option {
+      font-size: 12px;
+  }
+
+  .ModallmageEntrustPortfolio-artist-label {
+    font-size: 12px;
+}
+}

@@ -1,0 +1,40 @@
+.artworkEntrustUploadPortfolio-page {
+  /*max width */
+  --artworkEntrustUploadPortfolio-page-width: 1440px;
+}
+
+.artworkEntrustUploadPortfolio-page {
+  position: relative;
+  width: 100%;
+  max-width: var(--artworkEntrustUploadPortfolio-page-width);
+  padding: 100px 80px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.artworkEntrustUploadPortfolio-form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+  .artworkEntrustUploadPortfolio-form-content {
+      padding: 0px 30px;
+  }
+}
+
+@media screen and (max-width: 834px) {
+  .artworkEntrustUploadPortfolio-page {
+      padding: 100px 40px 20px 40px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .artworkEntrustUploadPortfolio-page {
+      padding: 100px 20px 20px 20px;
+  }
+}
