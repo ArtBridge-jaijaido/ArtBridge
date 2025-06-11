@@ -4,3 +4,7 @@
   border-collapse: collapse;
   border: 1px solid #60a5fa; /* Tailwind border-blue-400 */
 }
+
+.Calendar-row {
+  display: table-row;
+}
