@@ -1,0 +1,12 @@
+.ArtworkCalendar-container {
+  width: 100%;
+}
+
+.ArtworkCalendar-calendar-field {
+  width: 100%;
+  max-width: 735px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
