@@ -40,7 +40,7 @@ const ArtworkPainterArticlePage = () => {
                         console.log("not empty");
                         setIsEmpty(false);
                     }
-                    isDataFetched.current = true; // ✅ 數據已加載，防止重複執行
+                    isDataFetched.current = true; //  數據已加載，防止重複執行
                 }
             }, 500);
 
@@ -58,7 +58,7 @@ const ArtworkPainterArticlePage = () => {
 
 
 
-    // ✅ 當 Masonry 排列完成後，關閉 Loading
+    //  當 Masonry 排列完成後，關閉 Loading
     const handleMasonryReady = () => {
         setTimeout(() => {
             setIsImageLoading(false);

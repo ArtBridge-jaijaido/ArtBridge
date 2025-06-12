@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect, useMemo } from "react";
 import Masonry from "react-masonry-css";
 import ModalImgArtCommunity from "@/components/ModalImage/ModalImgArtCommunity.jsx";
@@ -14,6 +13,8 @@ import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 
 const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreloaded, setIsPreloaded, onCollected }) => {
+  
+  
   const pathname = usePathname();
   const isCollectionPage = pathname.includes("artworkCollectionList");
   const [imageLoaded, setImageLoaded] = useState({});
@@ -83,7 +84,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
         [image.portfolioId]: true,
       }));
     });
-  }, [images]);
+  }, [images.length]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -101,7 +102,7 @@ const MasonryArtCommunity = ({ images, onMasonryReady, isMasonryReady, isPreload
     };
   }, [currentBreakpoint]);
 
-  // ✅ Memo liked & collected map
+  //  Memo liked & collected map
   const likedMap = useMemo(() => {
     const map = {};
     images.forEach(img => {

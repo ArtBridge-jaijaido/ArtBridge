@@ -25,6 +25,9 @@ const ArtworkConsumerProfilePage = () => {
     const [isUserLoaded, setIsUserLoaded] = useState(false);
     const [masonryVisibleItems, setMasonryVisibleItems] = useState(10); // 作品集預設顯示數量
     const allUsers = useSelector((state) => state.user.allUsers);
+
+
+    
     //文章
     const [isPreloaded, setIsPreloaded] = useState(false);
     const [articleVisibleItems, setArticleVisibleItems] = useState(10); // 文章
