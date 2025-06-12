@@ -1,6 +1,7 @@
 "use client";
-import { format, isSameDay, isSameMonth } from "date-fns";
+import { format, isSameMonth } from "date-fns";
 import "./Calendar.css";
+import CaseDots from "./CaseDots";
 import { DAYS_IN_WEEK, WEEKDAYS } from "./constants";
 import getCalendarGrid from "./getCalendarGrid";
 
@@ -36,14 +37,7 @@ export default function Calendar({ events, date }) {
                   >
                     {format(day, "d")}
                   </div>
-                  <div className="Calendar-event-row">
-                    {events
-                      .filter((e) => isSameDay(day, new Date(e.date)))
-                      .map((e, i) => (
-                        <span key={i} />
-                        // TODO: 案件圓點
-                      ))}
-                  </div>
+                  <CaseDots date={day} events={events} />
                 </div>
               ))}
           </div>
