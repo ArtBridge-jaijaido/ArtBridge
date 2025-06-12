@@ -1,5 +1,6 @@
 .Calendar-table {
   display: table;
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #60a5fa; /* Tailwind border-blue-400 */
@@ -60,6 +61,4 @@
 .Calendar-event-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem; /* gap-1 */
-  margin-top: 0.25rem; /* mt-1 */
 }
