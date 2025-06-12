@@ -1,0 +1,45 @@
+.CaseListItem {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.CaseListItem-color-field {
+  display: flex;
+  gap: 20px;
+  color: #a2e2ff;
+  align-items: center;
+}
+
+.CaseListItem-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.CaseListItem-date {
+  color: #a2e2ff;
+  font-family: "Noto Sans TC";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.CaseListItem-title {
+  color: #7e7e7e;
+  font-family: "Noto Sans TC";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
