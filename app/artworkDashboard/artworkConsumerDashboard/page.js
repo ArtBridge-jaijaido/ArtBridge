@@ -66,7 +66,7 @@ const ConsumerDashboard = () => {
         <div className="ConsumerDashboard-leftPart-container">
           <div className="ConsumerDashboard-userInfo-container">
             <div className="ConsumerDashboard-userInfo-avatar">
-              <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="avatar" className="ConsumerDashboard-userInfo-avatar-img" />
+              <img src={user?.profileAvatar || "/images/kv-min-4.png"} alt="avatar" />
             </div>
 
             <div className="ConsumerDashboard-userInfo">

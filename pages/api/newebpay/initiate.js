@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 
   switch (type) {
       case "entrust":
-        clickBackURL = "https://e263-1-168-14-122.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
+        clickBackURL = "https://afd7-114-46-14-33.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
         itemDesc = `繪師委託-${artistNickname}`;
         tradeTempStoragePromise = pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
         break;
@@ -58,8 +58,8 @@ export default async function handler(req, res) {
     MerchantOrderNo: uniqueOrderNo,
     Amt: amount,
     ItemDesc: itemDesc,
-    ReturnURL: "https://e263-1-168-14-122.ngrok-free.app/api/newebpay/return", 
-    NotifyURL: "https://e263-1-168-14-122.ngrok-free.app/api/newebpay/notify", 
+    ReturnURL: "https://afd7-114-46-14-33.ngrok-free.app/api/newebpay/return", 
+    NotifyURL: "https://afd7-114-46-14-33.ngrok-free.app/api/newebpay/notify", 
     ClientBackURL: clickBackURL
   };
 

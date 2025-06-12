@@ -35,8 +35,8 @@
 }
 
 .PainterDashboard-painterInfo-avatar {
-    width: 120px !important;
-    height: 120px !important;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background-color: #CAEEFF;
     display: flex;
@@ -46,7 +46,7 @@
     aspect-ratio: 1/1;
 }
 
-.PainterDashboard-painterInfo-avatar-img {
+.PainterDashboard-painterInfo-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -527,8 +527,8 @@
     }
 
     .PainterDashboard-painterInfo-avatar{
-        width: 80px !important;
-        height: 80px !important;
+        width: 80px;
+        height: 80px ;
     }
 
 
@@ -648,8 +648,8 @@
     }
 
     .PainterDashboard-painterInfo-avatar{
-        width: 40px !important;
-        height: 40px !important;
+        width: 40px ;
+        height: 40px ;
     }
 
     .PainterDashboard-painterInfo h1 {

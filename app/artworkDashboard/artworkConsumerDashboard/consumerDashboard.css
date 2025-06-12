@@ -28,15 +28,14 @@
     display: flex;
     gap: 20px;
     align-items: center;
-
     width: 100%;
     max-width: 462px;
     height: 130px;
 }
 
 .ConsumerDashboard-userInfo-avatar {
-    width: 120px !important;
-    height: 120px !important;
+    width: 120px;
+    height: 120px ;
     border-radius: 50%;
     background-color: #CAEEFF;
     display: flex;
@@ -46,7 +45,7 @@
     aspect-ratio: 1/1;
 }
 
-.ConsumerDashboard-userInfo-avatar-img {
+.ConsumerDashboard-userInfo-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -525,8 +524,8 @@
     }
 
     .ConsumerDashboard-userInfo-avatar{
-        width: 80px !important;
-        height: 80px !important;
+        width: 80px;
+        height: 80px;
     }
 
 
@@ -546,7 +545,7 @@
     }
 
     .ConsumerDashboard-userInfo-avatar {
-        width: 100px;
+        width: 80px;
         height: 80px;
     }
 
@@ -646,9 +645,11 @@
     }
 
     .ConsumerDashboard-userInfo-avatar{
-        width: 40px !important;
-        height: 40px !important;
+        width: 40px;
+        height: 40px;
     }
+
+ 
 
     .ConsumerDashboard-userInfo h1 {
         font-size: 14px;

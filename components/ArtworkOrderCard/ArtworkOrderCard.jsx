@@ -6,15 +6,16 @@ import { useLoading } from "@/app/contexts/LoadingContext.js";
 import { updateArtworkOrder } from "@/services/artworkOrderService.js";
 import { createChatWithMessage } from "@/services/chatService";
 import ModalImgMarketOrderPreview from "@/components/ModalImage/ModalImgMarketOrderPreview.jsx";
+import ModalImgAcceptOrderConfirm from "@/components/ModalImage/ModalImgAcceptOrderConfirm";
 import { useSelector } from "react-redux";
 
 
 const preloadImage = (src) =>
     new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = resolve;
-      img.onerror = reject;
-      img.src = src;
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
     });
 
 
@@ -37,8 +38,9 @@ const ArtworkOrderCard = ({
     const allUsers = useSelector((state) => state.user.allUsers);
     const assignedPainterNickname = allUsers[OrderAssignedPainter]?.nickname || "使用者名稱";
     const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-   
-    
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+
+
     const handleViewEntrustApplicant = (e) => {
         e.stopPropagation();
         const targetPath = `/artworkOrdersManagement/consumerOrdersManagement/entrustApplicants/${orderId}`;
@@ -57,42 +59,48 @@ const ArtworkOrderCard = ({
     };
 
     // 市集 繪師接受承接
-    const handleAcceptOrder = async (e, orderId) => {
+    const handleConfirmModalOpen = async (e, orderId) => {
 
-        // 臨時設置 為測試isVisibleToConsumer 是否讓委託方同步顯示案件
+        e.stopPropagation();
+        setIsConfirmationModalOpen(true);
+        
+    };
+
+    const handleAcceptOrder = async (daysToStart, daysToComplete) => {
+
         e.stopPropagation();
         try {
             await updateArtworkOrder(orderId, {
                 isVisibleToConsumer: true,
-                status:"進行中",
+                status: "進行中",
+                daysToStart,
+                daysToComplete,
             });
 
-            // 創建聊天並發送初始消息
             await createChatWithMessage({
-                participants: [OrderAssignedPainter,OrderEntruster],
+                participants: [OrderAssignedPainter, OrderEntruster],
                 senderUid: OrderAssignedPainter,
                 content: "繪師已承接此委託。",
                 orderId,
-              });
-
-            console.log(" 承接成功並已更新訂單狀態");
+            });
         } catch (error) {
             console.error(" 接受訂單失敗", error);
         }
+        setShowModal(false);
     };
 
 
     // 市集 view 委託方參考圖及需求說明
     const openMarketPreviewModal = async (e) => {
         e.stopPropagation();
-        
+
         try {
-          await preloadImage(referenceImageUrl);
-          setIsPreviewModalOpen(true);
+            await preloadImage(referenceImageUrl);
+            setIsPreviewModalOpen(true);
         } catch (error) {
-          console.error("圖片預載失敗", error);
-        } 
-      };
+            console.error("圖片預載失敗", error);
+        }
+    };
 
     return (
         <div
@@ -140,7 +148,7 @@ const ArtworkOrderCard = ({
                         </button>
                     ) : OrderSource === "市集" && statusLabel === "等待回應" ? (
                         <div className="artworkOrderCard-market-buttons">
-                            <button className="artworkOrderCard-confirm-button" onClick={(e) => handleAcceptOrder(e, orderId)}>
+                            <button className="artworkOrderCard-confirm-button" onClick={(e) =>handleConfirmModalOpen(e, orderId)}>
                                 確認承接
                             </button>
                             <button className="artworkOrderCard-reject-button" onClick={() => handleRejectOrder(orderId)}>
@@ -161,9 +169,9 @@ const ArtworkOrderCard = ({
                     </p>
                     <div className="artworkOrderCard-image"
                         onClick={(e) => {
-                        e.stopPropagation(); 
-                        
-                      }}
+                            e.stopPropagation();
+
+                        }}
                     >
                         {OrderSource === "市集" ? (
                             <div className="artworkOrderCard-market-image-placeholder"
@@ -194,6 +202,13 @@ const ArtworkOrderCard = ({
                 referenceImageUrl={referenceImageUrl}
                 customRequirement={customRequirement}
             />
+
+            <ModalImgAcceptOrderConfirm
+                isOpen={isConfirmationModalOpen}
+                onClose={() => setIsConfirmationModalOpen(false)}
+                onConfirm={handleAcceptOrder}
+            />
+
         </div>
 
     );
