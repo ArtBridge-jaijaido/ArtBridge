@@ -1,0 +1,12 @@
+.CaseDots-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 0 7px;
+}
+
+.CaseDots-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
