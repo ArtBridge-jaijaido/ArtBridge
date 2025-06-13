@@ -1,5 +1,5 @@
-import crypto from "crypto";
 import { pendingPainterTempData } from "@/services/artworkOrderServiceAdmin";
+import crypto from "crypto";
 
 const merchantID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const HashKey = process.env.NEWEBPAY_HASH_KEY;
@@ -21,51 +21,69 @@ function shaEncrypt(data) {
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end("Method Not Allowed");
 
+  const {
+    artistNickname,
+    amount,
+    orderId,
+    artistUid,
+    expectedDays,
+    expectedPrice,
+    type,
+  } = req.body;
 
-  const { artistNickname, amount, orderId, artistUid, expectedDays, expectedPrice,type } = req.body;
-
-  if (!artistNickname || !amount || !orderId || !artistUid || !type ) {
+  if (!artistNickname || !amount || !orderId || !artistUid || !type) {
     return res.status(400).send("missing required fields");
   }
 
-  const uniqueOrderNo = `${type}_${orderId}_${Date.now()}`; 
+  const uniqueOrderNo = `${type}_${orderId}_${Date.now()}`;
   let clickBackURL = "";
   let itemDesc = "";
   let tradeTempStoragePromise = Promise.resolve();
 
   switch (type) {
-      case "entrust":
-        clickBackURL = "https://afd7-114-46-14-33.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
-        itemDesc = `繪師委託-${artistNickname}`;
-        tradeTempStoragePromise = pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
-        break;
-      case "market":
-        clickBackURL = "https://afd7-114-46-14-33.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
-        itemDesc = `市集繪師承接-${artistNickname}`;
-        break;
+    case "entrust":
+      clickBackURL =
+        "https://f571-59-115-26-48.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
+      itemDesc = `繪師委託-${artistNickname}`;
+      tradeTempStoragePromise = pendingPainterTempData(
+        orderId,
+        artistUid,
+        expectedDays,
+        expectedPrice
+      );
+      break;
+    case "market":
+      clickBackURL =
+        "https://cec3-2001-b400-e23f-40bc-b5d8-b022-f603-7adb.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
+      itemDesc = `市集繪師承接-${artistNickname}`;
+      break;
     default:
       return res.status(400).send("無效的付款類型");
-}
-       
-  
-  await tradeTempStoragePromise; 
+  }
 
+  await tradeTempStoragePromise;
 
   const tradeInfoObject = {
-    MerchantID: merchantID, 
+    MerchantID: merchantID,
     RespondType: "JSON",
     TimeStamp: Math.floor(Date.now() / 1000).toString(),
     Version: "2.0",
     MerchantOrderNo: uniqueOrderNo,
     Amt: amount,
     ItemDesc: itemDesc,
-    ReturnURL: "https://afd7-114-46-14-33.ngrok-free.app/api/newebpay/return", 
-    NotifyURL: "https://afd7-114-46-14-33.ngrok-free.app/api/newebpay/notify", 
-    ClientBackURL: clickBackURL
+    ReturnURL:
+      "https://cec3-2001-b400-e23f-40bc-b5d8-b022-f603-7adb.ngrok-free.app/api/newebpay/return",
+    NotifyURL:
+      "https://cec3-2001-b400-e23f-40bc-b5d8-b022-f603-7adb.ngrok-free.app/api/newebpay/notify",
+    ClientBackURL: clickBackURL,
   };
 
   const tradeInfoStr = new URLSearchParams(tradeInfoObject).toString();
-  const encrypted = aesEncrypt(tradeInfoStr, Buffer.from(HashKey, "utf8"), Buffer.from(HashIV, "utf8"));
+  const encrypted = aesEncrypt(
+    tradeInfoStr,
+    Buffer.from(HashKey, "utf8"),
+    Buffer.from(HashIV, "utf8")
+  );
   const sha = shaEncrypt(`HashKey=${HashKey}&${encrypted}&HashIV=${HashIV}`);
 
   res.status(200).send(`<!DOCTYPE html>
@@ -81,4 +99,3 @@ export default async function handler(req, res) {
   </body>
 </html>`);
 }
-

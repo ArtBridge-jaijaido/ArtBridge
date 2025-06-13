@@ -1,0 +1,16 @@
+.ScheduleAvailabilityPanelLegend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ScheduleAvailabilityPanelLegend-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ScheduleAvailabilityPanelLegend-label {
+  white-space: nowrap;
+}

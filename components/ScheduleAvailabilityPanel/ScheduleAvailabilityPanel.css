@@ -1,0 +1,132 @@
+.ScheduleAvailabilityPanel-panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: #fdfdfd;
+  padding: 40px;
+  gap: 40px;
+}
+
+.ScheduleAvailabilityPanel-legend {
+  display: flex;
+  gap: 80px;
+  justify-content: center;
+  align-items: center;
+  color: #707070;
+  font-family: "Noto Sans TC";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.ScheduleAvailabilityPanel-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.ScheduleAvailabilityPanel-month-row,
+.ScheduleAvailabilityPanel-half-row {
+  display: flex;
+  gap: 83px;
+}
+
+.ScheduleAvailabilityPanel-month-label,
+.ScheduleAvailabilityPanel-half-block {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  max-width: 78px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ScheduleAvailabilityPanel-month-label {
+  border-radius: 2px 2px 1px 1px;
+  background: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 30px;
+}
+
+.ScheduleAvailabilityPanel-half-block {
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  appearance: none; /* 標準 */
+  -webkit-appearance: none; /* Safari */
+  -moz-appearance: none; /* Firefox */
+}
+
+.ScheduleAvailabilityPanel-cell-container {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ScheduleAvailabilityPanel-cell-title,
+.ScheduleAvailabilityPanel-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ScheduleAvailabilityPanel-cell-title {
+  min-width: 62px;
+  color: #707070;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  vertical-align: middle;
+  letter-spacing: 1px;
+}
+
+.ScheduleAvailabilityPanel-cell {
+  flex: 1;
+  max-width: 78px;
+}
+
+.ScheduleAvailabilityPanel-month-bar {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  width: 50%;
+  border-radius: 2px;
+}
+
+.ScheduleAvailabilityPanel-month-bar.left {
+  left: 0;
+}
+
+.ScheduleAvailabilityPanel-month-bar.right {
+  right: 0;
+}
+
+.ScheduleAvailabilityPanel-half-block-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 78px;
+}
+
+.ScheduleAvailabilityPanel-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  margin-top: 14px;
+  width: 100%;
+  background: #eee;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.ScheduleAvailabilityPanel-dropdown-item {
+  padding: 6px 10px;
+  text-align: center;
+  cursor: pointer;
+}

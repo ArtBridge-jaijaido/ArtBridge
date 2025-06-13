@@ -1,5 +1,6 @@
 "use client";
 import { notoSansTCClass } from "@/app/layout.js";
+import { ArtworkCalendar } from "@/components/ArtworkCalendar/ArtworkCalendar";
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
 import ArtworkOrderManagementTabs from "@/components/Tabs/ArtworkOrderManagementTab";
 import { useSelector } from "react-redux";
@@ -9,7 +10,6 @@ const ConsumerOrdersManagementPage = () => {
   const consumerOrders = useSelector(
     (state) => state.artworkOrder.consumerOrders
   );
-
   const tabs = [
     {
       label: "目前案件",
@@ -42,7 +42,7 @@ const ConsumerOrdersManagementPage = () => {
     },
     {
       label: "行事曆",
-      content: <div>Consumer行事曆內容</div>,
+      content: <ArtworkCalendar orders={consumerOrders} />,
     },
     {
       label: "查看詳細資料",
