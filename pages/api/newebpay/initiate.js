@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
   const { artistNickname, amount, orderId, artistUid, expectedDays, expectedPrice,type } = req.body;
 
-  if (!artistNickname || !amount || !orderId || !artistUid || !expectedDays || !expectedPrice || !type ) {
+  if (!artistNickname || !amount || !orderId || !artistUid || !type ) {
     return res.status(400).send("missing required fields");
   }
 
@@ -40,7 +40,8 @@ export default async function handler(req, res) {
         tradeTempStoragePromise = pendingPainterTempData(orderId, artistUid, expectedDays, expectedPrice);
         break;
       case "market":
-     
+        clickBackURL = "https://afd7-114-46-14-33.ngrok-free.app/artworkOrdersManagement/consumerOrdersManagement";
+        itemDesc = `市集繪師承接-${artistNickname}`;
         break;
     default:
       return res.status(400).send("無效的付款類型");

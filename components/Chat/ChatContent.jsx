@@ -6,17 +6,24 @@ import { formatLastOnline } from "@/lib/functions";
 import { subscribeToMessages } from "@/lib/messageListener";
 import { sendTextMessage, sendImageMessage } from "@/services/messageService";
 import { updateUserData } from "@/services/userService";
+import { fetchArtworkOrderById } from "@/services/artworkOrderService";
 import { useToast } from "@/app/contexts/ToastContext";
 import MessageItem from "./ChatMessageItem";
 import dayjs from "dayjs";
 import "./ChatContent.css";
 
 
+
+
+
+
+
 const ChatContent = ({ chat }) => {
 
+    const [artworkOrder, setArtworkOrder] = useState(null); // 當下聊天的藝術品訂單
+    const orderId = chat?.orderId; // 從 chat 中獲取 orderId
     const [inputText, setInputText] = useState(""); // 新增輸入狀態
     const imageInputRef = useRef(null);
-
     const [isMilestoneOpen, setIsMilestoneOpen] = useState(false);
     const allUsers = useSelector((state) => state.user.allUsers);
     const currentUser = useSelector((state) => state.user.user);
@@ -78,17 +85,76 @@ const ChatContent = ({ chat }) => {
         }
     };
 
+    const handlePayNow =  async ()  => {
+        const res = await fetch("/api/newebpay/initiate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              artistNickname: otherUser.nickname || "繪師",
+              amount: artworkOrder?.price,
+              orderId: artworkOrder?.artworkOrderId,
+              artistUid: artworkOrder?.assignedPainterUid,
+              expectedDays:null,
+              expectedPrice: null,
+              type: "market",
+            }),
+          });
+        
+          const html = await res.text();
+        
+          
+          const blob = new Blob([html], { type: "text/html" });
+          const url = URL.createObjectURL(blob);
+        
+          
+          window.location.href = url;
+      };
+
+    let manageButton = null;
+    const isEntruster = currentUser?.uid === artworkOrder?.userUid;
+    // 根據第一個里程碑的狀態決定顯示的按鈕
+    const firstMilestoneStatus = artworkOrder?.artworkOrderMilestones?.[0]?.status;
+    switch (firstMilestoneStatus) {
+    case "等待中":
+        manageButton = isEntruster ? (
+        <button
+            className="chatContent-manageBtn-payNowEntrustOnly"
+            onClick={handlePayNow}
+        >
+            點此立即付款
+        </button>
+        ) : null;
+        break;
+
+    case "已付款":
+        manageButton = (
+        <button
+            className={`chatContent-manageBtn ${isMilestoneOpen ? "open" : ""}`}
+            onClick={() => setIsMilestoneOpen(!isMilestoneOpen)}
+        >
+            案件管理
+        </button>
+        );
+        break;
+
+    default:
+        manageButton = null; // 其他狀態不顯示任何按鈕
+    }
+    
+
+    // 當 orderId 改變時，重新獲取該訂單資料
+    useEffect(() => {
+        if (!orderId) return;    
+        const fetchOrder = async () => {
+          const data = await fetchArtworkOrderById(orderId);
+          setArtworkOrder(data);
+        };
+      
+        fetchOrder();
+    }, [orderId]);
 
 
 
-
-    const testingMilestones = [
-        { label: "0% 支付款項", percent: 0, id: 0, status: "等待中" },
-        { label: "30% 草稿", percent: 30, id: 1, status: "等待中" },
-        { label: "40% 線稿", percent: 40, id: 2, status: "等待中" },
-        { label: "70% 上色", percent: 70, id: 3, status: "等待中" },
-        { label: "100% 交付成品", percent: 100, id: 4, status: "等待中" },
-    ];
 
     useEffect(() => {
         if (!chat?.id || !currentUser?.uid) return;
@@ -106,6 +172,7 @@ const ChatContent = ({ chat }) => {
         };
     }, [chat?.id, currentUser?.uid]);
 
+    
 
     const groupedMessagesByDate = useMemo(() => {
         const groups = {};
@@ -131,17 +198,18 @@ const ChatContent = ({ chat }) => {
                             <div className="chatContent-username">{otherUser.nickname}</div>
                             <div className="chatContent-online">{lastOnlineText}</div>
                         </div>
-                        <button
+                        {/* <button
                             className={`chatContent-manageBtn ${isMilestoneOpen ? "open" : ""}`}
                             onClick={() => setIsMilestoneOpen(!isMilestoneOpen)}
                         >
                             案件管理
-                        </button>
+                        </button> */}
+                        {manageButton}
                         <img src="/images/icons8-exclamation-mark-64-1.png" alt="檢舉按鈕" className="chatContent-reportIcon" />
                     </div>
 
                     <div className={`chatContent-milestone-container ${isMilestoneOpen ? "visible" : "hidden"}`}>
-                        <PainterMilestoneProgress milestones={testingMilestones} status={true} />
+                        <PainterMilestoneProgress milestones={artworkOrder?.artworkOrderMilestones||[]} status={true} />
                         <div className="chatContent-divider"></div>
                     </div>
 

@@ -42,6 +42,24 @@
     color: #888;
     margin-top: 4px;
   }
+
+  .chatContent-manageBtn-payNowEntrustOnly{
+    background: #35BD63;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+   
+  }
+
+  .chatContent-manageBtn-payNowEntrustOnly:hover {
+    background-color: #43a047; 
+  }
+
   .chatContent-manageBtn {
     background: #73BCE4;
     color: white;

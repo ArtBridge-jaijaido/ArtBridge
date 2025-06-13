@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         redirectPath = "/artworkOrdersManagement/consumerOrdersManagement";
         break;
       case "market":
-        redirectPath = "/market/myPurchases";
+        redirectPath = "/artworkOrdersManagement/consumerOrdersManagement";
         break;
       default:
         redirectPath = "/";

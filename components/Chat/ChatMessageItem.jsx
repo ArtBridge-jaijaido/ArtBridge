@@ -5,6 +5,8 @@ import "./ChatMessageItem.css";
 const MessageItem = ({ message, isOwn }) => {
   const { type = "text", text, payload, createdAt } = message;
 
+  console.log(message);
+
   const time = new Date(createdAt).toLocaleTimeString("zh-TW", {
     hour: "2-digit",
     minute: "2-digit",
@@ -23,19 +25,36 @@ const MessageItem = ({ message, isOwn }) => {
           </div>
         );
 
-      case "system":
-        return <div className="ChatMessage-system">{text}</div>;
+      case "system-painterConfirmOrder":
+        if (payload?.dateToStart && payload?.payDeadline) {
+          const deadline = new Date(payload.payDeadline);
+
+          // 格式化日期
+          const formattedStart = payload.dateToStart;
+          const formattedDeadline = `${deadline.getFullYear()}/${String(
+            deadline.getMonth() + 1
+          ).padStart(2, "0")}/${String(deadline.getDate()).padStart(
+            2,
+            "0"
+          )}，${String(deadline.getHours()).padStart(2, "0")}:${String(
+            deadline.getMinutes()
+          ).padStart(2, "0")}`;
+
+          return (
+            <div className="ChatMessage-systemBox">
+              <div className="ChatMessage-system-painterConfirmOrder-title">繪師已選擇開始時間</div>
+              <div className="ChatMessage-system-painterConfirmOrder-start">
+                案件開始時間：{formattedStart}
+              </div>
+              <div className="ChatMessage-system-painterConfirmOrder-deadline">
+                請於 <span>{formattedDeadline}</span> 前付款
+              </div>
+            </div>
+          );
+        }
 
       case "milestoneNotice":
-        return (
-          <div className="ChatMessage-milestone-notice">
-            <p className="title">繪師已選擇開始時間</p>
-            <p>案件開始時間：{payload?.startDate}</p>
-            <p className="highlight">
-              請於 {payload?.deadline} 前付款
-            </p>
-          </div>
-        );
+        return <div className="ChatMessage-milestone-notice"></div>;
 
       default:
         return <div className="ChatMessage-unknown">[未知訊息]</div>;

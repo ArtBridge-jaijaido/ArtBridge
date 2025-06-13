@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import querystring from "querystring";
-import {updateOrderAfterPaymentAdmin } from "@/services/artworkOrderServiceAdmin";
+import {updateEntrustOrderAfterPaymentAdmin,updateMarkettOrderAfterPaymentAdmin } from "@/services/artworkOrderServiceAdmin";
 import {updateEntrustStatus} from "@/services/artworkEntrustServiceAdmin";
 
 export const config = {
@@ -44,11 +44,11 @@ export default async function handler(req, res) {
 
       switch (type) {
         case "entrust":
-          await updateOrderAfterPaymentAdmin(orderId);
+          await updateEntrustOrderAfterPaymentAdmin(orderId);
           await updateEntrustStatus(orderId);
           break;
         case "market":
-          // TODO: 根據你的設計邏輯更新市集訂單狀態
+          await updateMarkettOrderAfterPaymentAdmin(orderId);
           // await updateMarketOrderStatus(orderId);
           break;
         default:

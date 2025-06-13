@@ -27,6 +27,7 @@ const ArtworkOrderCard = ({
     OrderEndDate = "",
     OrderAssignedPainter = "",
     OrderEntruster = "",
+    OrderMilestone = [],
     orderId = "",
     exampleImageUrl = "",
     referenceImageUrl = "",
@@ -66,27 +67,43 @@ const ArtworkOrderCard = ({
         
     };
 
-    const handleAcceptOrder = async (daysToStart, daysToComplete) => {
+    const handleAcceptOrder = async (e, dateToStart, dateToEnd) => {
 
         e.stopPropagation();
+
+        const selectedStartDate = new Date(dateToStart);
+
+        // 付款期限（案件開始日期前1天，時間設為當天 23:59）
+        const payDeadline = new Date(selectedStartDate);
+        payDeadline.setDate(payDeadline.getDate() - 1);
+        payDeadline.setHours(23, 59, 0, 0);
+
         try {
+
             await updateArtworkOrder(orderId, {
-                isVisibleToConsumer: true,
+                // isVisibleToConsumer: true,
                 status: "進行中",
-                daysToStart,
-                daysToComplete,
+                dateToStart: dateToStart,
+                dateToEnd: dateToEnd,
             });
 
             await createChatWithMessage({
                 participants: [OrderAssignedPainter, OrderEntruster],
                 senderUid: OrderAssignedPainter,
-                content: "繪師已承接此委託。",
-                orderId,
+                content: `繪師已選擇案件開始時間`,
+                type:"system-painterConfirmOrder",
+                payload: {
+                    dateToStart: dateToStart,
+                    payDeadline: payDeadline.toISOString(),
+                  },
+                orderId,      
             });
+
         } catch (error) {
             console.error(" 接受訂單失敗", error);
         }
-        setShowModal(false);
+
+        setIsConfirmationModalOpen(false);
     };
 
 

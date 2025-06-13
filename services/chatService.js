@@ -20,7 +20,7 @@ import {
  * @param {object} [options.payload] - 訊息詳細內容（例如圖片、milestone 資訊等）
  */
 
-export async function createChatWithMessage({ participants, senderUid, type = "text", content = "", payload = {}, orderId }) {
+export async function createChatWithMessage({ participants, senderUid, type = "text", content = "",  payload = {}, orderId }) {
   try {
     const chatId = orderId ? `order-${orderId}` : participants.sort().join("_");
     const chatRef = doc(db, "chats", chatId);
@@ -41,6 +41,7 @@ export async function createChatWithMessage({ participants, senderUid, type = "t
         lastUpdated: now,
         unreadCounts,
         createdAt: now,
+        orderId: orderId || null,
       });
     } else {
       await updateDoc(chatRef, {

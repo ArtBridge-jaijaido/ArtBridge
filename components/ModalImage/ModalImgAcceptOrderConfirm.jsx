@@ -1,45 +1,74 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useToast } from "@/app/contexts/ToastContext.js";
 import "./ModalImgAcceptOrderConfirm.css";
 
-
 const ModalImgAcceptOrderConfirm = ({ isOpen, onClose, onConfirm }) => {
-    const [daysToStart, setDaysToStart] = useState(null);
-    const [daysToComplete, setDaysToComplete] = useState("");
+    const [dateToStart, setDateToStart] = useState(null);
+    const [completionDays, setCompletionDays] = useState("");
     const { addToast } = useToast();
 
     useEffect(() => {
         if (isOpen) {
-          setDaysToStart(null);
-          setDaysToComplete("");
+            setDateToStart(null);
+            setCompletionDays("");
         }
-      }, [isOpen]);
+    }, [isOpen]);
 
-    const handleSubmit = () => {
-        
-        // 檢查開始時間是否選擇
-        if (!daysToStart) {
+    const handleConfirm = (e) => {
+        e.stopPropagation();
+
+        if (!dateToStart) {
             addToast("error", "請選擇開始時間");
             return;
         }
-        // 檢查完稿天數是否為正整數
-        if (!daysToComplete || isNaN(daysToComplete) || parseInt(daysToComplete) <= 0) {
+
+        const selectedDate = new Date(dateToStart);
+
+        // 今天（淨化時間）
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // 今天 + 3 天
+        const minAllowedDate = new Date(today);
+        minAllowedDate.setDate(minAllowedDate.getDate() + 4);
+        
+        //  檢查是否早於今天
+        if (selectedDate < today) {
+          addToast("error", "開始時間不能早於今天");
+          return;
+        }
+        
+        //  檢查是否 <= 今天 + 4 天（排除 =）
+        if (selectedDate <= minAllowedDate) {
+        
+          addToast("error", `為等待委託方付款，選擇的開始時間需為T+3天後`);
+          return;
+        }
+
+        if (!completionDays || isNaN(completionDays) || parseInt(completionDays) <= 0) {
             addToast("error", "請輸入正確完稿天數");
             return;
         }
 
-        onConfirm(startDate, parseInt(daysToComplete));
+        const endDate = new Date(selectedDate);
+        endDate.setDate(endDate.getDate() + parseInt(completionDays));
+        const dateToEnd = endDate.toISOString().split("T")[0];
+
+       
+        onConfirm(e, dateToStart, dateToEnd);
     };
 
-    // 不顯示的狀態直接 return null
     if (!isOpen) return null;
 
     return (
-        <div className="ModalImgAcceptOrderConfirm-overlay" onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-        }}>
-            <div className="ModalImgAcceptOrderConfirm-box" onClick={(e) => e.stopPropagation()} >
+        <div
+            className="ModalImgAcceptOrderConfirm-overlay"
+            onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+            }}
+        >
+            <div className="ModalImgAcceptOrderConfirm-box" onClick={(e) => e.stopPropagation()}>
                 <button
                     className="ModalImgAcceptOrderConfirm-close-btn"
                     onClick={onClose}
@@ -56,21 +85,21 @@ const ModalImgAcceptOrderConfirm = ({ isOpen, onClose, onConfirm }) => {
                 </p>
 
                 <div className="ModalImgAcceptOrderConfirm-input-group">
-                <label>開始時間：</label>
-                <input
-                    type="date"
-                    value={daysToStart || ""}
-                    onChange={(e) => setDaysToStart(e.target.value)}
-                    className="ModalImgAcceptOrderConfirm-input"
-                />
+                    <label>開始時間：</label>
+                    <input
+                        type="date"
+                        value={dateToStart || ""}
+                        onChange={(e) => setDateToStart(e.target.value)}
+                        className="ModalImgAcceptOrderConfirm-input"
+                    />
                 </div>
 
                 <div className="ModalImgAcceptOrderConfirm-input-group">
                     <label>完稿天數：</label>
                     <input
                         type="number"
-                        value={daysToComplete}
-                        onChange={(e) => setDaysToComplete(e.target.value)}
+                        value={completionDays}
+                        onChange={(e) => setCompletionDays(e.target.value)}
                         placeholder="請輸入完稿天數"
                         className="ModalImgAcceptOrderConfirm-input"
                     />
@@ -78,7 +107,7 @@ const ModalImgAcceptOrderConfirm = ({ isOpen, onClose, onConfirm }) => {
 
                 <button
                     className="ModalImgAcceptOrderConfirm-confirm-btn"
-                    onClick={handleSubmit}
+                    onClick={handleConfirm}
                 >
                     確認
                 </button>

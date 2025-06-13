@@ -29,6 +29,7 @@ const ConsumerOrdersManagementPage = () => {
                       OrderTitle={order.marketName}
                       OrderSource={order.orderSource}
                       OrderEndDate={order.endDate}
+                      OrderMilestone={order.artworkOrderMilestones}
                       OrderAssignedPainter={order.assignedPainterUid}
                       OrderEntruster={order.userUid}
                       orderId={order.artworkOrderId}

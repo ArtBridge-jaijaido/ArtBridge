@@ -38,13 +38,46 @@
     border-radius: 8px;
   }
   
-  .ChatMessage-system {
-    background-color: #e0e0e0;
-    color: #555;
-    padding: 6px 10px;
-    border-radius: 10px;
-    font-size: 13px;
-    align-self: center;
+  .ChatMessage-systemBox {
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    border: 1.5px solid #507BA4;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 320px;
+  }
+  
+  .ChatMessage-system-painterConfirmOrder-title {
+    color: #507BA4;
+    font-family: "Noto Sans TC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+   
+  }
+  
+  .ChatMessage-system-painterConfirmOrder-start {
+    color: #747474;
+    font-family: "Noto Sans TC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;  
+}
+  
+  .ChatMessage-system-painterConfirmOrder-deadline {
+    color: #D43F3F;
+    font-family: "Noto Sans TC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
   }
   
   .ChatMessage-milestone-notice {
