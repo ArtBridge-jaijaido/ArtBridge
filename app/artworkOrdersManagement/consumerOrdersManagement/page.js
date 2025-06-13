@@ -1,14 +1,19 @@
 "use client";
 import { notoSansTCClass } from "@/app/layout.js";
+import { ArtworkCalendar } from "@/components/ArtworkCalendar/ArtworkCalendar";
 import ArtworkOrderCard from "@/components/ArtworkOrderCard/ArtworkOrderCard.jsx";
 import ArtworkOrderManagementTabs from "@/components/Tabs/ArtworkOrderManagementTab";
 import { useSelector } from "react-redux";
 import "./consumerOrdersManagement.css";
+import { useParams } from "next/navigation";
 
 const ConsumerOrdersManagementPage = () => {
   const consumerOrders = useSelector(
     (state) => state.artworkOrder.consumerOrders
   );
+
+  const {userUid} = useParams();
+  console.log(`---------------- ${userUid} ------------------`)
 
   const tabs = [
     {
@@ -42,7 +47,7 @@ const ConsumerOrdersManagementPage = () => {
     },
     {
       label: "行事曆",
-      content: <div>Consumer行事曆內容</div>,
+      content: <ArtworkCalendar consumerOrders={consumerOrders} />,
     },
     {
       label: "查看詳細資料",
